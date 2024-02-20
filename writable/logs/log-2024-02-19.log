@@ -1,0 +1,1071 @@
+INFO - 2024-02-19 05:36:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 05:37:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 05:37:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 05:38:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 05:38:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-02-19 06:06:58 --> mysqli_sql_exception: Table 'dashboard.appointments' doesn't exist in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\AppointmentModel.php(42): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ReportsController.php(43): App\Models\AppointmentModel->getAppointments(NULL)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-19 06:06:58 --> Table 'dashboard.appointments' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `appointments`
+JOIN `doctors` ON `doctors`.`doctorID` = `appointments`.`doctorID`
+JOIN `clients` ON `clients`.`idClient` = `appointments`.`clientID`
+JOIN `appointment_types` ON `appointment_types`.`appointmentTypeID` = `appointments`.`appointmentTypeID`', [], false)
+ 2 APPPATH\Models\AppointmentModel.php(42): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ReportsController.php(43): App\Models\AppointmentModel->getAppointments(null)
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-19 06:08:24 --> mysqli_sql_exception: Table 'dashboard.doctors' doesn't exist in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\AppointmentModel.php(42): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ReportsController.php(43): App\Models\AppointmentModel->getAppointments(NULL)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-19 06:08:24 --> Table 'dashboard.doctors' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `appointment`
+JOIN `doctors` ON `doctors`.`doctorID` = `appointment`.`doctorID`
+JOIN `clients` ON `clients`.`idClient` = `appointment`.`clientID`
+JOIN `appointment_types` ON `appointment_types`.`appointmentTypeID` = `appointment`.`appointmentTypeID`', [], false)
+ 2 APPPATH\Models\AppointmentModel.php(42): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ReportsController.php(43): App\Models\AppointmentModel->getAppointments(null)
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-19 06:10:53 --> mysqli_sql_exception: Table 'dashboard.appointment_types' doesn't exist in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\AppointmentModel.php(42): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ReportsController.php(43): App\Models\AppointmentModel->getAppointments(NULL)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-19 06:10:53 --> Table 'dashboard.appointment_types' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `appointment`
+JOIN `doctorprofile` ON `doctorprofile`.`DoctorID` = `appointment`.`doctorID`
+JOIN `client` ON `client`.`idClient` = `appointment`.`clientID`
+JOIN `appointment_types` ON `appointment_types`.`appointmentTypeID` = `appointment`.`appointmentTypeID`', [], false)
+ 2 APPPATH\Models\AppointmentModel.php(42): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ReportsController.php(43): App\Models\AppointmentModel->getAppointments(null)
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-19 06:15:56 --> mysqli_sql_exception: Table 'dashboard.appointment_types' doesn't exist in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\AppointmentModel.php(42): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ReportsController.php(43): App\Models\AppointmentModel->getAppointments(NULL)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-19 06:15:56 --> Table 'dashboard.appointment_types' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `appointment`
+JOIN `doctorprofile` ON `doctorprofile`.`DoctorID` = `appointment`.`doctorID`
+JOIN `client` ON `client`.`idClient` = `appointment`.`clientID`
+JOIN `appointment_types` ON `appointment_types`.`appointmentTypeID` = `appointment`.`appointmentTypeID`', [], false)
+ 2 APPPATH\Models\AppointmentModel.php(42): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ReportsController.php(43): App\Models\AppointmentModel->getAppointments(null)
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:21:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:21:37 --> Undefined array key "clientName"
+in APPPATH\Views\appointment_report.php on line 288.
+ 1 APPPATH\Views\appointment_report.php(288): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "clientName"', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 288)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report.php', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(45): view('appointment_report.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:24:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:24:36 --> Undefined array key "clientName"
+in APPPATH\Views\appointment_report.php on line 288.
+ 1 APPPATH\Views\appointment_report.php(288): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "clientName"', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 288)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report.php', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(45): view('appointment_report.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:24:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:24:39 --> Undefined array key "clientName"
+in APPPATH\Views\appointment_report.php on line 288.
+ 1 APPPATH\Views\appointment_report.php(288): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "clientName"', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 288)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report.php', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(45): view('appointment_report.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:26:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:26:31 --> Undefined array key "doctorFirstName"
+in APPPATH\Views\appointment_report.php on line 291.
+ 1 APPPATH\Views\appointment_report.php(291): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "doctorFirstName"', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 291)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report.php', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(45): view('appointment_report.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:27:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:27:24 --> Undefined array key "appointmentTypeName"
+in APPPATH\Views\appointment_report.php on line 300.
+ 1 APPPATH\Views\appointment_report.php(300): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "appointmentTypeName"', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 300)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report.php', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(45): view('appointment_report.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:28:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:28:50 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:28:50 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:28:51 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:28:52 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:28:52 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:28:53 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:28:58 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:37:23 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:37:24 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:37:26 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:37:27 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:37:27 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:37:40 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:37:40 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:37:41 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:37:41 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:37:41 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:37:43 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:37:44 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:37:45 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:37:47 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:37:47 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:37:48 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:38:03 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:38:04 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:38:05 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:38:06 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:38:06 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:38:06 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:38:07 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:39:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:39:31 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:39:32 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:39:32 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:39:33 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:39:35 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:39:36 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:39:37 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:39:38 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:39:40 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:39:40 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:39:41 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:39:41 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:39:49 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:39:50 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:39:50 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 06:39:51 --> Invalid file: "partials/appointments_table.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('partials/appointments_table.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('partials/appointments_table.php', [], true)
+ 3 APPPATH\Controllers\ReportsController.php(54): view('partials/appointments_table.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:43:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 06:44:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 06:44:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 06:44:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 06:44:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 06:44:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 06:44:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 06:44:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 06:44:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 06:44:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 06:44:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 06:44:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 06:44:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 06:44:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 06:45:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 06:45:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:45:45 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report.php', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(54): view('appointment_report.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:45:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:45:46 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report.php', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(54): view('appointment_report.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:45:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:45:47 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report.php', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(54): view('appointment_report.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:45:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:45:47 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report.php', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(54): view('appointment_report.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:52:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 06:52:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:52:47 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(54): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:52:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:52:47 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(54): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:52:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:52:48 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(54): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:52:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:52:48 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(54): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:53:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:53:17 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(54): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:53:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:53:22 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(54): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:53:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:53:22 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(54): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:53:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:53:23 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(54): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 06:55:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 06:55:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 06:55:58 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(55): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 07:00:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 07:00:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:00:20 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(55): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 07:00:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:00:30 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(55): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 07:00:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:00:31 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(55): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 07:00:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:00:31 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(55): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 07:01:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:01:10 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(55): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 07:01:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:01:12 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(55): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 07:01:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:01:12 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(55): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 07:01:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:01:13 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(55): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 07:01:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:01:13 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(55): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 07:01:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:01:14 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(55): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 07:01:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:01:15 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(55): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 07:02:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 07:03:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-02-19 07:03:57 --> Search Value: t
+INFO - 2024-02-19 07:03:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:03:57 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(59): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+DEBUG - 2024-02-19 07:04:00 --> Search Value: te
+INFO - 2024-02-19 07:04:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:04:00 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(59): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+DEBUG - 2024-02-19 07:04:00 --> Search Value: tes
+INFO - 2024-02-19 07:04:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:04:00 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(59): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+DEBUG - 2024-02-19 07:04:01 --> Search Value: test
+INFO - 2024-02-19 07:04:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:04:01 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(59): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 07:05:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 07:05:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 07:06:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 07:07:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 07:07:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 07:18:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-02-19 07:18:53 --> Search Value: 
+INFO - 2024-02-19 07:18:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:18:53 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(59): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+DEBUG - 2024-02-19 07:18:56 --> Search Value: t
+INFO - 2024-02-19 07:18:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:18:56 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(59): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+DEBUG - 2024-02-19 07:18:57 --> Search Value: te
+INFO - 2024-02-19 07:18:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:18:57 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(59): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+DEBUG - 2024-02-19 07:18:57 --> Search Value: tes
+DEBUG - 2024-02-19 07:18:57 --> Search Value: test
+INFO - 2024-02-19 07:18:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:18:57 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(59): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 07:18:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:18:57 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(59): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 07:26:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-02-19 07:26:37 --> Search Value: t
+INFO - 2024-02-19 07:26:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:26:37 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(59): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+DEBUG - 2024-02-19 07:26:37 --> Search Value: te
+INFO - 2024-02-19 07:26:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:26:37 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(59): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+DEBUG - 2024-02-19 07:26:38 --> Search Value: tes
+INFO - 2024-02-19 07:26:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:26:38 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(59): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+DEBUG - 2024-02-19 07:26:38 --> Search Value: test
+INFO - 2024-02-19 07:26:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-02-19 07:26:38 --> Undefined variable $client_names
+in APPPATH\Views\appointment_report.php on line 247.
+ 1 APPPATH\Views\appointment_report.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 247)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(59): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->searchAppointments()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-19 07:29:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-19 07:29:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

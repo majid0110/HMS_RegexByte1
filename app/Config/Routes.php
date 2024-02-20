@@ -1,0 +1,152 @@
+<?php
+
+use CodeIgniter\Router\RouteCollection;
+
+/**
+ * @var RouteCollection $routes
+ */
+
+$routes->get('/login', 'LoginController::show');
+$routes->post("/loginSave", 'LoginController::loginSave');
+$routes->get('/dashboard', 'LoginController::dashboard');
+$routes->get('/logout', 'LoginController::logout');
+$routes->get('/user_form', 'LoginController::user_form');
+$routes->get('/business_table', 'LoginController::business_table');
+$routes->post('/store', 'LoginController::store');
+$routes->get('/role_form', 'LoginController::role_form');
+$routes->post('/save_role', 'LoginController::save_role');
+$routes->get('/user_form2', 'LoginController::user_form2');
+$routes->post('/save_user', 'LoginController::save_user');
+
+$routes->get('/users_table', 'LoginController::users_table');
+$routes->get('/edit_user/(:num)', 'LoginController::edit_user/$1');
+$routes->post('/update_user/(:num)', 'LoginController::update_user/$1');
+
+$routes->get('/doctors_form', 'DoctorController::doctors_form');
+$routes->get('/doctors_table', 'DoctorController::doctors_table');
+$routes->get('/user_form1', 'LoginController::user_form1');
+$routes->post('/saveDoctorProfile', 'DoctorController::saveDoctorProfile');
+$routes->get('/doctors_fee', 'DoctorController::doctors_fee');
+
+$routes->post('/Savedoctorsfee', 'DoctorController::Savedoctorsfee');
+
+// $routes->get('/editDoctor', 'DoctorController::editDoctor');
+// $routes->get('/deleteDoctor', 'DoctorController::deleteDoctor');
+$routes->get('/editDoctor/(:num)', 'DoctorController::editDoctor/$1');
+$routes->get('/deleteDoctor/(:num)', 'DoctorController::deleteDoctor/$1');
+
+$routes->get('/appointments_form', 'DoctorController::appointments_form');
+
+//-----------------------------------------------------------------clients Routes
+$routes->get('/clients_form', 'ClientController::clients_form');
+$routes->get('/clients_table', 'ClientController::clients_table');
+$routes->post('/saveClientProfile', 'ClientController::saveClientProfile');
+$routes->get('/deleteClient/(:num)', 'ClientController::deleteClient/$1');
+$routes->get('/editClient/(:num)', 'ClientController::editClient/$1');
+$routes->post('/Savedoctorsfee', 'DoctorController::Savedoctorsfee');
+$routes->get('ClientController/editClient/(:num)', 'ClientController::editClient/$1');
+$routes->get('ClientController/editClient/(:num)', 'ClientController::editClient/$1');
+$routes->get('/editClient/(:num)', 'ClientController::editClient/$1');
+$routes->post('/updateClient/(:num)', 'ClientController::updateClient/$1');
+$routes->post('/updateClient/(:num)', 'ClientController::updateClient/$1');
+
+
+//-------------------------------------------------------------------Appointments Routes
+$routes->get('/appointments_form', 'ClientController::appointments_form');
+$routes->post('/saveAppointment', 'AppointmentController::saveAppointment');
+$routes->get('/appointments_table', 'AppointmentController::appointments_table');
+$routes->get('/deleteAppointment/(:num)', 'AppointmentController::deleteAppointment/$1');
+
+
+$routes->group('appointment', ['namespace' => 'App\Controllers'], function ($routes) {
+    $routes->get('fetchDoctorFee/(:num)/(:num)', 'AppointmentController::fetchDoctorFee/$1/$2');
+});
+
+
+$routes->get('/editDoctor/(:num)', 'DoctorController::editDoctor/$1');
+$routes->get('/deleteDoctor/(:num)', 'DoctorController::deleteDoctor/$1');
+
+$routes->get('/edit_fee/(:num)', 'DoctorController::editDoctorFee/$1');
+$routes->get('/edit_fee/(:num)', 'DoctorController::editDoctorFee/$1');
+$routes->post('/updateDoctorFee/(:num)', 'DoctorController::updateDoctorFee/$1');
+
+$routes->post('updateDoctor', 'DoctorController::updateDoctor');
+$routes->get('DoctorController/editDoctor/(:num)', 'DoctorController::editDoctor/$1');
+
+$routes->get('/configure', 'ConfigureController::configure');
+$routes->get('/config_form/(:num)', 'ConfigureController::config_form/$1');
+$routes->post('/update/(:num)', 'ConfigureController::update/$1');
+
+$routes->post('doctor-controller/get-doctors', 'DoctorController::getDoctors', ['as' => 'get-doctors']);
+$routes->post('DoctorController/getDoctors', 'DoctorController::getDoctors');
+$routes->post('DoctorController/fetchDoctorFee', 'DoctorController::fetchDoctorFee');
+
+//-------------------------------------------------------------------------------------------------------------------------
+//                                                 Lab Services
+//-------------------------------------------------------------------------------------------------------------------------
+$routes->get('/labServices_form', 'LabController::labServices_form');
+$routes->post('/saveLabService', 'LabController::saveLabService');
+$routes->get('/labtest_form', 'LabController::labtest_form');
+$routes->post('/addTest', 'LabController::addTest');
+
+$routes->get('LabController/getTestTypePrice/(:num)', 'LabController::getTestTypePrice/$1');
+//$routes->post('submitTests', 'LabController::submitTests');
+$routes->post('LabController/submitTests', 'LabController::submitTests');
+$routes->post('/submitTests', 'LabController::submitTests');
+
+$routes->post('LabController/getAppointmentsForClient', 'LabController::getAppointmentsForClient');
+$routes->post('LabController/getTestTypeId', 'LabController::getTestTypeId');
+$routes->post('LabController/getTestTypeId', 'LabController::getTestTypeId');
+$routes->post('LabController/getAppointmentTypeName/(:num)', 'LabController::getAppointmentTypeName/$1');
+$routes->get('/labtest_table', 'LabController::labtest_table');
+$routes->get('viewTestDetails/(:num)', 'LabController::viewTestDetails/$1');
+$routes->get('labServices_form', 'LabController::labServices_form');
+$routes->get('editTestForm/(:num)', 'LabController::editTestForm/$1');
+$routes->post('updateTest/(:num)', 'LabController::updateTest/$1');
+$routes->get('edit_test/(:num)', 'LabController::editTestForm/$1');
+
+
+//routes for generating pdf
+
+$routes->get('/generate_pdf', 'AppointmentController::generatePdf');
+
+$routes->post('PdfController/getDynamicDataForPdf', 'PdfController::getDynamicDataForPdf');
+$routes->get('PdfController/generatePdf', 'PdfController::generatePdf');
+
+$routes->get('/generate_testPdf', 'LabController::generatePdf');
+
+
+//-------------------------------------------------------------------------------------------------------------------------
+//                                                 Services Routes
+//-------------------------------------------------------------------------------------------------------------------------
+$routes->get('/Services_form', 'ServiceController::Services_form');
+$routes->post('/saveArtMenu', 'ServiceController::saveArtMenu');
+$routes->get('/Services_table', 'ServiceController::Services_table');
+$routes->get('/deleteService/(:num)', 'ServiceController::deleteService/$1');
+$routes->get('editService/(:num)', 'ServiceController::editService/$1');
+$routes->post('updateService/(:num)', 'ServiceController::updateService/$1');
+
+
+//-------------------------------------------------------------------------------------------------------------------------
+//                                                 Sales Routes
+//-------------------------------------------------------------------------------------------------------------------------
+$routes->get('/sales_form', 'SalesController::sales_form');
+$routes->post('SalesController/submitServices', 'SalesController::submitServices');
+
+$routes->post('SalesController/submitServices', 'SalesController::submitServices');
+$routes->post('submitServices', 'SalesController::submitServices');
+$routes->get('/Sales_table', 'SalesController::Sales_table');
+$routes->get('/deleteSales/(:num)', 'SalesController::deleteSales/$1');
+$routes->get('viewServiceDetails/(:num)', 'SalesController::viewServiceDetails/$1');
+$routes->get('sales/deleteService/(:num)', 'SalesController::deleteService/$1');
+$routes->post('sales/deleteService/(:num)', 'SalesController::deleteService/$1');
+
+
+
+//-------------------------------------------------------------------------------------------------------------------------
+//                                                 Reports Routes
+//-------------------------------------------------------------------------------------------------------------------------
+$routes->get('/reports_form', 'ReportsController::reports_form');
+$routes->get('/appointment_report', 'ReportsController::appointment_report');
+$routes->post('ReportsController/searchAppointments', 'ReportsController::searchAppointments');
+$routes->post('appointment_report', 'ReportsController::appointment_report');
