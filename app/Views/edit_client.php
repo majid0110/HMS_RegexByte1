@@ -1,4 +1,4 @@
-<?php include 'include_common/head.php'; ?>
+<?php include 'include_common/head1.php'; ?>
 <?php include 'include_common/navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +18,7 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="../public/assets/css_s/vertical-layout-light/style.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="../public/assets/images_s/regexbyte.png" />
+    <link rel="shortcut icon" href="/public/assets/images_s/regexbyte.png" />
 </head>
 
 

@@ -42,10 +42,10 @@ $routes->get('/clients_form', 'ClientController::clients_form');
 $routes->get('/clients_table', 'ClientController::clients_table');
 $routes->post('/saveClientProfile', 'ClientController::saveClientProfile');
 $routes->get('/deleteClient/(:num)', 'ClientController::deleteClient/$1');
-$routes->get('/editClient/(:num)', 'ClientController::editClient/$1');
+// $routes->get('/editClient/(:num)', 'ClientController::editClient/$1');
 $routes->post('/Savedoctorsfee', 'DoctorController::Savedoctorsfee');
-$routes->get('ClientController/editClient/(:num)', 'ClientController::editClient/$1');
-$routes->get('ClientController/editClient/(:num)', 'ClientController::editClient/$1');
+// $routes->get('ClientController/editClient/(:num)', 'ClientController::editClient/$1');
+// $routes->get('ClientController/editClient/(:num)', 'ClientController::editClient/$1');
 $routes->get('/editClient/(:num)', 'ClientController::editClient/$1');
 $routes->post('/updateClient/(:num)', 'ClientController::updateClient/$1');
 $routes->post('/updateClient/(:num)', 'ClientController::updateClient/$1');
@@ -69,10 +69,10 @@ $routes->get('/deleteDoctor/(:num)', 'DoctorController::deleteDoctor/$1');
 $routes->get('/edit_fee/(:num)', 'DoctorController::editDoctorFee/$1');
 $routes->get('/edit_fee/(:num)', 'DoctorController::editDoctorFee/$1');
 $routes->post('/updateDoctorFee/(:num)', 'DoctorController::updateDoctorFee/$1');
-
+//----------------------------------------------------------------------------------Doctor
 $routes->post('updateDoctor', 'DoctorController::updateDoctor');
-$routes->get('DoctorController/editDoctor/(:num)', 'DoctorController::editDoctor/$1');
-
+// $routes->get('DoctorController/editDoctor/(:num)', 'DoctorController::editDoctor/$1');
+$routes->get('/editDoctor/(:num)', 'DoctorController::editDoctor/$1');
 $routes->get('/configure', 'ConfigureController::configure');
 $routes->get('/config_form/(:num)', 'ConfigureController::config_form/$1');
 $routes->post('/update/(:num)', 'ConfigureController::update/$1');
@@ -80,7 +80,6 @@ $routes->post('/update/(:num)', 'ConfigureController::update/$1');
 $routes->post('doctor-controller/get-doctors', 'DoctorController::getDoctors', ['as' => 'get-doctors']);
 $routes->post('DoctorController/getDoctors', 'DoctorController::getDoctors');
 $routes->post('DoctorController/fetchDoctorFee', 'DoctorController::fetchDoctorFee');
-
 //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Lab Services
 //-------------------------------------------------------------------------------------------------------------------------
@@ -150,3 +149,6 @@ $routes->get('/reports_form', 'ReportsController::reports_form');
 $routes->get('/appointment_report', 'ReportsController::appointment_report');
 $routes->post('ReportsController/searchAppointments', 'ReportsController::searchAppointments');
 $routes->post('appointment_report', 'ReportsController::appointment_report');
+//----------------------------------------------
+$routes->get('/lab_report', 'ReportsController::lab_report');
+$routes->post('ReportsController/searchlabReport', 'ReportsController::searchlabReport');

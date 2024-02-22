@@ -238,14 +238,6 @@
                                     <div class="form-group row">
                                         <div class="col-md-3">
                                             <label>By Doctor</label>
-                                            <select class="form-control" name="doctor" id="doctorInput">
-                                                <option value="">All Doctors</option>
-                                                <?php foreach ($doctor_names as $doc): ?>
-                                                    <option value="<?= $doc['FirstName'] . ' ' . $doc['LastName']; ?>">
-                                                        <?= $doc['FirstName'] . ' ' . $doc['LastName']; ?>
-                                                    </option>
-                                                <?php endforeach; ?>
-                                            </select>
                                         </div>
                                         <div class="col-md-3">
                                             <label>By Client</label>
@@ -278,45 +270,37 @@
                                 <h4 class="card-title">Appointments Report</h4>
                                 <div class="col-12 grid-margin">
                                     <div class="table-responsive">
-
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>Client Name</th>
-                                                    <th>Doctor Name</th>
-                                                    <th>Appointment Date</th>
-                                                    <th>Appointment Time</th>
-                                                    <th>Appointment Type</th>
-                                                    <th>Total Fee</th>
+                                                    <th>FEE</th>
+                                                    <th>Added By</th>
+                                                    <th>Date</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($Appointments as $appointment): ?>
+
+                                                <?php foreach ($Tests as $test): ?>
                                                     <tr>
                                                         <td>
-                                                            <?= $appointment['clientName']; ?>
+                                                            <?= $test['clientName']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $appointment['doctorFirstName'] . ' ' . $appointment['doctorLastName']; ?>
+                                                            <?= $test['fee']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $appointment['appointmentDate']; ?>
+                                                            <?= $test['userName']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $appointment['appointmentTime']; ?>
+                                                            <?= $test['CreatedAT']; ?>
                                                         </td>
+
                                                         <td>
-                                                            <?= $appointment['appointmentTypeName']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $appointment['appointmentFee'] + $appointment['hospitalCharges']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <!-- Action buttons: Edit and Delete -->
-                                                            <a href="<?= base_url('deleteAppointment/' . $appointment['appointmentID']); ?>"
-                                                                onclick="return confirm('Are you sure you want to delete this Appointment?');"
-                                                                class="btn btn-danger btn-sm">Delete</a>
+                                                            <a href="<?= base_url('viewTestDetails/' . $test['test_id']); ?>"
+                                                                class="btn btn-info btn-sm">View
+                                                                Details</a>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
@@ -366,7 +350,7 @@
 
                     $.ajax({
                         type: 'POST',
-                        url: '<?= base_url('appointment_report'); ?>',
+                        url: '<?= base_url('lab_report'); ?>',
                         data: {
                             search: searchValue,
                             doctor: doctorValue,
@@ -374,7 +358,7 @@
                             fromDate: fromDateValue,
                             toDate: toDateValue
                         },
-                        dataType: 'json', // Specify the expected data type
+                        dataType: 'json',
                         success: function (response) {
                             if (response.success) {
                                 $('.table-responsive').html(response.tableContent);

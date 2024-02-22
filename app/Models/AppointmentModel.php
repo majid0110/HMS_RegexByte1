@@ -16,18 +16,8 @@ class AppointmentModel extends Model
     }
 
 
-    // public function getAppointments()
-    // {
-    //     return $this->db->table('appointment')
-    //         ->join('client', 'client.idClient = appointment.clientID')
-    //         ->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID')
-    //         ->join('fee_type', 'fee_type.f_id = appointment.appointmentType')
-    //         ->select('appointment.*, client.client as clientName, doctorprofile.FirstName as doctorFirstName, doctorprofile.LastName as doctorLastName, fee_type.FeeType as appointmentTypeName')
-    //         ->get()
-    //         ->getResultArray();
-    // }
 
-    // public function getAppointments($search = null)
+    // public function getAppointments($search = null, $doctor = null, $client = null)
     // {
     //     $builder = $this->db->table('appointment');
     //     $builder->select('appointment.*, doctorprofile.*, client.client as clientName, doctorprofile.FirstName as doctorFirstName, doctorprofile.LastName as doctorLastName, fee_type.FeeType as appointmentTypeName');
@@ -36,7 +26,6 @@ class AppointmentModel extends Model
     //     $builder->join('fee_type', 'fee_type.f_id = appointment.appointmentType');
 
     //     if (!empty($search)) {
-    //         // Modify this to search based on other criteria
     //         $builder->groupStart()
     //             ->like('client.client', $search)
     //             ->orLike('doctorprofile.FirstName', $search)
@@ -48,11 +37,23 @@ class AppointmentModel extends Model
     //             ->groupEnd();
     //     }
 
+    //     if (!empty($doctor)) {
+    //         $builder->groupStart()
+    //             ->like('CONCAT(doctorprofile.FirstName, " ", doctorprofile.LastName)', $doctor)
+    //             ->groupEnd();
+    //     }
+
+    //     if (!empty($client)) {
+    //         $builder->groupStart()
+    //             ->like('client.client', $client)
+    //             ->groupEnd();
+    //     }
+
     //     $query = $builder->get();
     //     return $query->getResultArray();
     // }
 
-    public function getAppointments($search = null, $doctor = null)
+    public function getAppointments($search = null, $doctor = null, $client = null, $fromDate = null, $toDate = null)
     {
         $builder = $this->db->table('appointment');
         $builder->select('appointment.*, doctorprofile.*, client.client as clientName, doctorprofile.FirstName as doctorFirstName, doctorprofile.LastName as doctorLastName, fee_type.FeeType as appointmentTypeName');
@@ -73,13 +74,24 @@ class AppointmentModel extends Model
         }
 
         if (!empty($doctor)) {
-            $builder->where('doctorprofile.FirstName', $doctor)
-                ->orWhere('doctorprofile.LastName', $doctor);
+            $builder->groupStart()
+                ->like('CONCAT(doctorprofile.FirstName, " ", doctorprofile.LastName)', $doctor)
+                ->groupEnd();
+        }
+
+        if (!empty($client)) {
+            $builder->like('client.client', $client);
+        }
+
+        if (!empty($fromDate) && !empty($toDate)) {
+            $builder->where('appointment.appointmentDate >=', $fromDate)
+                ->where('appointment.appointmentDate <=', $toDate);
         }
 
         $query = $builder->get();
         return $query->getResultArray();
     }
+
 
     public function getAppointmentTypes()
     {

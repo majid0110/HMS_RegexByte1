@@ -33,7 +33,7 @@
     }
 
     #cat:hover {
-      background-color: #52CDFF;
+      background-color: #800080;
       color: #fff;
       font-weight: 950;
       width: 80%;

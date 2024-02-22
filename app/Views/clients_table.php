@@ -275,7 +275,10 @@
                           </td>
                           <td>
                             <!-- Action buttons: Edit and Delete -->
-                            <a href="<?= base_url("ClientController/editClient/{$client['idClient']}") ?>"
+                            <!-- <a href="<?= base_url("ClientController/editClient/{$client['idClient']}") ?>"
+                              class="btn btn-warning btn-sm">Edit</a> -->
+
+                            <a href="<?php echo base_url() . 'editClient/' . $client['idClient']; ?>"
                               class="btn btn-warning btn-sm">Edit</a>
 
                             <a href="<?= base_url('deleteClient/' . $client['idClient']); ?>"

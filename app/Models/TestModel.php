@@ -12,16 +12,16 @@ class TestModel extends Model
 
 
 
-        
-        public function saveTest($responseData)
+
+    public function saveTest($responseData)
     {
         //$this->db->table('labtest')->insert($data);
 
-           $this->insert($responseData);
-           return $this->db->insertID();
+        $this->insert($responseData);
+        return $this->db->insertID();
     }
 
-    
+
     public function getTestsWithDetails()
     {
         return $this->db->table('labtest')
@@ -31,5 +31,16 @@ class TestModel extends Model
             ->get()
             ->getResultArray();
     }
+
+    public function TestReports()
+    {
+        return $this->db->table('labtest')
+            ->join('client', 'client.idClient = labtest.clientId')
+            ->join('users', 'users.ID = labtest.userId')
+            ->select('labtest.*, client.client as clientName, users.fName as userName')
+            ->get()
+            ->getResultArray();
+    }
+
 
 }

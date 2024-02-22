@@ -1,39 +1,86 @@
+<?php $session = session(); ?>
 <?php include 'include_common/head.php'; ?>
 <?php include 'include_common/navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
+<!-- <head>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #495057;
+            font-family: 'Arial', sans-serif;
+        }
 
-<!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/tables/basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:35 GMT -->
+        .card {
+            margin-bottom: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-sample {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        .btn-auth {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-auth:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head> -->
 
 <head>
-
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Star Admin2 </title>
-    <!-- plugins:css -->
-    <link rel="stylesheet" href="./public/assets/vendors/feather/feather.css">
-    <link rel="stylesheet" href="./public/assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="./public/assets/vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="./public/assets/vendors/typicons/typicons.css">
-    <link rel="stylesheet" href="./public/assets/vendors/simple-line-icons/css/simple-line-icons.css">
-    <link rel="stylesheet" href="./public/assets/vendors/css/vendor.bundle.base.css">
-    <!-- endinject -->
     <!-- Plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <link rel="stylesheet" href="./public/assets/css/vertical-layout-light/style.css">
+    <link rel="stylesheet" href="/public/assets/vendors_s/datatables.net-bs4/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="/public/assets/js_s/select.dataTables.min.css">
+    <link rel="stylesheet" href="../public/assets/vendors_s/feather/feather.css">
+    <link rel="stylesheet" href="../public/assets/vendors_s/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../public/assets/vendors_s/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../public/assets/vendors_s/typicons/typicons.css">
+    <link rel="stylesheet" href="../public/assets/vendors_s/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../public/assets/vendors_s/css/vendor.bundle.base.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="./public/assets/images/favicon.png" />
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../public/assets/css_s/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="../public/assets/images_s/regexbyte.png" />
 </head>
 
 <body>
     <div class="container-scroller">
-        <!-- partial:./public/assets/partials/_navbar.html -->
-
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
-            <!-- partial:./public/assets/partials/_settings-panel.html -->
+            <!-- partial:../../partials/_settings-panel.html -->
             <div class="theme-setting-wrapper">
                 <div id="settings-trigger"><i class="ti-settings"></i></div>
                 <div id="theme-settings" class="settings-panel">
@@ -56,355 +103,232 @@
                     </div>
                 </div>
             </div>
-            <div id="right-sidebar" class="settings-panel">
-                <i class="settings-close ti-close"></i>
-                <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab"
-                            aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab"
-                            aria-controls="chats-section">CHATS</a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="setting-content">
-                    <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
-                        aria-labelledby="todo-section">
-                        <div class="add-items d-flex px-3 mb-0">
-                            <form class="form w-100">
-                                <div class="form-group d-flex">
-                                    <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
-                                    <button type="submit" class="add btn btn-primary todo-list-add-btn"
-                                        id="add-task">Add</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="list-wrapper px-3">
-                            <ul class="d-flex flex-column-reverse todo-list">
-                                <li>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="checkbox" type="checkbox">
-                                            Team review meeting at 3.00 PM
-                                        </label>
-                                    </div>
-                                    <i class="remove ti-close"></i>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="checkbox" type="checkbox">
-                                            Prepare for presentation
-                                        </label>
-                                    </div>
-                                    <i class="remove ti-close"></i>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="checkbox" type="checkbox">
-                                            Resolve all the low priority tickets due today
-                                        </label>
-                                    </div>
-                                    <i class="remove ti-close"></i>
-                                </li>
-                                <li class="completed">
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="checkbox" type="checkbox" checked>
-                                            Schedule meeting for next week
-                                        </label>
-                                    </div>
-                                    <i class="remove ti-close"></i>
-                                </li>
-                                <li class="completed">
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="checkbox" type="checkbox" checked>
-                                            Project review
-                                        </label>
-                                    </div>
-                                    <i class="remove ti-close"></i>
-                                </li>
-                            </ul>
-                        </div>
-                        <h4 class="px-3 text-muted mt-5 fw-light mb-0">Events</h4>
-                        <div class="events pt-4 px-3">
-                            <div class="wrapper d-flex mb-2">
-                                <i class="ti-control-record text-primary me-2"></i>
-                                <span>Feb 11 2018</span>
-                            </div>
-                            <p class="mb-0 font-weight-thin text-gray">Creating component page build a js</p>
-                            <p class="text-gray mb-0">The total number of sessions</p>
-                        </div>
-                        <div class="events pt-4 px-3">
-                            <div class="wrapper d-flex mb-2">
-                                <i class="ti-control-record text-primary me-2"></i>
-                                <span>Feb 7 2018</span>
-                            </div>
-                            <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
-                            <p class="text-gray mb-0 ">Call Sarah Graves</p>
-                        </div>
-                    </div>
-                    <!-- To do section tab ends -->
-                    <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
-                        <div class="d-flex align-items-center justify-content-between border-bottom">
-                            <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
-                            <small
-                                class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 fw-normal">See
-                                All</small>
-                        </div>
-                        <ul class="chat-list">
-                            <li class="list active">
-                                <div class="profile"><img src="./public/assets/images/faces/face1.jpg" alt="image"><span
-                                        class="online"></span></div>
-                                <div class="info">
-                                    <p>Thomas Douglas</p>
-                                    <p>Available</p>
-                                </div>
-                                <small class="text-muted my-auto">19 min</small>
-                            </li>
-                            <li class="list">
-                                <div class="profile"><img src="./public/assets/images/faces/face2.jpg" alt="image"><span
-                                        class="offline"></span></div>
-                                <div class="info">
-                                    <div class="wrapper d-flex">
-                                        <p>Catherine</p>
-                                    </div>
-                                    <p>Away</p>
-                                </div>
-                                <div class="badge badge-success badge-pill my-auto mx-2">4</div>
-                                <small class="text-muted my-auto">23 min</small>
-                            </li>
-                            <li class="list">
-                                <div class="profile"><img src="./public/assets/images/faces/face3.jpg" alt="image"><span
-                                        class="online"></span></div>
-                                <div class="info">
-                                    <p>Daniel Russell</p>
-                                    <p>Available</p>
-                                </div>
-                                <small class="text-muted my-auto">14 min</small>
-                            </li>
-                            <li class="list">
-                                <div class="profile"><img src="./public/assets/images/faces/face4.jpg" alt="image"><span
-                                        class="offline"></span></div>
-                                <div class="info">
-                                    <p>James Richardson</p>
-                                    <p>Away</p>
-                                </div>
-                                <small class="text-muted my-auto">2 min</small>
-                            </li>
-                            <li class="list">
-                                <div class="profile"><img src="./public/assets/images/faces/face5.jpg" alt="image"><span
-                                        class="online"></span></div>
-                                <div class="info">
-                                    <p>Madeline Kennedy</p>
-                                    <p>Available</p>
-                                </div>
-                                <small class="text-muted my-auto">5 min</small>
-                            </li>
-                            <li class="list">
-                                <div class="profile"><img src="./public/assets/images/faces/face6.jpg" alt="image"><span
-                                        class="online"></span></div>
-                                <div class="info">
-                                    <p>Sarah Graves</p>
-                                    <p>Available</p>
-                                </div>
-                                <small class="text-muted my-auto">47 min</small>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- chat tab ends -->
-                </div>
-            </div>
-            <!-- partial -->
-            <!-- partial:./public/assets/partials/_sidebar.html -->
+
             <?php include 'include_common/sidebar.php'; ?>
-            <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
-                    <div class="col-lg-12 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <form action="<?= base_url('appointment_report'); ?>" method="post">
-                                    <div class="form-group row">
-                                        <div class="col-md-3 offset-md-9">
-                                            <label>Search</label>
-                                            <input class="form-control" type="text" name="search" id="searchInput"
-                                                placeholder="Search">
-                                        </div>
-                                    </div>
-                                </form>
-                                <!-- <div class="card">
-                                    <div class="card-body"> -->
-                                <div class="form-group row">
-                                    <div class="col-md-3">
-                                        <label>By Doctor</label>
-                                        <input class="form-control" type="text" name="doctor" placeholder="Doctor">
-                                    </div>
-                                    <div class="col">
-                                        <label>Client Name</label>
-                                        <div id="the-basics">
-                                            <select class="typeahead form-control" name="clientName">
-                                                <?php foreach ($client_names as $client): ?>
-                                                    <option value="<?= $client['idClient']; ?>">
-                                                        <?= $client['client']; ?>
-                                                    </option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form class="pt-3" method="POST" action="<?= base_url('updateDoctor'); ?>"
+                                        enctype="multipart/form-data">
+                                        <input type="hidden" name="DoctorID"
+                                            value="<?= $doctorDetails['DoctorID']; ?>" />
 
-                                    <div class="col-md-3">
-                                        <label>From</label>
-                                        <input class="form-control" type="date" placeholder="From">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>To</label>
-                                        <input class="form-control" type="date" placeholder="To">
-                                    </div>
-                                </div>
-                                <hr>
-                                <!-- </div>
-                                </div> -->
-                                <h4 class="card-title">Appointments Report</h4>
-                                <div class="col-12 grid-margin">
-                                    <div class="table-responsive">
+                                        <!-- Personal Info -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">First Name</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="fName"
+                                                            value="<?= $doctorDetails['FirstName']; ?>" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Last Name</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="lName"
+                                                            value="<?= $doctorDetails['LastName']; ?>" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Client Name</th>
-                                                    <th>Doctor Name</th>
-                                                    <th>Appointment Date</th>
-                                                    <th>Appointment Time</th>
-                                                    <th>Appointment Type</th>
-                                                    <th>Total Fee</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach ($Appointments as $appointment): ?>
-                                                    <tr>
-                                                        <td>
-                                                            <?= $appointment['clientName']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $appointment['doctorFirstName'] . ' ' . $appointment['doctorLastName']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $appointment['appointmentDate']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $appointment['appointmentTime']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $appointment['appointmentTypeName']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $appointment['appointmentFee'] + $appointment['hospitalCharges']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <!-- Action buttons: Edit and Delete -->
-                                                            <a href="<?= base_url('deleteAppointment/' . $appointment['appointmentID']); ?>"
-                                                                onclick="return confirm('Are you sure you want to delete this Appointment?');"
-                                                                class="btn btn-danger btn-sm">Delete</a>
-                                                        </td>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                        <!-- Contact Info -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Gender</label>
+                                                    <div class="col-sm-9">
+                                                        <select class="form-control" name="gender" required>
+                                                            <option value="Male" <?= ($doctorDetails['Gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
+                                                            <option value="Female"
+                                                                <?= ($doctorDetails['Gender'] == 'Female') ? 'selected' : ''; ?>>Female
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Date of Birth</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="date" class="form-control" name="dob"
+                                                            value="<?= $doctorDetails['DateOfBirth']; ?>" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Address and Contact -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Phone Number</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="phone"
+                                                            value="<?= $doctorDetails['ContactNumber']; ?>" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Email</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="email" class="form-control" name="email"
+                                                            value="<?= $doctorDetails['Email']; ?>" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Professional Info -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Specialization</label>
+                                                    <div class="col-sm-9">
+                                                        <select class="form-control" name="specialization" required>
+                                                            <?php foreach ($specializations as $specialization): ?>
+                                                                <option value="<?= $specialization['s_id']; ?>"
+                                                                    <?= ($specialization['s_id'] == $doctorDetails['Specialization']) ? 'selected' : ''; ?>>
+                                                                    <?= $specialization['specialization_N']; ?>
+                                                                </option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Medical License
+                                                        Number</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="MLN"
+                                                            value="<?= $doctorDetails['MedicalLicenseNumber']; ?>"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Additional Professional Details -->
+                                        <!-- ... -->
+
+                                        <!-- Address and Affiliation -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Clinic Address</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="address"
+                                                            value="<?= $doctorDetails['ClinicAddress']; ?>" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Hospital Affiliation</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="hos_af"
+                                                            value="<?= $doctorDetails['HospitalAffiliation']; ?>"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Education and Experience -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Education</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="education"
+                                                            value="<?= $doctorDetails['Education']; ?>" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Experience</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="experience"
+                                                            value="<?= $doctorDetails['ExperienceYears']; ?>"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Certification and Image Upload -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Certification</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="certificate"
+                                                            value="<?= $doctorDetails['Certification']; ?>" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Profile Image</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="file" class="form-control" name="profile"
+                                                            accept="image/*" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Submit button -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <button type="submit" class="btn btn-primary">Update</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- content-wrapper ends -->
-                    <!-- partial:./public/assets/partials/_footer.html -->
-                    <?php include 'include_common/footer.php'; ?>
-                    <!-- partial -->
                 </div>
+                <?php include 'include_common/footer.php'; ?>
 
-                <!-- main-panel ends -->
+                <!-- partial -->
             </div>
-            <!-- page-body-wrapper ends -->
+            <!-- main-panel ends -->
         </div>
-        <!-- container-scroller -->
-        <!-- plugins:js -->
-        <script src="./public/assets/vendors/js/vendor.bundle.base.js"></script>
-        <!-- endinject -->
-        <!-- Plugin js for this page -->
-        <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-        <!-- Add this to your HTML file -->
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="../public/assets/vendors_s/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="../public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js"></script>
+    <script src="../public/assets/vendors_s/select2/select2.min.js"></script>
+    <script src="../public/assets/vendors_s/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../public/assets/js_s/off-canvas.js"></script>
+    <script src="../public/assets/js_s/hoverable-collapse.js"></script>
+    <script src="../public/assets/js_s/template.js"></script>
+    <script src="../public/assets/js_s/settings.js"></script>
+    <script src="../public/assets/js_s/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="../public/assets/js_s/file-upload.js"></script>
+    <script src="../public/assets/js_s/typeahead.js"></script>
+    <script src="../public/assets/js_s/select2.js"></script>
+    <!-- End custom js for this page-->
 
-        <!-- End plugin js for this page -->
-        <!-- inject:js -->
-        <script>
-            $(document).ready(function () {
-                $('#searchInput').on('input', function () {
-                    var searchValue = $(this).val();
-
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?= base_url('appointment_report'); ?>',
-                        data: { search: searchValue },
-                        dataType: 'json', // Specify the expected data type
-                        success: function (response) {
-                            if (response.success) {
-                                $('.table-responsive').html(response.tableContent);
-                            } else {
-                                console.error('Error:', response.error);
-                            }
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            console.error('AJAX Error:', textStatus, errorThrown);
-                        }
-                    });
-                });
-            });
-        </script>
-        <!-- <script>
-            // Add an event listener to the search input
-            $(document).ready(function () {
-                $('#searchInput').on('input', function () {
-                    // Trigger the form submission when the user types
-                    $(this).closest('form').submit();
-                });
-            });
-        </script> -->
-        <!-- <script>
-            // Add an event listener to the search input
-            $(document).ready(function () {
-                $('#searchInput').on('input', function () {
-                    // Get the search term
-                    var searchValue = $(this).val();
-
-                    // Send an AJAX request to update the table content
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?= base_url('appointment_report'); ?>',
-                        data: { search: searchValue },
-                        success: function (response) {
-                            // Update the table content with the response
-                            $('.table-responsive').html(response);
-                        }
-                    });
-                });
-            });
-        </script> -->
-        <script src="./public/assets/js/off-canvas.js"></script>
-        <script src="./public/assets/js/hoverable-collapse.js"></script>
-        <script src="./public/assets/js/template.js"></script>
-        <script src="./public/assets/js/settings.js"></script>
-        <script src="./public/assets/js/todolist.js"></script>
-        <!-- endinject -->
-        <!-- Custom js for this page-->
-        <!-- End custom js for this page-->
 </body>
-
-
-<!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/tables/basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:35 GMT -->
 
 </html>
