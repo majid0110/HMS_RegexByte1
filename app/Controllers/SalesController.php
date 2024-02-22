@@ -251,7 +251,7 @@ class SalesController extends Controller
                 ];
                 $invoiceDetailModel->insert($serviceData);
             }
-            $invoiceDetailModel->insert($serviceData);
+            // $invoiceDetailModel->insert($serviceData);
             $paymentDetailsModel = new InvoiceDetailsModel();
             $paymentDetailsData = [
                 'value' => $totalFee,
