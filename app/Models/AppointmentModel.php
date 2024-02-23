@@ -205,4 +205,16 @@ class AppointmentModel extends Model
         return $query->getResultArray();
     }
 
+    public function getuserprofile()
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+
+        return $this->db->table('users')
+            ->where('businessID', $businessID)
+            ->get()
+            ->getResultArray();
+    }
+
+
 }

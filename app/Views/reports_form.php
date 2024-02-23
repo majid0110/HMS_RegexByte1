@@ -257,11 +257,13 @@
                             </div>
                         </div>
                         <div class="col-md-3 grid-margin stretch-card">
-                            <div class="card">
+                            <div class="card" onclick="window.location.href='<?= base_url('services_report'); ?>';">
                                 <div class="card-body">
-                                    <h4 class="card-title">Lab Report</h4>
+                                    <h4 class="card-title">Services Report</h4>
                                     <div class="media">
                                         <i class="ti-world icon-md text-info d-flex align-self-start me-3"></i>
+                                        <div class="media-body">
+                                        </div>
                                     </div>
                                 </div>
                             </div>

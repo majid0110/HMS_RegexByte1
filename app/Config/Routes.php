@@ -147,8 +147,7 @@ $routes->post('sales/deleteService/(:num)', 'SalesController::deleteService/$1')
 //-------------------------------------------------------------------------------------------------------------------------
 $routes->get('/reports_form', 'ReportsController::reports_form');
 $routes->get('/appointment_report', 'ReportsController::appointment_report');
-$routes->post('ReportsController/searchAppointments', 'ReportsController::searchAppointments');
 $routes->post('appointment_report', 'ReportsController::appointment_report');
 //----------------------------------------------
 $routes->get('/lab_report', 'ReportsController::lab_report');
-$routes->post('ReportsController/searchlabReport', 'ReportsController::searchlabReport');
+$routes->post('lab_report', 'ReportsController::lab_report');

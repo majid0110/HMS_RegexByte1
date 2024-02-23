@@ -1,334 +1,590 @@
-<?php $session = session(); ?>
-<?php include 'include_common/head.php'; ?>
-<?php include 'include_common/navbar.php'; ?>
-<!DOCTYPE html>
-<html lang="en">
-<!-- <head>
-    <style>
-        body {
-            background-color: #f8f9fa;
-            color: #495057;
-            font-family: 'Arial', sans-serif;
-        }
+<?php
+// Retrieve modules from session data
+$modules = $session->get('modules');
+$userPermissions = $session->get('user_permissions');
+$modulePermissions = $session->get('module_permissions'); // Assuming you store user permissions in the session
 
-        .card {
-            margin-bottom: 20px;
-            border: 1px solid #ced4da;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+?>
 
-        .form-sample {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
 
-        label {
-            font-weight: bold;
-            color: #007bff;
-        }
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('dashboard'); ?>">
+                <i class="mdi mdi-grid-large menu-icon"></i>
+                <span class="menu-title">Dashboard</span>
+            </a>
+        </li>
 
-        .form-control {
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-        }
+        <?php foreach ($modules as $module): ?>
+            <?php
+            $moduleID = $module['id'];
 
-        .btn-auth {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+            $isRegisterBusinessModule = $module['module_name'] === 'Register Business';
 
-        .btn-auth:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head> -->
+            $canView = $isRegisterBusinessModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            ?>
 
-<head>
-    <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="/public/assets/vendors_s/datatables.net-bs4/dataTables.bootstrap4.css">
-    <link rel="stylesheet" href="/public/assets/js_s/select.dataTables.min.css">
-    <link rel="stylesheet" href="../public/assets/vendors_s/feather/feather.css">
-    <link rel="stylesheet" href="../public/assets/vendors_s/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../public/assets/vendors_s/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="../public/assets/vendors_s/typicons/typicons.css">
-    <link rel="stylesheet" href="../public/assets/vendors_s/simple-line-icons/css/simple-line-icons.css">
-    <link rel="stylesheet" href="../public/assets/vendors_s/css/vendor.bundle.base.css">
-    <!-- endinject -->
-
-    <!-- inject:css -->
-    <link rel="stylesheet" href="../public/assets/css_s/vertical-layout-light/style.css">
-    <!-- endinject -->
-    <link rel="shortcut icon" href="../public/assets/images_s/regexbyte.png" />
-</head>
-
-<body>
-    <div class="container-scroller">
-        <!-- partial -->
-        <div class="container-fluid page-body-wrapper">
-            <!-- partial:../../partials/_settings-panel.html -->
-            <div class="theme-setting-wrapper">
-                <div id="settings-trigger"><i class="ti-settings"></i></div>
-                <div id="theme-settings" class="settings-panel">
-                    <i class="settings-close ti-close"></i>
-                    <p class="settings-heading">SIDEBAR SKINS</p>
-                    <div class="sidebar-bg-options selected" id="sidebar-light-theme">
-                        <div class="img-ss rounded-circle bg-light border me-3"></div>Light
+            <?php if ($canView): ?>
+                <li class="nav-item nav-category">
+                    <?= $module['module_name'] ?>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-<?= $moduleID ?>" aria-expanded="false"
+                        aria-controls="ui-basic-<?= $moduleID ?>">
+                        <i class="menu-icon mdi mdi-floor-plan"></i>
+                        <span class="menu-title">
+                            <?= $module['module_name'] ?>
+                        </span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic-<?= $moduleID ?>">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('user_form'); ?>">
+                                    <?= $module['module_name'] ?>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('business_table'); ?>">View
+                                    <?= $module['module_name'] ?>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="sidebar-bg-options" id="sidebar-dark-theme">
-                        <div class="img-ss rounded-circle bg-dark border me-3"></div>Dark
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <?php foreach ($modules as $module): ?>
+            <?php
+            $moduleID = $module['id'];
+
+            $isUserManagementModule = $module['module_name'] === 'User Management';
+
+            $canView = $isUserManagementModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            ?>
+
+            <?php if ($canView): ?>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-<?= $moduleID ?>" aria-expanded="false"
+                        aria-controls="ui-basic-<?= $moduleID ?>">
+                        <i class="menu-icon mdi mdi-card-text-outline"></i>
+                        <span class="menu-title">
+                            <?= $module['module_name'] ?>
+                        </span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic-<?= $moduleID ?>">
+                        <ul class="nav flex-column sub-menu">
+                            <!-- <li class="nav-item">
+                        <a class="nav-link" href="pages/forms/basic_elements.html">Create License</a>
+                    </li> -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url() . 'role_form'; ?>">Create Roles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url() . 'user_form2'; ?>">Create Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('users_table'); ?>">View Users</a>
+                            </li>
+                        </ul>
                     </div>
-                    <p class="settings-heading mt-2">HEADER SKINS</p>
-                    <div class="color-tiles mx-0 px-4">
-                        <div class="tiles success"></div>
-                        <div class="tiles warning"></div>
-                        <div class="tiles danger"></div>
-                        <div class="tiles info"></div>
-                        <div class="tiles dark"></div>
-                        <div class="tiles default"></div>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <?php foreach ($modules as $module): ?>
+            <?php
+            $moduleID = $module['id']; // Adjust this based on your actual column name
+        
+            // Check if the current module is the "Modules" module
+            $isModulesModule = $module['module_name'] === 'Modules';
+
+            // Check if the user has permission to view this module
+            $canView = $isModulesModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            ?>
+
+            <?php if ($canView): ?>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-<?= $moduleID ?>" aria-expanded="false"
+                        aria-controls="ui-basic-<?= $moduleID ?>">
+                        <i class="menu-icon mdi mdi-buffer"></i>
+                        <span class="menu-title">
+                            <?= $module['module_name'] ?>
+                        </span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic-<?= $moduleID ?>">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="pages/tables/basic-table.html">Add Modules</a>
+                            </li>
+                            <!-- Add more sub-menu items as needed -->
+                        </ul>
                     </div>
-                </div>
-            </div>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
 
-            <?php include 'include_common/sidebar.php'; ?>
-            <div class="main-panel">
-                <div class="content-wrapper">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form class="pt-3" method="POST" action="<?= base_url('updateDoctor'); ?>"
-                                        enctype="multipart/form-data">
-                                        <input type="hidden" name="DoctorID"
-                                            value="<?= $doctorDetails['DoctorID']; ?>" />
 
-                                        <!-- Personal Info -->
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">First Name</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="fName"
-                                                            value="<?= $doctorDetails['FirstName']; ?>" required />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Last Name</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="lName"
-                                                            value="<?= $doctorDetails['LastName']; ?>" required />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+        <!-- For Clients module -->
+        <?php foreach ($modules as $module): ?>
+            <?php
+            $moduleID = $module['id']; // Adjust this based on your actual column name
+        
+            // Check if the current module is the "Clients" module
+            $isClientsModule = $module['module_name'] === 'Clients';
 
-                                        <!-- Contact Info -->
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Gender</label>
-                                                    <div class="col-sm-9">
-                                                        <select class="form-control" name="gender" required>
-                                                            <option value="Male" <?= ($doctorDetails['Gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
-                                                            <option value="Female"
-                                                                <?= ($doctorDetails['Gender'] == 'Female') ? 'selected' : ''; ?>>Female
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Date of Birth</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="date" class="form-control" name="dob"
-                                                            value="<?= $doctorDetails['DateOfBirth']; ?>" required />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+            // Check if the user has permission to view this module
+            $canView = $isClientsModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            ?>
 
-                                        <!-- Address and Contact -->
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Phone Number</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="phone"
-                                                            value="<?= $doctorDetails['ContactNumber']; ?>" required />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Email</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="email" class="form-control" name="email"
-                                                            value="<?= $doctorDetails['Email']; ?>" required />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Professional Info -->
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Specialization</label>
-                                                    <div class="col-sm-9">
-                                                        <select class="form-control" name="specialization" required>
-                                                            <?php foreach ($specializations as $specialization): ?>
-                                                                <option value="<?= $specialization['s_id']; ?>"
-                                                                    <?= ($specialization['s_id'] == $doctorDetails['Specialization']) ? 'selected' : ''; ?>>
-                                                                    <?= $specialization['specialization_N']; ?>
-                                                                </option>
-                                                            <?php endforeach; ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Medical License
-                                                        Number</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="MLN"
-                                                            value="<?= $doctorDetails['MedicalLicenseNumber']; ?>"
-                                                            required />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Additional Professional Details -->
-                                        <!-- ... -->
-
-                                        <!-- Address and Affiliation -->
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Clinic Address</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="address"
-                                                            value="<?= $doctorDetails['ClinicAddress']; ?>" required />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Hospital Affiliation</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="hos_af"
-                                                            value="<?= $doctorDetails['HospitalAffiliation']; ?>"
-                                                            required />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Education and Experience -->
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Education</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="education"
-                                                            value="<?= $doctorDetails['Education']; ?>" required />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Experience</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="experience"
-                                                            value="<?= $doctorDetails['ExperienceYears']; ?>"
-                                                            required />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Certification and Image Upload -->
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Certification</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="certificate"
-                                                            value="<?= $doctorDetails['Certification']; ?>" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Profile Image</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="file" class="form-control" name="profile"
-                                                            accept="image/*" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Submit button -->
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <button type="submit" class="btn btn-primary">Update</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+            <?php if ($canView): ?>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-<?= $moduleID ?>" aria-expanded="false"
+                        aria-controls="ui-basic-<?= $moduleID ?>">
+                        <i class="menu-icon mdi mdi-account-circle-outline"></i>
+                        <span class="menu-title">
+                            <?= $module['module_name'] ?>
+                        </span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic-<?= $moduleID ?>">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('clients_form'); ?>">Add
+                                    <?= $module['module_name'] ?>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('clients_table'); ?>">View
+                                    <?= $module['module_name'] ?>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-                <?php include 'include_common/footer.php'; ?>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
 
-                <!-- partial -->
-            </div>
-            <!-- main-panel ends -->
-        </div>
-        <!-- page-body-wrapper ends -->
-    </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="../public/assets/vendors_s/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <script src="../public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js"></script>
-    <script src="../public/assets/vendors_s/select2/select2.min.js"></script>
-    <script src="../public/assets/vendors_s/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="../public/assets/js_s/off-canvas.js"></script>
-    <script src="../public/assets/js_s/hoverable-collapse.js"></script>
-    <script src="../public/assets/js_s/template.js"></script>
-    <script src="../public/assets/js_s/settings.js"></script>
-    <script src="../public/assets/js_s/todolist.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page-->
-    <script src="../public/assets/js_s/file-upload.js"></script>
-    <script src="../public/assets/js_s/typeahead.js"></script>
-    <script src="../public/assets/js_s/select2.js"></script>
-    <!-- End custom js for this page-->
+        <!-- For Appointments module -->
+        <?php foreach ($modules as $module): ?>
+            <?php
+            $moduleID = $module['id'];
 
-</body>
+            $isAppointmentsModule = $module['module_name'] === 'Appointments';
 
-</html>
+            $canView = $isAppointmentsModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            ?>
+
+            <?php if ($canView): ?>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-<?= $moduleID ?>" aria-expanded="false"
+                        aria-controls="ui-basic-<?= $moduleID ?>">
+                        <i class="menu-icon mdi mdi-alarm-check"></i>
+                        <span class="menu-title">
+                            <?= $module['module_name'] ?>
+                        </span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic-<?= $moduleID ?>">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('appointments_form'); ?>">Book
+                                    <?= $module['module_name'] ?>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('appointments_table'); ?>">View Appointments</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <!-- For Doctors module -->
+        <?php foreach ($modules as $module): ?>
+            <?php
+            $moduleID = $module['id'];
+
+            $isDoctorsModule = $module['module_name'] === 'Doctors';
+
+            $canView = $isDoctorsModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            ?>
+
+            <?php if ($canView): ?>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-<?= $moduleID ?>" aria-expanded="false"
+                        aria-controls="ui-basic-<?= $moduleID ?>">
+                        <i class="menu-icon mdi mdi-doctor"></i>
+                        <span class="menu-title">
+                            <?= $module['module_name'] ?>
+                        </span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic-<?= $moduleID ?>">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('doctors_form'); ?>">Add
+                                    <?= $module['module_name'] ?>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('doctors_table'); ?>">View
+                                    <?= $module['module_name'] ?>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('doctors_fee'); ?>">Doctors Fee</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <!-- For Laboratory Services module -->
+        <?php foreach ($modules as $module): ?>
+            <?php
+            $moduleID = $module['id'];
+
+            $isLaboratoryServicesModule = $module['module_name'] === 'Laboratory Services';
+
+            $canView = $isLaboratoryServicesModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            ?>
+
+            <?php if ($canView): ?>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-<?= $moduleID ?>" aria-expanded="false"
+                        aria-controls="ui-basic-<?= $moduleID ?>">
+                        <i class="menu-icon mdi mdi-pharmacy"></i>
+                        <span class="menu-title">
+                            <?= $module['module_name'] ?>
+                        </span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic-<?= $moduleID ?>">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('labServices_form'); ?>">Add Lab Test</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('labtest_form'); ?>">Add Test</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('labtest_table'); ?>">View Tests</a>
+                            </li>
+                            <!-- Add more sub-menu items as needed -->
+                        </ul>
+                    </div>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <?php foreach ($modules as $module): ?>
+            <?php
+            $moduleID = $module['id'];
+
+            $isServicesModule = $module['module_name'] === 'Services';
+
+            $canView = $isServicesModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            ?>
+
+            <?php if ($canView): ?>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-<?= $moduleID ?>" aria-expanded="false"
+                        aria-controls="ui-basic-<?= $moduleID ?>">
+                        <i class="menu-icon mdi mdi-bike"></i>
+                        <span class="menu-title">
+                            <?= $module['module_name'] ?>
+                        </span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic-<?= $moduleID ?>">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('Services_form'); ?>">Add Service</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('Services_table'); ?>">View Services</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('Sales_table'); ?>">View Sales</a>
+                            </li>
+                            <!-- Add more sub-menu items as needed -->
+                        </ul>
+                    </div>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <!-- Sales Modeule -->
+        <?php foreach ($modules as $module): ?>
+            <?php
+            $moduleID = $module['id'];
+
+            $isSalesModule = $module['module_name'] === 'Sales';
+
+            $canView = $isSalesModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            ?>
+
+            <?php if ($canView): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url('sales_form'); ?>">
+                        <i class="menu-icon mdi mdi-cash-multiple"></i>
+                        <span class="menu-title">
+                            <?= $module['module_name'] ?>
+                        </span>
+                    </a>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <!-- For Configuration module -->
+        <?php foreach ($modules as $module): ?>
+            <?php
+            $moduleID = $module['id'];
+
+            $isConfigurationModule = $module['module_name'] === 'Configuration';
+
+            $canView = $isConfigurationModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            ?>
+
+            <?php if ($canView): ?>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-<?= $moduleID ?>" aria-expanded="false"
+                        aria-controls="ui-basic-<?= $moduleID ?>">
+                        <i class="menu-icon mdi mdi-settings"></i>
+                        <span class="menu-title">
+                            <?= $module['module_name'] ?>
+                        </span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic-<?= $moduleID ?>">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('configure'); ?>">Configure Hospital</a>
+                            </li>
+                            <!-- Add more sub-menu items as needed -->
+                        </ul>
+                    </div>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <!-- For Reports module -->
+        <?php foreach ($modules as $module): ?>
+            <?php
+            $moduleID = $module['id'];
+
+            $isReportsModule = $module['module_name'] === 'Reports';
+
+            $canView = $isReportsModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            ?>
+
+            <?php if ($canView): ?>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-<?= $moduleID ?>" aria-expanded="false"
+                        aria-controls="ui-basic-<?= $moduleID ?>">
+                        <i class="menu-icon mdi mdi-file-document"></i>
+                        <span class="menu-title">
+                            <?= $module['module_name'] ?>
+                        </span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic-<?= $moduleID ?>">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('reports_form'); ?>">Reports</a>
+                            </li>
+                            <!-- Add more sub-menu items as needed -->
+                        </ul>
+                    </div>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+
+
+
+
+
+
+
+
+    </ul>
+
+
+
+</nav>
+
+<?php /*
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+<ul class="nav">
+<li class="nav-item">
+<a class="nav-link" href="index.html">
+<i class="mdi mdi-grid-large menu-icon"></i>
+<span class="menu-title">Dashboard</span>
+</a>
+</li>
+<li class="nav-item nav-category">REGISTER BUSINESS</li>
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+<i class="menu-icon mdi mdi-floor-plan"></i>
+<span class="menu-title">Register Business</span>
+<i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="ui-basic">
+<ul class="nav flex-column sub-menu">
+<li class="nav-item"> <a class="nav-link" href="<?php echo base_url() . 'user_form'; ?>">Add Business</a></li>
+<li class="nav-item"> <a class="nav-link" href="<?php echo base_url() . 'business_table'; ?>">Show Business List</a></li>
+<!-- <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li> -->
+</ul>
+</div>
+</li>
+<li class="nav-item nav-category">USER MANAGEMENT</li>
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+<i class="menu-icon mdi mdi-card-text-outline"></i>
+<span class="menu-title">User Management</span>
+<i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="form-elements">
+<ul class="nav flex-column sub-menu">
+<li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Create License</a></li>
+<li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'role_form'; ?>">Create Roles</a></li>
+<li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'user_form2'; ?>">Create Users</a></li>
+</ul>
+</div>
+</li>
+
+<li class="nav-item nav-category">MODULES</li>
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="">
+<i class="menu-icon mdi mdi-table"></i>
+<span class="menu-title">Modules</span>
+<i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="tables">
+<ul class="nav flex-column sub-menu">
+<li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Add Modules</a></li>
+</ul>
+</div>
+</li>
+</li>
+
+<li class="nav-item nav-category">CLIENTS</li>
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#clients" aria-expanded="false" aria-controls="clients">
+<i class="menu-icon mdi mdi-account-circle-outline"></i>
+<span class="menu-title">Clients</span>
+<i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="clients">
+<ul class="nav flex-column sub-menu">
+<li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'clients_form'; ?>">Add Clients</a></li>
+<li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'clients_table'; ?>">Show Clients</a></li>
+<!-- <li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'doctors_fee'; ?>">Doctors Fee</a></li> -->
+</ul>
+</div>
+</li>
+
+<li class="nav-item nav-category">APPOINTMENTS</li>
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+<i class="menu-icon mdi mdi-alarm-check"></i>
+<span class="menu-title">Appointments</span>
+<i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="icons">
+<ul class="nav flex-column sub-menu">
+<li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Add Appointments</a></li>
+</ul>
+<ul class="nav flex-column sub-menu">
+<li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Show List</a></li>
+</ul>
+</div>
+</li> 
+</li>
+
+<li class="nav-item nav-category">DOCTORS</li>
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#doctors" aria-expanded="false" aria-controls="doctors">
+<i class="menu-icon mdi mdi-doctor"></i>
+<span class="menu-title">Doctors</span>
+<i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="doctors">
+<ul class="nav flex-column sub-menu">
+<li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'doctors_form'; ?>">Add Doctors</a></li>
+<li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'doctors_table'; ?>">Show Doctors</a></li>
+<li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'doctors_fee'; ?>">Doctors Fee</a></li>
+</ul>
+</div>
+</li>
+<li class="nav-item nav-category">LABORATORY SERVICES</li>
+<li class="nav-item">
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+<i class="menu-icon mdi mdi-pharmacy"></i>
+<span class="menu-title">Laboratory Services</span>
+<i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="charts">
+<ul class="nav flex-column sub-menu">
+<li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">Manage laboratory </a></li>
+</ul>
+</div>
+</li>
+</li>
+
+
+<li class="nav-item nav-category">CONFIGURATION</li>
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#configuration" aria-expanded="false" aria-controls="configuration">
+<i class="menu-icon mdi mdi-table"></i>
+<span class="menu-title">Configuration</span>
+<i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="configuration">
+<ul class="nav flex-column sub-menu">
+<li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'configure'; ?>">Configure Hospital</a></li>
+</ul>
+</div>
+</li>
+
+
+
+<li class="nav-item nav-category">REPORTS</li>
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#reports" aria-expanded="false" aria-controls="reports">
+<i class="menu-icon mdi mdi-file-document"></i>
+<span class="menu-title">Reports</span>
+<i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="reports">
+<ul class="nav flex-column sub-menu">
+<li class="nav-item"><a class="nav-link" href="pages/tables/basic-table.html">Add Reports</a></li>
+</ul>
+</div>
+</li>
+
+
+
+
+
+
+
+
+
+</ul>
+
+
+
+</nav>
+*/ ?>

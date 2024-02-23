@@ -227,7 +227,7 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <form action="<?= base_url('appointment_report'); ?>" method="post">
+                                <form action="<?= base_url('lab_report'); ?>" method="post">
                                     <div class="form-group row">
                                         <div class="col-md-3 offset-md-9">
                                             <label>Search</label>
@@ -236,9 +236,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-md-3">
-                                            <label>By Doctor</label>
-                                        </div>
+
                                         <div class="col-md-3">
                                             <label>By Client</label>
                                             <div id="the-basics">
@@ -247,6 +245,20 @@
                                                     <?php foreach ($client_names as $client): ?>
                                                         <option value="<?= $client['client']; ?>">
                                                             <?= $client['client']; ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label>By Users</label>
+                                            <div id="the-basics">
+                                                <select class="form-control" name="userName" id='userInput'>
+                                                    <option value="">All Users</option>
+                                                    <?php foreach ($user_names as $users): ?>
+                                                        <option value="<?= $users['fName']; ?>">
+                                                            <?= $users['fName']; ?>
                                                         </option>
                                                     <?php endforeach; ?>
                                                 </select>
@@ -267,7 +279,7 @@
                                 <hr>
                                 <!-- </div>
                                 </div> -->
-                                <h4 class="card-title">Appointments Report</h4>
+                                <h4 class="card-title">Lab Report</h4>
                                 <div class="col-12 grid-margin">
                                     <div class="table-responsive">
                                         <table class="table table-striped">
@@ -335,15 +347,15 @@
 
         <script>
             $(document).ready(function () {
-                $('#searchInput, #doctorInput, #clientInput, #fromDateInput, #toDateInput').on('input change', function () {
+                $('#searchInput, #userInput, #clientInput, #fromDateInput, #toDateInput').on('input change', function () {
                     var searchValue = $('#searchInput').val();
-                    var doctorValue = $('#doctorInput').val();
+                    var userName = $('#userInput').val();
                     var clientValue = $('#clientInput').val();
                     var fromDateValue = $('#fromDateInput').val();
                     var toDateValue = $('#toDateInput').val();
 
                     console.log('Search Value:', searchValue);
-                    console.log('Doctor Value:', doctorValue);
+                    console.log('User Value:', userName);
                     console.log('Client Value:', clientValue);
                     console.log('From Date Value:', fromDateValue);
                     console.log('To Date Value:', toDateValue);
@@ -353,8 +365,8 @@
                         url: '<?= base_url('lab_report'); ?>',
                         data: {
                             search: searchValue,
-                            doctor: doctorValue,
-                            client: clientValue,
+                            userName: userName,
+                            clientName: clientValue,
                             fromDate: fromDateValue,
                             toDate: toDateValue
                         },
@@ -374,100 +386,6 @@
             });
         </script>
 
-
-
-        <!-- <script>
-
-            // $(document).ready(function () {
-            //     $('#searchInput, #doctorInput, #clientInput').on('input', function () {
-            //         var searchValue = $('#searchInput').val();
-            //         var doctorValue = $('#doctorInput').val();
-            //         var clientValue = $('#clientInput').val();
-
-            //         console.log('Search Value:', searchValue);
-            //         console.log('Doctor Value:', doctorValue);
-            //         console.log('Client Value:', clientValue);
-
-            //         $.ajax({
-            //             type: 'POST',
-            //             url: '<?= base_url('appointment_report'); ?>',
-            //             data: { search: searchValue, doctor: doctorValue, client: clientValue },
-            //             dataType: 'json', // Specify the expected data type
-            //             success: function (response) {
-            //                 if (response.success) {
-            //                     $('.table-responsive').html(response.tableContent);
-            //                 } else {
-            //                     console.error('Error:', response.error);
-            //                 }
-            //             },
-            //             error: function (jqXHR, textStatus, errorThrown) {
-            //                 console.error('AJAX Error:', textStatus, errorThrown);
-            //             }
-            //         });
-            //     });
-            // });
-
-
-
-
-            // $(document).ready(function () {
-            //     $('#searchInput, #doctorInput, #clientInput').on('input', function () {
-            //         var searchValue = $('#searchInput').val();
-            //         var doctorValue = $('#doctorInput').val();
-            //         var clientValue = $('#clientInput').val();
-
-            //         console.log('Search Value:', searchValue);
-            //         console.log('Doctor Value:', doctorValue);
-            //         console.log('Client Value:', clientInput);
-
-            //         $.ajax({
-            //             type: 'POST',
-            //             url: '<?= base_url('appointment_report'); ?>',
-            //             data: { search: searchValue, doctor: doctorValue, clientName: clientValue },
-            //             dataType: 'json', // Specify the expected data type
-            //             success: function (response) {
-            //                 if (response.success) {
-            //                     $('.table-responsive').html(response.tableContent);
-            //                 } else {
-            //                     console.error('Error:', response.error);
-            //                 }
-            //             },
-            //             error: function (jqXHR, textStatus, errorThrown) {
-            //                 console.error('AJAX Error:', textStatus, errorThrown);
-            //             }
-            //         });
-            //     });
-            // });
-        </script> -->
-        <!-- <script>
-            // Add an event listener to the search input
-            $(document).ready(function () {
-                $('#searchInput').on('input', function () {
-                    // Trigger the form submission when the user types
-                    $(this).closest('form').submit();
-                });
-            });
-        </script> -->
-        <!-- <script>
-            // Add an event listener to the search input
-            $(document).ready(function () {
-                $('#searchInput').on('input', function () {
-                    // Get the search term
-                    var searchValue = $(this).val();
-
-                    // Send an AJAX request to update the table content
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?= base_url('appointment_report'); ?>',
-                        data: { search: searchValue },
-                        success: function (response) {
-                            // Update the table content with the response
-                            $('.table-responsive').html(response);
-                        }
-                    });
-                });
-            });
-        </script> -->
         <script src="./public/assets/js/off-canvas.js"></script>
         <script src="./public/assets/js/hoverable-collapse.js"></script>
         <script src="./public/assets/js/template.js"></script>
