@@ -227,6 +227,10 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
+                            <div>
+    <p>Total Hospital Fee: <?= $totalHospitalFee ?></p>
+    <p>Total Appointment Fee: <?= $totalAppointmentFee ?></p>
+</div>
                                 <form action="<?= base_url('appointment_report'); ?>" method="post">
                                     <div class="form-group row">
                                         <div class="col-md-3 offset-md-9">

@@ -223,168 +223,140 @@
             <?php include 'include_common/sidebar.php'; ?>
             <!-- partial -->
             <div class="main-panel">
-                <div class="content-wrapper">
-                    <div class="col-lg-12 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <form action="<?= base_url('lab_report'); ?>" method="post">
-                                    <div class="form-group row">
-                                        <div class="col-md-3 offset-md-9">
-                                            <label>Search</label>
-                                            <input class="form-control" type="text" name="search" id="searchInput"
-                                                placeholder="Search">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-
-                                        <div class="col-md-3">
-                                            <label>By Client</label>
-                                            <div id="the-basics">
-                                                <select class="form-control" name="clientName" id='clientInput'>
-                                                    <option value="">All Client</option>
-                                                    <?php foreach ($client_names as $client): ?>
-                                                        <option value="<?= $client['client']; ?>">
-                                                            <?= $client['client']; ?>
-                                                        </option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <label>By Users</label>
-                                            <div id="the-basics">
-                                                <select class="form-control" name="userName" id='userInput'>
-                                                    <option value="">All Users</option>
-                                                    <?php foreach ($user_names as $users): ?>
-                                                        <option value="<?= $users['fName']; ?>">
-                                                            <?= $users['fName']; ?>
-                                                        </option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <label>From</label>
-                                            <input class="form-control" type="date" placeholder="From"
-                                                id="fromDateInput">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>To</label>
-                                            <input class="form-control" type="date" placeholder="To" id="toDateInput">
-                                        </div>
-                                    </div>
-                                </form>
-                                <hr>
-                                <!-- </div>
-                                </div> -->
-                                <h4 class="card-title">Lab Report</h4>
-                                <div class="col-12 grid-margin">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Client Name</th>
-                                                    <th>FEE</th>
-                                                    <th>Added By</th>
-                                                    <th>Date</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <?php foreach ($Tests as $test): ?>
-                                                    <tr>
-                                                        <td>
-                                                            <?= $test['clientName']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $test['fee']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $test['userName']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $test['CreatedAT']; ?>
-                                                        </td>
-
-                                                        <td>
-                                                            <a href="<?= base_url('viewTestDetails/' . $test['test_id']); ?>"
-                                                                class="btn btn-info btn-sm">View
-                                                                Details</a>
-                                                        </td>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+    <div class="content-wrapper">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <form action="<?= base_url('lab_report'); ?>" method="post">
+                        <div class="form-group row">
+                            <div class="col-md-3 offset-md-9">
+                                <label>Search</label>
+                                <input class="form-control" type="text" name="search" id="searchInput" placeholder="Search">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <label>By Client</label>
+                                <div id="the-basics">
+                                    <select class="form-control" name="clientName" id='clientInput'>
+                                        <option value="">All Clients</option>
+                                        <?php foreach ($client_names as $client): ?>
+                                            <option value="<?= $client['client']; ?>"><?= $client['client']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label>By Users</label>
+                                <div id="the-basics">
+                                    <select class="form-control" name="userName" id='userInput'>
+                                        <option value="">All Users</option>
+                                        <?php foreach ($user_names as $user): ?>
+                                            <option value="<?= $user['fName']; ?>"><?= $user['fName']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label>From</label>
+                                <input class="form-control" type="date" placeholder="From" id="fromDateInput" name="fromDate">
+                            </div>
+                            <div class="col-md-3">
+                                <label>To</label>
+                                <input class="form-control" type="date" placeholder="To" id="toDateInput" name="toDate">
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+                    <h4 class="card-title">Lab Report</h4>
+                    <div class="col-12 grid-margin">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Client Name</th>
+                                        <th>FEE</th>
+                                        <th>Added By</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($Tests as $test): ?>
+                                        <tr>
+                                            <td><?= $test['clientName']; ?></td>
+                                            <td><?= $test['fee']; ?></td>
+                                            <td><?= $test['userName']; ?></td>
+                                            <td><?= $test['CreatedAT']; ?></td>
+                                            <td>
+                                                <a href="<?= base_url('viewTestDetails/' . $test['test_id']); ?>" class="btn btn-info btn-sm">View Details</a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <!-- content-wrapper ends -->
-                    <!-- partial:./public/assets/partials/_footer.html -->
-
-                    <!-- partial -->
                 </div>
-                <?php include 'include_common/footer.php'; ?>
-                <!-- main-panel ends -->
             </div>
-            <!-- page-body-wrapper ends -->
         </div>
-        <!-- container-scroller -->
-        <!-- plugins:js -->
-        <script src="./public/assets/vendors/js/vendor.bundle.base.js"></script>
-        <!-- endinject -->
-        <!-- Plugin js for this page -->
-        <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-        <!-- Add this to your HTML file -->
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    </div>
+    <?php include 'include_common/footer.php'; ?>
+</div>
+ <!-- plugins:js -->
+<script src="./public/assets/vendors/js/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<!-- Add this to your HTML file -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-        <!-- End plugin js for this page -->
-        <!-- inject:js -->
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script>
+ $(document).ready(function () {
+        $('#searchInput, #userInput, #clientInput, #fromDateInput, #toDateInput').on('input change', function () {
+            var searchValue = $('#searchInput').val();
+            var userName = $('#userInput').val();
+            var clientValue = $('#clientInput').val();
+            var fromDateValue = $('#fromDateInput').val();
+            var toDateValue = $('#toDateInput').val();
 
-        <script>
-            $(document).ready(function () {
-                $('#searchInput, #userInput, #clientInput, #fromDateInput, #toDateInput').on('input change', function () {
-                    var searchValue = $('#searchInput').val();
-                    var userName = $('#userInput').val();
-                    var clientValue = $('#clientInput').val();
-                    var fromDateValue = $('#fromDateInput').val();
-                    var toDateValue = $('#toDateInput').val();
+            console.log('Search Value:', searchValue);
+            console.log('User Value:', userName);
+            console.log('Client Value:', clientValue);
+            console.log('From Date Value:', fromDateValue);
+            console.log('To Date Value:', toDateValue);
 
-                    console.log('Search Value:', searchValue);
-                    console.log('User Value:', userName);
-                    console.log('Client Value:', clientValue);
-                    console.log('From Date Value:', fromDateValue);
-                    console.log('To Date Value:', toDateValue);
+            $.ajax({
+    type: 'POST',
+    url: '<?= base_url('lab_report'); ?>',
+    data: {
+        search: searchValue,
+        userName: userName,
+        clientName: clientValue,
+        fromDate: fromDateValue,
+        toDate: toDateValue
+    },
+    dataType: 'json',
+    success: function(response) {
+        if (response.success) {
+            var cleanedTableContent = response.tableContent.trim();
+            $('.table-responsive').html(cleanedTableContent);
+        } else {
+            console.error('Error:', response.error);
+        }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+        console.error('AJAX Error:', textStatus, errorThrown);
+    }
+});
+        });
+    });
+</script>
 
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?= base_url('lab_report'); ?>',
-                        data: {
-                            search: searchValue,
-                            userName: userName,
-                            clientName: clientValue,
-                            fromDate: fromDateValue,
-                            toDate: toDateValue
-                        },
-                        dataType: 'json',
-                        success: function (response) {
-                            if (response.success) {
-                                $('.table-responsive').html(response.tableContent);
-                            } else {
-                                console.error('Error:', response.error);
-                            }
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            console.error('AJAX Error:', textStatus, errorThrown);
-                        }
-                    });
-                });
-            });
-        </script>
+
+
 
         <script src="./public/assets/js/off-canvas.js"></script>
         <script src="./public/assets/js/hoverable-collapse.js"></script>

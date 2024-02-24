@@ -92,6 +92,26 @@ class AppointmentModel extends Model
         return $query->getResultArray();
     }
 
+    public function getTotalHospitalFee()
+    {
+        $businessId = session()->get('businessID');
+        $builder = $this->db->table($this->table);
+        $builder->selectSum('hospitalCharges');
+        $builder->where('businessID', $businessId);
+        $result = $builder->get()->getRowArray();
+        return $result['hospitalCharges'];
+    }
+
+    public function getTotalAppointmentFee()
+    {
+        $businessId = session()->get('businessID');
+        $builder = $this->db->table($this->table);
+        $builder->selectSum('appointmentFee');
+        $builder->where('businessID', $businessId);
+        $result = $builder->get()->getRowArray();
+        return $result['appointmentFee'];
+    }
+
 
     public function getAppointmentTypes()
     {

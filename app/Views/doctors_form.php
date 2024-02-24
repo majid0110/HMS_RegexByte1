@@ -258,7 +258,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Phone Number</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="phone" required />
+                            <input type="text" class="form-control" name="phone" />
                           </div>
                         </div>
                       </div>
@@ -266,7 +266,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Email</label>
                           <div class="col-sm-9">
-                            <input type="email" class="form-control" name="email" required />
+                            <input type="email" class="form-control" name="email"/>
                           </div>
                         </div>
                       </div>
@@ -288,7 +288,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Medical License Number</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="MLN" required />
+                            <input type="text" class="form-control" name="MLN"/>
                           </div>
                         </div>
                       </div>
@@ -302,7 +302,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Clinic Address</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="address" required />
+                            <input type="text" class="form-control" name="address"/>
                           </div>
                         </div>
                       </div>
@@ -310,7 +310,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Hospital Affiliation</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="hos_af" required />
+                            <input type="text" class="form-control" name="hos_af"/>
                           </div>
                         </div>
                       </div>
@@ -320,7 +320,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Education</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="education" required />
+                            <input type="text" class="form-control" name="education"/>
                           </div>
                         </div>
                       </div>
@@ -328,7 +328,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Experience</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="experience" required />
+                            <input type="text" class="form-control" name="experience"/>
                           </div>
                         </div>
                       </div>
@@ -346,7 +346,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Profile Image</label>
                           <div class="col-sm-9">
-                            <input type="file" class="form-control" name="profile" accept="image/*" required />
+                            <input type="file" class="form-control" name="profile" accept="image/*"/>
                           </div>
                         </div>
                       </div>

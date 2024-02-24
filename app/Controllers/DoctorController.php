@@ -114,17 +114,59 @@ class DoctorController extends Controller
 //                                                  Main Fuctions
 //-------------------------------------------------------------------------------------------------------------------------
 
+    // public function saveDoctorProfile()
+    // {
+    //     $request = \Config\Services::request();
+    //     $session = \Config\Services::session();
+    //     $businessID = $session->get('businessID');
+
+    //     var_dump($_FILES);
+    //     $profileImage = $request->getFile('profile');
+    //     $ProfileImageName = $profileImage->getName();
+    //     $profileImage->move(FCPATH . 'login_ci4/uploads/', $ProfileImageName);
+
+    //     $data = [
+    //         'FirstName' => $request->getPost('fName'),
+    //         'LastName' => $request->getPost('lName'),
+    //         'Gender' => $request->getPost('gender'),
+    //         'DateOfBirth' => $request->getPost('dob'),
+    //         'ContactNumber' => $request->getPost('phone'),
+    //         'Email' => $request->getPost('email'),
+    //         'Specialization' => $request->getPost('specialization'),
+    //         'MedicalLicenseNumber' => $request->getPost('MLN'),
+    //         'ClinicAddress' => $request->getPost('address'),
+    //         'HospitalAffiliation' => $request->getPost('hos_af'),
+    //         'Education' => $request->getPost('education'),
+    //         'ExperienceYears' => $request->getPost('experience'),
+    //         'Certification' => $request->getPost('certificate'),
+    //         // 'ProfileImageURL' => $request->getPost('profile'),
+    //         'ProfileImageURL' => $ProfileImageName,
+    //         'BusinessID' => $businessID,
+    //     ];
+
+    //     $Model = new DoctorModel();
+    //     $Model->saveDoctorProfile($data);
+
+    //     session()->setFlashdata('success', 'Doctor Added Sucessfully..!!');
+
+    //     return redirect()->to(base_url("/doctors_form"));
+    // }
     public function saveDoctorProfile()
     {
         $request = \Config\Services::request();
         $session = \Config\Services::session();
         $businessID = $session->get('businessID');
-
-        var_dump($_FILES);
+    
         $profileImage = $request->getFile('profile');
-        $ProfileImageName = $profileImage->getName();
-        $profileImage->move(FCPATH . 'login_ci4/uploads/', $ProfileImageName);
-
+        
+        // Check if a file is uploaded
+        if ($profileImage->isValid()) {
+            $ProfileImageName = $profileImage->getName();
+            $profileImage->move(FCPATH . 'login_ci4/uploads/', $ProfileImageName);
+        } else {
+            $ProfileImageName = 'defaults/download.png';
+        }
+    
         $data = [
             'FirstName' => $request->getPost('fName'),
             'LastName' => $request->getPost('lName'),
@@ -139,19 +181,17 @@ class DoctorController extends Controller
             'Education' => $request->getPost('education'),
             'ExperienceYears' => $request->getPost('experience'),
             'Certification' => $request->getPost('certificate'),
-            // 'ProfileImageURL' => $request->getPost('profile'),
             'ProfileImageURL' => $ProfileImageName,
             'BusinessID' => $businessID,
         ];
-
+    
         $Model = new DoctorModel();
         $Model->saveDoctorProfile($data);
-
-        session()->setFlashdata('success', 'Doctor Added Sucessfully..!!');
-
+    
+        session()->setFlashdata('success', 'Doctor Added Successfully..!!');
+    
         return redirect()->to(base_url("/doctors_form"));
     }
-
 
 
     public function updateDoctor()

@@ -55,7 +55,7 @@ class ReportsController extends Controller
     {
         $Model = new AppointmentModel();
         $search = $this->request->getPost('search');
-        log_message('debug', 'Search Value: ' . $search);
+        // log_message('debug', 'Search Value: ' . $search);
         $data['Appointments'] = $Model->getAppointments($search);
         return view('lab_report', $data);
     }
@@ -64,7 +64,7 @@ class ReportsController extends Controller
     {
         $Model = new AppointmentModel();
         $search = $this->request->getPost('search');
-        log_message('debug', 'Search Value: ' . $search);
+        // log_message('debug', 'Search Value: ' . $search);
 
         $data['Appointments'] = $Model->getAppointments($search);
         return view('appointment_report', $data);
@@ -80,7 +80,9 @@ class ReportsController extends Controller
         $data['doctor_names'] = $model->getDoctorNames();
 
         $Model = new AppointmentModel();
-
+        $data['totalHospitalFee'] = $Model->getTotalHospitalFee();
+        $data['totalAppointmentFee'] = $Model->getTotalAppointmentFee();
+    
         $search = $this->request->getPost('search');
         $doctor = $this->request->getPost('doctor');
         $client = $this->request->getPost('client');
@@ -100,35 +102,79 @@ class ReportsController extends Controller
             return view('appointment_report', $data);
         }
     }
-    public function lab_report()
-    {
-        $clientModel = new ClientModel();
-        $data['client_names'] = $clientModel->getClientNames();
+    // public function lab_report()
+    // {
+    //     $clientModel = new ClientModel();
+    //     $data['client_names'] = $clientModel->getClientNames();
 
-        $user = new AppointmentModel();
-        $data['user_names'] = $user->getuserprofile();
+    //     $user = new AppointmentModel();
+    //     $data['user_names'] = $user->getuserprofile();
 
-        $testModel = new TestModel();
-        $fromDate = $this->request->getPost('fromDate');
-        $toDate = $this->request->getPost('toDate');
-        $userName = $this->request->getPost('userName');
-        $clientName = $this->request->getPost('clientName');
-        $search = $this->request->getPost('search');
+    //     $testModel = new TestModel();
+    //     $fromDate = $this->request->getPost('fromDate');
+    //     $toDate = $this->request->getPost('toDate');
+    //     $userName = $this->request->getPost('userName');
+    //     $clientName = $this->request->getPost('clientName');
+    //     $search = $this->request->getPost('search');
 
+    //     $data['Tests'] = $testModel->getReports($fromDate, $toDate, $userName, $clientName, $search);
+    //     if ($this->request->isAJAX()) {
+    //         try {
+    //             $tableContent = view('Reporttest', $data);
+    //             return $this->response->setJSON(['success' => true, 'tableContent' => $tableContent]);
+    //         } catch (\Exception $e) {
+    //             return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+    //         }
+    //     } else {
 
-        $data['Tests'] = $testModel->getReports($fromDate, $toDate, $userName, $clientName, $search);
+    //         return view('lab_report', $data);
+    //     }
+    // }
+//--------------------------------------------------------------------------
+// public function lab_report()
+// {
+//     $clientModel = new ClientModel();
+//     $data['client_names'] = $clientModel->getClientNames();
 
-        if ($this->request->isAJAX()) {
-            try {
-                $tableContent = view('Reporttest', $data);
-                return $this->response->setJSON(['success' => true, 'tableContent' => $tableContent]);
-            } catch (\Exception $e) {
-                return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
-            }
-        } else {
+//     $user = new AppointmentModel();
+//     $data['user_names'] = $user->getuserprofile();
 
-            return view('lab_report', $data);
+//     $search = $this->request->getPost('search');
+//     $userName = $this->request->getPost('userName');
+//     $clientName = $this->request->getPost('clientName');
+//     $fromDate = $this->request->getPost('fromDate');
+//     $toDate = $this->request->getPost('toDate');
+
+//     $testModel = new TestModel();
+//     $data['Tests'] = $testModel->searchLabReports($search, $userName, $clientName, $fromDate, $toDate);
+//     return view('lab_report', $data);
+// }
+public function lab_report()
+{
+    $clientModel = new ClientModel();
+    $data['client_names'] = $clientModel->getClientNames();
+
+    $user = new AppointmentModel();
+    $data['user_names'] = $user->getuserprofile();
+
+    $search = $this->request->getPost('search');
+    $userName = $this->request->getPost('userName');
+    $clientName = $this->request->getPost('clientName');
+    $fromDate = $this->request->getPost('fromDate');
+    $toDate = $this->request->getPost('toDate');
+
+    $testModel = new TestModel();
+    $data['Tests'] = $testModel->searchLabReports($search, $userName, $clientName, $fromDate, $toDate);
+    if ($this->request->isAJAX()) {
+        try {
+            $tableContent = view('ReportLab', $data);
+            return $this->response->setJSON(['success' => true, 'tableContent' => $tableContent]);
+        } catch (\Exception $e) {
+            return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
         }
+    } else {
+        return view('lab_report', $data);
     }
+}
 
 }
