@@ -41,14 +41,17 @@
         <i class="settings-close ti-close"></i>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab"
+              aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
+            <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab"
+              aria-controls="chats-section">CHATS</a>
           </li>
         </ul>
         <div class="tab-content" id="setting-content">
-          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
+            aria-labelledby="todo-section">
             <div class="add-items d-flex px-3 mb-0">
               <form class="form w-100">
                 <div class="form-group d-flex">
@@ -132,7 +135,8 @@
             </div>
             <ul class="chat-list">
               <li class="list active">
-                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Thomas Douglas</p>
                   <p>Available</p>
@@ -140,7 +144,8 @@
                 <small class="text-muted my-auto">19 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg" alt="image"><span
+                    class="offline"></span></div>
                 <div class="info">
                   <div class="wrapper d-flex">
                     <p>Catherine</p>
@@ -151,7 +156,8 @@
                 <small class="text-muted my-auto">23 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Daniel Russell</p>
                   <p>Available</p>
@@ -159,7 +165,8 @@
                 <small class="text-muted my-auto">14 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg" alt="image"><span
+                    class="offline"></span></div>
                 <div class="info">
                   <p>James Richardson</p>
                   <p>Away</p>
@@ -167,7 +174,8 @@
                 <small class="text-muted my-auto">2 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Madeline Kennedy</p>
                   <p>Available</p>
@@ -175,7 +183,8 @@
                 <small class="text-muted my-auto">5 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Sarah Graves</p>
                   <p>Available</p>
@@ -192,8 +201,8 @@
       <?php include 'include_common/sidebar.php'; ?>
       <!-- partial -->
       <div class="main-panel">
-            <div class="content-wrapper">
-            <?php
+        <div class="content-wrapper">
+          <?php
           $successMessage = session()->getFlashdata('success');
           $errorMessage = session()->getFlashdata('error');
 
@@ -205,21 +214,22 @@
             echo '<div class="alert alert-danger">' . $errorMessage . '</div>';
           }
           ?>
-                <div class="row">
-                    <div class="col-12 grid-margin">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">ADD CLIENT</h4>
-                                <form class="pt-3" method="POST" action="<?php echo base_url() . "saveClientProfile"; ?>" enctype="multipart/form-data">
-                                    <p class="card-description">
-                                        Personal info
-                                    </p>
-                                    <div class="row">
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">ADD CLIENT</h4>
+                  <form class="pt-3" method="POST" action="<?php echo base_url() . "saveClientProfile"; ?>"
+                    enctype="multipart/form-data">
+                    <p class="card-description">
+                      Personal info
+                    </p>
+                    <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Client Name</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="cName" required/>
+                            <input type="text" class="form-control" name="cName" required />
                           </div>
                         </div>
                       </div>
@@ -227,19 +237,19 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Client Contact</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="cphone"/>
+                            <input type="text" class="form-control" name="cphone" />
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="row">
-                    <div class="col-md-6">
+                      <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Identification Type</label>
                           <div class="col-sm-9">
-                            <select class="form-control" name ="idType"/>
-                              <option>CNIC</option>
-                              <option>Passport</option>
+                            <select class="form-control" name="idType" />
+                            <option>CNIC</option>
+                            <option>Passport</option>
                             </select>
                           </div>
                         </div>
@@ -248,43 +258,43 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Client CNIC</label>
                           <div class="col-sm-9">
-                          <input type="text" class="form-control" name="CNIC" />
+                            <input type="text" class="form-control" name="CNIC" />
                           </div>
                         </div>
                       </div>
                     </div>
 
                     <div class="row">
-                    <div class="col-md-6">
+                      <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label" name="cemail">Client Email</label>
                           <div class="col-sm-9">
-                          <input type="email" class="form-control" name="cemail"/>
+                            <input type="email" class="form-control" name="cemail" />
                           </div>
                         </div>
                       </div>
                     </div>
-                  <p class="card-description">
-                    Other Details
-                </p>
+                    <p class="card-description">
+                      Other Details
+                    </p>
                     <div class="row">
-                    <div class="col-md-6">
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Status</label>
-        <div class="col-sm-9">
-            <select class="form-control" name="cstatus" required>
-                <option value="Active">Active</option>
-                <option value="Inactive">Inactive</option>
-            </select>
-        </div>
-    </div>
-</div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Status</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" name="cstatus" required>
+                              <option value="Active">Active</option>
+                              <option value="Inactive">Inactive</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
 
                       <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Def</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="cdef"/>
+                            <input type="text" class="form-control" name="cdef" />
                           </div>
                         </div>
                       </div>
@@ -294,7 +304,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Limit Expense</label>
                           <div class="col-sm-9">
-                            <input type="number" class="form-control" name="expense" Value="0.0"/>
+                            <input type="number" class="form-control" name="expense" Value="0.0" />
                           </div>
                         </div>
                       </div>
@@ -302,35 +312,36 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Discount</label>
                           <div class="col-sm-9">
-                            <input type="number" class="form-control" Value="0.0" name="discount"/>
+                            <input type="number" class="form-control" Value="0.0" name="discount" />
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-6">
-                          <div class="form-group row">
-                             <!-- <label class="col-sm-3 col-form-label">Main Client</label>  -->
-                            <!-- <div class="col-sm-9"> -->
-                                <input type="checkbox" class="form-check-input" name="mclient" style="    margin-left: 9rem; display=flex">
-                                <span style="margin-left: 11rem;margin-top: -19px;">Main Client</span>
-                              </input>
-                                <!-- <label class="col-sm-3 col-form-label">Main Client</label>  -->
-                            </div>
-                         <!-- </div> -->
-                     </div>
+                        <div class="form-group row">
+                          <!-- <label class="col-sm-3 col-form-label">Main Client</label>  -->
+                          <!-- <div class="col-sm-9"> -->
+                          <input type="checkbox" class="form-check-input" name="mclient"
+                            style="    margin-left: 9rem; display=flex">
+                          <span style="margin-left: 11rem;margin-top: -19px;">Main Client</span>
+                          </input>
+                          <!-- <label class="col-sm-3 col-form-label">Main Client</label>  -->
+                        </div>
+                        <!-- </div> -->
+                      </div>
                     </div>
 
 
                     <p class="card-description">
-                    Address Details
-                </p>
+                      Address Details
+                    </p>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Address</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="address"/>
+                            <input type="text" class="form-control" name="address" />
                           </div>
                         </div>
                       </div>
@@ -338,7 +349,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">City</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="city"/>
+                            <input type="text" class="form-control" name="city" />
                           </div>
                         </div>
                       </div>
@@ -349,7 +360,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">State</label>
                           <div class="col-sm-9">
-                            <select class="form-control" name = 'state'>
+                            <select class="form-control" name='state'>
                               <option>Pakistan</option>
                               <option>Others</option>
                             </select>
@@ -360,31 +371,31 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Code</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="code"/>
+                            <input type="text" class="form-control" name="code" />
                           </div>
                         </div>
                       </div>
-                    </div>                      
-                    
-                                    <!-- Add a submit button -->
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
                     </div>
+
+                    <!-- Add a submit button -->
+                    <div class="row">
+                      <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
+              </div>
             </div>
-                  
-                
+          </div>
+        </div>
+
+
         <!-- content-wrapper ends -->
         <!-- partial:../../partials/_footer.html -->
         <?php include 'include_common/footer.php'; ?>
-        
-      
+
+
         <!-- partial -->
       </div>
       <!-- main-panel ends -->

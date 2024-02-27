@@ -7,6 +7,7 @@ namespace App\Controllers;
 
 use App\Models\AppointmentModel;
 use App\Models\DoctorModel;
+use App\Models\ClientModel;
 use App\Models\LoginModel;
 use APP\libraries\EscPos;
 
@@ -139,7 +140,43 @@ class AppointmentController extends Controller
         flush();
     }
 
+    public function saveClientProfile()
+    {
+        $request = \Config\Services::request();
+        $session = \Config\Services::session();
 
+        $model = new ClientModel();
+        $businessID = $session->get('businessID');
+        $mainClient = $request->getPost('mclient') ? 1 : 0;
+
+        if ($mainClient == 1) {
+            $model->resetMainClients();
+        }
+
+        $data = [
+            'client' => $request->getPost('cName'),
+            'contact' => $request->getPost('cphone'),
+            'email' => $request->getPost('cemail'),
+            'CNIC' => $request->getPost('CNIC'),
+            'status' => $request->getPost('cstatus'),
+            'Def' => $request->getPost('cdef'),
+            'idBusiness' => $businessID,
+            'identification_type' => $request->getPost('idType'),
+            'limitExpense' => $request->getPost('expense'),
+            'discount' => $request->getPost('discount'),
+            'mainClient' => $mainClient,
+            'address' => $request->getPost('address'),
+            'city' => $request->getPost('city'),
+            'state' => $request->getPost('state'),
+            'code' => $request->getPost('code'),
+        ];
+
+        $model->saveClient($data);
+
+        session()->setFlashdata('success', 'Client Added..!!');
+
+        return redirect()->to(base_url("/appointments_form"));
+    }
 
 
 

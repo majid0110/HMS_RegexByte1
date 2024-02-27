@@ -227,6 +227,8 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
+                <p>Total Fee: <?= $totalLabFee ?></p>
+<p>Total Hospital Charges: <?= $totalHospitalFee ?></p>
                     <form action="<?= base_url('lab_report'); ?>" method="post">
                         <div class="form-group row">
                             <div class="col-md-3 offset-md-9">

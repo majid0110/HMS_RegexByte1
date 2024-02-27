@@ -14,6 +14,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <!-- --------------------------------------------------------- -->
+  <style>
+    #openAddClientModal:hover {
+      background-color: purple;
+    }
+  </style>
 </head>
 
 <body>
@@ -47,14 +52,17 @@
         <i class="settings-close ti-close"></i>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab"
+              aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
+            <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab"
+              aria-controls="chats-section">CHATS</a>
           </li>
         </ul>
         <div class="tab-content" id="setting-content">
-          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
+            aria-labelledby="todo-section">
             <div class="add-items d-flex px-3 mb-0">
               <form class="form w-100">
                 <div class="form-group d-flex">
@@ -138,7 +146,8 @@
             </div>
             <ul class="chat-list">
               <li class="list active">
-                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Thomas Douglas</p>
                   <p>Available</p>
@@ -146,7 +155,8 @@
                 <small class="text-muted my-auto">19 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg" alt="image"><span
+                    class="offline"></span></div>
                 <div class="info">
                   <div class="wrapper d-flex">
                     <p>Catherine</p>
@@ -157,7 +167,8 @@
                 <small class="text-muted my-auto">23 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Daniel Russell</p>
                   <p>Available</p>
@@ -165,7 +176,8 @@
                 <small class="text-muted my-auto">14 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg" alt="image"><span
+                    class="offline"></span></div>
                 <div class="info">
                   <p>James Richardson</p>
                   <p>Away</p>
@@ -173,7 +185,8 @@
                 <small class="text-muted my-auto">2 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Madeline Kennedy</p>
                   <p>Available</p>
@@ -181,7 +194,8 @@
                 <small class="text-muted my-auto">5 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Sarah Graves</p>
                   <p>Available</p>
@@ -211,12 +225,13 @@
             echo '<div class="alert alert-danger">' . $errorMessage . '</div>';
           }
           ?>
-           <div class="row">
+          <div class="row">
             <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">BOOK APPOINTMENT</h4>
-                  <form class="pt-3" method="POST" action="<?php echo base_url() . "saveAppointment"; ?>" enctype="multipart/form-data">
+                  <form class="pt-3" method="POST" action="<?php echo base_url() . "saveAppointment"; ?>"
+                    enctype="multipart/form-data">
                     <p class="card-description">
                       Personal info
                     </p>
@@ -226,8 +241,10 @@
                           <label class="col-sm-3 col-form-label">Client Name</label>
                           <div class="col-sm-9">
                             <select class="form-control" name="clientId" id="clientId">
-                              <?php foreach ($client_names as $client) : ?>
-                                <option value="<?= $client['idClient']; ?>"><?= $client['client']; ?></option>
+                              <?php foreach ($client_names as $client): ?>
+                                <option value="<?= $client['idClient']; ?>">
+                                  <?= $client['client']; ?>
+                                </option>
                               <?php endforeach; ?>
                             </select>
                           </div>
@@ -238,13 +255,13 @@
 
 
                       <div class="col-md-6">
-                        <div class="form-group row">
-                          <a class="nav-link" href="<?php echo base_url() . 'clients_form'; ?>" aria-expanded="false" aria-controls="auth">
-                            <i class="menu-icon mdi mdi-account-plus "></i>
-                            <span class="menu-title">Add Client</span>
-                            <i class="menu-arrow"></i>
-                          </a>
-                        </div>
+                        <!-- <a href="#" class="btn btn-rounded btn-fw" id="openAddClientModal">
+                          <i class="mdi mdi-account-plus"> Add Client</i>
+                        </a> -->
+                        <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"
+                          id="openAddClientModal">
+                          <i class="ti-user"> Add</i>
+                        </button>
                       </div>
 
                     </div>
@@ -258,7 +275,7 @@
                           </div>
                         </div>
                       </div>
-                   
+
                       <input type="hidden" name="doctorName" id="doctorNameInput">
 
                       <div class="col-md-6">
@@ -266,8 +283,11 @@
                           <label class="col-sm-3 col-form-label" name="ftype">Appointment Type</label>
                           <div class="col-sm-9">
                             <select class="form-control" name="app_type_id" id="app_type_id">
-                              <?php foreach ($fee_types as $fee_type) : ?>
-                                <option value="<?= $fee_type->f_id; ?>" data-appointment-type="<?= $fee_type->FeeType; ?>"><?= $fee_type->FeeType; ?></option>
+                              <?php foreach ($fee_types as $fee_type): ?>
+                                <option value="<?= $fee_type->f_id; ?>"
+                                  data-appointment-type="<?= $fee_type->FeeType; ?>">
+                                  <?= $fee_type->FeeType; ?>
+                                </option>
                               <?php endforeach; ?>
                             </select>
                           </div>
@@ -291,7 +311,8 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Appointment Date</label>
                             <div class="col-sm-9">
-                              <input type="date" class="form-control" name="appointmentDate" value="<?= date('Y-m-d'); ?>" />
+                              <input type="date" class="form-control" name="appointmentDate"
+                                value="<?= date('Y-m-d'); ?>" />
                             </div>
                           </div>
                         </div>
@@ -299,7 +320,8 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Appointment Time</label>
                             <div class="col-sm-9">
-                              <input type="time" class="form-control" name="appointmentTime" value="<?= date('H:i'); ?>" />
+                              <input type="time" class="form-control" name="appointmentTime"
+                                value="<?= date('H:i'); ?>" />
                             </div>
                           </div>
                         </div>
@@ -310,6 +332,18 @@
                         </div>
                       </div>
                   </form>
+                  <div class="modal fade" id="addClientModal" tabindex="-1" role="dialog"
+                    aria-labelledby="addClientModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                        <!-- Include your client form here -->
+                        <div class="modal-body">
+                          <?php include 'tst_client.php'; ?>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -328,14 +362,14 @@
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    
+    document.addEventListener('DOMContentLoaded', function () {
+
       var appointmentTypeSelect = document.getElementById('app_type_id');
       var appointmentTypeNameInput = document.getElementById('appointmentTypeNameInput');
 
-      appointmentTypeSelect.addEventListener('change', function() {
+      appointmentTypeSelect.addEventListener('change', function () {
         var selectedOption = appointmentTypeSelect.options[appointmentTypeSelect.selectedIndex];
         var appointmentTypeName = selectedOption.getAttribute('data-appointment-type');
 
@@ -345,13 +379,13 @@
   </script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
 
       var clientIdSelect = document.getElementById('clientId');
       var clientNameInput = document.getElementById('clientNameInput');
 
-    
-      clientIdSelect.addEventListener('change', function() {
+
+      clientIdSelect.addEventListener('change', function () {
         var selectedOption = clientIdSelect.options[clientIdSelect.selectedIndex];
         var clientName = selectedOption.text;
 
@@ -361,79 +395,87 @@
   </script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       var doctorIdSelect = document.getElementById('doctor_id');
       var doctorNameInput = document.getElementById('doctorNameInput');
 
-      doctorIdSelect.addEventListener('change', function() {
+      doctorIdSelect.addEventListener('change', function () {
         var selectedOption = doctorIdSelect.options[doctorIdSelect.selectedIndex];
-        var doctorName = selectedOption ? selectedOption.text : ''; 
+        var doctorName = selectedOption ? selectedOption.text : '';
 
         doctorNameInput.value = doctorName;
       });
     });
   </script>
-
-<script>
-$(document).ready(function () {
-
-    fetchDoctors();
-
-    $('#doctor_id').change(function () {
-        updateAppointmentFee();
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      $('#openAddClientModal').on('click', function () {
+        $('#addClientModal').modal('show');
+        e.preventDefault();
+      });
     });
+  </script>
 
-    $('#app_type_id').change(function () {
+  <script>
+    $(document).ready(function () {
+
+      fetchDoctors();
+
+      $('#doctor_id').change(function () {
         updateAppointmentFee();
-    });
+      });
 
-    function updateAppointmentFee() {
+      $('#app_type_id').change(function () {
+        updateAppointmentFee();
+      });
+
+      function updateAppointmentFee() {
         var doctorId = $('#doctor_id').val();
         var feeTypeId = $('#app_type_id').val();
 
         $.ajax({
-            type: 'POST',
-            url: '<?= site_url('DoctorController/fetchDoctorFee') ?>',
-            data: {
-                doctorID: doctorId,
-                feeTypeID: feeTypeId
-            },
-            dataType: 'json',
-            success: function (response) {
+          type: 'POST',
+          url: '<?= site_url('DoctorController/fetchDoctorFee') ?>',
+          data: {
+            doctorID: doctorId,
+            feeTypeID: feeTypeId
+          },
+          dataType: 'json',
+          success: function (response) {
 
-                $('#appointmentFee').val(response.fee);
-            },
-            error: function (error) {
-                console.log(error);
-            }
+            $('#appointmentFee').val(response.fee);
+          },
+          error: function (error) {
+            console.log(error);
+          }
         });
-    }
+      }
 
-    function fetchDoctors() {
+      function fetchDoctors() {
         $.ajax({
-            type: 'POST',
-            url: '<?= site_url('DoctorController/getDoctors') ?>',
-            dataType: 'json',
-            success: function (response) {
-                populateDoctors(response.doctors);
-            },
-            error: function (error) {
-                console.log(error);
-            }
+          type: 'POST',
+          url: '<?= site_url('DoctorController/getDoctors') ?>',
+          dataType: 'json',
+          success: function (response) {
+            populateDoctors(response.doctors);
+          },
+          error: function (error) {
+            console.log(error);
+          }
         });
-    }
-    function populateDoctors(doctors) {
+      }
+      function populateDoctors(doctors) {
         var doctorDropdown = $('#doctor_id');
         doctorDropdown.empty();
 
         doctors.forEach(function (doctor) {
-            doctorDropdown.append('<option value="' + doctor.DoctorID + '">' + doctor.FirstName + ' ' + doctor.LastName + '</option>');
+          doctorDropdown.append('<option value="' + doctor.DoctorID + '">' + doctor.FirstName + ' ' + doctor.LastName + '</option>');
         });
-    }
-});
-</script>
+      }
+    });
+  </script>
   <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
       $('.select2').select2();
     });
   </script>

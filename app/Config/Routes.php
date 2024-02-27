@@ -38,6 +38,8 @@ $routes->get('/deleteDoctor/(:num)', 'DoctorController::deleteDoctor/$1');
 $routes->get('/appointments_form', 'DoctorController::appointments_form');
 
 //-----------------------------------------------------------------clients Routes
+$routes->post('ClientController/saveClientProfile', 'ClientController::saveClientProfile');
+
 $routes->get('/clients_form', 'ClientController::clients_form');
 $routes->get('/clients_table', 'ClientController::clients_table');
 $routes->post('/saveClientProfile', 'ClientController::saveClientProfile');
@@ -56,7 +58,7 @@ $routes->get('/appointments_form', 'ClientController::appointments_form');
 $routes->post('/saveAppointment', 'AppointmentController::saveAppointment');
 $routes->get('/appointments_table', 'AppointmentController::appointments_table');
 $routes->get('/deleteAppointment/(:num)', 'AppointmentController::deleteAppointment/$1');
-
+$routes->post('/saveClient', 'AppointmentController::saveClientProfile');
 
 $routes->group('appointment', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('fetchDoctorFee/(:num)/(:num)', 'AppointmentController::fetchDoctorFee/$1/$2');
@@ -151,3 +153,7 @@ $routes->post('appointment_report', 'ReportsController::appointment_report');
 //----------------------------------------------
 $routes->get('/lab_report', 'ReportsController::lab_report');
 $routes->post('lab_report', 'ReportsController::lab_report');
+
+
+$routes->get('/services_report', 'ReportsController::services_report');
+$routes->post('services_report', 'ReportsController::services_report');

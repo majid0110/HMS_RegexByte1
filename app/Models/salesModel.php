@@ -149,4 +149,38 @@ class salesModel extends Model
     //         ->get()
     //         ->getResultArray();
     // }
+
+    public function getSalesReport($search = null, $paymentInput = null, $clientName = null, $fromDate = null, $toDate = null)
+    {
+        $builder = $this->db->table('invoices');
+        $builder->join('client', 'client.idClient = invoices.idClient');
+        $builder->join('currency', 'currency.id = invoices.idCurrency');
+        $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
+        $builder->select('invoices.*, client.client as clientName, currency.Currency, paymentmethods.Method as PaymentMethod');
+
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->like('invoices.invOrdNum', $search)
+                ->orLike('client.client', $search)
+                ->orLike('currency.Currency', $search)
+                ->orLike('paymentmethods.Method', $search)
+                ->groupEnd();
+        }
+
+        if (!empty($paymentInput)) {
+            $builder->where('invoices.paymentMethod', $paymentInput);
+        }
+
+        if (!empty($clientName)) {
+            $builder->like('client.client', $clientName);
+        }
+
+        if (!empty($fromDate) && !empty($toDate)) {
+            $builder->where('invoices.Date >=', $fromDate)
+                ->where('invoices.Date <=', $toDate);
+        }
+
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
 }

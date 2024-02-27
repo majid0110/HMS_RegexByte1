@@ -138,5 +138,23 @@ public function searchLabReports($search = null, $userName = null, $clientName =
     return $query->getResultArray();
 }
 
+public function getTotalHospitalFee()
+{
+    $businessId = session()->get('businessID');
+    $builder = $this->db->table('labtest');
+    $builder->selectSum('hospitalCharges');
+    $builder->where('businessId', $businessId);
+    $result = $builder->get()->getRowArray();
+    return $result['hospitalCharges'];
+}
 
+public function getTotalLabFee()
+{
+    $businessId = session()->get('businessID');
+    $builder = $this->db->table('labtest');
+    $builder->selectSum('fee');
+    $builder->where('businessId', $businessId);
+    $result = $builder->get()->getRowArray();
+    return $result['fee'];
+}
 }

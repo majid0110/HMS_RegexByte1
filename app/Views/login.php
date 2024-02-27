@@ -1,22 +1,22 @@
 <?php
 $session = session();
 if ($session->has('error')) {
-?>
+	?>
 	<div class="flash-message error">
 		<?php echo $session->getFlashdata('error'); ?>
 	</div>
-<?php
+	<?php
 }
 ?>
 
 <!-- Display flash messages for success -->
 <?php
 if ($session->has('success')) {
-?>
+	?>
 	<div class="flash-message success">
 		<?php echo $session->getFlashdata('success'); ?>
 	</div>
-<?php
+	<?php
 }
 ?>
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ if ($session->has('success')) {
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Star Admin2 </title>
+	<title>HMS RegexByte </title>
 	<!-- plugins:css -->
 	<link rel="stylesheet" href="./public/assets/vendors/feather/feather.css">
 	<link rel="stylesheet" href="./public/assets/vendors/mdi/css/materialdesignicons.min.css">
@@ -40,7 +40,7 @@ if ($session->has('success')) {
 	<!-- inject:css -->
 	<link rel="stylesheet" href="./public/assets/css/vertical-layout-light/style.css">
 	<!-- endinject -->
-	<link rel="shortcut icon" href="./public/assets/images/favicon.png" />
+	<link rel="shortcut icon" href="./public/assets/images_s/regexbyte.png" />
 </head>
 
 <body>
@@ -58,13 +58,17 @@ if ($session->has('success')) {
 
 							<form class="pt-3" method="POST" action="<?php echo base_url() . 'loginSave'; ?>">
 								<div class="form-group">
-									<input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username" name="email" required autofocus>
+									<input type="email" class="form-control form-control-lg" id="exampleInputEmail1"
+										placeholder="Username" name="email" required autofocus>
 								</div>
 								<div class="form-group">
-									<input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" name="password" required>
+									<input type="password" class="form-control form-control-lg"
+										id="exampleInputPassword1" placeholder="Password" name="password" required>
 								</div>
 								<div class="mt-3">
-									<button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
+									<button type="submit"
+										class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN
+										IN</button>
 								</div>
 								<div class="my-2 d-flex justify-content-between align-items-center">
 									<div class="form-check">
@@ -78,36 +82,36 @@ if ($session->has('success')) {
 							</form>
 
 							<!-- <form class="pt-3">
-                <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1"
-                    placeholder="Username">
-                </div>
-                <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1"
-                    placeholder="Password">
-                </div>
-                <div class="mt-3">
-                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
-                    href="../../index.html">SIGN IN</a>
-                </div>
-                <div class="my-2 d-flex justify-content-between align-items-center">
-                  <div class="form-check">
-                    <label class="form-check-label text-muted">
-                      <input type="checkbox" class="form-check-input">
-                      Keep me signed in
-                    </label>
-                  </div>
-                  <a href="#" class="auth-link text-black">Forgot password?</a>
-                </div>
-                <div class="mb-2">
-                  <button type="button" class="btn btn-block btn-facebook auth-form-btn">
-                    <i class="ti-facebook me-2"></i>Connect using facebook
-                  </button>
-                </div>
-                <div class="text-center mt-4 fw-light">
-                  Don't have an account? <a href="register.html" class="text-primary">Create</a>
-                </div>
-              </form> -->
+				<div class="form-group">
+				  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1"
+					placeholder="Username">
+				</div>
+				<div class="form-group">
+				  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1"
+					placeholder="Password">
+				</div>
+				<div class="mt-3">
+				  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+					href="../../index.html">SIGN IN</a>
+				</div>
+				<div class="my-2 d-flex justify-content-between align-items-center">
+				  <div class="form-check">
+					<label class="form-check-label text-muted">
+					  <input type="checkbox" class="form-check-input">
+					  Keep me signed in
+					</label>
+				  </div>
+				  <a href="#" class="auth-link text-black">Forgot password?</a>
+				</div>
+				<div class="mb-2">
+				  <button type="button" class="btn btn-block btn-facebook auth-form-btn">
+					<i class="ti-facebook me-2"></i>Connect using facebook
+				  </button>
+				</div>
+				<div class="text-center mt-4 fw-light">
+				  Don't have an account? <a href="register.html" class="text-primary">Create</a>
+				</div>
+			  </form> -->
 						</div>
 					</div>
 				</div>
