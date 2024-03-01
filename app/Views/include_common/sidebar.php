@@ -411,7 +411,47 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
             <?php endif; ?>
         <?php endforeach; ?>
 
-        <!-- Sales Modeule -->
+        <!-- Managment Modeule -->
+
+        <?php foreach ($modules as $module): ?>
+            <?php
+            $moduleID = $module['id'];
+            $isManagementModule = $module['module_name'] === 'Managment';
+            $canView = $isManagementModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            ?>
+
+            <?php if ($canView): ?>
+                <li class="nav-item nav-category">
+                    <?= $module['module_name'] ?>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-<?= $moduleID ?>" aria-expanded="false"
+                        aria-controls="ui-basic-<?= $moduleID ?>">
+                        <i class="menu-icon mdi mdi-floor-plan"></i>
+                        <span class="menu-title">
+                            <?= $module['module_name'] ?>
+                        </span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic-<?= $moduleID ?>" data-parent="#accordion">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('Managment_form'); ?>">
+                                    <?= $module['module_name'] ?>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('business_table'); ?>">View
+                                    <?= $module['module_name'] ?>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+
 
     </ul>
 

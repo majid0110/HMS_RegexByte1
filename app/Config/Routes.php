@@ -157,3 +157,11 @@ $routes->post('lab_report', 'ReportsController::lab_report');
 
 $routes->get('/services_report', 'ReportsController::services_report');
 $routes->post('services_report', 'ReportsController::services_report');
+
+//-------------------------------------------------------------------------------------------------------------------------
+//                                                 items Routes
+//-------------------------------------------------------------------------------------------------------------------------
+$routes->get('/items_form', 'itemsController::items_form');
+$routes->post('/saveitems', 'itemsController::saveitems');
+$routes->get('/items_table', 'itemsController::items_table');
+$routes->get('/Managment_form', 'itemsController::Managment_form');

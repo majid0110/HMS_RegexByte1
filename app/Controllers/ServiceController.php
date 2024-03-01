@@ -33,7 +33,6 @@ class ServiceController extends Controller
     public function Services_table()
     {
         $Model = new ServicesModel();
-        ;
         $data['Services'] = $Model->getServices();
         return view('Services_table.php', $data);
     }

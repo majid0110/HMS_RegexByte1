@@ -9,7 +9,7 @@ class ClientModel extends Model
 
     protected $table = 'client';
     protected $primaryKey = 'idClient';
-    protected $allowedFields = ['client', 'contact', 'email', 'notes', 'idBusiness', 'Def', 'status', 'CNIC', 'address', 'city', 'state', 'code', 'identification_type', 'limitExpense', 'discount', 'mainClient'];
+    protected $allowedFields = ['client', 'contact', 'email', 'notes', 'idBusiness', 'Def', 'status', 'CNIC', 'address', 'city', 'state', 'code', 'gender', 'age', 'clientUniqueId', 'identification_type', 'limitExpense', 'discount', 'mainClient'];
 
     public function saveClient($data)
     {
