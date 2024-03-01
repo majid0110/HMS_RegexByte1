@@ -49,11 +49,19 @@ class itemsModel extends Model
         return $this->where('idArtMenu', $idArtMenu)->delete();
     }
 
-    public function getitem()
+    // public function getitem()
+    // {
+    //     $builder = $this->db->table('itemswarehouse');
+    //     return $builder->join('units', 'units.idUnit = itemswarehouse.Unit')
+    //         ->select('itemswarehouse.*,units.name')
+    //         ->get()
+    //         ->getResultArray();
+    // }
+    public function getItems() // Updated method name
     {
         $builder = $this->db->table('itemswarehouse');
         return $builder->join('units', 'units.idUnit = itemswarehouse.Unit')
-            ->select('itemswarehouse.*,units.name')
+            ->select('itemswarehouse.*, units.name')
             ->get()
             ->getResultArray();
     }

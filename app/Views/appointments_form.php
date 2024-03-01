@@ -260,7 +260,7 @@
                         </a> -->
                         <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"
                           id="openAddClientModal">
-                          <i class="ti-user"> A`dd</i>
+                          <i class="ti-user"> Add</i>
                         </button>
                       </div>
 

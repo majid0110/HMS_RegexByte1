@@ -230,6 +230,22 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Services Table</h4>
+                                <a href="<?= base_url('items_form') ?>" class="btn btn-danger">Add</a>
+                                <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"
+                                    id="openAddClientModal">
+                                    <i class="ti-user"> Add</i>
+                                </button>
+                                <div class="modal fade" id="addClientModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="addClientModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <!-- Include your client form here -->
+                                            <div class="modal-body">
+                                                <?php include 'additem.php'; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <thead>
@@ -238,7 +254,6 @@
                                                 <th>Cost</th>
                                                 <th>Status</th>
                                                 <th>Unit</th>
-                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -256,15 +271,6 @@
                                                     </td>
                                                     <td>
                                                         <?= $item['name']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <!-- Action buttons: Edit, Delete -->
-                                                        <a href="<?= base_url('editService/' . $Service['idArtMenu']); ?>"
-                                                            class="btn btn-primary btn-sm">Edit</a>
-
-                                                        <a href="<?= base_url('deleteService/' . $Service['idArtMenu']); ?>"
-                                                            onclick="return confirm('Are you sure you want to delete this Service?');"
-                                                            class="btn btn-danger btn-sm">Delete</a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -293,6 +299,14 @@
     <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $('#openAddClientModal').on('click', function () {
+                $('#addClientModal').modal('show');
+                e.preventDefault();
+            });
+        });
+    </script>
     <script src="./public/assets/js/off-canvas.js"></script>
     <script src="./public/assets/js/hoverable-collapse.js"></script>
     <script src="./public/assets/js/template.js"></script>

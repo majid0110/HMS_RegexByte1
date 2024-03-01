@@ -36,10 +36,16 @@ class itemsController extends Controller
         return view('items_form.php', $data);
     }
 
+    // public function items_table()
+    // {
+    //     $Model = new itemsModel();
+    //     $data['items'] = $Model->getitem();
+    //     return view('items_table.php', $data);
+    // }
     public function items_table()
     {
-        $Model = new itemsModel();
-        $data['items'] = $Model->getitem();
+        $model = new itemsModel();
+        $data['items'] = $model->getItems(); // Updated method name
         return view('items_table.php', $data);
     }
 
