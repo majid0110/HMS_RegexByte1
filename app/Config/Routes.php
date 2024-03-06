@@ -165,3 +165,5 @@ $routes->get('/items_form', 'itemsController::items_form');
 $routes->post('/saveitems', 'itemsController::saveitems');
 $routes->get('/items_table', 'itemsController::items_table');
 $routes->get('/Managment_form', 'itemsController::Managment_form');
+$routes->get('items', 'itemsController::items_table');
+$routes->get('/additem', 'itemsController::additem');

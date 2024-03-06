@@ -57,12 +57,17 @@ class itemsModel extends Model
     //         ->get()
     //         ->getResultArray();
     // }
-    public function getItems() // Updated method name
+    // public function getItems() // Updated method name
+    // {
+    //     $builder = $this->db->table('itemswarehouse');
+    //     return $builder->join('units', 'units.idUnit = itemswarehouse.Unit')
+    //         ->select('itemswarehouse.*, units.name')
+    //         ->get()
+    //         ->getResultArray();
+    // }
+
+    public function getItems()
     {
-        $builder = $this->db->table('itemswarehouse');
-        return $builder->join('units', 'units.idUnit = itemswarehouse.Unit')
-            ->select('itemswarehouse.*, units.name')
-            ->get()
-            ->getResultArray();
+        return $this->findAll();
     }
 }

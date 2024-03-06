@@ -229,19 +229,23 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
+
                                 <h4 class="card-title">Services Table</h4>
-                                <a href="<?= base_url('items_form') ?>" class="btn btn-danger">Add</a>
-                                <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"
-                                    id="openAddClientModal">
-                                    <i class="ti-user"> Add</i>
-                                </button>
-                                <div class="modal fade" id="addClientModal" tabindex="-1" role="dialog"
-                                    aria-labelledby="addClientModalLabel" aria-hidden="true">
+                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#addItemModal">Add</button>
+                                <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="addItemModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
-                                            <!-- Include your client form here -->
-                                            <div class="modal-body">
-                                                <?php include 'additem.php'; ?>
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="addItemModalLabel">Add Item</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body" id="addItemModalBody">
+                                                <!-- Form content will be loaded dynamically here -->
                                             </div>
                                         </div>
                                     </div>
@@ -250,28 +254,25 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Item Name</th>
-                                                <th>Cost</th>
-                                                <th>Status</th>
-                                                <th>Unit</th>
+                                                <th>ID</th>
+                                                <th>Code</th>
+                                                <th>Name</th>
+                                                <!-- Add other table headers as needed -->
                                             </tr>
                                         </thead>
                                         <tbody>
-
                                             <?php foreach ($items as $item): ?>
                                                 <tr>
                                                     <td>
-                                                        <?= $item['Name']; ?>
+                                                        <?= $item['idItem'] ?>
                                                     </td>
                                                     <td>
-                                                        <?= $item['Cost']; ?>
+                                                        <?= $item['Code'] ?>
                                                     </td>
                                                     <td>
-                                                        <?= $item['status']; ?>
+                                                        <?= $item['Name'] ?>
                                                     </td>
-                                                    <td>
-                                                        <?= $item['name']; ?>
-                                                    </td>
+                                                    <!-- Add other table cells as needed -->
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -300,13 +301,20 @@
     <!-- End plugin js for this page -->
     <!-- inject:js -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            $('#openAddClientModal').on('click', function () {
-                $('#addClientModal').modal('show');
-                e.preventDefault();
+        $(document).ready(function () {
+            // Handle button click
+            $('.btn-danger').click(function () {
+                // Get the form content dynamically (you may need to adjust the URL)
+                $.get('<?= base_url('additem') ?>', function (data) {
+                    // Inject the form content into the modal body
+                    $('#addItemModalBody').html(data);
+                    // Show the modal
+                    $('#addItemModal').modal('show');
+                });
             });
         });
     </script>
+
     <script src="./public/assets/js/off-canvas.js"></script>
     <script src="./public/assets/js/hoverable-collapse.js"></script>
     <script src="./public/assets/js/template.js"></script>

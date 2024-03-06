@@ -19,7 +19,7 @@
             ADD CLIENT
         </small>
     </h3>
-    <form class="pt-3" method="POST" action="<?php echo base_url() . "saveitems"; ?>" nctype="multipart/form-data">
+    <form class="pt-3" method="POST" action="<?php echo base_url() . "saveitems"; ?>" enctype="multipart/form-data">
         <p class="card-description">
             Items Details
         </p>
@@ -44,7 +44,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Name</label>
+                    <label class="col-sm-3 col-form-label">Name Majid Khan</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="name" required />
                     </div>
@@ -201,6 +201,7 @@
                 </div>
             </div>
     </form>
+
     <script>
         $(document).ready(function () {
             $('.select2').select2();
@@ -209,7 +210,7 @@
             $('#closeAddClientModal').click(function (e) {
                 e.preventDefault(); // Prevent the default anchor behavior
                 // Assuming your form is wrapped in a modal, you can close it like this:
-                $('#addClientModal').modal('hide');
+                $('#addItemModal').modal('hide');
             });
         });
     </script>
