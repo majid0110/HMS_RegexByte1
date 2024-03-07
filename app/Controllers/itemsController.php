@@ -64,6 +64,25 @@ class itemsController extends Controller
     }
 
 
+    public function edititem($idItem)
+    {
+        $servicesModel = new ServicesModel();
+        $data = [
+            'units' => $servicesModel->getUnits(),
+            'categories' => $servicesModel->getCategories(),
+            'tax' => $servicesModel->getTaxes(),
+        ];
+        $Model = new itemsModel();
+        $data['warehouse'] = $Model->getIdWarehouse();
+
+        // Fetch the data of the item to be edited
+        $data['item'] = $Model->find($idItem);
+
+        return view('edit_item_form.php', $data);
+    }
+
+
+
     //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Main Logic
 //-------------------------------------------------------------------------------------------------------------------------
@@ -83,6 +102,7 @@ class itemsController extends Controller
             'idBusiness' => $businessID,
             'idTAX' => $this->request->getPost('tax'),
             'idCategories' => $this->request->getPost('category'),
+            'Unit' => $this->request->getPost('Unit'),
             'idWarehouse' => 1,
             'status' => $this->request->getPost('cstatus'),
             'characteristic1' => $this->request->getPost('char_1'),
@@ -97,7 +117,58 @@ class itemsController extends Controller
         $servicesModel->insert($formData);
 
         session()->setFlashdata('success', 'Item Added..!!');
-        return redirect()->to(base_url("/items_form"));
+        return redirect()->to(base_url("/items_table"));
+    }
+
+    public function deleteitem($idItem)
+    {
+
+        try {
+            $Model = new itemsModel();
+            $Model->deleteitem($idItem);
+            session()->setFlashdata('success', 'Service deleted...!!');
+
+            return redirect()->to(base_url("/items_table"));
+
+        } catch (\Exception $e) {
+            log_message('error', 'Error retrieving data: ' . $e->getMessage());
+            session()->setFlashdata('error', 'DataBase Error: ' . $e->getMessage());
+            return redirect()->to(base_url("/items_table"));
+        }
+    }
+
+
+
+    public function updateitem($idItem)
+    {
+        $request = \Config\Services::request();
+        $Model = new itemsModel();
+
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+
+        $formData = [
+            'barcode' => $this->request->getPost('bcode'),
+            'Code' => $this->request->getPost('code'),
+            'Name' => $this->request->getPost('name'),
+            'Cost' => $this->request->getpost('cost'),
+            'Minimum' => $this->request->getpost('min'),
+            'Notes' => $this->request->getPost('notes'),
+            'idBusiness' => $businessID,
+            'idTAX' => $this->request->getPost('tax'),
+            'idCategories' => $this->request->getPost('category'),
+            'idWarehouse' => 1,
+            'status' => $this->request->getPost('cstatus'),
+            'characteristic1' => $this->request->getPost('char_1'),
+            'Characteristic2' => $this->request->getPost('char_2'),
+            'isSendEmail' => 1,
+            'isSendExpire' => 0,
+        ];
+
+        $Model->update($idItem, $formData);
+
+        session()->setFlashdata('success', 'Service updated successfully..!!');
+        return redirect()->to(base_url("/items_table"));
     }
 
 

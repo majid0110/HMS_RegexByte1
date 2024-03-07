@@ -30,6 +30,17 @@ class ServiceController extends Controller
         return view('Services_form.php', $data);
     }
 
+    public function Services_form1()
+    {
+        $servicesModel = new ServicesModel();
+        $data = [
+            'units' => $servicesModel->getUnits(),
+            'categories' => $servicesModel->getCategories(),
+            'tax' => $servicesModel->getTaxes(),
+        ];
+        return view('addService.php', $data);
+    }
+
     public function Services_table()
     {
         $Model = new ServicesModel();
@@ -102,7 +113,7 @@ class ServiceController extends Controller
         $servicesModel->insert($formData);
 
         session()->setFlashdata('success', 'Service Added..!!');
-        return redirect()->to(base_url("/Services_form"));
+        return redirect()->to(base_url("/Services_table"));
     }
 
     // public function deleteService($idArtMenu)

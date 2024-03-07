@@ -12,9 +12,9 @@
         style="position: absolute; top: 10px; right: 10px; font-size: 20px; color: #333;">
         <i class="mdi mdi-close"></i>
     </a>
-    <form class="pt-3" method="POST" action="<?php echo base_url() . "saveitems"; ?>" enctype="multipart/form-data">
+    <form class="pt-3" method="POST" action="<?php echo base_url() . "saveArtMenu"; ?>" nctype="multipart/form-data">
         <p class="card-description">
-            Items Details
+            Service Details
         </p>
         <div class="row">
             <div class="col-md-6">
@@ -43,6 +43,14 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Image</label>
+                    <div class="col-sm-9">
+                        <input type="file" class="form-control" name="img" accept="image/*" />
+                    </div>
+                </div>
+            </div>
         </div>
 
         <p class="card-description">
@@ -51,18 +59,27 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Cost</label>
+                    <label class="col-sm-3 col-form-label">Price</label>
                     <div class="col-sm-9">
-                        <input type="number" class="form-control" name="cost" Value="0" />
+                        <input type="number" class="form-control" name="price" Value="0" />
                     </div>
                 </div>
             </div>
-
             <div class="col-md-6">
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Minimun</label>
+                    <label class="col-sm-3 col-form-label">Promotional Price</label>
                     <div class="col-sm-9">
-                        <input type="number" class="form-control" Value="0" name="min" />
+                        <input type="number" class="form-control" Value="0" name="pro_price" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Cost</label>
+                    <div class="col-sm-9">
+                        <input type="number" class="form-control" name="cost" Value="0" />
                     </div>
                 </div>
             </div>
@@ -100,7 +117,7 @@
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Units</label>
                     <div class="col-sm-9">
-                        <select class="form-control" name="Unit">
+                        <select class="form-control" name="unit">
                             <?php foreach ($units as $unit): ?>
                                 <option value="<?= $unit['idUnit'] ?>">
                                     <?= $unit['name'] ?>
@@ -110,22 +127,14 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-md-6">
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Warehouse</label>
+                    <label class="col-sm-3 col-form-label">Product Max</label>
                     <div class="col-sm-9">
-                        <select class="form-control" name="unit">
-                            <?php foreach ($warehouse as $warehouse): ?>
-                                <option value="<?= $warehouse['idWarehouse'] ?>">
-                                    <?= $warehouse['name'] ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
+                        <input type="number" class="form-control" name="p_max" />
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="row">
@@ -181,7 +190,7 @@
                         <!-- <div class="col-sm-9"> -->
                         <input type="checkbox" class="form-check-input" name="service"
                             style="    margin-left: 9rem; display=flex" checked disabled>
-                        <span style="margin-left: 11rem;margin-top: -19px;">Item</span>
+                        <span style="margin-left: 11rem;margin-top: -19px;">Service</span>
                         </input>
                         <!-- <label class="col-sm-3 col-form-label">Main Client</label>  -->
                     </div>

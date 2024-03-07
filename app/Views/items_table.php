@@ -230,53 +230,69 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <h4 class="card-title">Services Table</h4>
-                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                <h4 class="card-title">Items</h4>
+                                <button type="button" class="btn btn-danger" id="add-item-btn" data-toggle="modal"
                                     data-target="#addItemModal">Add</button>
-                                <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog"
-                                    aria-labelledby="addItemModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="addItemModalLabel">Add Item</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body" id="addItemModalBody">
-                                                <!-- Form content will be loaded dynamically here -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Code</th>
                                                 <th>Name</th>
-                                                <!-- Add other table headers as needed -->
+                                                <th>Price</th>
+                                                <th>Status</th>
+                                                <th>Unit</th>
+                                                <th>Action</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($items as $item): ?>
                                                 <tr>
                                                     <td>
-                                                        <?= $item['idItem'] ?>
-                                                    </td>
-                                                    <td>
-                                                        <?= $item['Code'] ?>
-                                                    </td>
-                                                    <td>
                                                         <?= $item['Name'] ?>
                                                     </td>
-                                                    <!-- Add other table cells as needed -->
+                                                    <td>
+                                                        <?= $item['Cost'] ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $item['status'] ?>
+                                                    </td>
+
+                                                    <td>
+                                                        <?= $item['unit_name'] ?>
+                                                    </td>
+
+                                                    <td>
+                                                        <!-- Action buttons: Edit, Delete -->
+                                                        <a href="<?= base_url('edititem/' . $item['idItem']); ?>"
+                                                            class="btn btn-primary btn-sm">Edit</a>
+                                                        <a href="<?= base_url('deleteitem/' . $item['idItem']); ?>"
+                                                            onclick="return confirm('Are you sure you want to delete this item?');"
+                                                            class="btn btn-danger btn-sm">Delete</a>
+                                                    </td>
+
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
+                                    <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="addItemModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="addItemModalLabel">Add Item</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body" id="addItemModalBody">
+                                                    <!-- Form content will be loaded dynamically here -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -302,13 +318,10 @@
     <!-- inject:js -->
     <script>
         $(document).ready(function () {
-            // Handle button click
-            $('.btn-danger').click(function () {
-                // Get the form content dynamically (you may need to adjust the URL)
+            $('#add-item-btn').click(function (e) {
+                e.preventDefault();
                 $.get('<?= base_url('additem') ?>', function (data) {
-                    // Inject the form content into the modal body
                     $('#addItemModalBody').html(data);
-                    // Show the modal
                     $('#addItemModal').modal('show');
                 });
             });

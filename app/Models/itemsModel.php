@@ -44,9 +44,9 @@ class itemsModel extends Model
     }
 
 
-    public function deleteService($idArtMenu)
+    public function deleteitem($idItem)
     {
-        return $this->where('idArtMenu', $idArtMenu)->delete();
+        return $this->where('idItem', $idItem)->delete();
     }
 
     // public function getitem()
@@ -68,6 +68,12 @@ class itemsModel extends Model
 
     public function getItems()
     {
-        return $this->findAll();
+        $builder = $this->db->table('itemswarehouse');
+        $result = $builder->join('units', 'units.idUnit = itemswarehouse.Unit')
+            ->select('itemswarehouse.*, units.name as unit_name') // Include the 'unit_name' field
+            ->get()
+            ->getResultArray();
+
+        return $result;
     }
 }

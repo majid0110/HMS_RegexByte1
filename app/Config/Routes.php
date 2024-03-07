@@ -126,6 +126,7 @@ $routes->get('/Services_table', 'ServiceController::Services_table');
 $routes->get('/deleteService/(:num)', 'ServiceController::deleteService/$1');
 $routes->get('editService/(:num)', 'ServiceController::editService/$1');
 $routes->post('updateService/(:num)', 'ServiceController::updateService/$1');
+$routes->get('/Services_form1', 'ServiceController::Services_form1');
 
 
 //-------------------------------------------------------------------------------------------------------------------------
@@ -167,3 +168,8 @@ $routes->get('/items_table', 'itemsController::items_table');
 $routes->get('/Managment_form', 'itemsController::Managment_form');
 $routes->get('items', 'itemsController::items_table');
 $routes->get('/additem', 'itemsController::additem');
+$routes->get('/deleteitem/(:num)', 'itemsController::deleteitem/$1');
+$routes->get('/edititem/(:num)', 'itemsController::edititem/$1');
+
+$routes->get('edititem/(:num)', 'itemsController::edititem/$1');
+$routes->post('updateitem/(:num)', 'itemsController::updateitem/$1');

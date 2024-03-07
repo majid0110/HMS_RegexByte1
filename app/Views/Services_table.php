@@ -230,6 +230,27 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Services Table</h4>
+                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#addServiceModal">Add</button>
+                                <div class="modal fade" id="addServiceModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="addServiceModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="addServiceModalLabel">Add Service</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body" id="addServiceModalBody">
+                                                <!-- Form content will be loaded dynamically here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <thead>
@@ -242,7 +263,6 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-
                                             <?php foreach ($Services as $Service): ?>
                                                 <tr>
                                                     <td>
@@ -261,7 +281,6 @@
                                                         <!-- Action buttons: Edit, Delete -->
                                                         <a href="<?= base_url('editService/' . $Service['idArtMenu']); ?>"
                                                             class="btn btn-primary btn-sm">Edit</a>
-
                                                         <a href="<?= base_url('deleteService/' . $Service['idArtMenu']); ?>"
                                                             onclick="return confirm('Are you sure you want to delete this Service?');"
                                                             class="btn btn-danger btn-sm">Delete</a>
@@ -281,6 +300,7 @@
                 <!-- partial -->
             </div>
 
+
             <!-- main-panel ends -->
         </div>
         <!-- page-body-wrapper ends -->
@@ -293,6 +313,21 @@
     <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
+    <script>
+        $(document).ready(function () {
+            // Handle button click
+            $('.btn-danger').click(function () {
+                // Get the form content dynamically (you may need to adjust the URL)
+                $.get('<?= base_url('Services_form1') ?>', function (data) {
+                    // Inject the form content into the modal body
+                    $('#addServiceModalBody').html(data);
+                    // Show the modal
+                    $('#addServiceModal').modal('show');
+                });
+            });
+        });
+    </script>
+
     <script src="./public/assets/js/off-canvas.js"></script>
     <script src="./public/assets/js/hoverable-collapse.js"></script>
     <script src="./public/assets/js/template.js"></script>
