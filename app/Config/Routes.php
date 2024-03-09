@@ -181,3 +181,8 @@ $routes->post('updateitem/(:num)', 'itemsController::updateitem/$1');
 $routes->get('/category_table', 'itemsController::category_table');
 $routes->post('/saveCatart', 'itemsController::saveCatart');
 $routes->get('/addcat', 'itemsController::addcat');
+$routes->get('/deletecat/(:num)', 'itemsController::deletecat/$1');
+$routes->get('/editcat/(:num)', 'itemsController::editcat/$1');
+$routes->post('/updatecat/(:num)', 'itemsController::updatecat/$1');
+$routes->get('/sectors_table', 'itemsController::sectors_table');
+$routes->get('/sectors_form', 'itemsController::sectors_form');

@@ -100,14 +100,14 @@
 
             <tr>
 
-                <td style=" width: 50%; white-space: nowrap;">Client:<b>
+                <td style=" width: 50%; white-space: nowrap;">Patient Name:<b>
                         <?= $clientName; ?>
                     </b></td>
             </tr>
 
             <tr>
 
-                <td style=" width: 50%; white-space: nowrap;">Doctor:<b>
+                <td style=" width: 50%; white-space: nowrap;">Doctor Name:<b>
                         <?= $doctorName; ?>
                     </b></td>
             </tr>
@@ -185,19 +185,19 @@
 <?php
 $session = session();
 if ($session->has('businessProfileImage')) {
-   echo '<img class="img-xs rounded-circle larger-profile-img" style="width: 90px; height: 90px;" src="' . $session->get('businessProfileImage') . '" alt="Profile image">';
+echo '<img class="img-xs rounded-circle larger-profile-img" style="width: 90px; height: 90px;" src="' . $session->get('businessProfileImage') . '" alt="Profile image">';
 }
 ?>
 
 <?php
-   $session = session();
-   if ($session->has('businessName') && $session->has('phoneNumber')) {
-     echo '<h1 class="welcome-text">Welcome, <span class="text-black fw-bold">' . $session->get('businessName') . '</span></h1>';
-     echo '<h3 class="welcome-sub-text">Contact: ' . $session->get('phoneNumber') . '</h3>';
-   }
-   ?>
-   <p>Client Name: <?= $clientName; ?></p>
-   <p>Doctor Name: <?= $doctorName; ?></p>
+$session = session();
+if ($session->has('businessName') && $session->has('phoneNumber')) {
+echo '<h1 class="welcome-text">Welcome, <span class="text-black fw-bold">' . $session->get('businessName') . '</span></h1>';
+echo '<h3 class="welcome-sub-text">Contact: ' . $session->get('phoneNumber') . '</h3>';
+}
+?>
+<p>Client Name: <?= $clientName; ?></p>
+<p>Doctor Name: <?= $doctorName; ?></p>
 <p>appointmentType: <?=$appointmentTypeName; ?></p>
 <p>appointment Fee: <?=  $appointmentFee; ?></p>
 <p>Appointment Date: <?= $appointmentDate; ?></p>
@@ -207,4 +207,4 @@ if ($session->has('businessProfileImage')) {
 
 </body>
 </html>
-*/?>
+*/ ?>

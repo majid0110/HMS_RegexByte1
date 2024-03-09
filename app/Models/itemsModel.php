@@ -42,6 +42,12 @@ class itemsModel extends Model
             ->get()
             ->getResultArray();
     }
+    public function deletecat($idCatArt)
+    {
+        return $this->db->table('catart')
+            ->where('idCatArt', $idCatArt)
+            ->delete();
+    }
 
 
     public function deleteitem($idItem)
@@ -89,5 +95,42 @@ class itemsModel extends Model
     {
         return $this->db->table('catart')->insert($data);
     }
+
+    // public function getSectors()
+    // {
+    //     return $this->db->table('sectors')
+    //         ->select('idSector, name')
+    //         ->get()
+    //         ->getResultArray();
+    // }
+
+    public function getCatartCategory($idCatArt)
+    {
+        return $this->db->table('catart')
+            ->where('idCatArt', $idCatArt)
+            ->get()
+            ->getRowArray();
+    }
+
+    public function updateCatart($idCatArt, $data)
+    {
+        return $this->db->table('catart')
+            ->where('idCatArt', $idCatArt)
+            ->update($data);
+    }
+
+    public function getSectors()
+    {
+        return $this->db->table('sectors')
+            ->select('idSector, name, PrintOutput, notes, TVSH, idBusiness')
+            ->get()
+            ->getResultArray();
+    }
+
+    public function saveSector($data)
+    {
+        return $this->db->table('sectors')->insert($data);
+    }
+
 
 }

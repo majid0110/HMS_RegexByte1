@@ -230,9 +230,9 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <h4 class="card-title">Items</h4>
+                                <h4 class="card-title">Sector</h4>
                                 <button type="button" class="btn btn-danger" id="add-item-btn" data-toggle="modal"
-                                    data-target="#addItemModal">Add</button>
+                                    data-target="#addsectorModal">Add</button>
                                 <hr>
 
                                 <div class="table-responsive">
@@ -240,36 +240,33 @@
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Price</th>
-                                                <th>Status</th>
-                                                <th>Unit</th>
+                                                <th>Print Output</th>
+                                                <th>Notes</th>
+                                                <th>TVSH</th>
                                                 <th>Action</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($items as $item): ?>
+                                            <?php foreach ($sectors as $sector): ?>
                                                 <tr>
                                                     <td>
-                                                        <?= $item['Name'] ?>
+                                                        <?= $sector['name']; ?>
                                                     </td>
                                                     <td>
-                                                        <?= $item['Cost'] ?>
+                                                        <?= $sector['PrintOutput']; ?>
                                                     </td>
                                                     <td>
-                                                        <?= $item['status'] ?>
+                                                        <?= $sector['notes']; ?>
                                                     </td>
-
                                                     <td>
-                                                        <?= $item['unit_name'] ?>
+                                                        <?= $sector['TVSH']; ?>
                                                     </td>
-
                                                     <td>
                                                         <!-- Action buttons: Edit, Delete -->
-                                                        <a href="<?= base_url('edititem/' . $item['idItem']); ?>"
+                                                        <a href="<?= base_url('edititem/' . $sector['idSector']); ?>"
                                                             class="btn btn-primary btn-sm">Edit</a>
-                                                        <a href="<?= base_url('deleteitem/' . $item['idItem']); ?>"
-                                                            onclick="return confirm('Are you sure you want to delete this item?');"
+                                                        <a href="<?= base_url('deleteitem/' . $sector['idSector']); ?>"
+                                                            onclick="return confirm('Are you sure you want to delete this Sector?');"
                                                             class="btn btn-danger btn-sm">Delete</a>
                                                     </td>
 
@@ -277,18 +274,18 @@
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
-                                    <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog"
-                                        aria-labelledby="addItemModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="addsectorModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="addSectorModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="addItemModalLabel">Add Item</h5>
+                                                    <h5 class="modal-title" id="addSectorModalLabel">Add Item</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <div class="modal-body" id="addItemModalBody">
+                                                <div class="modal-body" id="addSectorModalBody">
                                                     <!-- Form content will be loaded dynamically here -->
                                                 </div>
                                             </div>
@@ -317,13 +314,14 @@
     <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#add-item-btn').click(function (e) {
                 e.preventDefault();
-                $.get('<?= base_url('additem') ?>', function (data) {
-                    $('#addItemModalBody').html(data);
-                    $('#addItemModal').modal('show');
+                $.get('<?= base_url('sectors_form') ?>', function (data) {
+                    $('#addSectorModalBody').html(data);
+                    $('#addsectorModal').modal('show');
                 });
             });
         });

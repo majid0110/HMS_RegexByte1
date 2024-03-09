@@ -84,23 +84,31 @@
             $currentDateTime = new DateTime('now', $peshawarTimeZone);
             $date = $currentDateTime->format('d-m-Y');
             $time = $currentDateTime->format('h:i:s');
-            ?>  
+            ?>
             <tr>
                 <td style="width: 50%;">Invoice# <b>59867</b> </td>
-                <td style="width: 50%; text-align: right;">Date:<b><?= $date; ?></b></td>
+                <td style="width: 50%; text-align: right;">Date:<b>
+                        <?= $date; ?>
+                    </b></td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align: left; margin-right: 5px;">Time:<b><?= $time; ?></b><br></td>
+                <td colspan="2" style="text-align: left; margin-right: 5px;">Time:<b>
+                        <?= $time; ?>
+                    </b><br></td>
             </tr>
 
             <tr>
 
-                <td style=" width: 50%; white-space: nowrap;">Client:<b><?= $data['clientName'] ?></b></td>
+                <td style=" width: 50%; white-space: nowrap;">Patient Name:<b>
+                        <?= $data['clientName'] ?>
+                    </b></td>
             </tr>
 
             <tr>
 
-                <td style=" width: 50%; white-space: nowrap;">AppointmentID:<b> <?= $data['appointmentId'] ?></b></td>
+                <td style=" width: 50%; white-space: nowrap;">AppointmentID:<b>
+                        <?= $data['appointmentId'] ?>
+                    </b></td>
             </tr>
 
             <tr>
@@ -136,7 +144,9 @@
             <tr>
                 <td style="width: 50%; text-align: left;">&nbsp;</td>
 
-                <td style="width: 25%; text-align:  right; padding-right:10px" colspan="2"><b>Total</b> PKR:<?= $data['fee']; ?>.00</td>
+                <td style="width: 25%; text-align:  right; padding-right:10px" colspan="2"><b>Total</b> PKR:
+                    <?= $data['fee']; ?>.00
+                </td>
             </tr>
 
             </tr>

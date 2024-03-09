@@ -59,17 +59,12 @@ class itemsController extends Controller
 
     public function addcat()
     {
+        $Model = new itemsModel();
+        $data['sectors'] = $Model->getSectors();
 
-        return view('cat_form.php');
+        return view('cat_form.php', $data);
     }
 
-
-    // public function items_table()
-    // {
-    //     $Model = new itemsModel();
-    //     $data['items'] = $Model->getitem();
-    //     return view('items_table.php', $data);
-    // }
 
     public function items_table()
     {
@@ -89,12 +84,41 @@ class itemsController extends Controller
         ];
         $Model = new itemsModel();
         $data['warehouse'] = $Model->getIdWarehouse();
-
-        // Fetch the data of the item to be edited
         $data['item'] = $Model->find($idItem);
 
         return view('edit_item_form.php', $data);
     }
+
+    public function editcat($idCatArt)
+    {
+        $Model = new itemsModel();
+        $data['category'] = $Model->getCatartCategory($idCatArt); // Fetch category data to pre-fill the form
+        $data['sectors'] = $Model->getSectors();
+
+        return view('edit_cat.php', $data);
+    }
+
+    // public function editcat($idCatArt)
+    // {
+    //     $Model = new itemsModel();
+    //     $data['sectors'] = $Model->getSectors();
+    //     $data['category'] = $Model->getCatartCategory($idCatArt);
+
+    //     return view('edit_cat.php', $data);
+    // }
+
+    public function sectors_table()
+    {
+        $model = new itemsModel();
+        $data['sectors'] = $model->getSectors();
+        return view('sectors_table', $data);
+    }
+
+    public function sectors_form()
+    {
+        return view('sectors_form.php');
+    }
+
 
 
 
@@ -201,6 +225,60 @@ class itemsController extends Controller
 
         session()->setFlashdata('success', 'Item Added..!!');
         return redirect()->to(base_url("/category_table"));
+    }
+
+    public function deletecat($idCatArt)
+    {
+
+        try {
+            $Model = new itemsModel();
+            $Model->deletecat($idCatArt);
+            session()->setFlashdata('success', 'Category deleted...!!');
+
+            return redirect()->to(base_url("/category_table"));
+
+        } catch (\Exception $e) {
+            log_message('error', 'Error retrieving data: ' . $e->getMessage());
+            session()->setFlashdata('error', 'DataBase Error: ' . $e->getMessage());
+            return redirect()->to(base_url("/category_table"));
+        }
+    }
+
+    public function updatecat($idCatArt)
+    {
+        $request = \Config\Services::request();
+        $Model = new itemsModel();
+
+        $formData = [
+            'name' => $this->request->getPost('name'),
+            'idSector' => $this->request->getPost('id_sec'),
+            'notes' => $this->request->getPost('notes'),
+        ];
+
+        $Model->updateCatart($idCatArt, $formData);
+
+        session()->setFlashdata('success', 'Category updated successfully..!!');
+        return redirect()->to(base_url("/category_table"));
+    }
+
+    public function saveSector()
+    {
+        $itemsModel = new itemsModel();
+        $session = \Config\Services::session();
+        $request = \Config\Services::request();
+        $businessID = $session->get('businessID');
+
+        $data = [
+            'name' => $this->request->getPost('name'),
+            'PrintOutput' => $this->request->getPost('PrintOutput'),
+            'notes' => $this->request->getPost('notes'),
+            'TVSH' => $this->request->getPost('TVSH'),
+            'idBusiness' => $businessID,
+        ];
+
+        $itemsModel->saveSector($data);
+
+        return redirect()->to(base_url('/sectors_table'))->with('success', 'Sector added successfully.');
     }
 
 

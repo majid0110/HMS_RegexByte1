@@ -233,22 +233,19 @@
                                 <h4 class="card-title">Items</h4>
                                 <button type="button" class="btn btn-danger" id="add-item-btn" data-toggle="modal"
                                     data-target="#addcatModal">Add</button>
+                                <hr>
 
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <tr>
-                                            <th>ID</th>
                                             <th>Name</th>
                                             <th>Sector ID</th>
                                             <th>Notes</th>
-                                            <th>Business ID</th>
+                                            <th>Action</th>
                                         </tr>
 
                                         <?php foreach ($catart as $catart): ?>
                                             <tr>
-                                                <td>
-                                                    <?= $catart['idCatArt']; ?>
-                                                </td>
                                                 <td>
                                                     <?= $catart['name']; ?>
                                                 </td>
@@ -259,17 +256,21 @@
                                                     <?= $catart['notes']; ?>
                                                 </td>
                                                 <td>
-                                                    <?= $catart['idBusiness']; ?>
+                                                    <!-- Action buttons: Edit, Delete -->
+                                                    <a href="<?= base_url('editcat/' . $catart['idCatArt']); ?>"
+                                                        class="btn btn-primary btn-sm">Edit</a>
+                                                    <a href="<?= base_url('deletecat/' . $catart['idCatArt']); ?>"
+                                                        onclick="return confirm('Are you sure you want to delete this Category?');"
+                                                        class="btn btn-danger btn-sm">Delete</a>
                                                 </td>
-                                            </tr>
-                                        <?php endforeach; ?>
+                                            <?php endforeach; ?>
                                     </table>
                                     <div class="modal fade" id="addcatModal" tabindex="-1" role="dialog"
                                         aria-labelledby="addcatModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="addcatModalLabel">Add Item</h5>
+                                                    <h5 class="modal-title" id="addcatModalLabel">Add Category</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>

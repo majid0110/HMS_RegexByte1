@@ -13,15 +13,23 @@
     </a>
     <form class="pt-3" method="POST" action="<?php echo base_url() . "saveCatart"; ?>" enctype="multipart/form-data">
         <p class="card-description">
-            Category Details
+            Sector Details
         </p>
 
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Category Name</label>
+                    <label class="col-sm-3 col-form-label">Sector Name</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="name" required />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Print Output</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="printOutput" required />
                     </div>
                 </div>
             </div>
@@ -29,19 +37,12 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Id Sector</label>
+                    <label class="col-sm-3 col-form-label">TVSH</label>
                     <div class="col-sm-9">
-                        <select class="form-control" name="id_sec">
-                            <?php foreach ($sectors as $sector): ?>
-                                <option value="<?= $sector['idSector']; ?>">
-                                    <?= $sector['name']; ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
+                        <input type="text" class="form-control" name="TVSH" required />
                     </div>
                 </div>
             </div>
-
             <div class="col-md-6">
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Notes</label>
@@ -66,11 +67,6 @@
                 e.preventDefault();
                 $('#addcatModal').modal('hide');
             });
-
-            // Alternatively, you can try using the following code for the close button:
-            // $('#addcatModal').on('hidden.bs.modal', function () {
-            //     // Additional actions after modal is hidden
-            // });
         });
     </script>
 </body>

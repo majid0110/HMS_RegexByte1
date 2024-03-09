@@ -232,6 +232,7 @@
                                 <h4 class="card-title">Services Table</h4>
                                 <button type="button" class="btn btn-danger" data-toggle="modal"
                                     data-target="#addServiceModal">Add</button>
+                                <hr>
                                 <div class="modal fade" id="addServiceModal" tabindex="-1" role="dialog"
                                     aria-labelledby="addServiceModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" role="document">

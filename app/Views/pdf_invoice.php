@@ -87,23 +87,35 @@
             ?>
             <tr>
                 <td style="width: 50%;">Invoice# <b>59867</b> </td>
-                <td style="width: 50%; text-align: right;">Date:<b><?= $date; ?></b></td>
+                <td style="width: 50%; text-align: right;">Date:<b>
+                        <?= $date; ?>
+                    </b></td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align: left; margin-right: 5px;">Time:<b><?= $time; ?></b><br></td>
-            </tr>
-
-            <tr>
-                <td style=" width: 50%; white-space: nowrap;">Client:<b><?= $clientName ?></b></td>
-                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-right:15px;">Currency:<b><?= $currencyName; ?></b></td>
-
-
+                <td colspan="2" style="text-align: left; margin-right: 5px;">Time:<b>
+                        <?= $time; ?>
+                    </b><br></td>
             </tr>
 
             <tr>
+                <td style=" width: 50%; white-space: nowrap;">Patient Name:<b>
+                        <?= $clientName ?>
+                    </b></td>
+                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-right:15px;">Currency:<b>
+                        <?= $currencyName; ?>
+                    </b></td>
 
-                <td style=" width: 50%; white-space: nowrap;">PaymentMethod:<b> <?= $paymentMethodName; ?></b></td>
-                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-right:23px;">Exchange:<b><?= $invoiceData['rate'] ?></b></td>
+
+            </tr>
+
+            <tr>
+
+                <td style=" width: 50%; white-space: nowrap;">PaymentMethod:<b>
+                        <?= $paymentMethodName; ?>
+                    </b></td>
+                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-right:23px;">Exchange:<b>
+                        <?= $invoiceData['rate'] ?>
+                    </b></td>
             </tr>
 
             <tr>
@@ -138,7 +150,9 @@
         <table style="width: 100%;">
             <tr>
                 <td style="width: 50%; text-align: left;">&nbsp;</td>
-                <td style="width: 25%; text-align: right; padding-right:10px;"><b>Total</b> PKR:<?= $invoiceData['Value']; ?></td>
+                <td style="width: 25%; text-align: right; padding-right:10px;"><b>Total</b> PKR:
+                    <?= $invoiceData['Value']; ?>
+                </td>
             </tr>
         </table>
         <br>
@@ -156,58 +170,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice</title>
+<style>
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
 
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-    </style>
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+</style>
 </head>
 <body>
-    <h1>Invoice</h1>
+<h1>Invoice</h1>
 
-    <h2>Invoice Details</h2>
-    <p><strong>Payment:</strong> <?= $paymentDetailsData['idPaymentMethod'] ?></p>
-    <p><strong>Exchange:</strong> <?= $invoiceData['rate'] ?></p>
-    <p><strong>paymentMethod:</strong> <?= $invoiceData['paymentMethod'] ?></p>
-    <p>Client Name: <?= $clientName; ?></p>
-    <p>Payment Method Name: <?= $paymentMethodName; ?></p>
+<h2>Invoice Details</h2>
+<p><strong>Payment:</strong> <?= $paymentDetailsData['idPaymentMethod'] ?></p>
+<p><strong>Exchange:</strong> <?= $invoiceData['rate'] ?></p>
+<p><strong>paymentMethod:</strong> <?= $invoiceData['paymentMethod'] ?></p>
+<p>Client Name: <?= $clientName; ?></p>
+<p>Payment Method Name: <?= $paymentMethodName; ?></p>
 <p>Currency Name: <?= $currencyName; ?></p>
 
 
-    <p><strong>Total Fee:</strong> <?= $invoiceData['Value'] ?></p>
-    <!-- Add more details as needed -->
+<p><strong>Total Fee:</strong> <?= $invoiceData['Value'] ?></p>
+<!-- Add more details as needed -->
 
-    <h2>Services</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Service Type</th>
-                <th>Service Name</th>
-                <th>Fee</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($services as $service): ?>
-    <tr>
-        <td><?= $service['serviceTypeId'] ?></td>
-        <td><?= $service['serviceName'] ?></td>
-        <td><?= $service['fee'] ?></td>
-    </tr>
+<h2>Services</h2>
+<table>
+<thead>
+  <tr>
+      <th>Service Type</th>
+      <th>Service Name</th>
+      <th>Fee</th>
+  </tr>
+</thead>
+<tbody>
+<?php foreach ($services as $service): ?>
+<tr>
+<td><?= $service['serviceTypeId'] ?></td>
+<td><?= $service['serviceName'] ?></td>
+<td><?= $service['fee'] ?></td>
+</tr>
 <?php endforeach; ?>
 
-        </tbody>
-    </table>
+</tbody>
+</table>
 </body>
 </html>
 */ ?>
