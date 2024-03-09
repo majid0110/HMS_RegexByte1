@@ -36,6 +36,14 @@ class itemsController extends Controller
         return view('items_form.php', $data);
     }
 
+    public function category_table()
+    {
+        $itemsModel = new itemsModel();
+        $data['catart'] = $itemsModel->getCatartItems();
+
+        return view('category_table', $data);
+    }
+
     public function additem()
     {
         $servicesModel = new ServicesModel();
@@ -48,6 +56,13 @@ class itemsController extends Controller
         $data['warehouse'] = $Model->getIdWarehouse();
         return view('items_form.php', $data);
     }
+
+    public function addcat()
+    {
+
+        return view('cat_form.php');
+    }
+
 
     // public function items_table()
     // {
@@ -137,8 +152,6 @@ class itemsController extends Controller
         }
     }
 
-
-
     public function updateitem($idItem)
     {
         $request = \Config\Services::request();
@@ -171,6 +184,24 @@ class itemsController extends Controller
         return redirect()->to(base_url("/items_table"));
     }
 
+    public function saveCatart()
+    {
+        $itemsModel = new itemsModel();
+        $session = \Config\Services::session();
+        $request = \Config\Services::request();
+        $businessID = $session->get('businessID');
+
+        $data = [
+            'name' => $this->request->getPost('name'),
+            'idSector' => $this->request->getPost('id_sec'),
+            'notes' => $this->request->getPost('notes'),
+            'idBusiness' => $businessID,
+        ];
+        $itemsModel->insertCatart($data);
+
+        session()->setFlashdata('success', 'Item Added..!!');
+        return redirect()->to(base_url("/category_table"));
+    }
 
 
 }

@@ -173,3 +173,11 @@ $routes->get('/edititem/(:num)', 'itemsController::edititem/$1');
 
 $routes->get('edititem/(:num)', 'itemsController::edititem/$1');
 $routes->post('updateitem/(:num)', 'itemsController::updateitem/$1');
+
+//-------------------------------------------------------------------------------------------------------------------------
+//                                                 items Routes
+//-------------------------------------------------------------------------------------------------------------------------
+
+$routes->get('/category_table', 'itemsController::category_table');
+$routes->post('/saveCatart', 'itemsController::saveCatart');
+$routes->get('/addcat', 'itemsController::addcat');

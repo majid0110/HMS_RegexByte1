@@ -3,30 +3,39 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/tables/basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:35 GMT -->
+
 <head>
 
-    <link rel="stylesheet" href="./public/assets/vendors_s/select2/select2.min.css">
-    <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css">
-    <style>
-        /* Add this style to make the cursor change to a pointer when hovering over the card */
-        .card {
-            cursor: pointer;
-        }
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Star Admin2 </title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="./public/assets/vendors/feather/feather.css">
+    <link rel="stylesheet" href="./public/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="./public/assets/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="./public/assets/vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="./public/assets/vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="./public/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-        .card:hover {
-            background: purple;
-            color: whitesmoke;
-            /* background-image: url("./public/assets/images_s/bg.jpeg"); */
-        }
-    </style>
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="./public/assets/css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="./public/assets/images/favicon.png" />
 </head>
 
 <body>
-
     <div class="container-scroller">
+        <!-- partial:./public/assets/partials/_navbar.html -->
+
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
-            <!-- partial:../../partials/_settings-panel.html -->
+            <!-- partial:./public/assets/partials/_settings-panel.html -->
             <div class="theme-setting-wrapper">
                 <div id="settings-trigger"><i class="ti-settings"></i></div>
                 <div id="theme-settings" class="settings-panel">
@@ -150,8 +159,8 @@
                         </div>
                         <ul class="chat-list">
                             <li class="list active">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg"
-                                        alt="image"><span class="online"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face1.jpg" alt="image"><span
+                                        class="online"></span></div>
                                 <div class="info">
                                     <p>Thomas Douglas</p>
                                     <p>Available</p>
@@ -159,8 +168,8 @@
                                 <small class="text-muted my-auto">19 min</small>
                             </li>
                             <li class="list">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg"
-                                        alt="image"><span class="offline"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face2.jpg" alt="image"><span
+                                        class="offline"></span></div>
                                 <div class="info">
                                     <div class="wrapper d-flex">
                                         <p>Catherine</p>
@@ -171,8 +180,8 @@
                                 <small class="text-muted my-auto">23 min</small>
                             </li>
                             <li class="list">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg"
-                                        alt="image"><span class="online"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face3.jpg" alt="image"><span
+                                        class="online"></span></div>
                                 <div class="info">
                                     <p>Daniel Russell</p>
                                     <p>Available</p>
@@ -180,8 +189,8 @@
                                 <small class="text-muted my-auto">14 min</small>
                             </li>
                             <li class="list">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg"
-                                        alt="image"><span class="offline"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face4.jpg" alt="image"><span
+                                        class="offline"></span></div>
                                 <div class="info">
                                     <p>James Richardson</p>
                                     <p>Away</p>
@@ -189,8 +198,8 @@
                                 <small class="text-muted my-auto">2 min</small>
                             </li>
                             <li class="list">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg"
-                                        alt="image"><span class="online"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face5.jpg" alt="image"><span
+                                        class="online"></span></div>
                                 <div class="info">
                                     <p>Madeline Kennedy</p>
                                     <p>Available</p>
@@ -198,8 +207,8 @@
                                 <small class="text-muted my-auto">5 min</small>
                             </li>
                             <li class="list">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg"
-                                        alt="image"><span class="online"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face6.jpg" alt="image"><span
+                                        class="online"></span></div>
                                 <div class="info">
                                     <p>Sarah Graves</p>
                                     <p>Available</p>
@@ -212,118 +221,111 @@
                 </div>
             </div>
             <!-- partial -->
-            <!-- partial:../../partials/_sidebar.html -->
+            <!-- partial:./public/assets/partials/_sidebar.html -->
             <?php include 'include_common/sidebar.php'; ?>
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
-                    <?php
-                    $successMessage = session()->getFlashdata('success');
-                    $errorMessage = session()->getFlashdata('error');
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
 
-                    if ($successMessage) {
-                        echo '<div class="alert alert-success">' . $successMessage . '</div>';
-                    }
+                                <h4 class="card-title">Items</h4>
+                                <button type="button" class="btn btn-danger" id="add-item-btn" data-toggle="modal"
+                                    data-target="#addcatModal">Add</button>
 
-                    if ($errorMessage) {
-                        echo '<div class="alert alert-danger">' . $errorMessage . '</div>';
-                    }
-                    ?>
-                    <div class="row">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Sector ID</th>
+                                            <th>Notes</th>
+                                            <th>Business ID</th>
+                                        </tr>
 
-                        <div class="col-md-3 grid-margin stretch-card">
-                            <div class="card" onclick="window.location.href='<?= base_url('items_table'); ?>';">
-                                <div class="card-body">
-                                    <h4 class="card-title" style="text-align:center">Manage Items</h4>
-                                    <div class="media">
-                                        <!-- <i class="ti-world icon-md text-info d-flex align-self-center"></i> -->
-                                        <svg style="margin: 0px auto" height="45px" width="45px"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                        </svg>
-
-                                        <div class="media-body">
-                                            <!-- Your content goes here -->
+                                        <?php foreach ($catart as $catart): ?>
+                                            <tr>
+                                                <td>
+                                                    <?= $catart['idCatArt']; ?>
+                                                </td>
+                                                <td>
+                                                    <?= $catart['name']; ?>
+                                                </td>
+                                                <td>
+                                                    <?= $catart['idSector']; ?>
+                                                </td>
+                                                <td>
+                                                    <?= $catart['notes']; ?>
+                                                </td>
+                                                <td>
+                                                    <?= $catart['idBusiness']; ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                    <div class="modal fade" id="addcatModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="addcatModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="addcatModalLabel">Add Item</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body" id="addcatModalBody">
+                                                    <!-- Form content will be loaded dynamically here -->
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 grid-margin stretch-card">
-                            <div class="card" onclick="window.location.href='<?= base_url('Services_table'); ?>';">
-                                <div class="card-body">
-                                    <h4 class="card-title" style="text-align:center">Manage Services</h4>
-                                    <div class="media">
-                                        <!-- <i class="ti-world icon-md text-info d-flex align-self-start me-3"></i> -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" style="margin: 0px auto" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="45"
-                                            height="45">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
-                                        </svg>
-
-                                        <div class="media-body">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 grid-margin stretch-card">
-                            <div class="card" onclick="window.location.href='<?= base_url('category_table'); ?>';">
-                                <div class="card-body">
-                                    <h4 class="card-title" style="text-align:center">Manage Categories</h4>
-                                    <div class="media">
-                                        <i class="ti-world icon-md text-info d-flex align-self-start me-3"></i>
-                                        <svg style="margin: 0px auto" height="45px" width="45px"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 0 1-1.125-1.125v-3.75ZM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-8.25ZM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-2.25Z" />
-                                        </svg>
-
-
-                                        <div class="media-body">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
                     </div>
-                    <!-- content-wrapper ends -->
-                    <!-- partial:../../partials/_footer.html -->
-
-
-                    <!-- partial -->
                 </div>
-                <!-- main-panel ends -->
+                <!-- content-wrapper ends -->
+                <!-- partial:./public/assets/partials/_footer.html -->
+                <?php include 'include_common/footer.php'; ?>
+                <!-- partial -->
             </div>
-            <!-- page-body-wrapper ends -->
+
+            <!-- main-panel ends -->
         </div>
-        <!-- container-scroller -->
-        <!-- plugins:js -->
-        <script src="./public/assets/vendors_s/js/vendor.bundle.base.js"></script>
-        <!-- endinject -->
-        <!-- Plugin js for this page -->
-        <script src="./public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js"></script>
-        <script src="./public/assets/vendors_s/select2/select2.min.js"></script>
-        <script src="./public/assets/vendors_s/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-        <!-- End plugin js for this page -->
-        <!-- inject:js -->
-        <script src="./public/assets/js_s/off-canvas.js"></script>
-        <script src="./public/assets/js_s/hoverable-collapse.js"></script>
-        <script src="./public/assets/js_s/template.js"></script>
-        <script src="./public/assets/js_s/settings.js"></script>
-        <script src="./public/assets/js_s/todolist.js"></script>
-        <!-- endinject -->
-        <!-- Custom js for this page-->
-        <script src="./public/assets/js_s/file-upload.js"></script>
-        <script src="./public/assets/js_s/typeahead.js"></script>
-        <script src="./public/assets/js_s/select2.js"></script>
-        <!-- End custom js for this page-->
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="./public/assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script>
+        $(document).ready(function () {
+            $('#add-item-btn').click(function (e) {
+                e.preventDefault();
+                $.get('<?= base_url('addcat') ?>', function (data) {
+                    $('#addcatModalBody').html(data);
+                    $('#addcatModal').modal('show');
+                });
+            });
+        });
+    </script>
+    <script src="./public/assets/js/off-canvas.js"></script>
+    <script src="./public/assets/js/hoverable-collapse.js"></script>
+    <script src="./public/assets/js/template.js"></script>
+    <script src="./public/assets/js/settings.js"></script>
+    <script src="./public/assets/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <!-- End custom js for this page-->
 </body>
+
+
+<!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/tables/basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:35 GMT -->
 
 </html>

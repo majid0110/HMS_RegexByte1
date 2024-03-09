@@ -76,4 +76,18 @@ class itemsModel extends Model
 
         return $result;
     }
+
+    public function getCatartItems()
+    {
+        $builder = $this->db->table('catart');
+        $result = $builder->get()->getResultArray();
+
+        return $result;
+    }
+
+    public function insertCatart($data)
+    {
+        return $this->db->table('catart')->insert($data);
+    }
+
 }
