@@ -1,0 +1,632 @@
+INFO - 2024-03-11 05:17:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 05:17:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 05:17:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 05:18:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 05:18:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 05:18:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 05:18:42 --> Trying to access array offset on value of type null
+in APPPATH\Views\edit_item_form.php on line 237.
+ 1 APPPATH\Views\edit_item_form.php(237): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\edit_item_form.php', 237)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\edit_item_form.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('edit_item_form.php', [], true)
+ 5 APPPATH\Controllers\itemsController.php(89): view('edit_item_form.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->edititem('1')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 05:18:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 05:18:51 --> Invalid file: "sectors_form.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('sectors_form.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('sectors_form.php', [], true)
+ 3 APPPATH\Controllers\itemsController.php(119): view('sectors_form.php')
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->sectors_form()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 05:27:57 --> Invalid file: "sectors_form.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('sectors_form.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('sectors_form.php', [], true)
+ 3 APPPATH\Controllers\itemsController.php(119): view('sectors_form.php')
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->sectors_form()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 05:29:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 05:33:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 05:34:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 05:36:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 05:39:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 05:44:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 05:44:14 --> Invalid file: "sectors_form.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('sectors_form.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('sectors_form.php', [], true)
+ 3 APPPATH\Controllers\itemsController.php(119): view('sectors_form.php')
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->sectors_form()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 05:45:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 05:45:48 --> Invalid file: "/sectors_form.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('/sectors_form.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('/sectors_form', [], true)
+ 3 APPPATH\Controllers\itemsController.php(119): view('/sectors_form')
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->sectors_form()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 05:49:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 05:49:40 --> unlink(C:\xampp\htdocs\HMS_RegexByte\writable\debugbar/debugbar_1710134280.790027.json): No such file or directory
+in SYSTEMPATH\Debug\Toolbar\Collectors\History.php on line 80.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'unlink(C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1710134280.790027.json): No such file or directory', 'C:\\xampp\\htdocs\\HMS_RegexByte\\system\\Debug\\Toolbar\\Collectors\\History.php', 80)
+ 2 SYSTEMPATH\Debug\Toolbar\Collectors\History.php(80): unlink('C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1710134280.790027.json')
+ 3 SYSTEMPATH\Debug\Toolbar.php(497): CodeIgniter\Debug\Toolbar\Collectors\History->setFiles('1710136174.324132', 20)
+ 4 SYSTEMPATH\Debug\Toolbar.php(476): CodeIgniter\Debug\Toolbar->format([...], 'html')
+ 5 APPPATH\Config\Events.php(47): CodeIgniter\Debug\Toolbar->respond()
+ 6 SYSTEMPATH\Events\Events.php(154): CodeIgniter\Events\Events::Config\{closure}()
+ 7 SYSTEMPATH\CodeIgniter.php(442): CodeIgniter\Events\Events::trigger('pre_system')
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 05:50:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 05:50:07 --> mysqli_sql_exception: Column 'idSector' cannot be null in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-11 05:50:07 --> Column 'idSector' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `catart` (`name`, `idSector`, `notes`, `idBusiness`) VALUES (:name:, :idSector:, :notes:, :idBusiness:)', [...], false)
+ 2 APPPATH\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 05:53:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 05:53:35 --> include(sectors_form.php): Failed to open stream: No such file or directory
+in APPPATH\Views\sectors_table.php on line 311.
+ 1 APPPATH\Views\sectors_table.php(311): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(sectors_form.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\sectors_table.php', 311)
+ 2 APPPATH\Views\sectors_table.php(311): include()
+ 3 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\sectors_table.php')
+ 4 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('sectors_table', [], true)
+ 6 APPPATH\Controllers\itemsController.php(114): view('sectors_table', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->sectors_table()
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 05:53:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 05:53:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 05:53:48 --> include(sectors_form.php): Failed to open stream: No such file or directory
+in APPPATH\Views\sectors_table.php on line 311.
+ 1 APPPATH\Views\sectors_table.php(311): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(sectors_form.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\sectors_table.php', 311)
+ 2 APPPATH\Views\sectors_table.php(311): include()
+ 3 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\sectors_table.php')
+ 4 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('sectors_table', [], true)
+ 6 APPPATH\Controllers\itemsController.php(114): view('sectors_table', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->sectors_table()
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 05:54:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 05:54:18 --> include(sectors_form.php): Failed to open stream: No such file or directory
+in APPPATH\Views\sectors_table.php on line 288.
+ 1 APPPATH\Views\sectors_table.php(288): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(sectors_form.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\sectors_table.php', 288)
+ 2 APPPATH\Views\sectors_table.php(288): include()
+ 3 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\sectors_table.php')
+ 4 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('sectors_table', [], true)
+ 6 APPPATH\Controllers\itemsController.php(114): view('sectors_table', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->sectors_table()
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 05:54:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 05:54:54 --> include(/sectors_form.php): Failed to open stream: No such file or directory
+in APPPATH\Views\sectors_table.php on line 288.
+ 1 APPPATH\Views\sectors_table.php(288): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(/sectors_form.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\sectors_table.php', 288)
+ 2 APPPATH\Views\sectors_table.php(288): include()
+ 3 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\sectors_table.php')
+ 4 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('sectors_table', [], true)
+ 6 APPPATH\Controllers\itemsController.php(114): view('sectors_table', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->sectors_table()
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 05:55:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 05:56:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 05:56:05 --> mysqli_sql_exception: Column 'idSector' cannot be null in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-11 05:56:05 --> Column 'idSector' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `catart` (`name`, `idSector`, `notes`, `idBusiness`) VALUES (:name:, :idSector:, :notes:, :idBusiness:)', [...], false)
+ 2 APPPATH\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 06:07:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 06:07:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 06:07:42 --> mysqli_sql_exception: Column 'idSector' cannot be null in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-11 06:07:42 --> Column 'idSector' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `catart` (`name`, `idSector`, `notes`, `idBusiness`) VALUES (:name:, :idSector:, :notes:, :idBusiness:)', [...], false)
+ 2 APPPATH\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 06:09:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 06:09:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 06:09:26 --> mysqli_sql_exception: Column 'idSector' cannot be null in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-11 06:09:26 --> Column 'idSector' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `catart` (`name`, `idSector`, `notes`, `idBusiness`) VALUES (:name:, :idSector:, :notes:, :idBusiness:)', [...], false)
+ 2 APPPATH\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 06:09:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 06:10:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 06:10:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 06:10:49 --> mysqli_sql_exception: Column 'idSector' cannot be null in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-11 06:10:49 --> Column 'idSector' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `catart` (`name`, `idSector`, `notes`, `idBusiness`) VALUES (:name:, :idSector:, :notes:, :idBusiness:)', [...], false)
+ 2 APPPATH\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 06:11:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 06:11:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 06:11:39 --> mysqli_sql_exception: Column 'idSector' cannot be null in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-11 06:11:39 --> Column 'idSector' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `catart` (`name`, `idSector`, `notes`, `idBusiness`) VALUES (:name:, :idSector:, :notes:, :idBusiness:)', [...], false)
+ 2 APPPATH\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 06:14:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 06:14:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 06:14:47 --> mysqli_sql_exception: Column 'idSector' cannot be null in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-11 06:14:47 --> Column 'idSector' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `catart` (`name`, `idSector`, `notes`, `idBusiness`) VALUES (:name:, :idSector:, :notes:, :idBusiness:)', [...], false)
+ 2 APPPATH\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 06:20:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 06:20:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 06:20:58 --> mysqli_sql_exception: Column 'idSector' cannot be null in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-11 06:20:58 --> Column 'idSector' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `catart` (`name`, `idSector`, `notes`, `idBusiness`) VALUES (:name:, :idSector:, :notes:, :idBusiness:)', [...], false)
+ 2 APPPATH\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 06:21:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 06:21:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 06:22:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 06:26:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 06:29:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 06:29:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 06:29:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 06:29:31 --> mysqli_sql_exception: Column 'idSector' cannot be null in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-11 06:29:31 --> Column 'idSector' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `catart` (`name`, `idSector`, `notes`, `idBusiness`) VALUES (:name:, :idSector:, :notes:, :idBusiness:)', [...], false)
+ 2 APPPATH\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\itemsController.php(224): App\Models\itemsModel->insertCatart([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 06:41:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 06:42:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 06:42:08 --> mysqli_sql_exception: Column 'idSector' cannot be null in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\itemsController.php(225): App\Models\itemsModel->insertCatart(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-11 06:42:08 --> Column 'idSector' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `catart` (`name`, `idSector`, `notes`, `idBusiness`) VALUES (:name:, :idSector:, :notes:, :idBusiness:)', [...], false)
+ 2 APPPATH\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\itemsController.php(225): App\Models\itemsModel->insertCatart([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 06:45:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 06:50:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 06:50:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:00:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:00:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:00:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 07:00:51 --> mysqli_sql_exception: Column 'idSector' cannot be null in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\itemsController.php(225): App\Models\itemsModel->insertCatart(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-11 07:00:51 --> Column 'idSector' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `catart` (`name`, `idSector`, `notes`, `idBusiness`) VALUES (:name:, :idSector:, :notes:, :idBusiness:)', [...], false)
+ 2 APPPATH\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\itemsController.php(225): App\Models\itemsModel->insertCatart([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 07:03:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:03:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 07:04:02 --> unlink(C:\xampp\htdocs\HMS_RegexByte\writable\debugbar/debugbar_1710137491.998598.json): No such file or directory
+in SYSTEMPATH\Debug\Toolbar\Collectors\History.php on line 80.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'unlink(C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1710137491.998598.json): No such file or directory', 'C:\\xampp\\htdocs\\HMS_RegexByte\\system\\Debug\\Toolbar\\Collectors\\History.php', 80)
+ 2 SYSTEMPATH\Debug\Toolbar\Collectors\History.php(80): unlink('C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1710137491.998598.json')
+ 3 SYSTEMPATH\Debug\Toolbar.php(497): CodeIgniter\Debug\Toolbar\Collectors\History->setFiles('1710140629.594694', 20)
+ 4 SYSTEMPATH\Debug\Toolbar.php(476): CodeIgniter\Debug\Toolbar->format([...], 'html')
+ 5 APPPATH\Config\Events.php(47): CodeIgniter\Debug\Toolbar->respond()
+ 6 SYSTEMPATH\Events\Events.php(154): CodeIgniter\Events\Events::Config\{closure}()
+ 7 SYSTEMPATH\CodeIgniter.php(442): CodeIgniter\Events\Events::trigger('pre_system')
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 07:04:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:06:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:06:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:07:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 07:07:03 --> mysqli_sql_exception: Column 'idSector' cannot be null in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\itemsController.php(225): App\Models\itemsModel->insertCatart(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-11 07:07:03 --> Column 'idSector' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `catart` (`name`, `idSector`, `notes`, `idBusiness`) VALUES (:name:, :idSector:, :notes:, :idBusiness:)', [...], false)
+ 2 APPPATH\Models\itemsModel.php(96): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\itemsController.php(225): App\Models\itemsModel->insertCatart([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->saveCatart()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 07:42:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:43:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:43:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 07:43:36 --> unlink(C:\xampp\htdocs\HMS_RegexByte\writable\debugbar/debugbar_1710138380.197916.json): No such file or directory
+in SYSTEMPATH\Debug\Toolbar\Collectors\History.php on line 80.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'unlink(C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1710138380.197916.json): No such file or directory', 'C:\\xampp\\htdocs\\HMS_RegexByte\\system\\Debug\\Toolbar\\Collectors\\History.php', 80)
+ 2 SYSTEMPATH\Debug\Toolbar\Collectors\History.php(80): unlink('C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1710138380.197916.json')
+ 3 SYSTEMPATH\Debug\Toolbar.php(497): CodeIgniter\Debug\Toolbar\Collectors\History->setFiles('1710143002.289395', 20)
+ 4 SYSTEMPATH\Debug\Toolbar.php(476): CodeIgniter\Debug\Toolbar->format([...], 'html')
+ 5 APPPATH\Config\Events.php(47): CodeIgniter\Debug\Toolbar->respond()
+ 6 SYSTEMPATH\Events\Events.php(154): CodeIgniter\Events\Events::Config\{closure}()
+ 7 SYSTEMPATH\CodeIgniter.php(442): CodeIgniter\Events\Events::trigger('pre_system')
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 07:45:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:45:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:45:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:47:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:48:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:53:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:54:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:54:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:54:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:59:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 07:59:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:00:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:04:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 08:04:18 --> Undefined variable $ServiceDetails
+in APPPATH\Views\test_details.php on line 347.
+ 1 APPPATH\Views\test_details.php(347): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $ServiceDetails', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\test_details.php', 347)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\test_details.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('test_details', [], true)
+ 5 APPPATH\Controllers\LabController.php(44): view('test_details', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->viewTestDetails('99')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 08:08:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:08:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 08:08:29 --> Undefined array key "status"
+in APPPATH\Views\test_details.php on line 346.
+ 1 APPPATH\Views\test_details.php(346): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "status"', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\test_details.php', 346)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\test_details.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('test_details', [], true)
+ 5 APPPATH\Controllers\LabController.php(44): view('test_details', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->viewTestDetails('99')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 08:09:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 08:09:31 --> Undefined array key "created_at"
+in APPPATH\Views\test_details.php on line 346.
+ 1 APPPATH\Views\test_details.php(346): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "created_at"', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\test_details.php', 346)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\test_details.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('test_details', [], true)
+ 5 APPPATH\Controllers\LabController.php(44): view('test_details', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->viewTestDetails('99')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 08:10:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 08:10:08 --> Undefined array key "test_id"
+in APPPATH\Views\test_details.php on line 349.
+ 1 APPPATH\Views\test_details.php(349): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "test_id"', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\test_details.php', 349)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\test_details.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('test_details', [], true)
+ 5 APPPATH\Controllers\LabController.php(44): view('test_details', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->viewTestDetails('99')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 08:10:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 08:10:50 --> Undefined array key "test_id"
+in APPPATH\Views\test_details.php on line 370.
+ 1 APPPATH\Views\test_details.php(370): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "test_id"', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\test_details.php', 370)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\test_details.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('test_details', [], true)
+ 5 APPPATH\Controllers\LabController.php(44): view('test_details', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->viewTestDetails('99')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 08:12:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 08:12:15 --> Undefined array key "test_id"
+in APPPATH\Views\test_details.php on line 391.
+ 1 APPPATH\Views\test_details.php(391): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "test_id"', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\test_details.php', 391)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\test_details.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('test_details', [], true)
+ 5 APPPATH\Controllers\LabController.php(44): view('test_details', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->viewTestDetails('99')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 08:12:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:13:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:15:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:15:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:16:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:16:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:19:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:20:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:23:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 08:23:08 --> Undefined array key "status"
+in APPPATH\Views\test_details.php on line 347.
+ 1 APPPATH\Views\test_details.php(347): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "status"', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\test_details.php', 347)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\test_details.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('test_details', [], true)
+ 5 APPPATH\Controllers\LabController.php(44): view('test_details', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->viewTestDetails('99')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 08:24:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:25:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:26:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 08:26:45 --> Undefined variable $client
+in APPPATH\Views\labtest_table.php on line 260.
+ 1 APPPATH\Views\labtest_table.php(260): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\labtest_table.php', 260)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\labtest_table.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('labtest_table.php', [], true)
+ 5 APPPATH\Controllers\LabController.php(37): view('labtest_table.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->labtest_table()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 08:28:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:29:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:41:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:42:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 08:42:24 --> mysqli_sql_exception: Unknown column 'id' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('DELETE FROM `la...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `la...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `la...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2790): CodeIgniter\Database\BaseConnection->query('DELETE FROM `la...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\LabModel.php(45): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\LabController.php(300): App\Models\LabModel->deleteTest('99')
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\LabController->deleteTest('99')
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-11 08:42:24 --> Unknown column 'id' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2790): CodeIgniter\Database\BaseConnection->query('DELETE FROM `labtest`
+WHERE `id` = :id:', [...], false)
+ 2 APPPATH\Models\LabModel.php(45): CodeIgniter\Database\BaseBuilder->delete()
+ 3 APPPATH\Controllers\LabController.php(300): App\Models\LabModel->deleteTest('99')
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->deleteTest('99')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 08:43:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 08:43:37 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`dashboard`.`labtestdetails`, CONSTRAINT `fk_labtest` FOREIGN KEY (`labTestID`) REFERENCES `labtest` (`test_id`)) in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('DELETE FROM `la...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `la...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `la...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2790): CodeIgniter\Database\BaseConnection->query('DELETE FROM `la...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\LabModel.php(45): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\LabController.php(300): App\Models\LabModel->deleteTest('99')
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\LabController->deleteTest('99')
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-11 08:43:37 --> Cannot delete or update a parent row: a foreign key constraint fails (`dashboard`.`labtestdetails`, CONSTRAINT `fk_labtest` FOREIGN KEY (`labTestID`) REFERENCES `labtest` (`test_id`))
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2790): CodeIgniter\Database\BaseConnection->query('DELETE FROM `labtest`
+WHERE `test_id` = :test_id:', [...], false)
+ 2 APPPATH\Models\LabModel.php(45): CodeIgniter\Database\BaseBuilder->delete()
+ 3 APPPATH\Controllers\LabController.php(300): App\Models\LabModel->deleteTest('99')
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->deleteTest('99')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 08:44:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:44:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:45:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:45:18 --> Client ID: 24
+INFO - 2024-03-11 08:45:23 --> Client ID: 27
+INFO - 2024-03-11 08:45:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:45:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:45:39 --> Client ID: 24
+INFO - 2024-03-11 08:45:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 08:45:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

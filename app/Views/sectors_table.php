@@ -231,10 +231,8 @@
                             <div class="card-body">
 
                                 <h4 class="card-title">Sector</h4>
-                                <button type="button" class="btn btn-danger" id="add-item-btn" data-toggle="modal"
-                                    data-target="#addsectorModal">Add</button>
-                                <hr>
-
+                                <button type="button" class="btn btn-primary btn-sm mt-3"
+                                    id="openSectorFormDialog">Add</button>
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <thead>
@@ -274,23 +272,25 @@
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
-                                    <div class="modal fade" id="addsectorModal" tabindex="-1" role="dialog"
-                                        aria-labelledby="addSectorModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="sectorFormModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="sectorFormModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="addSectorModalLabel">Add Item</h5>
+                                                    <h5 class="modal-title" id="sectorFormModalLabel">Sector Form</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <div class="modal-body" id="addSectorModalBody">
-                                                    <!-- Form content will be loaded dynamically here -->
+                                                <div class="modal-body" id="sectorFormModalBody">
+                                                    <!-- Include your sector form content here -->
+                                                    <?php include 'sector_form.php'; ?>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -317,12 +317,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#add-item-btn').click(function (e) {
-                e.preventDefault();
-                $.get('<?= base_url('sectors_form') ?>', function (data) {
-                    $('#addSectorModalBody').html(data);
-                    $('#addsectorModal').modal('show');
-                });
+            $('#openSectorFormDialog').click(function () {
+                // Open dialog-box with sector_form page
+                // You can use a modal or any other dialog-box mechanism here
+                // For simplicity, let's assume you're using a Bootstrap modal
+                $('#sectorFormModal').modal('show');
             });
         });
     </script>

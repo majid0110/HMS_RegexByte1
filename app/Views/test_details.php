@@ -4,6 +4,7 @@
 <html lang="en">
 
 <!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/tables/basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:35 GMT -->
+
 <head>
   <link rel="stylesheet" href="/public/assets/vendors_s/datatables.net-bs4/dataTables.bootstrap4.css">
   <link rel="stylesheet" href="/public/assets/js_s/select.dataTables.min.css">
@@ -33,8 +34,12 @@
         <div id="theme-settings" class="settings-panel">
           <i class="settings-close ti-close"></i>
           <p class="settings-heading">SIDEBAR SKINS</p>
-          <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border me-3"></div>Light</div>
-          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border me-3"></div>Dark</div>
+          <div class="sidebar-bg-options selected" id="sidebar-light-theme">
+            <div class="img-ss rounded-circle bg-light border me-3"></div>Light
+          </div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme">
+            <div class="img-ss rounded-circle bg-dark border me-3"></div>Dark
+          </div>
           <p class="settings-heading mt-2">HEADER SKINS</p>
           <div class="color-tiles mx-0 px-4">
             <div class="tiles success"></div>
@@ -50,14 +55,17 @@
         <i class="settings-close ti-close"></i>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab"
+              aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
+            <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab"
+              aria-controls="chats-section">CHATS</a>
           </li>
         </ul>
         <div class="tab-content" id="setting-content">
-          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
+            aria-labelledby="todo-section">
             <div class="add-items d-flex px-3 mb-0">
               <form class="form w-100">
                 <div class="form-group d-flex">
@@ -141,7 +149,8 @@
             </div>
             <ul class="chat-list">
               <li class="list active">
-                <div class="profile"><img src="./public/assets/images/faces/face1.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images/faces/face1.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Thomas Douglas</p>
                   <p>Available</p>
@@ -149,7 +158,8 @@
                 <small class="text-muted my-auto">19 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="./public/assets/images/faces/face2.jpg" alt="image"><span
+                    class="offline"></span></div>
                 <div class="info">
                   <div class="wrapper d-flex">
                     <p>Catherine</p>
@@ -160,7 +170,8 @@
                 <small class="text-muted my-auto">23 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images/faces/face3.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Daniel Russell</p>
                   <p>Available</p>
@@ -168,7 +179,8 @@
                 <small class="text-muted my-auto">14 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="./public/assets/images/faces/face4.jpg" alt="image"><span
+                    class="offline"></span></div>
                 <div class="info">
                   <p>James Richardson</p>
                   <p>Away</p>
@@ -176,7 +188,8 @@
                 <small class="text-muted my-auto">2 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images/faces/face5.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images/faces/face5.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Madeline Kennedy</p>
                   <p>Available</p>
@@ -184,7 +197,8 @@
                 <small class="text-muted my-auto">5 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images/faces/face6.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images/faces/face6.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Sarah Graves</p>
                   <p>Available</p>
@@ -201,44 +215,50 @@
       <?php include 'include_common/sidebar.php'; ?>
       <!-- partial -->
       <div class="main-panel">
-    <div class="content-wrapper">
-        <div class="col-lg-12 grid-margin stretch-card">
+        <div class="content-wrapper">
+          <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Test Details Table</h4>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <!-- <th>LabTestID</th> -->
-                                    <th>Test Type</th>
-                                    <th>Fee</th>
-                                    
-                                    <th>Created AT</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                              
-<?php foreach ($testDetails as $detail): ?>
-    <tr>
-        <td><?= $detail['testTypeName']; ?></td>
-        <td><?= $detail['fee']; ?></td>
+              <div class="card-body">
+                <h4 class="card-title">Test Details Table</h4>
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <!-- <th>LabTestID</th> -->
+                        <th>Test Type</th>
+                        <th>Fee</th>
 
-        <td><?= $detail['createdAT']; ?></td>
-    </tr>
-<?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
+                        <th>Created AT</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      <?php foreach ($testDetails as $detail): ?>
+                        <tr>
+                          <td>
+                            <?= $detail['testTypeName']; ?>
+                          </td>
+                          <td>
+                            <?= $detail['fee']; ?>
+                          </td>
+
+                          <td>
+                            <?= $detail['createdAT']; ?>
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </tbody>
+                  </table>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-    <!-- content-wrapper ends -->
-    <!-- partial:./public/assets/partials/_footer.html -->
-    <?php include 'include_common/footer.php'; ?>
-    <!-- partial -->
-</div>
+        <!-- content-wrapper ends -->
+        <!-- partial:./public/assets/partials/_footer.html -->
+        <?php include 'include_common/footer.php'; ?>
+        <!-- partial -->
+      </div>
 
       <!-- main-panel ends -->
     </div>
@@ -264,4 +284,5 @@
 
 
 <!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/tables/basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:35 GMT -->
+
 </html>

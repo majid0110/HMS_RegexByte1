@@ -9,6 +9,7 @@ use App\Models\InvoiceDetailModel;
 use App\Models\ClientModel;
 use App\Models\InvoiceModel;
 use App\Models\ServicesModel;
+use App\Models\SectorsModel;
 use App\Models\itemsModel;
 use Mpdf\Mpdf;
 
@@ -116,7 +117,7 @@ class itemsController extends Controller
 
     public function sectors_form()
     {
-        return view('sectors_form.php');
+        return view('sector_form.php');
     }
 
 
@@ -261,14 +262,34 @@ class itemsController extends Controller
         return redirect()->to(base_url("/category_table"));
     }
 
+    // public function saveSector()
+    // {
+    //     $itemsModel = new itemsModel();
+    //     $session = \Config\Services::session();
+    //     $request = \Config\Services::request();
+    //     $businessID = $session->get('businessID');
+
+    //     $data = [
+    //         'name' => $this->request->getPost('name'),
+    //         'PrintOutput' => $this->request->getPost('PrintOutput'),
+    //         'notes' => $this->request->getPost('notes'),
+    //         'TVSH' => $this->request->getPost('TVSH'),
+    //         'idBusiness' => $businessID,
+    //     ];
+
+    //     $itemsModel->saveSector($data);
+
+    //     return redirect()->to(base_url('/sectors_table'))->with('success', 'Sector added successfully.');
+    // }
     public function saveSector()
     {
-        $itemsModel = new itemsModel();
+        $Model = new SectorsModel();
         $session = \Config\Services::session();
         $request = \Config\Services::request();
         $businessID = $session->get('businessID');
 
         $data = [
+
             'name' => $this->request->getPost('name'),
             'PrintOutput' => $this->request->getPost('PrintOutput'),
             'notes' => $this->request->getPost('notes'),
@@ -276,10 +297,10 @@ class itemsController extends Controller
             'idBusiness' => $businessID,
         ];
 
-        $itemsModel->saveSector($data);
+
+        $Model->saveSector($data);
 
         return redirect()->to(base_url('/sectors_table'))->with('success', 'Sector added successfully.');
     }
-
 
 }

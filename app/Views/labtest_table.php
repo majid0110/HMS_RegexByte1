@@ -256,6 +256,10 @@
                           <td>
                             <a href="<?= base_url('viewTestDetails/' . $test['test_id']); ?>"
                               class="btn btn-info btn-sm">View Details</a>
+
+                            <a href="<?= base_url('deleteTest/' . $test['test_id']); ?>"
+                              onclick="return confirm('Are you sure you want to delete this Record?');"
+                              class="btn btn-danger btn-sm">Delete</a>
                           </td>
                         </tr>
                       <?php endforeach; ?>

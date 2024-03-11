@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <a href="#" id="closecatModal" style="position: absolute; top: 10px; right: 10px; font-size: 20px; color: #333;">
+    <a href="#" id="closeSectorForm" style="position: absolute; top: 10px; right: 10px; font-size: 20px; color: #333;">
         <i class="mdi mdi-close"></i>
     </a>
     <form class="pt-3" method="POST" action="<?php echo base_url() . "saveCatart"; ?>" enctype="multipart/form-data">
@@ -61,12 +61,18 @@
 
     <script>
         $(document).ready(function () {
-            $('.select2').select2();
-
-            $('#closecatModal').click(function (e) {
+            // Close button functionality
+            $('#closeSectorForm').click(function (e) {
                 e.preventDefault();
-                $('#addcatModal').modal('hide');
+                // Since there's no modal, just close the form
+                // You might want to add further functionality here if needed
+                // For now, just go back to the previous page or close the form
+                // Example: window.history.back();
+                // Or: $('#sectorFormContainer').hide(); // if the form is in a container
             });
+
+            // Initialize Select2 for any select elements with the .select2 class
+            $('.select2').select2();
         });
     </script>
 </body>

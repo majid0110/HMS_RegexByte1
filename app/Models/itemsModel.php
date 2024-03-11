@@ -129,6 +129,7 @@ class itemsModel extends Model
 
     public function saveSector($data)
     {
+
         return $this->db->table('sectors')->insert($data);
     }
 

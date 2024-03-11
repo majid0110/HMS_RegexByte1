@@ -3,24 +3,32 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/tables/basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:35 GMT -->
+
 <head>
+  <link rel="stylesheet" href="/public/assets/vendors_s/datatables.net-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="/public/assets/js_s/select.dataTables.min.css">
+  <link rel="stylesheet" href="../public/assets/vendors_s/feather/feather.css">
+  <link rel="stylesheet" href="../public/assets/vendors_s/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../public/assets/vendors_s/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="../public/assets/vendors_s/typicons/typicons.css">
+  <link rel="stylesheet" href="../public/assets/vendors_s/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="../public/assets/vendors_s/css/vendor.bundle.base.css">
+  <!-- endinject -->
 
-  <link rel="stylesheet" href="./public/assets/vendors_s/select2/select2.min.css">
-  <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css">
-
-  <!-- --------------------------------------------------------- -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <!-- --------------------------------------------------------- -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="../public/assets/css_s/vertical-layout-light/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="../public/assets/images_s/regexbyte.png" />
 </head>
 
 <body>
   <div class="container-scroller">
+    <!-- partial:./public/assets/partials/_navbar.html -->
+
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
-      <!-- partial:../../partials/_settings-panel.html -->
+      <!-- partial:./public/assets/partials/_settings-panel.html -->
       <div class="theme-setting-wrapper">
         <div id="settings-trigger"><i class="ti-settings"></i></div>
         <div id="theme-settings" class="settings-panel">
@@ -141,7 +149,7 @@
             </div>
             <ul class="chat-list">
               <li class="list active">
-                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg" alt="image"><span
+                <div class="profile"><img src="./public/assets/images/faces/face1.jpg" alt="image"><span
                     class="online"></span></div>
                 <div class="info">
                   <p>Thomas Douglas</p>
@@ -150,7 +158,7 @@
                 <small class="text-muted my-auto">19 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg" alt="image"><span
+                <div class="profile"><img src="./public/assets/images/faces/face2.jpg" alt="image"><span
                     class="offline"></span></div>
                 <div class="info">
                   <div class="wrapper d-flex">
@@ -162,7 +170,7 @@
                 <small class="text-muted my-auto">23 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg" alt="image"><span
+                <div class="profile"><img src="./public/assets/images/faces/face3.jpg" alt="image"><span
                     class="online"></span></div>
                 <div class="info">
                   <p>Daniel Russell</p>
@@ -171,7 +179,7 @@
                 <small class="text-muted my-auto">14 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg" alt="image"><span
+                <div class="profile"><img src="./public/assets/images/faces/face4.jpg" alt="image"><span
                     class="offline"></span></div>
                 <div class="info">
                   <p>James Richardson</p>
@@ -180,7 +188,7 @@
                 <small class="text-muted my-auto">2 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg" alt="image"><span
+                <div class="profile"><img src="./public/assets/images/faces/face5.jpg" alt="image"><span
                     class="online"></span></div>
                 <div class="info">
                   <p>Madeline Kennedy</p>
@@ -189,7 +197,7 @@
                 <small class="text-muted my-auto">5 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg" alt="image"><span
+                <div class="profile"><img src="./public/assets/images/faces/face6.jpg" alt="image"><span
                     class="online"></span></div>
                 <div class="info">
                   <p>Sarah Graves</p>
@@ -203,277 +211,78 @@
         </div>
       </div>
       <!-- partial -->
-      <!-- partial:../../partials/_sidebar.html -->
+      <!-- partial:./public/assets/partials/_sidebar.html -->
       <?php include 'include_common/sidebar.php'; ?>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <?php
-          $successMessage = session()->getFlashdata('success');
-          $errorMessage = session()->getFlashdata('error');
+          <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Test Details Table</h4>
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <!-- <th>LabTestID</th> -->
+                        <th>Test Type</th>
+                        <th>Fee</th>
 
-          if ($successMessage) {
-            echo '<div class="alert alert-success">' . $successMessage . '</div>';
-          }
+                        <th>Created AT</th>
+                      </tr>
+                    </thead>
+                    <tbody>
 
-          if ($errorMessage) {
-            echo '<div class="alert alert-danger">' . $errorMessage . '</div>';
-          }
-          ?>
-          <div class="row">
-            <div class="col-12 grid-margin">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">BOOK APPOINTMENT</h4>
-                  <form class="pt-3" method="POST" action="<?php echo base_url() . "saveAppointment"; ?>"
-                    enctype="multipart/form-data">
-                    <p class="card-description">
-                      Personal info
-                    </p>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Client Name</label>
-                          <div class="col-sm-9">
-                            <select class="form-control" name="clientId" id="clientId">
-                              <?php foreach ($client_names as $client): ?>
-                                <option value="<?= $client['idClient']; ?>">
-                                  <?= $client['client']; ?>
-                                </option>
-                              <?php endforeach; ?>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
+                      <?php foreach ($testDetails as $detail): ?>
+                        <tr>
+                          <td>
+                            <?= $detail['testTypeName']; ?>
+                          </td>
+                          <td>
+                            <?= $detail['fee']; ?>
+                          </td>
 
-                      <input type="hidden" name="clientName" id="clientNameInput">
-
-
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <a class="nav-link" href="<?php echo base_url() . 'clients_form'; ?>" aria-expanded="false"
-                            aria-controls="auth">
-                            <i class="menu-icon mdi mdi-account-plus "></i>
-                            <span class="menu-title">Add Client</span>
-                            <i class="menu-arrow"></i>
-                          </a>
-                        </div>
-                      </div>
-
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Doctor Name</label>
-                          <div class="col-sm-9">
-                            <select class="form-control" name="doctor_id" id="doctor_id">
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-
-                      <input type="hidden" name="doctorName" id="doctorNameInput">
-
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label" name="ftype">Appointment Type</label>
-                          <div class="col-sm-9">
-                            <select class="form-control" name="app_type_id" id="app_type_id">
-                              <?php foreach ($fee_types as $fee_type): ?>
-                                <option value="<?= $fee_type->f_id; ?>"
-                                  data-appointment-type="<?= $fee_type->FeeType; ?>">
-                                  <?= $fee_type->FeeType; ?>
-                                </option>
-                              <?php endforeach; ?>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-
-                      <input type="hidden" name="appointmentTypeName" id="appointmentTypeNameInput">
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Appointment Fee</label>
-                            <div class="col-sm-9">
-                              <input type="number" class="form-control" name="appointmentFee" id="appointmentFee" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Appointment Date</label>
-                            <div class="col-sm-9">
-                              <input type="date" class="form-control" name="appointmentDate"
-                                value="<?= date('Y-m-d'); ?>" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Appointment Time</label>
-                            <div class="col-sm-9">
-                              <input type="time" class="form-control" name="appointmentTime"
-                                value="<?= date('H:i'); ?>" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <button type="submit" class="btn btn-primary">BOOK</button>
-                        </div>
-                      </div>
-                  </form>
+                          <td>
+                            <?= $detail['createdAT']; ?>
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <!-- content-wrapper ends -->
-        <!-- partial:../../partials/_footer.html -->
+        <!-- partial:./public/assets/partials/_footer.html -->
         <?php include 'include_common/footer.php'; ?>
         <!-- partial -->
       </div>
-      <!-- partial -->
+
+      <!-- main-panel ends -->
     </div>
-    <!-- main-panel ends -->
-  </div>
-  <!-- page-body-wrapper ends -->
+    <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-      var appointmentTypeSelect = document.getElementById('app_type_id');
-      var appointmentTypeNameInput = document.getElementById('appointmentTypeNameInput');
-
-      appointmentTypeSelect.addEventListener('change', function () {
-        var selectedOption = appointmentTypeSelect.options[appointmentTypeSelect.selectedIndex];
-        var appointmentTypeName = selectedOption.getAttribute('data-appointment-type');
-
-        appointmentTypeNameInput.value = appointmentTypeName;
-      });
-    });
-  </script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-      var clientIdSelect = document.getElementById('clientId');
-      var clientNameInput = document.getElementById('clientNameInput');
-
-
-      clientIdSelect.addEventListener('change', function () {
-        var selectedOption = clientIdSelect.options[clientIdSelect.selectedIndex];
-        var clientName = selectedOption.text;
-
-        clientNameInput.value = clientName;
-      });
-    });
-  </script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var doctorIdSelect = document.getElementById('doctor_id');
-      var doctorNameInput = document.getElementById('doctorNameInput');
-
-      doctorIdSelect.addEventListener('change', function () {
-        var selectedOption = doctorIdSelect.options[doctorIdSelect.selectedIndex];
-        var doctorName = selectedOption ? selectedOption.text : '';
-
-        doctorNameInput.value = doctorName;
-      });
-    });
-  </script>
-
-  <script>
-    $(document).ready(function () {
-
-      fetchDoctors();
-
-      $('#doctor_id').change(function () {
-        updateAppointmentFee();
-      });
-
-      $('#app_type_id').change(function () {
-        updateAppointmentFee();
-      });
-
-      function updateAppointmentFee() {
-        var doctorId = $('#doctor_id').val();
-        var feeTypeId = $('#app_type_id').val();
-
-        $.ajax({
-          type: 'POST',
-          url: '<?= site_url('DoctorController/fetchDoctorFee') ?>',
-          data: {
-            doctorID: doctorId,
-            feeTypeID: feeTypeId
-          },
-          dataType: 'json',
-          success: function (response) {
-
-            $('#appointmentFee').val(response.fee);
-          },
-          error: function (error) {
-            console.log(error);
-          }
-        });
-      }
-
-      function fetchDoctors() {
-        $.ajax({
-          type: 'POST',
-          url: '<?= site_url('DoctorController/getDoctors') ?>',
-          dataType: 'json',
-          success: function (response) {
-            populateDoctors(response.doctors);
-          },
-          error: function (error) {
-            console.log(error);
-          }
-        });
-      }
-      function populateDoctors(doctors) {
-        var doctorDropdown = $('#doctor_id');
-        doctorDropdown.empty();
-
-        doctors.forEach(function (doctor) {
-          doctorDropdown.append('<option value="' + doctor.DoctorID + '">' + doctor.FirstName + ' ' + doctor.LastName + '</option>');
-        });
-      }
-    });
-  </script>
-  <script>
-    $(document).ready(function () {
-      $('.select2').select2();
-    });
-  </script>
-  <script src="./public/assets/vendors_s/js/vendor.bundle.base.js"></script>
+  <script src="./public/assets/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
-  <script src="./public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js"></script>
-  <script src="./public/assets/vendors_s/select2/select2.min.js"></script>
-  <script src="./public/assets/vendors_s/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+  <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
   <!-- End plugin js for this page -->
   <!-- inject:js -->
-  <script src="./public/assets/js_s/off-canvas.js"></script>
-  <script src="./public/assets/js_s/hoverable-collapse.js"></script>
-  <script src="./public/assets/js_s/template.js"></script>
-  <script src="./public/assets/js_s/settings.js"></script>
-  <script src="./public/assets/js_s/todolist.js"></script>
+  <script src="./public/assets/js/off-canvas.js"></script>
+  <script src="./public/assets/js/hoverable-collapse.js"></script>
+  <script src="./public/assets/js/template.js"></script>
+  <script src="./public/assets/js/settings.js"></script>
+  <script src="./public/assets/js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="./public/assets/js_s/file-upload.js"></script>
-  <script src="./public/assets/js_s/typeahead.js"></script>
-  <script src="./public/assets/js_s/select2.js"></script>
   <!-- End custom js for this page-->
 </body>
+
+
+<!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/tables/basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:35 GMT -->
 
 </html>

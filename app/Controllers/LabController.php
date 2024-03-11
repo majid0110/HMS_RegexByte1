@@ -293,6 +293,15 @@ class LabController extends Controller
         }
     }
 
+    public function deleteTest($test_id)
+    {
+
+        $labModel = new LabModel();
+        $testType = $labModel->deleteTest($test_id);
+
+        return redirect()->to(base_url("/labtest_table"));
+    }
+
 
 
 }

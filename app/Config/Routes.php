@@ -105,6 +105,7 @@ $routes->get('labServices_form', 'LabController::labServices_form');
 $routes->get('editTestForm/(:num)', 'LabController::editTestForm/$1');
 $routes->post('updateTest/(:num)', 'LabController::updateTest/$1');
 $routes->get('edit_test/(:num)', 'LabController::editTestForm/$1');
+$routes->get('deleteTest/(:num)', 'LabController::deleteTest/$1');
 
 
 //routes for generating pdf

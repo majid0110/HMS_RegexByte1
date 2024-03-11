@@ -37,7 +37,17 @@ class LabModel extends Model
         $query = $this->select('testTypeId, title, test_fee')->findAll();
         return $query;
     }
+    public function deleteTest($test_id)
+    {
+        $this->db->table('labtestdetails')
+            ->where('labTestID', $test_id)
+            ->delete();
 
+        $this->db->table('labtest')
+            ->where('test_id', $test_id)
+            ->delete();
+
+    }
 
 
 }
