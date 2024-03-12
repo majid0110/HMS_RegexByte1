@@ -144,6 +144,8 @@ $routes->get('viewServiceDetails/(:num)', 'SalesController::viewServiceDetails/$
 $routes->get('sales/deleteService/(:num)', 'SalesController::deleteService/$1');
 $routes->post('sales/deleteService/(:num)', 'SalesController::deleteService/$1');
 
+// $routes->get('deleteSales/(:num)', 'SalesController::deleteSales/$1');
+
 
 
 //-------------------------------------------------------------------------------------------------------------------------
@@ -171,8 +173,6 @@ $routes->get('items', 'itemsController::items_table');
 $routes->get('/additem', 'itemsController::additem');
 $routes->get('/deleteitem/(:num)', 'itemsController::deleteitem/$1');
 $routes->get('/edititem/(:num)', 'itemsController::edititem/$1');
-
-$routes->get('edititem/(:num)', 'itemsController::edititem/$1');
 $routes->post('updateitem/(:num)', 'itemsController::updateitem/$1');
 
 //-------------------------------------------------------------------------------------------------------------------------
@@ -185,5 +185,12 @@ $routes->get('/addcat', 'itemsController::addcat');
 $routes->get('/deletecat/(:num)', 'itemsController::deletecat/$1');
 $routes->get('/editcat/(:num)', 'itemsController::editcat/$1');
 $routes->post('/updatecat/(:num)', 'itemsController::updatecat/$1');
+//-------------------------------------------------------------------------------------------------------------------------
+//                                                 Sector Routes
+//-------------------------------------------------------------------------------------------------------------------------
+
 $routes->get('/sectors_table', 'itemsController::sectors_table');
 $routes->get('/sectors_form', 'itemsController::sectors_form');
+$routes->post('/saveSector', 'itemsController::saveSector');
+$routes->get('/deletesector/(:num)', 'itemsController::deletesector/$1');
+$routes->get('editsector/(:num)', 'itemsController::editsector/$1');

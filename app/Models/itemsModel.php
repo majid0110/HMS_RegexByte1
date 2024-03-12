@@ -49,6 +49,14 @@ class itemsModel extends Model
             ->delete();
     }
 
+    public function deleteSector($idSector)
+    {
+        return $this->db->table('sectors')
+            ->where('idSector', $idSector)
+            ->delete();
+    }
+
+
 
     public function deleteitem($idItem)
     {

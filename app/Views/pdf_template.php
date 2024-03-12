@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <title>Express Wash Customer Invoice</title>
+    <title>Appointment Details</title>
     <style>
         @media print {
             @page {
@@ -83,14 +83,14 @@
 
 
             <tr>
-                <td style="width: 50%;">Invoice# <b>59867</b> </td>
+                <td style="width: 50%;">Appointment# <b>59867</b> </td>
                 <td style="width: 50%; text-align: right;">Date:<b>
-                        <?= $appointmentDate; ?>
+                        <?= $appointmentData['appointmentDate']; ?>
                     </b></td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align: left; margin-right: 5px;">Time:<b>
-                        <?= $appointmentTime; ?>
+                        <?= $appointmentData['appointmentTime']; ?>
                     </b><br></td>
             </tr>
 
@@ -119,7 +119,7 @@
         <table>
             <tr>
                 <td><b>Appointment</b></td>
-                <td style="padding-left: 100px;"><b>Price</b></td>
+                <td style="padding-left: 100px;"><b>Fee</b></td>
             </tr>
 
             <tr>
@@ -132,7 +132,7 @@
                     <?= $appointmentTypeName; ?>
                 </td>
                 <td style="padding-left:100px">
-                    <?= $appointmentFee; ?>.00
+                    <?= $appointmentData['appointmentFee']; ?>.00
                 </td>
             </tr>
 
@@ -147,7 +147,7 @@
                 <td style="width: 50%; text-align: left;">&nbsp;</td>
 
                 <td style="width: 25%; text-align:  right; padding-right:10px" colspan="2"><b>Total</b> PKR
-                    <?= $appointmentFee; ?>.00
+                    <?= $appointmentData['appointmentFee']; ?>.00
                 </td>
             </tr>
 
@@ -167,44 +167,3 @@
 </body>
 
 </html>
-
-
-
-
-
-<?php /*
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Appointment Details</title>
-<!-- Add your styles here if needed -->
-</head>
-<body>
-<h1>Appointment Details</h1>
-<?php
-$session = session();
-if ($session->has('businessProfileImage')) {
-echo '<img class="img-xs rounded-circle larger-profile-img" style="width: 90px; height: 90px;" src="' . $session->get('businessProfileImage') . '" alt="Profile image">';
-}
-?>
-
-<?php
-$session = session();
-if ($session->has('businessName') && $session->has('phoneNumber')) {
-echo '<h1 class="welcome-text">Welcome, <span class="text-black fw-bold">' . $session->get('businessName') . '</span></h1>';
-echo '<h3 class="welcome-sub-text">Contact: ' . $session->get('phoneNumber') . '</h3>';
-}
-?>
-<p>Client Name: <?= $clientName; ?></p>
-<p>Doctor Name: <?= $doctorName; ?></p>
-<p>appointmentType: <?=$appointmentTypeName; ?></p>
-<p>appointment Fee: <?=  $appointmentFee; ?></p>
-<p>Appointment Date: <?= $appointmentDate; ?></p>
-<p>Appointment Time: <?= $appointmentTime; ?></p>
-
-<!-- Add other fields as needed -->
-
-</body>
-</html>
-*/ ?>

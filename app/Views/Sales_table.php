@@ -267,6 +267,10 @@
                                                         <a href="<?= base_url('viewServiceDetails/' . $Sale['idReceipts']); ?>"
                                                             class="btn btn-info btn-sm">View Details</a>
 
+                                                        <a href="<?= base_url('deleteSales/' . $Sale['idReceipts']); ?>"
+                                                            onclick="return confirm('Are you sure you want to delete this Record?');"
+                                                            class="btn btn-danger btn-sm">Delete</a>
+
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>

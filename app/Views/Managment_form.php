@@ -300,7 +300,7 @@
                         <div class="col-md-3 grid-margin stretch-card">
                             <div class="card" onclick="window.location.href='<?= base_url('sectors_table'); ?>';">
                                 <div class="card-body">
-                                    <h4 class="card-title" style="text-align:center">Manage Warehouse</h4>
+                                    <h4 class="card-title" style="text-align:center">Manage Sectors</h4>
                                     <div class="media">
                                         <svg style="margin: 0px auto" height="45px" width="45px" data-slot="icon"
                                             fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"

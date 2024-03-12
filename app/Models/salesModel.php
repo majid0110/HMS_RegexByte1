@@ -94,9 +94,13 @@ class salesModel extends Model
 
     public function deleteSales($idReceipts)
     {
+        $this->db->table('invoicedetail')
+            ->where('idReceipts', $idReceipts)->delete();
+
         return $this->db->table('invoices')
             ->where('idReceipts', $idReceipts)->delete();
     }
+
     public function getSalesDetails($idReceipts)
     {
         return $this->db->table('invoicedetail')

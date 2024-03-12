@@ -77,6 +77,51 @@ class AppointmentController extends Controller
     }
 
     //------------------------------------------------Functions
+    // public function saveAppointment()
+    // {
+    //     $appointmentModel = new AppointmentModel();
+    //     $doctorModel = new DoctorModel();
+    //     $businessModel = new LoginModel("business");
+
+    //     $clientID = $this->request->getPost('clientId');
+    //     $doctorID = $this->request->getPost('doctor_id');
+    //     $appointmentDate = $this->request->getPost('appointmentDate');
+    //     $appointmentTime = $this->request->getPost('appointmentTime');
+    //     $appointmentType = $this->request->getPost('app_type_id');
+    //     $selectedFeeTypeID = $this->request->getPost('fee_type_id');
+    //     $doctorFee = $this->request->getPost('appointmentFee');
+
+
+    //     $appointmentTypeName = $this->request->getPost('appointmentTypeName');
+    //     $clientName = $this->request->getPost('clientName');
+    //     $doctorName = $this->request->getPost('doctorName');
+
+    //     $businessID = session()->get('businessID');
+    //     $charges = $businessModel->getBusinessCharges($businessID);
+
+    //     $data = [
+    //         'clientID' => $clientID,
+    //         'doctorID' => $doctorID,
+    //         'appointmentDate' => $appointmentDate,
+    //         'appointmentTime' => $appointmentTime,
+    //         'appointmentType' => $appointmentType,
+    //         'appointmentFee' => $doctorFee,
+    //         'hospitalCharges' => $charges,
+    //         'businessID' => $businessID,
+    //     ];
+
+    //     $appointmentModel->saveAppointment($data);
+    //     $dataPdf = [
+    //         'appointmentTypeName' => $appointmentTypeName,
+    //         'clientName' => $clientName,
+    //         'doctorName' => $doctorName,
+    //     ];
+
+
+    //     $this->generatePdf($dataPdf + $data);
+
+    //     return redirect()->to(base_url("/appointments_form"));
+    // }
     public function saveAppointment()
     {
         $appointmentModel = new AppointmentModel();
@@ -90,8 +135,6 @@ class AppointmentController extends Controller
         $appointmentType = $this->request->getPost('app_type_id');
         $selectedFeeTypeID = $this->request->getPost('fee_type_id');
         $doctorFee = $this->request->getPost('appointmentFee');
-
-
         $appointmentTypeName = $this->request->getPost('appointmentTypeName');
         $clientName = $this->request->getPost('clientName');
         $doctorName = $this->request->getPost('doctorName');
@@ -111,17 +154,27 @@ class AppointmentController extends Controller
         ];
 
         $appointmentModel->saveAppointment($data);
-        $dataPdf = [
+
+        $mpdf = new Mpdf();
+        $pdfContent = view('pdf_template', [
+            'appointmentData' => $data,
             'appointmentTypeName' => $appointmentTypeName,
             'clientName' => $clientName,
             'doctorName' => $doctorName,
-        ];
+        ]);
+        $mpdf->WriteHTML($pdfContent);
 
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: inline; filename="appointment_' . date('Y_m_d_H_i_s') . '.pdf"');
 
-        $this->generatePdf($dataPdf + $data);
+        echo $mpdf->Output('', 'S');
+
+        flush();
 
         return redirect()->to(base_url("/appointments_form"));
     }
+
+
 
 
     private function generatePdf($data)

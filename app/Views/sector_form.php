@@ -11,7 +11,7 @@
     <a href="#" id="closeSectorForm" style="position: absolute; top: 10px; right: 10px; font-size: 20px; color: #333;">
         <i class="mdi mdi-close"></i>
     </a>
-    <form class="pt-3" method="POST" action="<?php echo base_url() . "saveCatart"; ?>" enctype="multipart/form-data">
+    <form class="pt-3" method="POST" action="<?php echo base_url() . "saveSector"; ?>" enctype="multipart/form-data">
         <p class="card-description">
             Sector Details
         </p>

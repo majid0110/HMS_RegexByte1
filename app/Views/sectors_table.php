@@ -224,6 +224,7 @@
             <!-- partial:./public/assets/partials/_sidebar.html -->
             <?php include 'include_common/sidebar.php'; ?>
             <!-- partial -->
+
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="col-lg-12 grid-margin stretch-card">
@@ -231,71 +232,71 @@
                             <div class="card-body">
 
                                 <h4 class="card-title">Sector</h4>
-                                <button type="button" class="btn btn-primary btn-sm mt-3"
-                                    id="openSectorFormDialog">Add</button>
-                                <div class="table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Print Output</th>
-                                                <th>Notes</th>
-                                                <th>TVSH</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php foreach ($sectors as $sector): ?>
-                                                <tr>
-                                                    <td>
-                                                        <?= $sector['name']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?= $sector['PrintOutput']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?= $sector['notes']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?= $sector['TVSH']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <!-- Action buttons: Edit, Delete -->
-                                                        <a href="<?= base_url('edititem/' . $sector['idSector']); ?>"
-                                                            class="btn btn-primary btn-sm">Edit</a>
-                                                        <a href="<?= base_url('deleteitem/' . $sector['idSector']); ?>"
-                                                            onclick="return confirm('Are you sure you want to delete this Sector?');"
-                                                            class="btn btn-danger btn-sm">Delete</a>
-                                                    </td>
+                                <button type="button" class="btn btn-primary" id="openSectorFormDialog">Add</button>
+                                <hr>
 
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
-                                    <div class="modal fade" id="sectorFormModal" tabindex="-1" role="dialog"
-                                        aria-labelledby="sectorFormModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="sectorFormModalLabel">Sector Form</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body" id="sectorFormModalBody">
-                                                    <!-- Include your sector form content here -->
-                                                    <?php include 'sector_form.php'; ?>
-                                                </div>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Print Output</th>
+                                            <th>Notes</th>
+                                            <th>TVSH</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($sectors as $sector): ?>
+                                            <tr>
+                                                <td>
+                                                    <?= $sector['name']; ?>
+                                                </td>
+                                                <td>
+                                                    <?= $sector['PrintOutput']; ?>
+                                                </td>
+                                                <td>
+                                                    <?= $sector['notes']; ?>
+                                                </td>
+                                                <td>
+                                                    <?= $sector['TVSH']; ?>
+                                                </td>
+                                                <td>
+                                                    <!-- Action buttons: Edit, Delete -->
+                                                    <a href="<?= base_url('editsector/' . $sector['idSector']); ?>"
+                                                        class="btn btn-primary btn-sm">Edit</a>
+                                                    <a href="<?= base_url('deletesector/' . $sector['idSector']); ?>"
+                                                        onclick="return confirm('Are you sure you want to delete this Sector?');"
+                                                        class="btn btn-danger btn-sm">Delete</a>
+                                                </td>
+
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <div class="modal fade" id="sectorFormModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="sectorFormModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="sectorFormModalLabel">Sector Form</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body" id="sectorFormModalBody">
+                                                <!-- Include your sector form content here -->
+                                                <?php include 'sector_form.php'; ?>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- content-wrapper ends -->
                 <!-- partial:./public/assets/partials/_footer.html -->
                 <?php include 'include_common/footer.php'; ?>

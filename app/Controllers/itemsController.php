@@ -291,7 +291,7 @@ class itemsController extends Controller
         $data = [
 
             'name' => $this->request->getPost('name'),
-            'PrintOutput' => $this->request->getPost('PrintOutput'),
+            'PrintOutput' => $this->request->getPost('printOutput'),
             'notes' => $this->request->getPost('notes'),
             'TVSH' => $this->request->getPost('TVSH'),
             'idBusiness' => $businessID,
@@ -301,6 +301,37 @@ class itemsController extends Controller
         $Model->saveSector($data);
 
         return redirect()->to(base_url('/sectors_table'))->with('success', 'Sector added successfully.');
+    }
+
+    public function deletesector($idSector)
+    {
+
+        try {
+            $Model = new itemsModel();
+            $Model->deleteSector($idSector);
+            session()->setFlashdata('success', 'Sector deleted...!!');
+
+            return redirect()->to(base_url("/sectors_table"));
+
+        } catch (\Exception $e) {
+            log_message('error', 'Error retrieving data: ' . $e->getMessage());
+            session()->setFlashdata('error', 'DataBase Error: ' . $e->getMessage());
+            return redirect()->to(base_url("/sectors_table"));
+        }
+    }
+    public function editsector($idItem)
+    {
+        $servicesModel = new ServicesModel();
+        $data = [
+            'units' => $servicesModel->getUnits(),
+            'categories' => $servicesModel->getCategories(),
+            'tax' => $servicesModel->getTaxes(),
+        ];
+        $Model = new itemsModel();
+        $data['warehouse'] = $Model->getIdWarehouse();
+        $data['item'] = $Model->find($idItem);
+
+        return view('edit_item_form.php', $data);
     }
 
 }

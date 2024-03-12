@@ -214,42 +214,57 @@
       <!-- partial:./public/assets/partials/_sidebar.html -->
       <?php include 'include_common/sidebar.php'; ?>
       <!-- partial -->
-      <div class="main-panel">
-        <div class="content-wrapper">
+      <div class="main-panel" style="padding: 20px; background: #F4F5F7">
+        <div class="content-wrapper" style="background: #F4F5F7;">
           <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Test Details Table</h4>
-                <div class="table-responsive">
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <!-- <th>LabTestID</th> -->
-                        <th>Test Type</th>
-                        <th>Fee</th>
-
-                        <th>Created AT</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-
-                      <?php foreach ($testDetails as $detail): ?>
-                        <tr>
-                          <td>
-                            <?= $detail['testTypeName']; ?>
-                          </td>
-                          <td>
-                            <?= $detail['fee']; ?>
-                          </td>
-
-                          <td>
-                            <?= $detail['createdAT']; ?>
-                          </td>
-                        </tr>
-                      <?php endforeach; ?>
-                    </tbody>
-                  </table>
+            <div class="invoice-box"
+              style="max-width: 950px; margin: auto; border-radius: 30px; background: snow; width: 85rem; padding: 30px; border: 1px solid #eee; box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); font-size: 16px; line-height: 24px; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; color: #555;">
+              <div class="card-body" style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="logo" style="flex: 1;">
+                  <!-- Insert your profile image here -->
+                  <?php
+                  $session = session();
+                  if ($session->has('businessProfileImage')) {
+                    echo '<img class="img-xs rounded-circle larger-profile-img" style="width: 90px; height: 90px;" src="' . $session->get('businessProfileImage') . '" alt="Profile image">';
+                  }
+                  ?>
+                  <!-- Style your image here -->
+                  <style="width: 100%; max-width: 300px" />
                 </div>
+
+                <div class="company-details" style="flex: 2; text-align: right;">
+                  <?php
+                  $session = session();
+                  if ($session->has('businessName') && $session->has('phoneNumber')) {
+                    echo '<strong>' . $session->get('businessName') . '</strong><br>';
+                    echo '<strong>' . $session->get('phoneNumber') . '</strong><br>';
+                    echo '<strong>' . $session->get('business_address') . '</strong><br>';
+                  }
+                  ?>
+                </div>
+              </div>
+              <hr>
+              <h4 class="card-title">Test Details Table</h4>
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <!-- <th>LabTestID</th> -->
+                      <th>Test Type</th>
+                      <th>Fee</th>
+                      <th>Created AT</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($testDetails as $detail): ?>
+                      <tr>
+                        <td><?= $detail['testTypeName']; ?></td>
+                        <td><?= $detail['fee']; ?></td>
+                        <td><?= $detail['createdAT']; ?></td>
+                      </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -260,26 +275,32 @@
         <!-- partial -->
       </div>
 
+
+      <!-- main-panel ends -->
       <!-- main-panel ends -->
     </div>
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
-  <script src="./public/assets/vendors/js/vendor.bundle.base.js"></script>
+  <script src="../public/assets/vendors_s/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
-  <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+  <script src="../public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js"></script>
+  <script src="../public/assets/vendors_s/select2/select2.min.js"></script>
+  <script src="../public/assets/vendors_s/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
   <!-- End plugin js for this page -->
   <!-- inject:js -->
-  <script src="./public/assets/js/off-canvas.js"></script>
-  <script src="./public/assets/js/hoverable-collapse.js"></script>
-  <script src="./public/assets/js/template.js"></script>
-  <script src="./public/assets/js/settings.js"></script>
-  <script src="./public/assets/js/todolist.js"></script>
+  <script src="../public/assets/js_s/off-canvas.js"></script>
+  <script src="../public/assets/js_s/hoverable-collapse.js"></script>
+  <script src="../public/assets/js_s/template.js"></script>
+  <script src="../public/assets/js_s/settings.js"></script>
+  <script src="../public/assets/js_s/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <!-- End custom js for this page-->
+  <script src="../public/assets/js_s/file-upload.js"></script>
+  <script src="../public/assets/js_s/typeahead.js"></script>
+  <script src="../public/assets/js_s/select2.js"></script>
 </body>
 
 
