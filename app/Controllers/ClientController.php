@@ -46,12 +46,32 @@ class ClientController extends Controller
     //     return redirect()->to(base_url("/clients_table"));
     // }
 
+    //---------------------------------------------------------------------------------
+    // public function deleteClient($idClient)
+    // {
+    //     try {
+    //         $model = new ClientModel();
+    //         if ($model->hasBookings($idClient)) {
+    //             throw new \Exception("This client has bookings. You cannot delete the client.");
+    //         }
+    //         $model->deleteClient($idClient);
+
+    //         return redirect()->to(base_url("/clients_table"));
+    //     } catch (\Exception $e) {
+    //         echo '<script>alert("' . $e->getMessage() . '");</script>';
+    //     }
+    // }
+//----------------------------------------------------------------------------------------------
     public function deleteClient($idClient)
     {
         try {
             $model = new ClientModel();
+
             if ($model->hasBookings($idClient)) {
                 throw new \Exception("This client has bookings. You cannot delete the client.");
+            }
+            if ($model->hasInvoices($idClient)) {
+                throw new \Exception("This client has associated invoices. You cannot delete the client.");
             }
             $model->deleteClient($idClient);
 
@@ -60,8 +80,6 @@ class ClientController extends Controller
             echo '<script>alert("' . $e->getMessage() . '");</script>';
         }
     }
-
-
 
 
     public function appointments_form($doctorID)

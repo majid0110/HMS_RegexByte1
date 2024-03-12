@@ -57,6 +57,13 @@ class ClientModel extends Model
             ->countAllResults() > 0;
     }
 
+    public function hasInvoices($idClient)
+    {
+        return $this->db->table('invoices')
+            ->where('idClient', $idClient)
+            ->countAllResults() > 0;
+    }
+
     public function countClientsByBusinessID($businessID)
     {
         return $this->db->table('client')->where('idBusiness', $businessID)->countAllResults();
