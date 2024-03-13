@@ -55,10 +55,11 @@ $routes->post('/updateClient/(:num)', 'ClientController::updateClient/$1');
 
 //-------------------------------------------------------------------Appointments Routes
 $routes->get('/appointments_form', 'ClientController::appointments_form');
-$routes->post('/saveAppointment', 'AppointmentController::saveAppointment');
+// $routes->post('/saveAppointment', 'AppointmentController::saveAppointment');
 $routes->get('/appointments_table', 'AppointmentController::appointments_table');
 $routes->get('/deleteAppointment/(:num)', 'AppointmentController::deleteAppointment/$1');
 $routes->post('/saveClient', 'AppointmentController::saveClientProfile');
+$routes->post('AppointmentController/saveAppointment', 'AppointmentController::saveAppointment');
 
 $routes->group('appointment', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('fetchDoctorFee/(:num)/(:num)', 'AppointmentController::fetchDoctorFee/$1/$2');

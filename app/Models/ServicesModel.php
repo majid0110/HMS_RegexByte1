@@ -87,4 +87,14 @@ class ServicesModel extends Model
             ->get()
             ->getResultArray();
     }
+
+    public function getTotalServicesFee()
+    {
+        $businessId = session()->get('businessID');
+        $builder = $this->db->table($this->table);
+        $builder->selectSum('Price');
+        $builder->where('idBusiness', $businessId);
+        $result = $builder->get()->getRowArray();
+        return $result['Price'];
+    }
 }

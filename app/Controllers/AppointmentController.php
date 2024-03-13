@@ -162,16 +162,14 @@ class AppointmentController extends Controller
             'clientName' => $clientName,
             'doctorName' => $doctorName,
         ]);
+
         $mpdf->WriteHTML($pdfContent);
-
-        header('Content-Type: application/pdf');
-        header('Content-Disposition: inline; filename="appointment_' . date('Y_m_d_H_i_s') . '.pdf"');
-
-        echo $mpdf->Output('', 'S');
-
-        flush();
-
-        return redirect()->to(base_url("/appointments_form"));
+        $pdfBinary = $mpdf->Output('', 'S');
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Data inserted successfully',
+            'pdfContent' => base64_encode($pdfBinary),
+        ]);
     }
 
 

@@ -230,8 +230,8 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">BOOK APPOINTMENT</h4>
-                  <form class="pt-3" method="POST" action="<?php echo base_url() . "saveAppointment"; ?>"
-                    enctype="multipart/form-data">
+                  <form class="pt-3" id="appointmentForm" method="POST"
+                    action="<?php echo base_url() . "saveAppointment"; ?>" enctype="multipart/form-data">
                     <p class="card-description">
                       Personal info
                     </p>
@@ -471,12 +471,60 @@
         doctors.forEach(function (doctor) {
           doctorDropdown.append('<option value="' + doctor.DoctorID + '">' + doctor.FirstName + ' ' + doctor.LastName + '</option>');
         });
-      }
+      } z
     });
   </script>
   <script>
     $(document).ready(function () {
       $('.select2').select2();
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      function viewPdf(pdfContent) {
+        const byteCharacters = atob(pdfContent);
+        const byteNumbers = new Array(byteCharacters.length);
+
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: 'application/pdf' });
+
+        const newWindow = window.open();
+        newWindow.document.write('<iframe width="100%" height="100%" src="' + URL.createObjectURL(blob) + '"></iframe>');
+      }
+
+      function submitForm() {
+        var formData = new FormData($('#appointmentForm')[0]);
+
+        $.ajax({
+          type: 'POST',
+          url: '<?= site_url('AppointmentController/saveAppointment') ?>',
+          data: formData,
+          contentType: false,
+          cache: false,
+          processData: false,
+          dataType: 'json',
+          success: function (response) {
+            if (response.status === 'success') {
+              viewPdf(response.pdfContent);
+            } else {
+
+              console.error('Failed to generate PDF.');
+            }
+          },
+          error: function (error) {
+            console.log(error);
+          }
+        });
+      }
+      $('#appointmentForm').submit(function (e) {
+        e.preventDefault();
+        submitForm();
+      });
+
     });
   </script>
   <script src="./public/assets/vendors_s/js/vendor.bundle.base.js"></script>

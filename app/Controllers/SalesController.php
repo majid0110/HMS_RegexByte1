@@ -150,6 +150,8 @@ class SalesController extends Controller
                 'idPayment' => $idReceipt,
             ]);
             $db->transCommit();
+
+
             $mpdf = new Mpdf();
             $pdfContent = view('pdf_invoice', [
                 'invoiceData' => $invoiceData,

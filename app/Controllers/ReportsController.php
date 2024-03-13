@@ -9,6 +9,7 @@ use App\Models\DoctorModel;
 use App\Models\TestModel;
 use App\Models\LoginModel;
 use App\Models\salesModel;
+use App\Models\ServicesModel;
 use App\Models\ConfigureModel;
 use CodeIgniter\CLI\Console;
 use App\Models\ClientModel;
@@ -45,6 +46,9 @@ class ReportsController extends Controller
         $sales = new SalesModel();
         $data['payments'] = $sales->getpayment();
 
+        $Model = new ServicesModel();
+        $data['totalServiceFee'] = $Model->getTotalServicesFee();
+
         $Model = new SalesModel();
         //e d $data['Sales'] = $Model->getSales();
 
@@ -53,6 +57,7 @@ class ReportsController extends Controller
         $clientName = $this->request->getPost('clientName');
         $fromDate = $this->request->getPost('fromDate');
         $toDate = $this->request->getPost('toDate');
+
 
 
         $data['Sales'] = $Model->getSalesReport($search, $paymentInput, $clientName, $fromDate, $toDate);
