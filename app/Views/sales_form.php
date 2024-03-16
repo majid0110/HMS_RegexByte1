@@ -27,19 +27,45 @@
     }
 
     #cat {
-      width: 80%;
-      height: 4rem;
-
+      width: 56%;
+      height: 0rem;
+      margin-bottom: -28px
     }
 
     #cat:hover {
       background-color: #800080;
       color: #fff;
       font-weight: 950;
-      width: 80%;
-      HEIGHT: 4rem;
+      width: 58%;
+      HEIGHT: 0rem;
+      margin-bottom: -28px
+    }
+
+    #serviceTableBodyContainer {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    #summaryTableContainer {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .active {
+      background: #52CDFF;
+      color: #fff;
 
     }
+
+
+    .table tbody tr {
+      height: 30px;
+    }
+
+    /*
+    .table tbody td {
+      padding: 5px;
+    } */
   </style>
 </head>
 
@@ -238,111 +264,136 @@
         <div class="content-wrapper">
           <div class="row">
             <div class="col-12 grid-margin">
-              <div class="card">
+              <div class="card" style="margin-bottom: -16px; margin-top: -17px;">
                 <div class="card-body">
-                  <h4 class="card-title">Categories</h4>
+                  <p class="card-description"
+                    style="margin-top: -19px; margin-bottom: 20px; font-weight: bold;color: black">
+                    Categories
+                  </p>
                   <div class="row" id="categoryButtons">
                     <?php foreach ($categories as $category): ?>
-                      <div class="col-md-2" style="margin-bottom: 10px; margin-right: -50px">
-                        <button class="btn btn-outline-secondary btn-block" id="cat">
-                          <?= $category['name']; ?>
-                        </button>
-                      </div>
+                      <button style="width: auto;height: 41px;margin-top: -19px;margin-bottom: -15px;margin-left: 11px"
+                        class="btn btn-outline-secondary btn-category" data-category-id="<?= $category['idCatArt']; ?>">
+                        <?= $category['name']; ?>
+                      </button>
                     <?php endforeach; ?>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="row">
-              <div class="col-md-6">
-                <div class="card h-100">
-                  <div class="card-body">
-                    <h4 class="card-title">Add Service</h4>
-                    <p class="card-description">
-                      Lab Services
-                    </p>
-                    <form class="pt-3" method="POST" action="<?php echo base_url() . "submitTests"; ?>"
-                      enctype="multipart/form-data">
-                      <div class="form-group row">
-                        <div class="col">
-                          <label>Client Name</label>
-                          <div id="the-basics">
-                            <select class="typeahead form-control" name="clientName">
-                              <?php foreach ($client_names as $client): ?>
-                                <option value="<?= $client['idClient']; ?>">
-                                  <?= $client['client']; ?>
-                                </option>
-                              <?php endforeach; ?>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col">
-                          <label>Payment Method</label>
-                          <div id="the-basics">
-                            <select class="typeahead form-control" name="Payment">
-                              <?php foreach ($payments as $payment): ?>
-                                <option value="<?= $payment['idPaymentMethods']; ?>"
-                                  data-payment-id="<?= $payment['idPaymentMethods']; ?>">
-                                  <?= $payment['Method']; ?>
-                                </option>
-                              <?php endforeach; ?>
-                            </select>
-                          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card h-100">
+                <div class="card-body">
+                  <p class="card-description"
+                    style="margin-top: -19px; margin-bottom: -10px; font-weight: bold; color: black">
+                    Services
+                  </p>
+
+                  <form class="pt-3" method="POST" action="<?php echo base_url() . "submitTests"; ?>"
+                    enctype="multipart/form-data">
+                    <div class="form-group row" style="margin-bottom: 6px;">
+                      <div class="col">
+                        <label>Client Name</label>
+                        <div id="the-basics">
+                          <select class="typeahead form-control" name="clientName">
+                            <?php foreach ($client_names as $client): ?>
+                              <option value="<?= $client['idClient']; ?>">
+                                <?= $client['client']; ?>
+                              </option>
+                            <?php endforeach; ?>
+                          </select>
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <div class="col">
-                          <label>Currency</label>
-                          <div id="the-basics">
-                            <select class="typeahead form-control" name="Currency">
-                              <?php foreach ($currencies as $currency): ?>
-                                <option value="<?= $currency['id']; ?>">
-                                  <?= $currency['Currency']; ?>
-                                </option>
-                              <?php endforeach; ?>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col">
-                          <label>Exchange</label>
-                          <div id="bloodhound">
-                            <input class="typeahead form-control" type="Number" name="exchange" value='1.0'
-                              id="exchangeInput" placeholder="Exchange Rate">
-                          </div>
+                      <div class="col">
+                        <label>Payment Method</label>
+                        <div id="the-basics">
+                          <select class="typeahead form-control" name="Payment">
+                            <?php foreach ($payments as $payment): ?>
+                              <option value="<?= $payment['idPaymentMethods']; ?>"
+                                data-payment-id="<?= $payment['idPaymentMethods']; ?>">
+                                <?= $payment['Method']; ?>
+                              </option>
+                            <?php endforeach; ?>
+                          </select>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label for="serviceType">Service Type</label>
-                        <ul class="list-group" id="serviceTypeList">
-                          <?php foreach ($services as $service): ?>
-                            <li class="list-group-item d-flex justify-content-between align-items-center"
-                              data-service-type-id="<?= $service['idArtMenu']; ?>">
-                              <span class="title">
-                                <?= $service['Name']; ?>
-                              </span>
-                              <span class="fee" contenteditable="true">
-                                <?= $service['Price']; ?>
-                              </span>
-                              <span class="badge badge-primary badge-pill hover-effect" onclick="addService()">ADD</span>
-                            </li>
-                          <?php endforeach; ?>
-                        </ul>
+                    </div>
+                    <div class="form-group row" style="margin-bottom: 6px;">
+                      <div class="col">
+                        <label>Currency</label>
+                        <div id="the-basics">
+                          <select class="typeahead form-control" name="Currency">
+                            <?php foreach ($currencies as $currency): ?>
+                              <option value="<?= $currency['id']; ?>">
+                                <?= $currency['Currency']; ?>
+                              </option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
                       </div>
-                    </form>
-                  </div>
+                      <div class="col">
+                        <label>Exchange</label>
+                        <div id="bloodhound">
+                          <input class="typeahead form-control" type="Number" name="exchange" value='1.0'
+                            id="exchangeInput" placeholder="Exchange Rate">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 6px;">
+                      <!-- <label for="serviceType">Service Type</label> -->
+                      <label for="search" style="display: inline-block; margin-right: 10px;">Search</label>
+                      <div style="display: inline-block; position: relative;">
+                        <input type="text" id="search" placeholder="..."
+                          style="border: none; border-bottom: 1px solid #ccc; width: 200px;">
+                      </div>
+                      <div id="serviceTableBodyContainer">
+                        <table class="table" id="serviceTypeList">
+                          <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>Price</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php foreach ($services as $service): ?>
+                              <tr data-service-type-id="<?= $service['idArtMenu']; ?>">
+                                <td class="title">
+                                  <?= $service['Name']; ?>
+                                </td>
+                                <td class="fee" contenteditable="true">
+                                  <?= $service['Price']; ?>
+                                </td>
+                                <td><span class="badge badge-primary badge-pill hover-effect"
+                                    onclick="addService()">ADD</span></td>
+                              </tr>
+
+                            <?php endforeach; ?>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="card h-100">
-                  <div class="card-body">
-                    <h4 class="card-title">SUMMARY</h4>
-                    <hr>
-                    <div class="row">
-                      <div class="col-md-6" id="clientDetailsLeft"></div>
-                      <div class="col-md-6" id="clientDetailsRight"></div>
-                    </div>
-                    <hr>
+            </div>
+            <div class="col-md-6">
+              <div class="card h-100">
+                <div class="card-body">
+                  <p class="card-description"
+                    style="margin-top: -19px; margin-bottom: -10px; font-weight: bold; color: black;">
+                    SUMMARY
+                  </p>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-6" id="clientDetailsLeft"></div>
+                    <div class="col-md-6" id="clientDetailsRight"></div>
+                  </div>
+                  <hr>
+                  <div id="summaryTableContainer">
                     <table class="table">
                       <thead>
                         <tr>
@@ -354,45 +405,176 @@
                       <tbody id="serviceTableBody"></tbody>
                     </table>
                   </div>
-                  <div style="margin-left: 2.3em; font-weight: 900; font-size: 150px">
-                    <p>Total Fee: <span id="totalFee">0</span></p>
-                  </div>
-                  <div style="height: 50px; margin-left: 1.4em; font-weight: 900; font-size: 150px">
-                    <!-- <button class="btn btn-primary btn-fw" id="insertBtn">Save</button> -->
-                    <button type="button" class="btn btn-outline-info btn-icon-text" id="insertBtn">Print
-                      <i class="ti-printer btn-icon-append"></i>
-                    </button>
-                  </div>
+                </div>
+                <div style="margin-left: 400px; font-weight: 900; font-size: 150px">
+                  <p>Total Fee: <span id="totalFee">0</span></p>
+                </div>
+                <div style="height: 50px; margin-left: 1.4em; font-weight: 900; font-size: 150px">
+                  <!-- <button class="btn btn-primary btn-fw" id="insertBtn">Save</button> -->
+                  <button type="button" class="btn btn-outline-info btn-icon-text" id="insertBtn">Print
+                    <i class="ti-printer btn-icon-append"></i>
+                  </button>
                 </div>
               </div>
             </div>
-
-
           </div>
         </div>
+
+
+        <!-- Include footer -->
+        <?php include 'include_common/footer.php'; ?>
       </div>
+
+      <!-- main-panel ends -->
     </div>
-  </div>
-
-  <!-- Include footer -->
-  <?php include 'include_common/footer.php'; ?>
-  </div>
-
-  <!-- main-panel ends -->
-  </div>
-  <!-- page-body-wrapper ends -->
+    <!-- page-body-wrapper ends -->
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../../vendors/js/vendor.bundle.base.js"></script>
 
+  <!-- <script>
+    function attachAddServiceHandler() {
+      $('#serviceTypeList .badge').click(function () {
+        var serviceTypeRow = $(this).closest('tr');
+        var serviceTypeId = serviceTypeRow.data('service-type-id');
+        var serviceType = serviceTypeRow.find('.title').text().trim();
+        var serviceFee = serviceTypeRow.find('.fee').text().trim();
+        console.log("Service Type: ", serviceType);
+        console.log("Service Type ID: ", serviceTypeId);
+        console.log("Service Fee: ", serviceFee);
+        addServiceRow(serviceType, serviceTypeId, serviceFee);
+        calculateTotalFee();
+      });
+    }
 
-
-
-  <script>
+    // Attach event handler on document ready
     $(document).ready(function () {
-      // $('#insertBtn').click(function () {
-      //   insertData();
-      // });
+      attachAddServiceHandler();
+
+      // Filter services based on categories
+      $('.btn-category').click(function () {
+        var categoryId = $(this).data('category-id');
+        filterServices(categoryId);
+      });
+
+      function filterServices(categoryId) {
+        $.ajax({
+          url: '<?php echo base_url() . "SalesController/filterServices"; ?>',
+          type: 'POST',
+          data: { categoryId: categoryId },
+          dataType: 'html',
+          success: function (data) {
+            $('#serviceTableBodyContainer').html(data);
+            // Reattach event handler after filtering
+            attachAddServiceHandler();
+          }
+        });
+      }
+    });
+  </script> -->
+  <script>
+
+    function addServiceRow(serviceType, serviceTypeId, serviceFee) {
+      var exists = false;
+
+      // Check if the service already exists in the summary table
+      $('#serviceTableBody tr').each(function () {
+        var existingServiceTypeId = $(this).find('td:first').data('service-type-id');
+        if (existingServiceTypeId === serviceTypeId) {
+          exists = true;
+          return false;
+        }
+      });
+
+      if (!exists) {
+        var newRow = '<tr>' +
+          '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
+          '<td>' + serviceFee + '</td>' +
+          '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)">Remove</button></td>' +
+          '</tr>';
+        $('#serviceTableBody').append(newRow);
+        calculateTotalFee();
+      } else {
+        alert('This service is already added to the summary.');
+      }
+    }
+
+    // Attach event handlers
+    $(document).ready(function () {
+
+      // Attach add service event handler
+      $('#serviceTypeList .badge').click(function () {
+        var serviceTypeRow = $(this).closest('tr');
+        var serviceTypeId = serviceTypeRow.data('service-type-id');
+        var serviceType = serviceTypeRow.find('.title').text().trim();
+        var serviceFee = serviceTypeRow.find('.fee').text().trim();
+        console.log("Service Type: ", serviceType);
+        console.log("Service Type ID: ", serviceTypeId);
+        console.log("Service Fee: ", serviceFee);
+        addServiceRow(serviceType, serviceTypeId, serviceFee);
+        calculateTotalFee();
+      });
+
+      // Define attachAddServiceHandler function
+      function attachAddServiceHandler() {
+        $('#serviceTypeList .badge').click(function () {
+          var serviceTypeRow = $(this).closest('tr');
+          var serviceTypeId = serviceTypeRow.data('service-type-id');
+          var serviceType = serviceTypeRow.find('.title').text().trim();
+          var serviceFee = serviceTypeRow.find('.fee').text().trim();
+          console.log("Service Type: ", serviceType);
+          console.log("Service Type ID: ", serviceTypeId);
+          console.log("Service Fee: ", serviceFee);
+          addServiceRow(serviceType, serviceTypeId, serviceFee);
+          calculateTotalFee();
+        });
+      }
+
+      // Filter services based on categories
+      $('.btn-category').click(function () {
+        var categoryId = $(this).data('category-id');
+        filterServices(categoryId);
+      });
+
+      function filterServices(categoryId) {
+        $.ajax({
+          url: '<?php echo base_url() . "SalesController/filterServices"; ?>',
+          type: 'POST',
+          data: { categoryId: categoryId },
+          dataType: 'html',
+          success: function (data) {
+            $('#serviceTableBodyContainer').html(data);
+            // Reattach event handler after filtering
+            attachAddServiceHandler();
+          }
+        });
+      }
+
+      $('#search').on('input', function () {
+        var searchText = $(this).val().toLowerCase();
+        $('#serviceTypeList tbody tr').each(function () {
+          var serviceName = $(this).find('.title').text().toLowerCase();
+          var servicePrice = $(this).find('.fee').text().toLowerCase();
+          if (serviceName.includes(searchText) || servicePrice.includes(searchText)) {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+      });
+
+      $('.btn-category').click(function () {
+        var categoryId = $(this).data('category-id');
+
+        // Remove active class from previously active button
+        $('.btn-category.active').removeClass('active');
+
+        // Add active class to the clicked button
+        $(this).addClass('active');
+
+        // Filter services based on the clicked category
+        filterServices(categoryId);
+      });
 
       $('#insertBtn').off('click').on('click', function () {
         insertData();
@@ -405,16 +587,6 @@
       $('#serviceTypeList .badge-pill').mouseleave(function () {
         $(this).removeClass('hover-effect');
       });
-
-
-      $('#serviceTypeList .badge').click(function () {
-        var serviceTypeRow = $(this).closest('li');
-        var serviceTypeId = serviceTypeRow.data('service-type-id');
-        var serviceType = serviceTypeRow.find('.title').text().trim();
-        addServiceRow(serviceType, serviceTypeId, serviceTypeRow.find('.fee').text());
-        calculateTotalFee();
-      });
-
 
       $('select[name="clientName"]').change(function () {
         updateSelectedDetails();
@@ -465,81 +637,6 @@
         calculateTotalFee(-serviceFee);
       });
 
-      function addServiceRow(serviceType, serviceTypeId, serviceFee) {
-        var newRow = '<tr><td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
-          '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
-          '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)">Remove</button></td></tr>';
-        $('#serviceTableBody').append(newRow);
-
-        $('#serviceTableBody').off('input', '.editable-fee').on('input', '.editable-fee', function () {
-          calculateTotalFee();
-        });
-
-        $('#serviceTypeList .badge-pill').mouseenter(function () {
-          $(this).addClass('hover-effect');
-        });
-
-        $('#serviceTypeList .badge-pill').mouseleave(function () {
-          $(this).removeClass('hover-effect');
-        });
-
-        calculateTotalFee();
-      }
-      //   function insertData() {
-      //     var clientId = $('select[name="clientName"]').val();
-      //     var paymentMethodOption = $('select[name="Payment"] option:selected');
-      //     var paymentMethodId = paymentMethodOption.data('payment-id');
-      //     var paymentMethodName = paymentMethodOption.text();
-      //     var currency = $('select[name="Currency"]').val();
-      //     // var exchange = $('input[name="Exchange"]').val();
-      //     var exchange = $('#exchangeInput').val();
-      //     var totalFee = parseFloat($('#totalFee').text());
-
-      //     if (!clientId || isNaN(totalFee)) {
-      //       alert('Invalid data for insertion.');
-      //       return;
-      //     }
-
-      //     var services = [];
-
-      //     $('#serviceTableBody tr').each(function () {
-      //       var serviceTypeId = $(this).find('td:eq(0)').data('service-type-id');
-      //       var serviceName = $(this).find('td:eq(0)').text();
-      //       var fee = parseFloat($(this).find('td:eq(1)').text());
-
-      //       services.push({
-      //         serviceTypeId: serviceTypeId,
-      //         serviceName: serviceName,
-      //         fee: fee,
-      //       });
-      //     });
-
-      //     $.ajax({
-      //       method: 'POST',
-      //       url: '<?= site_url('SalesController/submitServices') ?>',
-      //       dataType: "json",
-      //       data: {
-      //         clientId: clientId,
-      //         paymentMethodId: paymentMethodId,
-      //         paymentMethodName: paymentMethodName,
-      //         currency: currency,
-      //         exchange: exchange,
-      //         totalFee: totalFee,
-      //         services: services
-      //       },
-      //       success: function (response) {
-      //         alert('Data inserted successfully!');
-      //         console.log('Data inserted successfully:', response);
-      //         $('#serviceTableBody').empty();
-      //         $('#totalFee').text('0');
-      //       },
-      //       error: function (error) {
-      //         console.error('Error inserting data:', error);
-      //       }
-      //     });
-      //   }
-      // });
-
 
       function insertData() {
         var clientId = $('select[name="clientName"]').val();
@@ -550,24 +647,40 @@
         var paymentMethodName = paymentMethodOption.text();
         var currency = $('select[name="Currency"]').val();
         var currencyName = $('select[name="Currency"] option:selected').text();
-        // var exchange = $('input[name="Exchange"]').val();
         var exchange = $('#exchangeInput').val();
         var totalFee = parseFloat($('#totalFee').text());
+
+        console.log("Client ID: ", clientId);
+        console.log("Client Name: ", clientName);
+        console.log("Payment Method ID: ", paymentMethodId);
+        console.log("Payment Name: ", paymentName);
+        console.log("Currency: ", currency);
+        console.log("Exchange: ", exchange);
+        console.log("Total Fee: ", totalFee);
+
         if (!clientId || isNaN(totalFee)) {
           alert('Invalid data for insertion.');
           return;
         }
         var services = [];
         $('#serviceTableBody tr').each(function () {
-          var serviceTypeId = $(this).find('td:eq(0)').data('service-type-id');
+          //var serviceTypeId = $(this).find('td:eq(0)').data('service-type-id');
+          // var serviceTypeId = 12;
+          var serviceTypeId = $('#serviceTypeList .badge').closest('tr').data('service-type-id');
           var serviceName = $(this).find('td:eq(0)').text();
           var fee = parseFloat($(this).find('td:eq(1)').text());
+
+          console.log("Service Type ID: ", serviceTypeId);
+          console.log("Service Name: ", serviceName);
+          console.log("Fee: ", fee);
+
           services.push({
             serviceTypeId: serviceTypeId,
             serviceName: serviceName,
             fee: fee,
           });
         });
+
         $.ajax({
           method: 'POST',
           url: '<?= site_url('SalesController/submitServices') ?>',

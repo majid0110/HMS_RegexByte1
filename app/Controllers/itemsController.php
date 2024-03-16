@@ -11,6 +11,7 @@ use App\Models\InvoiceModel;
 use App\Models\ServicesModel;
 use App\Models\SectorsModel;
 use App\Models\itemsModel;
+use App\Models\DoctorModel;
 use Mpdf\Mpdf;
 
 class itemsController extends Controller
@@ -119,6 +120,21 @@ class itemsController extends Controller
     {
         return view('sector_form.php');
     }
+
+    public function specilization_table()
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+        $model = new DoctorModel();
+        $data['Specialization'] = $model->getSpecialization($businessID);
+        return view('specilization_table', $data);
+    }
+
+    public function specilization_form()
+    {
+        return view('specialization_form.php');
+    }
+
 
 
 
@@ -319,19 +335,54 @@ class itemsController extends Controller
             return redirect()->to(base_url("/sectors_table"));
         }
     }
-    public function editsector($idItem)
+    public function editsector($idSector)
     {
-        $servicesModel = new ServicesModel();
-        $data = [
-            'units' => $servicesModel->getUnits(),
-            'categories' => $servicesModel->getCategories(),
-            'tax' => $servicesModel->getTaxes(),
-        ];
         $Model = new itemsModel();
-        $data['warehouse'] = $Model->getIdWarehouse();
-        $data['item'] = $Model->find($idItem);
+        $data['sector'] = $Model->getSector($idSector);
 
-        return view('edit_item_form.php', $data);
+        return view('edit_Sector', $data);
+    }
+
+    public function updateSector($idSector)
+    {
+        $Model = new SectorsModel();
+        $session = \Config\Services::session();
+        $request = \Config\Services::request();
+        $businessID = $session->get('businessID');
+
+        $data = [
+
+            'name' => $this->request->getPost('name'),
+            'PrintOutput' => $this->request->getPost('printOutput'),
+            'notes' => $this->request->getPost('notes'),
+            'TVSH' => $this->request->getPost('TVSH'),
+            'idBusiness' => $businessID,
+        ];
+        $Model->update($idSector, $data);
+
+        session()->setFlashdata('success', 'Sector Updated...!!');
+
+        return redirect()->to(base_url("/sectors_table"));
+    }
+
+    public function saveSpecialization()
+    {
+
+
+        $Model = new DoctorModel();
+        $session = \Config\Services::session();
+        $request = \Config\Services::request();
+        $businessID = $session->get('businessID');
+
+        $data = [
+
+            'specialization_N' => $this->request->getPost('specialization_name'),
+            'Description' => $this->request->getPost('description'),
+            'idBusiness' => $businessID,
+        ];
+
+        $Model->saveSpecialization($data);
+        return redirect()->to(base_url('/specilization_table'))->with('success', 'Sector added successfully.');
     }
 
 }

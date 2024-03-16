@@ -154,6 +154,10 @@ class AppointmentController extends Controller
         ];
 
         $appointmentModel->saveAppointment($data);
+        $clientID = $this->request->getPost('clientId');
+        $clientModel = new ClientModel();
+        $Age = $clientModel->getclientAge($businessID, $clientID);
+        $Gender = $clientModel->getclientGender($businessID, $clientID);
 
         $mpdf = new Mpdf();
         $pdfContent = view('pdf_template', [
@@ -161,6 +165,8 @@ class AppointmentController extends Controller
             'appointmentTypeName' => $appointmentTypeName,
             'clientName' => $clientName,
             'doctorName' => $doctorName,
+            'Age' => $Age,
+            'Gender' => $Gender,
         ]);
 
         $mpdf->WriteHTML($pdfContent);

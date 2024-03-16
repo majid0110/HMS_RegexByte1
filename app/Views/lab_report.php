@@ -267,9 +267,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <div id="total-fee-container">
-                                    Total Appointment Fee:
+                                    Total Lab Fee:
                                     <?= $totalLabFee ?>
                                 </div>
+
                                 <form action="<?= base_url('lab_report'); ?>" method="post">
                                     <div class="form-group row">
                                         <div class="col-md-3 offset-md-9">

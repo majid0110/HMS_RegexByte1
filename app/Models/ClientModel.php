@@ -82,6 +82,26 @@ class ClientModel extends Model
         return $this->where('idClient', $idClient)->set($data)->update();
     }
 
+    public function getclientAge($businessID, $clientID)
+    {
+        return $this->db->table($this->table)
+            ->where('idBusiness', $businessID)
+            ->where('idClient', $clientID)
+            ->select('age')
+            ->get()
+            ->getRowArray()['age'] ?? null;
+    }
+
+    public function getclientGender($businessID, $clientID)
+    {
+        return $this->db->table($this->table)
+            ->where('idBusiness', $businessID)
+            ->where('idClient', $clientID)
+            ->select('gender')
+            ->get()
+            ->getRowArray()['gender'] ?? null;
+    }
+
 
 }
 

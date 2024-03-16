@@ -50,6 +50,7 @@ class salesModel extends Model
     {
         return $this->db->table('artmenu')
             ->select('idArtMenu, Name, Price, idCatArt')
+            ->where('status', 'Active')
             ->get()
             ->getResultArray();
     }
@@ -162,7 +163,7 @@ class salesModel extends Model
         $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
         $builder->select('invoices.*, client.client as clientName, currency.Currency, paymentmethods.Method as PaymentMethod');
 
-        if (!empty($search)) {
+        if (!empty ($search)) {
             $builder->groupStart()
                 ->like('invoices.invOrdNum', $search)
                 ->orLike('client.client', $search)
@@ -171,20 +172,28 @@ class salesModel extends Model
                 ->groupEnd();
         }
 
-        if (!empty($paymentInput)) {
+        if (!empty ($paymentInput)) {
             $builder->where('invoices.paymentMethod', $paymentInput);
         }
 
-        if (!empty($clientName)) {
+        if (!empty ($clientName)) {
             $builder->like('client.client', $clientName);
         }
 
-        if (!empty($fromDate) && !empty($toDate)) {
+        if (!empty ($fromDate) && !empty ($toDate)) {
             $builder->where('invoices.Date >=', $fromDate)
                 ->where('invoices.Date <=', $toDate);
         }
 
         $query = $builder->get();
         return $query->getResultArray();
+    }
+
+    public function getServicesByCategory($categoryId)
+    {
+        return $this->db->table('artmenu')
+            ->where('idCatArt', $categoryId)
+            ->get()
+            ->getResultArray();
     }
 }

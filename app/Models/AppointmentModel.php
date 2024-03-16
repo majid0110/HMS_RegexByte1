@@ -148,6 +148,7 @@ class AppointmentModel extends Model
             ->countAllResults();
     }
 
+
     public function getTotalAppointmentsRevenue($businessID)
     {
         $query = $this->selectSum('appointmentFee', 'totalAppointmentsRevenue')

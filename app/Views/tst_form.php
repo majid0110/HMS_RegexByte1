@@ -41,14 +41,17 @@
         <i class="settings-close ti-close"></i>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab"
+              aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
+            <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab"
+              aria-controls="chats-section">CHATS</a>
           </li>
         </ul>
         <div class="tab-content" id="setting-content">
-          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
+            aria-labelledby="todo-section">
             <div class="add-items d-flex px-3 mb-0">
               <form class="form w-100">
                 <div class="form-group d-flex">
@@ -132,7 +135,8 @@
             </div>
             <ul class="chat-list">
               <li class="list active">
-                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Thomas Douglas</p>
                   <p>Available</p>
@@ -140,7 +144,8 @@
                 <small class="text-muted my-auto">19 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg" alt="image"><span
+                    class="offline"></span></div>
                 <div class="info">
                   <div class="wrapper d-flex">
                     <p>Catherine</p>
@@ -151,7 +156,8 @@
                 <small class="text-muted my-auto">23 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Daniel Russell</p>
                   <p>Available</p>
@@ -159,7 +165,8 @@
                 <small class="text-muted my-auto">14 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg" alt="image"><span
+                    class="offline"></span></div>
                 <div class="info">
                   <p>James Richardson</p>
                   <p>Away</p>
@@ -167,7 +174,8 @@
                 <small class="text-muted my-auto">2 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Madeline Kennedy</p>
                   <p>Available</p>
@@ -175,7 +183,8 @@
                 <small class="text-muted my-auto">5 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Sarah Graves</p>
                   <p>Available</p>
@@ -192,17 +201,17 @@
       <?php include 'include_common/sidebar.php'; ?>
       <!-- partial -->
       <div class="main-panel">
-            <div class="content-wrapper">
-                <div class="row">
-                    <div class="col-12 grid-margin">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">ADD DOCTORS</h4>
-                                <form action="<?= base_url('LoginController/saveDoctorProfile') ?>" method="post">
-                                    <p class="card-description">
-                                        Personal info
-                                    </p>
-                                    <div class="row">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">ADD DOCTORS</h4>
+                  <form action="<?= base_url('LoginController/saveDoctorProfile') ?>" method="post">
+                    <p class="card-description">
+                      Personal info
+                    </p>
+                    <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">First Name</label>
@@ -215,7 +224,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Last Name</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="lName"/>
+                            <input type="text" class="form-control" name="lName" />
                           </div>
                         </div>
                       </div>
@@ -223,7 +232,7 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label name="gender"">Gender</label>
+                          <label class="col-sm-3 col-form-label name=" gender"">Gender</label>
                           <div class="col-sm-9">
                             <select class="form-control">
                               <option>Male</option>
@@ -236,7 +245,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Date of Birth</label>
                           <div class="col-sm-9">
-                            <input class="form-control" placeholder="dd/mm/yyyy" name="dob"/>
+                            <input class="form-control" placeholder="dd/mm/yyyy" name="dob" />
                           </div>
                         </div>
                       </div>
@@ -246,7 +255,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Phone Number</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="phone"/>
+                            <input type="text" class="form-control" name="phone" />
                           </div>
                         </div>
                       </div>
@@ -254,7 +263,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Email</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="email"/>
+                            <input type="text" class="form-control" name="email" />
                           </div>
                         </div>
                       </div>
@@ -264,7 +273,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Specialization</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="specialization"/>
+                            <input type="text" class="form-control" name="specialization" />
                           </div>
                         </div>
                       </div>
@@ -272,7 +281,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Medical License Number</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" name="MLN"/>
+                            <input type="text" class="form-control" name="MLN" />
                           </div>
                         </div>
                       </div>
@@ -280,7 +289,7 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label name="cat"">Category</label>
+                          <label class="col-sm-3 col-form-label name=" cat"">Category</label>
                           <div class="col-sm-9">
                             <select class="form-control">
                               <option>Category1</option>
@@ -291,90 +300,90 @@
                           </div>
                         </div>
                       </div>
-                                    <p class="card-description">
-                                        Other Details
-                                    </p>
-                                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Clinic Address</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control" name="address"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Hospital Affiliation</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control" name="hos_af"/>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Education</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control" name="education"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Experience</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control" name="experience"/>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Certification</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control" name="certificate"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Profile Image</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control" name="profile"/>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                                    <!-- Add a submit button -->
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label">Business ID</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="bid" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        </div>
-                                    </div>
-                                </form>
+                      <p class="card-description">
+                        Other Details
+                      </p>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Clinic Address</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" name="address" />
                             </div>
+                          </div>
                         </div>
-                    </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Hospital Affiliation</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" name="hos_af" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Education</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" name="education" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Experience</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" name="experience" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Certification</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" name="certificate" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Profile Image</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" name="profile" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Add a submit button -->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Business ID</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" name="bid" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                      </div>
+                  </form>
                 </div>
+              </div>
             </div>
-                  
-                
+          </div>
+        </div>
+
+
         <!-- content-wrapper ends -->
         <!-- partial:../../partials/_footer.html -->
         <?php include 'include_common/footer.php'; ?>
-        
-      
+
+
         <!-- partial -->
       </div>
       <!-- main-panel ends -->

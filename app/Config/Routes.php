@@ -83,6 +83,11 @@ $routes->post('/update/(:num)', 'ConfigureController::update/$1');
 $routes->post('doctor-controller/get-doctors', 'DoctorController::getDoctors', ['as' => 'get-doctors']);
 $routes->post('DoctorController/getDoctors', 'DoctorController::getDoctors');
 $routes->post('DoctorController/fetchDoctorFee', 'DoctorController::fetchDoctorFee');
+
+//----------------------------------------------------------------------------------Doctor Specilization
+$routes->get('/specilization_table', 'itemsController::specilization_table');
+$routes->get('/specilization_form', 'itemsController::specilization_form');
+$routes->post('/saveSpecialization', 'itemsController::saveSpecialization');
 //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Lab Services
 //-------------------------------------------------------------------------------------------------------------------------
@@ -144,6 +149,7 @@ $routes->get('/deleteSales/(:num)', 'SalesController::deleteSales/$1');
 $routes->get('viewServiceDetails/(:num)', 'SalesController::viewServiceDetails/$1');
 $routes->get('sales/deleteService/(:num)', 'SalesController::deleteService/$1');
 $routes->post('sales/deleteService/(:num)', 'SalesController::deleteService/$1');
+$routes->post('SalesController/filterServices', 'SalesController::filterServices');
 
 // $routes->get('deleteSales/(:num)', 'SalesController::deleteSales/$1');
 
@@ -195,3 +201,4 @@ $routes->get('/sectors_form', 'itemsController::sectors_form');
 $routes->post('/saveSector', 'itemsController::saveSector');
 $routes->get('/deletesector/(:num)', 'itemsController::deletesector/$1');
 $routes->get('editsector/(:num)', 'itemsController::editsector/$1');
+$routes->post('/updateSector/(:num)', 'itemsController::updateSector/$1');

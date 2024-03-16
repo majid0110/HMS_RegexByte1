@@ -175,6 +175,14 @@ class SalesController extends Controller
         }
     }
 
+    public function filterServices()
+    {
+        $categoryId = $this->request->getPost('categoryId');
+        $model = new salesModel();
+        $data['services'] = $model->getServicesByCategory($categoryId);
+        echo view('service_table_partial', $data);
+    }
+
     public function deleteSales($idReceipts)
     {
 

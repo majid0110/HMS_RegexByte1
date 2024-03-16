@@ -98,10 +98,13 @@
                 <td colspan="2"></td>
             </tr>
 
-            <tr>
 
-                <td style=" width: 50%; white-space: nowrap;">Patient Name:<b>
+            <tr>
+                <td style=" width: 50%;">Patient Name:<b>
                         <?= $clientName; ?>
+                    </b></td>
+                <td style="width: 50%; text-align: right;">Gender:<b>
+                        <?= $Gender; ?>
                     </b></td>
             </tr>
 

@@ -46,7 +46,7 @@ class DoctorModel extends Model
             ->get()
             ->getResultArray();
     }
-    
+
 
     public function countDoctorsByBusinessID($businessID)
     {
@@ -57,14 +57,14 @@ class DoctorModel extends Model
 
     public function deleteDoctor($doctorID)
     {
-        
+
         $this->db->table('doctorprofile')->where('DoctorID', $doctorID)->delete();
     }
 
 
     public function getDoctorByID($doctorID)
     {
-      
+
         return $this->db->table('doctorprofile')->where('DoctorID', $doctorID)->get()->getRowArray();
     }
 
@@ -146,5 +146,19 @@ class DoctorModel extends Model
             ->where('FeeTypeId', $feeTypeID)
             ->get()
             ->getRowArray();
+    }
+
+    public function getSpecialization($businessID)
+    {
+        return $this->db->table('specialization')
+            ->select('s_id, specialization_N, Description')
+            ->where('idBusiness', $businessID)
+            ->get()
+            ->getResultArray();
+    }
+
+    public function saveSpecialization($data)
+    {
+        $this->db->table('specialization')->insert($data);
     }
 }
