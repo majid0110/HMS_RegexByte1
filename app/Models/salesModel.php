@@ -191,9 +191,10 @@ class salesModel extends Model
 
     public function getServicesByCategory($categoryId)
     {
-        return $this->db->table('artmenu')
-            ->where('idCatArt', $categoryId)
-            ->get()
-            ->getResultArray();
+        $builder = $this->db->table('artmenu');
+        if ($categoryId !== null) {
+            $builder->where('idCatArt', $categoryId);
+        }
+        return $builder->get()->getResultArray();
     }
 }

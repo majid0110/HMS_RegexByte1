@@ -6,19 +6,19 @@
       </button>
     </div>
     <div>
-</div>
+    </div>
 
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-top">
     <ul class="navbar-nav">
-    <a class="navbar-brand brand-logo">
-    <?php
-    $session = session();
-    if ($session->has('businessProfileImage')) {
-        echo '<img class="img-xs rounded-circle larger-profile-img" style="width: 90px; height: 90px;" src="' . $session->get('businessProfileImage') . '" alt="Profile image">';
-    }
-    ?>
-</a>
+      <a class="navbar-brand brand-logo">
+        <?php
+        $session = session();
+        if ($session->has('businessProfileImage')) {
+          echo '<img class="img-xs rounded-circle larger-profile-img" style="width: 90px; height: 90px;" src="' . $session->get('businessProfileImage') . '" alt="Profile image">';
+        }
+        ?>
+      </a>
 
 
       <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
@@ -75,17 +75,18 @@
           <input type="text" class="form-control">
         </div>
       </li> -->
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <form class="search-form" action="#">
           <i class="icon-search"></i>
           <input type="search" class="form-control" placeholder="Search Here" title="Search here">
         </form>
-      </li>
+      </li> -->
       <li class="nav-item dropdown">
         <a class="nav-link count-indicator" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
           <i class="icon-mail icon-lg"></i>
         </a>
-        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="notificationDropdown">
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
+          aria-labelledby="notificationDropdown">
           <a class="dropdown-item py-3 border-bottom">
             <p class="mb-0 font-weight-medium float-left">You have 4 new notifications </p>
             <span class="badge badge-pill badge-primary float-right">View all</span>
@@ -124,7 +125,8 @@
           <i class="icon-bell"></i>
           <span class="count"></span>
         </a>
-        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="countDropdown">
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
+          aria-labelledby="countDropdown">
           <a class="dropdown-item py-3">
             <p class="mb-0 font-weight-medium float-left">You have 7 unread mails </p>
             <span class="badge badge-pill badge-primary float-right">View all</span>
@@ -182,10 +184,14 @@
                 </div>
 
               </div>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages</a>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Activity</a>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
+              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My
+                Profile <span class="badge badge-pill badge-danger">1</span></a>
+              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i>
+                Messages</a>
+              <a class="dropdown-item"><i
+                  class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Activity</a>
+              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i>
+                FAQ</a>
               <a class="dropdown-item" href="<?php echo base_url('/logout'); ?>">
                 <i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out
               </a>
@@ -194,7 +200,8 @@
             </div>
       </li>
     </ul>
-    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-bs-toggle="offcanvas">
+    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+      data-bs-toggle="offcanvas">
       <span class="mdi mdi-menu"></span>
     </button>
   </div>

@@ -150,6 +150,8 @@ $routes->get('viewServiceDetails/(:num)', 'SalesController::viewServiceDetails/$
 $routes->get('sales/deleteService/(:num)', 'SalesController::deleteService/$1');
 $routes->post('sales/deleteService/(:num)', 'SalesController::deleteService/$1');
 $routes->post('SalesController/filterServices', 'SalesController::filterServices');
+$routes->post('SalesController/getAllServices', 'SalesController::getAllServices');
+//$routes->match(['get', 'post'], 'SalesController/getAllServices', 'SalesController::getAllServices');
 
 // $routes->get('deleteSales/(:num)', 'SalesController::deleteSales/$1');
 

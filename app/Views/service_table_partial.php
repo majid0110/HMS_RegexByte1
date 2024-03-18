@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css">
     <style>
         #serviceTableBodyContainer {
-            max-height: 300px;
+            max-height: 220px;
             overflow-y: auto;
         }
     </style>

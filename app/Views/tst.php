@@ -50,6 +50,30 @@
       max-height: 300px;
       overflow-y: auto;
     }
+
+    .active {
+      background: #52CDFF;
+      color: #fff;
+
+    }
+
+
+    .table tbody tr {
+      height: 30px;
+    }
+
+    .table thead tr {
+      height: 30px;
+    }
+
+
+    .table tbody td {
+      padding: 5px;
+    }
+
+    .table thead tr {
+      padding: 5px;
+    }
   </style>
 </head>
 
@@ -248,15 +272,16 @@
         <div class="content-wrapper">
           <div class="row">
             <div class="col-12 grid-margin">
-              <div class="card">
+              <div class="card" style="margin-bottom: -16px; margin-top: -17px;">
                 <div class="card-body">
-                  <p class="card-description">
+                  <p class="card-description"
+                    style="margin-top: -19px; margin-bottom: 20px; font-weight: bold;color: black">
                     Categories
                   </p>
                   <div class="row" id="categoryButtons">
                     <?php foreach ($categories as $category): ?>
-                      <button class="btn btn-outline-secondary btn-category"
-                        data-category-id="<?= $category['idCatArt']; ?>">
+                      <button style="width: auto;height: 41px;margin-top: -19px;margin-bottom: -15px;margin-left: 11px"
+                        class="btn btn-outline-secondary btn-category" data-category-id="<?= $category['idCatArt']; ?>">
                         <?= $category['name']; ?>
                       </button>
                     <?php endforeach; ?>
@@ -270,11 +295,14 @@
             <div class="col-md-6">
               <div class="card h-100">
                 <div class="card-body">
-                  <h4 class="card-title">Add Service</h4>
+                  <p class="card-description"
+                    style="margin-top: -19px; margin-bottom: -10px; font-weight: bold; color: black">
+                    Services
+                  </p>
 
                   <form class="pt-3" method="POST" action="<?php echo base_url() . "submitTests"; ?>"
                     enctype="multipart/form-data">
-                    <div class="form-group row">
+                    <div class="form-group row" style="margin-bottom: 6px;">
                       <div class="col">
                         <label>Client Name</label>
                         <div id="the-basics">
@@ -301,7 +329,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" style="margin-bottom: 6px;">
                       <div class="col">
                         <label>Currency</label>
                         <div id="the-basics">
@@ -322,15 +350,31 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label for="serviceType">Service Type</label>
+                    <div class="form-group row" style="margin-bottom: 6px;">
+                      <div class="col">
+                        <label for="categoryDropdown">Category:</label>
+                        <select class="form-control" id="categoryDropdown">
+                          <option value="">All Categories</option>
+                          <?php foreach ($categories as $category): ?>
+                            <option value="<?= $category['idCatArt']; ?>">
+                              <?= $category['name']; ?>
+                            </option>
+                          <?php endforeach; ?>
+                        </select>
+                      </div>
+                      <div class="col">
+                        <label for="search">Search:</label>
+                        <input type="text" id="search" class="form-control" placeholder="Enter service type or fee">
+                      </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 6px;">
                       <div id="serviceTableBodyContainer">
                         <table class="table" id="serviceTypeList">
                           <thead>
                             <tr>
                               <th>Name</th>
                               <th>Price</th>
-                              <th>Action</th> <!-- Empty header for the button column -->
+                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -358,7 +402,10 @@
             <div class="col-md-6">
               <div class="card h-100">
                 <div class="card-body">
-                  <h4 class="card-title">SUMMARY</h4>
+                  <p class="card-description"
+                    style="margin-top: -19px; margin-bottom: -10px; font-weight: bold; color: black;">
+                    SUMMARY
+                  </p>
                   <hr>
                   <div class="row">
                     <div class="col-md-6" id="clientDetailsLeft"></div>
@@ -378,7 +425,7 @@
                     </table>
                   </div>
                 </div>
-                <div style="margin-left: 2.3em; font-weight: 900; font-size: 150px">
+                <div style="margin-left: 400px; font-weight: 900; font-size: 150px">
                   <p>Total Fee: <span id="totalFee">0</span></p>
                 </div>
                 <div style="height: 50px; margin-left: 1.4em; font-weight: 900; font-size: 150px">
@@ -404,52 +451,11 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../../vendors/js/vendor.bundle.base.js"></script>
 
-  <!-- <script>
-    function attachAddServiceHandler() {
-      $('#serviceTypeList .badge').click(function () {
-        var serviceTypeRow = $(this).closest('tr');
-        var serviceTypeId = serviceTypeRow.data('service-type-id');
-        var serviceType = serviceTypeRow.find('.title').text().trim();
-        var serviceFee = serviceTypeRow.find('.fee').text().trim();
-        console.log("Service Type: ", serviceType);
-        console.log("Service Type ID: ", serviceTypeId);
-        console.log("Service Fee: ", serviceFee);
-        addServiceRow(serviceType, serviceTypeId, serviceFee);
-        calculateTotalFee();
-      });
-    }
-
-    // Attach event handler on document ready
-    $(document).ready(function () {
-      attachAddServiceHandler();
-
-      // Filter services based on categories
-      $('.btn-category').click(function () {
-        var categoryId = $(this).data('category-id');
-        filterServices(categoryId);
-      });
-
-      function filterServices(categoryId) {
-        $.ajax({
-          url: '<?php echo base_url() . "SalesController/filterServices"; ?>',
-          type: 'POST',
-          data: { categoryId: categoryId },
-          dataType: 'html',
-          success: function (data) {
-            $('#serviceTableBodyContainer').html(data);
-            // Reattach event handler after filtering
-            attachAddServiceHandler();
-          }
-        });
-      }
-    });
-  </script> -->
   <script>
 
     function addServiceRow(serviceType, serviceTypeId, serviceFee) {
       var exists = false;
 
-      // Check if the service already exists in the summary table
       $('#serviceTableBody tr').each(function () {
         var existingServiceTypeId = $(this).find('td:first').data('service-type-id');
         if (existingServiceTypeId === serviceTypeId) {
@@ -471,10 +477,8 @@
       }
     }
 
-    // Attach event handlers
     $(document).ready(function () {
 
-      // Attach add service event handler
       $('#serviceTypeList .badge').click(function () {
         var serviceTypeRow = $(this).closest('tr');
         var serviceTypeId = serviceTypeRow.data('service-type-id');
@@ -487,7 +491,6 @@
         calculateTotalFee();
       });
 
-      // Define attachAddServiceHandler function
       function attachAddServiceHandler() {
         $('#serviceTypeList .badge').click(function () {
           var serviceTypeRow = $(this).closest('tr');
@@ -503,8 +506,13 @@
       }
 
       // Filter services based on categories
-      $('.btn-category').click(function () {
-        var categoryId = $(this).data('category-id');
+      // $('.btn-category').click(function () {
+      //   var categoryId = $(this).data('category-id');
+      //   filterServices(categoryId);
+      // });
+
+      $('#categoryDropdown').change(function () {
+        var categoryId = $(this).val();
         filterServices(categoryId);
       });
 
@@ -516,11 +524,32 @@
           dataType: 'html',
           success: function (data) {
             $('#serviceTableBodyContainer').html(data);
-            // Reattach event handler after filtering
-            attachAddServiceHandler();
           }
         });
       }
+
+      $('#search').on('input', function () {
+        var searchText = $(this).val().toLowerCase();
+        $('#serviceTypeList tbody tr').each(function () {
+          var serviceName = $(this).find('.title').text().toLowerCase();
+          var servicePrice = $(this).find('.fee').text().toLowerCase();
+          if (serviceName.includes(searchText) || servicePrice.includes(searchText)) {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+      });
+
+      $('.btn-category').click(function () {
+        var categoryId = $(this).data('category-id');
+
+        $('.btn-category.active').removeClass('active');
+
+        $(this).addClass('active');
+
+        filterServices(categoryId);
+      });
 
       $('#insertBtn').off('click').on('click', function () {
         insertData();
@@ -689,6 +718,178 @@
   <script src="./public/assets/js_s/typeahead.js"></script>
   <script src="./public/assets/js_s/select2.js"></script>
   <!-- End custom js for this page-->
+</body>
+
+</html>
+
+////////////////////////////////////////////////////////////////////////
+pdf
+////////////////////////////////////////////////////////////////////////
+<!DOCTYPE html>
+<html>
+<!-- <html lang="ar"> for arabic only -->
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>Express Wash Customer Invoice</title>
+
+  <style>
+    @media print {
+      @page {
+        margin: 0 auto;
+        sheet-size: 300px 250mm;
+      }
+
+      html {
+        direction: rtl;
+      }
+
+      html,
+      body {
+        font-size: 12px;
+        margin: 0;
+        padding: 0
+      }
+
+      #printContainer {
+        font-size: 12px;
+        width: 250px;
+        margin: auto;
+        /*padding: 10px;*/
+        /*border: 2px dotted #000;*/
+        text-align: justify;
+      }
+
+      /*span {
+                display: inline-block;
+                min-width: 350px;
+                white-space: nowrap;
+                background: red;
+            }*/
+
+      .text-center {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body onload="window.print();">
+  <h1 id="logo" class="text-center" style="margin-top: 5px; margin-bottom: 5px;">
+    <?php
+    $session = session();
+    if ($session->has('businessProfileImage')) {
+      echo '<img class="img-xs rounded-circle larger-profile-img" style="width: 120px; height: 120px; margin-top: 10px; margin-bottom: 10px;" src="' . $session->get('businessProfileImage') . '" alt="Profile image">';
+    } else {
+      // Default image or alternative content if the session variable is not set
+      echo '<img style="width: 120px; height: 120px; margin-top: 5px; margin-bottom: 5px;" src="' . base_url() . './public/assets/images/regexbyte.png" alt="Default Logo">';
+    }
+    ?>
+  </h1>
+
+
+  <div id='printContainer'>
+
+    <?php
+    $session = session();
+    if ($session->has('businessName') && $session->has('phoneNumber') && $session->has('business_address')) {
+      echo '<h2 id="slogan" style="margin: 0; font-size: 12px;" class="text-center"><span class="text-black fw-bold" style="font-weight: bold;">' . $session->get('businessName') . '</span></h2>';
+
+      echo '<p id="slogan" class="text-center" style="margin: 0; font-size: 12px;"><span class="text-black fw-bold" style="font-weight: normal;">' . $session->get('phoneNumber') . '</span></p>';
+      echo '<p id="slogan" class="text-center" style="margin: 0; font-size: 12px;"><span class="text-black fw-bold" style="font-weight: normal;">' . $session->get('business_address') . '</span></p>';
+
+      echo '<br>';
+    }
+    ?>
+
+    <table>
+
+      <?php
+      date_default_timezone_set('Asia/Karachi');
+      $peshawarTimeZone = new DateTimeZone('Asia/Karachi');
+      $currentDateTime = new DateTime('now', $peshawarTimeZone);
+      $date = $currentDateTime->format('d-m-Y');
+      $time = $currentDateTime->format('h:i:s');
+      ?>
+      <tr>
+        <td style="width: 50%;">Invoice# <b>59867</b> </td>
+        <td style="width: 50%; text-align: right;">Date:<b>
+            <?= $date; ?>
+          </b></td>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align: left; margin-right: 5px;">Time:<b>
+            <?= $time; ?>
+          </b><br></td>
+      </tr>
+
+      <tr>
+        <td style=" width: 50%; white-space: nowrap;">Patient Name:<b>
+            <?= $clientName ?>
+          </b></td>
+        <td style=" width: 50%; white-space: nowrap;text-align: right;padding-right:15px;">Currency:<b>
+            <?= $currencyName; ?>
+          </b></td>
+
+
+      </tr>
+
+      <tr>
+
+        <td style=" width: 50%; white-space: nowrap;">PaymentMethod:<b>
+            <?= $paymentMethodName; ?>
+          </b></td>
+        <td style=" width: 50%; white-space: nowrap;text-align: right;padding-right:23px;">Exchange:<b>
+            <?= $invoiceData['rate'] ?>
+          </b></td>
+      </tr>
+
+      <tr>
+        <td colspan="2"></td>
+      </tr>
+    </table>
+    <hr>
+
+    <table>
+      <tr>
+        <td><b>Service Name</b></td>
+        <td style="padding-left: 100px;"><b>Fee</b></td>
+      </tr>
+
+      <?php
+      if (!empty ($services)) {
+        foreach ($services as $service) {
+          echo '<tr>';
+          echo '<td style="margin-left: 20px;">' . $service['serviceName'] . '</td>';
+          echo '<td style="padding-left:100px">' . $service['fee'] . '</td>';
+          echo '</tr>';
+        }
+      } else {
+        echo '<tr>';
+        echo '<td colspan="2">No service details available.</td>';
+        echo '</tr>';
+      }
+      ?>
+    </table>
+
+    <hr>
+    <table style="width: 100%;">
+      <tr>
+        <td style="width: 50%; text-align: left;">&nbsp;</td>
+        <td style="width: 25%; text-align: right; padding-right:10px;"><b>Total</b> PKR:
+          <?= $invoiceData['Value']; ?>
+        </td>
+      </tr>
+    </table>
+    <br>
+
+
+    <div style="text-align:center">
+      <a style="text-decoration:none" href="www.regexbyte.com">www.regexbyte.com</a>
+    </div>
+
+  </div>
 </body>
 
 </html>

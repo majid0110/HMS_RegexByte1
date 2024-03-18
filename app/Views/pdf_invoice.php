@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <title>Express Wash Customer Invoice</title>
+    <title>Services Invoice</title>
 
     <style>
         @media print {
@@ -49,6 +49,30 @@
 </head>
 
 <body onload="window.print();">
+    <?php
+    date_default_timezone_set('Asia/Karachi');
+    $peshawarTimeZone = new DateTimeZone('Asia/Karachi');
+    $currentDateTime = new DateTime('now', $peshawarTimeZone);
+    $date = $currentDateTime->format('d-m-Y');
+    $time = $currentDateTime->format('h:i:s');
+    ?>
+    <table style="width: 100%;">
+        <tr>
+            <td style="padding-right: 10px;text-align: left;">Invoice# <b>59867</b> </td>
+            <td style="padding-left: 10px;text-align: right;">Patient Unique# <b>59867</b> </td>
+        </tr>
+        <tr style="position: relative;">
+            <td style="absolute; margin-left: 60px ;text-align: left;">Date:<b>
+                    <?= $date; ?>
+                </b></td>
+            <td style="padding-left: 10px;text-align: right;">Time:<b>
+                    <?= $time; ?>
+                </b></td>
+        </tr>
+        <tr>
+            <td colspan="2"></td>
+        </tr>
+    </table>
     <h1 id="logo" class="text-center" style="margin-top: 5px; margin-bottom: 5px;">
         <?php
         $session = session();
@@ -131,7 +155,7 @@
             </tr>
 
             <?php
-            if (!empty($services)) {
+            if (!empty ($services)) {
                 foreach ($services as $service) {
                     echo '<tr>';
                     echo '<td style="margin-left: 20px;">' . $service['serviceName'] . '</td>';
@@ -175,15 +199,15 @@
 <title>Invoice</title>
 <style>
 table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+width: 100%;
+border-collapse: collapse;
+margin-top: 20px;
 }
 
 th, td {
-  border: 1px solid black;
-  padding: 8px;
-  text-align: left;
+border: 1px solid black;
+padding: 8px;
+text-align: left;
 }
 </style>
 </head>
@@ -205,11 +229,11 @@ th, td {
 <h2>Services</h2>
 <table>
 <thead>
-  <tr>
-      <th>Service Type</th>
-      <th>Service Name</th>
-      <th>Fee</th>
-  </tr>
+<tr>
+<th>Service Type</th>
+<th>Service Name</th>
+<th>Fee</th>
+</tr>
 </thead>
 <tbody>
 <?php foreach ($services as $service): ?>

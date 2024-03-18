@@ -26,21 +26,6 @@
 
     }
 
-    #cat {
-      width: 56%;
-      height: 0rem;
-      margin-bottom: -28px
-    }
-
-    #cat:hover {
-      background-color: #800080;
-      color: #fff;
-      font-weight: 950;
-      width: 58%;
-      HEIGHT: 0rem;
-      margin-bottom: -28px
-    }
-
     #serviceTableBodyContainer {
       max-height: 300px;
       overflow-y: auto;
@@ -57,13 +42,48 @@
 
     }
 
+    .table thead th,
+    .table tbody td {
+      padding: 8px;
+    }
 
+    .table thead,
+    .table tbody {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    .table tbody tr {
+      height: 0px;
+    }
+
+    .table thead tr {
+      height: 0px;
+
+    }
+
+    .table-container {
+      max-height: 220px;
+      /* Adjust the height as needed */
+      overflow-y: auto;
+    }
+
+    /* 
     .table tbody tr {
       height: 30px;
     }
 
-    /*
+    .table thead tr {
+      height: 30px;
+    }
+
+
     .table tbody td {
+      padding: 5px;
+    }
+
+    .table thead tr {
       padding: 5px;
     } */
   </style>
@@ -262,28 +282,7 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <div class="row">
-            <div class="col-12 grid-margin">
-              <div class="card" style="margin-bottom: -16px; margin-top: -17px;">
-                <div class="card-body">
-                  <p class="card-description"
-                    style="margin-top: -19px; margin-bottom: 20px; font-weight: bold;color: black">
-                    Categories
-                  </p>
-                  <div class="row" id="categoryButtons">
-                    <?php foreach ($categories as $category): ?>
-                      <button style="width: auto;height: 41px;margin-top: -19px;margin-bottom: -15px;margin-left: 11px"
-                        class="btn btn-outline-secondary btn-category" data-category-id="<?= $category['idCatArt']; ?>">
-                        <?= $category['name']; ?>
-                      </button>
-                    <?php endforeach; ?>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
+          <div class="row" style="margin-top: -22px;">
             <div class="col-md-6">
               <div class="card h-100">
                 <div class="card-body">
@@ -342,38 +341,51 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-group" style="margin-bottom: 6px;">
-                      <!-- <label for="serviceType">Service Type</label> -->
-                      <label for="search" style="display: inline-block; margin-right: 10px;">Search</label>
-                      <div style="display: inline-block; position: relative;">
-                        <input type="text" id="search" placeholder="..."
-                          style="border: none; border-bottom: 1px solid #ccc; width: 200px;">
+                    <div class="form-group row" style="margin-bottom: 6px;">
+                      <div class="col">
+                        <label for="categoryDropdown">Category:</label>
+                        <select class="form-control" id="categoryDropdown">
+                          <option value="">All Categories</option>
+                          <?php foreach ($categories as $category): ?>
+                            <option value="<?= $category['idCatArt']; ?>">
+                              <?= $category['name']; ?>
+                            </option>
+                          <?php endforeach; ?>
+                        </select>
                       </div>
+                      <div class="col">
+                        <label for="search">Search:</label>
+                        <input type="text" id="search" class="form-control" placeholder="Enter service type or fee">
+                      </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 6px;">
                       <div id="serviceTableBodyContainer">
-                        <table class="table" id="serviceTypeList">
-                          <thead>
-                            <tr>
-                              <th>Name</th>
-                              <th>Price</th>
-                              <th>Action</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <?php foreach ($services as $service): ?>
-                              <tr data-service-type-id="<?= $service['idArtMenu']; ?>">
-                                <td class="title">
-                                  <?= $service['Name']; ?>
-                                </td>
-                                <td class="fee" contenteditable="true">
-                                  <?= $service['Price']; ?>
-                                </td>
-                                <td><span class="badge badge-primary badge-pill hover-effect"
-                                    onclick="addService()">ADD</span></td>
+                        <div class="table-container">
+                          <table class="table" id="serviceTypeList">
+                            <thead>
+                              <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Action</th>
                               </tr>
+                            </thead>
+                            <tbody>
+                              <?php foreach ($services as $service): ?>
+                                <tr data-service-type-id="<?= $service['idArtMenu']; ?>">
+                                  <td class="title">
+                                    <?= $service['Name']; ?>
+                                  </td>
+                                  <td class="fee" contenteditable="true">
+                                    <?= $service['Price']; ?>
+                                  </td>
+                                  <td><span class="badge badge-primary badge-pill hover-effect"
+                                      onclick="addService()">ADD</span></td>
+                                </tr>
 
-                            <?php endforeach; ?>
-                          </tbody>
-                        </table>
+                              <?php endforeach; ?>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     </div>
                   </form>
@@ -387,8 +399,7 @@
                     style="margin-top: -19px; margin-bottom: -10px; font-weight: bold; color: black;">
                     SUMMARY
                   </p>
-                  <hr>
-                  <div class="row">
+                  <div class="row" style="margin-top: 8px;margin-bottom: -7px;">
                     <div class="col-md-6" id="clientDetailsLeft"></div>
                     <div class="col-md-6" id="clientDetailsRight"></div>
                   </div>
@@ -406,10 +417,10 @@
                     </table>
                   </div>
                 </div>
-                <div style="margin-left: 400px; font-weight: 900; font-size: 150px">
+                <div style="margin-left: 368px; font-weight: 900; font-size: 150px">
                   <p>Total Fee: <span id="totalFee">0</span></p>
                 </div>
-                <div style="height: 50px; margin-left: 1.4em; font-weight: 900; font-size: 150px">
+                <div style="height: 58px; margin-left: 1.4em; font-weight: 900; font-size: 150px">
                   <!-- <button class="btn btn-primary btn-fw" id="insertBtn">Save</button> -->
                   <button type="button" class="btn btn-outline-info btn-icon-text" id="insertBtn">Print
                     <i class="ti-printer btn-icon-append"></i>
@@ -432,52 +443,28 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../../vendors/js/vendor.bundle.base.js"></script>
 
-  <!-- <script>
-    function attachAddServiceHandler() {
-      $('#serviceTypeList .badge').click(function () {
-        var serviceTypeRow = $(this).closest('tr');
-        var serviceTypeId = serviceTypeRow.data('service-type-id');
-        var serviceType = serviceTypeRow.find('.title').text().trim();
-        var serviceFee = serviceTypeRow.find('.fee').text().trim();
-        console.log("Service Type: ", serviceType);
-        console.log("Service Type ID: ", serviceTypeId);
-        console.log("Service Fee: ", serviceFee);
-        addServiceRow(serviceType, serviceTypeId, serviceFee);
-        calculateTotalFee();
+  <script>
+
+    function calculateTotalFee() {
+      var totalFee = 0;
+
+      $('#serviceTableBody tr').each(function () {
+        var fee = parseFloat($(this).find('td:eq(1)').text());
+        if (!isNaN(fee)) {
+          totalFee += fee;
+        }
       });
+
+      $('#totalFee').text(totalFee.toFixed(2));
     }
 
-    // Attach event handler on document ready
-    $(document).ready(function () {
-      attachAddServiceHandler();
-
-      // Filter services based on categories
-      $('.btn-category').click(function () {
-        var categoryId = $(this).data('category-id');
-        filterServices(categoryId);
-      });
-
-      function filterServices(categoryId) {
-        $.ajax({
-          url: '<?php echo base_url() . "SalesController/filterServices"; ?>',
-          type: 'POST',
-          data: { categoryId: categoryId },
-          dataType: 'html',
-          success: function (data) {
-            $('#serviceTableBodyContainer').html(data);
-            // Reattach event handler after filtering
-            attachAddServiceHandler();
-          }
-        });
-      }
+    $('#serviceTableBody').on('input', 'td[contenteditable="true"]', function () {
+      calculateTotalFee();
     });
-  </script> -->
-  <script>
 
     function addServiceRow(serviceType, serviceTypeId, serviceFee) {
       var exists = false;
 
-      // Check if the service already exists in the summary table
       $('#serviceTableBody tr').each(function () {
         var existingServiceTypeId = $(this).find('td:first').data('service-type-id');
         if (existingServiceTypeId === serviceTypeId) {
@@ -489,7 +476,7 @@
       if (!exists) {
         var newRow = '<tr>' +
           '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
-          '<td>' + serviceFee + '</td>' +
+          '<td contenteditable="true">' + serviceFee + '</td>' +
           '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)">Remove</button></td>' +
           '</tr>';
         $('#serviceTableBody').append(newRow);
@@ -499,10 +486,8 @@
       }
     }
 
-    // Attach event handlers
     $(document).ready(function () {
 
-      // Attach add service event handler
       $('#serviceTypeList .badge').click(function () {
         var serviceTypeRow = $(this).closest('tr');
         var serviceTypeId = serviceTypeRow.data('service-type-id');
@@ -515,7 +500,6 @@
         calculateTotalFee();
       });
 
-      // Define attachAddServiceHandler function
       function attachAddServiceHandler() {
         $('#serviceTypeList .badge').click(function () {
           var serviceTypeRow = $(this).closest('tr');
@@ -531,8 +515,13 @@
       }
 
       // Filter services based on categories
-      $('.btn-category').click(function () {
-        var categoryId = $(this).data('category-id');
+      // $('.btn-category').click(function () {
+      //   var categoryId = $(this).data('category-id');
+      //   filterServices(categoryId);
+      // });
+
+      $('#categoryDropdown').change(function () {
+        var categoryId = $(this).val();
         filterServices(categoryId);
       });
 
@@ -544,8 +533,6 @@
           dataType: 'html',
           success: function (data) {
             $('#serviceTableBodyContainer').html(data);
-            // Reattach event handler after filtering
-            attachAddServiceHandler();
           }
         });
       }
@@ -566,13 +553,10 @@
       $('.btn-category').click(function () {
         var categoryId = $(this).data('category-id');
 
-        // Remove active class from previously active button
         $('.btn-category.active').removeClass('active');
 
-        // Add active class to the clicked button
         $(this).addClass('active');
 
-        // Filter services based on the clicked category
         filterServices(categoryId);
       });
 
@@ -617,18 +601,7 @@
           '<br>Exchange: ' + (selectedExchange !== undefined ? selectedExchange : 'N/A'));
       }
 
-      function calculateTotalFee() {
-        var totalFee = 0;
 
-        $('#serviceTableBody tr').each(function () {
-          var fee = parseFloat($(this).find('td:eq(1)').text());
-          if (!isNaN(fee)) {
-            totalFee += fee;
-          }
-        });
-
-        $('#totalFee').text(totalFee.toFixed(2));
-      }
 
       $('#serviceTableBody').on('click', '.remove-btn', function () {
         var row = $(this).closest('tr');

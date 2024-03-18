@@ -34,6 +34,14 @@ class SalesController extends Controller
         return view('sales_form.php', $data);
     }
 
+    public function getAllServices()
+    {
+        $model = new salesModel();
+        $services = $model->getServices();
+
+        return $this->response->setJSON(['services' => $services]);
+    }
+
     public function Sales_table()
     {
         $Model = new salesModel();
@@ -178,6 +186,11 @@ class SalesController extends Controller
     public function filterServices()
     {
         $categoryId = $this->request->getPost('categoryId');
+
+        if (empty ($categoryId)) {
+            $categoryId = null;
+        }
+
         $model = new salesModel();
         $data['services'] = $model->getServicesByCategory($categoryId);
         echo view('service_table_partial', $data);
@@ -233,6 +246,8 @@ class SalesController extends Controller
             return $this->response->setJSON(['success' => false, 'error' => 'Error message']);
         }
     }
+
+
 
 
 
