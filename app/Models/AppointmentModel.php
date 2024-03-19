@@ -8,11 +8,46 @@ class AppointmentModel extends Model
 {
     protected $table = 'appointment';
     protected $primaryKey = 'appointmentID';
-    protected $allowedFields = ['clientID', 'doctorID', 'appointmentDate', 'appointmentTime', 'appointmentType', 'appointmentFee', 'createdAT', 'updatedAT', 'businessID'];
+    protected $allowedFields = ['clientID', 'doctorID', 'appointmentDate', 'appointmentTime', 'appointmentType', 'appointmentFee', 'appointmentNo', 'createdAT', 'updatedAT', 'businessID'];
 
     public function saveAppointment($data)
     {
         return $this->insert($data);
+    }
+
+    public function getLastAppointmentNo($businessID)
+    {
+        $query = $this->select('appointmentNo')
+            ->where('businessID', $businessID)
+            ->orderBy('appointmentID', 'DESC')
+            ->limit(1)
+            ->get();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getRow();
+            return $result->appointmentNo;
+        } else {
+            return 0;
+        }
+    }
+
+    public function getinvoiceNumber($businessID, $appointmentID)
+    {
+        return $this->db->table($this->table)
+            ->where('businessID', $businessID)
+            ->where('appointmentID', $appointmentID)
+            ->select('appointmentNo')
+            ->get()
+            ->getRowArray()['appointmentNo'] ?? null;
+    }
+
+    public function getDoctorSpecialization($doctorID)
+    {
+        return $this->db->table('doctorprofile')
+            ->join('specialization', 'doctorprofile.Specialization = specialization.s_id')
+            ->where('DoctorID', $doctorID)
+            ->select('specialization_N')
+            ->get()
+            ->getRowArray()['specialization_N'] ?? null;
     }
 
 
@@ -61,7 +96,7 @@ class AppointmentModel extends Model
         $builder->join('client', 'client.idClient = appointment.clientID');
         $builder->join('fee_type', 'fee_type.f_id = appointment.appointmentType');
 
-        if (!empty($search)) {
+        if (!empty ($search)) {
             $builder->groupStart()
                 ->like('client.client', $search)
                 ->orLike('doctorprofile.FirstName', $search)
@@ -73,17 +108,17 @@ class AppointmentModel extends Model
                 ->groupEnd();
         }
 
-        if (!empty($doctor)) {
+        if (!empty ($doctor)) {
             $builder->groupStart()
                 ->like('CONCAT(doctorprofile.FirstName, " ", doctorprofile.LastName)', $doctor)
                 ->groupEnd();
         }
 
-        if (!empty($client)) {
+        if (!empty ($client)) {
             $builder->like('client.client', $client);
         }
 
-        if (!empty($fromDate) && !empty($toDate)) {
+        if (!empty ($fromDate) && !empty ($toDate)) {
             $builder->where('appointment.appointmentDate >=', $fromDate)
                 ->where('appointment.appointmentDate <=', $toDate);
         }

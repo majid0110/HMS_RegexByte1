@@ -16,7 +16,7 @@
   <!-- --------------------------------------------------------- -->
   <style>
     #openAddClientModal:hover {
-      background-color: purple;
+      background-color: #52CDFF;
     }
   </style>
 </head>
@@ -229,12 +229,9 @@
             <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">BOOK APPOINTMENT</h4>
+                  <h4 class="card-title" style="margin-top: -7x;">BOOK APPOINTMENT</h4>
                   <form class="pt-3" id="appointmentForm" method="POST"
                     action="<?php echo base_url() . "saveAppointment"; ?>" enctype="multipart/form-data">
-                    <p class="card-description">
-                      Personal info
-                    </p>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
@@ -265,7 +262,7 @@
                       </div>
 
                     </div>
-                    <div class="row">
+                    <div class="row" style="margin-top: -16px;">
                       <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Doctor Name</label>
@@ -295,42 +292,45 @@
                       </div>
 
                       <input type="hidden" name="appointmentTypeName" id="appointmentTypeNameInput">
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Appointment Fee</label>
-                            <div class="col-sm-9">
-                              <input type="number" class="form-control" name="appointmentFee" id="appointmentFee" />
-                            </div>
+                    </div>
+                    <div class="row" style="margin-top: -26px;">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Appointment Fee</label>
+                          <div class="col-sm-9">
+                            <input type="number" class="form-control" name="appointmentFee" id="appointmentFee"
+                              required />
                           </div>
                         </div>
                       </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Appointment Date</label>
-                            <div class="col-sm-9">
-                              <input type="date" class="form-control" name="appointmentDate"
-                                value="<?= date('Y-m-d'); ?>" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Appointment Time</label>
-                            <div class="col-sm-9">
-                              <input type="time" class="form-control" name="appointmentTime"
-                                value="<?= date('H:i'); ?>" />
-                            </div>
+                    </div>
+                    <div class="row" style="margin-top: -26px;">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Appointment Date</label>
+                          <div class="col-sm-9">
+                            <input type="date" class="form-control" name="appointmentDate"
+                              value="<?= date('Y-m-d'); ?>" />
                           </div>
                         </div>
                       </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <button type="submit" class="btn btn-primary">BOOK</button>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Appointment Time</label>
+                          <div class="col-sm-9">
+                            <input type="time" class="form-control" name="appointmentTime"
+                              value="<?= date('H:i'); ?>" />
+                          </div>
                         </div>
                       </div>
+                    </div>
+                    <div class="row" style="margin-top: -16px;">
+                      <div class="col-md-6">
+                        <!-- <button type="submit" class="btn btn-primary">BOOK</button> -->
+                        <button type="submit" class="btn btn-outline-info btn-icon-text">BOOK
+                        </button>
+                      </div>
+                    </div>
                   </form>
                   <div class="modal fade" id="addClientModal" tabindex="-1" role="dialog"
                     aria-labelledby="addClientModalLabel" aria-hidden="true">

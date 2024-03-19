@@ -92,6 +92,16 @@ class ClientModel extends Model
             ->getRowArray()['age'] ?? null;
     }
 
+    public function getclientUnique($businessID, $clientID)
+    {
+        return $this->db->table($this->table)
+            ->where('idBusiness', $businessID)
+            ->where('idClient', $clientID)
+            ->select('clientUniqueId')
+            ->get()
+            ->getRowArray()['clientUniqueId'] ?? null;
+    }
+
     public function getclientGender($businessID, $clientID)
     {
         return $this->db->table($this->table)

@@ -142,6 +142,9 @@ class AppointmentController extends Controller
         $businessID = session()->get('businessID');
         $charges = $businessModel->getBusinessCharges($businessID);
 
+        $lastAppointmentNo = $appointmentModel->getLastAppointmentNo($businessID);
+        $appointmentNo = intval($lastAppointmentNo) + 1;
+
         $data = [
             'clientID' => $clientID,
             'doctorID' => $doctorID,
@@ -150,14 +153,20 @@ class AppointmentController extends Controller
             'appointmentType' => $appointmentType,
             'appointmentFee' => $doctorFee,
             'hospitalCharges' => $charges,
+            'appointmentNo' => $appointmentNo,
             'businessID' => $businessID,
         ];
 
         $appointmentModel->saveAppointment($data);
+        $appointmentID = $appointmentModel->getInsertID();
         $clientID = $this->request->getPost('clientId');
         $clientModel = new ClientModel();
         $Age = $clientModel->getclientAge($businessID, $clientID);
         $Gender = $clientModel->getclientGender($businessID, $clientID);
+        $clientUnique = $clientModel->getclientUnique($businessID, $clientID);
+        $Model = new AppointmentModel();
+        $InvoiceNumber = $Model->getinvoiceNumber($businessID, $appointmentID);
+        $specializationName = $Model->getDoctorSpecialization($doctorID);
 
         $mpdf = new Mpdf();
         $pdfContent = view('pdf_template', [
@@ -167,6 +176,9 @@ class AppointmentController extends Controller
             'doctorName' => $doctorName,
             'Age' => $Age,
             'Gender' => $Gender,
+            'clientUnique' => $clientUnique,
+            'InvoiceNumber' => $InvoiceNumber,
+            'specializationName' => $specializationName,
         ]);
 
         $mpdf->WriteHTML($pdfContent);

@@ -56,16 +56,20 @@
     $date = $currentDateTime->format('d-m-Y');
     $time = $currentDateTime->format('h:i:s');
     ?>
-    <table style="width: 100%;">
+    <table style="text-align: left">
         <tr>
-            <td style="padding-right: 10px;text-align: left;">Invoice# <b>59867</b> </td>
-            <td style="padding-left: 10px;text-align: right;">Patient Unique# <b>59867</b> </td>
+            <td style="padding-left: 7% ;text-align: left;">Invoice# <b>
+                    <?= $InvoiceNumber ?>
+                </b> </td>
+            <td style="padding-left:13%;text-align: right;">Patient Unique# <b>
+                    <?= $clientUnique ?>
+                </b> </td>
         </tr>
-        <tr style="position: relative;">
-            <td style="absolute; margin-left: 60px ;text-align: left;">Date:<b>
+        <tr style="text-align: left">
+            <td style="padding-left: 7% ; text-align: left;">Date:<b>
                     <?= $date; ?>
                 </b></td>
-            <td style="padding-left: 10px;text-align: right;">Time:<b>
+            <td style="padding-left: 11%;text-align: right;">Time:<b>
                     <?= $time; ?>
                 </b></td>
         </tr>
@@ -110,26 +114,17 @@
             $time = $currentDateTime->format('h:i:s');
             ?>
             <tr>
-                <td style="width: 50%;">Invoice# <b>59867</b> </td>
-                <td style="width: 50%; text-align: right;">Date:<b>
-                        <?= $date; ?>
-                    </b></td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align: left; margin-right: 5px;">Time:<b>
-                        <?= $time; ?>
-                    </b><br></td>
-            </tr>
-
-            <tr>
-                <td style=" width: 50%; white-space: nowrap;">Patient Name:<b>
+                <td style=" width: 50%; white-space: nowrap;">Patient:<b>
                         <?= $clientName ?>
                     </b></td>
-                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-right:15px;">Currency:<b>
-                        <?= $currencyName; ?>
+                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Gender:<b>
+                        <?= $Gender; ?>
                     </b></td>
-
-
+            </tr>
+            <tr>
+                <td style=" width: 50%; white-space: nowrap;text-align: left;padding-right:15px;">Age:<b>
+                        <?= $Age; ?>
+                    </b></td>
             </tr>
 
             <tr>
@@ -137,8 +132,8 @@
                 <td style=" width: 50%; white-space: nowrap;">PaymentMethod:<b>
                         <?= $paymentMethodName; ?>
                     </b></td>
-                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-right:23px;">Exchange:<b>
-                        <?= $invoiceData['rate'] ?>
+                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Currency:<b>
+                        <?= $currencyName; ?>
                     </b></td>
             </tr>
 
@@ -150,8 +145,9 @@
 
         <table>
             <tr>
-                <td><b>Service Name</b></td>
-                <td style="padding-left: 100px;"><b>Fee</b></td>
+                <td style="text-align: left;"><b>Service</b></td>
+                <td style="text-align: right; padding-left:40%;"><b>Quantity</b></td>
+                <td style="text-align: right;padding-left:4%;"><b>Fee</b></td>
             </tr>
 
             <?php
@@ -159,7 +155,8 @@
                 foreach ($services as $service) {
                     echo '<tr>';
                     echo '<td style="margin-left: 20px;">' . $service['serviceName'] . '</td>';
-                    echo '<td style="padding-left:100px">' . $service['fee'] . '</td>';
+                    echo '<td  style="text-align: right;padding-left:40%;">1</td>';
+                    echo '<td style="text-align: right; padding-left:4%;">' . number_format($service['fee'], 2) . '</td>';
                     echo '</tr>';
                 }
             } else {
@@ -175,7 +172,7 @@
             <tr>
                 <td style="width: 50%; text-align: left;">&nbsp;</td>
                 <td style="width: 25%; text-align: right; padding-right:10px;"><b>Total</b> PKR:
-                    <?= $invoiceData['Value']; ?>
+                    <?= $invoiceData['Value']; ?>.00
                 </td>
             </tr>
         </table>

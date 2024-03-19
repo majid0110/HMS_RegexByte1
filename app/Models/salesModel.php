@@ -197,4 +197,5 @@ class salesModel extends Model
         }
         return $builder->get()->getResultArray();
     }
+
 }

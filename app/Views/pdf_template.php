@@ -48,6 +48,27 @@
 </head>
 
 <body onload="window.print();">
+    <table style="text-align: left">
+        <tr>
+            <td style="padding-left: 7% ;text-align: left;">Invoice# <b>
+                    <?= $InvoiceNumber ?>
+                </b> </td>
+            <td style="padding-left:13%;text-align: right;">Patient Unique# <b>
+                    <?= $clientUnique ?>
+                </b> </td>
+        </tr>
+        <tr style="text-align: left">
+            <td style="padding-left: 7% ; text-align: left;">Date:<b>
+                    <?= $appointmentData['appointmentDate']; ?>
+                </b></td>
+            <td style="padding-left: 11%;text-align: right;">Time:<b>
+                    <?= $appointmentData['appointmentTime']; ?>
+                </b></td>
+        </tr>
+        <tr>
+            <td colspan="2"></td>
+        </tr>
+    </table>
     <h1 id="logo" class="text-center" style="margin-top: 5px; margin-bottom: 5px;">
         <?php
         $session = session();
@@ -80,38 +101,26 @@
 
 
         <table>
-
-
             <tr>
-                <td style="width: 50%;">Appointment# <b>59867</b> </td>
-                <td style="width: 50%; text-align: right;">Date:<b>
-                        <?= $appointmentData['appointmentDate']; ?>
+                <td style=" width: 50%; white-space: nowrap;">Patient:<b>
+                        <?= $clientName ?>
                     </b></td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align: left; margin-right: 5px;">Time:<b>
-                        <?= $appointmentData['appointmentTime']; ?>
-                    </b><br></td>
-            </tr>
-
-            <tr>
-                <td colspan="2"></td>
-            </tr>
-
-
-            <tr>
-                <td style=" width: 50%;">Patient Name:<b>
-                        <?= $clientName; ?>
-                    </b></td>
-                <td style="width: 50%; text-align: right;">Gender:<b>
+                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Gender:<b>
                         <?= $Gender; ?>
                     </b></td>
             </tr>
+            <tr>
+                <td style=" width: 50%; white-space: nowrap;text-align: left;padding-right:15px;">Age:<b>
+                        <?= $Age; ?>
+                    </b></td>
+            </tr>
 
             <tr>
-
-                <td style=" width: 50%; white-space: nowrap;">Doctor Name:<b>
-                        <?= $doctorName; ?>
+                <td style=" width: 50%; white-space: nowrap;">Doctor:<b>
+                        <?= $doctorName ?>
+                    </b></td>
+                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Specialization:<b>
+                        <?= $specializationName; ?>
                     </b></td>
             </tr>
 
@@ -122,7 +131,7 @@
         <table>
             <tr>
                 <td><b>Appointment</b></td>
-                <td style="padding-left: 100px;"><b>Fee</b></td>
+                <td style="text-align: right;padding-left: 50%;"><b>Fee</b></td>
             </tr>
 
             <tr>
@@ -134,7 +143,7 @@
                 <td style="margin-left: 20px;">
                     <?= $appointmentTypeName; ?>
                 </td>
-                <td style="padding-left:100px">
+                <td style="text-align: right;padding-left: 50%;">
                     <?= $appointmentData['appointmentFee']; ?>.00
                 </td>
             </tr>
@@ -147,9 +156,9 @@
         <hr>
         <table style="width: 100%;">
             <tr>
-                <td style="width: 50%; text-align: left;">&nbsp;</td>
+                <td style="text-align: left;">&nbsp;</td>
 
-                <td style="width: 25%; text-align:  right; padding-right:10px" colspan="2"><b>Total</b> PKR
+                <td style="text-align:  right; padding-right:8px" colspan="2"><b>Total</b> PKR
                     <?= $appointmentData['appointmentFee']; ?>.00
                 </td>
             </tr>

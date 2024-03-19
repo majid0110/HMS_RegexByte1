@@ -46,4 +46,14 @@ class InvoiceModel extends Model
     {
         return $this->insert($data);
     }
+
+    public function getinvoiceNumber($businessID, $idPayment)
+    {
+        return $this->db->table($this->table)
+            ->where('idBusiness', $businessID)
+            ->where('idReceipts', $idPayment)
+            ->select('invOrdNum')
+            ->get()
+            ->getRowArray()['invOrdNum'] ?? null;
+    }
 }

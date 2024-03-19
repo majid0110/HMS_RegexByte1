@@ -160,6 +160,14 @@ class SalesController extends Controller
             $db->transCommit();
 
 
+            $clientID = $this->request->getPost('clientId');
+            $clientModel = new ClientModel();
+            $Age = $clientModel->getclientAge($businessID, $clientID);
+            $Gender = $clientModel->getclientGender($businessID, $clientID);
+            $clientUnique = $clientModel->getclientUnique($businessID, $clientID);
+            $InvoiceModel = new InvoiceModel();
+            $InvoiceNumber = $InvoiceModel->getinvoiceNumber($businessID, $idPayment);
+
             $mpdf = new Mpdf();
             $pdfContent = view('pdf_invoice', [
                 'invoiceData' => $invoiceData,
@@ -168,6 +176,10 @@ class SalesController extends Controller
                 'clientName' => $clientName,
                 'currencyName' => $currencyName,
                 'paymentMethodName' => $paymentMethodName,
+                'Age' => $Age,
+                'clientUnique' => $clientUnique,
+                'Gender' => $Gender,
+                'InvoiceNumber' => $InvoiceNumber,
             ]);
             $mpdf->WriteHTML($pdfContent);
             $pdfBinary = $mpdf->Output('', 'S');
