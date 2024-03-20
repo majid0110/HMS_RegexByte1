@@ -10,15 +10,63 @@
 
   <style>
     .badge-pill:hover {
-      background-color: #007bff;
-      /* Change this to the desired hover background color */
+      background-color: #52CDFF;
       color: #fff;
-      /* Change this to the desired hover text color */
       cursor: pointer;
+      font-weight: bolder;
+      border: #52CDFF;
     }
 
     #clientDetails {
       font-weight: 750;
+    }
+
+    .twitter-typeahead {
+      max-width: 100%;
+      width: 100%;
+
+    }
+
+    #serviceTableBodyContainer {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    #summaryTableContainer {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .active {
+      background: #52CDFF;
+      color: #fff;
+
+    }
+
+    .table thead th,
+    .table tbody td {
+      padding: 8px;
+    }
+
+    .table thead,
+    .table tbody {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    .table tbody tr {
+      height: 0px;
+    }
+
+    .table thead tr {
+      height: 0px;
+
+    }
+
+    .table-container {
+      max-height: 220px;
+      overflow-y: auto;
     }
   </style>
 </head>
@@ -229,13 +277,13 @@
             echo '<div class="alert alert-danger">' . $errorMessage . '</div>';
           }
           ?>
-          <div class="row">
+          <div class="row" style="margin-top: -2%;">
             <div class="col-md-6">
               <div class="card h-100">
                 <div class="card-body">
-                  <h4 class="card-title">Add Test</h4>
-                  <p class="card-description">
-                    Lab Test Services
+                  <p class="card-description"
+                    style="margin-top: -19px; margin-bottom: -10px; font-weight: bold; color: black;">
+                    Add Test
                   </p>
                   <form class="pt-3" method="POST" action="<?php echo base_url() . "submitTests"; ?>"
                     enctype="multipart/form-data">
@@ -249,7 +297,7 @@
                         <?php endforeach; ?>
                       </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="margin-top: -4%;">
                       <label for="appointment">Appointment</label>
                       <select class="form-control" id="appointment" name="appointment">
                         <!-- Appointments will be loaded dynamically here -->
@@ -257,23 +305,44 @@
                       <div id="appointmentStatus"></div>
                     </div>
 
-                    <div class="form-group">
-                      <label for="testType">Test Type</label>
-                      <ul class="list-group" id="testTypeList">
-                        <?php foreach ($test_types as $testType): ?>
-                          <li class="list-group-item d-flex justify-content-between align-items-center"
-                            data-test-type-id="<?= $testType['testTypeId']; ?>">
-                            <span class="title">
-                              <?= $testType['title']; ?>
-                            </span>
-                            <span class="fee" contenteditable="true">
-                              <?= $testType['test_fee']; ?>
-                            </span>
-                            <span class="badge badge-primary badge-pill hover-effect" onclick="addTest()">ADD</span>
-                          </li>
-                        <?php endforeach; ?>
-                      </ul>
+                    <div class="form-group" style="margin-top: -4%;margin-bottom: 1%;">
+                      <label for="testType">Search Test Type</label>
+                      <input type="text" class="form-control" id="testTypeSearch" placeholder="Search Test Type">
                     </div>
+
+                    <div class="form-group">
+                      <div class="table-responsive">
+                        <div class="table-container">
+                          <table class="table" id="testTypeList">
+                            <thead>
+                              <tr>
+                                <th>Test Type</th>
+                                <th>Test Fee</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php foreach ($test_types as $testType): ?>
+                                <tr data-test-type-id="<?= $testType['testTypeId']; ?>">
+                                  <td class="title">
+                                    <?= $testType['title']; ?>
+                                  </td>
+                                  <td class="fee" contenteditable="true">
+                                    <?= $testType['test_fee']; ?>
+                                  </td>
+                                  <td>
+                                    <span class="badge badge-primary badge-pill hover-effect"
+                                      onclick="addTest()">ADD</span>
+                                  </td>
+                                </tr>
+                              <?php endforeach; ?>
+                            </tbody>
+
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+
                   </form>
 
                 </div>
@@ -282,42 +351,42 @@
             <div class="col-md-6">
               <div class="card h-100">
                 <div class="card-body">
-                  <h4 class="card-title">SUMMARY</h4>
+                  <p class="card-description"
+                    style="margin-top: -19px; margin-bottom: -1px; font-weight: bold; color: black;">
+                    SUMMARY
+                  </p>
                   <p class="card-description" id="clientDetails"></p>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Test Type</th>
-                        <th>Test Fee</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody id="testTableBody">
-
-                    </tbody>
-                  </table>
+                  <hr style="margin-top: -3%;margin-bottom: 2%;">
+                  <div id="summaryTableContainer">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Test Type</th>
+                          <th>Test Fee</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="testTableBody">
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                <div style="margin-left: 2.3em; font-weight: 900; font-size: 150px">
+                <div style="margin-left: 368px; font-weight: 900; font-size: 150px">
                   <p>Total Fee: <span id="totalFee">0</span></p>
                 </div>
-                <div style="height: 50px; margin-left: 1.4em; font-weight: 900; font-size: 150px">
-                  <button class="btn btn-primary btn-fw" id="insertBtn">PRINT</button>
+                <div style="height: 58px; margin-left: 1.4em; font-weight: 900; font-size: 150px">
+                  <!-- <button class="btn btn-primary btn-fw" id="insertBtn">Save</button> -->
+                  <button type="button" class="btn btn-outline-info btn-icon-text" id="insertBtn">Print
+                    <i class="ti-printer btn-icon-append"></i>
+                  </button>
                 </div>
               </div>
             </div>
 
           </div>
 
-
-
-
-
-          <!-- End custom js for this page-->
-
           <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
           <script src="../../vendors/js/vendor.bundle.base.js"></script>
-
-
 
           <script>
             $(document).ready(function () {
@@ -335,40 +404,6 @@
                 var appointment = $('#appointment option:selected').text();
                 $('#clientDetails').html('Client: ' + clientName + '<br>Appointment: ' + appointment);
               }
-
-
-
-
-              // function loadAppointments(clientId) {
-              //   $.ajax({
-              //     method: 'POST',
-              //     url: '<?= site_url('LabController/getAppointmentsForClient') ?>',
-              //     dataType: "json",
-              //     data: {
-              //       clientId: clientId,
-              //       _cache: new Date().getTime()
-              //     },
-              //     async: false,
-              //     success: function(response) {
-              //       console.log('Appointments Response:', response);
-
-              //       var appointmentDropdown = $('#appointment');
-              //       appointmentDropdown.empty();
-
-              //       if (response.success && response.appointments.length > 0) {
-              //         $.each(response.appointments, function(index, appointment) {
-              //           appointmentDropdown.append('<option value="' + appointment.appointmentID + '">' + appointment.appointmentID + '</option>');
-              //         });
-              //       } else {
-              //         appointmentDropdown.append('<option value="">No appointments available</option>');
-              //         updateClientDetails(clientId, 'No appointments available');
-              //       }
-              //     },
-              //     error: function(error) {
-              //       console.error('Error loading appointments:', error);
-              //     }
-              //   });
-              // }
 
               function loadAppointments(clientId) {
                 $.ajax({
@@ -403,7 +438,17 @@
                 });
               }
 
-
+              $('#testTypeSearch').on('input', function () {
+                var searchText = $(this).val().toLowerCase();
+                $('#testTypeList tbody tr').each(function () {
+                  var testType = $(this).find('.title').text().toLowerCase();
+                  if (testType.includes(searchText)) {
+                    $(this).show(); // Show the row if it matches the search text
+                  } else {
+                    $(this).hide(); // Hide the row if it doesn't match the search text
+                  }
+                });
+              });
 
               function addTestRow(testType, testTypeId, testFee) {
                 var newRow = '<tr><td data-test-type-id="' + testTypeId + '">' + testType + '</td>' +
@@ -418,18 +463,31 @@
                 calculateTotalFee();
               }
 
+              // function addTest(testType, testTypeId) {
+              //   var testFee = $('#testTypeList li:contains(' + testType + ') .fee').text();
+              //   var existingRow = $('#testTableBody td:contains(' + testType + ')').closest('tr');
 
-
+              //   if (existingRow.length > 0) {
+              //     existingRow.find('.editable-fee').text(testFee);
+              //   } else {
+              //     addTestRow(testType, testTypeId, testFee);
+              //   }
+              //   calculateTotalFee();
+              // }
 
               function addTest(testType, testTypeId) {
-                var testFee = $('#testTypeList li:contains(' + testType + ') .fee').text();
-                var existingRow = $('#testTableBody td:contains(' + testType + ')').closest('tr');
+                var testRow = $('#testTypeList tr[data-test-type-id="' + testTypeId + '"]');
+                var testFee = testRow.find('.fee').text();
 
-                if (existingRow.length > 0) {
-                  existingRow.find('.editable-fee').text(testFee);
-                } else {
-                  addTestRow(testType, testTypeId, testFee);
+                if (testType && testFee) {
+                  var existingRow = $('#testTableBody td[data-test-type-id="' + testTypeId + '"]').closest('tr');
+                  if (existingRow.length > 0) {
+                    existingRow.find('.editable-fee').text(testFee);
+                  } else {
+                    addTestRow(testType, testTypeId, testFee);
+                  }
                 }
+
                 calculateTotalFee();
               }
 
@@ -443,17 +501,14 @@
               });
 
               $('#testTypeList .badge').click(function () {
-
-                // var testType = $(this).closest('li').find('span:first').text().trim();
-                // var testTypeId = $(this).closest('li').data('test-type-id');
-                // var testFee = $(this).closest('li').find('.fee').text();
-
-                var testTypeRow = $(this).closest('li');
+                var testTypeRow = $(this).closest('tr');
                 var testTypeId = testTypeRow.data('test-type-id');
                 var testType = testTypeRow.find('.title').text().trim();
                 var testFee = testTypeRow.find('.fee').text();
-                addTestRow(testType, testTypeId, testFee);
-                calculateTotalFee();
+                console.log("Test Type: ", testType);
+                console.log("Test Type ID: ", testTypeId);
+                console.log("Test Fee: ", testFee);
+                addTest(testType, testTypeId);
               });
 
               function addTestRow(testType, testTypeId, testFee) {
@@ -576,14 +631,10 @@
               }
             });
           </script>
-
-
-          <?php include 'include_common/footer.php'; ?>
-
-
           <!-- partial -->
         </div>
         <!-- main-panel ends -->
+        <?php include 'include_common/footer.php'; ?>
       </div>
       <!-- page-body-wrapper ends -->
     </div>

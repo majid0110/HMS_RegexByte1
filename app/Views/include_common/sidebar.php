@@ -82,15 +82,15 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
                     </a>
                     <div class="collapse" id="ui-basic-<?= $moduleID ?>">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link" href="<?= base_url('labServices_form'); ?>">Add Lab Test</a>
-                            </li>
+                            </li> -->
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= base_url('labtest_form'); ?>">Add Test</a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link" href="<?= base_url('labtest_table'); ?>">View Tests</a>
-                            </li>
+                            </li> -->
                             <!-- Add more sub-menu items as needed -->
                         </ul>
                     </div>

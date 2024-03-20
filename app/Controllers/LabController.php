@@ -120,7 +120,7 @@ class LabController extends Controller
             $appointmentId = $this->request->getPost('appointmentId');
             $tests = $this->request->getPost('tests');
 
-            if (!empty($tests)) {
+            if (!empty ($tests)) {
                 foreach ($tests as $test) {
                     $data = [
                         'testTypeId' => $test['testTypeId'],
@@ -182,7 +182,7 @@ class LabController extends Controller
             $clientId = $this->request->getPost('clientId');
             log_message('info', 'Client ID: ' . $clientId);
 
-            if (empty($clientId)) {
+            if (empty ($clientId)) {
                 throw new \Exception('Invalid client ID.');
             }
 
@@ -237,6 +237,12 @@ class LabController extends Controller
                 $totalFee += $test['fee'];
             }
 
+            $testmodel = new TestModel();
+
+            $lastInvoiceNo = $testmodel->getLastLabNo($businessID);
+            $testNo = intval($lastInvoiceNo) + 1;
+
+
             $db->transBegin();
 
             $data = [
@@ -247,6 +253,7 @@ class LabController extends Controller
                 'hospitalCharges' => $hospitalcharges,
                 'clientId' => $clientId,
                 'appointmentId' => $appointmentId,
+                'labInvoice' => $testNo,
                 'clientName' => $clientName,
             ];
 
@@ -275,8 +282,24 @@ class LabController extends Controller
             }
             $db->transCommit();
 
+            $clientID = $this->request->getPost('clientId');
+            $clientModel = new ClientModel();
+            $Age = $clientModel->getclientAge($businessID, $clientID);
+            $Gender = $clientModel->getclientGender($businessID, $clientID);
+            $clientUnique = $clientModel->getclientUnique($businessID, $clientID);
+            $operatorName = session()->get('fName');
+
+
             $mpdf = new Mpdf();
-            $pdfContent = view('pdf_labTest', ['data' => $data, 'detailsData' => $detailsData]);
+            $pdfContent = view('pdf_labTest', [
+                'data' => $data,
+                'detailsData' => $detailsData,
+                'Age' => $Age,
+                'Gender' => $Gender,
+                'clientUnique' => $clientUnique,
+                'operatorName' => $operatorName,
+
+            ]);
             $mpdf->WriteHTML($pdfContent);
 
             $pdfBinary = $mpdf->Output('', 'S');

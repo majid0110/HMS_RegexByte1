@@ -167,6 +167,7 @@ class SalesController extends Controller
             $clientUnique = $clientModel->getclientUnique($businessID, $clientID);
             $InvoiceModel = new InvoiceModel();
             $InvoiceNumber = $InvoiceModel->getinvoiceNumber($businessID, $idPayment);
+            $operatorName = session()->get('fName');
 
             $mpdf = new Mpdf();
             $pdfContent = view('pdf_invoice', [
@@ -180,6 +181,7 @@ class SalesController extends Controller
                 'clientUnique' => $clientUnique,
                 'Gender' => $Gender,
                 'InvoiceNumber' => $InvoiceNumber,
+                'operatorName' => $operatorName,
             ]);
             $mpdf->WriteHTML($pdfContent);
             $pdfBinary = $mpdf->Output('', 'S');

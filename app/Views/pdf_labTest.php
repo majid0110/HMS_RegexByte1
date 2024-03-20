@@ -5,8 +5,47 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <title>Express Wash Customer Invoice</title>
+    <title>Lab Test Invoice</title>
 
+    <!-- <style>
+        @media print {
+            @page {
+                margin: 0 auto;
+                sheet-size: 300px 250mm;
+            }
+
+            html {
+                direction: rtl;
+            }
+
+            html,
+            body {
+                font-size: 12px;
+                margin: 0;
+                padding: 0
+            }
+
+            #printContainer {
+                font-size: 12px;
+                width: 250px;
+                margin: auto;
+                /*padding: 10px;*/
+                /*border: 2px dotted #000;*/
+                text-align: justify;
+            }
+
+            /*span {
+                display: inline-block;
+                min-width: 350px;
+                white-space: nowrap;
+                background: red;
+            }*/
+
+            .text-center {
+                text-align: center;
+            }
+        }
+    </style> -->
     <style>
         @media print {
             @page {
@@ -49,6 +88,37 @@
 </head>
 
 <body onload="window.print();">
+
+    <?php
+    date_default_timezone_set('Asia/Karachi');
+    $peshawarTimeZone = new DateTimeZone('Asia/Karachi');
+    $currentDateTime = new DateTime('now', $peshawarTimeZone);
+    $date = $currentDateTime->format('d-m-Y');
+    $time = $currentDateTime->format('h:i:s');
+    ?>
+    <table style="text-align: left">
+        <tr>
+            <td style="padding-left: 7% ;text-align: left;">Invoice# <b>
+                    000
+                </b> </td>
+            <td style="padding-left:13%;text-align: right;">Patient Unique# <b>
+                    <?= $clientUnique; ?>
+                </b> </td>
+        </tr>
+        <tr style="text-align: left">
+            <td style="padding-left: 7% ; text-align: left;">Date:<b>
+                    <?= $date; ?>
+                </b></td>
+            <td style="padding-left: 11%;text-align: right;">Time:<b>
+                    <?= $time; ?>
+                </b></td>
+        </tr>
+        <tr>
+            <td colspan="2"></td>
+        </tr>
+    </table>
+
+
     <h1 id="logo" class="text-center" style="margin-top: 5px; margin-bottom: 5px;">
         <?php
         $session = session();
@@ -77,30 +147,20 @@
         ?>
 
         <table>
-
-            <?php
-            date_default_timezone_set('Asia/Karachi');
-            $peshawarTimeZone = new DateTimeZone('Asia/Karachi');
-            $currentDateTime = new DateTime('now', $peshawarTimeZone);
-            $date = $currentDateTime->format('d-m-Y');
-            $time = $currentDateTime->format('h:i:s');
-            ?>
             <tr>
-                <td style="width: 50%;">Invoice# <b>59867</b> </td>
-                <td style="width: 50%; text-align: right;">Date:<b>
-                        <?= $date; ?>
+                <td style=" width: 50%; white-space: nowrap;">Patient:<b>
+                        <?= $data['clientName'] ?>
+                    </b></td>
+                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Gender:<b>
+                        <?= $Gender; ?>
                     </b></td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align: left; margin-right: 5px;">Time:<b>
-                        <?= $time; ?>
-                    </b><br></td>
-            </tr>
-
-            <tr>
-
-                <td style=" width: 50%; white-space: nowrap;">Patient Name:<b>
-                        <?= $data['clientName'] ?>
+                <td style=" width: 50%; white-space: nowrap;">Age:<b>
+                        <?= $Age; ?>
+                    </b></td>
+                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Operator:<b>
+                        <?= $operatorName; ?>
                     </b></td>
             </tr>
 
@@ -118,17 +178,19 @@
         <hr>
         <table>
             <tr>
-                <td><b>Test Name</b></td>
-                <td style="padding-left: 100px;"><b>Price</b></td>
+                <td style="text-align: left;"><b>Test</b></td>
+                <td style="text-align: right; padding-left:40%;"><b>Quantity</b></td>
+                <td style="text-align: right;padding-left:4%;"><b>Fee</b></td>
             </tr>
 
             <?php
 
-            if (!empty($detailsData)) {
+            if (!empty ($detailsData)) {
                 foreach ($detailsData as $testItem) {
                     echo '<tr>';
                     echo '<td style="margin-left: 20px;">' . $testItem['testName'] . '</td>';
-                    echo '<td style="padding-left:100px">' . $testItem['fee'] . '.00</td>';
+                    echo '<td  style="text-align: right;padding-left:40%;">1</td>';
+                    echo '<td style="text-align: right; padding-left:4%;">' . number_format($testItem['fee'], 2) . '</td>';
                     echo '</tr>';
                 }
             } else {
@@ -143,15 +205,10 @@
         <table style="width: 100%;">
             <tr>
                 <td style="width: 50%; text-align: left;">&nbsp;</td>
-
-                <td style="width: 25%; text-align:  right; padding-right:10px" colspan="2"><b>Total</b> PKR:
+                <td style="width: 25%; text-align: right; padding-right:6px;"><b>Total</b> PKR:
                     <?= $data['fee']; ?>.00
                 </td>
             </tr>
-
-            </tr>
-
-
         </table>
         <br>
 

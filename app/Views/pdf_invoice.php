@@ -125,6 +125,9 @@
                 <td style=" width: 50%; white-space: nowrap;text-align: left;padding-right:15px;">Age:<b>
                         <?= $Age; ?>
                     </b></td>
+                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Operator:<b>
+                        <?= $operatorName; ?>
+                    </b></td>
             </tr>
 
             <tr>

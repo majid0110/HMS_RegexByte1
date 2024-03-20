@@ -10,10 +10,10 @@
   <style>
     .badge-pill:hover {
       background-color: #52CDFF;
-      /* Change this to the desired hover background color */
       color: #fff;
-      /* Change this to the desired hover text color */
       cursor: pointer;
+      font-weight: bolder;
+      border: #52CDFF;
     }
 
     #clientDetails {

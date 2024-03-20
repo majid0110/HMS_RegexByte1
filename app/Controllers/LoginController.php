@@ -73,7 +73,7 @@ class LoginController extends Controller
         }
         foreach ($monthlyHospitalCharges as $hospitalCharge) {
             $label = $hospitalCharge['label'];
-            if (isset($combinedData[$label])) {
+            if (isset ($combinedData[$label])) {
                 $combinedData[$label]['total'] += $hospitalCharge['hospitalCharges'];
             } else {
                 $combinedData[$label] = [
@@ -84,7 +84,7 @@ class LoginController extends Controller
         }
         foreach ($monthlyLabCharges as $labCharge) {
             $label = $labCharge['label'];
-            if (isset($combinedData[$label])) {
+            if (isset ($combinedData[$label])) {
                 $combinedData[$label]['total'] += $labCharge['totalCharges'];
             } else {
                 $combinedData[$label] = [
@@ -197,6 +197,7 @@ class LoginController extends Controller
                     'modules' => $modules,
 
                     'ID' => $user['ID'],
+                    'user' => $user['fName'],
                     'businessID' => $user['businessID'],
                     'fName' => $user['fName'],
                     'lName' => $user['lName'],
@@ -366,10 +367,10 @@ class LoginController extends Controller
                 $permissionsData[] = [
                     'roleID' => $roleID,
                     'moduleID' => $moduleID,
-                    'can_view' => isset($permissions['view']) ? 1 : 0,
-                    'can_insert' => isset($permissions['add']) ? 1 : 0,
-                    'can_update' => isset($permissions['update']) ? 1 : 0,
-                    'can_delete' => isset($permissions['delete']) ? 1 : 0,
+                    'can_view' => isset ($permissions['view']) ? 1 : 0,
+                    'can_insert' => isset ($permissions['add']) ? 1 : 0,
+                    'can_update' => isset ($permissions['update']) ? 1 : 0,
+                    'can_delete' => isset ($permissions['delete']) ? 1 : 0,
                 ];
             }
 

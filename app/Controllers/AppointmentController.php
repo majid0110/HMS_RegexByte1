@@ -167,6 +167,7 @@ class AppointmentController extends Controller
         $Model = new AppointmentModel();
         $InvoiceNumber = $Model->getinvoiceNumber($businessID, $appointmentID);
         $specializationName = $Model->getDoctorSpecialization($doctorID);
+        $operatorName = session()->get('fName');
 
         $mpdf = new Mpdf();
         $pdfContent = view('pdf_template', [
@@ -179,6 +180,7 @@ class AppointmentController extends Controller
             'clientUnique' => $clientUnique,
             'InvoiceNumber' => $InvoiceNumber,
             'specializationName' => $specializationName,
+            'operatorName' => $operatorName,
         ]);
 
         $mpdf->WriteHTML($pdfContent);

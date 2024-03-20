@@ -8,7 +8,7 @@ class TestModel extends Model
 {
     protected $table = 'labtest';
     protected $primaryKey = 'test_id';
-    protected $allowedFields = ['testTypeId', 'fee', 'userId', 'businessId', 'hospitalCharges', 'clientId', 'appointmentId', 'CreatedAT'];
+    protected $allowedFields = ['testTypeId', 'fee', 'userId', 'businessId', 'hospitalCharges', 'clientId', 'appointmentId', 'labInvoice', 'CreatedAT'];
 
 
 
@@ -19,6 +19,21 @@ class TestModel extends Model
 
         $this->insert($responseData);
         return $this->db->insertID();
+    }
+
+    public function getLastLabNo($businessID)
+    {
+        $query = $this->select('labInvoice')
+            ->where('businessID', $businessID)
+            ->orderBy('test_id', 'DESC')
+            ->limit(1)
+            ->get();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getRow();
+            return $result->labInvoice;
+        } else {
+            return 0;
+        }
     }
 
 
@@ -81,7 +96,7 @@ class TestModel extends Model
         $builder->select('labtest.*, client.client as clientName, users.fName as userName');
 
         // Add conditions based on search parameters
-        if (!empty($search)) {
+        if (!empty ($search)) {
             $builder->groupStart()
                 ->like('client.client', $search)
                 ->orLike('users.fName', $search)
@@ -89,15 +104,15 @@ class TestModel extends Model
                 ->groupEnd();
         }
 
-        if (!empty($userName)) {
+        if (!empty ($userName)) {
             $builder->where('users.fName', $userName);
         }
 
-        if (!empty($clientName)) {
+        if (!empty ($clientName)) {
             $builder->where('client.client', $clientName);
         }
 
-        if (!empty($fromDate) && !empty($toDate)) {
+        if (!empty ($fromDate) && !empty ($toDate)) {
             $builder->where('labtest.CreatedAT >=', $fromDate)
                 ->where('labtest.CreatedAT <=', $toDate);
         }
@@ -113,7 +128,7 @@ class TestModel extends Model
         $builder->join('users', 'users.ID = labtest.userId');
         $builder->select('labtest.*, client.client as clientName, users.fName as userName');
 
-        if (!empty($search)) {
+        if (!empty ($search)) {
             $builder->groupStart()
                 ->like('client.client', $search)
                 ->orLike('users.fName', $search)
@@ -121,15 +136,15 @@ class TestModel extends Model
                 ->groupEnd();
         }
 
-        if (!empty($userName)) {
+        if (!empty ($userName)) {
             $builder->where('users.ID', $userName);
         }
 
-        if (!empty($clientName)) {
+        if (!empty ($clientName)) {
             $builder->where('client.client', $clientName);
         }
 
-        if (!empty($fromDate) && !empty($toDate)) {
+        if (!empty ($fromDate) && !empty ($toDate)) {
             $builder->where('labtest.CreatedAT >=', $fromDate)
                 ->where('labtest.CreatedAT <=', $toDate);
         }
