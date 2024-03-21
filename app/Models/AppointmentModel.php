@@ -51,43 +51,6 @@ class AppointmentModel extends Model
     }
 
 
-
-    // public function getAppointments($search = null, $doctor = null, $client = null)
-    // {
-    //     $builder = $this->db->table('appointment');
-    //     $builder->select('appointment.*, doctorprofile.*, client.client as clientName, doctorprofile.FirstName as doctorFirstName, doctorprofile.LastName as doctorLastName, fee_type.FeeType as appointmentTypeName');
-    //     $builder->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID');
-    //     $builder->join('client', 'client.idClient = appointment.clientID');
-    //     $builder->join('fee_type', 'fee_type.f_id = appointment.appointmentType');
-
-    //     if (!empty($search)) {
-    //         $builder->groupStart()
-    //             ->like('client.client', $search)
-    //             ->orLike('doctorprofile.FirstName', $search)
-    //             ->orLike('doctorprofile.LastName', $search)
-    //             ->orLike('appointment.appointmentDate', $search)
-    //             ->orLike('appointment.appointmentTime', $search)
-    //             ->orLike('fee_type.FeeType', $search)
-    //             ->orLike('(appointment.appointmentFee + appointment.hospitalCharges)', $search)
-    //             ->groupEnd();
-    //     }
-
-    //     if (!empty($doctor)) {
-    //         $builder->groupStart()
-    //             ->like('CONCAT(doctorprofile.FirstName, " ", doctorprofile.LastName)', $doctor)
-    //             ->groupEnd();
-    //     }
-
-    //     if (!empty($client)) {
-    //         $builder->groupStart()
-    //             ->like('client.client', $client)
-    //             ->groupEnd();
-    //     }
-
-    //     $query = $builder->get();
-    //     return $query->getResultArray();
-    // }
-
     public function getAppointments($search = null, $doctor = null, $client = null, $fromDate = null, $toDate = null)
     {
         $builder = $this->db->table('appointment');
@@ -210,11 +173,6 @@ class AppointmentModel extends Model
         return $this->findAll();
     }
 
-
-
-
-
-
     public function countTotalAppointments()
     {
         return $this->db->table('appointment')->countAll();
@@ -270,6 +228,17 @@ class AppointmentModel extends Model
             ->where('businessID', $businessID)
             ->get()
             ->getResultArray();
+    }
+
+    public function getAppointmentDetails($appointmentId)
+    {
+        return $this->db->table($this->table)
+            ->select('appointment.*, doctorprofile.FirstName, doctorprofile.LastName, fee_type.FeeType')
+            ->join('doctorprofile', 'doctorprofile.DoctorID = appointment.DoctorID', 'left')
+            ->join('fee_type', 'fee_type.f_id = appointment.appointmentType', 'left')
+            ->where('appointment.appointmentID', $appointmentId)
+            ->get()
+            ->getRowArray();
     }
 
 

@@ -36,6 +36,19 @@ class TestModel extends Model
         }
     }
 
+    public function getinvoiceNumber($businessID, $clientID, $appointmentID)
+    {
+        return $this->db->table($this->table)
+            ->where('businessID', $businessID)
+            ->where('clientId', $clientID)
+            ->where('appointmentId', $appointmentID)
+            ->orderBy('labInvoice', 'DESC')
+            ->select('labInvoice')
+            ->get()
+            ->getRowArray()['labInvoice'] ?? null;
+    }
+
+
 
     public function getTestsWithDetails()
     {

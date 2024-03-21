@@ -72,28 +72,12 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
 
             <?php if ($canView): ?>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-<?= $moduleID ?>" aria-expanded="false"
-                        aria-controls="ui-basic-<?= $moduleID ?>">
+                    <a class="nav-link" href="<?= base_url('labtest_form'); ?>">
                         <i class="menu-icon mdi mdi-pharmacy"></i>
                         <span class="menu-title">
                             <?= $module['module_name'] ?>
                         </span>
-                        <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="ui-basic-<?= $moduleID ?>">
-                        <ul class="nav flex-column sub-menu">
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="<?= base_url('labServices_form'); ?>">Add Lab Test</a>
-                            </li> -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= base_url('labtest_form'); ?>">Add Test</a>
-                            </li>
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="<?= base_url('labtest_table'); ?>">View Tests</a>
-                            </li> -->
-                            <!-- Add more sub-menu items as needed -->
-                        </ul>
-                    </div>
                 </li>
             <?php endif; ?>
         <?php endforeach; ?>

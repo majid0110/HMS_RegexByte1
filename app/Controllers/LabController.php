@@ -22,6 +22,10 @@ class LabController extends Controller
         $data['Tests'] = $Model->getTestDetails();
         return view('LabServices_form.php', $data);
     }
+    public function lab_test_form()
+    {
+        return view('lab_test_form.php');
+    }
 
     public function editTest($df_id)
     {
@@ -270,7 +274,7 @@ class LabController extends Controller
                 $detailsData[] = [
                     'labTestID' => $labtestId,
                     'testTypeID' => $test['testTypeId'],
-                    'testName' => $test['testName'], // Access test name here
+                    'testName' => $test['testName'],
                     'fee' => $test['fee'],
                 ];
 
@@ -282,12 +286,42 @@ class LabController extends Controller
             }
             $db->transCommit();
 
+            // $appointmentId = $this->request->getPost('appointmentId');
+            // if (empty ($appointmentId)) {
+            //     $appointment = 'Non';
+            // } else {
+            //     $appointment = $appointmentId;
+            // }
+
+
+            if (empty ($appointmentId)) {
+                $appointment = 'Non';
+                $appointmentType = 'Non';
+                $doctorName = 'Non';
+            } else {
+                $appointmentModel = new AppointmentModel();
+                $appointmentDetails = $appointmentModel->getAppointmentDetails($appointmentId);
+
+                if ($appointmentDetails) {
+                    $appointmentType = $appointmentDetails['FeeType'];
+                    $doctorName = $appointmentDetails['FirstName'] . ' ' . $appointmentDetails['LastName'];
+                } else {
+                    $appointmentType = 'Non';
+                    $doctorName = 'Non';
+                }
+                $appointment = $appointmentId;
+            }
+
             $clientID = $this->request->getPost('clientId');
+            //$appointment = $this->request->getPost('appointmentId');
             $clientModel = new ClientModel();
             $Age = $clientModel->getclientAge($businessID, $clientID);
             $Gender = $clientModel->getclientGender($businessID, $clientID);
             $clientUnique = $clientModel->getclientUnique($businessID, $clientID);
             $operatorName = session()->get('fName');
+            $Model = new TestModel();
+            $InvoiceNumber = $Model->getinvoiceNumber($businessID, $clientID, $appointmentId);
+
 
 
             $mpdf = new Mpdf();
@@ -295,9 +329,13 @@ class LabController extends Controller
                 'data' => $data,
                 'detailsData' => $detailsData,
                 'Age' => $Age,
+                'appointment' => $appointment,
                 'Gender' => $Gender,
                 'clientUnique' => $clientUnique,
                 'operatorName' => $operatorName,
+                'InvoiceNumber' => $InvoiceNumber,
+                'appointmentType' => $appointmentType,
+                'doctorName' => $doctorName,
 
             ]);
             $mpdf->WriteHTML($pdfContent);

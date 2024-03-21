@@ -99,7 +99,7 @@
     <table style="text-align: left">
         <tr>
             <td style="padding-left: 7% ;text-align: left;">Invoice# <b>
-                    000
+                    <?= $InvoiceNumber; ?>
                 </b> </td>
             <td style="padding-left:13%;text-align: right;">Patient Unique# <b>
                     <?= $clientUnique; ?>
@@ -164,12 +164,27 @@
                     </b></td>
             </tr>
 
-            <tr>
-
-                <td style=" width: 50%; white-space: nowrap;">AppointmentID:<b>
-                        <?= $data['appointmentId'] ?>
-                    </b></td>
-            </tr>
+            <?php if ($appointment !== 'Non'): ?>
+                <tr>
+                    <td style=" width: 50%; white-space: nowrap;">AppointmentID:<b>
+                            <?= $appointment; ?>
+                        </b></td>
+                    <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Doctor:<b>
+                            <?= $doctorName; ?>
+                        </b></td>
+                </tr>
+                <tr>
+                    <td style=" width: 50%; white-space: nowrap;">AppointmentType:<b>
+                            <?= $appointmentType; ?>
+                        </b></td>
+                </tr>
+            <?php else: ?>
+                <tr>
+                    <td style=" width: 100%; white-space: nowrap;">AppointmentID:<b>
+                            <?= $appointment; ?>
+                        </b></td>
+                </tr>
+            <?php endif; ?>
 
             <tr>
                 <td colspan="2"></td>
