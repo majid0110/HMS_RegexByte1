@@ -8,7 +8,7 @@ class AppointmentModel extends Model
 {
     protected $table = 'appointment';
     protected $primaryKey = 'appointmentID';
-    protected $allowedFields = ['clientID', 'doctorID', 'appointmentDate', 'appointmentTime', 'appointmentType', 'appointmentFee', 'appointmentNo', 'createdAT', 'updatedAT', 'businessID'];
+    protected $allowedFields = ['clientID', 'doctorID', 'appointmentDate', 'appointmentTime', 'appointmentType', 'appointmentFee', 'hospitalCharges', 'appointmentNo', 'createdAT', 'updatedAT', 'businessID'];
 
     public function saveAppointment($data)
     {

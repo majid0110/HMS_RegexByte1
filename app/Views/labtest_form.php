@@ -19,6 +19,7 @@
 
     #clientDetails {
       font-weight: 750;
+      font-family: monospace;
     }
 
     .twitter-typeahead {
@@ -67,6 +68,21 @@
     .table-container {
       max-height: 220px;
       overflow-y: auto;
+    }
+
+    .form-groups {
+      margin-top: 2%;
+      font-size: 0.913rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      .form-group {
+        margin-top: -2%;
+      }
+    }
+
+    @media screen and (min-width: 1200px) {
+      .form-group {}
     }
   </style>
 </head>
@@ -287,9 +303,9 @@
                   </p>
                   <form class="pt-3" method="POST" action="<?php echo base_url() . "submitTests"; ?>"
                     enctype="multipart/form-data">
-                    <div class="form-group">
+                    <div class="form-groups">
                       <label for="clientName">Client Name</label>
-                      <select class="form-control" id="clientName" name="clientName">
+                      <select style="margin-top: 0.2rem;" class="form-control" id="clientName" name="clientName">
                         <?php foreach ($client_names as $client): ?>
                           <option value="<?= $client['idClient']; ?>">
                             <?= $client['client']; ?>
@@ -297,20 +313,21 @@
                         <?php endforeach; ?>
                       </select>
                     </div>
-                    <div class="form-group" style="margin-top: -4%;">
+                    <div class="form-groups">
                       <label for="appointment">Appointment</label>
-                      <select class="form-control" id="appointment" name="appointment">
+                      <select style="margin-top: 0.2rem;" class="form-control" id="appointment" name="appointment">
                         <!-- Appointments will be loaded dynamically here -->
                       </select>
                       <div id="appointmentStatus"></div>
                     </div>
 
-                    <div class="form-group" style="margin-top: -4%;margin-bottom: 1%;">
+                    <div class="form-groups">
                       <label for="testType">Search Test Type</label>
-                      <input type="text" class="form-control" id="testTypeSearch" placeholder="Search Test Type">
+                      <input type="text" style="margin-top: 0.2rem;" class="form-control" id="testTypeSearch"
+                        placeholder="Search..">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-groups">
                       <div class="table-responsive">
                         <div class="table-container">
                           <table class="table" id="testTypeList">

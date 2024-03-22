@@ -493,9 +493,9 @@
         var serviceTypeId = serviceTypeRow.data('service-type-id');
         var serviceType = serviceTypeRow.find('.title').text().trim();
         var serviceFee = serviceTypeRow.find('.fee').text().trim();
-        console.log("Service Type: ", serviceType);
-        console.log("Service Type ID: ", serviceTypeId);
-        console.log("Service Fee: ", serviceFee);
+        // console.log("Service Type in badge: ", serviceType);
+        // console.log("Service Type ID in badge: ", serviceTypeId);
+        // console.log("Service Fee in badge: ", serviceFee);
         addServiceRow(serviceType, serviceTypeId, serviceFee);
         calculateTotalFee();
       });
@@ -506,9 +506,9 @@
           var serviceTypeId = serviceTypeRow.data('service-type-id');
           var serviceType = serviceTypeRow.find('.title').text().trim();
           var serviceFee = serviceTypeRow.find('.fee').text().trim();
-          console.log("Service Type: ", serviceType);
-          console.log("Service Type ID: ", serviceTypeId);
-          console.log("Service Fee: ", serviceFee);
+          // console.log("Service Type: ", serviceType);
+          // console.log("Service Type ID: ", serviceTypeId);
+          // console.log("Service Fee: ", serviceFee);
           addServiceRow(serviceType, serviceTypeId, serviceFee);
           calculateTotalFee();
         });
@@ -623,13 +623,13 @@
         var exchange = $('#exchangeInput').val();
         var totalFee = parseFloat($('#totalFee').text());
 
-        console.log("Client ID: ", clientId);
-        console.log("Client Name: ", clientName);
-        console.log("Payment Method ID: ", paymentMethodId);
-        console.log("Payment Name: ", paymentName);
-        console.log("Currency: ", currency);
-        console.log("Exchange: ", exchange);
-        console.log("Total Fee: ", totalFee);
+        // console.log("Client ID: ", clientId);
+        // console.log("Client Name: ", clientName);
+        // console.log("Payment Method ID: ", paymentMethodId);
+        // console.log("Payment Name: ", paymentName);
+        // console.log("Currency: ", currency);
+        // console.log("Exchange: ", exchange);
+        // console.log("Total Fee: ", totalFee);
 
         if (!clientId || isNaN(totalFee)) {
           alert('Invalid data for insertion.');
@@ -637,23 +637,21 @@
         }
         var services = [];
         $('#serviceTableBody tr').each(function () {
-          //var serviceTypeId = $(this).find('td:eq(0)').data('service-type-id');
-          // var serviceTypeId = 12;
-          var serviceTypeId = $('#serviceTypeList .badge').closest('tr').data('service-type-id');
-          var serviceName = $(this).find('td:eq(0)').text();
-          var fee = parseFloat($(this).find('td:eq(1)').text());
-
-          console.log("Service Type ID: ", serviceTypeId);
-          console.log("Service Name: ", serviceName);
-          console.log("Fee: ", fee);
+          var serviceTypeRow = $(this);
+          var serviceTypeId = serviceTypeRow.find('td:first').data('service-type-id');
+          var serviceName = serviceTypeRow.find('td:eq(0)').text();
+          var fee = parseFloat(serviceTypeRow.find('td:eq(1)').text());
 
           services.push({
             serviceTypeId: serviceTypeId,
             serviceName: serviceName,
             fee: fee,
           });
-        });
 
+          // console.log("Service Type ID After Push: ", serviceTypeId);
+          // console.log("Service Name After Push: ", serviceName);
+          // console.log("Fee After Push: ", fee);
+        });
         $.ajax({
           method: 'POST',
           url: '<?= site_url('SalesController/submitServices') ?>',

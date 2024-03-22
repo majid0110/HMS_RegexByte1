@@ -139,8 +139,9 @@ class AppointmentController extends Controller
         $clientName = $this->request->getPost('clientName');
         $doctorName = $this->request->getPost('doctorName');
 
+        $session = \Config\Services::session();
         $businessID = session()->get('businessID');
-        $charges = $businessModel->getBusinessCharges($businessID);
+        $charges = $session->get('hospitalcharges');
 
         $lastAppointmentNo = $appointmentModel->getLastAppointmentNo($businessID);
         $appointmentNo = intval($lastAppointmentNo) + 1;

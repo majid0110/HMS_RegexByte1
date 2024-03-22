@@ -23,8 +23,6 @@ class SalesController extends Controller
     {
         $clientModel = new ClientModel();
         $data['client_names'] = $clientModel->getClientNames();
-
-
         $sales = new salesModel();
         $data['payments'] = $sales->getpayment();
         $data['currencies'] = $sales->getCurrancy();
@@ -123,7 +121,8 @@ class SalesController extends Controller
                 $quantity = 1;
                 $sum = $quantity * $service['fee'];
                 $serviceData = [
-                    'idReceipts' => $invoice->getInsertID(),
+                    // 'idReceipts' => $invoice->getInsertID(),
+                    'idReceipts' => $idPayment,
                     'Nr' => 0,
                     'idArtMenu' => $service['serviceTypeId'],
                     'Quantity' => $quantity,

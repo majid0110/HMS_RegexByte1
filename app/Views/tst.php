@@ -5,27 +5,92 @@
 
 <head>
 
-  <link rel="stylesheet" href="./public/assets/vendors_s/select2/select2.min.css" />
-  <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css" />
-
+  <link rel="stylesheet" href="./public/assets/vendors_s/select2/select2.min.css">
+  <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css">
   <style>
     .badge-pill:hover {
-      background-color: #007bff;
-      /* Change this to the desired hover background color */
+      background-color: #52CDFF;
       color: #fff;
-      /* Change this to the desired hover text color */
       cursor: pointer;
+      font-weight: bolder;
+      border: #52CDFF;
     }
 
     #clientDetails {
       font-weight: 750;
     }
+
+    .twitter-typeahead {
+      max-width: 100%;
+      width: 100%;
+
+    }
+
+    #serviceTableBodyContainer {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    #summaryTableContainer {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .active {
+      background: #52CDFF;
+      color: #fff;
+
+    }
+
+    .table thead th,
+    .table tbody td {
+      padding: 8px;
+    }
+
+    .table thead,
+    .table tbody {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    .table tbody tr {
+      height: 0px;
+    }
+
+    .table thead tr {
+      height: 0px;
+
+    }
+
+    .table-container {
+      max-height: 220px;
+      /* Adjust the height as needed */
+      overflow-y: auto;
+    }
+
+    /* 
+    .table tbody tr {
+      height: 30px;
+    }
+
+    .table thead tr {
+      height: 30px;
+    }
+
+
+    .table tbody td {
+      padding: 5px;
+    }
+
+    .table thead tr {
+      padding: 5px;
+    } */
   </style>
 </head>
 
 <body>
   <div class="container-scroller">
-    <!-- partial:../../partials/_navbar.html -->
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:../../partials/_settings-panel.html -->
@@ -145,12 +210,13 @@
           <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
             <div class="d-flex align-items-center justify-content-between border-bottom">
               <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
-              <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 fw-normal">See All</small>
+              <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 fw-normal">See
+                All</small>
             </div>
             <ul class="chat-list">
               <li class="list active">
-                <div class="profile"><img src="../../images/faces/face1.jpg" alt="image"><span class="online"></span>
-                </div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Thomas Douglas</p>
                   <p>Available</p>
@@ -158,8 +224,8 @@
                 <small class="text-muted my-auto">19 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="../../images/faces/face2.jpg" alt="image"><span class="offline"></span>
-                </div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg" alt="image"><span
+                    class="offline"></span></div>
                 <div class="info">
                   <div class="wrapper d-flex">
                     <p>Catherine</p>
@@ -170,8 +236,8 @@
                 <small class="text-muted my-auto">23 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="../../images/faces/face3.jpg" alt="image"><span class="online"></span>
-                </div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Daniel Russell</p>
                   <p>Available</p>
@@ -179,8 +245,8 @@
                 <small class="text-muted my-auto">14 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="../../images/faces/face4.jpg" alt="image"><span class="offline"></span>
-                </div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg" alt="image"><span
+                    class="offline"></span></div>
                 <div class="info">
                   <p>James Richardson</p>
                   <p>Away</p>
@@ -188,8 +254,8 @@
                 <small class="text-muted my-auto">2 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="../../images/faces/face5.jpg" alt="image"><span class="online"></span>
-                </div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Madeline Kennedy</p>
                   <p>Available</p>
@@ -197,8 +263,8 @@
                 <small class="text-muted my-auto">5 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="../../images/faces/face6.jpg" alt="image"><span class="online"></span>
-                </div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Sarah Graves</p>
                   <p>Available</p>
@@ -215,364 +281,445 @@
       <?php include 'include_common/sidebar.php'; ?>
       <!-- partial -->
       <div class="main-panel">
-
         <div class="content-wrapper">
-          <?php
-          $successMessage = session()->getFlashdata('success');
-          $errorMessage = session()->getFlashdata('error');
-
-          if ($successMessage) {
-            echo '<div class="alert alert-success">' . $successMessage . '</div>';
-          }
-
-          if ($errorMessage) {
-            echo '<div class="alert alert-danger">' . $errorMessage . '</div>';
-          }
-          ?>
-          <div class="row">
+          <div class="row" style="margin-top: -22px;">
             <div class="col-md-6">
               <div class="card h-100">
                 <div class="card-body">
-                  <h4 class="card-title">Add Test</h4>
-                  <p class="card-description">
-                    Lab Test Services
+                  <p class="card-description"
+                    style="margin-top: -19px; margin-bottom: -10px; font-weight: bold; color: black">
+                    Services
                   </p>
+
                   <form class="pt-3" method="POST" action="<?php echo base_url() . "submitTests"; ?>"
                     enctype="multipart/form-data">
-                    <div class="form-group">
-                      <label for="clientName">Client Name</label>
-                      <select class="form-control" id="clientName" name="clientName">
-                        <?php foreach ($client_names as $client): ?>
-                          <option value="<?= $client['idClient']; ?>">
-                            <?= $client['client']; ?>
-                          </option>
-                        <?php endforeach; ?>
-                      </select>
+                    <div class="form-group row" style="margin-bottom: 6px;">
+                      <div class="col">
+                        <label>Client Name</label>
+                        <div id="the-basics">
+                          <select class="typeahead form-control" name="clientName">
+                            <?php foreach ($client_names as $client): ?>
+                              <option value="<?= $client['idClient']; ?>">
+                                <?= $client['client']; ?>
+                              </option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <label>Payment Method</label>
+                        <div id="the-basics">
+                          <select class="typeahead form-control" name="Payment">
+                            <?php foreach ($payments as $payment): ?>
+                              <option value="<?= $payment['idPaymentMethods']; ?>"
+                                data-payment-id="<?= $payment['idPaymentMethods']; ?>">
+                                <?= $payment['Method']; ?>
+                              </option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                      </div>
                     </div>
-                    <div class="form-group">
-                      <label for="appointment">Appointment</label>
-                      <select class="form-control" id="appointment" name="appointment">
-                        <!-- Appointments will be loaded dynamically here -->
-                      </select>
-                      <div id="appointmentStatus"></div>
+                    <div class="form-group row" style="margin-bottom: 6px;">
+                      <div class="col">
+                        <label>Currency</label>
+                        <div id="the-basics">
+                          <select class="typeahead form-control" name="Currency">
+                            <?php foreach ($currencies as $currency): ?>
+                              <option value="<?= $currency['id']; ?>">
+                                <?= $currency['Currency']; ?>
+                              </option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <label>Exchange</label>
+                        <div id="bloodhound">
+                          <input class="typeahead form-control" type="Number" name="exchange" value='1.0'
+                            id="exchangeInput" placeholder="Exchange Rate">
+                        </div>
+                      </div>
                     </div>
+                    <div class="form-group row" style="margin-bottom: 6px;">
+                      <div class="col">
+                        <label for="categoryDropdown">Category:</label>
+                        <select class="form-control" id="categoryDropdown">
+                          <option value="">All Categories</option>
+                          <?php foreach ($categories as $category): ?>
+                            <option value="<?= $category['idCatArt']; ?>">
+                              <?= $category['name']; ?>
+                            </option>
+                          <?php endforeach; ?>
+                        </select>
+                      </div>
+                      <div class="col">
+                        <label for="search">Search:</label>
+                        <input type="text" id="search" class="form-control" placeholder="Enter service type or fee">
+                      </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 6px;">
+                      <div id="serviceTableBodyContainer">
+                        <div class="table-container">
+                          <table class="table" id="serviceTypeList">
+                            <thead>
+                              <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php foreach ($services as $service): ?>
+                                <tr data-service-type-id="<?= $service['idArtMenu']; ?>">
+                                  <td class="title">
+                                    <?= $service['Name']; ?>
+                                  </td>
+                                  <td class="fee" contenteditable="true">
+                                    <?= $service['Price']; ?>
+                                  </td>
+                                  <td><span class="badge badge-primary badge-pill hover-effect"
+                                      onclick="addService()">ADD</span></td>
+                                </tr>
 
-                    <div class="form-group">
-                      <label for="testType">Test Type</label>
-                      <input type="text" class="form-control" id="testTypeSearch" placeholder="Search Test Type">
-                      <ul class="list-group" id="testTypeList">
-                        <?php foreach ($test_types as $testType): ?>
-                          <li class="list-group-item d-flex justify-content-between align-items-center"
-                            data-test-type-id="<?= $testType['testTypeId']; ?>">
-                            <span class="title">
-                              <?= $testType['title']; ?>
-                            </span>
-                            <span class="fee" contenteditable="true">
-                              <?= $testType['test_fee']; ?>
-                            </span>
-                            <span class="badge badge-primary badge-pill hover-effect" onclick="addTest()">ADD</span>
-                          </li>
-                        <?php endforeach; ?>
-                      </ul>
+                              <?php endforeach; ?>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
                     </div>
                   </form>
-
                 </div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="card h-100">
                 <div class="card-body">
-                  <h4 class="card-title">SUMMARY</h4>
-                  <p class="card-description" id="clientDetails"></p>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Test Type</th>
-                        <th>Test Fee</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody id="testTableBody">
-
-                    </tbody>
-                  </table>
+                  <p class="card-description"
+                    style="margin-top: -19px; margin-bottom: -10px; font-weight: bold; color: black;">
+                    SUMMARY
+                  </p>
+                  <div class="row" style="margin-top: 8px;margin-bottom: -7px;">
+                    <div class="col-md-6" id="clientDetailsLeft"></div>
+                    <div class="col-md-6" id="clientDetailsRight"></div>
+                  </div>
+                  <hr>
+                  <div id="summaryTableContainer">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Service Type</th>
+                          <th>Amount</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="serviceTableBody"></tbody>
+                    </table>
+                  </div>
                 </div>
-                <div style="margin-left: 2.3em; font-weight: 900; font-size: 150px">
+                <div style="margin-left: 368px; font-weight: 900; font-size: 150px">
                   <p>Total Fee: <span id="totalFee">0</span></p>
                 </div>
-                <div style="height: 50px; margin-left: 1.4em; font-weight: 900; font-size: 150px">
-                  <button class="btn btn-primary btn-fw" id="insertBtn">PRINT</button>
+                <div style="height: 58px; margin-left: 1.4em; font-weight: 900; font-size: 150px">
+                  <!-- <button class="btn btn-primary btn-fw" id="insertBtn">Save</button> -->
+                  <button type="button" class="btn btn-outline-info btn-icon-text" id="insertBtn">Print
+                    <i class="ti-printer btn-icon-append"></i>
+                  </button>
                 </div>
               </div>
             </div>
-
           </div>
-
-          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-          <script src="../../vendors/js/vendor.bundle.base.js"></script>
-
-          <script>
-            $(document).ready(function () {
-              var initialClientId = $('#clientName').val();
-              loadAppointments(initialClientId);
-
-              $('#clientName').change(function () {
-                var clientId = $(this).val();
-                updateClientDetails(clientId);
-                loadAppointments(clientId);
-              });
-
-              function updateClientDetails(clientId) {
-                var clientName = $('#clientName option:selected').text();
-                var appointment = $('#appointment option:selected').text();
-                $('#clientDetails').html('Client: ' + clientName + '<br>Appointment: ' + appointment);
-              }
-
-              function loadAppointments(clientId) {
-                $.ajax({
-                  method: 'POST',
-                  url: '<?= site_url('LabController/getAppointmentsForClient') ?>',
-                  dataType: "json",
-                  data: {
-                    clientId: clientId,
-                    _cache: new Date().getTime()
-                  },
-                  async: false,
-                  success: function (response) {
-                    console.log('Appointments Response:', response);
-
-                    var appointmentDropdown = $('#appointment');
-                    appointmentDropdown.empty();
-
-                    if (response.success && response.appointments.length > 0) {
-                      $.each(response.appointments, function (index, appointment) {
-                        appointmentDropdown.append('<option value="' + appointment.appointmentID + '">' + appointment.appointmentID + '</option>');
-                      });
-
-                      updateClientDetails(clientId);
-                    } else {
-                      appointmentDropdown.append('<option value="">No appointments available</option>');
-                      updateClientDetails(clientId);
-                    }
-                  },
-                  error: function (error) {
-                    console.error('Error loading appointments:', error);
-                  }
-                });
-              }
-
-              $('#testTypeSearch').on('input', function () {
-                console.log('Search event triggered');
-                var searchText = $(this).val().toLowerCase();
-                $('#testTypeList li').each(function () {
-                  var testType = $(this).find('.title').text().toLowerCase();
-                  if (testType.includes(searchText)) {
-                    $(this).show(); // Show the list item if it matches the search text
-                  } else {
-                    $(this).hide(); // Hide the list item if it doesn't match the search text
-                  }
-                });
-              });
-
-              function addTestRow(testType, testTypeId, testFee) {
-                var newRow = '<tr><td data-test-type-id="' + testTypeId + '">' + testType + '</td>' +
-                  '<td contenteditable="true" class="editable-fee">' + testFee + '</td>' +
-                  '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeTestRow(this)">Remove</button></td></tr>';
-                $('#testTableBody').append(newRow);
-
-                $('#testTableBody').off('input', '.editable-fee').on('input', '.editable-fee', function () {
-                  calculateTotalFee();
-                });
-
-                calculateTotalFee();
-              }
-              function addTest(testType, testTypeId) {
-                var testFee = $('#testTypeList li:contains(' + testType + ') .fee').text();
-                var existingRow = $('#testTableBody td:contains(' + testType + ')').closest('tr');
-
-                if (existingRow.length > 0) {
-                  existingRow.find('.editable-fee').text(testFee);
-                } else {
-                  addTestRow(testType, testTypeId, testFee);
-                }
-                calculateTotalFee();
-              }
-
-
-              $('#testTypeList .badge-pill').mouseenter(function () {
-                $(this).addClass('hover-effect');
-              });
-
-              $('#testTypeList .badge-pill').mouseleave(function () {
-                $(this).removeClass('hover-effect');
-              });
-
-              $('#testTypeList .badge').click(function () {
-
-                var testTypeRow = $(this).closest('li');
-                var testTypeId = testTypeRow.data('test-type-id');
-                var testType = testTypeRow.find('.title').text().trim();
-                var testFee = testTypeRow.find('.fee').text();
-                addTestRow(testType, testTypeId, testFee);
-                calculateTotalFee();
-              });
-
-              function addTestRow(testType, testTypeId, testFee) {
-
-                var newRow = '<tr><td data-test-type-id="' + testTypeId + '">' + testType + '</td>' +
-                  '<td contenteditable="true" class="editable-fee">' + testFee + '</td>' +
-                  '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeTestRow(this)">Remove</button></td></tr>';
-                $('#testTableBody').append(newRow);
-
-                $('#testTableBody').off('input', '.editable-fee').on('input', '.editable-fee', function () {
-                  calculateTotalFee();
-                });
-
-                calculateTotalFee();
-              }
-
-              $('#testTableBody').on('click', '.remove-btn', function () {
-                var row = $(this).closest('tr');
-                var testFee = parseFloat(row.find('td:eq(1)').text());
-                row.remove();
-                calculateTotalFee(-testFee);
-              });
-
-
-
-              function calculateTotalFee() {
-                var totalFee = 0;
-
-                $('#testTableBody tr').each(function () {
-                  var fee = parseFloat($(this).find('td:eq(1)').text());
-                  if (!isNaN(fee)) {
-                    totalFee += fee;
-                  }
-                });
-
-                $('#totalFee').text(totalFee.toFixed(2));
-              }
-
-              $('#insertBtn').click(function () {
-                insertData();
-              });
-
-
-              function insertData() {
-                var clientId = $('#clientName').val();
-                var clientName = $('#clientName option:selected').text(); // Add this line
-                var appointmentId = $('#appointment').val();
-                var totalFee = parseFloat($('#totalFee').text());
-
-                console.log('Client ID:', clientId);
-                console.log('Appointment ID:', appointmentId);
-                console.log('Total Fee:', totalFee);
-
-
-
-                if (!clientId || isNaN(totalFee)) {
-                  alert('Invalid data for insertion.');
-                  return;
-                }
-
-                var tests = [];
-
-                $('#testTableBody tr').each(function () {
-                  var testTypeId = $(this).find('td:eq(0)').data('test-type-id');
-                  var testName = $(this).find('td:eq(0)').text();
-                  var fee = parseFloat($(this).find('td:eq(1)').text());
-
-                  tests.push({
-                    testTypeId: testTypeId,
-                    testName: testName,
-                    fee: fee,
-                    appointmentId: appointmentId
-                  });
-                });
-
-
-                $.ajax({
-                  method: 'POST',
-                  url: '<?= site_url('LabController/submitTests') ?>',
-                  dataType: "json",
-                  data: {
-                    clientId: clientId,
-                    clientName: clientName,
-                    appointmentId: appointmentId,
-                    totalFee: totalFee,
-                    tests: tests
-                  },
-                  success: function (response) {
-                    console.log('Data inserted successfully:', response);
-
-                    // Check if PDF content is present
-                    if (response.pdfContent) {
-                      // Decode base64 and use the PDF content as needed
-                      var decodedPdfContent = atob(response.pdfContent);
-
-                      // Create a Blob from the decoded PDF content
-                      var blob = new Blob([new Uint8Array(decodedPdfContent.split('').map(function (c) {
-                        return c.charCodeAt(0);
-                      }))], {
-                        type: 'application/pdf'
-                      });
-
-                      // Create a download link and trigger the download
-                      var link = document.createElement('a');
-                      link.href = window.URL.createObjectURL(blob);
-                      //   link.download = 'your_file_name.pdf'; // Specify the desired file name
-                      link.click();
-                    }
-
-                    // Continue with other actions as needed
-                    $('#testTableBody').empty();
-                    $('#totalFee').text('0');
-                  },
-
-
-                  error: function (error) {
-                    console.error('Error inserting data:', error);
-                  }
-                });
-              }
-            });
-          </script>
-
-
-          <?php include 'include_common/footer.php'; ?>
-
-
-          <!-- partial -->
         </div>
-        <!-- main-panel ends -->
+
+
+        <!-- Include footer -->
+        <?php include 'include_common/footer.php'; ?>
       </div>
-      <!-- page-body-wrapper ends -->
+
+      <!-- main-panel ends -->
     </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="./public/assets/vendors_s/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <script src="./public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js"></script>
-    <script src="./public/assets/vendors_s/select2/select2.min.js"></script>
-    <script src="./public/assets/vendors_s/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="./public/assets/js_s/off-canvas.js"></script>
-    <script src="./public/assets/js_s/hoverable-collapse.js"></script>
-    <script src="./public/assets/js_s/template.js"></script>
-    <script src="./public/assets/js_s/settings.js"></script>
-    <script src="./public/assets/js_s/todolist.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page-->
-    <script src="./public/assets/js_s/file-upload.js"></script>
-    <script src="./public/assets/js_s/typeahead.js"></script>
-    <script src="./public/assets/js_s/select2.js"></script>
-    <!-- End custom js for this page-->
+    <!-- page-body-wrapper ends -->
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../../vendors/js/vendor.bundle.base.js"></script>
 
+  <script>
+
+    function calculateTotalFee() {
+      var totalFee = 0;
+
+      $('#serviceTableBody tr').each(function () {
+        var fee = parseFloat($(this).find('td:eq(1)').text());
+        if (!isNaN(fee)) {
+          totalFee += fee;
+        }
+      });
+
+      $('#totalFee').text(totalFee.toFixed(2));
+    }
+
+    $('#serviceTableBody').on('input', 'td[contenteditable="true"]', function () {
+      calculateTotalFee();
+    });
+
+    function addServiceRow(serviceType, serviceTypeId, serviceFee) {
+      var exists = false;
+
+      $('#serviceTableBody tr').each(function () {
+        var existingServiceTypeId = $(this).find('td:first').data('service-type-id');
+        if (existingServiceTypeId === serviceTypeId) {
+          exists = true;
+          return false;
+        }
+      });
+
+      if (!exists) {
+        var newRow = '<tr>' +
+          '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
+          '<td contenteditable="true">' + serviceFee + '</td>' +
+          '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)">Remove</button></td>' +
+          '</tr>';
+        $('#serviceTableBody').append(newRow);
+        calculateTotalFee();
+      } else {
+        alert('This service is already added to the summary.');
+      }
+    }
+
+    $(document).ready(function () {
+
+      $('#serviceTypeList .badge').click(function () {
+        var serviceTypeRow = $(this).closest('tr');
+        var serviceTypeId = serviceTypeRow.data('service-type-id');
+        var serviceType = serviceTypeRow.find('.title').text().trim();
+        var serviceFee = serviceTypeRow.find('.fee').text().trim();
+        console.log("Service Type: ", serviceType);
+        console.log("Service Type ID: ", serviceTypeId);
+        console.log("Service Fee: ", serviceFee);
+        addServiceRow(serviceType, serviceTypeId, serviceFee);
+        calculateTotalFee();
+      });
+
+      function attachAddServiceHandler() {
+        $('#serviceTypeList .badge').click(function () {
+          var serviceTypeRow = $(this).closest('tr');
+          var serviceTypeId = serviceTypeRow.data('service-type-id');
+          var serviceType = serviceTypeRow.find('.title').text().trim();
+          var serviceFee = serviceTypeRow.find('.fee').text().trim();
+          console.log("Service Type: ", serviceType);
+          console.log("Service Type ID: ", serviceTypeId);
+          console.log("Service Fee: ", serviceFee);
+          addServiceRow(serviceType, serviceTypeId, serviceFee);
+          calculateTotalFee();
+        });
+      }
+
+      // Filter services based on categories
+      // $('.btn-category').click(function () {
+      //   var categoryId = $(this).data('category-id');
+      //   filterServices(categoryId);
+      // });
+
+      $('#categoryDropdown').change(function () {
+        var categoryId = $(this).val();
+        filterServices(categoryId);
+      });
+
+      function filterServices(categoryId) {
+        $.ajax({
+          url: '<?php echo base_url() . "SalesController/filterServices"; ?>',
+          type: 'POST',
+          data: { categoryId: categoryId },
+          dataType: 'html',
+          success: function (data) {
+            $('#serviceTableBodyContainer').html(data);
+          }
+        });
+      }
+
+      $('#search').on('input', function () {
+        var searchText = $(this).val().toLowerCase();
+        $('#serviceTypeList tbody tr').each(function () {
+          var serviceName = $(this).find('.title').text().toLowerCase();
+          var servicePrice = $(this).find('.fee').text().toLowerCase();
+          if (serviceName.includes(searchText) || servicePrice.includes(searchText)) {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+      });
+
+      $('.btn-category').click(function () {
+        var categoryId = $(this).data('category-id');
+
+        $('.btn-category.active').removeClass('active');
+
+        $(this).addClass('active');
+
+        filterServices(categoryId);
+      });
+
+      $('#insertBtn').off('click').on('click', function () {
+        insertData();
+      });
+
+      $('#serviceTypeList .badge-pill').mouseenter(function () {
+        $(this).addClass('hover-effect');
+      });
+
+      $('#serviceTypeList .badge-pill').mouseleave(function () {
+        $(this).removeClass('hover-effect');
+      });
+
+      $('select[name="clientName"]').change(function () {
+        updateSelectedDetails();
+      });
+
+      $('select[name="Payment"]').change(function () {
+        updateSelectedDetails();
+      });
+
+      $('select[name="Currency"]').change(function () {
+        updateSelectedDetails();
+      });
+
+      $('#exchangeInput').on('input', function () {
+        updateSelectedDetails();
+      });
+
+      function updateSelectedDetails() {
+        var selectedClientName = $('select[name="clientName"] option:selected').text();
+        var selectedPaymentMethod = $('select[name="Payment"] option:selected').text();
+        var selectedCurrency = $('select[name="Currency"] option:selected').text();
+        var selectedExchange = $('#exchangeInput').val();
+
+        $('#clientDetailsLeft').html('Client: ' + selectedClientName +
+          '<br>Payment Method: ' + selectedPaymentMethod);
+
+        $('#clientDetailsRight').html('Currency: ' + selectedCurrency +
+          '<br>Exchange: ' + (selectedExchange !== undefined ? selectedExchange : 'N/A'));
+      }
+
+
+
+      $('#serviceTableBody').on('click', '.remove-btn', function () {
+        var row = $(this).closest('tr');
+        var serviceFee = parseFloat(row.find('td:eq(1)').text());
+        row.remove();
+        calculateTotalFee(-serviceFee);
+      });
+
+
+      function insertData() {
+        var clientId = $('select[name="clientName"]').val();
+        var clientName = $('select[name="clientName"] option:selected').text();
+        var paymentMethodOption = $('select[name="Payment"] option:selected');
+        var paymentMethodId = paymentMethodOption.data('payment-id');
+        var paymentName = paymentMethodOption.text();
+        var paymentMethodName = paymentMethodOption.text();
+        var currency = $('select[name="Currency"]').val();
+        var currencyName = $('select[name="Currency"] option:selected').text();
+        var exchange = $('#exchangeInput').val();
+        var totalFee = parseFloat($('#totalFee').text());
+
+        // console.log("Client ID: ", clientId);
+        // console.log("Client Name: ", clientName);
+        // console.log("Payment Method ID: ", paymentMethodId);
+        // console.log("Payment Name: ", paymentName);
+        // console.log("Currency: ", currency);
+        // console.log("Exchange: ", exchange);
+        // console.log("Total Fee: ", totalFee);
+
+        if (!clientId || isNaN(totalFee)) {
+          alert('Invalid data for insertion.');
+          return;
+        }
+        var services = [];
+        $('#serviceTableBody tr').each(function () {
+          //var serviceTypeId = $(this).find('td:eq(0)').data('service-type-id');
+          // var serviceTypeId = 12;
+          // var serviceTypeId = $('#serviceTypeList .badge').closest('tr').data('service-type-id');
+          var serviceTypeId = serviceTypeRow.data('service-type-id');
+          var serviceName = $(this).find('td:eq(0)').text();
+          var fee = parseFloat($(this).find('td:eq(1)').text());
+
+          // console.log("Service Type ID Before Push: ", serviceTypeId);
+          // console.log("Service Name Before Push: ", serviceName);
+          // console.log("Fee Before Push: ", fee);
+
+          services.push({
+            serviceTypeId: serviceTypeId,
+            serviceName: serviceName,
+            fee: fee,
+          });
+          console.log("Service Type ID After Push: ", serviceTypeId);
+          console.log("Service Name After Push: ", serviceName);
+          console.log("Fee After Push: ", fee);
+        });
+
+        $.ajax({
+          method: 'POST',
+          url: '<?= site_url('SalesController/submitServices') ?>',
+          dataType: "json",
+          data: {
+            clientId: clientId,
+            clientName: clientName,
+            currencyName: currencyName,
+            paymentMethodId: paymentMethodId,
+            paymentName: paymentName,
+            paymentMethodName: paymentMethodName,
+            currency: currency,
+            exchange: exchange,
+            totalFee: totalFee,
+            services: services
+          },
+          success: function (response) {
+            // alert('Data inserted successfully!');
+            console.log('Data inserted successfully:', response);
+            if (response.pdfContent) {
+              var decodedPdfContent = atob(response.pdfContent);
+              var blob = new Blob([new Uint8Array(decodedPdfContent.split('').map(function (c) {
+                return c.charCodeAt(0);
+              }))], {
+                type: 'application/pdf'
+              });
+              var link = document.createElement('a');
+              link.href = window.URL.createObjectURL(blob);
+              //   link.download = 'your_file_name.pdf'; // Specify the desired file name
+              link.click();
+            }
+            $('#serviceTableBody').empty();
+            $('#totalFee').text('0');
+          },
+          error: function (error) {
+            console.error('Error inserting data:', error);
+          }
+        });
+      }
+    });
+  </script>
+
+
+  <script src="./public/assets/vendors_s/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="./public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js"></script>
+  <script src="./public/assets/vendors_s/select2/select2.min.js"></script>
+  <script src="./public/assets/vendors_s/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="./public/assets/js_s/off-canvas.js"></script>
+  <script src="./public/assets/js_s/hoverable-collapse.js"></script>
+  <script src="./public/assets/js_s/template.js"></script>
+  <script src="./public/assets/js_s/settings.js"></script>
+  <script src="./public/assets/js_s/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="./public/assets/js_s/file-upload.js"></script>
+  <script src="./public/assets/js_s/typeahead.js"></script>
+  <script src="./public/assets/js_s/select2.js"></script>
+  <!-- End custom js for this page-->
 </body>
-
-<!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/forms/basic_elements.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:34 GMT -->
 
 </html>
