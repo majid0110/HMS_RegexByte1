@@ -8,10 +8,57 @@ use CodeIgniter\Controller;
 use App\Models\LoginModel;
 use App\Models\DoctorModel;
 use App\Models\AppointmentModel;
-
+use App\Models\RoleModel;
 
 class LoginController extends Controller
 {
+
+    public function view_role()
+    {
+        $roleModel = new RoleModel();
+        $rolesWithPermissions = $roleModel->getAllRolesWithPermissions();
+        return view('view_role', ['rolesWithPermissions' => $rolesWithPermissions]);
+    }
+
+    public function editRole($roleId)
+    {
+        $roleModel = new RoleModel();
+        $role = $roleModel->find($roleId);
+
+        if (!$role) {
+            return redirect()->to(base_url('roles'))->with('error', 'Role not found.');
+        }
+        $db = \Config\Database::connect();
+        $builder = $db->table('role_permissions');
+        $permissions = $builder->where('roleID', $roleId)->get()->getResultArray();
+
+        return view('edit_role', ['role' => $role, 'permissions' => $permissions]);
+    }
+
+    public function updateRole($roleId)
+    {
+        // Retrieve the role data from the form submission
+        $roleName = $this->request->getPost('role_name');
+        $roleDescription = $this->request->getPost('role_description');
+        $permissions = $this->request->getPost('permissions'); // Assuming permissions are submitted as an array
+
+        $roleModel = new RoleModel();
+        $role = $roleModel->find($roleId);
+
+        if (!$role) {
+            return redirect()->to(base_url('roles'))->with('error', 'Role not found.');
+        }
+
+        $roleData = [
+            'role_name' => $roleName,
+            'role_description' => $roleDescription,
+        ];
+
+        $roleModel->update($roleId, $roleData);
+
+        return redirect()->to(base_url('roles'))->with('success', 'Role updated successfully.');
+    }
+
 
 
     public function dashboard()
@@ -389,6 +436,20 @@ class LoginController extends Controller
 
             return redirect()->back();
         }
+    }
+
+    public function edit_role($role_id)
+    {
+        $db = \Config\Database::connect();
+        $rolesModel = new LoginModel('role');
+        $role = $rolesModel->find($role_id);
+        $permissionsModel = new LoginModel('role_permissions');
+        $permissions = $permissionsModel->where('roleID', $role_id)->findAll();
+
+        return view('edit_role', [
+            'role' => $role,
+            'permissions' => $permissions,
+        ]);
     }
 
     public function save_user()

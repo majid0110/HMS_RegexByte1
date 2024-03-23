@@ -4,14 +4,24 @@
 <html lang="en">
 
 <head>
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="/public/assets/vendors_s/datatables.net-bs4/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="/public/assets/js_s/select.dataTables.min.css">
+    <link rel="stylesheet" href="../public/assets/vendors_s/feather/feather.css">
+    <link rel="stylesheet" href="../public/assets/vendors_s/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../public/assets/vendors_s/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../public/assets/vendors_s/typicons/typicons.css">
+    <link rel="stylesheet" href="../public/assets/vendors_s/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../public/assets/vendors_s/css/vendor.bundle.base.css">
+    <!-- endinject -->
 
-    <link rel="stylesheet" href="./public/assets/vendors_s/select2/select2.min.css">
-    <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css">
-
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../public/assets/css_s/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="../public/assets/images_s/regexbyte.png" />
 </head>
 
 <body>
-
     <div class="container-scroller">
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
@@ -222,117 +232,81 @@
                         <div class="col-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Role Details</h4>
-                                    <p class="card-description">
-                                        Role info
-                                    </p>
-                                    <form class="forms-sample" method="post"
-                                        action="<?php echo base_url() . 'save_role'; ?>">
-                                        <div class="form-group">
-                                            <label for="exampleInputUsername1">Role Title</label>
-                                            <input type="text" class="form-control" name="role_title"
-                                                id="exampleInputUsername1" placeholder="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Role Description</label>
-                                            <input type="text" class="form-control" name="role_description"
-                                                id="exampleInputUsername" placeholder="">
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-12 grid-margin stretch-card">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Module Name</th>
-                                                                        <th>Permissions</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?php foreach ($moduleNames as $module): ?>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <label>
-                                                                                    <input type="checkbox"
-                                                                                        name="module_permissions[<?= $module['ID'] ?>][role]"
-                                                                                        value="<?= $module['module_name'] ?>">
-                                                                                    <?= $module['module_name'] ?>
-                                                                                </label>
-                                                                            </td>
-                                                                            <td>
-                                                                                <label>
-                                                                                    <input type="checkbox"
-                                                                                        name="module_permissions[<?= $module['ID'] ?>][view]"
-                                                                                        value="1"> View
-                                                                                </label>
-                                                                                <label>
-                                                                                    <input type="checkbox"
-                                                                                        name="module_permissions[<?= $module['ID'] ?>][update]"
-                                                                                        value="1"> Update
-                                                                                </label>
-                                                                                <label>
-                                                                                    <input type="checkbox"
-                                                                                        name="module_permissions[<?= $module['ID'] ?>][delete]"
-                                                                                        value="1"> Delete
-                                                                                </label>
-                                                                                <label>
-                                                                                    <input type="checkbox"
-                                                                                        name="module_permissions[<?= $module['ID'] ?>][add]"
-                                                                                        value="1"> Add
-                                                                                </label>
-                                                                            </td>
-                                                                        </tr>
-                                                                    <?php endforeach; ?>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    <h4 class="card-title">Edit Sector</h4>
+                                    <form action="<?= base_url('role/update') ?>" method="post">
+                                        <input type="hidden" name="role_id" value="<?= $role['ID'] ?>">
+                                        <label for="role_name">Role Name:</label>
+                                        <input type="text" id="role_name" name="role_name"
+                                            value="<?= $role['role_name'] ?>"><br><br>
+
+                                        <label for="role_description">Role Description:</label>
+                                        <input type="text" id="role_description" name="role_description"
+                                            value="<?= $role['role_description'] ?>"><br><br>
+
+                                        <h2>Module Permissions</h2>
+                                        <?php foreach ($permissions as $permission): ?>
+                                            <input type="checkbox" id="can_view_<?= $permission['moduleID'] ?>"
+                                                name="permissions[<?= $permission['moduleID'] ?>][can_view]" value="1"
+                                                <?= $permission['can_view'] ? 'checked' : '' ?>>
+                                            <label for="can_view_<?= $permission['moduleID'] ?>">View</label>
+
+                                            <input type="checkbox" id="can_insert_<?= $permission['moduleID'] ?>"
+                                                name="permissions[<?= $permission['moduleID'] ?>][can_insert]" value="1"
+                                                <?= $permission['can_insert'] ? 'checked' : '' ?>>
+                                            <label for="can_insert_<?= $permission['moduleID'] ?>">Insert</label>
+
+                                            <input type="checkbox" id="can_update_<?= $permission['moduleID'] ?>"
+                                                name="permissions[<?= $permission['moduleID'] ?>][can_update]" value="1"
+                                                <?= $permission['can_update'] ? 'checked' : '' ?>>
+                                            <label for="can_update_<?= $permission['moduleID'] ?>">Update</label>
+
+                                            <input type="checkbox" id="can_delete_<?= $permission['moduleID'] ?>"
+                                                name="permissions[<?= $permission['moduleID'] ?>][can_delete]" value="1"
+                                                <?= $permission['can_delete'] ? 'checked' : '' ?>>
+                                            <label for="can_delete_<?= $permission['moduleID'] ?>">Delete</label>
+                                            <br>
+                                        <?php endforeach; ?>
+
+                                        <button type="submit">Save</button>
                                     </form>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- content-wrapper ends -->
-    <!-- partial:../../partials/_footer.html -->
-    <?php include 'include_common/footer.php'; ?>
 
-    <!-- partial -->
-    </div>
-    <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
+
+                <!-- content-wrapper ends -->
+                <!-- partial:../../partials/_footer.html -->
+                <?php include 'include_common/footer.php'; ?>
+
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="./public/assets/vendors_s/js/vendor.bundle.base.js"></script>
+    <script src="../public/assets/vendors_s/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
-    <script src="./public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js"></script>
-    <script src="./public/assets/vendors_s/select2/select2.min.js"></script>
-    <script src="./public/assets/vendors_s/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="../public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js"></script>
+    <script src="../public/assets/vendors_s/select2/select2.min.js"></script>
+    <script src="../public/assets/vendors_s/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="./public/assets/js_s/off-canvas.js"></script>
-    <script src="./public/assets/js_s/hoverable-collapse.js"></script>
-    <script src="./public/assets/js_s/template.js"></script>
-    <script src="./public/assets/js_s/settings.js"></script>
-    <script src="./public/assets/js_s/todolist.js"></script>
+    <script src="../public/assets/js_s/off-canvas.js"></script>
+    <script src="../public/assets/js_s/hoverable-collapse.js"></script>
+    <script src="../public/assets/js_s/template.js"></script>
+    <script src="../public/assets/js_s/settings.js"></script>
+    <script src="../public/assets/js_s/todolist.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page-->
-    <script src="./public/assets/js_s/file-upload.js"></script>
-    <script src="./public/assets/js_s/typeahead.js"></script>
-    <script src="./public/assets/js_s/select2.js"></script>
-    <!-- End custom js for this page-->
+    <script src="../public/assets/js_s/file-upload.js"></script>
+    <script src="../public/assets/js_s/typeahead.js"></script>
+    <script src="../public/assets/js_s/select2.js"></script>
 </body>
 
 </html>

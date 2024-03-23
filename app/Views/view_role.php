@@ -3,19 +3,39 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/tables/basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:35 GMT -->
+
 <head>
 
-    <link rel="stylesheet" href="./public/assets/vendors_s/select2/select2.min.css">
-    <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Star Admin2 </title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="./public/assets/vendors/feather/feather.css">
+    <link rel="stylesheet" href="./public/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="./public/assets/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="./public/assets/vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="./public/assets/vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="./public/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="./public/assets/css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="./public/assets/images/favicon.png" />
 </head>
 
 <body>
-
     <div class="container-scroller">
+        <!-- partial:./public/assets/partials/_navbar.html -->
+
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
-            <!-- partial:../../partials/_settings-panel.html -->
+            <!-- partial:./public/assets/partials/_settings-panel.html -->
             <div class="theme-setting-wrapper">
                 <div id="settings-trigger"><i class="ti-settings"></i></div>
                 <div id="theme-settings" class="settings-panel">
@@ -139,8 +159,8 @@
                         </div>
                         <ul class="chat-list">
                             <li class="list active">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg"
-                                        alt="image"><span class="online"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face1.jpg" alt="image"><span
+                                        class="online"></span></div>
                                 <div class="info">
                                     <p>Thomas Douglas</p>
                                     <p>Available</p>
@@ -148,8 +168,8 @@
                                 <small class="text-muted my-auto">19 min</small>
                             </li>
                             <li class="list">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg"
-                                        alt="image"><span class="offline"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face2.jpg" alt="image"><span
+                                        class="offline"></span></div>
                                 <div class="info">
                                     <div class="wrapper d-flex">
                                         <p>Catherine</p>
@@ -160,8 +180,8 @@
                                 <small class="text-muted my-auto">23 min</small>
                             </li>
                             <li class="list">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg"
-                                        alt="image"><span class="online"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face3.jpg" alt="image"><span
+                                        class="online"></span></div>
                                 <div class="info">
                                     <p>Daniel Russell</p>
                                     <p>Available</p>
@@ -169,8 +189,8 @@
                                 <small class="text-muted my-auto">14 min</small>
                             </li>
                             <li class="list">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg"
-                                        alt="image"><span class="offline"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face4.jpg" alt="image"><span
+                                        class="offline"></span></div>
                                 <div class="info">
                                     <p>James Richardson</p>
                                     <p>Away</p>
@@ -178,8 +198,8 @@
                                 <small class="text-muted my-auto">2 min</small>
                             </li>
                             <li class="list">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg"
-                                        alt="image"><span class="online"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face5.jpg" alt="image"><span
+                                        class="online"></span></div>
                                 <div class="info">
                                     <p>Madeline Kennedy</p>
                                     <p>Available</p>
@@ -187,8 +207,8 @@
                                 <small class="text-muted my-auto">5 min</small>
                             </li>
                             <li class="list">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg"
-                                        alt="image"><span class="online"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face6.jpg" alt="image"><span
+                                        class="online"></span></div>
                                 <div class="info">
                                     <p>Sarah Graves</p>
                                     <p>Available</p>
@@ -201,138 +221,131 @@
                 </div>
             </div>
             <!-- partial -->
-            <!-- partial:../../partials/_sidebar.html -->
+            <!-- partial:./public/assets/partials/_sidebar.html -->
             <?php include 'include_common/sidebar.php'; ?>
             <!-- partial -->
+
             <div class="main-panel">
                 <div class="content-wrapper">
-                    <?php
-                    $successMessage = session()->getFlashdata('success');
-                    $errorMessage = session()->getFlashdata('error');
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
 
-                    if ($successMessage) {
-                        echo '<div class="alert alert-success">' . $successMessage . '</div>';
-                    }
+                                <h4 class="card-title">Sector</h4>
+                                <button type="button" class="btn btn-primary" id="openSectorFormDialog">Add</button>
+                                <hr>
 
-                    if ($errorMessage) {
-                        echo '<div class="alert alert-danger">' . $errorMessage . '</div>';
-                    }
-                    ?>
-                    <div class="row">
-                        <div class="col-12 grid-margin">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Role Details</h4>
-                                    <p class="card-description">
-                                        Role info
-                                    </p>
-                                    <form class="forms-sample" method="post"
-                                        action="<?php echo base_url() . 'save_role'; ?>">
-                                        <div class="form-group">
-                                            <label for="exampleInputUsername1">Role Title</label>
-                                            <input type="text" class="form-control" name="role_title"
-                                                id="exampleInputUsername1" placeholder="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Role Description</label>
-                                            <input type="text" class="form-control" name="role_description"
-                                                id="exampleInputUsername" placeholder="">
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-12 grid-margin stretch-card">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Module Name</th>
-                                                                        <th>Permissions</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?php foreach ($moduleNames as $module): ?>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <label>
-                                                                                    <input type="checkbox"
-                                                                                        name="module_permissions[<?= $module['ID'] ?>][role]"
-                                                                                        value="<?= $module['module_name'] ?>">
-                                                                                    <?= $module['module_name'] ?>
-                                                                                </label>
-                                                                            </td>
-                                                                            <td>
-                                                                                <label>
-                                                                                    <input type="checkbox"
-                                                                                        name="module_permissions[<?= $module['ID'] ?>][view]"
-                                                                                        value="1"> View
-                                                                                </label>
-                                                                                <label>
-                                                                                    <input type="checkbox"
-                                                                                        name="module_permissions[<?= $module['ID'] ?>][update]"
-                                                                                        value="1"> Update
-                                                                                </label>
-                                                                                <label>
-                                                                                    <input type="checkbox"
-                                                                                        name="module_permissions[<?= $module['ID'] ?>][delete]"
-                                                                                        value="1"> Delete
-                                                                                </label>
-                                                                                <label>
-                                                                                    <input type="checkbox"
-                                                                                        name="module_permissions[<?= $module['ID'] ?>][add]"
-                                                                                        value="1"> Add
-                                                                                </label>
-                                                                            </td>
-                                                                        </tr>
-                                                                    <?php endforeach; ?>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Role Name</th>
+                                            <th>Role Description</th>
+                                            <th>Module Permissions</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($rolesWithPermissions as $role): ?>
+                                            <tr>
+                                                <td>
+                                                    <?= $role['role_name'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $role['role_description'] ?>
+                                                </td>
+                                                <td>
+                                                    <ul>
+                                                        <?php foreach ($role['permissions'] as $permission): ?>
+                                                            <li>
+                                                                <?= $permission['module_name'] ?>:
+                                                                <?php if ($permission['can_view']): ?> View
+                                                                <?php endif; ?>
+                                                                <?php if ($permission['can_insert']): ?> Insert
+                                                                <?php endif; ?>
+                                                                <?php if ($permission['can_update']): ?> Update
+                                                                <?php endif; ?>
+                                                                <?php if ($permission['can_delete']): ?> Delete
+                                                                <?php endif; ?>
+                                                            </li>
+                                                        <?php endforeach; ?>
+                                                    </ul>
+                                                </td>
+                                                <td>
+                                                    <a href="<?= base_url('role/edit/' . $role['ID']) ?>"
+                                                        class="btn btn-primary btn-sm">Edit</a>
+                                                    <a href="<?= base_url('role/delete/' . $role['ID']) ?>"
+                                                        onclick="return confirm('Are you sure you want to delete this Role?');"
+                                                        class="btn btn-danger btn-sm">Delete</a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <div class="modal fade" id="sectorFormModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="sectorFormModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="sectorFormModalLabel">Sector Form</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body" id="sectorFormModalBody">
+                                                <!-- Include your sector form content here -->
+                                                <?php include 'sector_form.php'; ?>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </form>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- content-wrapper ends -->
-    <!-- partial:../../partials/_footer.html -->
-    <?php include 'include_common/footer.php'; ?>
 
-    <!-- partial -->
-    </div>
-    <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
+                <!-- content-wrapper ends -->
+                <!-- partial:./public/assets/partials/_footer.html -->
+                <?php include 'include_common/footer.php'; ?>
+                <!-- partial -->
+            </div>
+
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="./public/assets/vendors_s/js/vendor.bundle.base.js"></script>
+    <script src="./public/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
-    <script src="./public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js"></script>
-    <script src="./public/assets/vendors_s/select2/select2.min.js"></script>
-    <script src="./public/assets/vendors_s/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="./public/assets/js_s/off-canvas.js"></script>
-    <script src="./public/assets/js_s/hoverable-collapse.js"></script>
-    <script src="./public/assets/js_s/template.js"></script>
-    <script src="./public/assets/js_s/settings.js"></script>
-    <script src="./public/assets/js_s/todolist.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#openSectorFormDialog').click(function () {
+                // Open dialog-box with sector_form page
+                // You can use a modal or any other dialog-box mechanism here
+                // For simplicity, let's assume you're using a Bootstrap modal
+                $('#sectorFormModal').modal('show');
+            });
+        });
+    </script>
+
+    <script src="./public/assets/js/off-canvas.js"></script>
+    <script src="./public/assets/js/hoverable-collapse.js"></script>
+    <script src="./public/assets/js/template.js"></script>
+    <script src="./public/assets/js/settings.js"></script>
+    <script src="./public/assets/js/todolist.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page-->
-    <script src="./public/assets/js_s/file-upload.js"></script>
-    <script src="./public/assets/js_s/typeahead.js"></script>
-    <script src="./public/assets/js_s/select2.js"></script>
     <!-- End custom js for this page-->
 </body>
+
+
+<!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/tables/basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:35 GMT -->
 
 </html>

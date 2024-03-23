@@ -95,6 +95,10 @@ class ComposerStaticInitf08dc387de4df7a15d08a4ffd04c8b62
             'CodeIgniter\\CodingStandard\\' => 27,
             'CodeIgniter\\' => 12,
         ),
+        'A' => 
+        array (
+            'App\\' => 4,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -271,6 +275,10 @@ class ComposerStaticInitf08dc387de4df7a15d08a4ffd04c8b62
         array (
             0 => __DIR__ . '/../..' . '/system',
         ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -284,6 +292,36 @@ class ComposerStaticInitf08dc387de4df7a15d08a4ffd04c8b62
     );
 
     public static $classMap = array (
+        'App\\Controllers\\AppointmentController' => __DIR__ . '/../..' . '/app/Controllers/AppointmentController.php',
+        'App\\Controllers\\BaseController' => __DIR__ . '/../..' . '/app/Controllers/BaseController.php',
+        'App\\Controllers\\ClientController' => __DIR__ . '/../..' . '/app/Controllers/ClientController.php',
+        'App\\Controllers\\ConfigureController' => __DIR__ . '/../..' . '/app/Controllers/ConfigureController.php',
+        'App\\Controllers\\DoctorController' => __DIR__ . '/../..' . '/app/Controllers/DoctorController.php',
+        'App\\Controllers\\Home' => __DIR__ . '/../..' . '/app/Controllers/Home.php',
+        'App\\Controllers\\LabController' => __DIR__ . '/../..' . '/app/Controllers/LabController.php',
+        'App\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Controllers/LoginController.php',
+        'App\\Controllers\\ReportsController' => __DIR__ . '/../..' . '/app/Controllers/ReportsController.php',
+        'App\\Controllers\\SalesController' => __DIR__ . '/../..' . '/app/Controllers/SalesController.php',
+        'App\\Controllers\\ServiceController' => __DIR__ . '/../..' . '/app/Controllers/ServiceController.php',
+        'App\\Controllers\\itemsController' => __DIR__ . '/../..' . '/app/Controllers/itemsController.php',
+        'App\\Middleware\\AuthMiddleware' => __DIR__ . '/../..' . '/app/Middleware/AuthMiddleware.php',
+        'App\\Middleware\\SessionExpiryMiddleware' => __DIR__ . '/../..' . '/app/Middleware/SessionExpiryMiddleware.php',
+        'App\\Models\\AppointmentModel' => __DIR__ . '/../..' . '/app/Models/AppointmentModel.php',
+        'App\\Models\\BusinessModel' => __DIR__ . '/../..' . '/app/Models/BusinessModel.php',
+        'App\\Models\\ClientModel' => __DIR__ . '/../..' . '/app/Models/ClientModel.php',
+        'App\\Models\\ConfigureModel' => __DIR__ . '/../..' . '/app/Models/ConfigureModel.php',
+        'App\\Models\\DoctorModel' => __DIR__ . '/../..' . '/app/Models/DoctorModel.php',
+        'App\\Models\\InvoiceDetailModel' => __DIR__ . '/../..' . '/app/Models/InvoiceDetailModel.php',
+        'App\\Models\\InvoiceDetailsModel' => __DIR__ . '/../..' . '/app/Models/InvoiceDetailsModel.php',
+        'App\\Models\\InvoiceModel' => __DIR__ . '/../..' . '/app/Models/InvoiceModel.php',
+        'App\\Models\\LabModel' => __DIR__ . '/../..' . '/app/Models/LabModel.php',
+        'App\\Models\\LabtestdetailsModel' => __DIR__ . '/../..' . '/app/Models/LabtestdetailsModel.php',
+        'App\\Models\\LoginModel' => __DIR__ . '/../..' . '/app/Models/LoginModel.php',
+        'App\\Models\\SectorsModel' => __DIR__ . '/../..' . '/app/Models/SectorsModel.php',
+        'App\\Models\\ServicesModel' => __DIR__ . '/../..' . '/app/Models/ServicesModel.php',
+        'App\\Models\\TestModel' => __DIR__ . '/../..' . '/app/Models/TestModel.php',
+        'App\\Models\\itemsModel' => __DIR__ . '/../..' . '/app/Models/itemsModel.php',
+        'App\\Models\\salesModel' => __DIR__ . '/../..' . '/app/Models/salesModel.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'CURLStringFile' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/CURLStringFile.php',
         'CodeIgniter\\API\\ResponseTrait' => __DIR__ . '/../..' . '/system/API/ResponseTrait.php',

@@ -231,6 +231,9 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
                                 <a class="nav-link" href="<?= base_url() . 'role_form'; ?>">Create Roles</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url() . 'view_role'; ?>">Edit Roles</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="<?= base_url() . 'user_form2'; ?>">Create Users</a>
                             </li>
                             <li class="nav-item">
