@@ -222,21 +222,21 @@
                         <div class="col-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Role Details</h4>
-                                    <p class="card-description">
-                                        Role info
-                                    </p>
+                                    <h4 class="card-title">Edit Role</h4>
+                                    <p class="card-description">Role info</p>
                                     <form class="forms-sample" method="post"
-                                        action="<?php echo base_url() . 'save_role'; ?>">
+                                        action="<?= base_url('update_role/' . $role['ID']); ?>">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Role Title</label>
                                             <input type="text" class="form-control" name="role_title"
-                                                id="exampleInputUsername1" placeholder="">
+                                                id="exampleInputUsername1" value="<?= $role['role_name']; ?>"
+                                                placeholder="">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Role Description</label>
                                             <input type="text" class="form-control" name="role_description"
-                                                id="exampleInputUsername" placeholder="">
+                                                id="exampleInputUsername" value="<?= $role['role_description']; ?>"
+                                                placeholder="">
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-12 grid-margin stretch-card">
@@ -265,22 +265,26 @@
                                                                                 <label>
                                                                                     <input type="checkbox"
                                                                                         name="module_permissions[<?= $module['ID'] ?>][view]"
-                                                                                        value="1"> View
+                                                                                        value="1"
+                                                                                        <?= ($rolePermissions[$module['ID']]['can_view'] == 1) ? 'checked' : ''; ?>> View
                                                                                 </label>
                                                                                 <label>
                                                                                     <input type="checkbox"
                                                                                         name="module_permissions[<?= $module['ID'] ?>][update]"
-                                                                                        value="1"> Update
+                                                                                        value="1"
+                                                                                        <?= ($rolePermissions[$module['ID']]['can_update'] == 1) ? 'checked' : ''; ?>> Update
                                                                                 </label>
                                                                                 <label>
                                                                                     <input type="checkbox"
                                                                                         name="module_permissions[<?= $module['ID'] ?>][delete]"
-                                                                                        value="1"> Delete
+                                                                                        value="1"
+                                                                                        <?= ($rolePermissions[$module['ID']]['can_delete'] == 1) ? 'checked' : ''; ?>> Delete
                                                                                 </label>
                                                                                 <label>
                                                                                     <input type="checkbox"
                                                                                         name="module_permissions[<?= $module['ID'] ?>][add]"
-                                                                                        value="1"> Add
+                                                                                        value="1"
+                                                                                        <?= ($rolePermissions[$module['ID']]['can_insert'] == 1) ? 'checked' : ''; ?>> Add
                                                                                 </label>
                                                                             </td>
                                                                         </tr>
@@ -292,7 +296,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary">Update</button>
                                     </form>
                                 </div>
                             </div>

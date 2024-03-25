@@ -232,56 +232,89 @@
                         <div class="col-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Edit Sector</h4>
-                                    <form action="<?= base_url('role/update') ?>" method="post">
-                                        <input type="hidden" name="role_id" value="<?= $role['ID'] ?>">
-                                        <label for="role_name">Role Name:</label>
-                                        <input type="text" id="role_name" name="role_name"
-                                            value="<?= $role['role_name'] ?>"><br><br>
+                                    <h4 class="card-title">Edit Role</h4>
+                                    <p class="card-description">Role info</p>
+                                    <form class="forms-sample" method="post"
+                                        action="<?= base_url('update_role/' . $role['ID']); ?>">
+                                        <div class="form-group">
+                                            <label for="exampleInputUsername1">Role Title</label>
+                                            <input type="text" class="form-control" name="role_name"
+                                                id="exampleInputUsername1" value="<?= $role['role_name']; ?>"
+                                                placeholder="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Role Description</label>
+                                            <input type="text" class="form-control" name="role_description"
+                                                id="exampleInputUsername" value="<?= $role['role_description']; ?>"
+                                                placeholder="">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-12 grid-margin stretch-card">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Module ID</th>
+                                                                        <!-- Change column name here -->
+                                                                        <th>Permissions</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php foreach ($moduleNames as $module): ?>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <label>
+                                                                                    <label>
+                                                                                        <input type="checkbox"
+                                                                                            name="module_permissions[<?= $module['ID'] ?>][role]"
+                                                                                            value="<?= $module['module_name'] ?>">
+                                                                                        <?= $module['module_name'] ?>
+                                                                                    </label>
+                                                                                </label>
+                                                                            </td>
+                                                                            <td>
+                                                                                <label>
+                                                                                    <input type="checkbox"
+                                                                                        name="module_permissions[<?= $module['ID'] ?>][view]"
+                                                                                        value="1"> View
 
-                                        <label for="role_description">Role Description:</label>
-                                        <input type="text" id="role_description" name="role_description"
-                                            value="<?= $role['role_description'] ?>"><br><br>
-
-                                        <h2>Module Permissions</h2>
-                                        <?php foreach ($permissions as $permission): ?>
-                                            <input type="checkbox" id="can_view_<?= $permission['moduleID'] ?>"
-                                                name="permissions[<?= $permission['moduleID'] ?>][can_view]" value="1"
-                                                <?= $permission['can_view'] ? 'checked' : '' ?>>
-                                            <label for="can_view_<?= $permission['moduleID'] ?>">View</label>
-
-                                            <input type="checkbox" id="can_insert_<?= $permission['moduleID'] ?>"
-                                                name="permissions[<?= $permission['moduleID'] ?>][can_insert]" value="1"
-                                                <?= $permission['can_insert'] ? 'checked' : '' ?>>
-                                            <label for="can_insert_<?= $permission['moduleID'] ?>">Insert</label>
-
-                                            <input type="checkbox" id="can_update_<?= $permission['moduleID'] ?>"
-                                                name="permissions[<?= $permission['moduleID'] ?>][can_update]" value="1"
-                                                <?= $permission['can_update'] ? 'checked' : '' ?>>
-                                            <label for="can_update_<?= $permission['moduleID'] ?>">Update</label>
-
-                                            <input type="checkbox" id="can_delete_<?= $permission['moduleID'] ?>"
-                                                name="permissions[<?= $permission['moduleID'] ?>][can_delete]" value="1"
-                                                <?= $permission['can_delete'] ? 'checked' : '' ?>>
-                                            <label for="can_delete_<?= $permission['moduleID'] ?>">Delete</label>
-                                            <br>
-                                        <?php endforeach; ?>
-
-                                        <button type="submit">Save</button>
+                                                                                </label>
+                                                                                <label>
+                                                                                    <input type="checkbox"
+                                                                                        name="module_permissions[<?= $module['ID'] ?>][edit]"
+                                                                                        value="1"
+                                                                                        <?= (isset ($rolePermissions[$module['ID']]) && $rolePermissions[$module['ID']]['can_edit'] == 1) ? 'checked' : ''; ?>>
+                                                                                    Edit
+                                                                                </label>
+                                                                                <label>
+    <input type="checkbox" name="module_permissions[<?= $module['ID'] ?>][delete]" value="1"
+        <?= (isset($rolePermissions[$module['ID']]) && $rolePermissions[$module['ID']]['can_delete'] == 1) ? 'checked' : ''; ?>>
+    Delete
+</label>
+<label>
+    <input type="checkbox" name="module_permissions[<?= $module['ID'] ?>][add]" value="1"
+        <?= (isset($rolePermissions[$module['ID']]) && $rolePermissions[$module['ID']]['can_add'] == 1) ? 'checked' : ''; ?>>
+    Add
+</label>
+                                                                            </td>
+                                                                        </tr>
+                                                                    <?php endforeach; ?>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Update</button>
                                     </form>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-                <!-- content-wrapper ends -->
-                <!-- partial:../../partials/_footer.html -->
-                <?php include 'include_common/footer.php'; ?>
-
-                <!-- partial -->
             </div>
             <!-- main-panel ends -->
         </div>

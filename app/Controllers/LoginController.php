@@ -13,6 +13,11 @@ use App\Models\RoleModel;
 class LoginController extends Controller
 {
 
+    public function show()
+    {
+        return view('login.php');
+    }
+
     public function view_role()
     {
         $roleModel = new RoleModel();
@@ -20,47 +25,151 @@ class LoginController extends Controller
         return view('view_role', ['rolesWithPermissions' => $rolesWithPermissions]);
     }
 
-    public function editRole($roleId)
+    public function edit_role($roleID)
     {
-        $roleModel = new RoleModel();
-        $role = $roleModel->find($roleId);
+        $moduleModel = new LoginModel('modules');
+        $data['moduleNames'] = $moduleModel->getModuleNames();
+        $rolesModel = new LoginModel('role');
+        $modulePermissionsModel = new LoginModel('role_permissions');
 
-        if (!$role) {
-            return redirect()->to(base_url('roles'))->with('error', 'Role not found.');
-        }
-        $db = \Config\Database::connect();
-        $builder = $db->table('role_permissions');
-        $permissions = $builder->where('roleID', $roleId)->get()->getResultArray();
+        $data['role'] = $rolesModel->find($roleID);
+        // $data['moduleNames'] = $rolesModel->getModuleNames();
+        $data['rolePermissions'] = $modulePermissionsModel->getRolePermissions($roleID);
 
-        return view('edit_role', ['role' => $role, 'permissions' => $permissions]);
+        return view('edit_role', $data);
     }
 
-    public function updateRole($roleId)
+    public function role_form()
     {
-        // Retrieve the role data from the form submission
+        $moduleModel = new LoginModel('modules');
+        $data['moduleNames'] = $moduleModel->getModuleNames();
+
+        return view('add_role.php', $data);
+    }
+
+
+    public function business_table()
+    {
+        $businessModel = new LoginModel('business');
+        $data['businessData'] = $businessModel->getBusinessTable();
+
+        return view('business_table', $data);
+    }
+    public function user_form()
+    {
+        $Model = new LoginModel('businesstype');
+        $data['business'] = $Model->getAllBusinessTypes();
+
+        return view('add_business.php', $data);
+    }
+
+    public function user_form2()
+    {
+        $Model = new LoginModel('role');
+        $data['roleName'] = $Model->getAllRoles('role');
+
+        return view('add_user.php', $data);
+    }
+
+
+    public function users_table()
+    {
+        $model = new LoginModel('users');
+        $data['userDetails'] = $model->getuserprofile();
+        return view('users_table.php', $data);
+    }
+
+    public function edit_user($user_id)
+    {
+        $model = new LoginModel('users');
+        $data['userData'] = $model->get_user_by_id($user_id);
+        $Model = new LoginModel('role');
+        $data['roleName'] = $Model->getAllRoles('role');
+        return view('edit_user.php', $data);
+    }
+
+    // public function update_role($roleID)
+    // {
+    //     // Retrieve the role data from the form submission
+    //     $roleName = $this->request->getPost('role_name');
+    //     $roleDescription = $this->request->getPost('role_description');
+    //     $permissions = $this->request->getPost('permissions'); // Assuming permissions are submitted as an array
+
+    //     // Load the RoleModel
+    //     $roleModel = new RoleModel();
+    //     $role = $roleModel->find($roleID);
+
+    //     // Check if the role exists
+    //     if (!$role) {
+    //         return redirect()->to(base_url('roles'))->with('error', 'Role not found.');
+    //     }
+
+    //     // Prepare role data for update
+    //     $roleData = [
+    //         'role_name' => $roleName,
+    //         'role_description' => $roleDescription,
+    //     ];
+
+    //     // Update the role details
+    //     $roleModel->update($roleID, $roleData);
+
+    //     // Update role permissions
+    //     $rolePermissions = [];
+    //     foreach ($permissions as $moduleID => $permission) {
+    //         $rolePermissions[] = [
+    //             'roleID' => $roleID,
+    //             'moduleID' => $moduleID,
+    //             'can_view' => isset ($permission['view']) ? 1 : 0,
+    //             'can_insert' => isset ($permission['add']) ? 1 : 0,
+    //             'can_update' => isset ($permission['update']) ? 1 : 0,
+    //             'can_delete' => isset ($permission['delete']) ? 1 : 0,
+    //         ];
+    //     }
+
+    //     // Update role permissions in the database
+    //     $rolePermissionModel = new RolePermissionModel();
+    //     $rolePermissionModel->updateRolePermissions($roleID, $rolePermissions);
+
+    //     // Redirect back to roles view with success message
+    //     return redirect()->to(base_url('roles'))->with('success', 'Role updated successfully.');
+    // }
+    public function update_role($roleID)
+    {
+
         $roleName = $this->request->getPost('role_name');
         $roleDescription = $this->request->getPost('role_description');
-        $permissions = $this->request->getPost('permissions'); // Assuming permissions are submitted as an array
+        $modulePermissions = $this->request->getPost('module_permissions');
 
         $roleModel = new RoleModel();
-        $role = $roleModel->find($roleId);
-
+        $role = $roleModel->find($roleID);
         if (!$role) {
             return redirect()->to(base_url('roles'))->with('error', 'Role not found.');
         }
-
         $roleData = [
             'role_name' => $roleName,
             'role_description' => $roleDescription,
         ];
-
-        $roleModel->update($roleId, $roleData);
-
-        return redirect()->to(base_url('roles'))->with('success', 'Role updated successfully.');
+        $roleModel->update($roleID, $roleData);
+        $rolePermissions = [];
+        foreach ($modulePermissions as $moduleID => $permissions) {
+            $rolePermissions[] = [
+                'roleID' => $roleID,
+                'moduleID' => $moduleID,
+                'can_view' => isset ($permissions['view']) ? 1 : 0,
+                'can_insert' => isset ($permissions['add']) ? 1 : 0,
+                'can_update' => isset ($permissions['update']) ? 1 : 0,
+                'can_delete' => isset ($permissions['delete']) ? 1 : 0,
+            ];
+        }
+        $permissionModel = new LoginModel('role_permissions');
+        $permissionModel->updateRolePermissions($roleID, $rolePermissions);
+        return redirect()->to(base_url('view_role'))->with('success', 'Role updated successfully.');
     }
 
 
-
+    //------------------------------------------------------------------------------------------------------------------------
+//                                                                     Functions
+//------------------------------------------------------------------------------------------------------------------------
     public function dashboard()
     {
         $businessID = session()->get('businessID');
@@ -154,56 +263,56 @@ class LoginController extends Controller
         return view('dashboard.php', $data);
     }
 
-    public function show()
+    public function save_role()
     {
-        return view('login.php');
-    }
+        $db = \Config\Database::connect();
+        $request = service('request');
+        $roleTitle = $request->getPost('role_title');
+        $roleDescription = $request->getPost('role_description');
+        $modulePermissions = $request->getPost('module_permissions');
+        $session = session();
+        $businessID = $session->get('businessID');
 
-    public function user_form()
-    {
-        $Model = new LoginModel('businesstype');
-        $data['business'] = $Model->getAllBusinessTypes();
+        $db->transBegin();
 
-        return view('add_business.php', $data);
-    }
-    public function role_form()
-    {
-        $moduleModel = new LoginModel('modules');
-        $data['moduleNames'] = $moduleModel->getModuleNames();
+        $data = [
+            'role_name' => $roleTitle,
+            'role_description' => $roleDescription,
+            'businessID' => $businessID,
+        ];
 
-        return view('add_role.php', $data);
-    }
-    public function business_table()
-    {
-        $businessModel = new LoginModel('business');
-        $data['businessData'] = $businessModel->getBusinessTable();
+        $rolesModel = new LoginModel('role');
+        $roleID = $rolesModel->save_role($data);
 
-        return view('business_table', $data);
-    }
+        if ($roleID) {
+            $permissionsData = [];
 
-    public function user_form2()
-    {
-        $Model = new LoginModel('role');
-        $data['roleName'] = $Model->getAllRoles('role');
-
-        return view('add_user.php', $data);
-    }
+            foreach ($modulePermissions as $moduleID => $permissions) {
+                $permissionsData[] = [
+                    'roleID' => $roleID,
+                    'moduleID' => $moduleID,
+                    'can_view' => isset ($permissions['view']) ? 1 : 0,
+                    'can_insert' => isset ($permissions['add']) ? 1 : 0,
+                    'can_update' => isset ($permissions['update']) ? 1 : 0,
+                    'can_delete' => isset ($permissions['delete']) ? 1 : 0,
+                ];
+            }
 
 
-    public function users_table()
-    {
-        $model = new LoginModel('users');
-        $data['userDetails'] = $model->getuserprofile();
-        return view('users_table.php', $data);
-    }
+            $permissionModel = new LoginModel('role_permissions');
+            $permissionModel->saveRolePermissions($permissionsData);
 
-    public function edit_user($user_id)
-    {
-        $model = new LoginModel('users');
-        $data['userData'] = $model->get_user_by_id($user_id);
-        $Model = new LoginModel('role');
-        $data['roleName'] = $Model->getAllRoles('role');
-        return view('edit_user.php', $data);
+
+            $db->transCommit();
+            session()->setFlashdata('success', 'Data inserted successfully.');
+
+            return redirect()->to(base_url("/role_form"));
+        } else {
+            $db->transRollback();
+            session()->setFlashdata('error', 'Error inserting data. Please try again.');
+
+            return redirect()->back();
+        }
     }
 
 
@@ -386,71 +495,20 @@ class LoginController extends Controller
     }
 
 
-    public function save_role()
-    {
-        $db = \Config\Database::connect();
-        $request = service('request');
-        $roleTitle = $request->getPost('role_title');
-        $roleDescription = $request->getPost('role_description');
-        $modulePermissions = $request->getPost('module_permissions');
-        $session = session();
-        $businessID = $session->get('businessID');
 
-        $db->transBegin();
+    // public function edit_role($role_id)
+    // {
+    //     $db = \Config\Database::connect();
+    //     $rolesModel = new LoginModel('role');
+    //     $role = $rolesModel->find($role_id);
+    //     $permissionsModel = new LoginModel('role_permissions');
+    //     $permissions = $permissionsModel->where('roleID', $role_id)->findAll();
 
-        $data = [
-            'role_name' => $roleTitle,
-            'role_description' => $roleDescription,
-            'businessID' => $businessID,
-        ];
-
-        $rolesModel = new LoginModel('role');
-        $roleID = $rolesModel->save_role($data);
-
-        if ($roleID) {
-            $permissionsData = [];
-
-            foreach ($modulePermissions as $moduleID => $permissions) {
-                $permissionsData[] = [
-                    'roleID' => $roleID,
-                    'moduleID' => $moduleID,
-                    'can_view' => isset ($permissions['view']) ? 1 : 0,
-                    'can_insert' => isset ($permissions['add']) ? 1 : 0,
-                    'can_update' => isset ($permissions['update']) ? 1 : 0,
-                    'can_delete' => isset ($permissions['delete']) ? 1 : 0,
-                ];
-            }
-
-
-            $permissionModel = new LoginModel('role_permissions');
-            $permissionModel->saveRolePermissions($permissionsData);
-
-
-            $db->transCommit();
-            session()->setFlashdata('success', 'Data inserted successfully.');
-
-            return redirect()->to(base_url("/role_form"));
-        } else {
-            $db->transRollback();
-            session()->setFlashdata('error', 'Error inserting data. Please try again.');
-
-            return redirect()->back();
-        }
-    }
-
-    public function edit_role($role_id)
-    {
-        $db = \Config\Database::connect();
-        $rolesModel = new LoginModel('role');
-        $role = $rolesModel->find($role_id);
-        $permissionsModel = new LoginModel('role_permissions');
-        $permissions = $permissionsModel->where('roleID', $role_id)->findAll();
-
-        return view('edit_role', [
-            'role' => $role,
-            'permissions' => $permissions,
-        ]);
-    }
+    //     return view('edit_role', [
+    //         'role' => $role,
+    //         'permissions' => $permissions,
+    //     ]);
+    // }
 
     public function save_user()
     {

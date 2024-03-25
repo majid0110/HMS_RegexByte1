@@ -150,7 +150,13 @@ class LoginModel extends Model
     {
         $this->insertBatch($permissionsData);
     }
-
+    public function updateRolePermissions($roleID, $permissionsData)
+    {
+        $this->where('roleID', $roleID)->delete();
+        foreach ($permissionsData as $permission) {
+            $this->insert($permission);
+        }
+    }
     public function getAllRoles()
     { {
             $session = \Config\Services::session();

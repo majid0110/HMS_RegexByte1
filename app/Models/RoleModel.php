@@ -8,6 +8,7 @@ class RoleModel extends Model
 {
     protected $table = 'role';
     protected $primaryKey = 'ID';
+    protected $allowedFields = ['role_name', 'role_description', 'businessID'];
 
     // Function to fetch all roles with their corresponding module permissions
     public function getAllRolesWithPermissions()

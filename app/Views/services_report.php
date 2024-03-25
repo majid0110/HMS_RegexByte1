@@ -330,6 +330,7 @@
                                                     <th>Payment Method</th>
                                                     <th>Status</th>
                                                     <th>Date</th>
+                                                    <th>FEE</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -354,6 +355,9 @@
                                                         </td>
                                                         <td>
                                                             <?= $Sale['Date']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['Fee']; ?>
                                                         </td>
                                                         <td>
                                                             <a href="<?= base_url('viewServiceDetails/' . $Sale['idReceipts']); ?>"
