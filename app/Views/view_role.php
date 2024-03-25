@@ -271,8 +271,13 @@
                                                     </ul>
                                                 </td>
                                                 <td>
-                                                    <a href="<?= base_url('role/edit/' . $role['ID']) ?>"
-                                                        class="btn btn-primary btn-sm">Edit</a>
+                                                    <!-- <a href="<?= base_url('role/edit/' . $role['ID']) ?>"
+                                                        class="btn btn-primary btn-sm">Edit</a> -->
+
+                                                    <a href="<?php echo base_url() . 'edit_role/' . $role['ID']; ?>"
+                                                        class="btn btn-warning btn-sm">Edit</a>
+
+
                                                     <a href="<?= base_url('role/delete/' . $role['ID']) ?>"
                                                         onclick="return confirm('Are you sure you want to delete this Role?');"
                                                         class="btn btn-danger btn-sm">Delete</a>

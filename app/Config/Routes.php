@@ -18,10 +18,11 @@ $routes->post('/save_role', 'LoginController::save_role');
 $routes->get('/user_form2', 'LoginController::user_form2');
 $routes->post('/save_user', 'LoginController::save_user');
 
-$routes->get('/edit_role', 'LoginController::edit_role');
+// $routes->get('/edit_role', 'LoginController::edit_role');
 $routes->post('/update_role/(:num)', 'LoginController::update_role/$1');
 $routes->get('/view_role', 'LoginController::view_role');
-$routes->get('/role/edit/(:num)', 'LoginController::edit_role/$1');
+$routes->get('/edit_role/(:num)', 'LoginController::edit_role/$1');
+// $routes->get('/role/edit/(:num)', 'LoginController::edit_role/$1');
 
 // $routes->post('role/update/(:num)', 'LoginController::updateRole/$1');
 $routes->get('role/edit/(:num)', 'LoginController::editRole/$1');
