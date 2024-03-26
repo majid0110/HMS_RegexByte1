@@ -314,6 +314,21 @@ class LoginController extends Controller
             return redirect()->back();
         }
     }
+    public function delete_role($roleID)
+    {
+        $roleModel = new RoleModel();
+        $role = $roleModel->find($roleID);
+
+        if (!$role) {
+            return redirect()->back()->with('error', 'Role not found.');
+        }
+        if ($roleModel->delete($roleID)) {
+
+            return redirect()->to(base_url('view_role'))->with('success', 'Role updated successfully.');
+        } else {
+            return redirect()->to(base_url('view_role'))->with('error', 'Failed to delete role. Please try again.');
+        }
+    }
 
 
 

@@ -303,6 +303,15 @@
                           </div>
                         </div>
                       </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Hospital Fee</label>
+                          <div class="col-sm-9">
+                            <input type="number" class="form-control" name="hospitalFee" id="hospitalFee" required <?php echo isset ($_SESSION['hospitalcharges']) ? 'value="' . $_SESSION['hospitalcharges'] . '"' : ''; ?> />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <div class="row" style="margin-top: -26px;">
                       <div class="col-md-6">

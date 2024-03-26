@@ -23,6 +23,7 @@ $routes->post('/update_role/(:num)', 'LoginController::update_role/$1');
 $routes->get('/view_role', 'LoginController::view_role');
 $routes->get('/edit_role/(:num)', 'LoginController::edit_role/$1');
 // $routes->get('/role/edit/(:num)', 'LoginController::edit_role/$1');
+$routes->get('/delete_role/(:num)', 'LoginController::delete_role/$1');
 
 // $routes->post('role/update/(:num)', 'LoginController::updateRole/$1');
 $routes->get('role/edit/(:num)', 'LoginController::editRole/$1');
@@ -78,6 +79,7 @@ $routes->group('appointment', ['namespace' => 'App\Controllers'], function ($rou
 
 $routes->get('/editDoctor/(:num)', 'DoctorController::editDoctor/$1');
 $routes->get('/deleteDoctor/(:num)', 'DoctorController::deleteDoctor/$1');
+$routes->get('viewAppointmentDetails/(:num)', 'AppointmentController::viewAppointmentDetails/$1');
 
 $routes->get('/edit_fee/(:num)', 'DoctorController::editDoctorFee/$1');
 $routes->get('/edit_fee/(:num)', 'DoctorController::editDoctorFee/$1');

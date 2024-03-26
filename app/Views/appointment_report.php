@@ -62,6 +62,12 @@
                 left: 150%;
             }
         }
+
+        .table-container {
+            max-height: 400px;
+            /* Adjust as needed */
+            overflow-y: auto;
+        }
     </style>
 
 </head>
@@ -266,10 +272,6 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <div id="total-fee-container">
-                                    Total Appointment Fee:
-                                    <?= $totalAppointmentFee ?>
-                                </div>
                                 <form action="<?= base_url('appointment_report'); ?>" method="post">
                                     <div class="form-group row">
                                         <div class="col-md-3 offset-md-9">
@@ -320,53 +322,67 @@
                                 </div> -->
                                 <h4 class="card-title">Appointments Report</h4>
                                 <div class="col-12 grid-margin">
-                                    <div class="table-responsive">
-
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Client Name</th>
-                                                    <th>Doctor Name</th>
-                                                    <th>Appointment Date</th>
-                                                    <th>Appointment Time</th>
-                                                    <th>Appointment Type</th>
-                                                    <th>Total Fee</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach ($Appointments as $appointment): ?>
+                                    <div class="table-container">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
                                                     <tr>
-                                                        <td>
-                                                            <?= $appointment['clientName']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $appointment['doctorFirstName'] . ' ' . $appointment['doctorLastName']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $appointment['appointmentDate']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $appointment['appointmentTime']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $appointment['appointmentTypeName']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $appointment['appointmentFee'] + $appointment['hospitalCharges']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <!-- Action buttons: Edit and Delete -->
-                                                            <a href="<?= base_url('deleteAppointment/' . $appointment['appointmentID']); ?>"
-                                                                onclick="return confirm('Are you sure you want to delete this Appointment?');"
-                                                                class="btn btn-danger btn-sm">Delete</a>
-                                                        </td>
+                                                        <th>Client Name</th>
+                                                        <th>Doctor Name</th>
+                                                        <th>Doctor Fee</th>
+                                                        <th>Appointment Date</th>
+                                                        <!-- <th>Appointment Time</th> -->
+                                                        <th>Appointment Type</th>
+                                                        <th>Hospital Fee</th>
+                                                        <th>Total Fee</th>
+                                                        <th>Actions</th>
                                                     </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    <?php foreach ($Appointments as $appointment): ?>
+                                                        <tr>
+                                                            <td>
+                                                                <?= $appointment['clientName']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?= $appointment['doctorFirstName'] . ' ' . $appointment['doctorLastName']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?= $appointment['appointmentFee']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?= $appointment['appointmentDate']; ?>
+                                                            </td>
+                                                            <!-- <td>
+                                                            'appointmentTime'
+                                                        </td> -->
+                                                            <td>
+                                                                <?= $appointment['appointmentTypeName']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?= $appointment['hospitalCharges']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?= $appointment['appointmentFee'] + $appointment['hospitalCharges']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <!-- Action buttons: Edit and Delete -->
+                                                                <a href="<?= base_url('deleteAppointment/' . $appointment['appointmentID']); ?>"
+                                                                    onclick="return confirm('Are you sure you want to delete this Appointment?');"
+                                                                    class="btn btn-danger btn-sm">Delete</a>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
+                                <div id="total-fee-container">
+                                    Total Appointment Fee:
+                                    <?= $totalAppointmentFee ?>
+                                </div>
+
                             </div>
                         </div>
                     </div>

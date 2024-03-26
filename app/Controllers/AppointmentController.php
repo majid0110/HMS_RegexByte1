@@ -9,6 +9,7 @@ use App\Models\AppointmentModel;
 use App\Models\DoctorModel;
 use App\Models\ClientModel;
 use App\Models\LoginModel;
+use App\Models\salesModel;
 use APP\libraries\EscPos;
 
 // require __DIR__ . '/Config/Autoload.php';
@@ -33,29 +34,19 @@ class AppointmentController extends Controller
         return view('appointments_table.php', $data);
     }
 
-    // AppointmentsController
     public function appointments_form()
     {
         $model = new AppointmentModel();
-
-        // Fetch appointment types
         $data['appointment_types'] = $model->getAppointmentTypes();
-
-
-
         return view('appointments_form.php', $data);
     }
 
-
-    // public function fetchDoctorFee($doctorID, $feeTypeID)
-    // {
-    // $model = new DoctorModel();
-    // $doctorFee = $model->getDoctorFee($doctorID, $feeTypeID);
-
-    // return $this->response->setJSON(['fee' => $doctorFee['Fee'] ?? '']);
-    // }
-
-
+    public function viewAppointmentDetails($appointmentID)
+    {
+        $model = new AppointmentModel();
+        $data['AppointmentDetails'] = $model->viewAppointmentDetails($appointmentID);
+        return view('appointment_details', $data);
+    }
     public function deleteAppointment($appointmentID)
     {
         $model = new AppointmentModel();
@@ -77,51 +68,7 @@ class AppointmentController extends Controller
     }
 
     //------------------------------------------------Functions
-    // public function saveAppointment()
-    // {
-    //     $appointmentModel = new AppointmentModel();
-    //     $doctorModel = new DoctorModel();
-    //     $businessModel = new LoginModel("business");
 
-    //     $clientID = $this->request->getPost('clientId');
-    //     $doctorID = $this->request->getPost('doctor_id');
-    //     $appointmentDate = $this->request->getPost('appointmentDate');
-    //     $appointmentTime = $this->request->getPost('appointmentTime');
-    //     $appointmentType = $this->request->getPost('app_type_id');
-    //     $selectedFeeTypeID = $this->request->getPost('fee_type_id');
-    //     $doctorFee = $this->request->getPost('appointmentFee');
-
-
-    //     $appointmentTypeName = $this->request->getPost('appointmentTypeName');
-    //     $clientName = $this->request->getPost('clientName');
-    //     $doctorName = $this->request->getPost('doctorName');
-
-    //     $businessID = session()->get('businessID');
-    //     $charges = $businessModel->getBusinessCharges($businessID);
-
-    //     $data = [
-    //         'clientID' => $clientID,
-    //         'doctorID' => $doctorID,
-    //         'appointmentDate' => $appointmentDate,
-    //         'appointmentTime' => $appointmentTime,
-    //         'appointmentType' => $appointmentType,
-    //         'appointmentFee' => $doctorFee,
-    //         'hospitalCharges' => $charges,
-    //         'businessID' => $businessID,
-    //     ];
-
-    //     $appointmentModel->saveAppointment($data);
-    //     $dataPdf = [
-    //         'appointmentTypeName' => $appointmentTypeName,
-    //         'clientName' => $clientName,
-    //         'doctorName' => $doctorName,
-    //     ];
-
-
-    //     $this->generatePdf($dataPdf + $data);
-
-    //     return redirect()->to(base_url("/appointments_form"));
-    // }
     public function saveAppointment()
     {
         $appointmentModel = new AppointmentModel();
@@ -138,10 +85,11 @@ class AppointmentController extends Controller
         $appointmentTypeName = $this->request->getPost('appointmentTypeName');
         $clientName = $this->request->getPost('clientName');
         $doctorName = $this->request->getPost('doctorName');
+        $charges = $this->request->getPost('hospitalFee');
 
         $session = \Config\Services::session();
         $businessID = session()->get('businessID');
-        $charges = $session->get('hospitalcharges');
+        // $charges = $session->get('hospitalcharges');
 
         $lastAppointmentNo = $appointmentModel->getLastAppointmentNo($businessID);
         $appointmentNo = intval($lastAppointmentNo) + 1;

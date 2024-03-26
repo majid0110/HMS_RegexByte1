@@ -5,9 +5,11 @@
         <tr>
             <th>Client Name</th>
             <th>Doctor Name</th>
+            <th>Doctor Fee</th>
             <th>Appointment Date</th>
-            <th>Appointment Time</th>
+            <!-- <th>Appointment Time</th> -->
             <th>Appointment Type</th>
+            <th>Hospital Fee</th>
             <th>Total Fee</th>
             <th>Actions</th>
         </tr>
@@ -22,13 +24,19 @@
                     <?= $appointment['doctorFirstName'] . ' ' . $appointment['doctorLastName']; ?>
                 </td>
                 <td>
+                    <?= $appointment['appointmentFee']; ?>
+                </td>
+                <td>
                     <?= $appointment['appointmentDate']; ?>
                 </td>
-                <td>
-                    <?= $appointment['appointmentTime']; ?>
-                </td>
+                <!-- <td>
+                                                            'appointmentTime'
+                                                        </td> -->
                 <td>
                     <?= $appointment['appointmentTypeName']; ?>
+                </td>
+                <td>
+                    <?= $appointment['hospitalCharges']; ?>
                 </td>
                 <td>
                     <?= $appointment['appointmentFee'] + $appointment['hospitalCharges']; ?>

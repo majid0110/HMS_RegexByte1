@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/tables/basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:35 GMT -->
+
 <head>
-    <!-- Plugin css for this page -->
     <link rel="stylesheet" href="/public/assets/vendors_s/datatables.net-bs4/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="/public/assets/js_s/select.dataTables.min.css">
     <link rel="stylesheet" href="../public/assets/vendors_s/feather/feather.css">
@@ -19,13 +20,105 @@
     <link rel="stylesheet" href="../public/assets/css_s/vertical-layout-light/style.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="../public/assets/images_s/regexbyte.png" />
+
+    <style>
+        .invoice-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
+
+        p {
+            font-size: medium;
+            font-family: math;
+        }
+
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+            font-family: monospace;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .blinking {
+            animation: blink 2s infinite;
+        }
+
+        .invoice-box table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+
+        .invoice-box table tr td:nth-child(2) {
+            text-align: right;
+        }
+
+        .invoice-box table tr.top table td {
+            padding-bottom: 20px;
+        }
+
+        .invoice-box table tr.top table td.title {
+            font-size: 45px;
+            line-height: 45px;
+            color: #333;
+        }
+
+        .invoice-box table tr.information table td {
+            padding-bottom: 40px;
+        }
+
+        .invoice-box table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .invoice-box table tr.details td {
+            padding-bottom: 20px;
+        }
+
+        .invoice-box table tr.item td {
+            border-bottom: 1px solid #eee;
+        }
+
+        .invoice-box table tr.item.last td {
+            border-bottom: none;
+        }
+
+        .invoice-box table tr.total td:nth-child(2) {
+            border-top: 2px solid #eee;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container-scroller">
+        <!-- partial:./public/assets/partials/_navbar.html -->
+
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
-            <!-- partial:../../partials/_settings-panel.html -->
+            <!-- partial:./public/assets/partials/_settings-panel.html -->
             <div class="theme-setting-wrapper">
                 <div id="settings-trigger"><i class="ti-settings"></i></div>
                 <div id="theme-settings" class="settings-panel">
@@ -149,8 +242,8 @@
                         </div>
                         <ul class="chat-list">
                             <li class="list active">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg"
-                                        alt="image"><span class="online"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face1.jpg" alt="image"><span
+                                        class="online"></span></div>
                                 <div class="info">
                                     <p>Thomas Douglas</p>
                                     <p>Available</p>
@@ -158,8 +251,8 @@
                                 <small class="text-muted my-auto">19 min</small>
                             </li>
                             <li class="list">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg"
-                                        alt="image"><span class="offline"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face2.jpg" alt="image"><span
+                                        class="offline"></span></div>
                                 <div class="info">
                                     <div class="wrapper d-flex">
                                         <p>Catherine</p>
@@ -170,8 +263,8 @@
                                 <small class="text-muted my-auto">23 min</small>
                             </li>
                             <li class="list">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg"
-                                        alt="image"><span class="online"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face3.jpg" alt="image"><span
+                                        class="online"></span></div>
                                 <div class="info">
                                     <p>Daniel Russell</p>
                                     <p>Available</p>
@@ -179,8 +272,8 @@
                                 <small class="text-muted my-auto">14 min</small>
                             </li>
                             <li class="list">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg"
-                                        alt="image"><span class="offline"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face4.jpg" alt="image"><span
+                                        class="offline"></span></div>
                                 <div class="info">
                                     <p>James Richardson</p>
                                     <p>Away</p>
@@ -188,8 +281,8 @@
                                 <small class="text-muted my-auto">2 min</small>
                             </li>
                             <li class="list">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg"
-                                        alt="image"><span class="online"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face5.jpg" alt="image"><span
+                                        class="online"></span></div>
                                 <div class="info">
                                     <p>Madeline Kennedy</p>
                                     <p>Available</p>
@@ -197,8 +290,8 @@
                                 <small class="text-muted my-auto">5 min</small>
                             </li>
                             <li class="list">
-                                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg"
-                                        alt="image"><span class="online"></span></div>
+                                <div class="profile"><img src="./public/assets/images/faces/face6.jpg" alt="image"><span
+                                        class="online"></span></div>
                                 <div class="info">
                                     <p>Sarah Graves</p>
                                     <p>Available</p>
@@ -211,119 +304,130 @@
                 </div>
             </div>
             <!-- partial -->
-            <!-- partial:../../partials/_sidebar.html -->
+            <!-- partial:./public/assets/partials/_sidebar.html -->
             <?php include 'include_common/sidebar.php'; ?>
             <!-- partial -->
-            <div class="main-panel">
-                <div class="content-wrapper">
-                    <?php
-                    $successMessage = session()->getFlashdata('success');
-                    $errorMessage = session()->getFlashdata('error');
+            <div class="main-panel" style="padding: 20px; background: #F4F5F7">
+                <div class="content-wrapper" style="background: #F4F5F7;">
 
-                    if ($successMessage) {
-                        echo '<div class="alert alert-success">' . $successMessage . '</div>';
-                    }
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="invoice-box"
+                            style="max-width: 950px; margin: auto; border-radius: 30px; background: snow; width: 85rem; padding: 30px; border: 1px solid #eee; box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); font-size: 16px; line-height: 24px; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; color: #555;">
+                            <table cellpadding="0" cellspacing="0">
+                                <tr class="top">
+                                    <td colspan="3">
+                                        <table>
+                                            <tr>
+                                                <td class="title">
+                                                    <?php
+                                                    $session = session();
+                                                    if ($session->has('businessProfileImage')) {
+                                                        echo '<img class="img-xs rounded-circle larger-profile-img" style="width: 90px; height: 90px;" src="' . $session->get('businessProfileImage') . '" alt="Profile image">';
+                                                    }
+                                                    ?>
+                                                </td>
 
-                    if ($errorMessage) {
-                        echo '<div class="alert alert-danger">' . $errorMessage . '</div>';
-                    }
-                    ?>
-                    <div class="row">
-                        <div class="col-12 grid-margin">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Edit Role</h4>
-                                    <p class="card-description">Role info</p>
-                                    <form class="forms-sample" method="post"
-                                        action="<?= base_url('update_role/' . $role['ID']); ?>">
-                                        <div class="form-group">
-                                            <label for="exampleInputUsername1">Role Title</label>
-                                            <input type="text" class="form-control" name="role_name"
-                                                id="exampleInputUsername1" value="<?= $role['role_name']; ?>"
-                                                placeholder="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Role Description</label>
-                                            <input type="text" class="form-control" name="role_description"
-                                                id="exampleInputUsername" value="<?= $role['role_description']; ?>"
-                                                placeholder="">
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-12 grid-margin stretch-card">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Module ID</th>
-                                                                        <!-- Change column name here -->
-                                                                        <th>Permissions</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?php foreach ($moduleNames as $module): ?>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <label>
-                                                                                    <label>
-                                                                                        <input type="checkbox"
-                                                                                            name="module_permissions[<?= $module['ID'] ?>][role]"
-                                                                                            value="<?= $module['module_name'] ?>">
-                                                                                        <?= $module['module_name'] ?>
-                                                                                    </label>
-                                                                                </label>
-                                                                            </td>
-                                                                            <td>
-                                                                                <label>
-                                                                                    <input type="checkbox"
-                                                                                        name="module_permissions[<?= $module['ID'] ?>][view]"
-                                                                                        value="1"
-                                                                                        <?= (isset ($rolePermissions[$module['ID']]) && $rolePermissions[$module['ID']]['can_view'] == 1) ? 'checked' : ''; ?>>
-                                                                                    View
-                                                                                </label>
-                                                                                <label>
-                                                                                    <input type="checkbox"
-                                                                                        name="module_permissions[<?= $module['ID'] ?>][update]"
-                                                                                        value="1"
-                                                                                        <?= (isset ($rolePermissions[$module['ID']]) && $rolePermissions[$module['ID']]['can_update'] == 1) ? 'checked' : ''; ?>>
-                                                                                    Update
-                                                                                </label>
-                                                                                <label>
-                                                                                    <input type="checkbox"
-                                                                                        name="module_permissions[<?= $module['ID'] ?>][delete]"
-                                                                                        value="1"
-                                                                                        <?= (isset ($rolePermissions[$module['ID']]) && $rolePermissions[$module['ID']]['can_delete'] == 1) ? 'checked' : ''; ?>>
-                                                                                    Delete
-                                                                                </label>
-                                                                                <label>
-                                                                                    <input type="checkbox"
-                                                                                        name="module_permissions[<?= $module['ID'] ?>][add]"
-                                                                                        value="1"
-                                                                                        <?= (isset ($rolePermissions[$module['ID']]) && $rolePermissions[$module['ID']]['can_insert'] == 1) ? 'checked' : ''; ?>>
-                                                                                    Add
-                                                                                </label>
-                                                                            </td>
-                                                                        </tr>
-                                                                    <?php endforeach; ?>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                    </form>
-                                </div>
-                            </div>
+                                                <td>
+                                                    <?php
+                                                    $session = session();
+                                                    if ($session->has('businessName') && $session->has('phoneNumber')) {
+                                                        echo '<strong>' . $session->get('businessName') . '<br>';
+                                                        echo '<strong>' . $session->get('phoneNumber') . '<br>';
+                                                        echo '<strong>' . $session->get('business_address') . '<br>';
+                                                    }
+                                                    ?>
+                                                </td>
+                                                <td></td>
+                                        </table>
+                                        <hr>
+                                        <p>
+                                            Appointment NO:
+                                            <?= $AppointmentDetails[0]['appointmentNo']; ?><br />
+                                            Created:
+                                            <?= (new DateTime($AppointmentDetails[0]['createdAT']))->format('F d, Y'); ?><br />
+                                            Appointment Time:
+                                            <?= $AppointmentDetails[0]['appointmentTime']; ?><br />
+                                        </p>
+                                        <a
+                                            href="<?= base_url('appointment/deleteAppointment/' . $AppointmentDetails[0]['appointmentID']); ?>">
+                                            <button onclick="deleteAppointment()" type="button"
+                                                class="btn btn-danger btn-icon"
+                                                style="margin-left: 23rem;margin-left: 49rem; margin-top: -52px;">
+                                                <svg style="color: #F4F5F7;" xmlns="http://www.w3.org/2000/svg"
+                                                    width="18" height="18" fill="currentColor" class="bi bi-trash"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                                    <path
+                                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                                </svg>
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr class="information">
+                                    <td>
+                                        <u><b>Client Details:</b></u><br />
+                                        Unique:
+                                        <?= $AppointmentDetails[0]['unique']; ?><br />
+                                        Client:
+                                        <?= $AppointmentDetails[0]['client']; ?><br />
+                                        Gender:
+                                        <?= $AppointmentDetails[0]['gender']; ?><br />
+                                        Contact:
+                                        <?= $AppointmentDetails[0]['contact']; ?><br />
+
+
+                                    </td>
+                                    <td>
+                                        <u><b>Doctor Details:</b></u><br />
+                                        Doctor:
+                                        <?= $AppointmentDetails[0]['doctorFirstName'] . ' ' . $AppointmentDetails[0]['doctorLastName']; ?><br />
+                                        Specialization:
+                                        <?= $AppointmentDetails[0]['Specialization']; ?><br />
+                                        Contact:
+                                        <?= $AppointmentDetails[0]['doctorContact']; ?><br />
+                                    </td>
+                                </tr>
+                            </table>
+                            </td>
+                            </tr>
+                            </table>
+                            <br>
+
+                            <table cellpadding="0" cellspacing="0">
+                                <tr class="heading">
+                                    <td>Appointment Type</td>
+                                    <td>Hospital Fee</td>
+                                    <td>Appointment Fee</td>
+                                </tr>
+                                <tr class="item">
+                                    <td>
+                                        <?= $AppointmentDetails[0]['AppointmentType']; ?>
+                                    </td>
+                                    <td>
+                                        <?= $AppointmentDetails[0]['hospitalCharges']; ?>
+                                    </td>
+                                    <td>
+                                        <?= $AppointmentDetails[0]['appointmentFee']; ?>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- main-panel ends -->
         </div>
-        <!-- page-body-wrapper ends -->
+        <!-- content-wrapper ends -->
+        <!-- partial:./public/assets/partials/_footer.html -->
+        <?php include 'include_common/footer.php'; ?>
+        <!-- partial -->
+    </div>
+
+    <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
@@ -346,5 +450,8 @@
     <script src="../public/assets/js_s/typeahead.js"></script>
     <script src="../public/assets/js_s/select2.js"></script>
 </body>
+
+
+<!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/tables/basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:35 GMT -->
 
 </html>

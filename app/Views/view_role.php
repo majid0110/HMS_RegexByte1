@@ -231,8 +231,8 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <h4 class="card-title">Sector</h4>
-                                <button type="button" class="btn btn-primary" id="openSectorFormDialog">Add</button>
+                                <h4 class="card-title">Roles</h4>
+                                <!-- <button type="button" class="btn btn-primary" id="openSectorFormDialog">Add</button> -->
                                 <hr>
 
                                 <table class="table table-striped">
@@ -277,8 +277,7 @@
                                                     <a href="<?php echo base_url() . 'edit_role/' . $role['ID']; ?>"
                                                         class="btn btn-warning btn-sm">Edit</a>
 
-
-                                                    <a href="<?= base_url('role/delete/' . $role['ID']) ?>"
+                                                    <a href="<?= base_url('delete_role/' . $role['ID']); ?>"
                                                         onclick="return confirm('Are you sure you want to delete this Role?');"
                                                         class="btn btn-danger btn-sm">Delete</a>
                                                 </td>

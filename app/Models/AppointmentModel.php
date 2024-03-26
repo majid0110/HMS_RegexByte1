@@ -241,5 +241,28 @@ class AppointmentModel extends Model
             ->getRowArray();
     }
 
+    // public function viewAppointmentDetails($appointmentID)
+    // {
+    //     return $this->db->table('appointment')
+    //         ->join('client', 'client.idClient = appointment.clientID')
+    //         ->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID')
+    //         ->where('appointment.appointmentID', $appointmentID)
+    //         ->select('appointment.*, client.client as client, client.contact as contact, client.email as email, client.clientUniqueId as clientUniqueId, doctorprofile.FirstName as doctorFirstName, doctorprofile.LastName as doctorLastName, doctorprofile.Specialization as Specialization, doctorprofile.ContactNumber as doctorContact')
+    //         ->get()
+    //         ->getResultArray();
+    // }
+
+    public function viewAppointmentDetails($appointmentID)
+    {
+        return $this->db->table('appointment')
+            ->join('client', 'client.idClient = appointment.clientID')
+            ->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID')
+            ->join('specialization', 'specialization.s_id = doctorprofile.Specialization', 'left')
+            ->join('fee_type', 'fee_type.f_id = appointment.appointmentType', 'left')
+            ->where('appointment.appointmentID', $appointmentID)
+            ->select('appointment.*, client.client as client, client.contact as contact, client.gender as gender, client.clientUniqueId as unique, client.clientUniqueId as clientUniqueId, doctorprofile.FirstName as doctorFirstName, doctorprofile.LastName as doctorLastName, specialization.specialization_N as Specialization, doctorprofile.ContactNumber as doctorContact, fee_type.FeeType as AppointmentType')
+            ->get()
+            ->getResultArray();
+    }
 
 }
