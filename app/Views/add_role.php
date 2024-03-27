@@ -222,26 +222,38 @@
                         <div class="col-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Edit Role</h4>
-                                    <p class="card-description">Role info</p>
+                                    <h4 class="card-title">Role Details</h4>
+                                    <p class="card-description">
+                                        Role info
+                                    </p>
                                     <form class="forms-sample" method="post"
-                                        action="<?= base_url('update_role/' . $role['ID']); ?>">
+                                        action="<?php echo base_url() . 'save_role'; ?>">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Role Title</label>
                                             <input type="text" class="form-control" name="role_title"
-                                                id="exampleInputUsername1" value="<?= $role['role_name']; ?>"
-                                                placeholder="">
+                                                id="exampleInputUsername1" placeholder="" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Role Description</label>
                                             <input type="text" class="form-control" name="role_description"
-                                                id="exampleInputUsername" value="<?= $role['role_description']; ?>"
-                                                placeholder="">
+                                                id="exampleInputUsername" placeholder="">
                                         </div>
+
                                         <div class="form-group">
                                             <div class="col-lg-12 grid-margin stretch-card">
                                                 <div class="card">
                                                     <div class="card-body">
+                                                        <span>
+                                                            <div class="form-check1" style="padding-left: 18px;">
+                                                                <input type="checkbox" class="form-check-input"
+                                                                    id="superRole">
+                                                                <label class="form-check-label" for="superRole">Super
+                                                                    Role
+                                                                    (All
+                                                                    Permissions)</label>
+                                                            </div>
+                                                        </span>
+
                                                         <div class="table-responsive">
                                                             <table class="table table-striped">
                                                                 <thead>
@@ -265,26 +277,22 @@
                                                                                 <label>
                                                                                     <input type="checkbox"
                                                                                         name="module_permissions[<?= $module['ID'] ?>][view]"
-                                                                                        value="1"
-                                                                                        <?= ($rolePermissions[$module['ID']]['can_view'] == 1) ? 'checked' : ''; ?>> View
+                                                                                        value="1"> View
                                                                                 </label>
                                                                                 <label>
                                                                                     <input type="checkbox"
                                                                                         name="module_permissions[<?= $module['ID'] ?>][update]"
-                                                                                        value="1"
-                                                                                        <?= ($rolePermissions[$module['ID']]['can_update'] == 1) ? 'checked' : ''; ?>> Update
+                                                                                        value="1"> Update
                                                                                 </label>
                                                                                 <label>
                                                                                     <input type="checkbox"
                                                                                         name="module_permissions[<?= $module['ID'] ?>][delete]"
-                                                                                        value="1"
-                                                                                        <?= ($rolePermissions[$module['ID']]['can_delete'] == 1) ? 'checked' : ''; ?>> Delete
+                                                                                        value="1"> Delete
                                                                                 </label>
                                                                                 <label>
                                                                                     <input type="checkbox"
                                                                                         name="module_permissions[<?= $module['ID'] ?>][add]"
-                                                                                        value="1"
-                                                                                        <?= ($rolePermissions[$module['ID']]['can_insert'] == 1) ? 'checked' : ''; ?>> Add
+                                                                                        value="1"> Add
                                                                                 </label>
                                                                             </td>
                                                                         </tr>
@@ -292,15 +300,63 @@
                                                                 </tbody>
                                                             </table>
                                                         </div>
+
+
+                                                        <!-- End of your dynamic table -->
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Update</button>
+
+                                        <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
+
+
+                                    <!-- <div class="table-responsive">
+                                                            <table class="table table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Module Name</th>
+                                                                        <th>Permissions</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                  
+                                                                    <tr>
+
+                                                                        <td> <label>
+                                                                                <input type="checkbox" name="roleCheckbox"> Role
+                                                                            </label>
+                                                                        </td>
+                                                                        <td>
+                                                                            <label>
+                                                                                <input type="checkbox" name="viewCheckbox"> View
+                                                                            </label>
+                                                                            <label>
+                                                                                <input type="checkbox" name="updateCheckbox"> Update
+                                                                            </label>
+
+
+                                                                            <label>
+                                                                                <input type="checkbox" name="deleteCheckbox"> Delete
+                                                                            </label>
+                                                                            <label>
+                                                                                <input type="checkbox" name="addCheckbox"> Add
+                                                                            </label>
+                                                                        </td>
+
+                                                                    </tr>
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                        </div> -->
                                 </div>
                             </div>
                         </div>
+
+
+
                     </div>
                 </div>
             </div>
@@ -324,6 +380,14 @@
     <script src="./public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js"></script>
     <script src="./public/assets/vendors_s/select2/select2.min.js"></script>
     <script src="./public/assets/vendors_s/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#superRole').change(function () {
+                var isChecked = $(this).is(':checked');
+                $('input[type="checkbox"]').prop('checked', isChecked);
+            });
+        });
+    </script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
     <script src="./public/assets/js_s/off-canvas.js"></script>

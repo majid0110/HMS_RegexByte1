@@ -50,7 +50,7 @@ $routes->get('/appointments_form', 'DoctorController::appointments_form');
 //-----------------------------------------------------------------clients Routes
 $routes->post('ClientController/saveClientProfile', 'ClientController::saveClientProfile');
 
-// $routes->get('/clients_form', 'ClientController::clients_form');
+$routes->get('/clients_form', 'ClientController::clients_form');
 
 $routes->get('/clients_table', 'ClientController::clients_table');
 $routes->post('/saveClientProfile', 'ClientController::saveClientProfile');

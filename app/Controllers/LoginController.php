@@ -36,6 +36,8 @@ class LoginController extends Controller
         // $data['moduleNames'] = $rolesModel->getModuleNames();
         $data['rolePermissions'] = $modulePermissionsModel->getRolePermissions($roleID);
 
+        // print_r($data);
+
         return view('edit_role', $data);
     }
 

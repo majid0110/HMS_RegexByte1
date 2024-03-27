@@ -266,12 +266,11 @@
                                                                         <tr>
                                                                             <td>
                                                                                 <label>
-                                                                                    <label>
-                                                                                        <input type="checkbox"
-                                                                                            name="module_permissions[<?= $module['ID'] ?>][role]"
-                                                                                            value="<?= $module['module_name'] ?>">
-                                                                                        <?= $module['module_name'] ?>
-                                                                                    </label>
+                                                                                    <input type="checkbox"
+                                                                                        name="module_permissions[<?= $module['ID'] ?>][role]"
+                                                                                        value="1"
+                                                                                        <?= (isset ($rolePermissions[$module['ID']]) && array_sum($rolePermissions[$module['ID']]) > 0) ? 'checked' : ''; ?>>
+                                                                                    <?= $module['module_name'] ?>
                                                                                 </label>
                                                                             </td>
                                                                             <td>
@@ -321,6 +320,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- main-panel ends -->
         </div>
         <!-- page-body-wrapper ends -->
