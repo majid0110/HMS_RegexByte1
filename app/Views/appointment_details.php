@@ -61,7 +61,9 @@
         }
 
         .blinking {
-            animation: blink 2s infinite;
+            animation: blink 3s infinite;
+            color: darkblue;
+            font-weight: bolder;
         }
 
         .invoice-box table td {
@@ -87,8 +89,13 @@
             padding-bottom: 40px;
         }
 
+        .total {
+            background: bisque;
+            font-weight: bold;
+        }
+
         .invoice-box table tr.heading td {
-            background: #eee;
+            background: #8299EF;
             border-bottom: 1px solid #ddd;
             font-weight: bold;
         }
@@ -341,8 +348,11 @@
                                         </table>
                                         <hr>
                                         <p>
-                                            Appointment NO:
-                                            <?= $AppointmentDetails[0]['appointmentNo']; ?><br />
+
+                                            <span class="blinking">
+                                                Appointment NO:
+                                                <?= $AppointmentDetails[0]['appointmentNo']; ?>
+                                            </span><br />
                                             Created:
                                             <?= (new DateTime($AppointmentDetails[0]['createdAT']))->format('F d, Y'); ?><br />
                                             Appointment Time:
@@ -350,7 +360,7 @@
                                         </p>
                                         <a
                                             href="<?= base_url('appointment/deleteAppointment/' . $AppointmentDetails[0]['appointmentID']); ?>">
-                                            <button onclick="deleteAppointment()" type="button"
+                                            <!-- <button onclick="deleteAppointment()" type="button"
                                                 class="btn btn-danger btn-icon"
                                                 style="margin-left: 23rem;margin-left: 49rem; margin-top: -52px;">
                                                 <svg style="color: #F4F5F7;" xmlns="http://www.w3.org/2000/svg"
@@ -361,7 +371,7 @@
                                                     <path
                                                         d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
                                                 </svg>
-                                            </button>
+                                            </button> -->
                                         </a>
                                     </td>
                                 </tr>
@@ -369,8 +379,9 @@
                                 <tr class="information">
                                     <td>
                                         <u><b>Client Details:</b></u><br />
-                                        Unique:
-                                        <?= $AppointmentDetails[0]['unique']; ?><br />
+                                        <span style="background: gold;">Unique:
+                                            <?= $AppointmentDetails[0]['unique']; ?><br />
+                                        </span>
                                         Client:
                                         <?= $AppointmentDetails[0]['client']; ?><br />
                                         Gender:
@@ -413,7 +424,66 @@
                                         <?= $AppointmentDetails[0]['appointmentFee']; ?>
                                     </td>
                                 </tr>
+                                <tr class="total">
+                                    <td colspan="2">Total:</td>
+                                    <td>
+                                        <?= $AppointmentDetails[0]['hospitalCharges'] + $AppointmentDetails[0]['appointmentFee']; ?>
+                                    </td>
+                                </tr>
                             </table>
+                            <br>
+                            <hr>
+
+                            <?php if (!empty ($AppointmentDetails[0]['labTestId'])): ?>
+                                <h3>Lab Test Details</h3>
+                                <table cellpadding="0" cellspacing="0">
+                                    <tr class="information">
+                                        <td>
+                                            <span style="font-family: math;"> Test Invoice:
+                                                <?= $AppointmentDetails[0]['labInvoice']; ?><br />
+                                                Created at:
+                                                <?= $AppointmentDetails[0]['labdate']; ?><br />
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr class="heading">
+                                        <td>Test</td>
+                                        <td>Hospital Fee</td>
+                                        <td>Test Fee</td>
+                                    </tr>
+
+                                    <?php
+                                    $totalFee = 0;
+                                    foreach ($AppointmentDetails as $detail):
+                                        $totalFee += $detail['labhospital'] + $detail['labTestFee'];
+                                        ?>
+                                        <tr>
+                                            <td>
+                                                <?= $detail['TestTitle']; ?>
+                                            </td>
+                                            <td>
+                                                <?= $detail['labhospital']; ?>
+                                            </td>
+                                            <td>
+                                                <?= $detail['labTestFee']; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+
+                                    <!-- Display total -->
+                                    <tr class="total">
+                                        <td colspan="2">Total:</td>
+                                        <td>
+                                            <?= $totalFee; ?>
+                                        </td>
+                                    </tr>
+                                </table>
+                            <?php else: ?>
+                                <p>No lab record found.</p>
+                            <?php endif; ?>
+
+
+
                         </div>
                     </div>
                 </div>

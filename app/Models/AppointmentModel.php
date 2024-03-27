@@ -252,6 +252,35 @@ class AppointmentModel extends Model
     //         ->getResultArray();
     // }
 
+
+    // public function viewAppointmentDetails($appointmentID)
+    // {
+    //     return $this->db->table('appointment')
+    //         ->join('client', 'client.idClient = appointment.clientID')
+    //         ->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID')
+    //         ->join('specialization', 'specialization.s_id = doctorprofile.Specialization', 'left')
+    //         ->join('fee_type', 'fee_type.f_id = appointment.appointmentType', 'left')
+    //         ->join('labtest', 'labtest.appointmentId = appointment.appointmentID', 'left')
+    //         ->where('appointment.appointmentID', $appointmentID)
+    //         ->select('appointment.*, client.client as client, client.contact as contact, client.gender as gender, client.clientUniqueId as unique,client.clientUniqueId as clientUniqueId, doctorprofile.FirstName as doctorFirstName, doctorprofile.LastName as doctorLastName, specialization.specialization_N as Specialization, doctorprofile.ContactNumber as doctorContact, labtest.test_id as labTestId, labtest.fee as labTestFee, labtest.hospitalCharges as labHospitalCharges, fee_type.FeeType as AppointmentType')
+    //         ->get()
+    //         ->getResultArray();
+    // }
+
+    // public function viewAppointmentDetails($appointmentID)
+    // {
+    //     return $this->db->table('appointment')
+    //         ->join('client', 'client.idClient = appointment.clientID')
+    //         ->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID')
+    //         ->join('specialization', 'specialization.s_id = doctorprofile.Specialization', 'left')
+    //         ->join('fee_type', 'fee_type.f_id = appointment.appointmentType', 'left')
+    //         ->join('labtest', 'labtest.appointmentId = appointment.appointmentID', 'left')
+    //         ->join('labtestdetails', 'labtestdetails.labTestID = labtest.test_id', 'left')
+    //         ->where('appointment.appointmentID', $appointmentID)
+    //         ->select('appointment.*, client.client as client, client.contact as contact, client.gender as gender, client.clientUniqueId as unique, client.clientUniqueId as clientUniqueId, doctorprofile.FirstName as doctorFirstName, doctorprofile.LastName as doctorLastName, specialization.specialization_N as Specialization, doctorprofile.ContactNumber as doctorContact, labtest.test_id as labTestId, labtestdetails.labtest_id as labTestDetailsId, labtestdetails.testTypeID as testTypeId, labtestdetails.fee as labTestFee, labtestdetails.createdAT as labTestCreatedAt, labtest.hospitalCharges as labHospitalCharges, fee_type.FeeType as AppointmentType')
+    //         ->get()
+    //         ->getResultArray();
+    // }
     public function viewAppointmentDetails($appointmentID)
     {
         return $this->db->table('appointment')
@@ -259,10 +288,20 @@ class AppointmentModel extends Model
             ->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID')
             ->join('specialization', 'specialization.s_id = doctorprofile.Specialization', 'left')
             ->join('fee_type', 'fee_type.f_id = appointment.appointmentType', 'left')
+            ->join('labtest', 'labtest.appointmentId = appointment.appointmentID', 'left')
+            ->join('labtestdetails', 'labtestdetails.labTestID = labtest.test_id', 'left')
+            ->join('test_type', 'test_type.testTypeId = labtestdetails.testTypeID', 'left')
             ->where('appointment.appointmentID', $appointmentID)
-            ->select('appointment.*, client.client as client, client.contact as contact, client.gender as gender, client.clientUniqueId as unique, client.clientUniqueId as clientUniqueId, doctorprofile.FirstName as doctorFirstName, doctorprofile.LastName as doctorLastName, specialization.specialization_N as Specialization, doctorprofile.ContactNumber as doctorContact, fee_type.FeeType as AppointmentType')
+            ->select('appointment.*, client.client as client, client.contact as contact, client.gender as gender,
+             client.clientUniqueId as unique, client.clientUniqueId as clientUniqueId, doctorprofile.FirstName as doctorFirstName,
+              doctorprofile.LastName as doctorLastName, specialization.specialization_N as Specialization,
+              doctorprofile.ContactNumber as doctorContact, labtest.test_id as labTestId, labtestdetails.labtest_id as labTestDetailsId, test_type.title as TestTitle,
+              labtestdetails.fee as labTestFee, labtestdetails.createdAT as labTestCreatedAt, labtest.hospitalCharges as labHospitalCharges, fee_type.FeeType as AppointmentType,
+              labtest.hospitalCharges as labhospital, labtest.labInvoice as labInvoice, labtest.CreatedAT as labdate')
             ->get()
             ->getResultArray();
     }
+
+
 
 }
