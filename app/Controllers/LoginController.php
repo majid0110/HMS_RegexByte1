@@ -34,7 +34,7 @@ class LoginController extends Controller
 
         $data['role'] = $rolesModel->find($roleID);
         // $data['moduleNames'] = $rolesModel->getModuleNames();
-        $data['rolePermissions'] = $modulePermissionsModel->getRolePermissions($roleID);
+        $data['rolePermissions'] = $modulePermissionsModel->getRolePermission($roleID);
 
         // print_r($data);
 
@@ -157,10 +157,10 @@ class LoginController extends Controller
             $rolePermissions[] = [
                 'roleID' => $roleID,
                 'moduleID' => $moduleID,
-                'can_view' => isset ($permissions['view']) ? 1 : 0,
-                'can_insert' => isset ($permissions['add']) ? 1 : 0,
-                'can_update' => isset ($permissions['update']) ? 1 : 0,
-                'can_delete' => isset ($permissions['delete']) ? 1 : 0,
+                'can_view' => isset($permissions['view']) ? 1 : 0,
+                'can_insert' => isset($permissions['add']) ? 1 : 0,
+                'can_update' => isset($permissions['update']) ? 1 : 0,
+                'can_delete' => isset($permissions['delete']) ? 1 : 0,
             ];
         }
         $permissionModel = new LoginModel('role_permissions');
@@ -231,7 +231,7 @@ class LoginController extends Controller
         }
         foreach ($monthlyHospitalCharges as $hospitalCharge) {
             $label = $hospitalCharge['label'];
-            if (isset ($combinedData[$label])) {
+            if (isset($combinedData[$label])) {
                 $combinedData[$label]['total'] += $hospitalCharge['hospitalCharges'];
             } else {
                 $combinedData[$label] = [
@@ -242,7 +242,7 @@ class LoginController extends Controller
         }
         foreach ($monthlyLabCharges as $labCharge) {
             $label = $labCharge['label'];
-            if (isset ($combinedData[$label])) {
+            if (isset($combinedData[$label])) {
                 $combinedData[$label]['total'] += $labCharge['totalCharges'];
             } else {
                 $combinedData[$label] = [
@@ -293,10 +293,10 @@ class LoginController extends Controller
                 $permissionsData[] = [
                     'roleID' => $roleID,
                     'moduleID' => $moduleID,
-                    'can_view' => isset ($permissions['view']) ? 1 : 0,
-                    'can_insert' => isset ($permissions['add']) ? 1 : 0,
-                    'can_update' => isset ($permissions['update']) ? 1 : 0,
-                    'can_delete' => isset ($permissions['delete']) ? 1 : 0,
+                    'can_view' => isset($permissions['view']) ? 1 : 0,
+                    'can_insert' => isset($permissions['add']) ? 1 : 0,
+                    'can_update' => isset($permissions['update']) ? 1 : 0,
+                    'can_delete' => isset($permissions['delete']) ? 1 : 0,
                 ];
             }
 

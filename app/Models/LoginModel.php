@@ -170,12 +170,12 @@ class LoginModel extends Model
 
 
 
-    // public function getRolePermissions($roleID)
-    // {
-    //     return $this->where('roleID', $roleID)->findAll();
-    // }
-
     public function getRolePermissions($roleID)
+    {
+        return $this->where('roleID', $roleID)->findAll();
+    }
+
+    public function getRolePermission($roleID)
     {
         $permissions = $this->where('roleID', $roleID)->findAll();
         $result = [];
