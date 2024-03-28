@@ -23,7 +23,7 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
 
             $isSalesModule = $module['module_name'] === 'Sales';
 
-            $canView = $isSalesModule && isset ($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            $canView = $isSalesModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
             ?>
 
             <?php if ($canView): ?>
@@ -45,7 +45,7 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
 
             $isAppointmentsModule = $module['module_name'] === 'Appointments';
 
-            $canView = $isAppointmentsModule && isset ($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            $canView = $isAppointmentsModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
             ?>
 
             <?php if ($canView): ?>
@@ -67,7 +67,7 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
 
             $isLaboratoryServicesModule = $module['module_name'] === 'Laboratory Services';
 
-            $canView = $isLaboratoryServicesModule && isset ($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            $canView = $isLaboratoryServicesModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
             ?>
 
             <?php if ($canView): ?>
@@ -88,7 +88,7 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
 
             $isServicesModule = $module['module_name'] === 'Services';
 
-            $canView = $isServicesModule && isset ($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            $canView = $isServicesModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
             ?>
 
             <?php if ($canView): ?>
@@ -129,7 +129,7 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
             $isClientsModule = $module['module_name'] === 'Clients';
 
             // Check if the user has permission to view this module
-            $canView = $isClientsModule && isset ($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            $canView = $isClientsModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
             ?>
 
             <?php if ($canView): ?>
@@ -169,7 +169,7 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
 
             $isDoctorsModule = $module['module_name'] === 'Doctors';
 
-            $canView = $isDoctorsModule && isset ($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            $canView = $isDoctorsModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
             ?>
 
             <?php if ($canView): ?>
@@ -209,7 +209,7 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
 
             $isUserManagementModule = $module['module_name'] === 'User Management';
 
-            $canView = $isUserManagementModule && isset ($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            $canView = $isUserManagementModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
             ?>
 
             <?php if ($canView): ?>
@@ -252,27 +252,17 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
 
             $isConfigurationModule = $module['module_name'] === 'Configuration';
 
-            $canView = $isConfigurationModule && isset ($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            $canView = $isConfigurationModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
             ?>
 
             <?php if ($canView): ?>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-<?= $moduleID ?>" aria-expanded="false"
-                        aria-controls="ui-basic-<?= $moduleID ?>">
+                    <a class="nav-link" href="<?= base_url('configure'); ?>">
                         <i class="menu-icon mdi mdi-settings"></i>
                         <span class="menu-title">
                             <?= $module['module_name'] ?>
                         </span>
-                        <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="ui-basic-<?= $moduleID ?>">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= base_url('configure'); ?>">Configure Hospital</a>
-                            </li>
-                            <!-- Add more sub-menu items as needed -->
-                        </ul>
-                    </div>
                 </li>
             <?php endif; ?>
         <?php endforeach; ?>
@@ -284,27 +274,17 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
 
             $isReportsModule = $module['module_name'] === 'Reports';
 
-            $canView = $isReportsModule && isset ($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            $canView = $isReportsModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
             ?>
 
             <?php if ($canView): ?>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-<?= $moduleID ?>" aria-expanded="false"
-                        aria-controls="ui-basic-<?= $moduleID ?>">
+                    <a class="nav-link" href="<?= base_url('reports_form'); ?>">
                         <i class="menu-icon mdi mdi-file-document"></i>
                         <span class="menu-title">
                             <?= $module['module_name'] ?>
                         </span>
-                        <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="ui-basic-<?= $moduleID ?>">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= base_url('reports_form'); ?>">Reports</a>
-                            </li>
-                            <!-- Add more sub-menu items as needed -->
-                        </ul>
-                    </div>
                 </li>
             <?php endif; ?>
         <?php endforeach; ?>
@@ -315,7 +295,7 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
             <?php
             $moduleID = $module['id'];
             $isManagementModule = $module['module_name'] === 'Managment';
-            $canView = $isManagementModule && isset ($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            $canView = $isManagementModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
             ?>
 
             <?php if ($canView): ?>
@@ -338,11 +318,6 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
                                     <?= $module['module_name'] ?>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= base_url('business_table'); ?>">View
-                                    <?= $module['module_name'] ?>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </li>
@@ -355,7 +330,7 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
 
             $isRegisterBusinessModule = $module['module_name'] === 'Register Business';
 
-            $canView = $isRegisterBusinessModule && isset ($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            $canView = $isRegisterBusinessModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
             ?>
 
             <?php if ($canView): ?>
@@ -399,7 +374,7 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
             $isModulesModule = $module['module_name'] === 'Modules';
 
             // Check if the user has permission to view this module
-            $canView = $isModulesModule && isset ($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            $canView = $isModulesModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
             ?>
 
             <?php if ($canView): ?>
