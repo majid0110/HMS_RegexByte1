@@ -266,11 +266,6 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <div id="total-fee-container">
-                                    Total Lab Fee:
-                                    <?= $totalLabFee ?>
-                                </div>
-
                                 <form action="<?= base_url('lab_report'); ?>" method="post">
                                     <div class="form-group row">
                                         <div class="col-md-3 offset-md-9">
@@ -356,6 +351,10 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                </div>
+                                <div id="total-fee-container">
+                                    Total Lab Fee:
+                                    <?= $totalLabFee ?>
                                 </div>
                             </div>
                         </div>

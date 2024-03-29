@@ -272,7 +272,7 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <form action="<?= base_url('appointment_report'); ?>" method="post">
+                                <form action="<?= base_url('generateExcelAppointments'); ?>" method="post">
                                     <div class="form-group row">
                                         <div class="col-md-3 offset-md-9">
                                             <label>Search</label>
@@ -305,15 +305,25 @@
                                                 </select>
                                             </div>
                                         </div>
-
                                         <div class="col-md-3">
                                             <label>From</label>
-                                            <input class="form-control" type="date" placeholder="From"
+                                            <input class="form-control" type="date" name="fromDate" placeholder="From"
                                                 id="fromDateInput">
                                         </div>
                                         <div class="col-md-3">
                                             <label>To</label>
-                                            <input class="form-control" type="date" placeholder="To" id="toDateInput">
+                                            <input class="form-control" type="date" name="toDate" placeholder="To"
+                                                id="toDateInput">
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-3 offset-md-9">
+                                            <button type="submit" class="btn btn-outline-info btn-icon-text">
+                                                <i class="ti-download btn-icon-prepend"></i>
+                                                Generate Excel
+                                            </button>
                                         </div>
                                     </div>
                                 </form>

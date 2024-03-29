@@ -265,10 +265,6 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <div id="total-fee-container">
-                                    Total Appointment Fee:
-                                    <?= $totalServiceFee ?>
-                                </div>
                                 <form action="<?= base_url('lab_report'); ?>" method="post">
                                     <div class="form-group row">
                                         <div class="col-md-3 offset-md-9">
@@ -318,7 +314,7 @@
                                     </div>
                                 </form>
                                 <hr>
-                                <h4 class="card-title">Lab Report</h4>
+                                <h4 class="card-title">Service Report</h4>
                                 <div class="col-12 grid-margin">
                                     <div class="table-responsive">
                                         <table class="table table-striped">
@@ -369,6 +365,10 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                </div>
+                                <div id="total-fee-container">
+                                    Total Appointment Fee:
+                                    <?= $totalServiceFee ?>
                                 </div>
                             </div>
                         </div>

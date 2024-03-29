@@ -3,97 +3,82 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/tables/basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:35 GMT -->
+
 <head>
 
-  <link rel="stylesheet" href="./public/assets/vendors_s/select2/select2.min.css">
-  <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Star Admin2 </title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="./public/assets/vendors/feather/feather.css">
+  <link rel="stylesheet" href="./public/assets/vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="./public/assets/vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="./public/assets/vendors/typicons/typicons.css">
+  <link rel="stylesheet" href="./public/assets/vendors/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="./public/assets/vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="./public/assets/css/vertical-layout-light/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="./public/assets/images/favicon.png" />
   <style>
-    .badge-pill:hover {
-      background-color: #52CDFF;
+    #total-fee-container {
+      font-size: 18px;
+      font-weight: 600;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       color: #fff;
-      cursor: pointer;
-      font-weight: bolder;
-      border: #52CDFF;
+      background-color: #2c3e50;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
     }
 
-    #clientDetails {
-      font-weight: 750;
+    #total-fee-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%);
+      transform: skewX(-20deg);
+      animation: shine 4s infinite;
     }
 
-    .twitter-typeahead {
-      max-width: 100%;
-      width: 100%;
+    @keyframes shine {
+      0% {
+        left: -50%;
+      }
 
-    }
-
-    #serviceTableBodyContainer {
-      max-height: 300px;
-      overflow-y: auto;
-    }
-
-    #summaryTableContainer {
-      max-height: 300px;
-      overflow-y: auto;
-    }
-
-    .active {
-      background: #52CDFF;
-      color: #fff;
-
-    }
-
-    .table thead th,
-    .table tbody td {
-      padding: 8px;
-    }
-
-    .table thead,
-    .table tbody {
-      display: table;
-      width: 100%;
-      table-layout: fixed;
-    }
-
-    .table tbody tr {
-      height: 0px;
-    }
-
-    .table thead tr {
-      height: 0px;
-
+      100% {
+        left: 150%;
+      }
     }
 
     .table-container {
-      max-height: 220px;
-      /* Adjust the height as needed */
+      max-height: 400px;
+      /* Adjust as needed */
       overflow-y: auto;
     }
-
-    /* 
-    .table tbody tr {
-      height: 30px;
-    }
-
-    .table thead tr {
-      height: 30px;
-    }
-
-
-    .table tbody td {
-      padding: 5px;
-    }
-
-    .table thead tr {
-      padding: 5px;
-    } */
   </style>
+
 </head>
 
 <body>
   <div class="container-scroller">
+    <!-- partial:./public/assets/partials/_navbar.html -->
+
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
-      <!-- partial:../../partials/_settings-panel.html -->
+      <!-- partial:./public/assets/partials/_settings-panel.html -->
       <div class="theme-setting-wrapper">
         <div id="settings-trigger"><i class="ti-settings"></i></div>
         <div id="theme-settings" class="settings-panel">
@@ -215,7 +200,7 @@
             </div>
             <ul class="chat-list">
               <li class="list active">
-                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg" alt="image"><span
+                <div class="profile"><img src="./public/assets/images/faces/face1.jpg" alt="image"><span
                     class="online"></span></div>
                 <div class="info">
                   <p>Thomas Douglas</p>
@@ -224,7 +209,7 @@
                 <small class="text-muted my-auto">19 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg" alt="image"><span
+                <div class="profile"><img src="./public/assets/images/faces/face2.jpg" alt="image"><span
                     class="offline"></span></div>
                 <div class="info">
                   <div class="wrapper d-flex">
@@ -236,7 +221,7 @@
                 <small class="text-muted my-auto">23 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg" alt="image"><span
+                <div class="profile"><img src="./public/assets/images/faces/face3.jpg" alt="image"><span
                     class="online"></span></div>
                 <div class="info">
                   <p>Daniel Russell</p>
@@ -245,7 +230,7 @@
                 <small class="text-muted my-auto">14 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg" alt="image"><span
+                <div class="profile"><img src="./public/assets/images/faces/face4.jpg" alt="image"><span
                     class="offline"></span></div>
                 <div class="info">
                   <p>James Richardson</p>
@@ -254,7 +239,7 @@
                 <small class="text-muted my-auto">2 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg" alt="image"><span
+                <div class="profile"><img src="./public/assets/images/faces/face5.jpg" alt="image"><span
                     class="online"></span></div>
                 <div class="info">
                   <p>Madeline Kennedy</p>
@@ -263,7 +248,7 @@
                 <small class="text-muted my-auto">5 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg" alt="image"><span
+                <div class="profile"><img src="./public/assets/images/faces/face6.jpg" alt="image"><span
                     class="online"></span></div>
                 <div class="info">
                   <p>Sarah Graves</p>
@@ -277,449 +262,301 @@
         </div>
       </div>
       <!-- partial -->
-      <!-- partial:../../partials/_sidebar.html -->
+      <!-- partial:./public/assets/partials/_sidebar.html -->
       <?php include 'include_common/sidebar.php'; ?>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <div class="row" style="margin-top: -22px;">
-            <div class="col-md-6">
-              <div class="card h-100">
-                <div class="card-body">
-                  <p class="card-description"
-                    style="margin-top: -19px; margin-bottom: -10px; font-weight: bold; color: black">
-                    Services
-                  </p>
-
-                  <form class="pt-3" method="POST" action="<?php echo base_url() . "submitTests"; ?>"
-                    enctype="multipart/form-data">
-                    <div class="form-group row" style="margin-bottom: 6px;">
-                      <div class="col">
-                        <label>Client Name</label>
-                        <div id="the-basics">
-                          <select class="typeahead form-control" name="clientName">
-                            <?php foreach ($client_names as $client): ?>
-                              <option value="<?= $client['idClient']; ?>">
-                                <?= $client['client']; ?>
-                              </option>
-                            <?php endforeach; ?>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <label>Payment Method</label>
-                        <div id="the-basics">
-                          <select class="typeahead form-control" name="Payment">
-                            <?php foreach ($payments as $payment): ?>
-                              <option value="<?= $payment['idPaymentMethods']; ?>"
-                                data-payment-id="<?= $payment['idPaymentMethods']; ?>">
-                                <?= $payment['Method']; ?>
-                              </option>
-                            <?php endforeach; ?>
-                          </select>
-                        </div>
-                      </div>
+          <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <form action="<?= base_url('generateExcelAppointments'); ?>" method="post">
+                  <!-- Include your existing form fields for search, doctor, client, fromDate, and toDate -->
+                  <button type="submit" class="btn btn-outline-info btn-icon-text">
+                    <i class="ti-download btn-icon-prepend"></i>
+                    Generate Excel
+                  </button>
+                </form>
+                <form action="<?= base_url('appointment_report'); ?>" method="post">
+                  <div class="form-group row">
+                    <div class="col-md-3 offset-md-9">
+                      <label>Search</label>
+                      <input class="form-control" type="text" name="search" id="searchInput" placeholder="Search">
                     </div>
-                    <div class="form-group row" style="margin-bottom: 6px;">
-                      <div class="col">
-                        <label>Currency</label>
-                        <div id="the-basics">
-                          <select class="typeahead form-control" name="Currency">
-                            <?php foreach ($currencies as $currency): ?>
-                              <option value="<?= $currency['id']; ?>">
-                                <?= $currency['Currency']; ?>
-                              </option>
-                            <?php endforeach; ?>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <label>Exchange</label>
-                        <div id="bloodhound">
-                          <input class="typeahead form-control" type="Number" name="exchange" value='1.0'
-                            id="exchangeInput" placeholder="Exchange Rate">
-                        </div>
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-md-3">
+                      <label>By Doctor</label>
+                      <select class="form-control" name="doctor" id="doctorInput">
+                        <option value="">All Doctors</option>
+                        <?php foreach ($doctor_names as $doc): ?>
+                          <option value="<?= $doc['FirstName'] . ' ' . $doc['LastName']; ?>">
+                            <?= $doc['FirstName'] . ' ' . $doc['LastName']; ?>
+                          </option>
+                        <?php endforeach; ?>
+                      </select>
                     </div>
-                    <div class="form-group row" style="margin-bottom: 6px;">
-                      <div class="col">
-                        <label for="categoryDropdown">Category:</label>
-                        <select class="form-control" id="categoryDropdown">
-                          <option value="">All Categories</option>
-                          <?php foreach ($categories as $category): ?>
-                            <option value="<?= $category['idCatArt']; ?>">
-                              <?= $category['name']; ?>
+                    <div class="col-md-3">
+                      <label>By Client</label>
+                      <div id="the-basics">
+                        <select class="form-control" name="clientName" id='clientInput'>
+                          <option value="">All Client</option>
+                          <?php foreach ($client_names as $client): ?>
+                            <option value="<?= $client['client']; ?>">
+                              <?= $client['client']; ?>
                             </option>
                           <?php endforeach; ?>
                         </select>
                       </div>
-                      <div class="col">
-                        <label for="search">Search:</label>
-                        <input type="text" id="search" class="form-control" placeholder="Enter service type or fee">
-                      </div>
                     </div>
-                    <div class="form-group" style="margin-bottom: 6px;">
-                      <div id="serviceTableBodyContainer">
-                        <div class="table-container">
-                          <table class="table" id="serviceTypeList">
-                            <thead>
-                              <tr>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>Action</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <?php foreach ($services as $service): ?>
-                                <tr data-service-type-id="<?= $service['idArtMenu']; ?>">
-                                  <td class="title">
-                                    <?= $service['Name']; ?>
-                                  </td>
-                                  <td class="fee" contenteditable="true">
-                                    <?= $service['Price']; ?>
-                                  </td>
-                                  <td><span class="badge badge-primary badge-pill hover-effect"
-                                      onclick="addService()">ADD</span></td>
-                                </tr>
 
-                              <?php endforeach; ?>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
+                    <div class="col-md-3">
+                      <label>From</label>
+                      <input class="form-control" type="date" placeholder="From" id="fromDateInput">
                     </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="card h-100">
-                <div class="card-body">
-                  <p class="card-description"
-                    style="margin-top: -19px; margin-bottom: -10px; font-weight: bold; color: black;">
-                    SUMMARY
-                  </p>
-                  <div class="row" style="margin-top: 8px;margin-bottom: -7px;">
-                    <div class="col-md-6" id="clientDetailsLeft"></div>
-                    <div class="col-md-6" id="clientDetailsRight"></div>
+                    <div class="col-md-3">
+                      <label>To</label>
+                      <input class="form-control" type="date" placeholder="To" id="toDateInput">
+                    </div>
                   </div>
-                  <hr>
-                  <div id="summaryTableContainer">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>Service Type</th>
-                          <th>Amount</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody id="serviceTableBody"></tbody>
-                    </table>
+                </form>
+                <hr>
+                <!-- </div>
+                                </div> -->
+                <h4 class="card-title">Appointments Report</h4>
+                <div class="col-12 grid-margin">
+                  <div class="table-container">
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>Client Name</th>
+                            <th>Doctor Name</th>
+                            <th>Doctor Fee</th>
+                            <th>Appointment Date</th>
+                            <!-- <th>Appointment Time</th> -->
+                            <th>Appointment Type</th>
+                            <th>Hospital Fee</th>
+                            <th>Total Fee</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php foreach ($Appointments as $appointment): ?>
+                            <tr>
+                              <td>
+                                <?= $appointment['clientName']; ?>
+                              </td>
+                              <td>
+                                <?= $appointment['doctorFirstName'] . ' ' . $appointment['doctorLastName']; ?>
+                              </td>
+                              <td>
+                                <?= $appointment['appointmentFee']; ?>
+                              </td>
+                              <td>
+                                <?= $appointment['appointmentDate']; ?>
+                              </td>
+                              <!-- <td>
+                                                            'appointmentTime'
+                                                        </td> -->
+                              <td>
+                                <?= $appointment['appointmentTypeName']; ?>
+                              </td>
+                              <td>
+                                <?= $appointment['hospitalCharges']; ?>
+                              </td>
+                              <td>
+                                <?= $appointment['appointmentFee'] + $appointment['hospitalCharges']; ?>
+                              </td>
+                              <td>
+                                <!-- Action buttons: Edit and Delete -->
+                                <a href="<?= base_url('deleteAppointment/' . $appointment['appointmentID']); ?>"
+                                  onclick="return confirm('Are you sure you want to delete this Appointment?');"
+                                  class="btn btn-danger btn-sm">Delete</a>
+                              </td>
+                            </tr>
+                          <?php endforeach; ?>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
-                <div style="margin-left: 368px; font-weight: 900; font-size: 150px">
-                  <p>Total Fee: <span id="totalFee">0</span></p>
+                <div id="total-fee-container">
+                  Total Appointment Fee:
+                  <?= $totalAppointmentFee ?>
                 </div>
-                <div style="height: 58px; margin-left: 1.4em; font-weight: 900; font-size: 150px">
-                  <!-- <button class="btn btn-primary btn-fw" id="insertBtn">Save</button> -->
-                  <button type="button" class="btn btn-outline-info btn-icon-text" id="insertBtn">Print
-                    <i class="ti-printer btn-icon-append"></i>
-                  </button>
-                </div>
+
               </div>
             </div>
           </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:./public/assets/partials/_footer.html -->
+
+          <!-- partial -->
         </div>
-
-
-        <!-- Include footer -->
         <?php include 'include_common/footer.php'; ?>
+        <!-- main-panel ends -->
       </div>
-
-      <!-- main-panel ends -->
+      <!-- page-body-wrapper ends -->
     </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="../../vendors/js/vendor.bundle.base.js"></script>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="./public/assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- Add this to your HTML file -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-  <script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
 
-    function calculateTotalFee() {
-      var totalFee = 0;
+    <script>
+      $(document).ready(function () {
+        $('#searchInput, #doctorInput, #clientInput, #fromDateInput, #toDateInput').on('input change', function () {
+          var searchValue = $('#searchInput').val();
+          var doctorValue = $('#doctorInput').val();
+          var clientValue = $('#clientInput').val();
+          var fromDateValue = $('#fromDateInput').val();
+          var toDateValue = $('#toDateInput').val();
 
-      $('#serviceTableBody tr').each(function () {
-        var fee = parseFloat($(this).find('td:eq(1)').text());
-        if (!isNaN(fee)) {
-          totalFee += fee;
-        }
-      });
+          console.log('Search Value:', searchValue);
+          console.log('Doctor Value:', doctorValue);
+          console.log('Client Value:', clientValue);
+          console.log('From Date Value:', fromDateValue);
+          console.log('To Date Value:', toDateValue);
 
-      $('#totalFee').text(totalFee.toFixed(2));
-    }
-
-    $('#serviceTableBody').on('input', 'td[contenteditable="true"]', function () {
-      calculateTotalFee();
-    });
-
-    function addServiceRow(serviceType, serviceTypeId, serviceFee) {
-      var exists = false;
-
-      $('#serviceTableBody tr').each(function () {
-        var existingServiceTypeId = $(this).find('td:first').data('service-type-id');
-        if (existingServiceTypeId === serviceTypeId) {
-          exists = true;
-          return false;
-        }
-      });
-
-      if (!exists) {
-        var newRow = '<tr>' +
-          '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
-          '<td contenteditable="true">' + serviceFee + '</td>' +
-          '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)">Remove</button></td>' +
-          '</tr>';
-        $('#serviceTableBody').append(newRow);
-        calculateTotalFee();
-      } else {
-        alert('This service is already added to the summary.');
-      }
-    }
-
-    $(document).ready(function () {
-
-      $('#serviceTypeList .badge').click(function () {
-        var serviceTypeRow = $(this).closest('tr');
-        var serviceTypeId = serviceTypeRow.data('service-type-id');
-        var serviceType = serviceTypeRow.find('.title').text().trim();
-        var serviceFee = serviceTypeRow.find('.fee').text().trim();
-        console.log("Service Type: ", serviceType);
-        console.log("Service Type ID: ", serviceTypeId);
-        console.log("Service Fee: ", serviceFee);
-        addServiceRow(serviceType, serviceTypeId, serviceFee);
-        calculateTotalFee();
-      });
-
-      function attachAddServiceHandler() {
-        $('#serviceTypeList .badge').click(function () {
-          var serviceTypeRow = $(this).closest('tr');
-          var serviceTypeId = serviceTypeRow.data('service-type-id');
-          var serviceType = serviceTypeRow.find('.title').text().trim();
-          var serviceFee = serviceTypeRow.find('.fee').text().trim();
-          console.log("Service Type: ", serviceType);
-          console.log("Service Type ID: ", serviceTypeId);
-          console.log("Service Fee: ", serviceFee);
-          addServiceRow(serviceType, serviceTypeId, serviceFee);
-          calculateTotalFee();
-        });
-      }
-
-      // Filter services based on categories
-      // $('.btn-category').click(function () {
-      //   var categoryId = $(this).data('category-id');
-      //   filterServices(categoryId);
-      // });
-
-      $('#categoryDropdown').change(function () {
-        var categoryId = $(this).val();
-        filterServices(categoryId);
-      });
-
-      function filterServices(categoryId) {
-        $.ajax({
-          url: '<?php echo base_url() . "SalesController/filterServices"; ?>',
-          type: 'POST',
-          data: { categoryId: categoryId },
-          dataType: 'html',
-          success: function (data) {
-            $('#serviceTableBodyContainer').html(data);
-          }
-        });
-      }
-
-      $('#search').on('input', function () {
-        var searchText = $(this).val().toLowerCase();
-        $('#serviceTypeList tbody tr').each(function () {
-          var serviceName = $(this).find('.title').text().toLowerCase();
-          var servicePrice = $(this).find('.fee').text().toLowerCase();
-          if (serviceName.includes(searchText) || servicePrice.includes(searchText)) {
-            $(this).show();
-          } else {
-            $(this).hide();
-          }
-        });
-      });
-
-      $('.btn-category').click(function () {
-        var categoryId = $(this).data('category-id');
-
-        $('.btn-category.active').removeClass('active');
-
-        $(this).addClass('active');
-
-        filterServices(categoryId);
-      });
-
-      $('#insertBtn').off('click').on('click', function () {
-        insertData();
-      });
-
-      $('#serviceTypeList .badge-pill').mouseenter(function () {
-        $(this).addClass('hover-effect');
-      });
-
-      $('#serviceTypeList .badge-pill').mouseleave(function () {
-        $(this).removeClass('hover-effect');
-      });
-
-      $('select[name="clientName"]').change(function () {
-        updateSelectedDetails();
-      });
-
-      $('select[name="Payment"]').change(function () {
-        updateSelectedDetails();
-      });
-
-      $('select[name="Currency"]').change(function () {
-        updateSelectedDetails();
-      });
-
-      $('#exchangeInput').on('input', function () {
-        updateSelectedDetails();
-      });
-
-      function updateSelectedDetails() {
-        var selectedClientName = $('select[name="clientName"] option:selected').text();
-        var selectedPaymentMethod = $('select[name="Payment"] option:selected').text();
-        var selectedCurrency = $('select[name="Currency"] option:selected').text();
-        var selectedExchange = $('#exchangeInput').val();
-
-        $('#clientDetailsLeft').html('Client: ' + selectedClientName +
-          '<br>Payment Method: ' + selectedPaymentMethod);
-
-        $('#clientDetailsRight').html('Currency: ' + selectedCurrency +
-          '<br>Exchange: ' + (selectedExchange !== undefined ? selectedExchange : 'N/A'));
-      }
-
-
-
-      $('#serviceTableBody').on('click', '.remove-btn', function () {
-        var row = $(this).closest('tr');
-        var serviceFee = parseFloat(row.find('td:eq(1)').text());
-        row.remove();
-        calculateTotalFee(-serviceFee);
-      });
-
-
-      function insertData() {
-        var clientId = $('select[name="clientName"]').val();
-        var clientName = $('select[name="clientName"] option:selected').text();
-        var paymentMethodOption = $('select[name="Payment"] option:selected');
-        var paymentMethodId = paymentMethodOption.data('payment-id');
-        var paymentName = paymentMethodOption.text();
-        var paymentMethodName = paymentMethodOption.text();
-        var currency = $('select[name="Currency"]').val();
-        var currencyName = $('select[name="Currency"] option:selected').text();
-        var exchange = $('#exchangeInput').val();
-        var totalFee = parseFloat($('#totalFee').text());
-
-        // console.log("Client ID: ", clientId);
-        // console.log("Client Name: ", clientName);
-        // console.log("Payment Method ID: ", paymentMethodId);
-        // console.log("Payment Name: ", paymentName);
-        // console.log("Currency: ", currency);
-        // console.log("Exchange: ", exchange);
-        // console.log("Total Fee: ", totalFee);
-
-        if (!clientId || isNaN(totalFee)) {
-          alert('Invalid data for insertion.');
-          return;
-        }
-        var services = [];
-        $('#serviceTableBody tr').each(function () {
-          //var serviceTypeId = $(this).find('td:eq(0)').data('service-type-id');
-          // var serviceTypeId = 12;
-          // var serviceTypeId = $('#serviceTypeList .badge').closest('tr').data('service-type-id');
-          var serviceTypeId = serviceTypeRow.data('service-type-id');
-          var serviceName = $(this).find('td:eq(0)').text();
-          var fee = parseFloat($(this).find('td:eq(1)').text());
-
-          // console.log("Service Type ID Before Push: ", serviceTypeId);
-          // console.log("Service Name Before Push: ", serviceName);
-          // console.log("Fee Before Push: ", fee);
-
-          services.push({
-            serviceTypeId: serviceTypeId,
-            serviceName: serviceName,
-            fee: fee,
-          });
-          console.log("Service Type ID After Push: ", serviceTypeId);
-          console.log("Service Name After Push: ", serviceName);
-          console.log("Fee After Push: ", fee);
-        });
-
-        $.ajax({
-          method: 'POST',
-          url: '<?= site_url('SalesController/submitServices') ?>',
-          dataType: "json",
-          data: {
-            clientId: clientId,
-            clientName: clientName,
-            currencyName: currencyName,
-            paymentMethodId: paymentMethodId,
-            paymentName: paymentName,
-            paymentMethodName: paymentMethodName,
-            currency: currency,
-            exchange: exchange,
-            totalFee: totalFee,
-            services: services
-          },
-          success: function (response) {
-            // alert('Data inserted successfully!');
-            console.log('Data inserted successfully:', response);
-            if (response.pdfContent) {
-              var decodedPdfContent = atob(response.pdfContent);
-              var blob = new Blob([new Uint8Array(decodedPdfContent.split('').map(function (c) {
-                return c.charCodeAt(0);
-              }))], {
-                type: 'application/pdf'
-              });
-              var link = document.createElement('a');
-              link.href = window.URL.createObjectURL(blob);
-              //   link.download = 'your_file_name.pdf'; // Specify the desired file name
-              link.click();
+          $.ajax({
+            type: 'POST',
+            url: '<?= base_url('appointment_report'); ?>',
+            data: {
+              search: searchValue,
+              doctor: doctorValue,
+              client: clientValue,
+              fromDate: fromDateValue,
+              toDate: toDateValue
+            },
+            dataType: 'json', // Specify the expected data type
+            success: function (response) {
+              if (response.success) {
+                $('.table-responsive').html(response.tableContent);
+              } else {
+                console.error('Error:', response.error);
+              }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+              console.error('AJAX Error:', textStatus, errorThrown);
             }
-            $('#serviceTableBody').empty();
-            $('#totalFee').text('0');
-          },
-          error: function (error) {
-            console.error('Error inserting data:', error);
-          }
+          });
         });
-      }
-    });
-  </script>
+      });
+    </script>
 
 
-  <script src="./public/assets/vendors_s/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page -->
-  <script src="./public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js"></script>
-  <script src="./public/assets/vendors_s/select2/select2.min.js"></script>
-  <script src="./public/assets/vendors_s/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-  <!-- End plugin js for this page -->
-  <!-- inject:js -->
-  <script src="./public/assets/js_s/off-canvas.js"></script>
-  <script src="./public/assets/js_s/hoverable-collapse.js"></script>
-  <script src="./public/assets/js_s/template.js"></script>
-  <script src="./public/assets/js_s/settings.js"></script>
-  <script src="./public/assets/js_s/todolist.js"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <script src="./public/assets/js_s/file-upload.js"></script>
-  <script src="./public/assets/js_s/typeahead.js"></script>
-  <script src="./public/assets/js_s/select2.js"></script>
-  <!-- End custom js for this page-->
+
+    <!-- <script>
+
+            // $(document).ready(function () {
+            //     $('#searchInput, #doctorInput, #clientInput').on('input', function () {
+            //         var searchValue = $('#searchInput').val();
+            //         var doctorValue = $('#doctorInput').val();
+            //         var clientValue = $('#clientInput').val();
+
+            //         console.log('Search Value:', searchValue);
+            //         console.log('Doctor Value:', doctorValue);
+            //         console.log('Client Value:', clientValue);
+
+            //         $.ajax({
+            //             type: 'POST',
+            //             url: '<?= base_url('appointment_report'); ?>',
+            //             data: { search: searchValue, doctor: doctorValue, client: clientValue },
+            //             dataType: 'json', // Specify the expected data type
+            //             success: function (response) {
+            //                 if (response.success) {
+            //                     $('.table-responsive').html(response.tableContent);
+            //                 } else {
+            //                     console.error('Error:', response.error);
+            //                 }
+            //             },
+            //             error: function (jqXHR, textStatus, errorThrown) {
+            //                 console.error('AJAX Error:', textStatus, errorThrown);
+            //             }
+            //         });
+            //     });
+            // });
+
+
+
+
+            // $(document).ready(function () {
+            //     $('#searchInput, #doctorInput, #clientInput').on('input', function () {
+            //         var searchValue = $('#searchInput').val();
+            //         var doctorValue = $('#doctorInput').val();
+            //         var clientValue = $('#clientInput').val();
+
+            //         console.log('Search Value:', searchValue);
+            //         console.log('Doctor Value:', doctorValue);
+            //         console.log('Client Value:', clientInput);
+
+            //         $.ajax({
+            //             type: 'POST',
+            //             url: '<?= base_url('appointment_report'); ?>',
+            //             data: { search: searchValue, doctor: doctorValue, clientName: clientValue },
+            //             dataType: 'json', // Specify the expected data type
+            //             success: function (response) {
+            //                 if (response.success) {
+            //                     $('.table-responsive').html(response.tableContent);
+            //                 } else {
+            //                     console.error('Error:', response.error);
+            //                 }
+            //             },
+            //             error: function (jqXHR, textStatus, errorThrown) {
+            //                 console.error('AJAX Error:', textStatus, errorThrown);
+            //             }
+            //         });
+            //     });
+            // });
+        </script> -->
+    <!-- <script>
+            // Add an event listener to the search input
+            $(document).ready(function () {
+                $('#searchInput').on('input', function () {
+                    // Trigger the form submission when the user types
+                    $(this).closest('form').submit();
+                });
+            });
+        </script> -->
+    <!-- <script>
+            // Add an event listener to the search input
+            $(document).ready(function () {
+                $('#searchInput').on('input', function () {
+                    // Get the search term
+                    var searchValue = $(this).val();
+
+                    // Send an AJAX request to update the table content
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?= base_url('appointment_report'); ?>',
+                        data: { search: searchValue },
+                        success: function (response) {
+                            // Update the table content with the response
+                            $('.table-responsive').html(response);
+                        }
+                    });
+                });
+            });
+        </script> -->
+    <script src="./public/assets/js/off-canvas.js"></script>
+    <script src="./public/assets/js/hoverable-collapse.js"></script>
+    <script src="./public/assets/js/template.js"></script>
+    <script src="./public/assets/js/settings.js"></script>
+    <script src="./public/assets/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <!-- End custom js for this page-->
 </body>
+
+
+<!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/tables/basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:35 GMT -->
 
 </html>
