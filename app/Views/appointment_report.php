@@ -68,6 +68,20 @@
             /* Adjust as needed */
             overflow-y: auto;
         }
+
+        .export {
+            padding: 17px 20px;
+
+            box-sizing: border-box;
+            border-radius: 6px;
+            color: #000000;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 12px;
+            margin-bottom: -94px;
+            margin-left: 39rem;
+            align-items: center;
+        }
     </style>
 
 </head>
@@ -274,11 +288,34 @@
                             <div class="card-body">
                                 <form action="<?= base_url('generateExcelAppointments'); ?>" method="post">
                                     <div class="form-group row">
-                                        <div class="col-md-3 offset-md-9">
-                                            <label>Search</label>
-                                            <input class="form-control" type="text" name="search" id="searchInput"
-                                                placeholder="Search">
+                                        <div>
+                                            <div
+                                                style="width:100%; display: flex; align-items: center; justify-content: flex-end; gap:10px">
+
+
+
+                                                <button type="submit"
+                                                    style="align-self: flex-end;color: white;background-color: #172D88;border-color: #172D88;height: 33px;font-size: 12px;font-weight: 500;box-sizing: border-box;border: 1px solid #CADDFF;padding: 8px 15px;border-radius: 6px;align-items: center;">
+                                                    <i class=" ti-download"></i>
+                                                    Export
+                                                </button>
+                                                <div class="col-md-3">
+
+                                                    <label>Search</label>
+                                                    <input class="form-control" type="text" name="search"
+                                                        id="searchInput" placeholder="Search">
+                                                </div>
+
+                                            </div>
+
+                                            <!-- <div class="btn-wrapper export" style="height: 20px;">
+                                                <button type="submit" class="btn btn-primary text-white me-0">
+                                                    <i class="ti-download"></i>
+                                                    Export
+                                                </button>
+                                            </div> -->
                                         </div>
+
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-3">
@@ -316,16 +353,14 @@
                                                 id="toDateInput">
                                         </div>
                                     </div>
-                                    <hr>
-
-                                    <div class="form-group row">
+                                    <!-- <div class="form-group row">
                                         <div class="col-md-3 offset-md-9">
                                             <button type="submit" class="btn btn-outline-info btn-icon-text">
                                                 <i class="ti-download btn-icon-prepend"></i>
                                                 Generate Excel
                                             </button>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </form>
                                 <hr>
                                 <!-- </div>
@@ -345,7 +380,7 @@
                                                         <th>Appointment Type</th>
                                                         <th>Hospital Fee</th>
                                                         <th>Total Fee</th>
-                                                        <th>Actions</th>
+                                                        <!-- <th>Actions</th> -->
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -375,12 +410,7 @@
                                                             <td>
                                                                 <?= $appointment['appointmentFee'] + $appointment['hospitalCharges']; ?>
                                                             </td>
-                                                            <td>
-                                                                <!-- Action buttons: Edit and Delete -->
-                                                                <a href="<?= base_url('deleteAppointment/' . $appointment['appointmentID']); ?>"
-                                                                    onclick="return confirm('Are you sure you want to delete this Appointment?');"
-                                                                    class="btn btn-danger btn-sm">Delete</a>
-                                                            </td>
+
                                                         </tr>
                                                     <?php endforeach; ?>
                                                 </tbody>
@@ -388,11 +418,47 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="total-fee-container">
-                                    Total Appointment Fee:
-                                    <?= $totalAppointmentFee ?>
-                                </div>
+                                <hr>
+                                <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a id="total-fee-by-doctor" class="nav-link active ps-0" id="home-tab"
+                                                data-bs-toggle="tab" role="tab" aria-controls="overview"
+                                                aria-selected="true" style="font-weight: bolder;text-align: center;">
+                                                Total Fee By Doctor<br>
+                                                <p style="color: brown;font-size: x-large;">
+                                                    <?= $totalFeeByDoctor ?>
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="total-fee-by-client" class="nav-link active ps-0" id="home-tab"
+                                                data-bs-toggle="tab" role="tab" aria-controls="overview"
+                                                aria-selected="true" style="font-weight: bolder;text-align: center;">
+                                                Total Fee By Client <br>
 
+                                                <p style="color: brown;font-size: x-large;">
+                                                    <?= $totalFeeByClient ?>
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="total-fee-by-dates" class="nav-link active ps-0" id="home-tab"
+                                                data-bs-toggle="tab" role="tab" aria-controls="overview"
+                                                aria-selected="true" style="font-weight: bolder;text-align: center;">
+                                                Total Fee By Dates<br>
+                                                <p style="color: brown;font-size: x-large;">
+                                                    <?= $totalFeeByDateRange ?>
+                                                </p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div id="total-fee-container">
+                                        Total Appointment Fee:
+                                        <?= $totalAppointmentFee + $totalHospitalFee ?>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -417,7 +483,6 @@
 
         <!-- End plugin js for this page -->
         <!-- inject:js -->
-
         <script>
             $(document).ready(function () {
                 $('#searchInput, #doctorInput, #clientInput, #fromDateInput, #toDateInput').on('input change', function () {
@@ -447,6 +512,9 @@
                         success: function (response) {
                             if (response.success) {
                                 $('.table-responsive').html(response.tableContent);
+                                $('#total-fee-by-doctor').text('Total Fee By Doctor: ' + response.totalFeeByDoctor);
+                                $('#total-fee-by-client').text('Total Fee By Client: ' + response.totalFeeByClient);
+                                $('#total-fee-by-dates').text('Total Fee By Dates: ' + response.totalFeeByDateRange);
                             } else {
                                 console.error('Error:', response.error);
                             }

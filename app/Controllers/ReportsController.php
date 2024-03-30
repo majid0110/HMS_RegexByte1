@@ -106,10 +106,20 @@ class ReportsController extends Controller
         $toDate = $this->request->getPost('toDate');
         $data['Appointments'] = $Model->getAppointments($search, $doctor, $client, $fromDate, $toDate);
 
+        $data['totalFeeByDoctor'] = $Model->getTotalFeeByDoctor($doctor, $fromDate, $toDate);
+        $data['totalFeeByClient'] = $Model->getTotalFeeByClient($client, $fromDate, $toDate);
+        $data['totalFeeByDateRange'] = $Model->getTotalFeeByDateRange($fromDate, $toDate);
+
         if ($this->request->isAJAX()) {
             try {
                 $tableContent = view('ReportApp', $data);
-                return $this->response->setJSON(['success' => true, 'tableContent' => $tableContent]);
+                return $this->response->setJSON([
+                    'success' => true,
+                    'tableContent' => $tableContent,
+                    'totalFeeByDoctor' => $data['totalFeeByDoctor'],
+                    'totalFeeByClient' => $data['totalFeeByClient'],
+                    'totalFeeByDateRange' => $data['totalFeeByDateRange']
+                ]);
             } catch (\Exception $e) {
                 return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
             }

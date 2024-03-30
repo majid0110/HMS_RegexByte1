@@ -11,7 +11,6 @@
             <th>Appointment Type</th>
             <th>Hospital Fee</th>
             <th>Total Fee</th>
-            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -40,12 +39,6 @@
                 </td>
                 <td>
                     <?= $appointment['appointmentFee'] + $appointment['hospitalCharges']; ?>
-                </td>
-                <td>
-                    <!-- Action buttons: Edit and Delete -->
-                    <a href="<?= base_url('deleteAppointment/' . $appointment['appointmentID']); ?>"
-                        onclick="return confirm('Are you sure you want to delete this Appointment?');"
-                        class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>
         <?php endforeach; ?>

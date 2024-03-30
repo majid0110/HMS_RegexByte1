@@ -59,7 +59,7 @@ class AppointmentModel extends Model
         $builder->join('client', 'client.idClient = appointment.clientID');
         $builder->join('fee_type', 'fee_type.f_id = appointment.appointmentType');
 
-        if (!empty ($search)) {
+        if (!empty($search)) {
             $builder->groupStart()
                 ->like('client.client', $search)
                 ->orLike('doctorprofile.FirstName', $search)
@@ -71,17 +71,17 @@ class AppointmentModel extends Model
                 ->groupEnd();
         }
 
-        if (!empty ($doctor)) {
+        if (!empty($doctor)) {
             $builder->groupStart()
                 ->like('CONCAT(doctorprofile.FirstName, " ", doctorprofile.LastName)', $doctor)
                 ->groupEnd();
         }
 
-        if (!empty ($client)) {
+        if (!empty($client)) {
             $builder->like('client.client', $client);
         }
 
-        if (!empty ($fromDate) && !empty ($toDate)) {
+        if (!empty($fromDate) && !empty($toDate)) {
             $builder->where('appointment.appointmentDate >=', $fromDate)
                 ->where('appointment.appointmentDate <=', $toDate);
         }
@@ -89,7 +89,6 @@ class AppointmentModel extends Model
         $query = $builder->get();
         return $query->getResultArray();
     }
-
     public function getTotalHospitalFee()
     {
         $businessId = session()->get('businessID');
@@ -99,6 +98,64 @@ class AppointmentModel extends Model
         $result = $builder->get()->getRowArray();
         return $result['hospitalCharges'];
     }
+
+    public function getTotalFeeByDoctor($doctor, $fromDate, $toDate)
+    {
+        $builder = $this->db->table('appointment');
+        $builder->selectSum('(appointment.appointmentFee + appointment.hospitalCharges)', 'totalFee');
+        $builder->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID');
+
+        if (!empty($doctor)) {
+            $builder->like('CONCAT(doctorprofile.FirstName, " ", doctorprofile.LastName)', $doctor);
+        }
+
+        if (!empty($fromDate) && !empty($toDate)) {
+            $builder->where('appointment.appointmentDate >=', $fromDate)
+                ->where('appointment.appointmentDate <=', $toDate);
+        }
+
+        $query = $builder->get();
+        $result = $query->getRowArray();
+
+        return $result['totalFee'] ?? 0;
+    }
+    public function getTotalFeeByClient($client, $fromDate, $toDate)
+    {
+        $builder = $this->db->table('appointment');
+        $builder->selectSum('(appointment.appointmentFee + appointment.hospitalCharges)', 'totalFee');
+        $builder->join('client', 'client.idClient = appointment.clientID');
+
+        if (!empty($client)) {
+            $builder->like('client.client', $client);
+        }
+
+        if (!empty($fromDate) && !empty($toDate)) {
+            $builder->where('appointment.appointmentDate >=', $fromDate)
+                ->where('appointment.appointmentDate <=', $toDate);
+        }
+
+        $query = $builder->get();
+        $result = $query->getRowArray();
+
+        return $result['totalFee'] ?? 0;
+    }
+
+    public function getTotalFeeByDateRange($fromDate, $toDate)
+    {
+        $builder = $this->db->table('appointment');
+        $builder->selectSum('(appointment.appointmentFee + appointment.hospitalCharges)', 'totalFee');
+
+        if (!empty($fromDate) && !empty($toDate)) {
+            $builder->where('appointment.appointmentDate >=', $fromDate)
+                ->where('appointment.appointmentDate <=', $toDate);
+        }
+
+        $query = $builder->get();
+        $result = $query->getRowArray();
+
+        return $result['totalFee'] ?? 0;
+    }
+
 
     public function getTotalAppointmentFee()
     {
