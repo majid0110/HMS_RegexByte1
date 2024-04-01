@@ -260,4 +260,100 @@ class ReportsController extends Controller
         }
     }
 
+    public function generateExcelLabReport()
+    {
+        $headerStyle = [
+            'font' => ['bold' => true],
+        ];
+        $headerFill = [
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'FFFF00'],
+            ],
+        ];
+
+        $borderStyle = [
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['rgb' => '000000'],
+                ],
+            ],
+        ];
+
+        $testModel = new TestModel();
+        $search = $this->request->getPost('search');
+        $userName = $this->request->getPost('userName');
+        $clientName = $this->request->getPost('clientName');
+        $fromDate = $this->request->getPost('fromDate');
+        $toDate = $this->request->getPost('toDate');
+        $tests = $testModel->searchLabReports($search, $userName, $clientName, $fromDate, $toDate);
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Set your business name here
+        $businessTypeName = 'Your Business Name';
+        $sheet->setCellValue('A1', 'Hospital Name: ' . $businessTypeName);
+        $sheet->mergeCells('A1:E1');
+        $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('A1')->applyFromArray($headerStyle);
+
+        $sheet->setCellValue('A2', 'Generated Date: ' . date('Y-m-d H:i:s'));
+        $sheet->mergeCells('A2:E2');
+        $sheet->getStyle('A2')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('A2')->applyFromArray($headerStyle);
+
+        $filterRow = 3;
+        if (!empty($userName)) {
+            $sheet->setCellValue('A' . $filterRow, 'Filter by User: ' . $userName);
+            $filterRow++;
+        }
+        if (!empty($clientName)) {
+            $sheet->setCellValue('A' . $filterRow, 'Filter by Client: ' . $clientName);
+            $filterRow++;
+        }
+        if (!empty($fromDate) && !empty($toDate)) {
+            $sheet->setCellValue('A' . $filterRow, 'Filter by Date Range: ' . $fromDate . ' to ' . $toDate);
+            $filterRow++;
+        }
+
+        $headers = ['Client Name', 'Fee', 'Added By', 'Date'];
+        foreach ($headers as $col => $header) {
+            $cell = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($col + 1) . ($filterRow);
+            $sheet->setCellValue($cell, $header);
+            $sheet->getStyle($cell)->applyFromArray($headerStyle);
+            $sheet->getStyle($cell)->applyFromArray($headerFill);
+            $sheet->getStyle($cell)->applyFromArray($borderStyle);
+        }
+
+        $row = $filterRow + 1;
+        foreach ($tests as $test) {
+            $sheet->setCellValue('A' . $row, $test['clientName']);
+            $sheet->setCellValue('B' . $row, $test['fee']);
+            $sheet->setCellValue('C' . $row, $test['userName']);
+            $sheet->setCellValue('D' . $row, $test['CreatedAT']);
+            $sheet->getStyle('A' . $row . ':D' . $row)->applyFromArray($borderStyle);
+            $row++;
+        }
+
+        foreach (range('A', 'D') as $col) {
+            $sheet->getColumnDimension($col)->setAutoSize(true);
+        }
+        $lastRow = $row;
+        $sheet->setCellValue('B' . $lastRow, 'Total Fee:');
+        $sheet->setCellValue('C' . $lastRow, '=SUM(B4:B' . ($lastRow - 1) . ')');
+        $sheet->getStyle('B' . $lastRow . ':C' . $lastRow)->applyFromArray($borderStyle);
+
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'lab_report.xlsx';
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=' . $filename);
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+        exit;
+    }
+
+
 }

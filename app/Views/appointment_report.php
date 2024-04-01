@@ -10,7 +10,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Star Admin2 </title>
+    <title>Appointment-Report </title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="./public/assets/vendors/feather/feather.css">
     <link rel="stylesheet" href="./public/assets/vendors/mdi/css/materialdesignicons.min.css">
@@ -291,10 +291,7 @@
                                         <div>
                                             <div
                                                 style="width:100%; display: flex; align-items: center; justify-content: flex-end; gap:10px">
-
-
-
-                                                <button type="submit"
+                                                <button type="submit" class="btn btn-primary text-white me-0"
                                                     style="align-self: flex-end;color: white;background-color: #172D88;border-color: #172D88;height: 33px;font-size: 12px;font-weight: 500;box-sizing: border-box;border: 1px solid #CADDFF;padding: 8px 15px;border-radius: 6px;align-items: center;">
                                                     <i class=" ti-download"></i>
                                                     Export
@@ -512,9 +509,11 @@
                         success: function (response) {
                             if (response.success) {
                                 $('.table-responsive').html(response.tableContent);
-                                $('#total-fee-by-doctor').text('Total Fee By Doctor: ' + response.totalFeeByDoctor);
-                                $('#total-fee-by-client').text('Total Fee By Client: ' + response.totalFeeByClient);
-                                $('#total-fee-by-dates').text('Total Fee By Dates: ' + response.totalFeeByDateRange);
+                                $('#total-fee-by-doctor p').text(response.totalFeeByDoctor);
+                                $('#total-fee-by-client p').text(response.totalFeeByClient);
+                                $('#total-fee-by-dates p').text(response.totalFeeByDateRange);
+                                // $('#total-fee-by-client').text('Total Fee By Client: ' + response.totalFeeByClient);
+                                // $('#total-fee-by-dates').text('Total Fee By Dates: ' + response.totalFeeByDateRange);
                             } else {
                                 console.error('Error:', response.error);
                             }

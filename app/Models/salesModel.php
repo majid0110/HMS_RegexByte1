@@ -188,13 +188,19 @@ class salesModel extends Model
     //     $query = $builder->get();
     //     return $query->getResultArray();
     // }
+
+    //-----------------------------------------------
     public function getSalesReport($search = null, $paymentInput = null, $clientName = null, $fromDate = null, $toDate = null)
     {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
         $builder = $this->db->table('invoices');
         $builder->join('client', 'client.idClient = invoices.idClient');
         $builder->join('currency', 'currency.id = invoices.idCurrency');
         $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
         $builder->select('invoices.*, client.client as clientName, currency.Currency, paymentmethods.Method as PaymentMethod');
+
+        $builder->where('invoices.idBusiness', $businessID);
 
         if (!empty($search)) {
             $builder->groupStart()
@@ -224,6 +230,9 @@ class salesModel extends Model
         $query = $builder->get();
         return $query->getResultArray();
     }
+    //--------------------------------------------------
+
+
     public function getServicesByCategory($categoryId)
     {
         $builder = $this->db->table('artmenu');

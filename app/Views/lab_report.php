@@ -54,6 +54,12 @@
             animation: shine 4s infinite;
         }
 
+        .table-container {
+            max-height: 400px;
+            /* Adjust as needed */
+            overflow-y: auto;
+        }
+
         @keyframes shine {
             0% {
                 left: -50%;
@@ -266,13 +272,33 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <form action="<?= base_url('lab_report'); ?>" method="post">
+                                <form action="<?= base_url('generateExcelLabReport'); ?>" method="post">
                                     <div class="form-group row">
-                                        <div class="col-md-3 offset-md-9">
-                                            <label>Search</label>
-                                            <input class="form-control" type="text" name="search" id="searchInput"
-                                                placeholder="Search">
+                                        <div>
+                                            <div
+                                                style="width:100%; display: flex; align-items: center; justify-content: flex-end; gap:10px">
+                                                <button type="submit"
+                                                    style="align-self: flex-end;color: white;background-color: #172D88;border-color: #172D88;height: 33px;font-size: 12px;font-weight: 500;box-sizing: border-box;border: 1px solid #CADDFF;padding: 8px 15px;border-radius: 6px;align-items: center;">
+                                                    <i class="ti-download"> </i>
+                                                    Export
+                                                </button>
+                                                <div class="col-md-3">
+
+                                                    <label>Search</label>
+                                                    <input class="form-control" type="text" name="search"
+                                                        id="searchInput" placeholder="Search">
+                                                </div>
+
+                                            </div>
+
+                                            <!-- <div class="btn-wrapper export" style="height: 20px;">
+                                                <button type="submit" class="btn btn-primary text-white me-0">
+                                                    <i class="ti-download"></i>
+                                                    Export
+                                                </button>
+                                            </div> -->
                                         </div>
+
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-3">
@@ -316,40 +342,42 @@
                                 <hr>
                                 <h4 class="card-title">Lab Report</h4>
                                 <div class="col-12 grid-margin">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Client Name</th>
-                                                    <th>FEE</th>
-                                                    <th>Added By</th>
-                                                    <th>Date</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach ($Tests as $test): ?>
+                                    <div class="table-container">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
                                                     <tr>
-                                                        <td>
-                                                            <?= $test['clientName']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $test['fee']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $test['userName']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $test['CreatedAT']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <a href="<?= base_url('viewTestDetails/' . $test['test_id']); ?>"
-                                                                class="btn btn-info btn-sm">View Details</a>
-                                                        </td>
+                                                        <th>Client Name</th>
+                                                        <th>FEE</th>
+                                                        <th>Added By</th>
+                                                        <th>Date</th>
+                                                        <th>Actions</th>
                                                     </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    <?php foreach ($Tests as $test): ?>
+                                                        <tr>
+                                                            <td>
+                                                                <?= $test['clientName']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?= $test['fee']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?= $test['userName']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?= $test['CreatedAT']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <a href="<?= base_url('viewTestDetails/' . $test['test_id']); ?>"
+                                                                    class="btn btn-info btn-sm">View Details</a>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                                 <div id="total-fee-container">
