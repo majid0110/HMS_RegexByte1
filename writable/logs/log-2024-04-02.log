@@ -1,0 +1,903 @@
+INFO - 2024-04-02 05:46:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 05:47:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 05:47:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 05:47:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 05:47:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 05:47:38 --> Call to a member function getGet() on null
+in APPPATH\Models\AppointmentModel.php on line 175.
+ 1 APPPATH\Controllers\ReportsController.php(155): App\Models\AppointmentModel->getPager(null, null, null, null, null, 20)
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 05:58:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 05:58:01 --> Call to a member function getGet() on null
+in APPPATH\Models\AppointmentModel.php on line 175.
+ 1 APPPATH\Controllers\ReportsController.php(155): App\Models\AppointmentModel->getPager(null, null, null, null, null, 20)
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 05:59:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 05:59:51 --> Call to a member function getGet() on null
+in APPPATH\Models\AppointmentModel.php on line 175.
+ 1 APPPATH\Controllers\ReportsController.php(155): App\Models\AppointmentModel->getPager(null, null, null, null, null, 20, 1)
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 05:59:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 05:59:54 --> Call to a member function getGet() on null
+in APPPATH\Models\AppointmentModel.php on line 175.
+ 1 APPPATH\Controllers\ReportsController.php(155): App\Models\AppointmentModel->getPager(null, null, null, null, null, 20, 1)
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 06:02:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 06:02:28 --> Call to a member function getGet() on null
+in APPPATH\Models\AppointmentModel.php on line 175.
+ 1 APPPATH\Controllers\ReportsController.php(156): App\Models\AppointmentModel->getPager(null, null, null, null, null, 20, 1)
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 06:02:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 06:02:32 --> Call to a member function getGet() on null
+in APPPATH\Models\AppointmentModel.php on line 175.
+ 1 APPPATH\Controllers\ReportsController.php(156): App\Models\AppointmentModel->getPager(null, null, null, null, null, 20, 1)
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 06:03:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 06:03:55 --> Call to a member function getGet() on null
+in APPPATH\Models\AppointmentModel.php on line 175.
+ 1 APPPATH\Controllers\ReportsController.php(155): App\Models\AppointmentModel->getPager(null, null, null, null, null, 20)
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 06:08:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 06:08:11 --> CodeIgniter\Pager\Pager::makeLinks(): Argument #1 ($page) must be of type int, array given, called in C:\xampp\htdocs\HMS_RegexByte\app\Models\AppointmentModel.php on line 181
+in SYSTEMPATH\Pager\Pager.php on line 106.
+ 1 APPPATH\Models\AppointmentModel.php(181): CodeIgniter\Pager\Pager->makeLinks([...])
+ 2 APPPATH\Controllers\ReportsController.php(155): App\Models\AppointmentModel->getPager(null, null, null, null, null, 20, 1)
+ 3 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 06:09:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 06:09:39 --> CodeIgniter\Pager\Pager::makeLinks(): Argument #4 ($template) must be of type string, array given, called in C:\xampp\htdocs\HMS_RegexByte\app\Models\AppointmentModel.php on line 180
+in SYSTEMPATH\Pager\Pager.php on line 106.
+ 1 APPPATH\Models\AppointmentModel.php(180): CodeIgniter\Pager\Pager->makeLinks(1, 20, 5, [...])
+ 2 APPPATH\Controllers\ReportsController.php(155): App\Models\AppointmentModel->getPager(null, null, null, null, null, 20, 1)
+ 3 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 06:09:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 06:09:44 --> CodeIgniter\Pager\Pager::makeLinks(): Argument #4 ($template) must be of type string, array given, called in C:\xampp\htdocs\HMS_RegexByte\app\Models\AppointmentModel.php on line 180
+in SYSTEMPATH\Pager\Pager.php on line 106.
+ 1 APPPATH\Models\AppointmentModel.php(180): CodeIgniter\Pager\Pager->makeLinks(1, 20, 5, [...])
+ 2 APPPATH\Controllers\ReportsController.php(155): App\Models\AppointmentModel->getPager(null, null, null, null, null, 20, 1)
+ 3 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 06:12:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 06:12:54 --> Undefined variable $Appointments
+in APPPATH\Views\appointment_report.php on line 384.
+ 1 APPPATH\Views\appointment_report.php(384): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $Appointments', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 384)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(165): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 06:14:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 06:14:57 --> Call to a member function links() on string
+in APPPATH\Views\appointment_report.php on line 415.
+ 1 SYSTEMPATH\View\View.php(228): include()
+ 2 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 4 APPPATH\Controllers\ReportsController.php(166): view('appointment_report', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 06:15:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 06:15:21 --> Undefined variable $totalFeeByDoctor
+in APPPATH\Views\appointment_report.php on line 428.
+ 1 APPPATH\Views\appointment_report.php(428): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $totalFeeByDoctor', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 428)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(166): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 06:17:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 06:18:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 06:18:47 --> Call to a member function links() on string
+in APPPATH\Views\appointment_report.php on line 415.
+ 1 SYSTEMPATH\View\View.php(228): include()
+ 2 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 4 APPPATH\Controllers\ReportsController.php(176): view('appointment_report', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 06:21:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 06:21:57 --> Call to a member function links() on string
+in APPPATH\Views\appointment_report.php on line 415.
+ 1 SYSTEMPATH\View\View.php(228): include()
+ 2 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 4 APPPATH\Controllers\ReportsController.php(177): view('appointment_report', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 06:24:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 06:24:20 --> Undefined variable $Appointments
+in APPPATH\Views\appointment_report.php on line 384.
+ 1 APPPATH\Views\appointment_report.php(384): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $Appointments', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 384)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(177): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 06:26:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 06:26:29 --> Call to a member function links() on string
+in APPPATH\Views\appointment_report.php on line 415.
+ 1 SYSTEMPATH\View\View.php(228): include()
+ 2 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 4 APPPATH\Controllers\ReportsController.php(177): view('appointment_report', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 06:26:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 06:27:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 06:27:10 --> Call to a member function links() on string
+in APPPATH\Views\appointment_report.php on line 415.
+ 1 SYSTEMPATH\View\View.php(228): include()
+ 2 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 4 APPPATH\Controllers\ReportsController.php(177): view('appointment_report', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 07:13:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 07:13:44 --> CodeIgniter\Pager\Pager::getTotal(): Return value must be of type int, null returned
+in SYSTEMPATH\Pager\Pager.php on line 197.
+ 1 APPPATH\Controllers\ReportsController.php(155): CodeIgniter\Pager\Pager->getTotal('<!-- DEBUG-VIEW START 1 SYSTEMPATH\\Pager\\Views\\default_full.php -->
+
+<nav aria-label="Page navigation">
+	<ul class="pagination">
+		
+					<li class="active">
+				<a href="http://localhost/HMS_RegexByte/index.php/appointment_report?page=1">
+					1				</a>
+			</li>
+		
+			</ul>
+</nav>
+
+<!-- DEBUG-VIEW ENDED 1 SYSTEMPATH\\Pager\\Views\\default_full.php -->
+')
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 07:19:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 07:19:16 --> CodeIgniter\Pager\Pager::getTotal(): Return value must be of type int, null returned
+in SYSTEMPATH\Pager\Pager.php on line 197.
+ 1 APPPATH\Controllers\ReportsController.php(155): CodeIgniter\Pager\Pager->getTotal('<!-- DEBUG-VIEW START 1 SYSTEMPATH\\Pager\\Views\\default_full.php -->
+
+<nav aria-label="Page navigation">
+	<ul class="pagination">
+		
+					<li class="active">
+				<a href="http://localhost/HMS_RegexByte/index.php/appointment_report?page=1">
+					1				</a>
+			</li>
+		
+			</ul>
+</nav>
+
+<!-- DEBUG-VIEW ENDED 1 SYSTEMPATH\\Pager\\Views\\default_full.php -->
+')
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 07:19:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 07:19:20 --> CodeIgniter\Pager\Pager::getTotal(): Return value must be of type int, null returned
+in SYSTEMPATH\Pager\Pager.php on line 197.
+ 1 APPPATH\Controllers\ReportsController.php(155): CodeIgniter\Pager\Pager->getTotal('<!-- DEBUG-VIEW START 1 SYSTEMPATH\\Pager\\Views\\default_full.php -->
+
+<nav aria-label="Page navigation">
+	<ul class="pagination">
+		
+					<li class="active">
+				<a href="http://localhost/HMS_RegexByte/index.php/appointment_report?page=1">
+					1				</a>
+			</li>
+		
+			</ul>
+</nav>
+
+<!-- DEBUG-VIEW ENDED 1 SYSTEMPATH\\Pager\\Views\\default_full.php -->
+')
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 07:20:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 07:20:38 --> CodeIgniter\Pager\Pager::getTotal(): Return value must be of type int, null returned
+in SYSTEMPATH\Pager\Pager.php on line 197.
+ 1 APPPATH\Controllers\ReportsController.php(155): CodeIgniter\Pager\Pager->getTotal('<!-- DEBUG-VIEW START 1 SYSTEMPATH\\Pager\\Views\\default_full.php -->
+
+<nav aria-label="Page navigation">
+	<ul class="pagination">
+		
+					<li class="active">
+				<a href="http://localhost/HMS_RegexByte/index.php/appointment_report?page=1">
+					1				</a>
+			</li>
+		
+			</ul>
+</nav>
+
+<!-- DEBUG-VIEW ENDED 1 SYSTEMPATH\\Pager\\Views\\default_full.php -->
+')
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 07:21:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 07:21:45 --> CodeIgniter\Pager\Pager::makeLinks(): Argument #1 ($page) must be of type int, array given, called in C:\xampp\htdocs\HMS_RegexByte\app\Models\AppointmentModel.php on line 227
+in SYSTEMPATH\Pager\Pager.php on line 106.
+ 1 APPPATH\Models\AppointmentModel.php(227): CodeIgniter\Pager\Pager->makeLinks([...])
+ 2 APPPATH\Controllers\ReportsController.php(153): App\Models\AppointmentModel->getPager(null, null, null, null, null, 20, 1)
+ 3 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 07:24:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 07:24:51 --> CodeIgniter\Pager\Pager::makeLinks(): Argument #4 ($template) must be of type string, null given, called in C:\xampp\htdocs\HMS_RegexByte\app\Models\AppointmentModel.php on line 225
+in SYSTEMPATH\Pager\Pager.php on line 106.
+ 1 APPPATH\Models\AppointmentModel.php(225): CodeIgniter\Pager\Pager->makeLinks(1, 20, 5, null, [...])
+ 2 APPPATH\Controllers\ReportsController.php(153): App\Models\AppointmentModel->getPager(null, null, null, null, null, 20, 1)
+ 3 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 07:25:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 07:25:48 --> CodeIgniter\Pager\Pager::makeLinks(): Argument #5 ($segment) must be of type int, array given, called in C:\xampp\htdocs\HMS_RegexByte\app\Models\AppointmentModel.php on line 225
+in SYSTEMPATH\Pager\Pager.php on line 106.
+ 1 APPPATH\Models\AppointmentModel.php(225): CodeIgniter\Pager\Pager->makeLinks(1, 20, 5, '', [...])
+ 2 APPPATH\Controllers\ReportsController.php(153): App\Models\AppointmentModel->getPager(null, null, null, null, null, 20, 1)
+ 3 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 07:26:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 07:26:49 --> CodeIgniter\Pager\Pager::makeLinks(): Argument #6 ($group) must be of type ?string, array given, called in C:\xampp\htdocs\HMS_RegexByte\app\Models\AppointmentModel.php on line 225
+in SYSTEMPATH\Pager\Pager.php on line 106.
+ 1 APPPATH\Models\AppointmentModel.php(225): CodeIgniter\Pager\Pager->makeLinks(1, 20, 5, '', 4, [...])
+ 2 APPPATH\Controllers\ReportsController.php(153): App\Models\AppointmentModel->getPager(null, null, null, null, null, 20, 1)
+ 3 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 07:27:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 07:27:49 --> Request URI segment is out of range: "4"
+in SYSTEMPATH\HTTP\URI.php on line 594.
+ 1 SYSTEMPATH\HTTP\URI.php(594): CodeIgniter\HTTP\Exceptions\HTTPException::forURISegmentOutOfRange(4)
+ 2 SYSTEMPATH\Pager\PagerRenderer.php(271): CodeIgniter\HTTP\URI->setSegment(4, 1)
+ 3 SYSTEMPATH\Pager\Views\default_full.php(26): CodeIgniter\Pager\PagerRenderer->links()
+ 4 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\system\\Pager\\Views\\default_full.php')
+ 5 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Pager\Pager.php(128): CodeIgniter\View\View->render('CodeIgniter\\Pager\\Views\\default_full')
+ 7 SYSTEMPATH\Pager\Pager.php(112): CodeIgniter\Pager\Pager->displayLinks('default', 'default_full')
+ 8 APPPATH\Models\AppointmentModel.php(225): CodeIgniter\Pager\Pager->makeLinks(1, 20, 5, 'default_full', 4)
+ 9 APPPATH\Controllers\ReportsController.php(153): App\Models\AppointmentModel->getPager(null, null, null, null, null, 20, 1)
+10 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+11 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 07:28:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 07:28:47 --> CodeIgniter\Pager\Pager::getTotal(): Return value must be of type int, null returned
+in SYSTEMPATH\Pager\Pager.php on line 197.
+ 1 APPPATH\Controllers\ReportsController.php(155): CodeIgniter\Pager\Pager->getTotal('<!-- DEBUG-VIEW START 1 SYSTEMPATH\\Pager\\Views\\default_full.php -->
+
+<nav aria-label="Page navigation">
+	<ul class="pagination">
+		
+					<li class="active">
+				<a href="http://localhost/HMS_RegexByte/index.php/appointment_report?page=1">
+					1				</a>
+			</li>
+		
+			</ul>
+</nav>
+
+<!-- DEBUG-VIEW ENDED 1 SYSTEMPATH\\Pager\\Views\\default_full.php -->
+')
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 07:29:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 07:29:23 --> CodeIgniter\Pager\Pager::getTotal(): Return value must be of type int, null returned
+in SYSTEMPATH\Pager\Pager.php on line 197.
+ 1 APPPATH\Controllers\ReportsController.php(155): CodeIgniter\Pager\Pager->getTotal('<!-- DEBUG-VIEW START 1 SYSTEMPATH\\Pager\\Views\\default_full.php -->
+
+<nav aria-label="Page navigation">
+	<ul class="pagination">
+		
+					<li class="active">
+				<a href="http://localhost/HMS_RegexByte/index.php/appointment_report?page=1">
+					1				</a>
+			</li>
+		
+			</ul>
+</nav>
+
+<!-- DEBUG-VIEW ENDED 1 SYSTEMPATH\\Pager\\Views\\default_full.php -->
+')
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 07:43:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 07:43:50 --> CodeIgniter\Pager\Pager::getTotal(): Return value must be of type int, null returned
+in SYSTEMPATH\Pager\Pager.php on line 197.
+ 1 APPPATH\Controllers\ReportsController.php(155): CodeIgniter\Pager\Pager->getTotal('<!-- DEBUG-VIEW START 1 SYSTEMPATH\\Pager\\Views\\default_full.php -->
+
+<nav aria-label="Page navigation">
+	<ul class="pagination">
+		
+					<li class="active">
+				<a href="http://localhost/HMS_RegexByte/index.php/appointment_report?page=1">
+					1				</a>
+			</li>
+		
+			</ul>
+</nav>
+
+<!-- DEBUG-VIEW ENDED 1 SYSTEMPATH\\Pager\\Views\\default_full.php -->
+')
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 08:01:08 --> Call to a member function getVar() on null
+in APPPATH\Models\AppointmentModel.php on line 132.
+ 1 APPPATH\Controllers\ReportsController.php(188): App\Models\AppointmentModel->getAppointments(null, null, null, null, null, 0, 20)
+ 2 APPPATH\Controllers\ReportsController.php(151): App\Controllers\ReportsController->paginateData(Object(App\Models\AppointmentModel), null, null, null, null, null)
+ 3 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 08:12:09 --> Call to a member function getVar() on null
+in APPPATH\Models\AppointmentModel.php on line 132.
+ 1 APPPATH\Controllers\ReportsController.php(202): App\Models\AppointmentModel->getAppointments(null, null, null, null, null, 0, 20)
+ 2 APPPATH\Controllers\ReportsController.php(164): App\Controllers\ReportsController->paginateData(Object(App\Models\AppointmentModel), null, null, null, null, null)
+ 3 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 08:12:29 --> Call to undefined method App\Controllers\ReportsController::paginateData()
+in APPPATH\Controllers\ReportsController.php on line 164.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 09:00:46 --> Cannot redeclare App\Controllers\ReportsController::appointment_report()
+in APPPATH\Controllers\ReportsController.php on line 223.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-04-02 09:02:11 --> Undefined property: App\Controllers\ReportsController::$load
+in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 APPPATH\Controllers\ReportsController.php(23): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\ReportsController::$load', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Controllers\\ReportsController.php', 23)
+ 2 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 3 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 09:03:17 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 09:03:18 --> Call to a member function getVar() on null
+in APPPATH\Models\AppointmentModel.php on line 132.
+ 1 APPPATH\Controllers\ReportsController.php(49): App\Models\AppointmentModel->getAppointments(null, null, null, null, null)
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 09:07:29 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:07:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 09:07:30 --> Undefined variable $pager
+in APPPATH\Views\appointment_report.php on line 416.
+ 1 APPPATH\Views\appointment_report.php(416): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php', 416)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\appointment_report.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 5 APPPATH\Controllers\ReportsController.php(77): view('appointment_report', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 09:08:51 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:08:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:09:14 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:09:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:09:15 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:09:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:09:20 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 09:09:20 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:09:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:09:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:20:46 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:20:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:22:01 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:22:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:23:09 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:23:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:23:37 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:23:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:24:04 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:24:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:24:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:24:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:25:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:25:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:25:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:25:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:25:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:25:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:25:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:26:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:26:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:26:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:26:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:26:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:26:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:26:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 09:26:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:27:11 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:27:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:27:17 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:27:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:27:33 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:27:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:30:47 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:30:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:31:07 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:31:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:31:19 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:31:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:34:50 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:34:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:37:24 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:37:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:38:53 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:38:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:39:10 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:39:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:41:10 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:41:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:47:16 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 09:47:17 --> Call to undefined method CodeIgniter\Pager\Pager::setTotal()
+in APPPATH\Models\AppointmentModel.php on line 127.
+ 1 APPPATH\Controllers\ReportsController.php(52): App\Models\AppointmentModel->getAppointments(null, null, null, null, null, 1)
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 09:53:35 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:53:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 09:55:01 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:55:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 09:55:02 --> Call to a member function links() on null
+in APPPATH\Views\appointment_report.php on line 464.
+ 1 SYSTEMPATH\View\View.php(228): include()
+ 2 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 4 APPPATH\Controllers\ReportsController.php(80): view('appointment_report', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 09:55:35 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:55:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 09:55:35 --> Call to a member function link() on null
+in APPPATH\Views\appointment_report.php on line 464.
+ 1 SYSTEMPATH\View\View.php(228): include()
+ 2 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 4 APPPATH\Controllers\ReportsController.php(80): view('appointment_report', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 09:56:28 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:56:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 09:56:29 --> Call to a member function links() on null
+in APPPATH\Views\appointment_report.php on line 464.
+ 1 SYSTEMPATH\View\View.php(228): include()
+ 2 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 4 APPPATH\Controllers\ReportsController.php(80): view('appointment_report', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 09:56:57 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:56:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 09:56:58 --> Call to a member function links() on null
+in APPPATH\Views\appointment_report.php on line 464.
+ 1 SYSTEMPATH\View\View.php(228): include()
+ 2 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 4 APPPATH\Controllers\ReportsController.php(80): view('appointment_report', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 09:59:23 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 09:59:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 09:59:23 --> Call to a member function links() on null
+in APPPATH\Views\appointment_report.php on line 464.
+ 1 SYSTEMPATH\View\View.php(228): include()
+ 2 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 4 APPPATH\Controllers\ReportsController.php(84): view('appointment_report', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 10:00:25 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:00:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 10:00:25 --> Call to a member function links() on null
+in APPPATH\Views\appointment_report.php on line 464.
+ 1 SYSTEMPATH\View\View.php(228): include()
+ 2 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 4 APPPATH\Controllers\ReportsController.php(84): view('appointment_report', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 10:00:29 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:00:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 10:00:29 --> Call to a member function links() on null
+in APPPATH\Views\appointment_report.php on line 464.
+ 1 SYSTEMPATH\View\View.php(228): include()
+ 2 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 4 APPPATH\Controllers\ReportsController.php(84): view('appointment_report', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 10:07:39 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 10:07:39 --> Call to a member function paginate() on array
+in APPPATH\Controllers\ReportsController.php on line 52.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 10:10:38 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:10:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 10:11:43 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:11:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 10:12:07 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:12:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 10:12:08 --> Call to a member function link() on null
+in APPPATH\Views\appointment_report.php on line 462.
+ 1 SYSTEMPATH\View\View.php(228): include()
+ 2 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 4 APPPATH\Controllers\ReportsController.php(81): view('appointment_report', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 10:12:22 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:12:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 10:12:22 --> Call to a member function links() on null
+in APPPATH\Views\appointment_report.php on line 462.
+ 1 SYSTEMPATH\View\View.php(228): include()
+ 2 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 4 APPPATH\Controllers\ReportsController.php(81): view('appointment_report', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 10:12:53 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:12:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 10:20:42 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:20:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 10:26:21 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:26:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 10:27:46 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:27:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-04-02 10:27:46 --> Call to a member function links() on null
+in APPPATH\Views\appointment_report.php on line 462.
+ 1 SYSTEMPATH\View\View.php(228): include()
+ 2 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('appointment_report', [], true)
+ 4 APPPATH\Controllers\ReportsController.php(81): view('appointment_report', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 10:30:11 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:30:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 10:31:14 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:31:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 10:31:34 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:31:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 10:34:08 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:34:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 10:34:44 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:34:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 10:35:10 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:35:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 10:35:15 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 10:35:16 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:35:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-04-02 10:35:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 10:35:37 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:35:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-04-02 10:37:20 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 10:37:20 --> Call to a member function setTotal() on null
+in APPPATH\Models\AppointmentModel.php on line 142.
+ 1 APPPATH\Controllers\ReportsController.php(52): App\Models\AppointmentModel->getAppointments(null, null, null, null, null, 1)
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 10:40:32 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 10:40:32 --> Call to undefined method CodeIgniter\Pager\Pager::withTotalCount()
+in APPPATH\Controllers\ReportsController.php on line 58.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 10:41:41 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 10:41:41 --> Call to undefined method CodeIgniter\Pager\Pager::setTotal()
+in APPPATH\Controllers\ReportsController.php on line 58.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ReportsController->appointment_report()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ReportsController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-04-02 10:43:43 --> [DEPRECATED] Creation of dynamic property App\Controllers\ReportsController::$pager is deprecated in APPPATH\Controllers\ReportsController.php on line 23.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\ReportsController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-04-02 10:43:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

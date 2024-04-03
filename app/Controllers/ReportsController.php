@@ -18,27 +18,161 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class ReportsController extends Controller
 {
+    protected $pager;
+    public function __construct()
+    {
+        $this->pager = service('pager');
+    }
     public function reports_form()
     {
         return view('reports_form.php');
     }
 
+    // public function appointment_report()
+    // {
+    //     // Load necessary models
+    //     $clientModel = new ClientModel();
+    //     $data['client_names'] = $clientModel->getClientNames();
+    //     $model = new DoctorModel();
+    //     $data['doctor_names'] = $model->getDoctorNames();
+    //     $model = new AppointmentModel();
+
+    //     // Get search parameters from request
+    //     $search = $this->request->getPost('search');
+    //     $doctor = $this->request->getPost('doctor');
+    //     $client = $this->request->getPost('client');
+    //     $fromDate = $this->request->getPost('fromDate');
+    //     $toDate = $this->request->getPost('toDate');
 
 
-    // public function services_report()
+    //     $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+
+    //     $perPage = 20;
+    //     $totalRecords = $model->countAllResults();
+    //     $data['pager'] = $model->getPager($search, $doctor, $client, $fromDate, $toDate, $perPage, $currentPage);
+    //     $data['Appointments'] = $model->getAppointments($search, $doctor, $client, $fromDate, $toDate, $perPage, ($currentPage - 1) * $perPage);
+
+    //     $data['totalHospitalFee'] = $model->getTotalHospitalFee();
+    //     $data['totalAppointmentFee'] = $model->getTotalAppointmentFee();
+    //     $data['totalFeeByDoctor'] = $model->getTotalFeeByDoctor($doctor, $fromDate, $toDate);
+    //     $data['totalFeeByClient'] = $model->getTotalFeeByClient($client, $fromDate, $toDate);
+    //     $data['totalFeeByDateRange'] = $model->getTotalFeeByDateRange($fromDate, $toDate);
+
+    //     if ($this->request->isAJAX()) {
+    //         try {
+    //             $tableContent = view('ReportApp', $data);
+    //             return $this->response->setJSON([
+    //                 'success' => true,
+    //                 'tableContent' => $tableContent,
+    //                 'totalFeeByDoctor' => $data['totalFeeByDoctor'],
+    //                 'totalFeeByClient' => $data['totalFeeByClient'],
+    //                 'totalFeeByDateRange' => $data['totalFeeByDateRange'],
+    //                 'pager' => $data['pager']
+    //             ]);
+    //         } catch (\Exception $e) {
+    //             return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+    //         }
+    //     } else {
+    //         return view('appointment_report', $data);
+    //     }
+    // }
+
+    // public function appointment_report()
     // {
     //     $clientModel = new ClientModel();
     //     $data['client_names'] = $clientModel->getClientNames();
-    //     $sales = new salesModel();
-    //     $data['payments'] = $sales->getpayment();
+    //     $model = new DoctorModel();
+    //     $data['doctor_names'] = $model->getDoctorNames();
+    //     $model = new AppointmentModel();
+    //     $search = $this->request->getPost('search');
+    //     $doctor = $this->request->getPost('doctor');
+    //     $client = $this->request->getPost('client');
+    //     $fromDate = $this->request->getPost('fromDate');
+    //     $toDate = $this->request->getPost('toDate');
 
+    //     $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+    //     $perPage = 9; 
+    //     $totalRecords = $model->countAllResults();
 
-    //     $user = new AppointmentModel();
-    //     $data['user_names'] = $user->getuserprofile();
-    //     $Model = new salesModel();
-    //     $data['Sales'] = $Model->getSalesReport();
-    //     return view('services_report.php', $data);
+    //     $data['pager'] = $model->getPager($search, $doctor, $client, $fromDate, $toDate, $perPage, $currentPage);
+    //     // $data['pager'] = $pager['pager'];
+
+    //     $data['Appointments'] = $model->getAppointments($search, $doctor, $client, $fromDate, $toDate, $perPage, ($currentPage - 1) * $perPage);
+
+    //     $data['totalHospitalFee'] = $model->getTotalHospitalFee();
+    //     $data['totalAppointmentFee'] = $model->getTotalAppointmentFee();
+
+    //     // Get total fees by doctor, client, and date range
+    //     $data['totalFeeByDoctor'] = $model->getTotalFeeByDoctor($doctor, $fromDate, $toDate);
+    //     $data['totalFeeByClient'] = $model->getTotalFeeByClient($client, $fromDate, $toDate);
+    //     $data['totalFeeByDateRange'] = $model->getTotalFeeByDateRange($fromDate, $toDate);
+
+    //     if ($this->request->isAJAX()) {
+    //         try {
+    //             $tableContent = view('ReportApp', $data);
+    //             return $this->response->setJSON([
+    //                 'success' => true,
+    //                 'tableContent' => $tableContent,
+    //                 'totalFeeByDoctor' => $data['totalFeeByDoctor'],
+    //                 'totalFeeByClient' => $data['totalFeeByClient'],
+    //                 'totalFeeByDateRange' => $data['totalFeeByDateRange'],
+    //                 'pager' => $data['pager'] // Pass the pager links to the view data
+    //             ]);
+    //         } catch (\Exception $e) {
+    //             return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+    //         }
+    //     } else {
+    //         return view('appointment_report', $data);
+    //     }
     // }
+
+    public function appointment_report()
+    {
+        $clientModel = new ClientModel();
+        $data['client_names'] = $clientModel->getClientNames();
+        $model = new DoctorModel();
+        $data['doctor_names'] = $model->getDoctorNames();
+        $model = new AppointmentModel();
+
+        $search = $this->request->getPost('search');
+        $doctor = $this->request->getPost('doctor');
+        $client = $this->request->getPost('client');
+        $fromDate = $this->request->getPost('fromDate');
+        $toDate = $this->request->getPost('toDate');
+
+        $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+        $perPage = 20;
+
+        $data['pager'] = $model->getPager($search, $doctor, $client, $fromDate, $toDate, $perPage, $currentPage);
+        $data['Appointments'] = $model->getAppointments($search, $doctor, $client, $fromDate, $toDate, $perPage, ($currentPage - 1) * $perPage);
+
+        $data['totalHospitalFee'] = $model->getTotalHospitalFee();
+        $data['totalAppointmentFee'] = $model->getTotalAppointmentFee();
+        $data['totalFeeByDoctor'] = $model->getTotalFeeByDoctor($doctor, $fromDate, $toDate);
+        $data['totalFeeByClient'] = $model->getTotalFeeByClient($client, $fromDate, $toDate);
+        $data['totalFeeByDateRange'] = $model->getTotalFeeByDateRange($fromDate, $toDate);
+
+        if ($this->request->isAJAX()) {
+            try {
+                $tableContent = view('ReportApp', $data);
+                return $this->response->setJSON([
+                    'success' => true,
+                    'tableContent' => $tableContent,
+                    'totalFeeByDoctor' => $data['totalFeeByDoctor'],
+                    'totalFeeByClient' => $data['totalFeeByClient'],
+                    'totalFeeByDateRange' => $data['totalFeeByDateRange'],
+                    'pager' => $data['pager']
+                ]);
+            } catch (\Exception $e) {
+                return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+            }
+        } else {
+            return view('appointment_report', $data);
+        }
+    }
+
+
+
 
     public function services_report()
     {
@@ -87,47 +221,129 @@ class ReportsController extends Controller
     }
 
 
-    public function appointment_report()
-    {
-        $clientModel = new ClientModel();
-        $data['client_names'] = $clientModel->getClientNames();
+    // public function appointment_report()
+    // {
+    //     $clientModel = new ClientModel();
+    //     $data['client_names'] = $clientModel->getClientNames();
 
-        $model = new DoctorModel();
-        $data['doctor_names'] = $model->getDoctorNames();
+    //     $model = new DoctorModel();
+    //     $data['doctor_names'] = $model->getDoctorNames();
 
-        $Model = new AppointmentModel();
-        $data['totalHospitalFee'] = $Model->getTotalHospitalFee();
-        $data['totalAppointmentFee'] = $Model->getTotalAppointmentFee();
+    //     $Model = new AppointmentModel();
+    //     $data['totalHospitalFee'] = $Model->getTotalHospitalFee();
+    //     $data['totalAppointmentFee'] = $Model->getTotalAppointmentFee();
 
-        $search = $this->request->getPost('search');
-        $doctor = $this->request->getPost('doctor');
-        $client = $this->request->getPost('client');
-        $fromDate = $this->request->getPost('fromDate');
-        $toDate = $this->request->getPost('toDate');
-        $data['Appointments'] = $Model->getAppointments($search, $doctor, $client, $fromDate, $toDate);
+    //     $search = $this->request->getPost('search');
+    //     $doctor = $this->request->getPost('doctor');
+    //     $client = $this->request->getPost('client');
+    //     $fromDate = $this->request->getPost('fromDate');
+    //     $toDate = $this->request->getPost('toDate');
+    //     $data['Appointments'] = $Model->getAppointments($search, $doctor, $client, $fromDate, $toDate);
 
-        $data['totalFeeByDoctor'] = $Model->getTotalFeeByDoctor($doctor, $fromDate, $toDate);
-        $data['totalFeeByClient'] = $Model->getTotalFeeByClient($client, $fromDate, $toDate);
-        $data['totalFeeByDateRange'] = $Model->getTotalFeeByDateRange($fromDate, $toDate);
+    // $data['totalFeeByDoctor'] = $Model->getTotalFeeByDoctor($doctor, $fromDate, $toDate);
+    // $data['totalFeeByClient'] = $Model->getTotalFeeByClient($client, $fromDate, $toDate);
+    // $data['totalFeeByDateRange'] = $Model->getTotalFeeByDateRange($fromDate, $toDate);
 
-        if ($this->request->isAJAX()) {
-            try {
-                $tableContent = view('ReportApp', $data);
-                return $this->response->setJSON([
-                    'success' => true,
-                    'tableContent' => $tableContent,
-                    'totalFeeByDoctor' => $data['totalFeeByDoctor'],
-                    'totalFeeByClient' => $data['totalFeeByClient'],
-                    'totalFeeByDateRange' => $data['totalFeeByDateRange']
-                ]);
-            } catch (\Exception $e) {
-                return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
-            }
-        } else {
+    //     if ($this->request->isAJAX()) {
+    //         try {
+    //             $tableContent = view('ReportApp', $data);
+    //             return $this->response->setJSON([
+    //                 'success' => true,
+    //                 'tableContent' => $tableContent,
+    //                 'totalFeeByDoctor' => $data['totalFeeByDoctor'],
+    //                 'totalFeeByClient' => $data['totalFeeByClient'],
+    //                 'totalFeeByDateRange' => $data['totalFeeByDateRange']
+    //             ]);
+    //         } catch (\Exception $e) {
+    //             return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+    //         }
+    //     } else {
 
-            return view('appointment_report', $data);
-        }
-    }
+    //         return view('appointment_report', $data);
+    //     }
+    // }
+
+    // public function appointment_report()
+    // {
+    //     // Debugging: Check if $this->request is null
+    //     if (!$this->request) {
+    //         // Log or echo a message to indicate that $this->request is null
+    //         log_message('error', 'Request object is null in appointment_report method');
+    //         // Or use echo statement for debugging
+    //         echo 'Request object is null in appointment_report method';
+    //         // Handle the error gracefully, such as returning a response or redirecting
+    //         return;
+    //     }
+
+    //     // Load necessary models
+    //     $clientModel = new ClientModel();
+    //     $data['client_names'] = $clientModel->getClientNames();
+
+    //     $model = new DoctorModel();
+    //     $data['doctor_names'] = $model->getDoctorNames();
+
+    //     $Model = new AppointmentModel();
+
+    //     // Get search parameters from request
+    //     $search = $this->request->getPost('search');
+    //     $doctor = $this->request->getPost('doctor');
+    //     $client = $this->request->getPost('client');
+    //     $fromDate = $this->request->getPost('fromDate');
+    //     $toDate = $this->request->getPost('toDate');
+
+    //     // Debugging: Output the request data to check if it's available
+    //     var_dump($search, $doctor, $client, $fromDate, $toDate);
+
+    //     // Get appointments data with pagination
+    //     $data['Appointments'] = $this->paginateData($Model, $search, $doctor, $client, $fromDate, $toDate);
+
+    //     // Get total fees
+    //     $data['totalHospitalFee'] = $Model->getTotalHospitalFee();
+    //     $data['totalAppointmentFee'] = $Model->getTotalAppointmentFee();
+
+    //     // Get total fees by doctor, client, and date range
+    //     $data['totalFeeByDoctor'] = $Model->getTotalFeeByDoctor($doctor, $fromDate, $toDate);
+    //     $data['totalFeeByClient'] = $Model->getTotalFeeByClient($client, $fromDate, $toDate);
+    //     $data['totalFeeByDateRange'] = $Model->getTotalFeeByDateRange($fromDate, $toDate);
+
+    //     if ($this->request->isAJAX()) {
+    //         try {
+    //             $tableContent = view('ReportApp', $data);
+    //             return $this->response->setJSON([
+    //                 'success' => true,
+    //                 'tableContent' => $tableContent,
+    //                 'totalFeeByDoctor' => $data['totalFeeByDoctor'],
+    //                 'totalFeeByClient' => $data['totalFeeByClient'],
+    //                 'totalFeeByDateRange' => $data['totalFeeByDateRange']
+    //             ]);
+    //         } catch (\Exception $e) {
+    //             return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+    //         }
+    //     } else {
+    //         return view('appointment_report', $data);
+    //     }
+    // }
+
+
+    // private function paginateData($Model, $search, $doctor, $client, $fromDate, $toDate)
+    // {
+    //     // Pagination configuration
+    //     $perPage = 20;
+    //     $currentPage = $this->request->getPost('page') ?? 1;
+
+    //     // Get data for current page
+    //     $start = ($currentPage - 1) * $perPage;
+    //     $data['Appointments'] = $Model->getAppointments($search, $doctor, $client, $fromDate, $toDate, $start, $perPage);
+
+    //     // Load pagination library
+    //     $pager = \Config\Services::pager();
+
+    //     // Create pagination links
+    //     $data['pager'] = $pager->makeLinks($currentPage, $perPage, $Model->countAllAppointments($search, $doctor, $client, $fromDate, $toDate));
+
+    //     return $data;
+    // }
+
 
     public function generateExcelAppointments()
     {

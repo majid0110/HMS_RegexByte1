@@ -1,4 +1,4 @@
-<?php include 'include_common/head.php'; ?>
+<?php include 'include_common/head1.php'; ?>
 <?php include 'include_common/navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,6 +81,44 @@
             margin-bottom: -94px;
             margin-left: 39rem;
             align-items: center;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 0px;
+            gap: 10px;
+            font-size: medium;
+
+        }
+
+        .pagination-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pagination-item {
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .pagination-link {
+            text-decoration: none;
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            color: #333;
+        }
+
+        .pagination-item.active .pagination-link {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .pagination-link:hover {
+            background-color: #007bff;
+            color: #fff;
         }
     </style>
 
@@ -412,13 +450,18 @@
                                                     <?php endforeach; ?>
                                                 </tbody>
                                             </table>
+                                            <div class="pagination">
+                                                <p style="margin-left: 10px;">
+                                                    <?= $pager ?>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="d-sm-flex align-items-center justify-content-between border-bottom">
                                     <ul class="nav nav-tabs" role="tablist">
-                                        <li class="nav-item">
+                                        <!-- <li class="nav-item">
                                             <a id="total-fee-by-doctor" class="nav-link active ps-0" id="home-tab"
                                                 data-bs-toggle="tab" role="tab" aria-controls="overview"
                                                 aria-selected="true" style="font-weight: bolder;text-align: center;">
@@ -427,7 +470,7 @@
                                                     <?= $totalFeeByDoctor ?>
                                                 </p>
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <li class="nav-item">
                                             <a id="total-fee-by-client" class="nav-link active ps-0" id="home-tab"
                                                 data-bs-toggle="tab" role="tab" aria-controls="overview"
@@ -451,8 +494,20 @@
                                         </li>
                                     </ul>
                                     <div id="total-fee-container">
+                                        <a id="total-fee-by-doctor">
+                                            Total Fee By Doctor:
+
+                                            <p style="color: Orange;">
+                                                <?= $totalFeeByDoctor ?>
+                                            </p>
+                                        </a>
+                                        <br>
+                                        Total Hospital Fee:
+                                        <?= $totalHospitalFee ?><br>
+                                        <hr>
+
                                         Total Appointment Fee:
-                                        <?= $totalAppointmentFee + $totalHospitalFee ?>
+                                        <?= $totalFeeByDoctor + $totalHospitalFee ?>
                                     </div>
 
                                 </div>
