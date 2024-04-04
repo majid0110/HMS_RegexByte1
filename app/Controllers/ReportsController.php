@@ -146,7 +146,8 @@ class ReportsController extends Controller
         $data['pager'] = $model->getPager($search, $doctor, $client, $fromDate, $toDate, $perPage, $currentPage);
         $data['Appointments'] = $model->getAppointments($search, $doctor, $client, $fromDate, $toDate, $perPage, ($currentPage - 1) * $perPage);
 
-        $data['totalHospitalFee'] = $model->getTotalHospitalFee();
+        // $data['totalHospitalFee'] = $model->getTotalHospitalFee();
+        $data['totalHospitalCharges'] = $model->getTotalHospitalCharges($doctor, $client, $fromDate, $toDate);
         $data['totalAppointmentFee'] = $model->getTotalAppointmentFee();
         $data['totalFeeByDoctor'] = $model->getTotalFeeByDoctor($doctor, $fromDate, $toDate);
         $data['totalFeeByClient'] = $model->getTotalFeeByClient($client, $fromDate, $toDate);
@@ -160,6 +161,7 @@ class ReportsController extends Controller
                     'tableContent' => $tableContent,
                     'totalFeeByDoctor' => $data['totalFeeByDoctor'],
                     'totalFeeByClient' => $data['totalFeeByClient'],
+                    'totalHospitalCharges' => $data['totalHospitalCharges'],
                     'totalFeeByDateRange' => $data['totalFeeByDateRange'],
                     'pager' => $data['pager']
                 ]);

@@ -29,8 +29,10 @@ class AppointmentController extends Controller
     //------------------------------------------------Main View 
     public function appointments_table()
     {
+        $session = \Config\Services::session();
+        $businessID = session()->get('businessID');
         $Model = new AppointmentModel();
-        $data['Appointments'] = $Model->getAppointments();
+        $data['Appointments'] = $Model->getAllAppointmentsByBusinessID($businessID);
         return view('appointments_table.php', $data);
     }
 

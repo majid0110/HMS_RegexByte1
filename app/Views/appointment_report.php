@@ -27,40 +27,65 @@
     <link rel="shortcut icon" href="./public/assets/images/favicon.png" />
     <style>
         #total-fee-container {
-            font-size: 18px;
-            font-weight: 600;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            color: #fff;
-            background-color: #2c3e50;
-            padding: 12px 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            max-width: 40rem;
+            margin: 0 auto;
+            height: auto;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        #total-fee-container .header-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        #total-fee-container .data-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #total-fee-container .col {
+            flex: 1;
             text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
         }
 
-        #total-fee-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -50%;
-            width: 200%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%);
-            transform: skewX(-20deg);
-            animation: shine 4s infinite;
+        #total-fee-container .col:first-child {
+            text-align: left;
         }
 
-        @keyframes shine {
-            0% {
-                left: -50%;
-            }
+        #total-fee-container .col:last-child {
+            text-align: right;
+        }
 
-            100% {
-                left: 150%;
-            }
+        #total-fee-container .header-row .col {
+            font-weight: bold;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        #total-fee-container .data-row .col {
+            font-size: 16px;
+            font-weight: 900;
+            color: #333;
+        }
+
+        #total-fee-by-doctor {
+            color: #4CAF50;
+        }
+
+        #total-hospital-fee {
+            color: #FF9800;
+        }
+
+        #total-fee {
+            color: #2196F3;
         }
 
         .table-container {
@@ -83,42 +108,60 @@
             align-items: center;
         }
 
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* Pagination Styling */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* Pagination Styling */
         .pagination {
             display: flex;
             justify-content: center;
-            margin-bottom: 0px;
-            gap: 10px;
-            font-size: medium;
-
-        }
-
-        .pagination-list {
-            list-style-type: none;
+            list-style: none;
             padding: 0;
             margin: 0;
         }
 
-        .pagination-item {
-            display: inline-block;
-            margin-right: 5px;
+        .pagination li {
+            margin: 0 5px;
         }
 
-        .pagination-link {
+        .pagination a {
+            display: block;
+            padding: 8px 16px;
             text-decoration: none;
-            padding: 5px 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
             color: #333;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        .pagination-item.active .pagination-link {
-            background-color: #007bff;
-            color: #fff;
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
         }
 
-        .pagination-link:hover {
-            background-color: #007bff;
-            color: #fff;
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+        /* Additional Styling */
+        .pagination a {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .pagination a.active {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 
@@ -402,114 +445,80 @@
                                 </div> -->
                                 <h4 class="card-title">Appointments Report</h4>
                                 <div class="col-12 grid-margin">
-                                    <div class="table-container">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped">
-                                                <thead>
+                                    <!-- <div class="table-container"> -->
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Client Name</th>
+                                                    <th>Doctor Name</th>
+                                                    <th>Doctor Fee</th>
+                                                    <th>Appointment Date</th>
+                                                    <!-- <th>Appointment Time</th> -->
+                                                    <th>Appointment Type</th>
+                                                    <th>Hospital Fee</th>
+                                                    <th>Total Fee</th>
+                                                    <!-- <th>Actions</th> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($Appointments as $appointment): ?>
                                                     <tr>
-                                                        <th>Client Name</th>
-                                                        <th>Doctor Name</th>
-                                                        <th>Doctor Fee</th>
-                                                        <th>Appointment Date</th>
-                                                        <!-- <th>Appointment Time</th> -->
-                                                        <th>Appointment Type</th>
-                                                        <th>Hospital Fee</th>
-                                                        <th>Total Fee</th>
-                                                        <!-- <th>Actions</th> -->
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php foreach ($Appointments as $appointment): ?>
-                                                        <tr>
-                                                            <td>
-                                                                <?= $appointment['clientName']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?= $appointment['doctorFirstName'] . ' ' . $appointment['doctorLastName']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?= $appointment['appointmentFee']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?= $appointment['appointmentDate']; ?>
-                                                            </td>
-                                                            <!-- <td>
+                                                        <td>
+                                                            <?= $appointment['clientName']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $appointment['doctorFirstName'] . ' ' . $appointment['doctorLastName']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $appointment['appointmentFee']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $appointment['appointmentDate']; ?>
+                                                        </td>
+                                                        <!-- <td>
                                                             'appointmentTime'
                                                         </td> -->
-                                                            <td>
-                                                                <?= $appointment['appointmentTypeName']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?= $appointment['hospitalCharges']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?= $appointment['appointmentFee'] + $appointment['hospitalCharges']; ?>
-                                                            </td>
+                                                        <td>
+                                                            <?= $appointment['appointmentTypeName']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $appointment['hospitalCharges']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $appointment['appointmentFee'] + $appointment['hospitalCharges']; ?>
+                                                        </td>
 
-                                                        </tr>
-                                                    <?php endforeach; ?>
-                                                </tbody>
-                                            </table>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                        <div class="pagination-container">
                                             <div class="pagination">
-                                                <p style="margin-left: 10px;">
-                                                    <?= $pager ?>
-                                                </p>
+                                                <?= $pager ?>
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- </div> -->
                                 </div>
                                 <hr>
-                                <div class="d-sm-flex align-items-center justify-content-between border-bottom">
-                                    <ul class="nav nav-tabs" role="tablist">
-                                        <!-- <li class="nav-item">
-                                            <a id="total-fee-by-doctor" class="nav-link active ps-0" id="home-tab"
-                                                data-bs-toggle="tab" role="tab" aria-controls="overview"
-                                                aria-selected="true" style="font-weight: bolder;text-align: center;">
-                                                Total Fee By Doctor<br>
-                                                <p style="color: brown;font-size: x-large;">
-                                                    <?= $totalFeeByDoctor ?>
-                                                </p>
-                                            </a>
-                                        </li> -->
-                                        <li class="nav-item">
-                                            <a id="total-fee-by-client" class="nav-link active ps-0" id="home-tab"
-                                                data-bs-toggle="tab" role="tab" aria-controls="overview"
-                                                aria-selected="true" style="font-weight: bolder;text-align: center;">
-                                                Total Fee By Client <br>
-
-                                                <p style="color: brown;font-size: x-large;">
-                                                    <?= $totalFeeByClient ?>
-                                                </p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a id="total-fee-by-dates" class="nav-link active ps-0" id="home-tab"
-                                                data-bs-toggle="tab" role="tab" aria-controls="overview"
-                                                aria-selected="true" style="font-weight: bolder;text-align: center;">
-                                                Total Fee By Dates<br>
-                                                <p style="color: brown;font-size: x-large;">
-                                                    <?= $totalFeeByDateRange ?>
-                                                </p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <div id="total-fee-container">
-                                        <a id="total-fee-by-doctor">
-                                            Total Fee By Doctor:
-
-                                            <p style="color: Orange;">
-                                                <?= $totalFeeByDoctor ?>
-                                            </p>
-                                        </a>
-                                        <br>
-                                        Total Hospital Fee:
-                                        <?= $totalHospitalFee ?><br>
-                                        <hr>
-
-                                        Total Appointment Fee:
-                                        <?= $totalFeeByDoctor + $totalHospitalFee ?>
+                                <div id="total-fee-container">
+                                    <div class="row header-row">
+                                        <div class="col">Total Doctor Fee</div>
+                                        <div class="col">Total Hospital Fee</div>
+                                        <div class="col">Total Fee</div>
                                     </div>
-
+                                    <div class="row data-row">
+                                        <div class="col" id="total-fee-by-doctor">
+                                            <?= $totalFeeByDoctor ?>
+                                        </div>
+                                        <div class="col" id="total-hospital-fee">
+                                            <?= $totalHospitalCharges ?>
+                                        </div>
+                                        <div class="col" id="total-fee">
+                                            <?= $totalFeeByDoctor + $totalHospitalCharges ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -564,11 +573,13 @@
                         success: function (response) {
                             if (response.success) {
                                 $('.table-responsive').html(response.tableContent);
-                                $('#total-fee-by-doctor p').text(response.totalFeeByDoctor);
+                                // $('#total-fee-by-doctor p').text(response.totalFeeByDoctor);
+                                $('#total-fee-by-doctor').text(response.totalFeeByDoctor);
+                                $('#total-hospital-fee').text(response.totalHospitalCharges);
                                 $('#total-fee-by-client p').text(response.totalFeeByClient);
                                 $('#total-fee-by-dates p').text(response.totalFeeByDateRange);
-                                // $('#total-fee-by-client').text('Total Fee By Client: ' + response.totalFeeByClient);
-                                // $('#total-fee-by-dates').text('Total Fee By Dates: ' + response.totalFeeByDateRange);
+                                var totalFee = parseFloat(response.totalFeeByDoctor) + parseFloat(response.totalHospitalCharges);
+                                $('#total-fee').text(totalFee);
                             } else {
                                 console.error('Error:', response.error);
                             }

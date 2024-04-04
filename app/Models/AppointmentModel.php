@@ -15,6 +15,17 @@ class AppointmentModel extends Model
         return $this->insert($data);
     }
 
+    public function getAllAppointmentsByBusinessID($businessID)
+    {
+        return $this->db->table('appointment')
+            ->join('client', 'client.idClient = appointment.clientID')
+            ->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID')
+            ->join('fee_type', 'fee_type.f_id = appointment.appointmentType')
+            ->select('appointment.*, client.client as clientName, doctorprofile.FirstName as doctorFirstName, doctorprofile.LastName as doctorLastName, fee_type.FeeType as appointmentTypeName')
+            ->where('appointment.businessID', $businessID)
+            ->get()
+            ->getResultArray();
+    }
     public function getLastAppointmentNo($businessID)
     {
         $query = $this->select('appointmentNo')
@@ -91,96 +102,6 @@ class AppointmentModel extends Model
     // }
 
     //----------------------------------------------------------------- Paganation
-
-    // public function getAppointments($search = null, $doctor = null, $client = null, $fromDate = null, $toDate = null, $perPage = 2, $offset = 0)
-    // {
-    //     $builder = $this->db->table('appointment');
-    //     $builder->select('appointment.*, doctorprofile.*, client.client as clientName, doctorprofile.FirstName as doctorFirstName, doctorprofile.LastName as doctorLastName, fee_type.FeeType as appointmentTypeName');
-    //     $builder->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID');
-    //     $builder->join('client', 'client.idClient = appointment.clientID');
-    //     $builder->join('fee_type', 'fee_type.f_id = appointment.appointmentType');
-
-    //     if (!empty($search)) {
-    //         $builder->groupStart()
-    //             ->like('client.client', $search)
-    //             ->orLike('doctorprofile.FirstName', $search)
-    //             ->orLike('doctorprofile.LastName', $search)
-    //             ->orLike('appointment.appointmentDate', $search)
-    //             ->orLike('appointment.appointmentTime', $search)
-    //             ->orLike('fee_type.FeeType', $search)
-    //             ->orLike('(appointment.appointmentFee + appointment.hospitalCharges)', $search)
-    //             ->groupEnd();
-    //     }
-
-    //     if (!empty($doctor)) {
-    //         $builder->groupStart()
-    //             ->like('CONCAT(doctorprofile.FirstName, " ", doctorprofile.LastName)', $doctor)
-    //             ->groupEnd();
-    //     }
-
-    //     if (!empty($client)) {
-    //         $builder->like('client.client', $client);
-    //     }
-
-    //     if (!empty($fromDate) && !empty($toDate)) {
-    //         $builder->where('appointment.appointmentDate >=', $fromDate)
-    //             ->where('appointment.appointmentDate <=', $toDate);
-    //     }
-
-    //     $builder->limit($perPage, $offset);
-
-    //     $query = $builder->get();
-    //     return $query->getResultArray();
-    // }
-    // public function getPager($search = null, $doctor = null, $client = null, $fromDate = null, $toDate = null, $perPage = 20, $currentPage = 1)
-    // {
-    //     $builder = $this->db->table('appointment');
-    //     $builder->select('COUNT(*) as total');
-
-    //     if (!empty($search)) {
-    //         $builder->groupStart()
-    //             ->like('client.client', $search)
-    //             ->orLike('doctorprofile.FirstName', $search)
-    //             ->orLike('doctorprofile.LastName', $search)
-    //             ->orLike('appointment.appointmentDate', $search)
-    //             ->orLike('appointment.appointmentTime', $search)
-    //             ->orLike('fee_type.FeeType', $search)
-    //             ->orLike('(appointment.appointmentFee + appointment.hospitalCharges)', $search)
-    //             ->groupEnd();
-    //     }
-
-    //     if (!empty($doctor)) {
-    //         $builder->groupStart()
-    //             ->like('CONCAT(doctorprofile.FirstName, " ", doctorprofile.LastName)', $doctor)
-    //             ->groupEnd();
-    //     }
-
-    //     if (!empty($client)) {
-    //         $builder->like('client.client', $client);
-    //     }
-
-    //     if (!empty($fromDate) && !empty($toDate)) {
-    //         $builder->where('appointment.appointmentDate >=', $fromDate)
-    //             ->where('appointment.appointmentDate <=', $toDate);
-    //     }
-
-    //     $totalQuery = $builder->get();
-    //     $totalResult = $totalQuery->getRowArray();
-    //     $total = isset($totalResult['total']) ? (int) $totalResult['total'] : 0;
-
-    //     $pager = service('pager');
-    //     $pagerConfig = [
-    //         'perPage' => $perPage,
-    //         'total' => $total,
-    //         'uri' => uri_string(),
-    //     ];
-
-    //     // Remove the segment parameter to avoid the out of range error
-    //     $pagerLinks = $pager->makeLinks($currentPage, $perPage, $total, 'default_full');
-    //     return $pagerLinks;
-    // }
-
-    //-----------------------------------------
     public function getAppointments($search = null, $doctor = null, $client = null, $fromDate = null, $toDate = null, $perPage = 2, $offset = 0)
     {
         $builder = $this->db->table('appointment');
@@ -285,14 +206,19 @@ class AppointmentModel extends Model
         return $result['hospitalCharges'];
     }
 
-    public function getTotalFeeByDoctor($doctor, $fromDate, $toDate)
+    public function getTotalHospitalCharges($doctor = null, $client = null, $fromDate = null, $toDate = null)
     {
         $builder = $this->db->table('appointment');
-        $builder->selectSum('(appointment.appointmentFee + appointment.hospitalCharges)', 'totalFee');
+        $builder->selectSum('hospitalCharges', 'totalHospitalCharges');
         $builder->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID');
+        $builder->join('client', 'client.idClient = appointment.clientID');
 
         if (!empty($doctor)) {
             $builder->like('CONCAT(doctorprofile.FirstName, " ", doctorprofile.LastName)', $doctor);
+        }
+
+        if (!empty($client)) {
+            $builder->like('client.client', $client);
         }
 
         if (!empty($fromDate) && !empty($toDate)) {
@@ -303,7 +229,96 @@ class AppointmentModel extends Model
         $query = $builder->get();
         $result = $query->getRowArray();
 
-        return $result['totalFee'] ?? 0;
+        return $result['totalHospitalCharges'] ?? 0;
+    }
+
+    // public function getTotalHospitalFeeByFilters($search = null, $doctor = null, $client = null, $fromDate = null, $toDate = null)
+    // {
+    //     $builder = $this->db->table('appointment');
+    //     $builder->selectSum('hospitalCharges', 'totalHospitalFee');
+    //     $builder->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID');
+    //     $builder->join('client', 'client.idClient = appointment.clientID');
+    //     $builder->join('fee_type', 'fee_type.f_id = appointment.appointmentType');
+
+    //     if (!empty($search)) {
+    //         $builder->groupStart()
+    //             ->like('client.client', $search)
+    //             ->orLike('doctorprofile.FirstName', $search)
+    //             ->orLike('doctorprofile.LastName', $search)
+    //             ->orLike('appointment.appointmentDate', $search)
+    //             ->orLike('appointment.appointmentTime', $search)
+    //             ->orLike('fee_type.FeeType', $search)
+    //             ->orLike('(appointment.appointmentFee + appointment.hospitalCharges)', $search)
+    //             ->groupEnd();
+    //     }
+
+    //     if (!empty($doctor)) {
+    //         $builder->groupStart()
+    //             ->like('CONCAT(doctorprofile.FirstName, " ", doctorprofile.LastName)', $doctor)
+    //             ->groupEnd();
+    //     }
+
+    //     if (!empty($client)) {
+    //         $builder->like('client.client', $client);
+    //     }
+
+    //     if (!empty($fromDate) && !empty($toDate)) {
+    //         $builder->where('appointment.appointmentDate >=', $fromDate)
+    //             ->where('appointment.appointmentDate <=', $toDate);
+    //     }
+
+    //     $query = $builder->get();
+    //     $result = $query->getRowArray();
+
+    //     return $result['totalHospitalFee'] ?? 0;
+    // }
+
+
+    // public function getTotalFeeByDoctor($doctor, $fromDate, $toDate)
+    // {
+    //     $builder = $this->db->table('appointment');
+    //     $builder->selectSum('(appointment.appointmentFee + appointment.hospitalCharges)', 'totalFee');
+    //     $builder->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID');
+
+    //     if (!empty($doctor)) {
+    //         $builder->like('CONCAT(doctorprofile.FirstName, " ", doctorprofile.LastName)', $doctor);
+    //     }
+
+    //     if (!empty($fromDate) && !empty($toDate)) {
+    //         $builder->where('appointment.appointmentDate >=', $fromDate)
+    //             ->where('appointment.appointmentDate <=', $toDate);
+    //     }
+
+    //     $query = $builder->get();
+    //     $result = $query->getRowArray();
+
+    //     return $result['totalFee'] ?? 0;
+    // }
+
+    public function getTotalFeeByDoctor($doctor = null, $client = null, $fromDate = null, $toDate = null)
+    {
+        $builder = $this->db->table('appointment');
+        $builder->selectSum('appointmentFee', 'totalAppointmentFee');
+        $builder->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID');
+        $builder->join('client', 'client.idClient = appointment.clientID');
+
+        if (!empty($doctor)) {
+            $builder->like('CONCAT(doctorprofile.FirstName, " ", doctorprofile.LastName)', $doctor);
+        }
+
+        if (!empty($client)) {
+            $builder->like('client.client', $client);
+        }
+
+        if (!empty($fromDate) && !empty($toDate)) {
+            $builder->where('appointment.appointmentDate >=', $fromDate)
+                ->where('appointment.appointmentDate <=', $toDate);
+        }
+
+        $query = $builder->get();
+        $result = $query->getRowArray();
+
+        return $result['totalAppointmentFee'] ?? 0;
     }
     public function getTotalFeeByClient($client, $fromDate, $toDate)
     {
