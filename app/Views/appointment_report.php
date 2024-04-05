@@ -27,14 +27,16 @@
     <link rel="shortcut icon" href="./public/assets/images/favicon.png" />
     <style>
         #total-fee-container {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
+            background-color: #f2f2f2;
+            border: 1px solid #000;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-            max-width: 40rem;
-            margin: 0 auto;
+            padding: 4px;
+            max-width: 29rem;
+            margin-left: 31rem;
             height: auto;
+            margin-top: -1.3rem;
+            font-size: xx-small;
             font-family: 'Roboto', sans-serif;
         }
 
@@ -452,10 +454,10 @@
                                                 <tr>
                                                     <th>Client Name</th>
                                                     <th>Doctor Name</th>
-                                                    <th>Doctor Fee</th>
                                                     <th>Appointment Date</th>
                                                     <!-- <th>Appointment Time</th> -->
                                                     <th>Appointment Type</th>
+                                                    <th>Doctor Fee</th>
                                                     <th>Hospital Fee</th>
                                                     <th>Total Fee</th>
                                                     <!-- <th>Actions</th> -->
@@ -471,9 +473,6 @@
                                                             <?= $appointment['doctorFirstName'] . ' ' . $appointment['doctorLastName']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $appointment['appointmentFee']; ?>
-                                                        </td>
-                                                        <td>
                                                             <?= $appointment['appointmentDate']; ?>
                                                         </td>
                                                         <!-- <td>
@@ -481,6 +480,9 @@
                                                         </td> -->
                                                         <td>
                                                             <?= $appointment['appointmentTypeName']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $appointment['appointmentFee']; ?>
                                                         </td>
                                                         <td>
                                                             <?= $appointment['hospitalCharges']; ?>
@@ -493,22 +495,17 @@
                                                 <?php endforeach; ?>
                                             </tbody>
                                         </table>
-                                        <div class="pagination-container">
-                                            <div class="pagination">
-                                                <?= $pager ?>
-                                            </div>
-                                        </div>
+
                                     </div>
                                     <!-- </div> -->
                                 </div>
-                                <hr>
+
                                 <div id="total-fee-container">
-                                    <div class="row header-row">
-                                        <div class="col">Total Doctor Fee</div>
-                                        <div class="col">Total Hospital Fee</div>
-                                        <div class="col">Total Fee</div>
-                                    </div>
+
                                     <div class="row data-row">
+                                        <div class="col">
+                                            Total:
+                                        </div>
                                         <div class="col" id="total-fee-by-doctor">
                                             <?= $totalFeeByDoctor ?>
                                         </div>
@@ -520,6 +517,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="pagination-container">
+                                    <div class="pagination">
+                                        <?= $pager ?>
+                                    </div>
+                                </div>
+                                <hr>
                             </div>
                         </div>
                     </div>

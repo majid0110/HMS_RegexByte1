@@ -1,4 +1,4 @@
-<?php include 'include_common/head.php'; ?>
+<?php include 'include_common/head1.php'; ?>
 <?php include 'include_common/navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,30 +28,67 @@
 
     <style>
         #total-fee-container {
-            font-size: 18px;
-            font-weight: 600;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            color: #fff;
-            background-color: #2c3e50;
-            padding: 12px 20px;
+            background-color: #f2f2f2;
+            border: 1px solid #000;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 4px;
+            max-width: 15rem;
+            margin-left: 27rem;
+            height: auto;
+            margin-top: -1.3rem;
+            font-size: xx-small;
+            font-family: 'Roboto', sans-serif;
         }
 
-        #total-fee-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -50%;
-            width: 200%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%);
-            transform: skewX(-20deg);
-            animation: shine 4s infinite;
+        #total-fee-container .header-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        #total-fee-container .data-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #total-fee-container .col {
+            flex: 1;
+            text-align: center;
+        }
+
+        #total-fee-container .col:first-child {
+            text-align: left;
+        }
+
+        #total-fee-container .col:last-child {
+            text-align: right;
+        }
+
+        #total-fee-container .header-row .col {
+            font-weight: bold;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        #total-fee-container .data-row .col {
+            font-size: 16px;
+            font-weight: 900;
+            color: #333;
+        }
+
+        #total-fee-by-doctor {
+            color: #4CAF50;
+        }
+
+        #total-hospital-fee {
+            color: #FF9800;
+        }
+
+        #total-fee {
+            color: #2196F3;
         }
 
         .table-container {
@@ -68,6 +105,48 @@
             100% {
                 left: 150%;
             }
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a {
+            display: block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #333;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+        /* Additional Styling */
+        .pagination a {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .pagination a.active {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -342,49 +421,63 @@
                                 <hr>
                                 <h4 class="card-title">Lab Report</h4>
                                 <div class="col-12 grid-margin">
-                                    <div class="table-container">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped">
-                                                <thead>
+                                    <!-- <div class="table-container"> -->
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Client Name</th>
+                                                    <th>Added By</th>
+                                                    <th>Date</th>
+                                                    <th>FEE</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($Tests as $test): ?>
                                                     <tr>
-                                                        <th>Client Name</th>
-                                                        <th>FEE</th>
-                                                        <th>Added By</th>
-                                                        <th>Date</th>
-                                                        <th>Actions</th>
+                                                        <td>
+                                                            <?= $test['clientName']; ?>
+                                                            </t>
+                                                        <td>
+                                                            <?= $test['userName']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $test['CreatedAT']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $test['fee']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <a href="<?= base_url('viewTestDetails/' . $test['test_id']); ?>"
+                                                                class="btn btn-info btn-sm">View Details</a>
+                                                        </td>
                                                     </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php foreach ($Tests as $test): ?>
-                                                        <tr>
-                                                            <td>
-                                                                <?= $test['clientName']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?= $test['fee']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?= $test['userName']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?= $test['CreatedAT']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <a href="<?= base_url('viewTestDetails/' . $test['test_id']); ?>"
-                                                                    class="btn btn-info btn-sm">View Details</a>
-                                                            </td>
-                                                        </tr>
-                                                    <?php endforeach; ?>
-                                                </tbody>
-                                            </table>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- </div> -->
+                                </div>
+
+                                <div id="total-fee-container">
+
+                                    <div class="row data-row">
+                                        <div class="col">
+                                            Total:
+                                        </div>
+                                        <div class="col" id="total-lab-fee">
+                                            <?= $totalLabFee ?>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="total-fee-container">
-                                    Total Lab Fee:
-                                    <?= $totalLabFee ?>
+                                <div class="pagination-container">
+                                    <div class="pagination">
+                                        <?= $pager ?>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -409,11 +502,11 @@
                         var fromDateValue = $('#fromDateInput').val();
                         var toDateValue = $('#toDateInput').val();
 
-                        console.log('Search Value:', searchValue);
-                        console.log('User Value:', userName);
-                        console.log('Client Value:', clientValue);
-                        console.log('From Date Value:', fromDateValue);
-                        console.log('To Date Value:', toDateValue);
+                        // console.log('Search Value:', searchValue);
+                        // console.log('User Value:', userName);
+                        // console.log('Client Value:', clientValue);
+                        // console.log('From Date Value:', fromDateValue);
+                        // console.log('To Date Value:', toDateValue);
 
                         $.ajax({
                             type: 'POST',
@@ -430,6 +523,8 @@
                                 if (response.success) {
                                     var cleanedTableContent = response.tableContent.trim();
                                     $('.table-responsive').html(cleanedTableContent);
+                                    $('#total-lab-fee').text(response.totalLabFee);
+                                    console.log(response.totalLabFee);
                                 } else {
                                     console.error('Error:', response.error);
                                 }

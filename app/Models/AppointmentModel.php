@@ -295,7 +295,7 @@ class AppointmentModel extends Model
     //     return $result['totalFee'] ?? 0;
     // }
 
-    public function getTotalFeeByDoctor($doctor = null, $client = null, $fromDate = null, $toDate = null)
+    public function getTotalFeeByDoctor($doctor, $client, $fromDate, $toDate)
     {
         $builder = $this->db->table('appointment');
         $builder->selectSum('appointmentFee', 'totalAppointmentFee');
@@ -320,6 +320,7 @@ class AppointmentModel extends Model
 
         return $result['totalAppointmentFee'] ?? 0;
     }
+
     public function getTotalFeeByClient($client, $fromDate, $toDate)
     {
         $builder = $this->db->table('appointment');
