@@ -27,40 +27,109 @@
     <link rel="shortcut icon" href="./public/assets/images/favicon.png" />
     <style>
         #total-fee-container {
-            font-size: 18px;
-            font-weight: 600;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            color: #fff;
-            background-color: #2c3e50;
-            padding: 12px 20px;
+            background-color: #f2f2f2;
+            border: 1px solid #000;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 4px;
+            max-width: 15rem;
+            margin-left: 35.5rem;
+            height: auto;
+            margin-top: -1.3rem;
+            font-size: xx-small;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        #total-fee-container .header-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        #total-fee-container .data-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #total-fee-container .col {
+            flex: 1;
             text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
         }
 
-        #total-fee-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -50%;
-            width: 200%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%);
-            transform: skewX(-20deg);
-            animation: shine 4s infinite;
+        #total-fee-container .col:first-child {
+            text-align: left;
         }
 
-        @keyframes shine {
-            0% {
-                left: -50%;
-            }
+        #total-fee-container .col:last-child {
+            text-align: right;
+        }
 
-            100% {
-                left: 150%;
-            }
+        #total-fee-container .header-row .col {
+            font-weight: bold;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        #total-fee-container .data-row .col {
+            font-size: 16px;
+            font-weight: 900;
+            color: #333;
+        }
+
+        #total-fee-by-doctor {
+            color: #4CAF50;
+        }
+
+        #total-hospital-fee {
+            color: #FF9800;
+        }
+
+        #total-fee {
+            color: #2196F3;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a {
+            display: block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #333;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+        /* Additional Styling */
+        .pagination a {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .pagination a.active {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -265,13 +334,26 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <form action="<?= base_url('lab_report'); ?>" method="post">
+                                <form action="<?= base_url('generateExcelServiceReport'); ?>" method="post">
                                     <div class="form-group row">
-                                        <div class="col-md-3 offset-md-9">
-                                            <label>Search</label>
-                                            <input class="form-control" type="text" name="search" id="searchInput"
-                                                placeholder="Search">
+                                        <div>
+                                            <div
+                                                style="width:100%; display: flex; align-items: center; justify-content: flex-end; gap:10px">
+                                                <button type="submit"
+                                                    style="align-self: flex-end;color: white;background-color: #172D88;border-color: #172D88;height: 33px;font-size: 12px;font-weight: 500;box-sizing: border-box;border: 1px solid #CADDFF;padding: 8px 15px;border-radius: 6px;align-items: center;">
+                                                    <i class="ti-download"> </i>
+                                                    Export
+                                                </button>
+                                                <div class="col-md-3">
+
+                                                    <label>Search</label>
+                                                    <input class="form-control" type="text" name="search"
+                                                        id="searchInput" placeholder="Search">
+                                                </div>
+
+                                            </div>
                                         </div>
+
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-3">
@@ -353,7 +435,7 @@
                                                             <?= $Sale['Date']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $Sale['Fee']; ?>
+                                                            <?= $Sale['Value']; ?>
                                                         </td>
                                                         <td>
                                                             <a href="<?= base_url('viewServiceDetails/' . $Sale['idReceipts']); ?>"
@@ -367,10 +449,23 @@
                                     </div>
                                 </div>
                                 <div id="total-fee-container">
-                                    Total Appointment Fee:
-                                    <?= $totalServiceFee ?>
+                                    <div class="row data-row">
+                                        <div class="col">
+                                            Total:
+                                        </div>
+                                        <div class="col" id="totalServiceFee">
+                                            <?= $totalServiceFee ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="pagination-container">
+                                <div class="pagination">
+                                    <?= $pager ?>
                                 </div>
                             </div>
+                            <hr>
                         </div>
                     </div>
                 </div>
@@ -416,6 +511,7 @@
                                 if (response.success) {
                                     var cleanedTableContent = response.tableContent.trim();
                                     $('.table-responsive').html(cleanedTableContent);
+                                    $('#totalServiceFee').text(response.totalServiceFee);
                                 } else {
                                     console.error('Error:', response.error);
                                 }
@@ -427,10 +523,6 @@
                     });
                 });
             </script>
-
-
-
-
             <script src="./public/assets/js/off-canvas.js"></script>
             <script src="./public/assets/js/hoverable-collapse.js"></script>
             <script src="./public/assets/js/template.js"></script>

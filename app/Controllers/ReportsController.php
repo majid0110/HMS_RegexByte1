@@ -28,6 +28,7 @@ class ReportsController extends Controller
         return view('reports_form.php');
     }
 
+    //---------------------------------- Appointment Report + Excel
     public function appointment_report()
     {
         $clientModel = new ClientModel();
@@ -48,7 +49,6 @@ class ReportsController extends Controller
         $data['pager'] = $model->getPager($search, $doctor, $client, $fromDate, $toDate, $perPage, $currentPage);
         $data['Appointments'] = $model->getAppointments($search, $doctor, $client, $fromDate, $toDate, $perPage, ($currentPage - 1) * $perPage);
 
-        // $data['totalHospitalFee'] = $model->getTotalHospitalFee();
         $data['totalHospitalCharges'] = $model->getTotalHospitalCharges($doctor, $client, $fromDate, $toDate);
         $data['totalAppointmentFee'] = $model->getTotalAppointmentFee();
         $data['totalFeeByDoctor'] = $model->getTotalFeeByDoctor($doctor, $client, $fromDate, $toDate);
@@ -75,55 +75,14 @@ class ReportsController extends Controller
         }
     }
 
-
-
-
-    public function services_report()
-    {
-        $clientModel = new ClientModel();
-        $data['client_names'] = $clientModel->getClientNames();
-
-        $sales = new SalesModel();
-        $data['payments'] = $sales->getpayment();
-
-        $Model = new ServicesModel();
-        $data['totalServiceFee'] = $Model->getTotalServicesFee();
-
-        $Model = new SalesModel();
-        //e d $data['Sales'] = $Model->getSales();
-
-        $search = $this->request->getPost('search');
-        $paymentInput = $this->request->getPost('paymentInput');
-        $clientName = $this->request->getPost('clientName');
-        $fromDate = $this->request->getPost('fromDate');
-        $toDate = $this->request->getPost('toDate');
-
-
-
-        $data['Sales'] = $Model->getSalesReport($search, $paymentInput, $clientName, $fromDate, $toDate);
-        if ($this->request->isAJAX()) {
-            try {
-                $tableContent = view('ReportService', $data);
-                return $this->response->setJSON(['success' => true, 'tableContent' => $tableContent]);
-            } catch (\Exception $e) {
-                return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
-            }
-        } else {
-            // Load the complete view for non-AJAX requests
-            return view('services_report', $data);
-        }
-    }
-
     public function searchAppointments()
     {
         $Model = new AppointmentModel();
         $search = $this->request->getPost('search');
-        // log_message('debug', 'Search Value: ' . $search);
 
         $data['Appointments'] = $Model->getAppointments($search);
         return view('appointment_report', $data);
     }
-
 
     public function generateExcelAppointments()
     {
@@ -157,8 +116,9 @@ class ReportsController extends Controller
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
-        $businessTypeName = 'Majid Khan';
-
+        $session = \Config\Services::session();
+        $businessName = session()->get('businessName');
+        $businessTypeName = $businessName;
         $sheet->setCellValue('A1', 'Hospital Name: ' . $businessTypeName);
         $sheet->mergeCells('A1:G1');
         $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
@@ -224,39 +184,192 @@ class ReportsController extends Controller
         exit;
     }
 
-    // public function lab_report()
-    // {
-    //     $testModel = new TestModel();
-    //     $data['totalHospitalFee'] = $testModel->getTotalHospitalFee();
-    //     $data['totalLabFee'] = $testModel->getTotalLabFee();
 
+    //---------------------------------------- Services Report + Excel
+
+    // public function services_report()
+    // {
     //     $clientModel = new ClientModel();
     //     $data['client_names'] = $clientModel->getClientNames();
 
-    //     $user = new AppointmentModel();
-    //     $data['user_names'] = $user->getuserprofile();
+    //     $sales = new SalesModel();
+    //     $data['payments'] = $sales->getpayment();
+
+    //     $Model = new ServicesModel();
+    //     // $data['totalServiceFee'] = $Model->getTotalServicesFee();
+
+    //     $Model = new SalesModel();
+    //     $data['totalServiceFee'] = $Model->gettotalServiceFee();
 
     //     $search = $this->request->getPost('search');
-    //     $userName = $this->request->getPost('userName');
+    //     $paymentInput = $this->request->getPost('paymentInput');
     //     $clientName = $this->request->getPost('clientName');
     //     $fromDate = $this->request->getPost('fromDate');
     //     $toDate = $this->request->getPost('toDate');
 
-
-    //     $data['Tests'] = $testModel->searchLabReports($search, $userName, $clientName, $fromDate, $toDate);
+    //     $data['Sales'] = $Model->getSalesReport($search, $paymentInput, $clientName, $fromDate, $toDate);
     //     if ($this->request->isAJAX()) {
     //         try {
-    //             $tableContent = view('ReportLab', $data);
+    //             $tableContent = view('ReportService', $data);
     //             return $this->response->setJSON(['success' => true, 'tableContent' => $tableContent]);
     //         } catch (\Exception $e) {
     //             return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
     //         }
     //     } else {
-    //         return view('lab_report', $data);
+    //         return view('services_report', $data);
     //     }
     // }
 
-    //--------------------------------------------pagination
+    public function services_report()
+    {
+        $clientModel = new ClientModel();
+        $data['client_names'] = $clientModel->getClientNames();
+
+        $sales = new SalesModel();
+        $data['payments'] = $sales->getpayment();
+
+        $Model = new ServicesModel();
+        $Model = new SalesModel();
+        $search = $this->request->getPost('search');
+        $paymentInput = $this->request->getPost('paymentInput');
+        $clientName = $this->request->getPost('clientName');
+        $fromDate = $this->request->getPost('fromDate');
+        $toDate = $this->request->getPost('toDate');
+
+        $data['totalServiceFee'] = $Model->gettotalServiceFee($clientName);
+        $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+        $perPage = 20;
+        $offset = ($currentPage - 1) * $perPage;
+
+        $data['Sales'] = $Model->getSalesReport($search, $paymentInput, $clientName, $fromDate, $toDate, $perPage, $offset);
+        $totalSales = count($Model->getSalesReport($search, $paymentInput, $clientName, $fromDate, $toDate));
+        $pager = service('pager');
+        $pagerLinks = $pager->makeLinks($currentPage, $perPage, $totalSales);
+        $data['pager'] = $pagerLinks;
+
+        if ($this->request->isAJAX()) {
+            try {
+                $tableContent = view('ReportService', $data);
+                return $this->response->setJSON([
+                    'success' => true,
+                    'tableContent' => $tableContent,
+                    'pager' => $pagerLinks,
+                    'totalServiceFee' => $data['totalServiceFee']
+                ]);
+            } catch (\Exception $e) {
+                return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+            }
+        } else {
+            return view('services_report', $data);
+        }
+    }
+
+    public function generateExcelServiceReport()
+    {
+        $headerStyle = [
+            'font' => ['bold' => true],
+        ];
+        $headerFill = [
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'FFFF00'],
+            ],
+        ];
+
+        $borderStyle = [
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['rgb' => '000000'],
+                ],
+            ],
+        ];
+
+        $Model = new salesModel();
+        $search = $this->request->getPost('search');
+        $paymentInput = $this->request->getPost('paymentInput');
+        $clientName = $this->request->getPost('clientName');
+        $fromDate = $this->request->getPost('fromDate');
+        $toDate = $this->request->getPost('toDate');
+        $services = $Model->getSalesReport($search, $paymentInput, $clientName, $fromDate, $toDate);
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $session = \Config\Services::session();
+        $businessName = session()->get('businessName');
+        $businessTypeName = $businessName;
+        $sheet->setCellValue('A1', $businessTypeName);
+        $sheet->mergeCells('A1:E1');
+        $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('A1')->applyFromArray($headerStyle);
+
+        $sheet->setCellValue('A2', 'Generated Date: ' . date('Y-m-d H:i:s'));
+        $sheet->mergeCells('A2:E2');
+        $sheet->getStyle('A2')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('A2')->applyFromArray($headerStyle);
+
+        $filterRow = 3;
+        if (!empty($search)) {
+            $sheet->setCellValue('A' . $filterRow, 'Filter by Search: ' . $search);
+            $filterRow++;
+        }
+        if (!empty($clientName)) {
+            $sheet->setCellValue('A' . $filterRow, 'Filter by Client: ' . $clientName);
+            $filterRow++;
+        }
+        if (!empty($paymentInput)) {
+            $sheet->setCellValue('A' . $filterRow, 'Filter by Payment Method: ' . $paymentInput);
+            $filterRow++;
+        }
+        if (!empty($fromDate) && !empty($toDate)) {
+            $sheet->setCellValue('A' . $filterRow, 'Filter by Date Range: ' . $fromDate . ' to ' . $toDate);
+            $filterRow++;
+        }
+
+        $headers = ['Invoice NO #', 'Client Name', 'Currency', 'Payment Method', 'Status', 'Date', 'Fee'];
+        foreach ($headers as $col => $header) {
+            $cell = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($col + 1) . ($filterRow);
+            $sheet->setCellValue($cell, $header);
+            $sheet->getStyle($cell)->applyFromArray($headerStyle);
+            $sheet->getStyle($cell)->applyFromArray($headerFill);
+            $sheet->getStyle($cell)->applyFromArray($borderStyle);
+        }
+
+        $row = $filterRow + 1;
+        foreach ($services as $service) {
+            $sheet->setCellValue('A' . $row, $service['invOrdNum']);
+            $sheet->setCellValue('B' . $row, $service['clientName']);
+            $sheet->setCellValue('C' . $row, $service['Currency']);
+            $sheet->setCellValue('D' . $row, $service['PaymentMethod']);
+            $sheet->setCellValue('E' . $row, $service['Status']);
+            $sheet->setCellValue('F' . $row, $service['Date']);
+            $sheet->setCellValue('G' . $row, $service['Fee']);
+            $row++;
+        }
+
+        foreach (range('A', 'G') as $col) {
+            $sheet->getColumnDimension($col)->setAutoSize(true);
+        }
+        $lastRow = $row;
+        $sheet->setCellValue('H' . $lastRow, 'Total Appointment Fee:');
+        $sheet->setCellValue('I' . $lastRow, '=SUM(G4:G' . ($lastRow - 1) . ')');
+        $sheet->getStyle('H' . $lastRow . ':I' . $lastRow)->applyFromArray($borderStyle);
+
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'service_report.xlsx';
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=' . $filename);
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+        exit;
+    }
+
+
+
+
+    //-------------------------------------- Lab Reports + Excel
     public function lab_report()
     {
         $testModel = new TestModel();
@@ -274,7 +387,7 @@ class ReportsController extends Controller
         $fromDate = $this->request->getPost('fromDate');
         $toDate = $this->request->getPost('toDate');
 
-        $data['totalLabFee'] = $testModel->getTotalLabFee($clientName);
+        $data['totalLabFee'] = $testModel->getTotalLabFee($clientName, $search, $userName, $fromDate, $toDate);
 
         $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
         $perPage = 20;
@@ -300,7 +413,6 @@ class ReportsController extends Controller
         }
     }
 
-    //---------------------------------------------------
     public function generateExcelLabReport()
     {
         $headerStyle = [
@@ -333,8 +445,9 @@ class ReportsController extends Controller
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
-        // Set your business name here
-        $businessTypeName = 'Your Business Name';
+        $session = \Config\Services::session();
+        $businessName = session()->get('businessName');
+        $businessTypeName = $businessName;
         $sheet->setCellValue('A1', 'Hospital Name: ' . $businessTypeName);
         $sheet->mergeCells('A1:E1');
         $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');

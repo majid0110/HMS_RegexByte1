@@ -186,47 +186,41 @@ class TestModel extends Model
     //     return $result['fee'];
     // }
 
-    public function getTotalLabFee($clientName)
+    public function getTotalLabFee($clientName, $search, $userName, $fromDate, $toDate)
     {
         // $businessId = session()->get('businessID');
         $builder = $this->db->table('labtest');
         $builder->selectSum('fee');
         $builder->join('client', 'client.idClient = labtest.clientId');
+        $builder->join('users', 'users.ID = labtest.userId');
         // $builder->where('businessId', $businessId);
 
         if (!empty($clientName)) {
             $builder->like('client.client', $clientName);
         }
 
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->like('client.client', $search)
+                ->orLike('users.fName', $search)
+                ->orLike('labtest.CreatedAT', $search)
+                ->groupEnd();
+        }
+
+        if (!empty($userName)) {
+            $builder->like('users.fName', $userName);
+        }
+
+        if (!empty($fromDate) && !empty($toDate)) {
+            $builder->where('labtest.CreatedAT >=', $fromDate)
+                ->where('labtest.CreatedAT <=', $toDate);
+        }
+
         $query = $builder->get();
         $result = $query->getRowArray();
         return $result['fee'] ?? 0;
     }
-    public function getTotalFeeByDoctor($doctor, $client, $fromDate, $toDate)
-    {
-        $builder = $this->db->table('appointment');
-        $builder->selectSum('appointmentFee', 'totalAppointmentFee');
-        $builder->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID');
-        $builder->join('client', 'client.idClient = appointment.clientID');
 
-        if (!empty($doctor)) {
-            $builder->like('CONCAT(doctorprofile.FirstName, " ", doctorprofile.LastName)', $doctor);
-        }
-
-        if (!empty($client)) {
-            $builder->like('client.client', $client);
-        }
-
-        if (!empty($fromDate) && !empty($toDate)) {
-            $builder->where('appointment.appointmentDate >=', $fromDate)
-                ->where('appointment.appointmentDate <=', $toDate);
-        }
-
-        $query = $builder->get();
-        $result = $query->getRowArray();
-
-        return $result['totalAppointmentFee'] ?? 0;
-    }
 
     // public function getTotalLabFee($userName = null, $fromDate = null, $toDate = null)
     // {
@@ -265,7 +259,7 @@ class TestModel extends Model
         }
 
         if (!empty($userName)) {
-            $builder->where('users.ID', $userName);
+            $builder->where('users.fName', $userName);
         }
 
         if (!empty($clientName)) {

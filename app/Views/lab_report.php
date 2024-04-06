@@ -369,13 +369,6 @@
                                                 </div>
 
                                             </div>
-
-                                            <!-- <div class="btn-wrapper export" style="height: 20px;">
-                                                <button type="submit" class="btn btn-primary text-white me-0">
-                                                    <i class="ti-download"></i>
-                                                    Export
-                                                </button>
-                                            </div> -->
                                         </div>
 
                                     </div>
@@ -461,7 +454,6 @@
                                 </div>
 
                                 <div id="total-fee-container">
-
                                     <div class="row data-row">
                                         <div class="col">
                                             Total:
@@ -471,13 +463,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="pagination-container">
-                                    <div class="pagination">
-                                        <?= $pager ?>
-                                    </div>
+                            </div>
+                            <div class="pagination-container">
+                                <div class="pagination">
+                                    <?= $pager ?>
                                 </div>
                             </div>
-
+                            <hr>
                         </div>
                     </div>
                 </div>
