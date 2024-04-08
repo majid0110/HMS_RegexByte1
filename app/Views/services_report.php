@@ -440,7 +440,6 @@
                                                         <td>
                                                             <a href="<?= base_url('viewServiceDetails/' . $Sale['idReceipts']); ?>"
                                                                 class="btn btn-info btn-sm">View Details</a>
-
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>

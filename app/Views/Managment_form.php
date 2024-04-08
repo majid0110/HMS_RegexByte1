@@ -235,27 +235,25 @@
                     }
                     ?>
                     <div class="row">
-
+                        <!-- ----------------------------------------------------------- -->
                         <div class="col-md-3 grid-margin stretch-card">
                             <div class="card" onclick="window.location.href='<?= base_url('items_table'); ?>';">
-                                <div class="card-body">
+                                <div class="card-body"
+                                    style="display: flex; flex-direction: column; align-items: center;">
                                     <h4 class="card-title" style="text-align:center">Manage Items</h4>
                                     <div class="media">
-                                        <svg style="margin: 0px auto" height="45px" width="45px" data-slot="icon"
-                                            fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z">
-                                            </path>
-                                        </svg>
-
-                                        <div class="media-body">
-                                            <!-- Your content goes here -->
-                                        </div>
+                                        <i class="icon-lg mdi mdi-cube-outline" style="height:45px; width:45px;"></i>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
+
+
+
+
+                        <!-- ---------------------------------------------------- -->
+
                         <div class="col-md-3 grid-margin stretch-card">
                             <div class="card" onclick="window.location.href='<?= base_url('Services_table'); ?>';">
                                 <div class="card-body">
@@ -323,18 +321,11 @@
 
                         <div class="col-md-3 grid-margin stretch-card">
                             <div class="card" onclick="window.location.href='<?= base_url('specilization_table'); ?>';">
-                                <div class="card-body">
-                                    <h4 class="card-title" style="text-align:center">Doctor Specilization</h4>
+                                <div class="card-body"
+                                    style="display: flex; flex-direction: column; align-items: center;">
+                                    <h4 class="card-title" style="text-align:center">Doctor Specialization</h4>
                                     <div class="media">
-                                        <svg style="margin: 0px auto" height="45px" width="45px" data-slot="icon"
-                                            fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125">
-                                            </path>
-                                        </svg>
-                                        <div class="media-body">
-                                        </div>
+                                        <i class="icon-lg mdi mdi-stethoscope" style="height:45px; width:45px;"></i>
                                     </div>
                                 </div>
                             </div>
@@ -342,38 +333,23 @@
 
                         <div class="col-md-3 grid-margin stretch-card">
                             <div class="card" onclick="window.location.href='<?= base_url('appointments_table'); ?>';">
-                                <div class="card-body">
+                                <div class="card-body"
+                                    style="display: flex; flex-direction: column; align-items: center;">
                                     <h4 class="card-title" style="text-align:center">Appointments</h4>
                                     <div class="media">
-                                        <svg style="margin: 0px auto" height="45px" width="45px"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                        </svg>
-
-                                        <div class="media-body">
-                                        </div>
+                                        <i class="icon-lg mdi mdi-calendar-clock" style="height:45px; width:45px;"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-md-3 grid-margin stretch-card">
                             <div class="card" onclick="window.location.href='<?= base_url('labServices_form'); ?>';">
-                                <div class="card-body">
-                                    <h4 class="card-title" style="text-align:center">Add Lab Test</h4>
+                                <div class="card-body"
+                                    style="display: flex; flex-direction: column; align-items: center;">
+                                    <h4 class="card-title" style="text-align:center">Lab Tests</h4>
                                     <div class="media">
-                                        <svg style="margin: 0px auto" height="45px" width="45px"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                        </svg>
-
-
-                                        <div class="media-body">
-                                        </div>
+                                        <i class="icon-lg mdi mdi-hospital-building"
+                                            style="height:45px; width:45px;"></i>
                                     </div>
                                 </div>
                             </div>
@@ -381,23 +357,15 @@
 
                         <div class="col-md-3 grid-margin stretch-card">
                             <div class="card" onclick="window.location.href='<?= base_url('labtest_table'); ?>';">
-                                <div class="card-body">
+                                <div class="card-body"
+                                    style="display: flex; flex-direction: column; align-items: center;">
                                     <h4 class="card-title" style="text-align:center">Manage Tests</h4>
                                     <div class="media">
-                                        <svg style="margin: 0px auto" height="45px" width="45px" data-slot="icon"
-                                            fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125">
-                                            </path>
-                                        </svg>
-                                        <div class="media-body">
-                                        </div>
+                                        <i class="icon-lg mdi mdi-pharmacy" style="height:45px; width:45px;"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <!-- content-wrapper ends -->
                     <!-- partial:../../partials/_footer.html -->

@@ -102,15 +102,20 @@ class salesModel extends Model
             ->where('idReceipts', $idReceipts)->delete();
     }
 
-    public function gettotalServiceFee($clientName)
+    public function gettotalServiceFee($clientName, $paymentInput)
     {
         $builder = $this->db->table('invoices');
         $builder->selectSum('Value', 'totalServiceFee');
         $builder->join('client', 'client.idClient = invoices.idClient');
+        $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
 
 
         if (!empty($clientName)) {
             $builder->like('client.client', $clientName);
+        }
+
+        if (!empty($paymentInput)) {
+            $builder->like('paymentmethods.Method', $paymentInput);
         }
 
 

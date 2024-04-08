@@ -236,7 +236,7 @@ class ReportsController extends Controller
         $fromDate = $this->request->getPost('fromDate');
         $toDate = $this->request->getPost('toDate');
 
-        $data['totalServiceFee'] = $Model->gettotalServiceFee($clientName);
+        $data['totalServiceFee'] = $Model->gettotalServiceFee($clientName, $paymentInput);
         $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
         $perPage = 20;
         $offset = ($currentPage - 1) * $perPage;
