@@ -1,6 +1,20 @@
 <!-- app/Views/appointment_table.php -->
 
-<table class="table table-striped">
+<head>
+    <style>
+        #appointments-table tfoot {
+            font-weight: bold;
+            background-color: #f2f2f2;
+        }
+
+        #appointments-table tfoot .table-totals td {
+
+            border-top: 2px solid #000;
+
+        }
+    </style>
+</head>
+<table id="appointments-table" class="table table-striped">
     <thead>
         <tr>
             <th>Client Name</th>
@@ -45,4 +59,21 @@
             </tr>
         <?php endforeach; ?>
     </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total:</td>
+            <td>
+                <?= $totalFeeByDoctor ?>
+            </td>
+            <td>
+                <?= $totalHospitalCharges ?>
+            </td>
+            <td>
+                <?= $totalFeeByDoctor + $totalHospitalCharges ?>
+            </td>
+        </tr>
+    </tfoot>
 </table>

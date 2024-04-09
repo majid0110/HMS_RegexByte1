@@ -27,68 +27,15 @@
     <link rel="shortcut icon" href="./public/assets/images/favicon.png" />
 
     <style>
-        #total-fee-container {
-            background-color: #f2f2f2;
-            border: 1px solid #000;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 4px;
-            max-width: 15rem;
-            margin-left: 27rem;
-            height: auto;
-            margin-top: -1.3rem;
-            font-size: xx-small;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        #total-fee-container .header-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        #total-fee-container .data-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        #total-fee-container .col {
-            flex: 1;
-            text-align: center;
-        }
-
-        #total-fee-container .col:first-child {
-            text-align: left;
-        }
-
-        #total-fee-container .col:last-child {
-            text-align: right;
-        }
-
-        #total-fee-container .header-row .col {
+        #lab-table tfoot {
             font-weight: bold;
-            color: #555;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            background-color: #f2f2f2;
         }
 
-        #total-fee-container .data-row .col {
-            font-size: 16px;
-            font-weight: 900;
-            color: #333;
-        }
+        #lab-table tfoot .table-totals td {
 
-        #total-fee-by-doctor {
-            color: #4CAF50;
-        }
+            border-top: 2px solid #000;
 
-        #total-hospital-fee {
-            color: #FF9800;
-        }
-
-        #total-fee {
-            color: #2196F3;
         }
 
         .table-container {
@@ -416,7 +363,7 @@
                                 <div class="col-12 grid-margin">
                                     <!-- <div class="table-container"> -->
                                     <div class="table-responsive">
-                                        <table class="table table-striped">
+                                        <table id="lab-table" class="table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>Client Name</th>
@@ -448,21 +395,22 @@
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
+                                            <tfoot>
+                                                <tr class="table-totals">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>Total:</td>
+                                                    <td>
+                                                        <?= $totalLabFee ?>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                            </tfoot>
                                         </table>
                                     </div>
                                     <!-- </div> -->
                                 </div>
 
-                                <div id="total-fee-container">
-                                    <div class="row data-row">
-                                        <div class="col">
-                                            Total:
-                                        </div>
-                                        <div class="col" id="total-lab-fee">
-                                            <?= $totalLabFee ?>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <div class="pagination-container">
                                 <div class="pagination">

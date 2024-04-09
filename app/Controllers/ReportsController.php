@@ -236,7 +236,7 @@ class ReportsController extends Controller
         $fromDate = $this->request->getPost('fromDate');
         $toDate = $this->request->getPost('toDate');
 
-        $data['totalServiceFee'] = $Model->gettotalServiceFee($clientName, $paymentInput);
+        $data['totalServiceFee'] = $Model->gettotalServiceFee($search, $clientName, $paymentInput, $fromDate, $toDate);
         $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
         $perPage = 20;
         $offset = ($currentPage - 1) * $perPage;
@@ -300,14 +300,15 @@ class ReportsController extends Controller
         $businessName = session()->get('businessName');
         $businessTypeName = $businessName;
         $sheet->setCellValue('A1', $businessTypeName);
-        $sheet->mergeCells('A1:E1');
+        $sheet->mergeCells('A1:G1');
         $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
         $sheet->getStyle('A1')->applyFromArray($headerStyle);
 
         $sheet->setCellValue('A2', 'Generated Date: ' . date('Y-m-d H:i:s'));
-        $sheet->mergeCells('A2:E2');
+        $sheet->mergeCells('A2:G2');
         $sheet->getStyle('A2')->getAlignment()->setHorizontal('center');
         $sheet->getStyle('A2')->applyFromArray($headerStyle);
+
 
         $filterRow = 3;
         if (!empty($search)) {
@@ -352,9 +353,12 @@ class ReportsController extends Controller
             $sheet->getColumnDimension($col)->setAutoSize(true);
         }
         $lastRow = $row;
-        $sheet->setCellValue('H' . $lastRow, 'Total Appointment Fee:');
-        $sheet->setCellValue('I' . $lastRow, '=SUM(G4:G' . ($lastRow - 1) . ')');
-        $sheet->getStyle('H' . $lastRow . ':I' . $lastRow)->applyFromArray($borderStyle);
+        $sheet->setCellValue('F' . $lastRow, 'Total Fee:');
+        $sheet->setCellValue('G' . $lastRow, '=SUM(G4:G' . ($lastRow - 1) . ')');
+        $sheet->getStyle('F' . $lastRow)->applyFromArray($headerStyle);
+        $sheet->getStyle('F' . $lastRow)->applyFromArray($borderStyle);
+        $sheet->getStyle('G' . $lastRow)->applyFromArray($headerStyle);
+        $sheet->getStyle('G' . $lastRow)->applyFromArray($borderStyle);
 
         $writer = new Xlsx($spreadsheet);
         $filename = 'service_report.xlsx';
@@ -403,13 +407,15 @@ class ReportsController extends Controller
                     'success' => true,
                     'tableContent' => $tableContent,
                     'pager' => $data['pager'],
-                    'totalLabFee' => $data['totalLabFee']
+                    'totalLabFee' => $data['totalLabFee'],
+
                 ]);
             } catch (\Exception $e) {
                 return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
             }
         } else {
             return view('lab_report', $data);
+
         }
     }
 
@@ -449,12 +455,12 @@ class ReportsController extends Controller
         $businessName = session()->get('businessName');
         $businessTypeName = $businessName;
         $sheet->setCellValue('A1', 'Hospital Name: ' . $businessTypeName);
-        $sheet->mergeCells('A1:E1');
+        $sheet->mergeCells('A1:D1');
         $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
         $sheet->getStyle('A1')->applyFromArray($headerStyle);
 
         $sheet->setCellValue('A2', 'Generated Date: ' . date('Y-m-d H:i:s'));
-        $sheet->mergeCells('A2:E2');
+        $sheet->mergeCells('A2:D2');
         $sheet->getStyle('A2')->getAlignment()->setHorizontal('center');
         $sheet->getStyle('A2')->applyFromArray($headerStyle);
 
@@ -472,7 +478,9 @@ class ReportsController extends Controller
             $filterRow++;
         }
 
-        $headers = ['Client Name', 'Fee', 'Added By', 'Date'];
+        $headers = ['Client Name', 'Added By', 'Date', 'Fee'];
+        $dataStartRow = $filterRow + 1;
+
         foreach ($headers as $col => $header) {
             $cell = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($col + 1) . ($filterRow);
             $sheet->setCellValue($cell, $header);
@@ -481,12 +489,13 @@ class ReportsController extends Controller
             $sheet->getStyle($cell)->applyFromArray($borderStyle);
         }
 
-        $row = $filterRow + 1;
+
+        $row = $dataStartRow;
         foreach ($tests as $test) {
             $sheet->setCellValue('A' . $row, $test['clientName']);
-            $sheet->setCellValue('B' . $row, $test['fee']);
-            $sheet->setCellValue('C' . $row, $test['userName']);
-            $sheet->setCellValue('D' . $row, $test['CreatedAT']);
+            $sheet->setCellValue('B' . $row, $test['userName']);
+            $sheet->setCellValue('C' . $row, $test['CreatedAT']);
+            $sheet->setCellValue('D' . $row, $test['fee']); // Assuming Fee is fetched from test data
             $sheet->getStyle('A' . $row . ':D' . $row)->applyFromArray($borderStyle);
             $row++;
         }
@@ -495,9 +504,12 @@ class ReportsController extends Controller
             $sheet->getColumnDimension($col)->setAutoSize(true);
         }
         $lastRow = $row;
-        $sheet->setCellValue('B' . $lastRow, 'Total Fee:');
-        $sheet->setCellValue('C' . $lastRow, '=SUM(B4:B' . ($lastRow - 1) . ')');
-        $sheet->getStyle('B' . $lastRow . ':C' . $lastRow)->applyFromArray($borderStyle);
+        $sheet->setCellValue('C' . $lastRow, 'Total Fee:');
+        $sheet->setCellValue('D' . $lastRow, '=SUM(D' . $dataStartRow . ':D' . ($lastRow - 1) . ')');
+        $sheet->getStyle('C' . $lastRow . ':D' . $lastRow)->applyFromArray($borderStyle);
+
+        // Merge cells for total fee
+        $sheet->mergeCells('C' . $lastRow . ':C' . $lastRow);
 
         $writer = new Xlsx($spreadsheet);
         $filename = 'lab_report.xlsx';

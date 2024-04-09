@@ -1,6 +1,20 @@
+<head>
+    <style>
+        #lab-table tfoot {
+            font-weight: bold;
+            background-color: #f2f2f2;
+        }
+
+        #lab-table tfoot .table-totals td {
+
+            border-top: 2px solid #000;
+
+        }
+    </style>
+</head>
 <div class="col-12 grid-margin">
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table id="lab-table" class="table table-striped">
             <thead>
                 <tr>
                     <th>Client Name</th>
@@ -34,6 +48,17 @@
                     </tr>
                 <?php endforeach; ?>
             </tbody>
+            <tfoot>
+                <tr class="table-totals">
+                    <td></td>
+                    <td></td>
+                    <td>Total:</td>
+                    <td>
+                        <?= $totalLabFee ?>
+                    </td>
+                    <td></td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>
