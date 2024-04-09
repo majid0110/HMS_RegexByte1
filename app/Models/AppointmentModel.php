@@ -102,7 +102,7 @@ class AppointmentModel extends Model
     // }
 
     //----------------------------------------------------------------- Paganation
-    public function getAppointments($search = null, $doctor = null, $client = null, $fromDate = null, $toDate = null, $perPage = 2, $offset = 0)
+    public function getAppointments($search = null, $doctor = null, $client = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
     {
         $builder = $this->db->table('appointment');
         $builder->select('appointment.*, doctorprofile.*, client.client as clientName, doctorprofile.FirstName as doctorFirstName, doctorprofile.LastName as doctorLastName, fee_type.FeeType as appointmentTypeName');
