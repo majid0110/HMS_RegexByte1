@@ -208,10 +208,10 @@ class ReportsController extends Controller
     //     $data['payments'] = $sales->getpayment();
 
     //     $Model = new ServicesModel();
-    //     // $data['totalServiceFee'] = $Model->getTotalServicesFee();
+    //     $data['totalServiceFee'] = $Model->getTotalServicesFee();
 
     //     $Model = new SalesModel();
-    //     $data['totalServiceFee'] = $Model->gettotalServiceFee();
+    //     //$data['totalServiceFee'] = $Model->gettotalServiceFee();
 
     //     $search = $this->request->getPost('search');
     //     $paymentInput = $this->request->getPost('paymentInput');
@@ -232,6 +232,7 @@ class ReportsController extends Controller
     //     }
     // }
 
+
     public function services_report()
     {
         $clientModel = new ClientModel();
@@ -248,11 +249,11 @@ class ReportsController extends Controller
         $fromDate = $this->request->getPost('fromDate');
         $toDate = $this->request->getPost('toDate');
 
+
         $data['totalServiceFee'] = $Model->gettotalServiceFee($search, $clientName, $paymentInput, $fromDate, $toDate);
         $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
         $perPage = 20;
         $offset = ($currentPage - 1) * $perPage;
-
         $data['Sales'] = $Model->getSalesReport($search, $paymentInput, $clientName, $fromDate, $toDate, $perPage, $offset);
         $totalSales = count($Model->getSalesReport($search, $paymentInput, $clientName, $fromDate, $toDate));
         $pager = service('pager');
@@ -269,6 +270,7 @@ class ReportsController extends Controller
                     'totalServiceFee' => $data['totalServiceFee']
                 ]);
             } catch (\Exception $e) {
+                log_message('error', 'Error in services_report method: ' . $e->getMessage());
                 return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
             }
         } else {

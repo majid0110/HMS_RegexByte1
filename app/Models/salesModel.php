@@ -379,14 +379,19 @@ class salesModel extends Model
 
         $builder->where('invoices.idBusiness', $businessID);
 
+        // if (!empty($search)) {
+        //     $builder->groupStart()
+        //         ->like('invoices.invOrdNum', $search)
+        //         ->orLike('client.client', $search)
+        //         ->orLike('currency.Currency', $search)
+        //         ->orLike('paymentmethods.Method', $search)
+        //         ->groupEnd();
+        // }
+
         if (!empty($search)) {
-            $builder->groupStart()
-                ->like('invoices.invOrdNum', $search)
-                ->orLike('client.client', $search)
-                ->orLike('currency.Currency', $search)
-                ->orLike('paymentmethods.Method', $search)
-                ->groupEnd();
+            $builder->where('client.client', $search);
         }
+
 
         if (!empty($paymentInput)) {
             $builder->where('invoices.paymentMethod', $paymentInput);
@@ -402,7 +407,6 @@ class salesModel extends Model
         }
 
         $builder->limit($perPage, $offset);
-
         $query = $builder->get();
         return $query->getResultArray();
     }
