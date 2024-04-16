@@ -256,7 +256,7 @@
                                                 <td>
                                                     <!-- Action buttons: Edit, Delete -->
                                                     <a href="<?= base_url('editspecialization/' . $specialization['s_id']); ?>"
-                                                        class="btn btn-primary btn-sm">Edit</a>
+                                                        class="btn btn-info btn-sm">Edit</a>
                                                     <a href="<?= base_url('deletespecialization/' . $specialization['s_id']); ?>"
                                                         onclick="return confirm('Are you sure you want to delete this Specialization?');"
                                                         class="btn btn-danger btn-sm">Delete</a>

@@ -258,7 +258,7 @@
                         <td>
                           <!-- Edit Button -->
                           <a href="<?= base_url('edit_test/' . $Test['testTypeId']); ?>"
-                            class="btn btn-sm btn-primary">Edit</a>
+                            class="btn btn-sm btn-info">Edit</a>
                         </td>
                       </tr>
                     <?php endforeach; ?>

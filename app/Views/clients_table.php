@@ -241,11 +241,12 @@
                           CNIC
                         </th>
                         <th>
-                          Status
+                          Gender
                         </th>
                         <th>
-                          Business ID
+                          Status
                         </th>
+
                         <th>
                           Actions
                         </th>
@@ -268,18 +269,19 @@
                             <?= $client['CNIC']; ?>
                           </td>
                           <td>
-                            <?= $client['status']; ?>
+                            <?= $client['gender']; ?>
                           </td>
                           <td>
-                            <?= $client['idBusiness']; ?>
+                            <?= $client['status']; ?>
                           </td>
+
                           <td>
                             <!-- Action buttons: Edit and Delete -->
                             <!-- <a href="<?= base_url("ClientController/editClient/{$client['idClient']}") ?>"
                               class="btn btn-warning btn-sm">Edit</a> -->
 
                             <a href="<?php echo base_url() . 'editClient/' . $client['idClient']; ?>"
-                              class="btn btn-warning btn-sm">Edit</a>
+                              class="btn btn-info btn-sm">Edit</a>
 
                             <a href="<?= base_url('deleteClient/' . $client['idClient']); ?>"
                               onclick="return confirm('Are you sure you want to delete this client?');"

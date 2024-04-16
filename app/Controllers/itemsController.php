@@ -17,6 +17,7 @@ use Mpdf\Mpdf;
 class itemsController extends Controller
 {
 
+
     //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Returning Views
 //-------------------------------------------------------------------------------------------------------------------------
@@ -70,6 +71,7 @@ class itemsController extends Controller
 
     public function items_table()
     {
+
         $model = new itemsModel();
         $data['items'] = $model->getItems();
         return view('items_table', $data);
@@ -145,8 +147,12 @@ class itemsController extends Controller
     public function saveitems()
     {
         $session = \Config\Services::session();
+
+
         $request = \Config\Services::request();
         $businessID = $session->get('businessID');
+        $idWarehouse = $this->request->getPost('tax');
+        $Inventory = $this->request->getPost('inventory');
 
         $formData = [
             'barcode' => $this->request->getPost('bcode'),
@@ -157,9 +163,10 @@ class itemsController extends Controller
             'Notes' => $this->request->getPost('notes'),
             'idBusiness' => $businessID,
             'idTAX' => $this->request->getPost('tax'),
-            'idCategories' => $this->request->getPost('category'),
+            'idCategories' => $this->request->getPost('warehouse'),
             'Unit' => $this->request->getPost('Unit'),
-            'idWarehouse' => 1,
+            'idWarehouse' => $idWarehouse,
+            'Inventory' => $Inventory,
             'status' => $this->request->getPost('cstatus'),
             'characteristic1' => $this->request->getPost('char_1'),
             'Characteristic2' => $this->request->getPost('char_2'),
@@ -169,8 +176,16 @@ class itemsController extends Controller
         ];
 
 
-        $servicesModel = new itemsModel();
-        $servicesModel->insert($formData);
+        $itemsModel = new itemsModel();
+        $insertedItemId = $itemsModel->insertItemWarehouse($formData);
+
+        $formDataInventory = [
+            'idItem' => $insertedItemId,
+            'inventory' => $Inventory,
+            'idWarehouse' => $idWarehouse,
+        ];
+
+        $itemsModel->insertItemInventory($formDataInventory);
 
         session()->setFlashdata('success', 'Item Added..!!');
         return redirect()->to(base_url("/items_table"));

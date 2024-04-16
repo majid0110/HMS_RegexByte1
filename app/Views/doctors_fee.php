@@ -41,14 +41,17 @@
         <i class="settings-close ti-close"></i>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab"
+              aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
+            <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab"
+              aria-controls="chats-section">CHATS</a>
           </li>
         </ul>
         <div class="tab-content" id="setting-content">
-          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
+            aria-labelledby="todo-section">
             <div class="add-items d-flex px-3 mb-0">
               <form class="form w-100">
                 <div class="form-group d-flex">
@@ -132,7 +135,8 @@
             </div>
             <ul class="chat-list">
               <li class="list active">
-                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Thomas Douglas</p>
                   <p>Available</p>
@@ -140,7 +144,8 @@
                 <small class="text-muted my-auto">19 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg" alt="image"><span
+                    class="offline"></span></div>
                 <div class="info">
                   <div class="wrapper d-flex">
                     <p>Catherine</p>
@@ -151,7 +156,8 @@
                 <small class="text-muted my-auto">23 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Daniel Russell</p>
                   <p>Available</p>
@@ -159,7 +165,8 @@
                 <small class="text-muted my-auto">14 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg" alt="image"><span
+                    class="offline"></span></div>
                 <div class="info">
                   <p>James Richardson</p>
                   <p>Away</p>
@@ -167,7 +174,8 @@
                 <small class="text-muted my-auto">2 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Madeline Kennedy</p>
                   <p>Available</p>
@@ -175,7 +183,8 @@
                 <small class="text-muted my-auto">5 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Sarah Graves</p>
                   <p>Available</p>
@@ -192,103 +201,106 @@
       <?php include 'include_common/sidebar.php'; ?>
       <!-- partial -->
       <div class="main-panel">
-    <div class="content-wrapper">
-        <div class="row">
+        <div class="content-wrapper">
+          <div class="row">
             <div class="col-12 grid-margin">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">DOCTORS FEE</h4>
-                        <!-- Form for adding/editing doctor fee -->
-                        <form class="pt-3" method="POST" action="<?= isset($editDoctorFeeId) ? base_url('updateDoctorFee/' . $editDoctorFeeId) : base_url('Savedoctorsfee'); ?>" enctype="multipart/form-data">
-                            <p class="card-description">Personal info</p>
-                            <div class="row">
-                                <!-- Fee (Amount) input -->
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Fee (Amount)</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="fee" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Doctor Name dropdown -->
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" name="dname">Doctor Name</label>
-                                        <div class="col-sm-9">
-                                            <select class="form-control" name="doctor_id">
-                                                <?php foreach ($doctor_names as $doctor) : ?>
-                                                    <option value="<?= $doctor['DoctorID']; ?>">
-                                                        <?= $doctor['FirstName'] . ' ' . $doctor['LastName']; ?>
-                                                    </option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <!-- Fee Type dropdown -->
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" name="ftype">Fee Type</label>
-                                        <div class="col-sm-9">
-                                            <select class="form-control" name="fee_type_id">
-                                                <?php foreach ($fee_types as $fee_type) : ?>
-                                                    <option value="<?= $fee_type->f_id; ?>"><?= $fee_type->FeeType; ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Submit button -->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <button type="submit" class="btn btn-primary">
-                                        <?= isset($editDoctorFeeId) ? 'Update' : 'Submit'; ?>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-
-                        <!-- Display Doctor Fee List -->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Doctor</th>
-                                            <th>Fee Type</th>
-                                            <th>Fee</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($doctorFees as $doctorFee) : ?>
-                                            <tr>
-                                                <td><?= $doctorFee['FirstName'] . ' ' . $doctorFee['LastName']; ?></td>
-                                                <td><?= $doctorFee['FeeType']; ?></td>
-                                                <td><?= $doctorFee['Fee']; ?></td>
-                                                <td>
-                                                    <!-- Edit Button -->
-                                                    <a href="<?= base_url('edit_fee/' . $doctorFee['df_id']); ?>" class="btn btn-sm btn-primary">Edit</a>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">DOCTORS FEE</h4>
+                  <!-- Form for adding/editing doctor fee -->
+                  <form class="pt-3" method="POST"
+                    action="<?= isset($editDoctorFeeId) ? base_url('updateDoctorFee/' . $editDoctorFeeId) : base_url('Savedoctorsfee'); ?>"
+                    enctype="multipart/form-data">
+                    <p class="card-description">Personal info</p>
+                    <div class="row">
+                      <!-- Fee (Amount) input -->
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Fee (Amount)</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" name="fee" />
+                          </div>
                         </div>
+                      </div>
+                      <!-- Doctor Name dropdown -->
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label" name="dname">Doctor Name</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" name="doctor_id">
+                              <?php foreach ($doctor_names as $doctor): ?>
+                                <option value="<?= $doctor['DoctorID']; ?>">
+                                  <?= $doctor['FirstName'] . ' ' . $doctor['LastName']; ?>
+                                </option>
+                              <?php endforeach; ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                    <div class="row">
+                      <!-- Fee Type dropdown -->
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label" name="ftype">Fee Type</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" name="fee_type_id">
+                              <?php foreach ($fee_types as $fee_type): ?>
+                                <option value="<?= $fee_type->f_id; ?>"><?= $fee_type->FeeType; ?></option>
+                              <?php endforeach; ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Submit button -->
+                    <div class="row">
+                      <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary">
+                          <?= isset($editDoctorFeeId) ? 'Update' : 'Submit'; ?>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
 
-    <!-- Include footer -->
-    <?php include 'include_common/footer.php'; ?>
-</div>
+                  <!-- Display Doctor Fee List -->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Doctor</th>
+                            <th>Fee Type</th>
+                            <th>Fee</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php foreach ($doctorFees as $doctorFee): ?>
+                            <tr>
+                              <td><?= $doctorFee['FirstName'] . ' ' . $doctorFee['LastName']; ?></td>
+                              <td><?= $doctorFee['FeeType']; ?></td>
+                              <td><?= $doctorFee['Fee']; ?></td>
+                              <td>
+                                <!-- Edit Button -->
+                                <a href="<?= base_url('edit_fee/' . $doctorFee['df_id']); ?>"
+                                  class="btn btn-sm btn-info">Edit</a>
+                              </td>
+                            </tr>
+                          <?php endforeach; ?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Include footer -->
+        <?php include 'include_common/footer.php'; ?>
+      </div>
 
       <!-- main-panel ends -->
     </div>

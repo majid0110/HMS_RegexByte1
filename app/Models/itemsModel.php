@@ -20,6 +20,7 @@ class itemsModel extends Model
         'idCategories',
         'barcode',
         'idWarehouse',
+        'Inventory',
         'status',
         'characteristic1',
         'characteristic2',
@@ -145,6 +146,17 @@ class itemsModel extends Model
     {
 
         return $this->db->table('sectors')->insert($data);
+    }
+
+    public function insertItemWarehouse($data)
+    {
+        $this->db->table('itemswarehouse')->insert($data);
+        return $this->db->insertID();
+    }
+
+    public function insertItemInventory($formDataInventory)
+    {
+        return $this->db->table('itemsinventory')->insert($formDataInventory);
     }
 
 

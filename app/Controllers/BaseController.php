@@ -21,6 +21,12 @@ use Psr\Log\LoggerInterface;
  */
 abstract class BaseController extends Controller
 {
+    protected $session; // Define session property
+
+    public function __construct()
+    {
+        $this->session = \Config\Services::session(); // Inject session service
+    }
     /**
      * Instance of the main Request object.
      *
@@ -54,5 +60,11 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+
+        if (!$this->session->get('loggedIn')) {
+            // Session has expired, redirect to login page
+            echo view('session_expired');
+        exit(); 
+        }
     }
 }

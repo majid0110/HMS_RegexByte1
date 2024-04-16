@@ -275,7 +275,7 @@
                                                         class="btn btn-primary btn-sm">Edit</a> -->
 
                                                     <a href="<?php echo base_url() . 'edit_role/' . $role['ID']; ?>"
-                                                        class="btn btn-warning btn-sm">Edit</a>
+                                                        class="btn btn-info btn-sm">Edit</a>
 
                                                     <a href="<?= base_url('delete_role/' . $role['ID']); ?>"
                                                         onclick="return confirm('Are you sure you want to delete this Role?');"

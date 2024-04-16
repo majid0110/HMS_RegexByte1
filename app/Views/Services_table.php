@@ -230,7 +230,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Services Table</h4>
-                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                <button type="button" class="btn btn-Primary" data-toggle="modal"
                                     data-target="#addServiceModal">Add</button>
                                 <hr>
                                 <div class="modal fade" id="addServiceModal" tabindex="-1" role="dialog"
@@ -281,7 +281,7 @@
                                                     <td>
                                                         <!-- Action buttons: Edit, Delete -->
                                                         <a href="<?= base_url('editService/' . $Service['idArtMenu']); ?>"
-                                                            class="btn btn-primary btn-sm">Edit</a>
+                                                            class="btn btn-info btn-sm">Edit</a>
                                                         <a href="<?= base_url('deleteService/' . $Service['idArtMenu']); ?>"
                                                             onclick="return confirm('Are you sure you want to delete this Service?');"
                                                             class="btn btn-danger btn-sm">Delete</a>

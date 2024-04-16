@@ -115,7 +115,7 @@
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Warehouse</label>
                     <div class="col-sm-9">
-                        <select class="form-control" name="unit">
+                        <select class="form-control" name="warehouse">
                             <?php foreach ($warehouse as $warehouse): ?>
                                 <option value="<?= $warehouse['idWarehouse'] ?>">
                                     <?= $warehouse['name'] ?>
@@ -177,11 +177,22 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Inventory</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="inventory" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
                         <!-- <label class="col-sm-3 col-form-label">Main Client</label>  -->
                         <!-- <div class="col-sm-9"> -->
                         <input type="checkbox" class="form-check-input" name="service"
                             style="    margin-left: 9rem; display=flex" checked disabled>
-                        <span style="margin-left: 11rem;margin-top: -19px;">Item</span>
+                        <span style="margin-left: 11rem;margin-top: -1px;">Item</span>
                         </input>
                         <!-- <label class="col-sm-3 col-form-label">Main Client</label>  -->
                     </div>

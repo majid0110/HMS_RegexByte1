@@ -263,7 +263,7 @@
                                                 <td>
                                                     <!-- Action buttons: Edit, Delete -->
                                                     <a href="<?= base_url('editsector/' . $sector['idSector']); ?>"
-                                                        class="btn btn-primary btn-sm">Edit</a>
+                                                        class="btn btn-info btn-sm">Edit</a>
                                                     <a href="<?= base_url('deletesector/' . $sector['idSector']); ?>"
                                                         onclick="return confirm('Are you sure you want to delete this Sector?');"
                                                         class="btn btn-danger btn-sm">Delete</a>

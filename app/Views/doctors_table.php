@@ -276,7 +276,7 @@
                           <td>
                             <!-- Action buttons: Edit and Delete -->
                             <a href="<?php echo base_url() . 'editDoctor/' . $doctor['DoctorID']; ?>"
-                              class="btn btn-warning btn-sm">Edit</a>
+                              class="btn btn-info btn-sm">Edit</a>
                             <a href="<?= base_url('DoctorController/deleteDoctor/' . $doctor['DoctorID']) ?>"
                               class="btn btn-danger btn-sm">Delete</a>
                           </td>
