@@ -26,6 +26,7 @@ class Filters extends BaseConfig
         'invalidchars' => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'auth' => AuthMiddleware::class,
+        'session' => \App\Filters\SessionFilter::class,
     ];
 
     /**
@@ -40,6 +41,7 @@ class Filters extends BaseConfig
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
+            'session',
         ],
         'after' => [
             'toolbar',

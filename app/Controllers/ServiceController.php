@@ -43,6 +43,10 @@ class ServiceController extends Controller
 
     public function Services_table()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $Model = new ServicesModel();
         $data['Services'] = $Model->getServices();
         return view('Services_table.php', $data);

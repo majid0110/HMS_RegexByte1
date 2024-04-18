@@ -19,6 +19,11 @@ class LoginController extends Controller
         return view('login.php');
     }
 
+    public function session_expired()
+    {
+        return view('session_expired.php');
+    }
+
     public function view_role()
     {
         $roleModel = new RoleModel();

@@ -20,7 +20,6 @@ class itemsModel extends Model
         'idCategories',
         'barcode',
         'idWarehouse',
-        'Inventory',
         'status',
         'characteristic1',
         'characteristic2',

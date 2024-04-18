@@ -29,6 +29,10 @@ class AppointmentController extends Controller
     //------------------------------------------------Main View 
     public function appointments_table()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $session = \Config\Services::session();
         $businessID = session()->get('businessID');
         $Model = new AppointmentModel();
@@ -38,8 +42,12 @@ class AppointmentController extends Controller
 
     public function appointments_form()
     {
+        $session = session();
         $model = new AppointmentModel();
         $data['appointment_types'] = $model->getAppointmentTypes();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/login"));
+        }
         return view('appointments_form.php', $data);
     }
 

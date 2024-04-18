@@ -7,6 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 $routes->get('/login', 'LoginController::show');
+$routes->get('/session_expired', 'LoginController::session_expired');
 $routes->post("/loginSave", 'LoginController::loginSave');
 $routes->get('/dashboard', 'LoginController::dashboard');
 $routes->get('/logout', 'LoginController::logout');

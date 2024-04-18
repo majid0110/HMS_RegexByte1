@@ -10,6 +10,10 @@ class ClientController extends Controller
     //------------------------------------------- Returning View
     public function clients_form()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         // $Model = new DoctorModel();
         // $data['specializations'] = $Model->getSpecializations();
 
@@ -18,6 +22,10 @@ class ClientController extends Controller
 
     public function editClient($idClient)
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $model = new ClientModel();
         $data['clientDetails'] = $model->getclientprofileByID($idClient);
         return view('edit_client.php', $data);
@@ -25,6 +33,10 @@ class ClientController extends Controller
 
     public function clients_table()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $model = new ClientModel();
         $data['clientDetails'] = $model->getclientprofile();
         return view('clients_table.php', $data);

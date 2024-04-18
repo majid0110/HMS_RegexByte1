@@ -28,6 +28,7 @@ class itemsController extends Controller
     }
     public function items_form()
     {
+
         $servicesModel = new ServicesModel();
         $data = [
             'units' => $servicesModel->getUnits(),
@@ -41,6 +42,10 @@ class itemsController extends Controller
 
     public function category_table()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/login"));
+        }
         $itemsModel = new itemsModel();
         $data['catart'] = $itemsModel->getCatartItems();
 
@@ -72,6 +77,10 @@ class itemsController extends Controller
     public function items_table()
     {
 
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/login"));
+        }
         $model = new itemsModel();
         $data['items'] = $model->getItems();
         return view('items_table', $data);
@@ -113,6 +122,10 @@ class itemsController extends Controller
 
     public function sectors_table()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/login"));
+        }
         $model = new itemsModel();
         $data['sectors'] = $model->getSectors();
         return view('sectors_table', $data);
@@ -125,6 +138,10 @@ class itemsController extends Controller
 
     public function specilization_table()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/login"));
+        }
         $session = \Config\Services::session();
         $businessID = $session->get('businessID');
         $model = new DoctorModel();
@@ -166,7 +183,6 @@ class itemsController extends Controller
             'idCategories' => $this->request->getPost('warehouse'),
             'Unit' => $this->request->getPost('Unit'),
             'idWarehouse' => $idWarehouse,
-            'Inventory' => $Inventory,
             'status' => $this->request->getPost('cstatus'),
             'characteristic1' => $this->request->getPost('char_1'),
             'Characteristic2' => $this->request->getPost('char_2'),
