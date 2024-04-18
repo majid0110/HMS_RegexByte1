@@ -270,7 +270,7 @@ class TestModel extends Model
             $builder->where('labtest.CreatedAT >=', $fromDate)
                 ->where('labtest.CreatedAT <=', $toDate);
         }
-
+        $builder->orderBy('labtest.CreatedAT', 'DESC');
         $builder->limit($perPage, $offset);
 
         $query = $builder->get();

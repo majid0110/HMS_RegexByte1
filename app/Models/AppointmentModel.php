@@ -137,6 +137,7 @@ class AppointmentModel extends Model
                 ->where('appointment.appointmentDate <=', $toDate);
         }
 
+        $builder->orderBy('appointment.appointmentDate', 'DESC');
         $builder->limit($perPage, $offset);
 
         $query = $builder->get();

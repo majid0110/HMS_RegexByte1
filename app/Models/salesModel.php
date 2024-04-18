@@ -405,7 +405,7 @@ class salesModel extends Model
             $builder->where('invoices.Date >=', $fromDate)
                 ->where('invoices.Date <=', $toDate);
         }
-
+        $builder->orderBy('invoices.Date', 'DESC');
         $builder->limit($perPage, $offset);
         $query = $builder->get();
         return $query->getResultArray();

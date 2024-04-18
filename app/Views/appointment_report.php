@@ -24,7 +24,7 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="./public/assets/css/vertical-layout-light/style.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="./public/assets/images/favicon.png" />
+    <link rel="shortcut icon" href="./public/assets/images_s/regexbyte.png" />
     <style>
         #appointments-table tfoot {
             font-weight: bold;
