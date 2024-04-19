@@ -53,12 +53,20 @@ class AppointmentController extends Controller
 
     public function viewAppointmentDetails($appointmentID)
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $model = new AppointmentModel();
         $data['AppointmentDetails'] = $model->viewAppointmentDetails($appointmentID);
         return view('appointment_details', $data);
     }
     public function deleteAppointment($appointmentID)
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $model = new AppointmentModel();
         $model->deleteAppointment($appointmentID);
         session()->setFlashdata('success', 'Appointment deleted...!!');

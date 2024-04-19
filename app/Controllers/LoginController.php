@@ -65,6 +65,10 @@ class LoginController extends Controller
     }
     public function user_form()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $Model = new LoginModel('businesstype');
         $data['business'] = $Model->getAllBusinessTypes();
 
@@ -73,6 +77,10 @@ class LoginController extends Controller
 
     public function user_form2()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $Model = new LoginModel('role');
         $data['roleName'] = $Model->getAllRoles('role');
 
@@ -82,6 +90,10 @@ class LoginController extends Controller
 
     public function users_table()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $model = new LoginModel('users');
         $data['userDetails'] = $model->getuserprofile();
         return view('users_table.php', $data);
@@ -89,6 +101,10 @@ class LoginController extends Controller
 
     public function edit_user($user_id)
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $model = new LoginModel('users');
         $data['userData'] = $model->get_user_by_id($user_id);
         $Model = new LoginModel('role');

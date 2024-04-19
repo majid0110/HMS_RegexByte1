@@ -21,6 +21,10 @@ class ServiceController extends Controller
 
     public function Services_form()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $servicesModel = new ServicesModel();
         $data = [
             'units' => $servicesModel->getUnits(),
@@ -32,6 +36,10 @@ class ServiceController extends Controller
 
     public function Services_form1()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $servicesModel = new ServicesModel();
         $data = [
             'units' => $servicesModel->getUnits(),
@@ -54,6 +62,10 @@ class ServiceController extends Controller
 
     public function editService($idArtMenu)
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $servicesModel = new ServicesModel();
 
         $data = [

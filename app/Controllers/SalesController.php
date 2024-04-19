@@ -21,6 +21,10 @@ class SalesController extends Controller
 
     public function sales_form()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $clientModel = new ClientModel();
         $data['client_names'] = $clientModel->getClientNames();
         $sales = new salesModel();
@@ -42,6 +46,10 @@ class SalesController extends Controller
 
     public function Sales_table()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $Model = new salesModel();
         $data['Sales'] = $Model->getSales();
         return view('Sales_table.php', $data);
@@ -200,7 +208,7 @@ class SalesController extends Controller
     {
         $categoryId = $this->request->getPost('categoryId');
 
-        if (empty ($categoryId)) {
+        if (empty($categoryId)) {
             $categoryId = null;
         }
 

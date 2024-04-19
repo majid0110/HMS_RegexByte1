@@ -20,6 +20,10 @@ class DoctorController extends Controller
 
     public function doctors_form()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $Model = new DoctorModel();
         $data['specializations'] = $Model->getSpecializations();
 
@@ -28,6 +32,10 @@ class DoctorController extends Controller
 
     public function editDoctor($doctorID)
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $model = new DoctorModel();
         $data['specializations'] = $model->getSpecializations();
         $data['doctorDetails'] = $model->getDoctorByID($doctorID);
@@ -36,6 +44,10 @@ class DoctorController extends Controller
 
     public function deleteDoctor($doctorID)
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $model = new DoctorModel();
         $model->deleteDoctor($doctorID);
 
@@ -44,6 +56,10 @@ class DoctorController extends Controller
 
     public function doctors_table()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $Model = new DoctorModel();
         $data['doctorDetails'] = $Model->getdoctorprofile();
         return view('doctors_table.php', $data);
@@ -156,9 +172,9 @@ class DoctorController extends Controller
         $request = \Config\Services::request();
         $session = \Config\Services::session();
         $businessID = $session->get('businessID');
-    
+
         $profileImage = $request->getFile('profile');
-        
+
         // Check if a file is uploaded
         if ($profileImage->isValid()) {
             $ProfileImageName = $profileImage->getName();
@@ -166,7 +182,7 @@ class DoctorController extends Controller
         } else {
             $ProfileImageName = 'defaults/download.png';
         }
-    
+
         $data = [
             'FirstName' => $request->getPost('fName'),
             'LastName' => $request->getPost('lName'),
@@ -184,12 +200,12 @@ class DoctorController extends Controller
             'ProfileImageURL' => $ProfileImageName,
             'BusinessID' => $businessID,
         ];
-    
+
         $Model = new DoctorModel();
         $Model->saveDoctorProfile($data);
-    
+
         session()->setFlashdata('success', 'Doctor Added Successfully..!!');
-    
+
         return redirect()->to(base_url("/doctors_form"));
     }
 

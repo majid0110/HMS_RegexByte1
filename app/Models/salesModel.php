@@ -89,6 +89,7 @@ class salesModel extends Model
             ->join('currency', 'currency.id = invoices.idCurrency')
             ->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod')
             ->select('invoices.*, client.client as clientName, currency.Currency, paymentmethods.Method as PaymentMethod')
+            ->orderBy('invoices.invOrdNum', 'DESC')
             ->get()
             ->getResultArray();
     }

@@ -308,7 +308,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Hospital Fee</label>
                           <div class="col-sm-9">
-                            <input type="number" class="form-control" name="hospitalFee" id="hospitalFee" required <?php echo isset ($_SESSION['hospitalcharges']) ? 'value="' . $_SESSION['hospitalcharges'] . '"' : ''; ?> />
+                            <input type="number" class="form-control" name="hospitalFee" id="hospitalFee" required <?php echo isset($_SESSION['hospitalcharges']) ? 'value="' . $_SESSION['hospitalcharges'] . '"' : ''; ?> />
                           </div>
                         </div>
                       </div>
@@ -371,7 +371,7 @@
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
-  script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
 

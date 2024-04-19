@@ -251,7 +251,6 @@
                                     </div>
                                 </div>
 
-
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <thead>
@@ -317,7 +316,7 @@
     <script>
         $(document).ready(function () {
             // Handle button click
-            $('.btn-danger').click(function () {
+            $('.btn-Primary').click(function () {
                 // Get the form content dynamically (you may need to adjust the URL)
                 $.get('<?= base_url('Services_form1') ?>', function (data) {
                     // Inject the form content into the modal body

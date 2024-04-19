@@ -54,6 +54,10 @@ class itemsController extends Controller
 
     public function additem()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/login"));
+        }
         $servicesModel = new ServicesModel();
         $data = [
             'units' => $servicesModel->getUnits(),
@@ -67,6 +71,10 @@ class itemsController extends Controller
 
     public function addcat()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/login"));
+        }
         $Model = new itemsModel();
         $data['sectors'] = $Model->getSectors();
 

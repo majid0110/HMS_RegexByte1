@@ -215,6 +215,7 @@ class LoginModel extends Model
 
         return $this->db->table('users')
             ->where('businessID', $businessID)
+            ->orderBy('ID', 'DESC')
             ->get()
             ->getResultArray();
     }

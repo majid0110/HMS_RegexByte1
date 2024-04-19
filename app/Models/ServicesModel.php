@@ -65,9 +65,12 @@ class ServicesModel extends Model
 
     public function getServices()
     {
+        $businessID = session()->get('businessID');
         $builder = $this->db->table('artmenu');
         return $builder->join('units', 'units.idUnit = artmenu.idUnit')
             ->select('artmenu.*,units.name')
+            ->where('artmenu.idBusiness', $businessID)
+            ->orderBy('artmenu.idArtMenu', 'DESC')
             ->get()
             ->getResultArray();
     }

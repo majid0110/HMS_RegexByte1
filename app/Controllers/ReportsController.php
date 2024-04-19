@@ -112,6 +112,10 @@ class ReportsController extends Controller
         $toDate = $this->request->getPost('toDate');
         $appointments = $Model->getAppointments($search, $doctor, $client, $fromDate, $toDate);
 
+        if (empty($appointments)) {
+            return redirect()->back()->with('error', 'No data available to generate report.');
+        }
+
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
@@ -178,7 +182,7 @@ class ReportsController extends Controller
         $lastRow = $row;
         $sheet->setCellValue('D' . $lastRow, 'Total Fee:');
         $sheet->setCellValue('E' . $lastRow, '=SUM(E4:E' . ($lastRow - 1) . ')');
-        $sheet->setCellValue('F' . $lastRow, '=SUM(F4:G' . ($lastRow - 1) . ')');
+        $sheet->setCellValue('F' . $lastRow, '=SUM(F4:F' . ($lastRow - 1) . ')');
         $sheet->setCellValue('G' . $lastRow, '=SUM(G4:G' . ($lastRow - 1) . ')');
         $sheet->getStyle('D' . $lastRow . ':G' . $lastRow)->applyFromArray($borderStyle);
         $lastRowRange = 'D' . $lastRow . ':G' . $lastRow;
@@ -306,6 +310,10 @@ class ReportsController extends Controller
         $fromDate = $this->request->getPost('fromDate');
         $toDate = $this->request->getPost('toDate');
         $services = $Model->getSalesReport($search, $paymentInput, $clientName, $fromDate, $toDate);
+
+        if (empty($services)) {
+            return redirect()->back()->with('error', 'No data available to generate report.');
+        }
 
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
@@ -461,6 +469,10 @@ class ReportsController extends Controller
         $fromDate = $this->request->getPost('fromDate');
         $toDate = $this->request->getPost('toDate');
         $tests = $testModel->searchLabReports($search, $userName, $clientName, $fromDate, $toDate);
+
+        if (empty($tests)) {
+            return redirect()->back()->with('error', 'No data available to generate report.');
+        }
 
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();

@@ -27,8 +27,11 @@ class DoctorModel extends Model
 
     public function getdoctorprofile()
     {
+        $businessId = session()->get('businessID');
         return $this->db->table('doctorprofile')
             ->join('specialization', 'specialization.s_id = doctorprofile.Specialization')
+            ->where('doctorprofile.BusinessID', $businessId)
+            ->orderBy('doctorprofile.DoctorID', 'DESC')
             ->get()
             ->getResultArray();
     }

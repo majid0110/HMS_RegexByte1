@@ -90,7 +90,8 @@ class itemsModel extends Model
     {
         $builder = $this->db->table('itemswarehouse');
         $result = $builder->join('units', 'units.idUnit = itemswarehouse.Unit')
-            ->select('itemswarehouse.*, units.name as unit_name') // Include the 'unit_name' field
+            ->select('itemswarehouse.*, units.name as unit_name')
+            ->orderBy('itemswarehouse.idItem', 'DESC')
             ->get()
             ->getResultArray();
 
@@ -99,7 +100,10 @@ class itemsModel extends Model
 
     public function getCatartItems()
     {
+        $businessId = session()->get('businessID');
         $builder = $this->db->table('catart');
+        $builder->where('idBusiness', $businessId);
+        $builder->orderBy('idCatArt', 'DESC');
         $result = $builder->get()->getResultArray();
 
         return $result;

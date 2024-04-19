@@ -23,6 +23,7 @@ class ClientModel extends Model
 
         return $this->db->table('client')
             ->where('idBusiness', $businessID)
+            ->orderBy('clientUniqueId', 'DESC')
             ->get()
             ->getResultArray();
     }
@@ -47,7 +48,7 @@ class ClientModel extends Model
 
     public function getClientNames()
     {
-        return $this->select('idClient, client')->findAll();
+        return $this->select('idClient, client')->where('status', 'Active')->findAll();
     }
 
     public function hasBookings($idClient)
