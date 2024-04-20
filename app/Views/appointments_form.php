@@ -7,6 +7,8 @@
 
   <link rel="stylesheet" href="./public/assets/vendors_s/select2/select2.min.css">
   <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
 
   <!-- --------------------------------------------------------- -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css">
@@ -17,6 +19,35 @@
   <style>
     #openAddClientModal:hover {
       background-color: #52CDFF;
+    }
+
+    .center-dropdown .select2-dropdown {
+      text-align: left;
+    }
+
+
+
+    .select2-container .select2-selection--single {
+      height: auto;
+      text-align: left;
+      padding: 0;
+    }
+
+    .select2-selection--single {
+      height: 33px;
+    }
+
+    .select2-container .select2-selection--single .select2-selection__rendered {
+      text-align: left;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+      line-height: normal;
+      padding: 0;
+    }
+
+    .select2-container .select2-selection--single .select2-selection__rendered {
+      text-align: left;
     }
   </style>
 </head>
@@ -237,7 +268,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Patient Name</label>
                           <div class="col-sm-9">
-                            <select class="form-control" name="clientId" id="clientId">
+                            <select class="form-control select2" name="clientId" id="clientId">
                               <?php foreach ($client_names as $client): ?>
                                 <option value="<?= $client['idClient']; ?>">
                                   <?= $client['client']; ?>
@@ -246,6 +277,7 @@
                             </select>
                           </div>
                         </div>
+
                       </div>
 
                       <input type="hidden" name="clientName" id="clientNameInput">
@@ -372,6 +404,25 @@
   <!-- container-scroller -->
   <!-- plugins:js -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Include Select2 JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+  <!-- Initialize Select2 -->
+  <script>
+    // $(document).ready(function () {
+    //   $('.select2').select2();
+    // });
+
+    $(document).ready(function () {
+      $('.select2').select2({
+        dropdownAutoWidth: true
+      });
+    });
+  </script>
+
   <script>
     document.addEventListener('DOMContentLoaded', function () {
 

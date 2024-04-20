@@ -183,6 +183,15 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Item Expiry</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" name="expiry" />
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="row">

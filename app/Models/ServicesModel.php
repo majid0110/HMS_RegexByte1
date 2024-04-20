@@ -75,6 +75,25 @@ class ServicesModel extends Model
             ->getResultArray();
     }
 
+    public function getActiveItems()
+    {
+        $businessID = session()->get('businessID');
+        $builder = $this->db->table('itemswarehouse');
+        return $builder->select('*')
+            ->where('status', 'active')
+            ->where('idBusiness', $businessID)
+            ->get()
+            ->getResultArray();
+    }
+
+    public function insertBatch(?array $data = null, ?bool $escape = null, int $batchSize = 100, bool $testing = false)
+    {
+        $builder = $this->db->table('artmenu');
+        return $builder->insertBatch($data, $escape, $batchSize, $testing);
+    }
+
+
+
     public function deleteService($idArtMenu)
     {
         return $this->where('idArtMenu', $idArtMenu)->delete();

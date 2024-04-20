@@ -159,8 +159,13 @@ class itemsModel extends Model
 
     public function insertItemInventory($formDataInventory)
     {
-        return $this->db->table('itemsinventory')->insert($formDataInventory);
+        $this->db->table('itemsinventory')->insert($formDataInventory);
+        return $this->db->insertID();
     }
-
+    public function insertItemExpiry($ItemExipry)
+    {
+        $this->db->table('itemsexpiry')->insert($ItemExipry);
+        return $this->db->insertID();
+    }
 
 }

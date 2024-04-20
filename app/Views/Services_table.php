@@ -27,6 +27,26 @@
     <link rel="stylesheet" href="./public/assets/css/vertical-layout-light/style.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="./public/assets/images/favicon.png" />
+
+    <style>
+        .toast {
+            position: fixed;
+            top: 10rem;
+            right: 20px;
+            background-color: orange;
+            color: darkblue;
+            padding: 16px;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 999;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+    </style>
 </head>
 
 <body>
@@ -229,9 +249,12 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
+                                <?php $successMessage = session()->getFlashdata('success');
+                                $errorMessage = session()->getFlashdata('error'); ?>
                                 <h4 class="card-title">Services Table</h4>
                                 <button type="button" class="btn btn-Primary" data-toggle="modal"
                                     data-target="#addServiceModal">Add</button>
+                                <a href="<?= base_url('transferItems'); ?>" class="btn btn-Dark">Transfer Items</a>
                                 <hr>
                                 <div class="modal fade" id="addServiceModal" tabindex="-1" role="dialog"
                                     aria-labelledby="addServiceModalLabel" aria-hidden="true">
@@ -315,6 +338,27 @@
     <!-- inject:js -->
     <script>
         $(document).ready(function () {
+            function showToast(message, type) {
+                var toastContainer = $('<div></div>').addClass('toast').addClass(type).text(message);
+                $('body').append(toastContainer);
+                toastContainer.addClass('show');
+                setTimeout(function () {
+                    toastContainer.removeClass('show');
+                    setTimeout(function () {
+                        toastContainer.remove();
+                    }, 300);
+                }, 5000);
+            }
+            <?php if ($successMessage = session()->getFlashdata('success')): ?>
+                showToast('<?= $successMessage ?>', 'success');
+            <?php endif; ?>
+            <?php if ($errorMessage = session()->getFlashdata('error')): ?>
+                showToast('<?= $errorMessage ?>', 'error');
+            <?php endif; ?>
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
             // Handle button click
             $('.btn-Primary').click(function () {
                 // Get the form content dynamically (you may need to adjust the URL)
@@ -327,6 +371,8 @@
             });
         });
     </script>
+
+
 
     <script src="./public/assets/js/off-canvas.js"></script>
     <script src="./public/assets/js/hoverable-collapse.js"></script>

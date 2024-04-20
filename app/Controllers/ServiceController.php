@@ -56,6 +56,7 @@ class ServiceController extends Controller
             return redirect()->to(base_url("/session_expired"));
         }
         $Model = new ServicesModel();
+        $data['activeItems'] = $Model->getActiveItems();
         $data['Services'] = $Model->getServices();
         return view('Services_table.php', $data);
     }
@@ -211,6 +212,113 @@ class ServiceController extends Controller
         return redirect()->to(base_url("/Services_table"));
     }
 
+    // public function transferItems()
+    // {
+    //     $model = new ServicesModel();
+    //     $activeItems = $model->getActiveItems();
+    //     $services = $model->getServices();
+
+    //     $missingItems = array_diff(array_column($activeItems, 'idItem'), array_column($services, 'idArtMenu'));
+
+    //     $insertData = [];
+    //     foreach ($activeItems as $item) {
+    //         if (in_array($item['idItem'], $missingItems)) {
+    //             // Prepare data to insert into artmenu
+    //             $insertData[] = [
+    //                 'BarCode' => 0,
+    //                 'Code' => $item['Code'],
+    //                 'Name' => $item['Name'],
+    //                 'Image' => 0,
+    //                 'Price' => 0,
+    //                 'Promotional_Price' => 0,
+    //                 'idCatArt' => 0,
+    //                 'Notes' => 0,
+    //                 'idUnit' => $item['Unit'],
+    //                 'Product_mix' => 0,
+    //                 'Tax' => 0,
+    //                 'status' => 0,
+    //                 'Characteristic1' => 0,
+    //                 'Characteristic2' => 0,
+    //                 'isService' => 1,
+    //                 'Barcode' => 0,
+    //                 'idBusiness' => $item['idBusiness'],
+    //                 'idPoint_of_sale' => 1,
+    //                 'Cost' => 0,
+    //                 'idTVSH' => 0,
+    //                 'noTvshType' => 0,
+    //             ];
+    //         }
+    //     }
+
+    //     if (!empty($insertData)) {
+    //         // Insert missing items into artmenu
+    //         $model->insertBatch('artmenu', $insertData);
+
+    //         return $this->response->setJSON(['success' => true]);
+    //     }
+
+    //     return $this->response->setJSON(['success' => false]);
+    // }
+
+    public function transferItems()
+    {
+        $servicesModel = new ServicesModel();
+
+        // Get active items from itemswarehouse
+        $activeItems = $servicesModel->getActiveItems();
+
+        // Get existing items in artmenu
+        $existingItems = $servicesModel->getServices();
+
+        // Prepare data for insertion
+        $dataToInsert = [];
+
+        foreach ($activeItems as $item) {
+            if (!$this->isItemExistsInArtmenu($item, $existingItems)) {
+                $dataToInsert[] = [
+                    'Barcode' => $item['barcode'],
+                    'Code' => $item['Code'],
+                    'Name' => $item['Name'],
+                    'Image' => 'defaults/download.png',
+                    'Cost' => $item['Cost'],
+                    'Promotional_Price' => 0,
+                    'idCatArt' => $item['idCategories'],
+                    'Notes' => $item['Notes'],
+                    'idUnit' => $item['Unit'],
+                    'Product_mix' => $item['Minimum'],
+                    'status' => $item['status'],
+                    'Characteristic1' => $item['characteristic1'],
+                    'Characteristic2' => $item['characteristic2'],
+                    'isService' => 0,
+                    'idBusiness' => $item['idBusiness'],
+                    'idPoint_of_sale' => 1,
+                    'Price' => 0,
+                    'idTVSH' => 0,
+                    'noTvshType' => 0,
+                ];
+            }
+        }
+
+
+        if (!empty($dataToInsert)) {
+            $servicesModel->insertBatch($dataToInsert, true);
+            session()->setFlashdata('success', 'Data Transfered..!!');
+        } else {
+            session()->setFlashdata('error', 'No data to Transfer..!!');
+        }
+
+        return redirect()->to(base_url('Services_table'));
+    }
+
+    private function isItemExistsInArtmenu($item, $existingItems)
+    {
+        foreach ($existingItems as $existingItem) {
+            if ($existingItem['Code'] === $item['Code']) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 }

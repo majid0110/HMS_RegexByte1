@@ -176,7 +176,7 @@ class itemsController extends Controller
 
         $request = \Config\Services::request();
         $businessID = $session->get('businessID');
-        $idWarehouse = $this->request->getPost('tax');
+        $idWarehouse = $this->request->getPost('warehouse');
         $Inventory = $this->request->getPost('inventory');
 
         $formData = [
@@ -188,7 +188,7 @@ class itemsController extends Controller
             'Notes' => $this->request->getPost('notes'),
             'idBusiness' => $businessID,
             'idTAX' => $this->request->getPost('tax'),
-            'idCategories' => $this->request->getPost('warehouse'),
+            'idCategories' => $this->request->getPost('category'),
             'Unit' => $this->request->getPost('Unit'),
             'idWarehouse' => $idWarehouse,
             'status' => $this->request->getPost('cstatus'),
@@ -208,6 +208,16 @@ class itemsController extends Controller
             'inventory' => $Inventory,
             'idWarehouse' => $idWarehouse,
         ];
+
+        $IdInventory = $itemsModel->insertItemInventory($formDataInventory);
+
+        $ItemExipry = [
+            'idInventory' => $IdInventory,
+            'inventory' => $Inventory,
+            'expiryDate' => $this->request->getPost('expiry'),
+        ];
+
+        $itemsModel->insertItemExpiry($ItemExipry);
 
         $itemsModel->insertItemInventory($formDataInventory);
 
