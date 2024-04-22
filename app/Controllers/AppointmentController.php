@@ -125,6 +125,7 @@ class AppointmentController extends Controller
         ];
 
         $appointmentModel->saveAppointment($data);
+
         $appointmentID = $appointmentModel->getInsertID();
         $clientID = $this->request->getPost('clientId');
         $clientModel = new ClientModel();
@@ -135,6 +136,8 @@ class AppointmentController extends Controller
         $InvoiceNumber = $Model->getinvoiceNumber($businessID, $appointmentID);
         $specializationName = $Model->getDoctorSpecialization($doctorID);
         $operatorName = session()->get('fName');
+
+        $total = $doctorFee + $charges;
 
         $mpdf = new Mpdf();
         $pdfContent = view('pdf_template', [
@@ -148,6 +151,8 @@ class AppointmentController extends Controller
             'InvoiceNumber' => $InvoiceNumber,
             'specializationName' => $specializationName,
             'operatorName' => $operatorName,
+            'hospitalfee' => $charges,
+            'total' => $total,
         ]);
 
         $mpdf->WriteHTML($pdfContent);
@@ -158,8 +163,6 @@ class AppointmentController extends Controller
             'pdfContent' => base64_encode($pdfBinary),
         ]);
     }
-
-
 
 
     private function generatePdf($data)

@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="./public/assets/vendors/simple-line-icons/css/simple-line-icons.css">
     <link rel="stylesheet" href="./public/assets/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
     <!-- endinject -->
     <!-- Plugin css for this page -->
@@ -33,18 +34,50 @@
             position: fixed;
             top: 10rem;
             right: 20px;
-            background-color: orange;
-            color: darkblue;
-            padding: 16px;
-            border-radius: 4px;
+            background-color: #333;
+            color: #fff;
+            padding: 16px 24px;
+            border-radius: 30px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             opacity: 0;
-            transition: opacity 0.3s;
+            transform: translateY(-100%);
+            transition: all 0.5s ease-in-out;
             z-index: 999;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
         }
 
         .toast.show {
             opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast.success {
+            background-color: #28a745;
+        }
+
+        .toast.error {
+            background-color: #dc3545;
+        }
+
+        .toast::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px;
+            border-style: solid;
+            border-color: transparent transparent transparent transparent;
+        }
+
+        .toast.success::before {
+            border-top-color: #28a745;
+        }
+
+        .toast.error::before {
+            border-top-color: #dc3545;
         }
     </style>
 </head>
@@ -339,14 +372,18 @@
     <script>
         $(document).ready(function () {
             function showToast(message, type) {
-                var toastContainer = $('<div></div>').addClass('toast').addClass(type).text(message);
-                $('body').append(toastContainer);
-                toastContainer.addClass('show');
+                const toastContainer = document.createElement('div');
+                toastContainer.classList.add('toast', type);
+                toastContainer.textContent = message;
+                document.body.appendChild(toastContainer);
+
+                toastContainer.classList.add('show');
+
                 setTimeout(function () {
-                    toastContainer.removeClass('show');
+                    toastContainer.classList.remove('show');
                     setTimeout(function () {
                         toastContainer.remove();
-                    }, 300);
+                    }, 500);
                 }, 5000);
             }
             <?php if ($successMessage = session()->getFlashdata('success')): ?>

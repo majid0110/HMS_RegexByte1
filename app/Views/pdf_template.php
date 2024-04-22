@@ -153,18 +153,34 @@
                 </td>
             </tr>
 
+
             <!-- <tr>
             <td> eco badge for waterless car washThe service at Detailing Knights is not only unmatched, it is also mobile, waterless and environmentally friendly. </td>
             <td></td>
         </tr> -->
         </table>
-        <hr>
+        <div style="margin-top: -2%;margin-bottom: -12px;">
+            <hr>
+        </div>
+        <table style="width: 100%;">
+
+            <tr>
+                <td style="font-size: 9px; margin-top: 0%; margin-bottom: 0%;"><b>Hospital Fee<b></td>
+                <td style="font-size: 9px; text-align: right;padding-left: 50%;margin-top: 0%; margin-bottom: 0%;">
+                    <?= $hospitalfee ?>.00
+                </td>
+            </tr>
+        </table>
+        <div style="margin-top: -3%;">
+            <hr>
+        </div>
+
         <table style="width: 100%;">
             <tr>
                 <td style="text-align: left;">&nbsp;</td>
 
                 <td style="text-align:  right; padding-right:8px" colspan="2"><b>Total</b> PKR
-                    <?= $appointmentData['appointmentFee']; ?>.00
+                    <?= $total ?>.00
                 </td>
             </tr>
 

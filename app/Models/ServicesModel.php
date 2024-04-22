@@ -86,10 +86,36 @@ class ServicesModel extends Model
             ->getResultArray();
     }
 
+    // public function insertBatch(?array $data = null, ?bool $escape = null, int $batchSize = 100, bool $testing = false)
+    // {
+    //     $builder = $this->db->table('artmenu');
+    //     return $builder->insertBatch($data, $escape, $batchSize);
+    // }
+
     public function insertBatch(?array $data = null, ?bool $escape = null, int $batchSize = 100, bool $testing = false)
     {
         $builder = $this->db->table('artmenu');
-        return $builder->insertBatch($data, $escape, $batchSize, $testing);
+
+        // Perform batch insertion
+        $builder->insertBatch($data, $escape, $batchSize);
+
+        // Retrieve the last inserted IDs manually
+        $insertedIds = [];
+        $lastInsertId = $this->db->insertID();
+        $numInsertedRows = count($data);
+        for ($i = 0; $i < $numInsertedRows; $i++) {
+            $insertedIds[] = $lastInsertId - $numInsertedRows + $i + 1;
+        }
+
+        // Return the insertion IDs
+        return $insertedIds;
+    }
+
+
+    public function insertBatchRatio(?array $data = null, ?bool $escape = null, int $batchSize = 100, bool $testing = false)
+    {
+        $builder = $this->db->table('ratio');
+        return $builder->insertBatch($data, $escape, $batchSize);
     }
 
 

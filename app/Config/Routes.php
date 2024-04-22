@@ -73,6 +73,8 @@ $routes->get('/deleteAppointment/(:num)', 'AppointmentController::deleteAppointm
 $routes->post('/saveClient', 'AppointmentController::saveClientProfile');
 $routes->post('AppointmentController/saveAppointment', 'AppointmentController::saveAppointment');
 
+$routes->post('AppointmentController/printToken', 'AppointmentController::printToken');
+
 $routes->group('appointment', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('fetchDoctorFee/(:num)/(:num)', 'AppointmentController::fetchDoctorFee/$1/$2');
 });

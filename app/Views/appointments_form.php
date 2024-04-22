@@ -17,6 +17,26 @@
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <!-- --------------------------------------------------------- -->
   <style>
+    .toast {
+      position: fixed;
+      top: 10rem;
+      right: 20px;
+      background-color: orange;
+      color: darkblue;
+      padding: 16px;
+      /* border-radius: 4px; */
+      radius: 30%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transition: opacity 0.3s;
+      /* transition: top 0.5s ease-in-out, opacity 0.5s ease-in-out; */
+      z-index: 999;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+
     #openAddClientModal:hover {
       background-color: #52CDFF;
     }
@@ -244,22 +264,12 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <?php
-          $successMessage = session()->getFlashdata('success');
-          $errorMessage = session()->getFlashdata('error');
-
-          if ($successMessage) {
-            echo '<div class="alert alert-success">' . $successMessage . '</div>';
-          }
-
-          if ($errorMessage) {
-            echo '<div class="alert alert-danger">' . $errorMessage . '</div>';
-          }
-          ?>
           <div class="row">
             <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
+                  <?php $successMessage = session()->getFlashdata('success');
+                  $errorMessage = session()->getFlashdata('error'); ?>
                   <h4 class="card-title" style="margin-top: -7x;">BOOK APPOINTMENT</h4>
                   <form class="pt-3" id="appointmentForm" method="POST"
                     action="<?php echo base_url() . "saveAppointment"; ?>" enctype="multipart/form-data">
@@ -570,13 +580,14 @@
           success: function (response) {
             if (response.status === 'success') {
               viewPdf(response.pdfContent);
+              showToast('Appointment booked successfully', 'success');
             } else {
-
-              console.error('Failed to generate PDF.');
+              showToast('Failed to book appointment', 'error');
             }
           },
           error: function (error) {
             console.log(error);
+            showToast('An error occurred while booking the appointment', 'error');
           }
         });
       }
@@ -586,6 +597,24 @@
       });
 
     });
+  </script>
+
+  <script>
+    function showToast(message, type) {
+      const toastContainer = document.createElement('div');
+      toastContainer.classList.add('toast', type);
+      toastContainer.textContent = message;
+      document.body.appendChild(toastContainer);
+
+      toastContainer.classList.add('show');
+
+      setTimeout(function () {
+        toastContainer.classList.remove('show');
+        setTimeout(function () {
+          toastContainer.remove();
+        }, 300);
+      }, 5000);
+    }
   </script>
   <script src="./public/assets/vendors_s/js/vendor.bundle.base.js"></script>
   <!-- endinject -->

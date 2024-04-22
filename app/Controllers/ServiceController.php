@@ -212,70 +212,23 @@ class ServiceController extends Controller
         return redirect()->to(base_url("/Services_table"));
     }
 
-    // public function transferItems()
-    // {
-    //     $model = new ServicesModel();
-    //     $activeItems = $model->getActiveItems();
-    //     $services = $model->getServices();
-
-    //     $missingItems = array_diff(array_column($activeItems, 'idItem'), array_column($services, 'idArtMenu'));
-
-    //     $insertData = [];
-    //     foreach ($activeItems as $item) {
-    //         if (in_array($item['idItem'], $missingItems)) {
-    //             // Prepare data to insert into artmenu
-    //             $insertData[] = [
-    //                 'BarCode' => 0,
-    //                 'Code' => $item['Code'],
-    //                 'Name' => $item['Name'],
-    //                 'Image' => 0,
-    //                 'Price' => 0,
-    //                 'Promotional_Price' => 0,
-    //                 'idCatArt' => 0,
-    //                 'Notes' => 0,
-    //                 'idUnit' => $item['Unit'],
-    //                 'Product_mix' => 0,
-    //                 'Tax' => 0,
-    //                 'status' => 0,
-    //                 'Characteristic1' => 0,
-    //                 'Characteristic2' => 0,
-    //                 'isService' => 1,
-    //                 'Barcode' => 0,
-    //                 'idBusiness' => $item['idBusiness'],
-    //                 'idPoint_of_sale' => 1,
-    //                 'Cost' => 0,
-    //                 'idTVSH' => 0,
-    //                 'noTvshType' => 0,
-    //             ];
-    //         }
-    //     }
-
-    //     if (!empty($insertData)) {
-    //         // Insert missing items into artmenu
-    //         $model->insertBatch('artmenu', $insertData);
-
-    //         return $this->response->setJSON(['success' => true]);
-    //     }
-
-    //     return $this->response->setJSON(['success' => false]);
-    // }
-
     public function transferItems()
     {
+        $db = \Config\Database::connect();
         $servicesModel = new ServicesModel();
 
-        // Get active items from itemswarehouse
         $activeItems = $servicesModel->getActiveItems();
 
-        // Get existing items in artmenu
         $existingItems = $servicesModel->getServices();
 
-        // Prepare data for insertion
-        $dataToInsert = [];
+        $db->transBegin();
+
+        $dataToInsertArtmenu = [];
+        $dataToInsertRatio = [];
 
         foreach ($activeItems as $item) {
             if (!$this->isItemExistsInArtmenu($item, $existingItems)) {
-                $dataToInsert[] = [
+                $dataToInsertArtmenu[] = [
                     'Barcode' => $item['barcode'],
                     'Code' => $item['Code'],
                     'Name' => $item['Name'],
@@ -296,19 +249,34 @@ class ServiceController extends Controller
                     'idTVSH' => 0,
                     'noTvshType' => 0,
                 ];
+
+                $dataToInsertRatio[] = [
+                    'idItem' => $item['idItem'],
+                    'ratio' => 1,
+                    'idBusiness' => $item['idBusiness'],
+                ];
             }
         }
 
+        if (!empty($dataToInsertArtmenu)) {
+            $insertedIds = $servicesModel->insertBatch($dataToInsertArtmenu, true);
+            foreach ($dataToInsertRatio as $key => $ratioData) {
+                $dataToInsertRatio[$key]['idArtMenu'] = $insertedIds[$key];
+            }
 
-        if (!empty($dataToInsert)) {
-            $servicesModel->insertBatch($dataToInsert, true);
+            $servicesModel->insertBatchRatio($dataToInsertRatio, true);
+
             session()->setFlashdata('success', 'Data Transfered..!!');
         } else {
-            session()->setFlashdata('error', 'No data to Transfer..!!');
+            session()->setFlashdata('error', 'No data to transfer.');
+
         }
+
+        $db->transCommit();
 
         return redirect()->to(base_url('Services_table'));
     }
+
 
     private function isItemExistsInArtmenu($item, $existingItems)
     {
