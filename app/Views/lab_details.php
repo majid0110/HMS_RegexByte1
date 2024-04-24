@@ -298,6 +298,7 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
+                                <h4 class="card-title">Lab Details Report</h4>
                                 <form action="<?= base_url('generateExcelLabReport'); ?>" method="post">
                                     <div class="form-group row">
                                         <div>
@@ -334,13 +335,13 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <label>By Users</label>
+                                            <label>By Test Type</label>
                                             <div id="the-basics">
-                                                <select class="form-control" name="userName" id='userInput'>
-                                                    <option value="">All Users</option>
-                                                    <?php foreach ($user_names as $user): ?>
-                                                        <option value="<?= $user['fName']; ?>">
-                                                            <?= $user['fName']; ?>
+                                                <select class="form-control" name="testName" id='userInput'>
+                                                    <option value="">All Tests</option>
+                                                    <?php foreach ($testType as $Type): ?>
+                                                        <option value="<?= $Type['title']; ?>">
+                                                            <?= $Type['title']; ?>
                                                         </option>
                                                     <?php endforeach; ?>
                                                 </select>
@@ -358,8 +359,6 @@
                                         </div>
                                     </div>
                                 </form>
-                                <hr>
-                                <h4 class="card-title">Lab Report</h4>
                                 <div class="col-12 grid-margin">
                                     <!-- <div class="table-container"> -->
                                     <div class="table-responsive">
@@ -370,63 +369,42 @@
                                                     <th>Contact</th>
                                                     <th>Gender</th>
                                                     <th>Age</th>
-                                                    <th>Added By</th>
+                                                    <th>Unique-ID</th>
+                                                    <th>Test type</th>
+                                                    <th>Fee</th>
                                                     <th>Date</th>
-                                                    <th>FEE</th>
-                                                    <th>Nationality</th>
-                                                    <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($Tests as $test): ?>
+                                                <?php foreach ($details as $detail): ?>
                                                     <tr>
                                                         <td>
-                                                            <?= $test['clientName']; ?>
+                                                            <?= $detail['clientName']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $test['contact']; ?>
+                                                            <?= $detail['contact']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $test['gender']; ?>
+                                                            <?= $detail['gender']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $test['age']; ?>
-                                                        </td>
-
-                                                        <td>
-                                                            <?= $test['userName']; ?>
+                                                            <?= $detail['age']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $test['CreatedAT']; ?>
+                                                            <?= $detail['unique']; ?>
+                                                            </t>
+                                                        <td>
+                                                            <?= $detail['testTypeName']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $test['fee']; ?>
+                                                            <?= $detail['fee']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $test['country']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <a href="<?= base_url('viewTestDetails/' . $test['test_id']); ?>"
-                                                                class="btn btn-info btn-sm">View Details</a>
+                                                            <?= $detail['createdAT']; ?>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
-                                            <tfoot>
-                                                <tr class="table-totals">
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>Total:</td>
-                                                    <td>
-                                                        <?= $totalLabFee ?>
-                                                    </td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                     <!-- </div> -->
@@ -438,6 +416,7 @@
                                     <?= $pager ?>
                                 </div>
                             </div>
+
                             <hr>
                         </div>
                     </div>
@@ -458,23 +437,23 @@
                 $(document).ready(function () {
                     $('#searchInput, #userInput, #clientInput, #fromDateInput, #toDateInput').on('input change', function () {
                         var searchValue = $('#searchInput').val();
-                        var userName = $('#userInput').val();
+                        var testName = $('#userInput').val();
                         var clientValue = $('#clientInput').val();
                         var fromDateValue = $('#fromDateInput').val();
                         var toDateValue = $('#toDateInput').val();
 
-                        // console.log('Search Value:', searchValue);
-                        // console.log('User Value:', userName);
-                        // console.log('Client Value:', clientValue);
-                        // console.log('From Date Value:', fromDateValue);
-                        // console.log('To Date Value:', toDateValue);
+                        console.log('Search Value:', searchValue);
+                        console.log('Test Value:', testName);
+                        console.log('Client Value:', clientValue);
+                        console.log('From Date Value:', fromDateValue);
+                        console.log('To Date Value:', toDateValue);
 
                         $.ajax({
                             type: 'POST',
-                            url: '<?= base_url('lab_report'); ?>',
+                            url: '<?= base_url('lab_details'); ?>',
                             data: {
                                 search: searchValue,
-                                userName: userName,
+                                testName: testName,
                                 clientName: clientValue,
                                 fromDate: fromDateValue,
                                 toDate: toDateValue
@@ -485,7 +464,7 @@
                                     var cleanedTableContent = response.tableContent.trim();
                                     $('.table-responsive').html(cleanedTableContent);
                                     $('#total-lab-fee').text(response.totalLabFee);
-                                    console.log(response.totalLabFee);
+                                    console.log(response.pager);
                                 } else {
                                     console.error('Error:', response.error);
                                 }

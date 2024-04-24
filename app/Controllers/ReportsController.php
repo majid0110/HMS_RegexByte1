@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\LabtestdetailsModel;
 use CodeIgniter\Controller;
 
 use App\Models\AppointmentModel;
@@ -27,6 +28,8 @@ class ReportsController extends Controller
     {
         return view('reports_form.php');
     }
+
+
 
     //---------------------------------- Appointment Report + Excel
     public function appointment_report()
@@ -546,6 +549,51 @@ class ReportsController extends Controller
         $writer->save('php://output');
         exit;
     }
+
+    //-------------------------------------- Lab Details Report
+    public function lab_details()
+    {
+        $Model = new LabtestdetailsModel();
+        // $data['details'] = $Model->getlabdetails();
+        $data['testType'] = $Model->getTestTypes();
+
+        $clientModel = new ClientModel();
+        $data['client_names'] = $clientModel->getClientNames();
+
+        $search = $this->request->getPost('search');
+        $testName = $this->request->getPost('testName');
+        $clientName = $this->request->getPost('clientName');
+        $fromDate = $this->request->getPost('fromDate');
+        $toDate = $this->request->getPost('toDate');
+
+        $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+        $perPage = 20;
+        $offset = ($currentPage - 1) * $perPage;
+
+        $data['details'] = $Model->searchLabReports($search, $testName, $clientName, $fromDate, $toDate, $perPage, $offset);
+        $data['pager'] = $Model->getPager($search, $testName, $clientName, $fromDate, $toDate, $perPage, $currentPage);
+
+        if ($this->request->isAJAX()) {
+            try {
+                $tableContent = view('labDetailsReport', $data);
+                return $this->response->setJSON([
+                    'success' => true,
+                    'tableContent' => $tableContent,
+                    'pager' => $data['pager'],
+                    // 'totalLabFee' => $data['totalLabFee'],
+
+                ]);
+            } catch (\Exception $e) {
+                return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+            }
+        } else {
+            return view('lab_details.php', $data);
+
+        }
+
+    }
+
+
 
 
 }

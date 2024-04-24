@@ -18,10 +18,13 @@
             <thead>
                 <tr>
                     <th>Client Name</th>
-
+                    <th>Contact</th>
+                    <th>Gender</th>
+                    <th>Age</th>
                     <th>Added By</th>
                     <th>Date</th>
                     <th>FEE</th>
+                    <th>Nationality</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -30,6 +33,15 @@
                     <tr>
                         <td>
                             <?= $test['clientName']; ?>
+                        </td>
+                        <td>
+                            <?= $test['contact']; ?>
+                        </td>
+                        <td>
+                            <?= $test['gender']; ?>
+                        </td>
+                        <td>
+                            <?= $test['age']; ?>
                         </td>
 
                         <td>
@@ -42,6 +54,9 @@
                             <?= $test['fee']; ?>
                         </td>
                         <td>
+                            <?= $test['country']; ?>
+                        </td>
+                        <td>
                             <a href="<?= base_url('viewTestDetails/' . $test['test_id']); ?>"
                                 class="btn btn-info btn-sm">View Details</a>
                         </td>
@@ -50,6 +65,10 @@
             </tbody>
             <tfoot>
                 <tr class="table-totals">
+
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td>Total:</td>
@@ -57,6 +76,8 @@
                         <?= $totalLabFee ?>
                     </td>
                     <td></td>
+                    <td></td>
+
                 </tr>
             </tfoot>
         </table>

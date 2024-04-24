@@ -248,7 +248,7 @@ class TestModel extends Model
         $builder = $this->db->table('labtest');
         $builder->join('client', 'client.idClient = labtest.clientId');
         $builder->join('users', 'users.ID = labtest.userId');
-        $builder->select('labtest.*, client.client as clientName, users.fName as userName');
+        $builder->select('labtest.*, client.client as clientName, client.contact as contact, client.age as age, client.gender as gender, client.state as country, users.fName as userName');
 
         if (!empty($search)) {
             $builder->groupStart()

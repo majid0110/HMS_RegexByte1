@@ -181,6 +181,9 @@ $routes->get('/reports_form', 'ReportsController::reports_form');
 $routes->get('/appointment_report', 'ReportsController::appointment_report');
 $routes->post('appointment_report', 'ReportsController::appointment_report');
 
+$routes->get('/lab_details', 'ReportsController::lab_details');
+$routes->post('/lab_details', 'ReportsController::lab_details');
+
 $routes->get('/generateExcelAppointments', 'ReportsController::generateExcelAppointments');
 $routes->post('generateExcelAppointments', 'ReportsController::generateExcelAppointments');
 //----------------------------------------------
