@@ -42,6 +42,47 @@ class LabtestdetailsModel extends Model
             ->getResultArray();
     }
 
+
+    public function getTotalLabDetailFee($clientName, $search, $testName, $fromDate, $toDate)
+    {
+        // $businessId = session()->get('businessID');
+        $builder = $this->db->table('labtestdetails');
+        $builder->selectSum('labtestdetails.fee');
+        $builder->join('test_type', 'test_type.testTypeId = labtestdetails.testTypeID');
+        $builder->join('labtest', 'labtest.test_id = labtestdetails.labTestID');
+        $builder->join('client', 'client.idClient = labtest.clientId');
+
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->like('test_type.title', $search)
+                ->orLike('labtestdetails.fee', $search)
+                ->orLike('client.client', $search)
+                ->like('client.contact', $search)
+                ->orLike('client.age', $search)
+                ->orLike('client.gender', $search)
+                ->like('client.state', $search)
+                ->like('client.clientUniqueId', $search)
+                ->orLike('labtest.CreatedAT', $search)
+                ->groupEnd();
+        }
+
+        if (!empty($testName)) {
+            $builder->where('test_type.title', $testName);
+        }
+
+        if (!empty($clientName)) {
+            $builder->where('client.client', $clientName);
+        }
+
+        if (!empty($fromDate) && !empty($toDate)) {
+            $builder->where('labtest.CreatedAT >=', $fromDate)
+                ->where('labtest.CreatedAT <=', $toDate);
+        }
+
+        $query = $builder->get();
+        $result = $query->getRowArray();
+        return $result['fee'] ?? 0;
+    }
     public function searchLabReports($search = null, $testName = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
     {
         $builder = $this->db->table('labtestdetails');

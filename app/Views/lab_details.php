@@ -299,7 +299,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Lab Details Report</h4>
-                                <form action="<?= base_url('generateExcelLabReport'); ?>" method="post">
+                                <form action="<?= base_url('generateExcelLabDetailReport'); ?>" method="post">
                                     <div class="form-group row">
                                         <div>
                                             <div
@@ -405,6 +405,20 @@
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
+                                            <tfoot>
+                                                <tr class="table-totals">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>Total:</td>
+                                                    <td>
+                                                        <?= $LabDetailFee ?>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                            </tfoot>
                                         </table>
                                     </div>
                                     <!-- </div> -->
@@ -463,7 +477,7 @@
                                 if (response.success) {
                                     var cleanedTableContent = response.tableContent.trim();
                                     $('.table-responsive').html(cleanedTableContent);
-                                    $('#total-lab-fee').text(response.totalLabFee);
+                                    $('#total-lab-fee').text(response.LabDetailFee);
                                     console.log(response.pager);
                                 } else {
                                     console.error('Error:', response.error);

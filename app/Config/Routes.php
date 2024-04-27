@@ -131,6 +131,9 @@ $routes->get('/lab_test_form', 'LabController::lab_test_form');
 
 $routes->get('/generateExcelLabReport', 'ReportsController::generateExcelLabReport');
 $routes->post('generateExcelLabReport', 'ReportsController::generateExcelLabReport');
+
+$routes->get('/generateExcelLabDetailReport', 'ReportsController::generateExcelLabDetailReport');
+$routes->post('generateExcelLabDetailReport', 'ReportsController::generateExcelLabDetailReport');
 //routes for generating pdf
 
 $routes->get('/generate_pdf', 'AppointmentController::generatePdf');
