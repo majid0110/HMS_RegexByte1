@@ -168,14 +168,15 @@ $routes->get('/Sales_table', 'SalesController::Sales_table');
 $routes->get('/deleteSales/(:num)', 'SalesController::deleteSales/$1');
 $routes->get('viewServiceDetails/(:num)', 'SalesController::viewServiceDetails/$1');
 $routes->get('sales/deleteService/(:num)', 'SalesController::deleteService/$1');
-$routes->post('sales/deleteService/(:num)', 'SalesController::deleteService/$1');
+$routes->post('sales/deleteService/(:num)', ' ::deleteService/$1');
 $routes->post('SalesController/filterServices', 'SalesController::filterServices');
 $routes->post('SalesController/getAllServices', 'SalesController::getAllServices');
 //$routes->match(['get', 'post'], 'SalesController/getAllServices', 'SalesController::getAllServices');
 
 // $routes->get('deleteSales/(:num)', 'SalesController::deleteSales/$1');
 
-
+$routes->get('/services_details', 'ReportsController::services_details');
+$routes->post('/services_details', 'ReportsController::services_details');
 
 //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Reports Routes

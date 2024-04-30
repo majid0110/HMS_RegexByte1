@@ -151,21 +151,52 @@ class itemsModel extends Model
         return $this->db->table('sectors')->insert($data);
     }
 
+    // public function insertItemWarehouse($data)
+    // {
+    //     $this->db->table('itemswarehouse')->insert($data);
+    //     return $this->db->insertID();
+    // }
+
+    // public function insertItemInventory($formDataInventory)
+    // {
+    //     $this->db->table('itemsinventory')->insert($formDataInventory);
+    //     return $this->db->insertID();
+    // }
+    // public function insertItemExpiry($ItemExipry)
+    // {
+    //     $this->db->table('itemsexpiry')->insert($ItemExipry);
+    //     return $this->db->insertID();
+    // }
+
     public function insertItemWarehouse($data)
     {
-        $this->db->table('itemswarehouse')->insert($data);
-        return $this->db->insertID();
+        try {
+            $this->db->table('itemswarehouse')->insert($data);
+            return $this->db->insertID();
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     public function insertItemInventory($formDataInventory)
     {
-        $this->db->table('itemsinventory')->insert($formDataInventory);
-        return $this->db->insertID();
+        try {
+            $this->db->table('itemsinventory')->insert($formDataInventory);
+            return $this->db->insertID();
+        } catch (\Exception $e) {
+            return false;
+        }
     }
-    public function insertItemExpiry($ItemExipry)
+
+    public function insertItemExpiry($ItemExpiry)
     {
-        $this->db->table('itemsexpiry')->insert($ItemExipry);
-        return $this->db->insertID();
+        try {
+            $this->db->table('itemsexpiry')->insert($ItemExpiry);
+            return $this->db->insertID();
+        } catch (\Exception $e) {
+            return false;
+        }
     }
+
 
 }

@@ -1,4 +1,4 @@
-<?php include 'include_common/head.php'; ?>
+<?php include 'include_common/head1.php'; ?>
 <?php include 'include_common/navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,9 +18,6 @@
     <link rel="stylesheet" href="./public/assets/vendors/typicons/typicons.css">
     <link rel="stylesheet" href="./public/assets/vendors/simple-line-icons/css/simple-line-icons.css">
     <link rel="stylesheet" href="./public/assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
@@ -30,54 +27,73 @@
     <link rel="shortcut icon" href="./public/assets/images/favicon.png" />
 
     <style>
-        .toast {
-            position: fixed;
-            top: 10rem;
-            right: 20px;
-            background-color: orange;
-            color: #fff;
-            padding: 16px 24px;
-            border-radius: 30px;
+        #lab-table tfoot {
+            font-weight: bold;
+            background-color: #f2f2f2;
+        }
+
+        #lab-table tfoot .table-totals td {
+
+            border-top: 2px solid #000;
+
+        }
+
+        .table-container {
+            max-height: 400px;
+            /* Adjust as needed */
+            overflow-y: auto;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -50%;
+            }
+
+            100% {
+                left: 150%;
+            }
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a {
+            display: block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #333;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+        /* Additional Styling */
+        .pagination a {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .pagination a.active {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            transform: translateY(-100%);
-            transition: all 0.5s ease-in-out;
-            z-index: 999;
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .toast.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .toast.success {
-            background-color: #6495ED;
-        }
-
-        .toast.error {
-            background-color: #dc3545;
-        }
-
-        .toast::before {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 10px;
-            border-style: solid;
-            border-color: transparent transparent transparent transparent;
-        }
-
-        .toast.success::before {
-            border-top-color: #6495ED;
-        }
-
-        .toast.error::before {
-            border-top-color: #dc3545;
         }
     </style>
 </head>
@@ -282,143 +298,206 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <?php $successMessage = session()->getFlashdata('success');
-                                $errorMessage = session()->getFlashdata('error'); ?>
-                                <h4 class="card-title">Services Table</h4>
-                                <button type="button" class="btn btn-Primary" data-toggle="modal"
-                                    data-target="#addServiceModal">Add</button>
-                                <a href="<?= base_url('transferItems'); ?>" class="btn btn-Dark">Transfer Items</a>
-                                <hr>
-                                <div class="modal fade" id="addServiceModal" tabindex="-1" role="dialog"
-                                    aria-labelledby="addServiceModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="addServiceModalLabel">Add Service</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
+                                <h4 class="card-title">Service Details Report</h4>
+                                <form action="<?= base_url(''); ?>" method="post">
+                                    <div class="form-group row">
+                                        <div>
+                                            <div
+                                                style="width:100%; display: flex; align-items: center; justify-content: flex-end; gap:10px">
+                                                <button type="submit"
+                                                    style="align-self: flex-end;color: white;background-color: #172D88;border-color: #172D88;height: 33px;font-size: 12px;font-weight: 500;box-sizing: border-box;border: 1px solid #CADDFF;padding: 8px 15px;border-radius: 6px;align-items: center;">
+                                                    <i class="ti-download"> </i>
+                                                    Export
                                                 </button>
-                                            </div>
-                                            <div class="modal-body" id="addServiceModalBody">
-                                                <!-- Form content will be loaded dynamically here -->
+                                                <div class="col-md-3">
+
+                                                    <label>Search</label>
+                                                    <input class="form-control" type="text" name="search"
+                                                        id="searchInput" placeholder="Search">
+                                                </div>
+
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
 
-                                <div class="table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Service Name</th>
-                                                <th>Price</th>
-                                                <th>Status</th>
-                                                <th>Unit</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php foreach ($Services as $Service): ?>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label>By Client</label>
+                                            <div id="the-basics">
+                                                <select class="form-control" name="clientName" id='clientInput'>
+                                                    <option value="">All Clients</option>
+                                                    <?php foreach ($client_names as $client): ?>
+                                                        <option value="<?= $client['client']; ?>">
+                                                            <?= $client['client']; ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>By Payment Method</label>
+                                            <div id="the-basics">
+                                                <select class="form-control" name="payment" id='userInput'>
+                                                    <option value="">All Payment</option>
+                                                    <?php foreach ($payments as $payment): ?>
+                                                        <option value="<?= $payment['idPaymentMethods']; ?>"
+                                                            data-payment-id="<?= $payment['idPaymentMethods']; ?>">
+                                                            <?= $payment['Method']; ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>From</label>
+                                            <input class="form-control" type="date" placeholder="From"
+                                                id="fromDateInput" name="fromDate">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>To</label>
+                                            <input class="form-control" type="date" placeholder="To" id="toDateInput"
+                                                name="toDate">
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="col-12 grid-margin">
+                                    <!-- <div class="table-container"> -->
+                                    <div class="table-responsive">
+                                        <table id="service-table" class="table table-striped">
+
+                                            <thead>
                                                 <tr>
-                                                    <td>
-                                                        <?= $Service['Name']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?= $Service['Price']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?= $Service['status']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?= $Service['name']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <!-- Action buttons: Edit, Delete -->
-                                                        <a href="<?= base_url('editService/' . $Service['idArtMenu']); ?>"
-                                                            class="btn btn-info btn-sm">Edit</a>
-                                                        <a href="<?= base_url('deleteService/' . $Service['idArtMenu']); ?>"
-                                                            onclick="return confirm('Are you sure you want to delete this Service?');"
-                                                            class="btn btn-danger btn-sm">Delete</a>
-                                                    </td>
+                                                    <th>Client</th>
+                                                    <th>Gender</th>
+                                                    <th>Age</th>
+                                                    <th>Contact</th>
+                                                    <th>UniqueID</th>
+                                                    <th>State</th>
+                                                    <th>Service</th>
+                                                    <th>Currancy</th>
+                                                    <th>Method</th>
+                                                    <th>FEE</th>
                                                 </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+
+                                                <?php foreach ($Sales as $Sale): ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?= $Sale['clientName']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['gender']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['age']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['contact']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['unique']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['country']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['name']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['Currency']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['PaymentMethod']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['Sum']; ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- </div> -->
                                 </div>
                             </div>
+                            <div class="pagination-container">
+                                <div class="pagination">
+                                    <?= $pager ?>
+                                </div>
+                            </div>
+                            <hr>
                         </div>
                     </div>
                 </div>
-                <!-- content-wrapper ends -->
-                <!-- partial:./public/assets/partials/_footer.html -->
                 <?php include 'include_common/footer.php'; ?>
-                <!-- partial -->
             </div>
+            <!-- plugins:js -->
+            <script src="./public/assets/vendors/js/vendor.bundle.base.js"></script>
+            <!-- endinject -->
+            <!-- Plugin js for this page -->
+            <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+            <!-- Add this to your HTML file -->
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+            <!-- End plugin js for this page -->
+            <!-- inject:js -->
+            <script>
+                $(document).ready(function () {
+                    $('#searchInput, #userInput, #clientInput, #fromDateInput, #toDateInput').on('input change', function () {
+                        var searchValue = $('#searchInput').val();
+                        var payment = $('#userInput').val();
+                        var clientValue = $('#clientInput').val();
+                        var fromDateValue = $('#fromDateInput').val();
+                        var toDateValue = $('#toDateInput').val();
 
-            <!-- main-panel ends -->
-        </div>
-        <!-- page-body-wrapper ends -->
-    </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="./public/assets/vendors/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script>
-        $(document).ready(function () {
-            function showToast(message, type) {
-                const toastContainer = document.createElement('div');
-                toastContainer.classList.add('toast', type);
-                toastContainer.textContent = message;
-                document.body.appendChild(toastContainer);
+                        console.log('Search Value:', searchValue);
+                        console.log('Test Value:', payment);
+                        console.log('Client Value:', clientValue);
+                        console.log('From Date Value:', fromDateValue);
+                        console.log('To Date Value:', toDateValue);
 
-                toastContainer.classList.add('show');
-
-                setTimeout(function () {
-                    toastContainer.classList.remove('show');
-                    setTimeout(function () {
-                        toastContainer.remove();
-                    }, 500);
-                }, 5000);
-            }
-            <?php if ($successMessage = session()->getFlashdata('success')): ?>
-                showToast('<?= $successMessage ?>', 'success');
-            <?php endif; ?>
-            <?php if ($errorMessage = session()->getFlashdata('error')): ?>
-                showToast('<?= $errorMessage ?>', 'error');
-            <?php endif; ?>
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            // Handle button click
-            $('.btn-Primary').click(function () {
-                // Get the form content dynamically (you may need to adjust the URL)
-                $.get('<?= base_url('Services_form1') ?>', function (data) {
-                    // Inject the form content into the modal body
-                    $('#addServiceModalBody').html(data);
-                    // Show the modal
-                    $('#addServiceModal').modal('show');
+                        $.ajax({
+                            type: 'POST',
+                            url: '<?= base_url('services_details'); ?>',
+                            data: {
+                                search: searchValue,
+                                payment: payment,
+                                clientName: clientValue,
+                                fromDate: fromDateValue,
+                                toDate: toDateValue
+                            },
+                            dataType: 'json',
+                            success: function (response) {
+                                if (response.success) {
+                                    var cleanedTableContent = response.tableContent.trim();
+                                    $('.table-responsive').html(cleanedTableContent);
+                                    $('#total-lab-fee').text(response.LabDetailFee);
+                                    console.log(response.pager);
+                                } else {
+                                    console.error('Error:', response.error);
+                                }
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                console.error('AJAX Error:', textStatus, errorThrown);
+                            }
+                        });
+                    });
                 });
-            });
-        });
-    </script>
+            </script>
 
 
 
-    <script src="./public/assets/js/off-canvas.js"></script>
-    <script src="./public/assets/js/hoverable-collapse.js"></script>
-    <script src="./public/assets/js/template.js"></script>
-    <script src="./public/assets/js/settings.js"></script>
-    <script src="./public/assets/js/todolist.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page-->
-    <!-- End custom js for this page-->
+
+            <script src="./public/assets/js/off-canvas.js"></script>
+            <script src="./public/assets/js/hoverable-collapse.js"></script>
+            <script src="./public/assets/js/template.js"></script>
+            <script src="./public/assets/js/settings.js"></script>
+            <script src="./public/assets/js/todolist.js"></script>
+            <!-- endinject -->
+            <!-- Custom js for this page-->
+            <!-- End custom js for this page-->
 </body>
 
 

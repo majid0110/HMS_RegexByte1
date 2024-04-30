@@ -48,7 +48,8 @@ class ClientModel extends Model
 
     public function getClientNames()
     {
-        return $this->select('idClient, client')->where('status', 'Active')->findAll();
+        $businessId = session()->get('businessID');
+        return $this->select('idClient, client')->where('status', 'Active')->where('idBusiness', $businessId)->findAll();
     }
 
     public function hasBookings($idClient)

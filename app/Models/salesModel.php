@@ -406,7 +406,7 @@ class salesModel extends Model
             $builder->where('invoices.Date >=', $fromDate)
                 ->where('invoices.Date <=', $toDate);
         }
-        $builder->orderBy('invoices.Date', 'DESC');
+        $builder->orderBy('invoices.idReceipts', 'DESC');
         $builder->limit($perPage, $offset);
         $query = $builder->get();
         return $query->getResultArray();
@@ -454,5 +454,94 @@ class salesModel extends Model
 
         return $pagerLinks;
     }
+
+
+    public function getSalesDetailsReport($search = null, $payment = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
+    {
+        $businessId = session()->get('businessID');
+        $builder = $this->db->table('invoicedetail');
+        $builder->join('invoices', 'invoices.idReceipts = invoicedetail.idReceipts');
+        $builder->join('client', 'client.idClient = invoices.idClient');
+        $builder->join('currency', 'currency.id = invoices.idCurrency');
+        $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
+        $builder->select('invoicedetail.*, client.clientUniqueId as unique, client.client as clientName, client.contact as contact, client.age as age, client.gender as gender, client.state as country , currency.Currency, paymentmethods.Method as PaymentMethod');
+
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->orLike('client.client', $search)
+                ->like('client.contact', $search)
+                ->orLike('client.age', $search)
+                ->orLike('client.gender', $search)
+                ->like('client.state', $search)
+                ->like('paymentmethods.idPaymentMethods', $search)
+                ->like('client.clientUniqueId', $search)
+                ->groupEnd();
+        }
+
+        if (!empty($payment)) {
+            $builder->where('paymentmethods.idPaymentMethods', $payment);
+        }
+
+        if (!empty($clientName)) {
+            $builder->where('client.client', $clientName);
+        }
+
+        if (!empty($fromDate) && !empty($toDate)) {
+            $builder->where('invoices.timeStamp >=', $fromDate)
+                ->where('invoices.timeStamp <=', $toDate);
+        }
+
+        $builder->where('invoices.idBusiness', $businessId);
+        $builder->orderBy('idInvoiceDetail', 'DESC');
+        $builder->limit($perPage, $offset);
+        $result = $builder->get()->getResultArray();
+
+        return $result;
+    }
+
+    public function getdetailPager($search = null, $payment = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $currentPage = 1)
+    {
+        $businessId = session()->get('businessID');
+        $builder = $this->db->table('invoicedetail');
+        $builder->join('invoices', 'invoices.idReceipts = invoicedetail.idReceipts');
+        $builder->join('client', 'client.idClient = invoices.idClient');
+        $builder->join('currency', 'currency.id = invoices.idCurrency');
+        $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
+        $builder->select('invoicedetail.*, client.clientUniqueId as unique, client.client as clientName, client.contact as contact, client.age as age, client.gender as gender, client.state as country , currency.Currency, paymentmethods.Method as PaymentMethod');
+
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->orLike('client.client', $search)
+                ->like('client.contact', $search)
+                ->orLike('client.age', $search)
+                ->orLike('client.gender', $search)
+                ->like('client.state', $search)
+                ->like('paymentmethods.idPaymentMethods', $search)
+                ->like('client.clientUniqueId', $search)
+                ->groupEnd();
+        }
+
+        if (!empty($payment)) {
+            $builder->where('paymentmethods.idPaymentMethods', $payment);
+        }
+
+        if (!empty($clientName)) {
+            $builder->where('client.client', $clientName);
+        }
+
+        if (!empty($fromDate) && !empty($toDate)) {
+            $builder->where('invoices.timeStamp >=', $fromDate)
+                ->where('invoices.timeStamp <=', $toDate);
+        }
+
+        $totalQuery = $builder->get();
+        $total = $totalQuery->getNumRows();
+
+        $pager = service('pager');
+        $pagerLinks = $pager->makeLinks($currentPage, $perPage, $total, 'default_full');
+
+        return $pagerLinks;
+    }
+
 
 }

@@ -169,12 +169,68 @@ class itemsController extends Controller
     //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Main Logic
 //-------------------------------------------------------------------------------------------------------------------------
+    // public function saveitems()
+    // {
+    //     $session = \Config\Services::session();
+
+
+    //     $request = \Config\Services::request();
+    //     $businessID = $session->get('businessID');
+    //     $idWarehouse = $this->request->getPost('warehouse');
+    //     $Inventory = $this->request->getPost('inventory');
+
+    //     $formData = [
+    //         'barcode' => $this->request->getPost('bcode'),
+    //         'Code' => $this->request->getPost('code'),
+    //         'Name' => $this->request->getPost('name'),
+    //         'Cost' => $this->request->getpost('cost'),
+    //         'Minimum' => $this->request->getpost('min'),
+    //         'Notes' => $this->request->getPost('notes'),
+    //         'idBusiness' => $businessID,
+    //         'idTAX' => $this->request->getPost('tax'),
+    //         'idCategories' => $this->request->getPost('category'),
+    //         'Unit' => $this->request->getPost('Unit'),
+    //         'idWarehouse' => $idWarehouse,
+    //         'status' => $this->request->getPost('cstatus'),
+    //         'characteristic1' => $this->request->getPost('char_1'),
+    //         'Characteristic2' => $this->request->getPost('char_2'),
+    //         'isSendEmail' => 1,
+    //         'isSendExpire' => 0,
+
+    //     ];
+
+
+    //     $itemsModel = new itemsModel();
+    //     $insertedItemId = $itemsModel->insertItemWarehouse($formData);
+
+    //     $formDataInventory = [
+    //         'idItem' => $insertedItemId,
+    //         'inventory' => $Inventory,
+    //         'idWarehouse' => $idWarehouse,
+    //     ];
+
+    //     $IdInventory = $itemsModel->insertItemInventory($formDataInventory);
+
+    //     $ItemExipry = [
+    //         'idInventory' => $IdInventory,
+    //         'inventory' => $Inventory,
+    //         'expiryDate' => $this->request->getPost('expiry'),
+    //     ];
+
+    //     $itemsModel->insertItemExpiry($ItemExipry);
+
+    //     $itemsModel->insertItemInventory($formDataInventory);
+
+    //     session()->setFlashdata('success', 'Item Added..!!');
+    //     return redirect()->to(base_url("/items_table"));
+    // }
+
+
     public function saveitems()
     {
         $session = \Config\Services::session();
-
-
         $request = \Config\Services::request();
+
         $businessID = $session->get('businessID');
         $idWarehouse = $this->request->getPost('warehouse');
         $Inventory = $this->request->getPost('inventory');
@@ -196,34 +252,30 @@ class itemsController extends Controller
             'Characteristic2' => $this->request->getPost('char_2'),
             'isSendEmail' => 1,
             'isSendExpire' => 0,
-
         ];
 
-
         $itemsModel = new itemsModel();
-        $insertedItemId = $itemsModel->insertItemWarehouse($formData);
 
+
+        $insertedItemId = $itemsModel->insertItemWarehouse($formData);
         $formDataInventory = [
             'idItem' => $insertedItemId,
             'inventory' => $Inventory,
             'idWarehouse' => $idWarehouse,
         ];
-
         $IdInventory = $itemsModel->insertItemInventory($formDataInventory);
 
-        $ItemExipry = [
+        $ItemExpiry = [
             'idInventory' => $IdInventory,
             'inventory' => $Inventory,
             'expiryDate' => $this->request->getPost('expiry'),
         ];
-
-        $itemsModel->insertItemExpiry($ItemExipry);
-
-        $itemsModel->insertItemInventory($formDataInventory);
+        $itemsModel->insertItemExpiry($ItemExpiry);
 
         session()->setFlashdata('success', 'Item Added..!!');
         return redirect()->to(base_url("/items_table"));
     }
+
 
     public function deleteitem($idItem)
     {

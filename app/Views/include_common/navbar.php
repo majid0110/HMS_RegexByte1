@@ -132,7 +132,7 @@
             <span class="badge badge-pill badge-primary float-right">View all</span>
           </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
+          <!-- <a class="dropdown-item preview-item">
             <div class="preview-thumbnail">
               <img src="./public/assets/images_s/faces/face10.jpg" alt="image" class="img-sm profile-pic">
             </div>
@@ -158,7 +158,7 @@
               <p class="preview-subject ellipsis font-weight-medium text-dark">Travis Jenkins </p>
               <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
             </div>
-          </a>
+          </a> -->
         </div>
       </li>
       <li class="nav-item dropdown d-none d-lg-block user-dropdown">

@@ -221,13 +221,15 @@ class ServiceController extends Controller
 
         $existingItems = $servicesModel->getServices();
 
+        $existingRatios = $servicesModel->getRatio();
+
         $db->transBegin();
 
         $dataToInsertArtmenu = [];
         $dataToInsertRatio = [];
 
         foreach ($activeItems as $item) {
-            if (!$this->isItemExistsInArtmenu($item, $existingItems)) {
+            if (!$this->isItemExistsInArtmenu($item, $existingItems) && !$this->isItemExistsInRatio($item, $existingRatios)) {
                 $dataToInsertArtmenu[] = [
                     'Barcode' => $item['barcode'],
                     'Code' => $item['Code'],
@@ -275,6 +277,16 @@ class ServiceController extends Controller
         $db->transCommit();
 
         return redirect()->to(base_url('Services_table'));
+    }
+
+    private function isItemExistsInRatio($item, $existingRatios)
+    {
+        foreach ($existingRatios as $existingRatio) {
+            if ($existingRatio['idItem'] === $item['idItem'] && $existingRatio['idBusiness'] === $item['idBusiness']) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

@@ -723,6 +723,51 @@ class ReportsController extends Controller
         exit;
     }
 
+    //------------------------------------- Service Details Report
+
+    public function services_details()
+    {
+        $clientModel = new ClientModel();
+        $data['client_names'] = $clientModel->getClientNames();
+
+        $sales = new SalesModel();
+        $data['payments'] = $sales->getpayment();
+
+        $search = $this->request->getPost('search');
+        $payment = $this->request->getPost('payment');
+        $clientName = $this->request->getPost('clientName');
+        $fromDate = $this->request->getPost('fromDate');
+        $toDate = $this->request->getPost('toDate');
+
+        $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+        $perPage = 20;
+        $offset = ($currentPage - 1) * $perPage;
+
+        $Model = new SalesModel();
+        $data['Sales'] = $Model->getSalesDetailsReport($search, $payment, $clientName, $fromDate, $toDate, $perPage, $offset);
+        $data['pager'] = $Model->getdetailPager($search, $payment, $clientName, $fromDate, $toDate, $perPage, $currentPage);
+
+        if ($this->request->isAJAX()) {
+            try {
+                $tableContent = view('serviceDetailsReport', $data);
+                return $this->response->setJSON([
+                    'success' => true,
+                    'tableContent' => $tableContent,
+                    'pager' => $data['pager'],
+                    // 'LabDetailFee' => $data['LabDetailFee'],
+
+                ]);
+            } catch (\Exception $e) {
+                return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+            }
+        } else {
+            return view('services_details.php', $data);
+
+        }
+
+
+    }
+
 
 
 

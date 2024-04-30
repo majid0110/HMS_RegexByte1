@@ -86,6 +86,18 @@ class ServicesModel extends Model
             ->getResultArray();
     }
 
+    public function getRatio()
+    {
+        $businessID = session()->get('businessID');
+        $builder = $this->db->table('ratio');
+        return $builder->select('*')
+            ->where('idBusiness', $businessID)
+            ->get()
+            ->getResultArray();
+    }
+
+
+
     // public function insertBatch(?array $data = null, ?bool $escape = null, int $batchSize = 100, bool $testing = false)
     // {
     //     $builder = $this->db->table('artmenu');
