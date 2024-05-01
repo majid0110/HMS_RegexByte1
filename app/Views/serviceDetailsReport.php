@@ -66,6 +66,23 @@
                     </tr>
                 <?php endforeach; ?>
             </tbody>
+            <tfoot>
+                <tr class="table-totals">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Total:</td>
+                    <td>
+                        <?= $ServiceDetailFee ?>
+                    </td>
+
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>

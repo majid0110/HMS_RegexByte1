@@ -73,7 +73,7 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
             <?php if ($canView): ?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('labtest_form'); ?>">
-                        <i class="menu-icon mdi mdi-pharmacy"></i>
+                        <i class="menu-icon mdi mdi-hospital-building"></i>
                         <span class="menu-title">
                             <?= $module['module_name'] ?>
                         </span>
@@ -258,7 +258,7 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
             <?php if ($canView): ?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('configure'); ?>">
-                        <i class="menu-icon mdi mdi-settings"></i>
+                        <i class="menu-icon mdi mdi-lumx"></i>
                         <span class="menu-title">
                             <?= $module['module_name'] ?>
                         </span>
@@ -352,18 +352,12 @@ $modulePermissions = $session->get('module_permissions'); // Assuming you store 
     </ul>
 
 
-    <div class="Version" style="
-    text-align: center;
-    font-size: small;
-    font-family: monospace;
-    color: #021326;
-    border-top: #f1e2e2 solid;
-    border-width: thin;
-">
+    <!-- <div class="Version"
+        style="text-align: center; font-size: small; font-family: monospace; color: #021326; border-top: #f1e2e2 solid; border-width: thin;">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
             <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center" style="margin: 4rem;"> Version
                 : 1.0</span>
         </div>
-    </div>
+    </div> -->
 
 </nav>

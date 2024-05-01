@@ -131,11 +131,53 @@ class ServicesModel extends Model
     }
 
 
-
     public function deleteService($idArtMenu)
     {
-        return $this->where('idArtMenu', $idArtMenu)->delete();
+        $db = \Config\Database::connect();
+
+        $db->transStart();
+
+        $db->table('ratio')->where('idArtMenu', $idArtMenu)->delete();
+
+        $this->where('idArtMenu', $idArtMenu)->delete();
+
+        $db->table('ratio')->where('idArtMenu', $idArtMenu)->delete();
+
+        $db->transComplete();
+
+        return $db->transStatus();
     }
+
+    // public function deleteService($idArtMenu, $code, $name)
+    // {
+    //     $db = \Config\Database::connect();
+
+    //     $db->transStart(); // Start transaction
+
+    //     // Fetch idItem from itemswarehouse table based on Code and Name
+    //     $idItem = $db->table('itemswarehouse')
+    //         ->select('idItem')
+    //         ->where('Code', $code)
+    //         ->where('Name', $name)
+    //         ->get()
+    //         ->getRowArray()['idItem'];
+
+    //     if (!$idItem) {
+    //         // Item not found, return false
+    //         return false;
+    //     }
+
+    //     $db->table('ratio')->where('idArtMenu', $idArtMenu)->where('idItem', $idItem)->delete();
+    //     $this->where('idArtMenu', $idArtMenu)->delete();
+
+    //     // Delete from ratio table where both idArtMenu and idItem match
+
+
+    //     $db->transComplete(); // Complete transaction
+
+    //     return $db->transStatus(); // Return transaction status
+    // }
+
 
     public function getAppointments()
     {

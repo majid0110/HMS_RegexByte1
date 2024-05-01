@@ -417,6 +417,23 @@
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
+                                            <tfoot>
+                                                <tr class="table-totals">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>Total:</td>
+                                                    <td>
+                                                        <?= $ServiceDetailFee ?>
+                                                    </td>
+
+                                                </tr>
+                                            </tfoot>
                                         </table>
                                     </div>
                                     <!-- </div> -->
@@ -473,7 +490,7 @@
                                 if (response.success) {
                                     var cleanedTableContent = response.tableContent.trim();
                                     $('.table-responsive').html(cleanedTableContent);
-                                    $('#total-lab-fee').text(response.LabDetailFee);
+                                    $('#total-Service-fee').text(response.ServiceDetailFee);
                                     console.log(response.pager);
                                 } else {
                                     console.error('Error:', response.error);

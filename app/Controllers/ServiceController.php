@@ -149,22 +149,43 @@ class ServiceController extends Controller
     //     }
 
     // }
+    // public function deleteService($idArtMenu)
+    // {
+
+    //     try {
+    //         $Model = new ServicesModel();
+    //         $Model->deleteService($idArtMenu);
+    //         session()->setFlashdata('success', 'Service deleted...!!');
+
+    //         return redirect()->to(base_url("/Services_table"));
+
+    //     } catch (\Exception $e) {
+    //         log_message('error', 'Error retrieving data: ' . $e->getMessage());
+    //         session()->setFlashdata('error', 'DataBase Error: ' . $e->getMessage());
+    //         return redirect()->to(base_url("/Services_table"));
+    //     }
+    // }
+
     public function deleteService($idArtMenu)
     {
-
         try {
             $Model = new ServicesModel();
-            $Model->deleteService($idArtMenu);
-            session()->setFlashdata('success', 'Service deleted...!!');
+            $deleted = $Model->deleteService($idArtMenu);
+
+            if ($deleted) {
+                session()->setFlashdata('success', 'Service deleted.');
+            } else {
+                session()->setFlashdata('error', 'Failed to delete service.');
+            }
 
             return redirect()->to(base_url("/Services_table"));
-
         } catch (\Exception $e) {
-            log_message('error', 'Error retrieving data: ' . $e->getMessage());
-            session()->setFlashdata('error', 'DataBase Error: ' . $e->getMessage());
+            log_message('error', 'Error deleting service: ' . $e->getMessage());
+            session()->setFlashdata('error', 'Database Error: ' . $e->getMessage());
             return redirect()->to(base_url("/Services_table"));
         }
     }
+
 
     public function updateService($idArtMenu)
     {

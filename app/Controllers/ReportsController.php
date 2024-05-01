@@ -739,11 +739,14 @@ class ReportsController extends Controller
         $fromDate = $this->request->getPost('fromDate');
         $toDate = $this->request->getPost('toDate');
 
+        $Model = new SalesModel();
+        $data['ServiceDetailFee'] = $Model->getTotalServiceDetailFee($clientName, $search, $payment, $fromDate, $toDate);
+
         $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
         $perPage = 20;
         $offset = ($currentPage - 1) * $perPage;
 
-        $Model = new SalesModel();
+
         $data['Sales'] = $Model->getSalesDetailsReport($search, $payment, $clientName, $fromDate, $toDate, $perPage, $offset);
         $data['pager'] = $Model->getdetailPager($search, $payment, $clientName, $fromDate, $toDate, $perPage, $currentPage);
 
@@ -754,7 +757,7 @@ class ReportsController extends Controller
                     'success' => true,
                     'tableContent' => $tableContent,
                     'pager' => $data['pager'],
-                    // 'LabDetailFee' => $data['LabDetailFee'],
+                    'ServiceDetailFee' => $data['ServiceDetailFee'],
 
                 ]);
             } catch (\Exception $e) {
