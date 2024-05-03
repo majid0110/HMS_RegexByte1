@@ -154,11 +154,11 @@
             </tr>
 
             <?php
-            if (!empty ($services)) {
+            if (!empty($services)) {
                 foreach ($services as $service) {
                     echo '<tr>';
                     echo '<td style="margin-left: 20px;">' . $service['serviceName'] . '</td>';
-                    echo '<td  style="text-align: right;padding-left:40%;">1</td>';
+                    echo '<td  style="text-align: right;padding-left:40%;">' . $service['quantity'] . '</td>';
                     echo '<td style="text-align: right; padding-left:4%;">' . number_format($service['fee'], 2) . '</td>';
                     echo '</tr>';
                 }
@@ -175,7 +175,13 @@
             <tr>
                 <td style="width: 50%; text-align: left;">&nbsp;</td>
                 <td style="width: 25%; text-align: right; padding-right:10px;"><b>Total</b> PKR:
-                    <?= $invoiceData['Value']; ?>.00
+                    <?php
+                    $totalAmount = 0;
+                    foreach ($services as $service) {
+                        $totalAmount += $service['quantity'] * $service['fee'];
+                    }
+                    echo number_format($totalAmount, 2);
+                    ?>
                 </td>
             </tr>
         </table>

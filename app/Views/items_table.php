@@ -233,6 +233,8 @@
                                 <h4 class="card-title">Items</h4>
                                 <button type="button" class="btn btn-Primary" id="add-item-btn" data-toggle="modal"
                                     data-target="#addItemModal">Add</button>
+                                <a href="<?= base_url('transferItems'); ?>" class="btn btn-Dark">Transfer Items</a>
+
                                 <hr>
 
                                 <div class="table-responsive">

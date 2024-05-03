@@ -408,8 +408,11 @@
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>Service Type</th>
+                          <th>Service</th>
                           <th>Amount</th>
+                          <th>Quantity</th>
+                          <th>Discount</th>
+                          <th>Total</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
@@ -444,23 +447,21 @@
   <script src="../../vendors/js/vendor.bundle.base.js"></script>
 
   <script>
-
     function calculateTotalFee() {
       var totalFee = 0;
 
       $('#serviceTableBody tr').each(function () {
-        var fee = parseFloat($(this).find('td:eq(1)').text());
-        if (!isNaN(fee)) {
-          totalFee += fee;
+        var quantity = parseFloat($(this).find('.editable-quantity').text());
+        var fee = parseFloat($(this).find('.editable-fee').text());
+        var discount = parseFloat($(this).find('.editable-discount').text());
+        var rowTotal = quantity * fee * (1 - discount / 100);
+        if (!isNaN(rowTotal)) {
+          totalFee += rowTotal;
         }
       });
 
       $('#totalFee').text(totalFee.toFixed(2));
     }
-
-    $('#serviceTableBody').on('input', 'td[contenteditable="true"]', function () {
-      calculateTotalFee();
-    });
 
     function addServiceRow(serviceType, serviceTypeId, serviceFee) {
       var exists = false;
@@ -476,7 +477,9 @@
       if (!exists) {
         var newRow = '<tr>' +
           '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
-          '<td contenteditable="true">' + serviceFee + '</td>' +
+          '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
+          '<td contenteditable="true" class="editable-quantity">1</td>' +
+          '<td contenteditable="true" class="editable-discount">0</td>' +
           '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)">Remove</button></td>' +
           '</tr>';
         $('#serviceTableBody').append(newRow);
@@ -487,15 +490,15 @@
     }
 
     $(document).ready(function () {
+      $('#serviceTableBody').on('input', 'td[contenteditable="true"]', function () {
+        calculateTotalFee();
+      });
 
       $('#serviceTypeList .badge').click(function () {
         var serviceTypeRow = $(this).closest('tr');
         var serviceTypeId = serviceTypeRow.data('service-type-id');
         var serviceType = serviceTypeRow.find('.title').text().trim();
         var serviceFee = serviceTypeRow.find('.fee').text().trim();
-        // console.log("Service Type in badge: ", serviceType);
-        // console.log("Service Type ID in badge: ", serviceTypeId);
-        // console.log("Service Fee in badge: ", serviceFee);
         addServiceRow(serviceType, serviceTypeId, serviceFee);
         calculateTotalFee();
       });
@@ -506,19 +509,10 @@
           var serviceTypeId = serviceTypeRow.data('service-type-id');
           var serviceType = serviceTypeRow.find('.title').text().trim();
           var serviceFee = serviceTypeRow.find('.fee').text().trim();
-          // console.log("Service Type: ", serviceType);
-          // console.log("Service Type ID: ", serviceTypeId);
-          // console.log("Service Fee: ", serviceFee);
           addServiceRow(serviceType, serviceTypeId, serviceFee);
           calculateTotalFee();
         });
       }
-
-      // Filter services based on categories
-      // $('.btn-category').click(function () {
-      //   var categoryId = $(this).data('category-id');
-      //   filterServices(categoryId);
-      // });
 
       $('#categoryDropdown').change(function () {
         var categoryId = $(this).val();
@@ -536,29 +530,6 @@
           }
         });
       }
-
-      $('#search').on('input', function () {
-        var searchText = $(this).val().toLowerCase();
-        $('#serviceTypeList tbody tr').each(function () {
-          var serviceName = $(this).find('.title').text().toLowerCase();
-          var servicePrice = $(this).find('.fee').text().toLowerCase();
-          if (serviceName.includes(searchText) || servicePrice.includes(searchText)) {
-            $(this).show();
-          } else {
-            $(this).hide();
-          }
-        });
-      });
-
-      $('.btn-category').click(function () {
-        var categoryId = $(this).data('category-id');
-
-        $('.btn-category.active').removeClass('active');
-
-        $(this).addClass('active');
-
-        filterServices(categoryId);
-      });
 
       $('#insertBtn').off('click').on('click', function () {
         insertData();
@@ -623,6 +594,9 @@
         var exchange = $('#exchangeInput').val();
         var totalFee = parseFloat($('#totalFee').text());
 
+        var quantity = parseFloat($('#quantityInput').val());
+
+        console.log("Quantity: ", quantity);
         // console.log("Client ID: ", clientId);
         // console.log("Client Name: ", clientName);
         // console.log("Payment Method ID: ", paymentMethodId);
@@ -641,16 +615,16 @@
           var serviceTypeId = serviceTypeRow.find('td:first').data('service-type-id');
           var serviceName = serviceTypeRow.find('td:eq(0)').text();
           var fee = parseFloat(serviceTypeRow.find('td:eq(1)').text());
+          var quantity = parseFloat(serviceTypeRow.find('.editable-quantity').text());
+          var discount = parseFloat(serviceTypeRow.find('.editable-discount').text());
 
           services.push({
             serviceTypeId: serviceTypeId,
             serviceName: serviceName,
             fee: fee,
+            quantity: quantity,
+            discount: discount
           });
-
-          // console.log("Service Type ID After Push: ", serviceTypeId);
-          // console.log("Service Name After Push: ", serviceName);
-          // console.log("Fee After Push: ", fee);
         });
         $.ajax({
           method: 'POST',
