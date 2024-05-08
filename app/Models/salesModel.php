@@ -464,7 +464,7 @@ class salesModel extends Model
         $builder->join('client', 'client.idClient = invoices.idClient');
         $builder->join('currency', 'currency.id = invoices.idCurrency');
         $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
-        $builder->select('invoicedetail.*, client.clientUniqueId as unique, client.client as clientName, client.contact as contact, client.age as age, client.gender as gender, client.state as country , currency.Currency, paymentmethods.Method as PaymentMethod');
+        $builder->select('invoicedetail.*, invoices.invOrdNum as Order, client.client as clientName, client.contact as contact, client.age as age, client.gender as gender, client.state as country , currency.Currency, paymentmethods.Method as PaymentMethod');
 
         if (!empty($search)) {
             $builder->groupStart()

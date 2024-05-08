@@ -39,4 +39,7 @@ class InvoiceDetailsModel extends Model
             $builder->update();
         }
     }
+
+
+    
 }

@@ -56,4 +56,33 @@ class InvoiceModel extends Model
             ->get()
             ->getRowArray()['invOrdNum'] ?? null;
     }
+
+    // public function updateItemInventory($idItem, $quantity)
+    // {
+    //     $builder = $this->db->table('itemsinventory');
+    //     $builder->set('inventory', "inventory - $quantity", false); // Subtract $quantity from inventory column
+    //     $builder->where('idItem', $idItem);
+    //     $builder->update();
+    // }
+
+    public function updateItemInventory($idItem, $quantity)
+{
+    $db = \Config\Database::connect();
+    $builder = $db->table('itemsinventory');
+
+    // First, fetch the current inventory value
+    $currentInventory = $builder->select('inventory')
+        ->where('idItem', $idItem)
+        ->get()
+        ->getRowArray();
+
+    if ($currentInventory) {
+        $newInventory = $currentInventory['inventory'] - $quantity;
+
+        // Then, update the inventory with the new value
+        $builder->set('inventory', $newInventory)
+            ->where('idItem', $idItem)
+            ->update();
+    }
+}
 }

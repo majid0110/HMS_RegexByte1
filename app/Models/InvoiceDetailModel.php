@@ -23,4 +23,26 @@ class InvoiceDetailModel extends Model
         'idSummaryInvoice',
         'Discount'
     ];
+
+    public function updateItemInventory($idItem, $quantity)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('itemsinventory');
+
+        $builder->set('inventory', 'inventory - ' . $quantity, false)
+            ->where('idItem', $idItem)
+            ->update();
+    }
+
+    public function getIdItemByIdArtMenu($idArtMenu, $idBusiness)
+{
+    $db = \Config\Database::connect();
+    $builder = $db->table('ratio');
+
+    return $builder->select('idItem, ratio')
+        ->where('idArtMenu', $idArtMenu)
+        ->where('idBusiness', $idBusiness)
+        ->get()
+        ->getRowArray();
+}
 }

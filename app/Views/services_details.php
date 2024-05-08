@@ -368,22 +368,45 @@
 
                                             <thead>
                                                 <tr>
+                                                <th>Invoice</th>
+                                                <th>code</th>
+                                                <th>Service</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <th>Sum</th>
+                                                <th>discount</th>
                                                     <th>Client</th>
                                                     <th>Gender</th>
-                                                    <th>Age</th>
-                                                    <th>Contact</th>
-                                                    <th>UniqueID</th>
                                                     <th>State</th>
-                                                    <th>Service</th>
-                                                    <th>Currancy</th>
                                                     <th>Method</th>
-                                                    <th>FEE</th>
+                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>
 
                                                 <?php foreach ($Sales as $Sale): ?>
                                                     <tr>
+                                                    <td>
+                                                            <?= $Sale['Order']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['idInvoiceDetail']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['name']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['Price']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['Quantity']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['Sum']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['Discount']; ?>
+                                                        </td>
                                                         <td>
                                                             <?= $Sale['clientName']; ?>
                                                         </td>
@@ -391,29 +414,13 @@
                                                             <?= $Sale['gender']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $Sale['age']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $Sale['contact']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $Sale['unique']; ?>
-                                                        </td>
-                                                        <td>
                                                             <?= $Sale['country']; ?>
                                                         </td>
-                                                        <td>
-                                                            <?= $Sale['name']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $Sale['Currency']; ?>
-                                                        </td>
+
                                                         <td>
                                                             <?= $Sale['PaymentMethod']; ?>
                                                         </td>
-                                                        <td>
-                                                            <?= $Sale['Sum']; ?>
-                                                        </td>
+                                                        
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
@@ -423,14 +430,16 @@
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
                                                     <td>Total:</td>
                                                     <td>
                                                         <?= $ServiceDetailFee ?>
                                                     </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    
 
                                                 </tr>
                                             </tfoot>
