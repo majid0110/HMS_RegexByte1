@@ -229,12 +229,20 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-
                                 <h4 class="card-title">Items</h4>
-                                <button type="button" class="btn btn-Primary" id="add-item-btn" data-toggle="modal"
-                                    data-target="#addItemModal">Add</button>
-                                <a href="<?= base_url('transferItems'); ?>" class="btn btn-Dark">Transfer Items</a>
-
+                                <span>
+                                    <form action="<?= base_url('transferItems') ?>" method="post"
+                                        enctype="multipart/form-data">
+                                        <div class="form-group d-flex align-items-end"
+                                            style="margin-left: 30rem;margin-bottom: -4rem;">
+                                            <input type="file" name="excel_file" class="form-control" required
+                                                style=" width: auto; height: auto;">
+                                            <button type=" submit" class="btn btn-primary ms-2">Import Excel</button>
+                                        </div>
+                                    </form>
+                                    <button type="button" class="btn btn-primary" id="add-item-btn" data-toggle="modal"
+                                        data-target="#addItemModal">Add</button>
+                                </span>
                                 <hr>
 
                                 <div class="table-responsive">

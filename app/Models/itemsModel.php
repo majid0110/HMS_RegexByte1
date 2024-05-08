@@ -198,5 +198,22 @@ class itemsModel extends Model
         }
     }
 
+    public function getCategoryByName($categoryName, $businessID)
+    {
+        $result = $this->db->table('catart')
+            ->select('*')
+            ->where('name', $categoryName)
+            ->where('idBusiness', $businessID)
+            ->get()
+            ->getRowArray();
+
+        return $result ?: null;
+    }
+
+    public function insertCategory($newCategory)
+    {
+        $this->db->table('catart')->insert($newCategory);
+        return $this->db->insertID();
+    }
 
 }

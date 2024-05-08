@@ -13,6 +13,7 @@ use App\Models\SectorsModel;
 use App\Models\itemsModel;
 use App\Models\DoctorModel;
 use Mpdf\Mpdf;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class itemsController extends Controller
 {
@@ -276,6 +277,79 @@ class itemsController extends Controller
         return redirect()->to(base_url("/items_table"));
     }
 
+    public function transferItems()
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+
+        $file = $this->request->getFile('excel_file');
+
+
+        if ($file->isValid() && !$file->hasMoved()) {
+            $excelReader = IOFactory::createReaderForFile($file->getTempName());
+            $spreadsheet = $excelReader->load($file->getTempName());
+            $worksheet = $spreadsheet->getActiveSheet();
+            $rows = $worksheet->toArray();
+
+            $itemsModel = new ItemsModel();
+
+            foreach ($rows as $key => $row) {
+                if ($key === 0 || empty(array_filter($row))) {
+                    continue;
+                }
+
+                $categoryName = $row[3];
+                $category = $itemsModel->getCategoryByName($categoryName, $businessID);
+
+                if ($category) {
+                    $idCatArt = $category['idCatArt'];
+                } else {
+                    $newCategory = [
+                        'name' => $categoryName,
+                        'idSector' => 3,
+                        'notes' => null,
+                        'idBusiness' => $businessID,
+                    ];
+                    $idCatArt = $itemsModel->insertCategory($newCategory);
+                }
+
+                $formData = [
+                    'barcode' => $row[0],
+                    'Name' => $row[1],
+                    'Notes' => $row[2],
+                    'idCategories' => $idCatArt,
+                    'idTAX' => $row[4],
+                    'idWarehouse' => $row[5],
+                    'Unit' => $row[6],
+                    'Cost' => $row[7],
+                    'Minimum' => $row[9],
+                    'characteristic1' => $row[10],
+                    'characteristic2' => $row[11],
+                    'Code' => $row[14],
+                    'idBusiness' => $businessID,
+                    'status' => 1,
+                    'isSendEmail' => 1,
+                    'isSendExpire' => 0,
+                ];
+
+                $insertedItemId = $itemsModel->insertItemWarehouse($formData);
+
+                $formDataInventory = [
+                    'idItem' => $insertedItemId,
+                    'inventory' => $row[8],
+                    'idWarehouse' => $row[5],
+                ];
+
+                $idInventory = $itemsModel->insertItemInventory($formDataInventory);
+            }
+
+            session()->setFlashdata('success', 'Items imported successfully!');
+            return redirect()->to(base_url("/items_table"));
+        } else {
+            session()->setFlashdata('error', 'Error uploading the Excel file.');
+            return redirect()->back();
+        }
+    }
 
     public function deleteitem($idItem)
     {

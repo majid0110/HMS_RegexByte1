@@ -214,6 +214,9 @@ $routes->get('/deleteitem/(:num)', 'itemsController::deleteitem/$1');
 $routes->get('/edititem/(:num)', 'itemsController::edititem/$1');
 $routes->post('updateitem/(:num)', 'itemsController::updateitem/$1');
 
+$routes->get('transferItems', 'itemsController::transferItems');
+$routes->post('transferItems', 'itemsController::transferItems');
+
 //-------------------------------------------------------------------------------------------------------------------------
 //                                                 items Routes
 //-------------------------------------------------------------------------------------------------------------------------
