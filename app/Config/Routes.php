@@ -178,6 +178,9 @@ $routes->post('SalesController/getAllServices', 'SalesController::getAllServices
 $routes->get('/services_details', 'ReportsController::services_details');
 $routes->post('/services_details', 'ReportsController::services_details');
 
+$routes->get('/generateExcelServiceDetailReport', 'ReportsController::generateExcelServiceDetailReport');
+$routes->post('generateExcelServiceDetailReport', 'ReportsController::generateExcelServiceDetailReport');
+
 //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Reports Routes
 //-------------------------------------------------------------------------------------------------------------------------

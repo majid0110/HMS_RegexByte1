@@ -299,7 +299,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Service Details Report</h4>
-                                <form action="<?= base_url(''); ?>" method="post">
+                                <form action="<?= base_url('generateExcelServiceDetailReport'); ?>" method="post">
                                     <div class="form-group row">
                                         <div>
                                             <div
@@ -368,25 +368,25 @@
 
                                             <thead>
                                                 <tr>
-                                                <th>Invoice</th>
-                                                <th>code</th>
-                                                <th>Service</th>
-                                                <th>Price</th>
-                                                <th>Quantity</th>
-                                                <th>Sum</th>
-                                                <th>discount</th>
+                                                    <th>Invoice</th>
+                                                    <th>code</th>
+                                                    <th>Service</th>
+                                                    <th>Price</th>
+                                                    <th>Quantity</th>
+                                                    <th>Sum</th>
+                                                    <th>discount</th>
                                                     <th>Client</th>
                                                     <th>Gender</th>
                                                     <th>State</th>
                                                     <th>Method</th>
-                                                    
+
                                                 </tr>
                                             </thead>
                                             <tbody>
 
                                                 <?php foreach ($Sales as $Sale): ?>
                                                     <tr>
-                                                    <td>
+                                                        <td>
                                                             <?= $Sale['Order']; ?>
                                                         </td>
                                                         <td>
@@ -420,7 +420,7 @@
                                                         <td>
                                                             <?= $Sale['PaymentMethod']; ?>
                                                         </td>
-                                                        
+
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
@@ -439,7 +439,7 @@
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
-                                                    
+
 
                                                 </tr>
                                             </tfoot>

@@ -69,23 +69,69 @@
       overflow-y: auto;
     }
 
-    /* 
-    .table tbody tr {
-      height: 30px;
-    }
-
-    .table thead tr {
-      height: 30px;
+    .center-dropdown .select2-dropdown {
+      text-align: left;
     }
 
 
-    .table tbody td {
-      padding: 5px;
+
+    .select2-container .select2-selection--single {
+      height: 2rem;
+      text-align: left;
+      padding: 0;
     }
 
-    .table thead tr {
-      padding: 5px;
-    } */
+    .select2-selection--single {
+      height: 33px;
+    }
+
+    .select2-container .select2-selection--single .select2-selection__rendered {
+      text-align: left;
+      padding: 2%;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+      line-height: normal;
+      /* padding: 0; */
+    }
+
+    .select2-container--default .select2-results>.select2-results__options {
+      background: #E9ECEF;
+    }
+
+    .select2-search--dropdown {
+      background: #E9ECEF;
+    }
+
+    .select2-container--default .select2-search--dropdown .select2-search__field {
+      background: #E9ECEF;
+    }
+
+    .select2-container .select2-selection--single .select2-selection__rendered {
+      text-align: left;
+    }
+
+    .select2-selection .select2-selection--single {
+      height: 2rem;
+    }
+  </style>
+  /*
+  .table tbody tr {
+  height: 30px;
+  }
+
+  .table thead tr {
+  height: 30px;
+  }
+
+
+  .table tbody td {
+  padding: 5px;
+  }
+
+  .table thead tr {
+  padding: 5px;
+  } */
   </style>
 </head>
 
@@ -297,7 +343,7 @@
                       <div class="col">
                         <label>Client Name</label>
                         <div id="the-basics">
-                          <select class="typeahead form-control" name="clientName">
+                          <select class="typeahead form-control select2" name="clientName" id="clientId">
                             <?php foreach ($client_names as $client): ?>
                               <option value="<?= $client['idClient']; ?>">
                                 <?= $client['client']; ?>
@@ -445,8 +491,14 @@
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../../vendors/js/vendor.bundle.base.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 
   <script>
+    $('.select2').select2({
+      dropdownAutoWidth: true,
+    });
+
     function calculateTotalFee() {
       var totalFee = 0;
 
