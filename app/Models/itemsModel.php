@@ -69,22 +69,6 @@ class itemsModel extends Model
         return $this->where('idItem', $idItem)->delete();
     }
 
-    // public function getitem()
-    // {
-    //     $builder = $this->db->table('itemswarehouse');
-    //     return $builder->join('units', 'units.idUnit = itemswarehouse.Unit')
-    //         ->select('itemswarehouse.*,units.name')
-    //         ->get()
-    //         ->getResultArray();
-    // }
-    // public function getItems() // Updated method name
-    // {
-    //     $builder = $this->db->table('itemswarehouse');
-    //     return $builder->join('units', 'units.idUnit = itemswarehouse.Unit')
-    //         ->select('itemswarehouse.*, units.name')
-    //         ->get()
-    //         ->getResultArray();
-    // }
 
     public function getItems()
     {
@@ -114,14 +98,6 @@ class itemsModel extends Model
         return $this->db->table('catart')->insert($data);
     }
 
-    // public function getSectors()
-    // {
-    //     return $this->db->table('sectors')
-    //         ->select('idSector, name')
-    //         ->get()
-    //         ->getResultArray();
-    // }
-
     public function getCatartCategory($idCatArt)
     {
         return $this->db->table('catart')
@@ -150,23 +126,6 @@ class itemsModel extends Model
 
         return $this->db->table('sectors')->insert($data);
     }
-
-    // public function insertItemWarehouse($data)
-    // {
-    //     $this->db->table('itemswarehouse')->insert($data);
-    //     return $this->db->insertID();
-    // }
-
-    // public function insertItemInventory($formDataInventory)
-    // {
-    //     $this->db->table('itemsinventory')->insert($formDataInventory);
-    //     return $this->db->insertID();
-    // }
-    // public function insertItemExpiry($ItemExipry)
-    // {
-    //     $this->db->table('itemsexpiry')->insert($ItemExipry);
-    //     return $this->db->insertID();
-    // }
 
     public function insertItemWarehouse($data)
     {
@@ -215,5 +174,47 @@ class itemsModel extends Model
         $this->db->table('catart')->insert($newCategory);
         return $this->db->insertID();
     }
+
+    public function getItemByCodeAndName($itemCode, $itemName, $businessID)
+    {
+        return $this->db->table('itemswarehouse')
+            ->select('*')
+            ->where('Code', $itemCode)
+            ->where('Name', $itemName)
+            ->where('idBusiness', $businessID)
+            ->get()
+            ->getRowArray();
+    }
+
+
+    public function insertOrUpdateItemInventory($formDataInventory)
+    {
+        $idItem = $formDataInventory['idItem'];
+        $idWarehouse = $formDataInventory['idWarehouse'];
+        $inventory = $formDataInventory['inventory'];
+
+        $existingInventory = $this->db->table('itemsinventory')
+            ->where('idItem', $idItem)
+            ->where('idWarehouse', $idWarehouse)
+            ->get()
+            ->getRow();
+
+        if ($existingInventory) {
+            $this->db->table('itemsinventory')
+                ->where('idItem', $idItem)
+                ->where('idWarehouse', $idWarehouse)
+                ->update(['inventory' => $inventory]);
+        } else {
+            $this->db->table('itemsinventory')->insert($formDataInventory);
+        }
+    }
+
+    public function updateItemWarehouse($itemId, $formData)
+    {
+        $this->db->table('itemswarehouse')
+            ->where('idItem', $itemId)
+            ->update($formData);
+    }
+
 
 }

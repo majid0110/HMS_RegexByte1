@@ -120,14 +120,7 @@ class itemsController extends Controller
         return view('edit_cat.php', $data);
     }
 
-    // public function editcat($idCatArt)
-    // {
-    //     $Model = new itemsModel();
-    //     $data['sectors'] = $Model->getSectors();
-    //     $data['category'] = $Model->getCatartCategory($idCatArt);
 
-    //     return view('edit_cat.php', $data);
-    // }
 
     public function sectors_table()
     {
@@ -170,62 +163,6 @@ class itemsController extends Controller
     //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Main Logic
 //-------------------------------------------------------------------------------------------------------------------------
-    // public function saveitems()
-    // {
-    //     $session = \Config\Services::session();
-
-
-    //     $request = \Config\Services::request();
-    //     $businessID = $session->get('businessID');
-    //     $idWarehouse = $this->request->getPost('warehouse');
-    //     $Inventory = $this->request->getPost('inventory');
-
-    //     $formData = [
-    //         'barcode' => $this->request->getPost('bcode'),
-    //         'Code' => $this->request->getPost('code'),
-    //         'Name' => $this->request->getPost('name'),
-    //         'Cost' => $this->request->getpost('cost'),
-    //         'Minimum' => $this->request->getpost('min'),
-    //         'Notes' => $this->request->getPost('notes'),
-    //         'idBusiness' => $businessID,
-    //         'idTAX' => $this->request->getPost('tax'),
-    //         'idCategories' => $this->request->getPost('category'),
-    //         'Unit' => $this->request->getPost('Unit'),
-    //         'idWarehouse' => $idWarehouse,
-    //         'status' => $this->request->getPost('cstatus'),
-    //         'characteristic1' => $this->request->getPost('char_1'),
-    //         'Characteristic2' => $this->request->getPost('char_2'),
-    //         'isSendEmail' => 1,
-    //         'isSendExpire' => 0,
-
-    //     ];
-
-
-    //     $itemsModel = new itemsModel();
-    //     $insertedItemId = $itemsModel->insertItemWarehouse($formData);
-
-    //     $formDataInventory = [
-    //         'idItem' => $insertedItemId,
-    //         'inventory' => $Inventory,
-    //         'idWarehouse' => $idWarehouse,
-    //     ];
-
-    //     $IdInventory = $itemsModel->insertItemInventory($formDataInventory);
-
-    //     $ItemExipry = [
-    //         'idInventory' => $IdInventory,
-    //         'inventory' => $Inventory,
-    //         'expiryDate' => $this->request->getPost('expiry'),
-    //     ];
-
-    //     $itemsModel->insertItemExpiry($ItemExipry);
-
-    //     $itemsModel->insertItemInventory($formDataInventory);
-
-    //     session()->setFlashdata('success', 'Item Added..!!');
-    //     return redirect()->to(base_url("/items_table"));
-    // }
-
 
     public function saveitems()
     {
@@ -284,7 +221,6 @@ class itemsController extends Controller
 
         $file = $this->request->getFile('excel_file');
 
-
         if ($file->isValid() && !$file->hasMoved()) {
             $excelReader = IOFactory::createReaderForFile($file->getTempName());
             $spreadsheet = $excelReader->load($file->getTempName());
@@ -298,49 +234,78 @@ class itemsController extends Controller
                     continue;
                 }
 
-                $categoryName = $row[3];
-                $category = $itemsModel->getCategoryByName($categoryName, $businessID);
+                $itemName = $row[1];
+                $itemCode = $row[14];
 
-                if ($category) {
-                    $idCatArt = $category['idCatArt'];
-                } else {
-                    $newCategory = [
-                        'name' => $categoryName,
-                        'idSector' => 3,
-                        'notes' => null,
+                $existingItem = $itemsModel->getItemByCodeAndName($itemCode, $itemName, $businessID);
+
+                if ($existingItem) {
+                    $insertedItemId = $existingItem['idItem'];
+
+                    $formDataWarehouse = [
+                        'barcode' => $row[0],
+                        'Name' => $itemName,
+                        'Notes' => $row[2],
+                        'idCategories' => $existingItem['idCategories'],
+                        'idTAX' => $row[4],
+                        'idWarehouse' => $row[5],
+                        'Unit' => $row[6],
+                        'Cost' => $row[7],
+                        'Minimum' => $row[9],
+                        'characteristic1' => $row[10],
+                        'characteristic2' => $row[11],
+                        'Code' => $itemCode,
                         'idBusiness' => $businessID,
+                        'status' => 1,
+                        'isSendEmail' => 1,
+                        'isSendExpire' => 0,
                     ];
-                    $idCatArt = $itemsModel->insertCategory($newCategory);
+
+                    $itemsModel->updateItemWarehouse($insertedItemId, $formDataWarehouse);
+                } else {
+                    $categoryName = $row[3];
+                    $category = $itemsModel->getCategoryByName($categoryName, $businessID);
+
+                    if ($category) {
+                        $idCatArt = $category['idCatArt'];
+                    } else {
+                        $newCategory = [
+                            'name' => $categoryName,
+                            'idSector' => 3,
+                            'notes' => null,
+                            'idBusiness' => $businessID,
+                        ];
+                        $idCatArt = $itemsModel->insertCategory($newCategory);
+                    }
+
+                    $formDataWarehouse = [
+                        'barcode' => $row[0],
+                        'Name' => $itemName,
+                        'Notes' => $row[2],
+                        'idCategories' => $idCatArt,
+                        'idTAX' => $row[4],
+                        'idWarehouse' => $row[5],
+                        'Unit' => $row[6],
+                        'Cost' => $row[7],
+                        'Minimum' => $row[9],
+                        'characteristic1' => $row[10],
+                        'characteristic2' => $row[11],
+                        'Code' => $itemCode,
+                        'idBusiness' => $businessID,
+                        'status' => 1,
+                        'isSendEmail' => 1,
+                        'isSendExpire' => 0,
+                    ];
+
+                    $insertedItemId = $itemsModel->insertItemWarehouse($formDataWarehouse);
                 }
-
-                $formData = [
-                    'barcode' => $row[0],
-                    'Name' => $row[1],
-                    'Notes' => $row[2],
-                    'idCategories' => $idCatArt,
-                    'idTAX' => $row[4],
-                    'idWarehouse' => $row[5],
-                    'Unit' => $row[6],
-                    'Cost' => $row[7],
-                    'Minimum' => $row[9],
-                    'characteristic1' => $row[10],
-                    'characteristic2' => $row[11],
-                    'Code' => $row[14],
-                    'idBusiness' => $businessID,
-                    'status' => 1,
-                    'isSendEmail' => 1,
-                    'isSendExpire' => 0,
-                ];
-
-                $insertedItemId = $itemsModel->insertItemWarehouse($formData);
-
                 $formDataInventory = [
                     'idItem' => $insertedItemId,
                     'inventory' => $row[8],
                     'idWarehouse' => $row[5],
                 ];
 
-                $idInventory = $itemsModel->insertItemInventory($formDataInventory);
+                $itemsModel->insertOrUpdateItemInventory($formDataInventory);
             }
 
             session()->setFlashdata('success', 'Items imported successfully!');
@@ -452,26 +417,6 @@ class itemsController extends Controller
         session()->setFlashdata('success', 'Category updated successfully..!!');
         return redirect()->to(base_url("/category_table"));
     }
-
-    // public function saveSector()
-    // {
-    //     $itemsModel = new itemsModel();
-    //     $session = \Config\Services::session();
-    //     $request = \Config\Services::request();
-    //     $businessID = $session->get('businessID');
-
-    //     $data = [
-    //         'name' => $this->request->getPost('name'),
-    //         'PrintOutput' => $this->request->getPost('PrintOutput'),
-    //         'notes' => $this->request->getPost('notes'),
-    //         'TVSH' => $this->request->getPost('TVSH'),
-    //         'idBusiness' => $businessID,
-    //     ];
-
-    //     $itemsModel->saveSector($data);
-
-    //     return redirect()->to(base_url('/sectors_table'))->with('success', 'Sector added successfully.');
-    // }
     public function saveSector()
     {
         $Model = new SectorsModel();
