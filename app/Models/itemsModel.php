@@ -69,18 +69,33 @@ class itemsModel extends Model
         return $this->where('idItem', $idItem)->delete();
     }
 
-
     public function getItems()
     {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+
         $builder = $this->db->table('itemswarehouse');
         $result = $builder->join('units', 'units.idUnit = itemswarehouse.Unit')
             ->select('itemswarehouse.*, units.name as unit_name')
+            ->where('itemswarehouse.idBusiness', $businessID)
             ->orderBy('itemswarehouse.idItem', 'DESC')
             ->get()
             ->getResultArray();
 
         return $result;
     }
+
+    // public function getItems()
+    // {
+    //     $builder = $this->db->table('itemswarehouse');
+    //     $result = $builder->join('units', 'units.idUnit = itemswarehouse.Unit')
+    //         ->select('itemswarehouse.*, units.name as unit_name')
+    //         ->orderBy('itemswarehouse.idItem', 'DESC')
+    //         ->get()
+    //         ->getResultArray();
+
+    //     return $result;
+    // }
 
     public function getCatartItems()
     {
