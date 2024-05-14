@@ -1,22 +1,16 @@
 <?php
 $session = session();
 if ($session->has('error')) {
-	?>
-	<div class="flash-message error">
-		<?php echo $session->getFlashdata('error'); ?>
-	</div>
-	<?php
+?>
+<?php
 }
 ?>
 
 <!-- Display flash messages for success -->
 <?php
 if ($session->has('success')) {
-	?>
-	<div class="flash-message success">
-		<?php echo $session->getFlashdata('success'); ?>
-	</div>
-	<?php
+?>
+<?php
 }
 ?>
 <!DOCTYPE html>
@@ -41,10 +35,64 @@ if ($session->has('success')) {
 	<link rel="stylesheet" href="./public/assets/css/vertical-layout-light/style.css">
 	<!-- endinject -->
 	<link rel="shortcut icon" href="./public/assets/images_s/regexbyte.png" />
+
+	<style>
+		.toast {
+			position: fixed;
+			top: 12rem;
+			right: 25rem;
+			background-color: orange;
+			color: #fff;
+			padding: 16px 24px;
+			border-radius: 30px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			opacity: 0;
+			transform: translateY(-100%);
+			transition: all 0.5s ease-in-out;
+			z-index: 999;
+			font-family: 'Poppins', sans-serif;
+			font-size: 14px;
+			font-weight: 500;
+		}
+
+		.toast.show {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		.toast.success {
+			background-color: #6495ED;
+		}
+
+		.toast.error {
+			background-color: #dc3545;
+		}
+
+		.toast::before {
+			content: '';
+			position: absolute;
+			bottom: -20px;
+			left: 50%;
+			transform: translateX(-50%);
+			border-width: 10px;
+			border-style: solid;
+			border-color: transparent transparent transparent transparent;
+		}
+
+		.toast.success::before {
+			border-top-color: #6495ED;
+		}
+
+		.toast.error::before {
+			border-top-color: #dc3545;
+		}
+	</style>
 </head>
 
 <body>
 	<div class="container-scroller">
+		<?php $successMessage = session()->getFlashdata('success');
+		$errorMessage = session()->getFlashdata('error'); ?>
 		<div class="container-fluid page-body-wrapper full-page-wrapper">
 			<div class="content-wrapper d-flex align-items-center auth px-0">
 				<div class="row w-100 mx-0">
@@ -134,6 +182,33 @@ if ($session->has('success')) {
 	<script src="./public/assets/js/template.js"></script>
 	<script src="./public/assets/js/settings.js"></script>
 	<script src="./public/assets/js/todolist.js"></script>
+	<script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			function showToast(message, type) {
+				const toastContainer = document.createElement('div');
+				toastContainer.classList.add('toast', type);
+				toastContainer.textContent = message;
+				document.body.appendChild(toastContainer);
+
+				toastContainer.classList.add('show');
+
+				setTimeout(function () {
+					toastContainer.classList.remove('show');
+					setTimeout(function () {
+						toastContainer.remove();
+					}, 500);
+				}, 5000);
+			}
+			<?php if ($successMessage = session()->getFlashdata('success')): ?>
+				showToast('<?= $successMessage ?>', 'success');
+			<?php endif; ?>
+			<?php if ($errorMessage = session()->getFlashdata('error')): ?>
+				showToast('<?= $errorMessage ?>', 'error');
+			<?php endif; ?>
+		});
+	</script>
 	<!-- endinject -->
 </body>
 

@@ -10,7 +10,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Star Admin2 </title>
+    <title>items table</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="./public/assets/vendors/feather/feather.css">
     <link rel="stylesheet" href="./public/assets/vendors/mdi/css/materialdesignicons.min.css">
@@ -25,8 +25,59 @@
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="./public/assets/css/vertical-layout-light/style.css">
-    <!-- endinject -->
-    <link rel="shortcut icon" href="./public/assets/images/favicon.png" />
+
+
+    <style>
+        .toast {
+            position: fixed;
+            top: 10rem;
+            right: 20px;
+            background-color: orange;
+            color: #fff;
+            padding: 16px 24px;
+            border-radius: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: all 0.5s ease-in-out;
+            z-index: 999;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast.success {
+            background-color: #6495ED;
+        }
+
+        .toast.error {
+            background-color: #dc3545;
+        }
+
+        .toast::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px;
+            border-style: solid;
+            border-color: transparent transparent transparent transparent;
+        }
+
+        .toast.success::before {
+            border-top-color: #6495ED;
+        }
+
+        .toast.error::before {
+            border-top-color: #dc3545;
+        }
+    </style>
 </head>
 
 <body>
@@ -229,6 +280,8 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
+                                <?php $successMessage = session()->getFlashdata('success');
+                                $errorMessage = session()->getFlashdata('error'); ?>
                                 <h4 class="card-title">Items</h4>
                                 <span>
                                     <form action="<?= base_url('transferItems') ?>" method="post"
@@ -327,6 +380,32 @@
     <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
+    <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function showToast(message, type) {
+                const toastContainer = document.createElement('div');
+                toastContainer.classList.add('toast', type);
+                toastContainer.textContent = message;
+                document.body.appendChild(toastContainer);
+
+                toastContainer.classList.add('show');
+
+                setTimeout(function () {
+                    toastContainer.classList.remove('show');
+                    setTimeout(function () {
+                        toastContainer.remove();
+                    }, 500);
+                }, 5000);
+            }
+            <?php if ($successMessage = session()->getFlashdata('success')): ?>
+                showToast('<?= $successMessage ?>', 'success');
+            <?php endif; ?>
+            <?php if ($errorMessage = session()->getFlashdata('error')): ?>
+                showToast('<?= $errorMessage ?>', 'error');
+            <?php endif; ?>
+        });
+    </script>
     <script>
         $(document).ready(function () {
             $('#add-item-btn').click(function (e) {
