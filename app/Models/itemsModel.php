@@ -184,6 +184,34 @@ class itemsModel extends Model
         return $result ?: null;
     }
 
+    public function getUnits($unit, $businessID)
+    {
+        $result = $this->db->table('units')
+            ->select('*')
+            ->where('name', $unit)
+            ->where('idBusiness', $businessID)
+            ->get()
+            ->getRowArray();
+
+        return $result ?: null;
+    }
+
+    public function insertUnit($newUnit)
+    {
+        $this->db->table('units')->insert($newUnit);
+        return $this->db->insertID();
+    }
+
+    public function getUnitByName($unitName, $businessID)
+    {
+        return $this->db->table('units')
+            ->where('name', $unitName)
+            ->where('idBusiness', $businessID)
+            ->get()
+            ->getRowArray();
+    }
+
+
     public function insertCategory($newCategory)
     {
         $this->db->table('catart')->insert($newCategory);

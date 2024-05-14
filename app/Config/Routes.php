@@ -241,6 +241,6 @@ $routes->get('/deletesector/(:num)', 'itemsController::deletesector/$1');
 $routes->get('editsector/(:num)', 'itemsController::editsector/$1');
 $routes->post('/updateSector/(:num)', 'itemsController::updateSector/$1');
 
-$routes->post('ServiceController/transferItems', 'ServiceController::transferItems');
-$routes->get('/transferItems', 'ServiceController::transferItems');
-$routes->post('/transferItems', 'ServiceController::transferItems');
+$routes->post('ServiceController/transferItemsToServices', 'ServiceController::transferItemsToServices');
+$routes->get('/transferItemsToServices', 'ServiceController::transferItemsToServices');
+$routes->post('/transferItemsToServices', 'ServiceController::transferItemsToServices');

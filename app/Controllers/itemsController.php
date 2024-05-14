@@ -214,6 +214,113 @@ class itemsController extends Controller
         return redirect()->to(base_url("/items_table"));
     }
 
+    // public function transferItems()
+    // {
+    //     $session = \Config\Services::session();
+    //     $businessID = $session->get('businessID');
+
+    //     $file = $this->request->getFile('excel_file');
+
+    //     if ($file->isValid() && !$file->hasMoved()) {
+    //         $excelReader = IOFactory::createReaderForFile($file->getTempName());
+    //         $spreadsheet = $excelReader->load($file->getTempName());
+    //         $worksheet = $spreadsheet->getActiveSheet();
+    //         $rows = $worksheet->toArray();
+
+    //         $itemsModel = new ItemsModel();
+
+    //         foreach ($rows as $key => $row) {
+    //             if ($key === 0 || empty(array_filter($row))) {
+    //                 continue;
+    //             }
+
+    //             $itemName = $row[1];
+    //             $itemCode = $row[14];
+
+    //             $existingItem = $itemsModel->getItemByCodeAndName($itemCode, $itemName, $businessID);
+
+    //             if ($existingItem) {
+    //                 $insertedItemId = $existingItem['idItem'];
+
+    //                 $formDataWarehouse = [
+    //                     'barcode' => $row[0],
+    //                     'Name' => $itemName,
+    //                     'Notes' => $row[2],
+    //                     'idCategories' => $existingItem['idCategories'],
+    //                     'idTAX' => $row[4],
+    //                     'idWarehouse' => $row[5],
+    //                     'Unit' => $row[6],
+    //                     'Cost' => $row[7],
+    //                     'Minimum' => $row[9],
+    //                     'characteristic1' => $row[10],
+    //                     'characteristic2' => $row[11],
+    //                     'Code' => $itemCode,
+    //                     'idBusiness' => $businessID,
+    //                     'status' => 1,
+    //                     'isSendEmail' => 1,
+    //                     'isSendExpire' => 0,
+    //                 ];
+
+    //                 $itemsModel->updateItemWarehouse($insertedItemId, $formDataWarehouse);
+    //             } else {
+    //                 $categoryName = $row[3];
+    //                 $category = $itemsModel->getCategoryByName($categoryName, $businessID);
+
+
+
+    //                 if ($category) {
+    //                     $idCatArt = $category['idCatArt'];
+    //                 } else {
+    //                     $newCategory = [
+    //                         'name' => $categoryName,
+    //                         'idSector' => 3,
+    //                         'notes' => null,
+    //                         'idBusiness' => $businessID,
+    //                     ];
+    //                     $idCatArt = $itemsModel->insertCategory($newCategory);
+    //                 }
+
+
+
+    //                 $formDataWarehouse = [  
+    //                     'barcode' => $row[0],
+    //                     'Name' => $itemName,
+    //                     'Notes' => $row[2],
+    //                     'idCategories' => $idCatArt,
+    //                     'idTAX' => $row[4],
+    //                     'idWarehouse' => $row[5],
+    //                     'Unit' => $row[6],
+    //                     'Cost' => $row[7],
+    //                     'Minimum' => $row[9],
+    //                     'characteristic1' => $row[10],
+    //                     'characteristic2' => $row[11],
+    //                     'Code' => $itemCode,
+    //                     'idBusiness' => $businessID,
+    //                     'status' => 1,
+    //                     'isSendEmail' => 1,
+    //                     'isSendExpire' => 0,
+    //                 ];
+
+    //                 $insertedItemId = $itemsModel->insertItemWarehouse($formDataWarehouse);
+    //             }
+    //             $formDataInventory = [
+    //                 'idItem' => $insertedItemId,
+    //                 'inventory' => $row[8],
+    //                 'idWarehouse' => $row[5],
+    //             ];
+
+    //             $itemsModel->insertOrUpdateItemInventory($formDataInventory);
+    //         }
+
+    //         session()->setFlashdata('success', 'Items imported successfully!');
+    //         return redirect()->to(base_url("/items_table"));
+    //     } else {
+    //         session()->setFlashdata('error', 'Error uploading the Excel file.');
+    //         return redirect()->back();
+    //     }
+    // }
+
+
     public function transferItems()
     {
         $session = \Config\Services::session();
@@ -242,6 +349,20 @@ class itemsController extends Controller
                 if ($existingItem) {
                     $insertedItemId = $existingItem['idItem'];
 
+                    $unitName = $row[6];
+                    $unit = $itemsModel->getUnitByName($unitName, $businessID);
+
+                    if ($unit) {
+                        $idUnit = $unit['idUnit'];
+                    } else {
+                        $newUnit = [
+                            'name' => $unitName,
+                            'notes' => null,
+                            'idBusiness' => $businessID,
+                            'unitCode' => 000,
+                        ];
+                        $idUnit = $itemsModel->insertUnit($newUnit);
+                    }
                     $formDataWarehouse = [
                         'barcode' => $row[0],
                         'Name' => $itemName,
@@ -249,7 +370,7 @@ class itemsController extends Controller
                         'idCategories' => $existingItem['idCategories'],
                         'idTAX' => $row[4],
                         'idWarehouse' => $row[5],
-                        'Unit' => $row[6],
+                        'Unit' => $idUnit,
                         'Cost' => $row[7],
                         'Minimum' => $row[9],
                         'characteristic1' => $row[10],
@@ -277,6 +398,21 @@ class itemsController extends Controller
                         ];
                         $idCatArt = $itemsModel->insertCategory($newCategory);
                     }
+                    $unitName = $row[6];
+                    $unit = $itemsModel->getUnitByName($unitName, $businessID);
+
+                    if ($unit) {
+                        $idUnit = $unit['idUnit'];
+
+                    } else {
+                        $newUnit = [
+                            'name' => $unitName,
+                            'notes' => null,
+                            'idBusiness' => $businessID,
+                            'unitCode' => 000,
+                        ];
+                        $idUnit = $itemsModel->insertUnit($newUnit);
+                    }
 
                     $formDataWarehouse = [
                         'barcode' => $row[0],
@@ -285,7 +421,7 @@ class itemsController extends Controller
                         'idCategories' => $idCatArt,
                         'idTAX' => $row[4],
                         'idWarehouse' => $row[5],
-                        'Unit' => $row[6],
+                        'Unit' => $idUnit,
                         'Cost' => $row[7],
                         'Minimum' => $row[9],
                         'characteristic1' => $row[10],
@@ -299,6 +435,7 @@ class itemsController extends Controller
 
                     $insertedItemId = $itemsModel->insertItemWarehouse($formDataWarehouse);
                 }
+
                 $formDataInventory = [
                     'idItem' => $insertedItemId,
                     'inventory' => $row[8],

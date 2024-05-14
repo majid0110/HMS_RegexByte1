@@ -287,7 +287,8 @@
                                 <h4 class="card-title">Services Table</h4>
                                 <button type="button" class="btn btn-Primary" data-toggle="modal"
                                     data-target="#addServiceModal">Add</button>
-                                <a href="<?= base_url('transferItems'); ?>" class="btn btn-Dark">Transfer Items</a>
+                                <a href="<?= base_url('transferItemsToServices'); ?>" class="btn btn-Dark">Transfer
+                                    Items</a>
                                 <hr>
                                 <div class="modal fade" id="addServiceModal" tabindex="-1" role="dialog"
                                     aria-labelledby="addServiceModalLabel" aria-hidden="true">

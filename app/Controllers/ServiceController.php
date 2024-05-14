@@ -233,7 +233,7 @@ class ServiceController extends Controller
         return redirect()->to(base_url("/Services_table"));
     }
 
-    public function transferItems()
+    public function transferItemsToServices()
     {
         $db = \Config\Database::connect();
         $servicesModel = new ServicesModel();
