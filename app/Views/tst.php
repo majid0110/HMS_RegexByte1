@@ -69,30 +69,89 @@
       overflow-y: auto;
     }
 
-    /* 
-    .table tbody tr {
-      height: 30px;
-    }
-
-    .table thead tr {
-      height: 30px;
+    .center-dropdown .select2-dropdown {
+      text-align: left;
     }
 
 
-    .table tbody td {
-      padding: 5px;
+
+    .select2-container .select2-selection--single {
+      height: 2rem;
+      text-align: left;
+      padding: 0;
     }
 
-    .table thead tr {
-      padding: 5px;
-    } */
+    .select2-selection--single {
+      height: 33px;
+    }
+
+    .select2-container .select2-selection--single .select2-selection__rendered {
+      text-align: left;
+      padding: 2%;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+      line-height: normal;
+      /* padding: 0; */
+    }
+
+    .select2-container--default .select2-results>.select2-results__options {
+      background: #E9ECEF;
+    }
+
+    .select2-search--dropdown {
+      background: #E9ECEF;
+    }
+
+    .select2-container--default .select2-search--dropdown .select2-search__field {
+      background: #E9ECEF;
+    }
+
+    .select2-container .select2-selection--single .select2-selection__rendered {
+      text-align: left;
+    }
+
+    .page-body-wrappers {
+      min-height: calc(100vh - 97px);
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-direction: row;
+      flex-direction: row;
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: 75px;
+    }
+
+    .select2-selection .select2-selection--single {
+      height: 2rem;
+    }
+  </style>
+  /*
+  .table tbody tr {
+  height: 30px;
+  }
+
+  .table thead tr {
+  height: 30px;
+  }
+
+
+  .table tbody td {
+  padding: 5px;
+  }
+
+  .table thead tr {
+  padding: 5px;
+  } */
+
+
   </style>
 </head>
 
 <body>
   <div class="container-scroller">
     <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
+    <div class="container-fluid page-body-wrappers">
       <!-- partial:../../partials/_settings-panel.html -->
       <div class="theme-setting-wrapper">
         <div id="settings-trigger"><i class="ti-settings"></i></div>
@@ -297,7 +356,7 @@
                       <div class="col">
                         <label>Client Name</label>
                         <div id="the-basics">
-                          <select class="typeahead form-control" name="clientName">
+                          <select class="typeahead form-control select2" name="clientName" id="clientId">
                             <?php foreach ($client_names as $client): ?>
                               <option value="<?= $client['idClient']; ?>">
                                 <?= $client['client']; ?>
@@ -408,8 +467,10 @@
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>Service Type</th>
+                          <th>Service</th>
                           <th>Amount</th>
+                          <th>Quantity</th>
+                          <th>Discount</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
@@ -442,26 +503,41 @@
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../../vendors/js/vendor.bundle.base.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 
   <script>
+    $('.select2').select2({
+      dropdownAutoWidth: true,
+    });
 
     function calculateTotalFee() {
       var totalFee = 0;
 
       $('#serviceTableBody tr').each(function () {
-        var fee = parseFloat($(this).find('td:eq(1)').text());
-        if (!isNaN(fee)) {
-          totalFee += fee;
+        var quantity = parseFloat($(this).find('.editable-quantity').text());
+        var fee = parseFloat($(this).find('.editable-fee').text());
+        var discount = parseFloat($(this).find('.editable-discount').text());
+        var rowTotal = quantity * fee * (1 - discount / 100);
+        if (!isNaN(rowTotal)) {
+          totalFee += rowTotal;
         }
       });
 
       $('#totalFee').text(totalFee.toFixed(2));
     }
 
-    $('#serviceTableBody').on('input', 'td[contenteditable="true"]', function () {
-      calculateTotalFee();
+    $('#search').on('input', function () {
+      var searchText = $(this).val().toLowerCase();
+      $('#serviceTypeList tbody tr').each(function () {
+        var serviceType = $(this).find('.title').text().toLowerCase();
+        if (serviceTypeType.includes(searchText)) {
+          $(this).show();
+        } else {
+          $(this).hide();
+        }
+      });
     });
-
     function addServiceRow(serviceType, serviceTypeId, serviceFee) {
       var exists = false;
 
@@ -476,7 +552,9 @@
       if (!exists) {
         var newRow = '<tr>' +
           '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
-          '<td contenteditable="true">' + serviceFee + '</td>' +
+          '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
+          '<td contenteditable="true" class="editable-quantity">1</td>' +
+          '<td contenteditable="true" class="editable-discount">0</td>' +
           '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)">Remove</button></td>' +
           '</tr>';
         $('#serviceTableBody').append(newRow);
@@ -487,15 +565,15 @@
     }
 
     $(document).ready(function () {
+      $('#serviceTableBody').on('input', 'td[contenteditable="true"]', function () {
+        calculateTotalFee();
+      });
 
       $('#serviceTypeList .badge').click(function () {
         var serviceTypeRow = $(this).closest('tr');
         var serviceTypeId = serviceTypeRow.data('service-type-id');
         var serviceType = serviceTypeRow.find('.title').text().trim();
         var serviceFee = serviceTypeRow.find('.fee').text().trim();
-        // console.log("Service Type in badge: ", serviceType);
-        // console.log("Service Type ID in badge: ", serviceTypeId);
-        // console.log("Service Fee in badge: ", serviceFee);
         addServiceRow(serviceType, serviceTypeId, serviceFee);
         calculateTotalFee();
       });
@@ -506,19 +584,10 @@
           var serviceTypeId = serviceTypeRow.data('service-type-id');
           var serviceType = serviceTypeRow.find('.title').text().trim();
           var serviceFee = serviceTypeRow.find('.fee').text().trim();
-          // console.log("Service Type: ", serviceType);
-          // console.log("Service Type ID: ", serviceTypeId);
-          // console.log("Service Fee: ", serviceFee);
           addServiceRow(serviceType, serviceTypeId, serviceFee);
           calculateTotalFee();
         });
       }
-
-      // Filter services based on categories
-      // $('.btn-category').click(function () {
-      //   var categoryId = $(this).data('category-id');
-      //   filterServices(categoryId);
-      // });
 
       $('#categoryDropdown').change(function () {
         var categoryId = $(this).val();
@@ -536,29 +605,6 @@
           }
         });
       }
-
-      $('#search').on('input', function () {
-        var searchText = $(this).val().toLowerCase();
-        $('#serviceTypeList tbody tr').each(function () {
-          var serviceName = $(this).find('.title').text().toLowerCase();
-          var servicePrice = $(this).find('.fee').text().toLowerCase();
-          if (serviceName.includes(searchText) || servicePrice.includes(searchText)) {
-            $(this).show();
-          } else {
-            $(this).hide();
-          }
-        });
-      });
-
-      $('.btn-category').click(function () {
-        var categoryId = $(this).data('category-id');
-
-        $('.btn-category.active').removeClass('active');
-
-        $(this).addClass('active');
-
-        filterServices(categoryId);
-      });
 
       $('#insertBtn').off('click').on('click', function () {
         insertData();
@@ -623,6 +669,9 @@
         var exchange = $('#exchangeInput').val();
         var totalFee = parseFloat($('#totalFee').text());
 
+        var quantity = parseFloat($('#quantityInput').val());
+
+        console.log("Quantity: ", quantity);
         // console.log("Client ID: ", clientId);
         // console.log("Client Name: ", clientName);
         // console.log("Payment Method ID: ", paymentMethodId);
@@ -641,16 +690,16 @@
           var serviceTypeId = serviceTypeRow.find('td:first').data('service-type-id');
           var serviceName = serviceTypeRow.find('td:eq(0)').text();
           var fee = parseFloat(serviceTypeRow.find('td:eq(1)').text());
+          var quantity = parseFloat(serviceTypeRow.find('.editable-quantity').text());
+          var discount = parseFloat(serviceTypeRow.find('.editable-discount').text());
 
           services.push({
             serviceTypeId: serviceTypeId,
             serviceName: serviceName,
             fee: fee,
+            quantity: quantity,
+            discount: discount
           });
-
-          // console.log("Service Type ID After Push: ", serviceTypeId);
-          // console.log("Service Name After Push: ", serviceName);
-          // console.log("Fee After Push: ", fee);
         });
         $.ajax({
           method: 'POST',

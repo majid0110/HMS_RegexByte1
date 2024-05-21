@@ -54,37 +54,65 @@ class ServicesModel extends Model
             ->getResultArray();
     }
 
+
     // public function getServices()
     // {
-    //     return $this->db->table('artmenu')
-    //         > join('units', 'units.idUnit = artmenu.idUnit')
-    //             ->select('artmenu.*,units.name')
-    //             ->get()
-    //             ->getResultArray();
+    //     $businessID = session()->get('businessID');
+    //     $builder = $this->db->table('artmenu');
+    //     return $builder->join('units', 'units.idUnit = artmenu.idUnit')
+    //         ->select('artmenu.*,units.name')
+    //         ->where('artmenu.idBusiness', $businessID)
+    //         ->orderBy('artmenu.idArtMenu', 'DESC')
+    //         ->get()
+    //         ->getResultArray();
     // }
 
-    public function getServices()
-    {
-        $businessID = session()->get('businessID');
-        $builder = $this->db->table('artmenu');
-        return $builder->join('units', 'units.idUnit = artmenu.idUnit')
-            ->select('artmenu.*,units.name')
-            ->where('artmenu.idBusiness', $businessID)
-            ->orderBy('artmenu.idArtMenu', 'DESC')
-            ->get()
-            ->getResultArray();
-    }
+    // public function getActiveItems()
+    // {
+    //     $businessID = session()->get('businessID');
+    //     $builder = $this->db->table('itemswarehouse');
+    //     return $builder->select('*')
+    //         ->where('status', 'active')
+    //         ->where('idBusiness', $businessID)
+    //         ->get()
+    //         ->getResultArray();
+    // }
 
-    public function getActiveItems()
-    {
-        $businessID = session()->get('businessID');
-        $builder = $this->db->table('itemswarehouse');
-        return $builder->select('*')
-            ->where('status', 'active')
-            ->where('idBusiness', $businessID)
-            ->get()
-            ->getResultArray();
-    }
+    public function getServices($perPage = 20, $currentPage = 1)
+{
+    $businessID = session()->get('businessID');
+
+    $offset = ($currentPage - 1) * $perPage;
+
+    $builder = $this->db->table('artmenu');
+    return $builder->join('units', 'units.idUnit = artmenu.idUnit')
+        ->select('artmenu.*, units.name')
+        ->where('artmenu.idBusiness', $businessID)
+        ->orderBy('artmenu.idArtMenu', 'DESC')
+        ->limit($perPage, $offset)
+        ->get()
+        ->getResultArray();
+}
+
+public function getServicesCount()
+{
+    $businessID = session()->get('businessID');
+
+    $builder = $this->db->table('artmenu');
+    $builder->where('artmenu.idBusiness', $businessID);
+    return $builder->countAllResults();
+}
+
+public function getActiveItems()
+{
+    $businessID = session()->get('businessID');
+    $builder = $this->db->table('itemswarehouse');
+    return $builder->select('*')
+        ->where('status', 'active')
+        ->where('idBusiness', $businessID)
+        ->get()
+        ->getResultArray();
+}
 
     public function getRatio()
     {

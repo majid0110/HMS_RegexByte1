@@ -159,7 +159,8 @@
                     echo '<tr>';
                     echo '<td style="margin-left: 20px;">' . $service['serviceName'] . '</td>';
                     echo '<td  style="text-align: right;padding-left:40%;">' . $service['quantity'] . '</td>';
-                    echo '<td style="text-align: right; padding-left:4%;">' . number_format($service['fee'], 2) . '</td>';
+                    echo '<td style="text-align: right; padding-left:4%;">' . number_format((float)$service['fee'] * (float)$service['quantity'], 2) . '</td>';
+                    // echo '<td style="text-align: right; padding-left:4%;">' . number_format($service['fee'], 2) . '</td>';
                     echo '</tr>';
                 }
             } else {
@@ -178,7 +179,7 @@
                     <?php
                     $totalAmount = 0;
                     foreach ($services as $service) {
-                        $totalAmount += $service['quantity'] * $service['fee'];
+                        $totalAmount += (float)$service['quantity'] * (float)$service['fee'];
                     }
                     echo number_format($totalAmount, 2);
                     ?>

@@ -28,6 +28,24 @@ class ItemsInventoryModel extends Model
 
     }
 
+    public function changeInventory($idItem, $data)
+    {
+        $existingInventory = $this->where('idItem', $idItem)
+                                  ->where('idWarehouse', $data['idWarehouse'])
+                                  ->first();
+
+        if ($existingInventory) {
+            $this->update($existingInventory['idInventory'], $data);
+        } else {
+            $this->insert($data);
+        }
+    }
+
+    public function getInventoryByItemId($idItem)
+    {
+        return $this->where('idItem', $idItem)->first();
+    }
+
     public function getRatio($idArtMenu, $idBusiness)
     {
         return $this->db->table('ratio')
@@ -44,6 +62,21 @@ class ItemsInventoryModel extends Model
             ->where('idItem', $idItem)
             ->set('inventory', 'inventory - ' . $quantity, FALSE)
             ->update();
+    }
+
+    public function getExpiriesByInventoryId($idInventory)
+    {
+        return $this->db->table('itemsexpiry')
+            ->where('idInventory', $idInventory)
+            ->get()
+            ->getResultArray();
+    }
+
+    public function updateExpiry($expiryID, $data)
+    {
+        $this->db->table('itemsexpiry')
+            ->where('expiryID', $expiryID)
+            ->update($data);
     }
 
 

@@ -1,0 +1,55 @@
+INFO - 2024-05-16 06:06:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 06:07:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 06:07:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 06:07:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 06:08:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 06:13:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 06:19:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 06:19:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 06:19:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 06:19:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 06:42:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 06:42:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 06:42:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-16 09:22:59 --> Class "Locale" not found
+in SYSTEMPATH\CodeIgniter.php on line 218.
+ 1 FCPATH\index.php(67): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-05-16 09:23:06 --> Uncaught Error: Class "Locale" not found in C:\xampp\htdocs\HMS_RegexByte\system\Helpers\number_helper.php:136
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Helpers\number_helper.php(55): format_number(8.0, 2, NULL, Array)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Debug\BaseExceptionHandler.php(145): number_to_size(8.0, 2)
+#2 C:\xampp\htdocs\HMS_RegexByte\app\Views\errors\html\error_exception.php(361): CodeIgniter\Debug\BaseExceptionHandler::describeMemory(8388608)
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Debug\BaseExceptionHandler.php(241): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\HMS_RegexByte\system\Debug\BaseExceptionHandler.php(244): CodeIgniter\Debug\BaseExceptionHandler->CodeIgniter\Debug\{closure}()
+#5 C:\xampp\htdocs\HMS_RegexByte\system\Debug\ExceptionHandler.php(112): CodeIgniter\Debug\BaseExceptionHandler->render(Object(Error), 500, 'C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\HMS_RegexByte\system\Debug\Exceptions.php(148): CodeIgniter\Debug\ExceptionHandler->handle(Object(Error), Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), 500, 1)
+#7 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(Error))
+#8 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 C:\xampp\htdocs\HMS_RegexByte\index.php(67): CodeIgniter\CodeIgniter->initialize()
+#1 {main}
+in SYSTEMPATH\Helpers\number_helper.php on line 136.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+INFO - 2024-05-16 07:30:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 07:34:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 07:35:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 07:35:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 07:35:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 12:04:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-16 12:04:06 --> foreach() argument must be of type array|object, null given
+in APPPATH\Views\include_common\sidebar.php on line 20.
+ 1 APPPATH\Views\include_common\sidebar.php(20): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, null given', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\include_common\\sidebar.php', 20)
+ 2 APPPATH\Views\edit_item_form.php(215): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\include_common\\sidebar.php')
+ 3 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\edit_item_form.php')
+ 4 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('edit_item_form.php', [], true)
+ 6 APPPATH\Controllers\itemsController.php(110): view('edit_item_form.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->edititem('729')
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-16 12:04:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-16 12:04:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

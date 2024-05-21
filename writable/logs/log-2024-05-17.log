@@ -1,0 +1,295 @@
+INFO - 2024-05-17 04:42:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 04:42:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 04:42:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 06:37:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 06:37:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 06:49:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 06:49:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 06:49:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 06:49:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 06:50:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 06:50:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 06:50:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 06:50:09 --> Client ID: 24
+INFO - 2024-05-17 10:53:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 10:53:58 --> Client ID: 31
+INFO - 2024-05-17 10:54:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 10:54:01 --> Client ID: 30
+INFO - 2024-05-17 10:54:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 10:54:05 --> Client ID: 24
+INFO - 2024-05-17 11:06:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 11:06:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 11:06:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 11:06:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 11:06:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 11:06:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 11:10:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 11:13:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:04:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:05:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:07:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:11:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-17 12:11:10 --> Class "ZipArchive" not found
+in FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php on line 61.
+ 1 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php(186): PhpOffice\PhpSpreadsheet\Shared\File::fileExists('zip://C:\\xampp\\tmp\\php307C.tmp#_rels/.rels')
+ 2 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Reader\Xlsx.php(76): PhpOffice\PhpSpreadsheet\Shared\File::testFileNoThrow('C:\\xampp\\tmp\\php307C.tmp', '_rels/.rels')
+ 3 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\IOFactory.php(162): PhpOffice\PhpSpreadsheet\Reader\Xlsx->canRead('C:\\xampp\\tmp\\php307C.tmp')
+ 4 APPPATH\Controllers\itemsController.php(461): PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile('C:\\xampp\\tmp\\php307C.tmp')
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->transferItems()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-17 12:12:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:12:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:12:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:13:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-17 12:13:58 --> Class "ZipArchive" not found
+in FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php on line 61.
+ 1 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php(186): PhpOffice\PhpSpreadsheet\Shared\File::fileExists('zip://C:\\xampp\\tmp\\phpBEC9.tmp#_rels/.rels')
+ 2 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Reader\Xlsx.php(76): PhpOffice\PhpSpreadsheet\Shared\File::testFileNoThrow('C:\\xampp\\tmp\\phpBEC9.tmp', '_rels/.rels')
+ 3 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\IOFactory.php(162): PhpOffice\PhpSpreadsheet\Reader\Xlsx->canRead('C:\\xampp\\tmp\\phpBEC9.tmp')
+ 4 APPPATH\Controllers\itemsController.php(461): PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile('C:\\xampp\\tmp\\phpBEC9.tmp')
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->transferItems()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-17 12:14:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:14:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-17 12:14:26 --> Class "ZipArchive" not found
+in FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php on line 61.
+ 1 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php(186): PhpOffice\PhpSpreadsheet\Shared\File::fileExists('zip://C:\\xampp\\tmp\\php2BAD.tmp#_rels/.rels')
+ 2 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Reader\Xlsx.php(76): PhpOffice\PhpSpreadsheet\Shared\File::testFileNoThrow('C:\\xampp\\tmp\\php2BAD.tmp', '_rels/.rels')
+ 3 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\IOFactory.php(162): PhpOffice\PhpSpreadsheet\Reader\Xlsx->canRead('C:\\xampp\\tmp\\php2BAD.tmp')
+ 4 APPPATH\Controllers\itemsController.php(461): PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile('C:\\xampp\\tmp\\php2BAD.tmp')
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->transferItems()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-17 12:15:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:15:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:15:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:15:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:16:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:16:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:16:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:17:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:17:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:17:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:17:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:17:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:17:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-17 12:17:43 --> unlink(C:\xampp\htdocs\HMS_RegexByte\writable\debugbar/debugbar_1715944425.617309.json): No such file or directory
+in SYSTEMPATH\Debug\Toolbar\Collectors\History.php on line 80.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'unlink(C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1715944425.617309.json): No such file or directory', 'C:\\xampp\\htdocs\\HMS_RegexByte\\system\\Debug\\Toolbar\\Collectors\\History.php', 80)
+ 2 SYSTEMPATH\Debug\Toolbar\Collectors\History.php(80): unlink('C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1715944425.617309.json')
+ 3 SYSTEMPATH\Debug\Toolbar.php(497): CodeIgniter\Debug\Toolbar\Collectors\History->setFiles('1715948256.176475', 20)
+ 4 SYSTEMPATH\Debug\Toolbar.php(476): CodeIgniter\Debug\Toolbar->format([...], 'html')
+ 5 APPPATH\Config\Events.php(47): CodeIgniter\Debug\Toolbar->respond()
+ 6 SYSTEMPATH\Events\Events.php(154): CodeIgniter\Events\Events::Config\{closure}()
+ 7 SYSTEMPATH\CodeIgniter.php(442): CodeIgniter\Events\Events::trigger('pre_system')
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-17 12:17:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-17 12:17:56 --> Class "ZipArchive" not found
+in FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php on line 61.
+ 1 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php(186): PhpOffice\PhpSpreadsheet\Shared\File::fileExists('zip://C:\\xampp\\tmp\\php6417.tmp#_rels/.rels')
+ 2 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Reader\Xlsx.php(76): PhpOffice\PhpSpreadsheet\Shared\File::testFileNoThrow('C:\\xampp\\tmp\\php6417.tmp', '_rels/.rels')
+ 3 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\IOFactory.php(162): PhpOffice\PhpSpreadsheet\Reader\Xlsx->canRead('C:\\xampp\\tmp\\php6417.tmp')
+ 4 APPPATH\Controllers\itemsController.php(461): PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile('C:\\xampp\\tmp\\php6417.tmp')
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->transferItems()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-17 12:20:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:20:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:21:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-17 12:21:08 --> unlink(C:\xampp\htdocs\HMS_RegexByte\writable\debugbar/debugbar_1715947665.008857.json): No such file or directory
+in SYSTEMPATH\Debug\Toolbar\Collectors\History.php on line 80.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'unlink(C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1715947665.008857.json): No such file or directory', 'C:\\xampp\\htdocs\\HMS_RegexByte\\system\\Debug\\Toolbar\\Collectors\\History.php', 80)
+ 2 SYSTEMPATH\Debug\Toolbar\Collectors\History.php(80): unlink('C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1715947665.008857.json')
+ 3 SYSTEMPATH\Debug\Toolbar.php(497): CodeIgniter\Debug\Toolbar\Collectors\History->setFiles('1715948456.344089', 20)
+ 4 SYSTEMPATH\Debug\Toolbar.php(476): CodeIgniter\Debug\Toolbar->format([...], 'html')
+ 5 APPPATH\Config\Events.php(47): CodeIgniter\Debug\Toolbar->respond()
+ 6 SYSTEMPATH\Events\Events.php(154): CodeIgniter\Events\Events::Config\{closure}()
+ 7 SYSTEMPATH\CodeIgniter.php(442): CodeIgniter\Events\Events::trigger('pre_system')
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-17 12:21:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:21:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:21:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:21:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:22:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:22:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:22:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:24:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:25:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:25:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:25:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:25:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:25:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:25:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:25:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:26:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:27:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:27:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:28:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:28:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:32:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:33:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:34:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:34:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-17 12:34:14 --> Class "ZipArchive" not found
+in FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php on line 61.
+ 1 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php(186): PhpOffice\PhpSpreadsheet\Shared\File::fileExists('zip://C:\\xampp\\tmp\\php4EA3.tmp#_rels/.rels')
+ 2 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Reader\Xlsx.php(76): PhpOffice\PhpSpreadsheet\Shared\File::testFileNoThrow('C:\\xampp\\tmp\\php4EA3.tmp', '_rels/.rels')
+ 3 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\IOFactory.php(162): PhpOffice\PhpSpreadsheet\Reader\Xlsx->canRead('C:\\xampp\\tmp\\php4EA3.tmp')
+ 4 APPPATH\Controllers\itemsController.php(322): PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile('C:\\xampp\\tmp\\php4EA3.tmp')
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->transferItems()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-17 12:35:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:35:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-17 12:35:55 --> unlink(C:\xampp\htdocs\HMS_RegexByte\writable\debugbar/debugbar_1715948527.990912.json): No such file or directory
+in SYSTEMPATH\Debug\Toolbar\Collectors\History.php on line 80.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'unlink(C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1715948527.990912.json): No such file or directory', 'C:\\xampp\\htdocs\\HMS_RegexByte\\system\\Debug\\Toolbar\\Collectors\\History.php', 80)
+ 2 SYSTEMPATH\Debug\Toolbar\Collectors\History.php(80): unlink('C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1715948527.990912.json')
+ 3 SYSTEMPATH\Debug\Toolbar.php(497): CodeIgniter\Debug\Toolbar\Collectors\History->setFiles('1715949338.849096', 20)
+ 4 SYSTEMPATH\Debug\Toolbar.php(476): CodeIgniter\Debug\Toolbar->format([...], 'html')
+ 5 APPPATH\Config\Events.php(47): CodeIgniter\Debug\Toolbar->respond()
+ 6 SYSTEMPATH\Events\Events.php(154): CodeIgniter\Events\Events::Config\{closure}()
+ 7 SYSTEMPATH\CodeIgniter.php(442): CodeIgniter\Events\Events::trigger('pre_system')
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-17 12:35:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-17 12:35:58 --> Class "ZipArchive" not found
+in FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php on line 61.
+ 1 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Shared\File.php(186): PhpOffice\PhpSpreadsheet\Shared\File::fileExists('zip://C:\\xampp\\tmp\\phpE522.tmp#_rels/.rels')
+ 2 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Reader\Xlsx.php(76): PhpOffice\PhpSpreadsheet\Shared\File::testFileNoThrow('C:\\xampp\\tmp\\phpE522.tmp', '_rels/.rels')
+ 3 FCPATH\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\IOFactory.php(162): PhpOffice\PhpSpreadsheet\Reader\Xlsx->canRead('C:\\xampp\\tmp\\phpE522.tmp')
+ 4 APPPATH\Controllers\itemsController.php(596): PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile('C:\\xampp\\tmp\\phpE522.tmp')
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->transferItems()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-17 12:41:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:41:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:41:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:41:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:41:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:41:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:41:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-17 12:42:00 --> file_get_contents(C:\xampp\htdocs\HMS_RegexByte\writable\debugbar/debugbar_1715948737.278818.json): Failed to open stream: No such file or directory
+in SYSTEMPATH\Debug\Toolbar\Collectors\History.php on line 86.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'file_get_contents(C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1715948737.278818.json): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\HMS_RegexByte\\system\\Debug\\Toolbar\\Collectors\\History.php', 86)
+ 2 SYSTEMPATH\Debug\Toolbar\Collectors\History.php(86): file_get_contents('C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1715948737.278818.json')
+ 3 SYSTEMPATH\Debug\Toolbar.php(497): CodeIgniter\Debug\Toolbar\Collectors\History->setFiles('1715949689.662518', 20)
+ 4 SYSTEMPATH\Debug\Toolbar.php(476): CodeIgniter\Debug\Toolbar->format([...], 'html')
+ 5 APPPATH\Config\Events.php(47): CodeIgniter\Debug\Toolbar->respond()
+ 6 SYSTEMPATH\Events\Events.php(154): CodeIgniter\Events\Events::Config\{closure}()
+ 7 SYSTEMPATH\CodeIgniter.php(442): CodeIgniter\Events\Events::trigger('pre_system')
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-05-17 12:42:00 --> file_get_contents(C:\xampp\htdocs\HMS_RegexByte\writable\debugbar/debugbar_1715948737.278818.json): Failed to open stream: No such file or directory
+in SYSTEMPATH\Debug\Toolbar\Collectors\History.php on line 86.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'file_get_contents(C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1715948737.278818.json): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\HMS_RegexByte\\system\\Debug\\Toolbar\\Collectors\\History.php', 86)
+ 2 SYSTEMPATH\Debug\Toolbar\Collectors\History.php(86): file_get_contents('C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1715948737.278818.json')
+ 3 SYSTEMPATH\Debug\Toolbar.php(497): CodeIgniter\Debug\Toolbar\Collectors\History->setFiles('1715949694.977841', 20)
+ 4 SYSTEMPATH\Debug\Toolbar.php(476): CodeIgniter\Debug\Toolbar->format([...], 'html')
+ 5 APPPATH\Config\Events.php(47): CodeIgniter\Debug\Toolbar->respond()
+ 6 SYSTEMPATH\Events\Events.php(154): CodeIgniter\Events\Events::Config\{closure}()
+ 7 SYSTEMPATH\CodeIgniter.php(442): CodeIgniter\Events\Events::trigger('pre_system')
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-05-17 12:42:00 --> file_get_contents(C:\xampp\htdocs\HMS_RegexByte\writable\debugbar/debugbar_1715948737.278818.json): Failed to open stream: No such file or directory
+in SYSTEMPATH\Debug\Toolbar\Collectors\History.php on line 86.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'file_get_contents(C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1715948737.278818.json): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\HMS_RegexByte\\system\\Debug\\Toolbar\\Collectors\\History.php', 86)
+ 2 SYSTEMPATH\Debug\Toolbar\Collectors\History.php(86): file_get_contents('C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1715948737.278818.json')
+ 3 SYSTEMPATH\Debug\Toolbar.php(497): CodeIgniter\Debug\Toolbar\Collectors\History->setFiles('1715949680.618753', 20)
+ 4 SYSTEMPATH\Debug\Toolbar.php(476): CodeIgniter\Debug\Toolbar->format([...], 'html')
+ 5 APPPATH\Config\Events.php(47): CodeIgniter\Debug\Toolbar->respond()
+ 6 SYSTEMPATH\Events\Events.php(154): CodeIgniter\Events\Events::Config\{closure}()
+ 7 SYSTEMPATH\CodeIgniter.php(442): CodeIgniter\Events\Events::trigger('pre_system')
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-17 12:44:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:44:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:44:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:45:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:45:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-05-17 12:48:09 --> mysqli_sql_exception: Column 'name' cannot be null in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `un...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `un...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `un...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `un...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\itemsModel.php(201): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\itemsController.php(822): App\Models\itemsModel->insertUnit(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\itemsController->transferItems()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-05-17 12:48:09 --> Column 'name' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `units` (`name`, `notes`, `idBusiness`, `unitCode`) VALUES (:name:, :notes:, :idBusiness:, :unitCode:)', [...], false)
+ 2 APPPATH\Models\itemsModel.php(201): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\itemsController.php(822): App\Models\itemsModel->insertUnit([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->transferItems()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-17 12:50:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:57:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 12:58:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:00:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:01:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:03:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:03:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:03:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:03:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:03:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:03:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:03:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:04:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:04:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:04:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:04:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:04:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:04:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:05:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:05:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:05:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:05:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:07:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:07:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:10:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:11:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:11:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:12:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:12:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-17 13:12:43 --> unlink(C:\xampp\htdocs\HMS_RegexByte\writable\debugbar/debugbar_1715951005.196378.json): No such file or directory
+in SYSTEMPATH\Debug\Toolbar\Collectors\History.php on line 80.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'unlink(C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1715951005.196378.json): No such file or directory', 'C:\\xampp\\htdocs\\HMS_RegexByte\\system\\Debug\\Toolbar\\Collectors\\History.php', 80)
+ 2 SYSTEMPATH\Debug\Toolbar\Collectors\History.php(80): unlink('C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1715951005.196378.json')
+ 3 SYSTEMPATH\Debug\Toolbar.php(497): CodeIgniter\Debug\Toolbar\Collectors\History->setFiles('1715951549.543042', 20)
+ 4 SYSTEMPATH\Debug\Toolbar.php(476): CodeIgniter\Debug\Toolbar->format([...], 'html')
+ 5 APPPATH\Config\Events.php(47): CodeIgniter\Debug\Toolbar->respond()
+ 6 SYSTEMPATH\Events\Events.php(154): CodeIgniter\Events\Events::Config\{closure}()
+ 7 SYSTEMPATH\CodeIgniter.php(442): CodeIgniter\Events\Events::trigger('pre_system')
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-17 13:12:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:14:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:14:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:15:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:16:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:16:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:17:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:19:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:19:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:20:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:20:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:20:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:20:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-17 13:20:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

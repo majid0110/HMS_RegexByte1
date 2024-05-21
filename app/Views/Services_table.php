@@ -12,12 +12,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Star Admin2 </title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="./public/assets/vendors/feather/feather.css">
-    <link rel="stylesheet" href="./public/assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="./public/assets/vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="./public/assets/vendors/typicons/typicons.css">
-    <link rel="stylesheet" href="./public/assets/vendors/simple-line-icons/css/simple-line-icons.css">
-    <link rel="stylesheet" href="./public/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../public/assets/vendors/feather/feather.css">
+    <link rel="stylesheet" href="../public/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../public/assets/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../public/assets/vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="../public/assets/vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../public/assets/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
@@ -25,9 +25,9 @@
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="./public/assets/css/vertical-layout-light/style.css">
+    <link rel="stylesheet" href="../public/assets/css/vertical-layout-light/style.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="./public/assets/images/favicon.png" />
+    <link rel="shortcut icon" href="../public/assets/images/favicon.png" />
 
     <style>
         .toast {
@@ -78,6 +78,62 @@
 
         .toast.error::before {
             border-top-color: #dc3545;
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* Pagination Styling */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* Pagination Styling */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a {
+            display: block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #333;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+        /* Additional Styling */
+        .pagination a {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .pagination a.active {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -347,79 +403,84 @@
                                         </tbody>
                                     </table>
                                 </div>
+
+                                <div class="pagination-container">
+                                    <div class="pagination">
+                                        <?= $pager ?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:./public/assets/partials/_footer.html -->
+                    <?php include 'include_common/footer.php'; ?>
+                    <!-- partial -->
                 </div>
-                <!-- content-wrapper ends -->
-                <!-- partial:./public/assets/partials/_footer.html -->
-                <?php include 'include_common/footer.php'; ?>
-                <!-- partial -->
+
+
+                <!-- main-panel ends -->
             </div>
-
-
-            <!-- main-panel ends -->
+            <!-- page-body-wrapper ends -->
         </div>
-        <!-- page-body-wrapper ends -->
-    </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="./public/assets/vendors/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script>
-        $(document).ready(function () {
-            function showToast(message, type) {
-                const toastContainer = document.createElement('div');
-                toastContainer.classList.add('toast', type);
-                toastContainer.textContent = message;
-                document.body.appendChild(toastContainer);
+        <!-- container-scroller -->
+        <!-- plugins:js -->
+        <script src="../public/assets/vendors/js/vendor.bundle.base.js"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page -->
+        <script src="../public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+        <!-- End plugin js for this page -->
+        <!-- inject:js -->
+        <script>
+            $(document).ready(function () {
+                function showToast(message, type) {
+                    const toastContainer = document.createElement('div');
+                    toastContainer.classList.add('toast', type);
+                    toastContainer.textContent = message;
+                    document.body.appendChild(toastContainer);
 
-                toastContainer.classList.add('show');
+                    toastContainer.classList.add('show');
 
-                setTimeout(function () {
-                    toastContainer.classList.remove('show');
                     setTimeout(function () {
-                        toastContainer.remove();
-                    }, 500);
-                }, 5000);
-            }
-            <?php if ($successMessage = session()->getFlashdata('success')): ?>
-                showToast('<?= $successMessage ?>', 'success');
-            <?php endif; ?>
-            <?php if ($errorMessage = session()->getFlashdata('error')): ?>
-                showToast('<?= $errorMessage ?>', 'error');
-            <?php endif; ?>
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            // Handle button click
-            $('.btn-Primary').click(function () {
-                // Get the form content dynamically (you may need to adjust the URL)
-                $.get('<?= base_url('Services_form1') ?>', function (data) {
-                    // Inject the form content into the modal body
-                    $('#addServiceModalBody').html(data);
-                    // Show the modal
-                    $('#addServiceModal').modal('show');
+                        toastContainer.classList.remove('show');
+                        setTimeout(function () {
+                            toastContainer.remove();
+                        }, 500);
+                    }, 5000);
+                }
+                <?php if ($successMessage = session()->getFlashdata('success')): ?>
+                    showToast('<?= $successMessage ?>', 'success');
+                <?php endif; ?>
+                <?php if ($errorMessage = session()->getFlashdata('error')): ?>
+                    showToast('<?= $errorMessage ?>', 'error');
+                <?php endif; ?>
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                // Handle button click
+                $('.btn-Primary').click(function () {
+                    // Get the form content dynamically (you may need to adjust the URL)
+                    $.get('<?= base_url('Services_form1') ?>', function (data) {
+                        // Inject the form content into the modal body
+                        $('#addServiceModalBody').html(data);
+                        // Show the modal
+                        $('#addServiceModal').modal('show');
+                    });
                 });
             });
-        });
-    </script>
+        </script>
 
 
 
-    <script src="./public/assets/js/off-canvas.js"></script>
-    <script src="./public/assets/js/hoverable-collapse.js"></script>
-    <script src="./public/assets/js/template.js"></script>
-    <script src="./public/assets/js/settings.js"></script>
-    <script src="./public/assets/js/todolist.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page-->
-    <!-- End custom js for this page-->
+        <script src="../public/assets/js/off-canvas.js"></script>
+        <script src="../public/assets/js/hoverable-collapse.js"></script>
+        <script src="../public/assets/js/template.js"></script>
+        <script src="../public/assets/js/settings.js"></script>
+        <script src="../public/assets/js/todolist.js"></script>
+        <!-- endinject -->
+        <!-- Custom js for this page-->
+        <!-- End custom js for this page-->
 </body>
 
 

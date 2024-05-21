@@ -77,14 +77,69 @@
         .toast.error::before {
             border-top-color: #dc3545;
         }
+
+          .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* Pagination Styling */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* Pagination Styling */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a {
+            display: block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #333;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+        /* Additional Styling */
+        .pagination a {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .pagination a.active {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 
 <body>
     <div class="container-scroller">
         <!-- partial:./public/assets/partials/_navbar.html -->
-
-        <!-- partial -->
+ 
         <div class="container-fluid page-body-wrapper">
             <!-- partial:./public/assets/partials/_settings-panel.html -->
             <div class="theme-setting-wrapper">
@@ -302,17 +357,25 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
+                                            <th>S.No</th>
+                                            <th>Code</th>
                                                 <th>Name</th>
                                                 <th>Price</th>
                                                 <th>Status</th>
                                                 <th>Unit</th>
+                                                <th>Inventory</th>
                                                 <th>Action</th>
 
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        <?php $serialNumber = 1; ?>
                                             <?php foreach ($items as $item): ?>
                                                 <tr>
+                                                <td><?= $serialNumber++ ?></td>
+                                                <td>
+                                                        <?= $item['Code'] ?>
+                                                    </td>
                                                     <td>
                                                         <?= $item['Name'] ?>
                                                     </td>
@@ -325,6 +388,9 @@
 
                                                     <td>
                                                         <?= $item['unit_name'] ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $item['inventory'] ?>
                                                     </td>
 
                                                     <td>
@@ -357,6 +423,12 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="pagination-container">
+                                    <div class="pagination">
+                                        <?= $pager ?>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>

@@ -111,34 +111,52 @@
       text-align: left;
     }
 
+    .page-body-wrappers {
+      min-height: calc(100vh - 97px);
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-direction: row;
+      flex-direction: row;
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: 75px;
+    }
+
     .select2-selection .select2-selection--single {
       height: 2rem;
     }
+
+    .quantity-input {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quantity-input span {
+      cursor: pointer;
+      font-size: 16px;
+      padding: 0 5px;
+    }
+
+    .quantity-input input {
+      width: 50px;
+      text-align: center;
+      margin: 0 5px;
+    }
+
+    #discountAmount,
+    #discountedTotal {
+      /* font-weight: 900;
+      font-size: 150px; */
+    }
   </style>
-  /*
-  .table tbody tr {
-  height: 30px;
-  }
 
-  .table thead tr {
-  height: 30px;
-  }
-
-
-  .table tbody td {
-  padding: 5px;
-  }
-
-  .table thead tr {
-  padding: 5px;
-  } */
-  </style>
 </head>
 
 <body>
   <div class="container-scroller">
     <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
+    <div class="container-fluid page-body-wrappers">
       <!-- partial:../../partials/_settings-panel.html -->
       <div class="theme-setting-wrapper">
         <div id="settings-trigger"><i class="ti-settings"></i></div>
@@ -458,7 +476,6 @@
                           <th>Amount</th>
                           <th>Quantity</th>
                           <th>Discount</th>
-                          <th>Total</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
@@ -468,6 +485,8 @@
                 </div>
                 <div style="margin-left: 368px; font-weight: 900; font-size: 150px">
                   <p>Total Fee: <span id="totalFee">0</span></p>
+                  <p>Discount: <span id="discountAmount">0</span></p>
+                  <p>Discounted Total: <span id="discountedTotal">0</span></p>
                 </div>
                 <div style="height: 58px; margin-left: 1.4em; font-weight: 900; font-size: 150px">
                   <!-- <button class="btn btn-primary btn-fw" id="insertBtn">Save</button> -->
@@ -501,20 +520,34 @@
 
     function calculateTotalFee() {
       var totalFee = 0;
+      var discountAmount = 0;
 
       $('#serviceTableBody tr').each(function () {
-        var quantity = parseFloat($(this).find('.editable-quantity').text());
+        var quantity = parseFloat($(this).find('.editable-quantity').val());
         var fee = parseFloat($(this).find('.editable-fee').text());
         var discount = parseFloat($(this).find('.editable-discount').text());
-        var rowTotal = quantity * fee * (1 - discount / 100);
-        if (!isNaN(rowTotal)) {
-          totalFee += rowTotal;
-        }
+        var rowTotal = quantity * fee;
+        var rowDiscountAmount = rowTotal * (discount / 100);
+        discountAmount += rowDiscountAmount;
+        totalFee += rowTotal - rowDiscountAmount;
       });
 
       $('#totalFee').text(totalFee.toFixed(2));
+      $('#discountAmount').text(discountAmount.toFixed(2));
+      $('#discountedTotal').text((totalFee - discountAmount).toFixed(2));
     }
 
+    $('#search').on('input', function () {
+      var searchText = $(this).val().toLowerCase();
+      $('#serviceTypeList tbody tr').each(function () {
+        var serviceType = $(this).find('.title').text().toLowerCase();
+        if (serviceTypeType.includes(searchText)) {
+          $(this).show();
+        } else {
+          $(this).hide();
+        }
+      });
+    });
     function addServiceRow(serviceType, serviceTypeId, serviceFee) {
       var exists = false;
 
@@ -530,21 +563,40 @@
         var newRow = '<tr>' +
           '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
           '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
-          '<td contenteditable="true" class="editable-quantity">1</td>' +
+          '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
           '<td contenteditable="true" class="editable-discount">0</td>' +
           '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)">Remove</button></td>' +
           '</tr>';
         $('#serviceTableBody').append(newRow);
         calculateTotalFee();
+
+        var newRowElement = $('#serviceTableBody tr:last');
+        newRowElement.find('.quantity-increment').click(function () {
+          var quantityInput = $(this).closest('td').find('.editable-quantity');
+          var currentQuantity = parseInt(quantityInput.val());
+          quantityInput.val(currentQuantity + 1);
+          calculateTotalFee();
+        });
+
+        newRowElement.find('.quantity-decrement').click(function () {
+          var quantityInput = $(this).closest('td').find('.editable-quantity');
+          var currentQuantity = parseInt(quantityInput.val());
+          if (currentQuantity > 1) {
+            quantityInput.val(currentQuantity - 1);
+            calculateTotalFee();
+          }
+        });
       } else {
         alert('This service is already added to the summary.');
       }
     }
 
+
     $(document).ready(function () {
       $('#serviceTableBody').on('input', 'td[contenteditable="true"]', function () {
         calculateTotalFee();
       });
+
 
       $('#serviceTypeList .badge').click(function () {
         var serviceTypeRow = $(this).closest('tr');
@@ -646,9 +698,9 @@
         var exchange = $('#exchangeInput').val();
         var totalFee = parseFloat($('#totalFee').text());
 
-        var quantity = parseFloat($('#quantityInput').val());
+        // var quantity = parseFloat($('#quantityInput').val());
 
-        console.log("Quantity: ", quantity);
+        // console.log("Quantity: ", quantity);
         // console.log("Client ID: ", clientId);
         // console.log("Client Name: ", clientName);
         // console.log("Payment Method ID: ", paymentMethodId);
@@ -664,19 +716,21 @@
         var services = [];
         $('#serviceTableBody tr').each(function () {
           var serviceTypeRow = $(this);
-          var serviceTypeId = serviceTypeRow.find('td:first').data('service-type-id');
-          var serviceName = serviceTypeRow.find('td:eq(0)').text();
-          var fee = parseFloat(serviceTypeRow.find('td:eq(1)').text());
-          var quantity = parseFloat(serviceTypeRow.find('.editable-quantity').text());
-          var discount = parseFloat(serviceTypeRow.find('.editable-discount').text());
+        var serviceTypeId = serviceTypeRow.find('td:first').data('service-type-id');
+        var serviceName = serviceTypeRow.find('td:eq(0)').text();
+        var fee = parseFloat(serviceTypeRow.find('td:eq(1)').text());
+        var quantityInput = serviceTypeRow.find('.editable-quantity');
+        var quantity = parseFloat(quantityInput.val());
+        console.log("Quantity for " + serviceName + ": " + quantity); 
+        var discount = parseFloat(serviceTypeRow.find('.editable-discount').text());
 
-          services.push({
+        services.push({
             serviceTypeId: serviceTypeId,
             serviceName: serviceName,
             fee: fee,
             quantity: quantity,
             discount: discount
-          });
+        });
         });
         $.ajax({
           method: 'POST',

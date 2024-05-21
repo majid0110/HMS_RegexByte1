@@ -49,17 +49,41 @@ class ServiceController extends Controller
         return view('addService.php', $data);
     }
 
+    // public function Services_table()
+    // {
+    //     $session = session();
+    //     if (!$session->get('ID')) {
+    //         return redirect()->to(base_url("/session_expired"));
+    //     }
+    //     $Model = new ServicesModel();
+    //     $data['activeItems'] = $Model->getActiveItems();
+    //     $data['Services'] = $Model->getServices();
+    //     return view('Services_table.php', $data);
+    // }
+
     public function Services_table()
-    {
-        $session = session();
-        if (!$session->get('ID')) {
-            return redirect()->to(base_url("/session_expired"));
-        }
-        $Model = new ServicesModel();
-        $data['activeItems'] = $Model->getActiveItems();
-        $data['Services'] = $Model->getServices();
-        return view('Services_table.php', $data);
+{
+    $session = session();
+    if (!$session->get('ID')) {
+        return redirect()->to(base_url("/session_expired"));
     }
+
+    $Model = new ServicesModel();
+
+    $currentPage = $this->request->getVar('page') ? (int)$this->request->getVar('page') : 1;
+    $perPage = 20; 
+
+    $data['activeItems'] = $Model->getActiveItems();
+
+    $data['Services'] = $Model->getServices($perPage, $currentPage);
+
+    $pager = service('pager');
+    $total = $Model->getServicesCount();
+    $data['pager'] = $pager->makeLinks($currentPage, $perPage, $total, 'default_full');
+
+    return view('Services_table.php', $data);
+}
+
 
     public function editService($idArtMenu)
     {

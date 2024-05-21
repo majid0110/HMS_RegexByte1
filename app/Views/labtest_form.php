@@ -460,9 +460,9 @@
                 $('#testTypeList tbody tr').each(function () {
                   var testType = $(this).find('.title').text().toLowerCase();
                   if (testType.includes(searchText)) {
-                    $(this).show(); // Show the row if it matches the search text
+                    $(this).show();
                   } else {
-                    $(this).hide(); // Hide the row if it doesn't match the search text
+                    $(this).hide();
                   }
                 });
               });
