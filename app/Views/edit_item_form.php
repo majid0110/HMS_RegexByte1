@@ -232,6 +232,9 @@
                         <div class="col-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
+                                    <button type="button" class="btn btn-outline-success btn-fw"
+                                        id="toggle-expiry-table" style="margin-left: 50rem;margin-bottom: -2rem;">Manage
+                                        Expiry</button>
                                     <h4 class="card-title">Edit ITEMS</h4>
                                     <!-- EditService_form.php -->
                                     <form method="POST" action="<?= base_url('updateitem/' . $item['idItem']); ?>"
@@ -416,47 +419,84 @@
                                         </div>
 
                                         <div class="row">
-        <div class="col-md-6">
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Inventory</label>
-                <div class="col-sm-9">
-                    <input type="number" class="form-control" name="inventory" value="<?= isset($item['inventory']) ? $item['inventory'] : ''; ?>" />
-                </div>
-            </div>
-        </div>
-
-        <p class="card-description">Expiry Details</p>
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Inventory</th>
-                        <th>Expiry Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($expiries as $expiry): ?>
-                        <tr>
-                            <td>
-                                <input type="number" class="form-control" name="expiry_inventory[<?= $expiry['expiryID']; ?>]" value="<?= $expiry['inventory']; ?>" />
-                            </td>
-                            <td>
-                                <input type="date" class="form-control" name="expiry_date[<?= $expiry['expiryID']; ?>]" value="<?= $expiry['expiryDate']; ?>" />
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    
-
-                                        <div class="row">
                                             <div class="col-md-6">
-                                                <button type="submit" class="btn btn-primary">Update</button>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Inventory</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="number" class="form-control" name="inventory"
+                                                            value="<?= isset($item['inventory']) ? $item['inventory'] : ''; ?>" />
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+
+                                            <div class="row" style="margin-bottom: 1rem;">
+                                                <div class="col-md-6">
+                                                    <button type="submit"
+                                                        class="btn btn-outline-info btn-fw">Update</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div id="expiry-table-container" style="display: none;">
+                                                        <hr>
+                                                        <p class="card-description">Expiry Details</p>
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Inventory</th>
+                                                                    <th>Expiry Date</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php if (!empty($expiries)): ?>
+                                                                    <?php foreach ($expiries as $expiry): ?>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <input type="number" class="form-control"
+                                                                                    name="expiry_inventory[<?= $expiry['expiryID']; ?>]"
+                                                                                    value="<?= $expiry['inventory']; ?>" />
+                                                                            </td>
+                                                                            <td>
+                                                                                <input type="date" class="form-control"
+                                                                                    name="expiry_date[<?= $expiry['expiryID']; ?>]"
+                                                                                    value="<?= $expiry['expiryDate']; ?>" />
+                                                                            </td>
+                                                                        </tr>
+                                                                    <?php endforeach; ?>
+                                                                <?php else: ?>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <input type="number" class="form-control"
+                                                                                name="expiry_inventory[new_1]" value="" />
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="date" class="form-control"
+                                                                                name="expiry_date[new_1]" value="" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <input type="number" class="form-control"
+                                                                                name="expiry_inventory[new_2]" value="" />
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="date" class="form-control"
+                                                                                name="expiry_date[new_2]" value="" />
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php endif; ?>
+                                                            </tbody>
+                                                        </table>
+                                                        <div style="margin-top: 1rem;">
+                                                            <button type="button" class="btn btn-outline-warning btn-fw"
+                                                                id="add-expiry-row">Add More</button>
+                                                            <button type="submit" class="btn btn-outline-info btn-fw"
+                                                                id="add-expiry-row">Update</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                     </form>
 
                                 </div>
@@ -481,6 +521,30 @@
     <script src="../public/assets/vendors_s/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
+
+    <script>
+        document.getElementById('toggle-expiry-table').addEventListener('click', function () {
+            const expiryTableContainer = document.getElementById('expiry-table-container');
+            expiryTableContainer.style.display = expiryTableContainer.style.display === 'none' ? 'block' : 'none';
+        });
+
+        document.getElementById('add-expiry-row').addEventListener('click', function () {
+            const tbody = document.querySelector('table tbody');
+            const rowCount = tbody.children.length + 1;
+            const newRow = document.createElement('tr');
+
+            newRow.innerHTML = `
+            <td>
+                <input type="number" class="form-control" name="expiry_inventory[new_${rowCount}]" value="" />
+            </td>
+            <td>
+                <input type="date" class="form-control" name="expiry_date[new_${rowCount}]" value="" />
+            </td>
+        `;
+
+            tbody.appendChild(newRow);
+        });
+    </script>
     <script src="../public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js"></script>
     <script src="../public/assets/vendors_s/select2/select2.min.js"></script>
     <script src="../public/assets/vendors_s/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>

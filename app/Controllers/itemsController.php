@@ -96,25 +96,25 @@ class itemsController extends Controller
     // }
 
     public function items_table()
-{
-    $session = session();
-    if (!$session->get('ID')) {
-        return redirect()->to(base_url("/login"));
+    {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/login"));
+        }
+
+        $model = new itemsModel();
+
+        $currentPage = $this->request->getVar('page') ? (int) $this->request->getVar('page') : 1;
+        $perPage = 20;
+
+        $data['items'] = $model->getItems($perPage, $currentPage);
+
+        $pager = service('pager');
+        $total = $model->getItemsCount();
+        $data['pager'] = $pager->makeLinks($currentPage, $perPage, $total, 'default_full');
+
+        return view('items_table', $data);
     }
-
-    $model = new itemsModel();
-
-    $currentPage = $this->request->getVar('page') ? (int)$this->request->getVar('page') : 1;
-    $perPage = 20;
-
-    $data['items'] = $model->getItems($perPage, $currentPage);
-
-    $pager = service('pager');
-    $total = $model->getItemsCount();
-    $data['pager'] = $pager->makeLinks($currentPage, $perPage, $total, 'default_full');
-
-    return view('items_table', $data);
-}
 
     public function edititem($idItem)
     {
@@ -238,7 +238,7 @@ class itemsController extends Controller
         return redirect()->to(base_url("/items_table"));
     }
 
-  
+
 
     public function transferItems()
     {
@@ -386,7 +386,7 @@ class itemsController extends Controller
             session()->setFlashdata('error', 'Error uploading the Excel file.');
             return redirect()->back();
         }
-    } 
+    }
 
 
 
@@ -443,7 +443,20 @@ class itemsController extends Controller
         ];
         $inventoryModel = new ItemsInventoryModel();
         $inventoryModel->changeInventory($idItem, $formDataInventory);
-           
+
+        $expiryInventory = $this->request->getPost('expiry_inventory');
+        $expiryDate = $this->request->getPost('expiry_date');
+        $expiryData = [];
+
+        foreach ($expiryInventory as $expiryID => $inventory) {
+            if (isset($expiryDate[$expiryID])) {
+                $expiryData[$expiryID] = [
+                    'inventory' => $inventory,
+                    'expiryDate' => $expiryDate[$expiryID],
+                ];
+            }
+        }
+        $inventoryModel->updateExpiry($idItem, $expiryData);
 
         session()->setFlashdata('success', 'Service updated successfully..!!');
         return redirect()->to(base_url("/items_table"));

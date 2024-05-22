@@ -31,8 +31,8 @@ class ItemsInventoryModel extends Model
     public function changeInventory($idItem, $data)
     {
         $existingInventory = $this->where('idItem', $idItem)
-                                  ->where('idWarehouse', $data['idWarehouse'])
-                                  ->first();
+            ->where('idWarehouse', $data['idWarehouse'])
+            ->first();
 
         if ($existingInventory) {
             $this->update($existingInventory['idInventory'], $data);
@@ -72,11 +72,31 @@ class ItemsInventoryModel extends Model
             ->getResultArray();
     }
 
-    public function updateExpiry($expiryID, $data)
+    // public function updateExpiry($expiryID, $data)
+    // {
+    //     $this->db->table('itemsexpiry')
+    //         ->where('expiryID', $expiryID)
+    //         ->update($data);
+    // }
+
+    public function updateExpiry($idInventory, $expiryData)
     {
-        $this->db->table('itemsexpiry')
-            ->where('expiryID', $expiryID)
-            ->update($data);
+        $db = \Config\Database::connect();
+        $builder = $db->table('itemsexpiry');
+
+        foreach ($expiryData as $expiryID => $data) {
+            $record = [
+                'idInventory' => $idInventory,
+                'inventory' => $data['inventory'],
+                'expiryDate' => $data['expiryDate'],
+            ];
+            $existingRecord = $builder->where('expiryID', $expiryID)->get()->getRowArray();
+            if ($existingRecord) {
+                $builder->where('expiryID', $expiryID)->update($record);
+            } else {
+                $builder->insert($record);
+            }
+        }
     }
 
 
