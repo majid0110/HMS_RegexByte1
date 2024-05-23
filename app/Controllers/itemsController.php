@@ -462,6 +462,42 @@ class itemsController extends Controller
         return redirect()->to(base_url("/items_table"));
     }
 
+    public function updateExpiry($idItem)
+    {
+        $request = \Config\Services::request();
+        $Model = new itemsModel();
+        $expiryModel = new ItemsInventoryModel();
+
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+        $idWarehouse = $this->request->getPost('warehouse');
+
+        $expiryInventory = $this->request->getPost('expiry_inventory');
+        $expiryDates = $this->request->getPost('expiry_date');
+
+        if ($expiryInventory && $expiryDates) {
+            foreach ($expiryInventory as $expiryID => $inventory) {
+                $expiryDate = $expiryDates[$expiryID];
+                $expiryData = [
+                    'idInventory' => $idItem,
+                    'inventory' => $inventory,
+                    'expiryDate' => $expiryDate,
+                ];
+
+                if ($expiryModel->expiryExists($idItem, $expiryDate)) {
+                    $expiryModel->updateExpiryByInventoryAndDate($idItem, $expiryDate, $expiryData);
+                } else {
+                    $expiryModel->insertExpiry($expiryData);
+                }
+            }
+        }
+
+        session()->setFlashdata('success', 'Expiry details updated successfully!');
+        return redirect()->to(base_url("/edititem"));
+    }
+
+
+
     public function saveCatart()
     {
         $itemsModel = new itemsModel();

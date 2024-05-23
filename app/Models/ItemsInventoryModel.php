@@ -79,25 +79,59 @@ class ItemsInventoryModel extends Model
     //         ->update($data);
     // }
 
-    public function updateExpiry($idInventory, $expiryData)
+    // public function updateExpiry($idInventory, $expiryData)
+    // {
+    //     $db = \Config\Database::connect();
+    //     $builder = $db->table('itemsexpiry');
+
+    //     foreach ($expiryData as $expiryID => $data) {
+    //         $record = [
+    //             'idInventory' => $idInventory,
+    //             'inventory' => $data['inventory'],
+    //             'expiryDate' => $data['expiryDate'],
+    //         ];
+    //         $existingRecord = $builder->where('expiryID', $expiryID)->get()->getRowArray();
+    //         if ($existingRecord) {
+    //             $builder->where('expiryID', $expiryID)->update($record);
+    //         } else {
+    //             $builder->insert($record);
+    //         }
+    //     }
+    // }
+
+    public function insertExpiry($data)
+    {
+        $this->db->table('itemsexpiry')
+            ->insert($data);
+    }
+
+    public function updateExpiry($expiryID, $expiryData)
     {
         $db = \Config\Database::connect();
         $builder = $db->table('itemsexpiry');
 
-        foreach ($expiryData as $expiryID => $data) {
-            $record = [
-                'idInventory' => $idInventory,
-                'inventory' => $data['inventory'],
-                'expiryDate' => $data['expiryDate'],
-            ];
-            $existingRecord = $builder->where('expiryID', $expiryID)->get()->getRowArray();
-            if ($existingRecord) {
-                $builder->where('expiryID', $expiryID)->update($record);
-            } else {
-                $builder->insert($record);
-            }
-        }
+        $builder->where('expiryID', $expiryID)
+            ->update($expiryData);
     }
 
+    public function expiryExists($idInventory, $expiryDate)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('itemsexpiry');
+
+        return $builder->where('idInventory', $idInventory)
+            ->where('expiryDate', $expiryDate)
+            ->countAllResults() > 0;
+    }
+
+    public function updateExpiryByInventoryAndDate($idInventory, $expiryDate, $expiryData)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('itemsexpiry');
+
+        $builder->where('idInventory', $idInventory)
+            ->where('expiryDate', $expiryDate)
+            ->update($expiryData);
+    }
 
 }
