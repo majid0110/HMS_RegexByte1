@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use App\Models\ConfigureModel;
+use App\Models\ConfigModel;
 use CodeIgniter\CLI\Console;
 
 class ConfigureController extends Controller
@@ -11,6 +12,11 @@ class ConfigureController extends Controller
     public function configure()
     {
         return view('add_config.php');
+    }
+
+    public function config_settings()
+    {
+        return view('config_Settings.php');
     }
 
     public function config_form($businessTableID)
@@ -54,6 +60,19 @@ class ConfigureController extends Controller
         }
         session()->setFlashdata('success', 'Business data updated successfully.');
 
+        return redirect()->to(base_url('/configure'));
+    }
+
+    public function updateConfig()
+    {
+        $session = \Config\Services::session();
+        $businessID = $this->request->getPost('businessID');
+        $isExpiry = $this->request->getPost('isExpiry') ? 1 : 0;
+
+        $configModel = new ConfigModel();
+        $configModel->updateConfig($businessID, ['isExpiry' => $isExpiry]);
+
+        session()->setFlashdata('success', 'Configuration updated successfully!');
         return redirect()->to(base_url('/configure'));
     }
 }

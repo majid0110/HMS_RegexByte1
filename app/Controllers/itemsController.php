@@ -12,6 +12,7 @@ use App\Models\ServicesModel;
 use App\Models\SectorsModel;
 use App\Models\itemsModel;
 use App\Models\DoctorModel;
+use App\Models\ConfigModel;
 use Mpdf\Mpdf;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -67,6 +68,12 @@ class itemsController extends Controller
         ];
         $Model = new itemsModel();
         $data['warehouse'] = $Model->getIdWarehouse();
+
+        $configModel = new ConfigModel();
+        $businessID = session()->get('businessID');
+        $config = $configModel->where('businessID', $businessID)->first();
+        $data['isExpiry'] = $config ? $config['isExpiry'] : 0;
+
         return view('items_form.php', $data);
     }
 
@@ -133,6 +140,11 @@ class itemsController extends Controller
         $data['item']['inventory'] = $inventory ? $inventory['inventory'] : '';
 
         $data['expiries'] = $inventoryModel->getExpiriesByInventoryId($inventory['idInventory']);
+
+        $configModel = new ConfigModel();
+        $businessID = session()->get('businessID');
+        $config = $configModel->where('businessID', $businessID)->first();
+        $data['isExpiry'] = $config ? $config['isExpiry'] : 0;
 
         return view('edit_item_form.php', $data);
     }

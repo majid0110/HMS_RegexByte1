@@ -8,6 +8,22 @@
   <link rel="stylesheet" href="./public/assets/vendors_s/select2/select2.min.css">
   <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css">
 
+  <style>
+    .card {
+      cursor: pointer;
+    }
+
+    .card:hover {
+      background: cornflowerblue;
+      color: whitesmoke;
+      /* background-image: url("./public/assets/images_s/bg.jpeg"); */
+    }
+
+    .card:hover h4 {
+      color: whitesmoke;
+
+    }
+  </style>
 </head>
 
 <body>
@@ -132,7 +148,8 @@
           <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
             <div class="d-flex align-items-center justify-content-between border-bottom">
               <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
-              <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 fw-normal">See All</small>
+              <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 fw-normal">See
+                All</small>
             </div>
             <ul class="chat-list">
               <li class="list active">
@@ -216,51 +233,38 @@
           }
           ?>
           <div class="row">
-            <div class="col-md-4 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Configure Business</h4>
+            <!-- ----------------------------------------------------------- -->
+            <div class="col-md-3 grid-margin stretch-card">
+              <div class="card"
+                onclick="window.location.href='<?= base_url() . 'config_form/' . $session->get('businessTableID'); ?>';">
+                <div class="card-body" style="display: flex; flex-direction: column; align-items: center;">
+                  <h4 class="card-title" style="text-align:center">Configure Business</h4>
                   <div class="media">
-                    <i class="ti-world icon-md text-info d-flex align-self-start me-3"></i>
-                    <div class="media-body">
-                      <p class="card-text">Update Business</p>
-                      <!-- Add the URL button here -->
-                      <a href="<?php echo base_url() . 'config_form/' . $session->get('businessTableID'); ?>"
-                        class="btn btn-primary">Configure Here</a>
-                    </div>
+                    <i class="icon-lg mdi mdi mdi-transcribe" style="height:45px; width:45px;"></i>
+                  </div>
+                </div>
 
+              </div>
+            </div>
+
+            <div class="col-md-3 grid-margin stretch-card">
+              <div class="card" onclick="window.location.href='<?= base_url('config_settings'); ?>';">
+                <div class="card-body" style="display: flex; flex-direction: column; align-items: center;">
+                  <h4 class="card-title" style="text-align: center;">Configure Data</h4>
+                  <div class="media">
+                    <i class="icon-lg mdi mdi-settings" style="height: 45px; width: 45px;"></i>
                   </div>
                 </div>
               </div>
             </div>
 
 
-            <!-- <div class="col-md-4 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Center aligned media</h4>
-                  <div class="media">
-                    <i class="ti-world icon-md text-info d-flex align-self-center me-3"></i>
-                    <div class="media-body">
-                      <p class="card-text">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Top aligned media</h4>
-                  <div class="media">
-                    <i class="ti-world icon-md text-info d-flex align-self-start me-3"></i>
-                    <div class="media-body">
-                      <p class="card-text">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
+
+
+
+            <!-- ---------------------------------------------------- -->
+
+
 
 
           </div>

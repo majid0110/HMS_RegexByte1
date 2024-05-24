@@ -238,10 +238,13 @@
                         <div class="col-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <button type="button" class="btn btn-outline-success btn-fw" data-toggle="modal"
-                                        data-target="#expiryModal" id="toggle-expiry-table"
-                                        style="margin-left: 50rem;margin-bottom: -2rem;">Manage
-                                        Expiry</button>
+                                    <?php if ($isExpiry == 1): ?>
+                                        <button type="button" class="btn btn-outline-success btn-fw" data-toggle="modal"
+                                            data-target="#expiryModal" id="toggle-expiry-table"
+                                            style="margin-left: 50rem; margin-bottom: -2rem;">
+                                            Manage Expiry
+                                        </button>
+                                    <?php endif; ?>
 
                                     <h4 class="card-title">Edit ITEMS</h4>
                                     <!-- EditService_form.php -->

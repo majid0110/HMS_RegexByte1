@@ -92,8 +92,11 @@ $routes->post('updateDoctor', 'DoctorController::updateDoctor');
 // $routes->get('DoctorController/editDoctor/(:num)', 'DoctorController::editDoctor/$1');
 $routes->get('/editDoctor/(:num)', 'DoctorController::editDoctor/$1');
 $routes->get('/configure', 'ConfigureController::configure');
+$routes->get('/config_settings', 'ConfigureController::config_settings');
 $routes->get('/config_form/(:num)', 'ConfigureController::config_form/$1');
 $routes->post('/update/(:num)', 'ConfigureController::update/$1');
+
+$routes->post('updateConfig', 'ConfigureController::updateConfig');
 
 $routes->post('doctor-controller/get-doctors', 'DoctorController::getDoctors', ['as' => 'get-doctors']);
 $routes->post('DoctorController/getDoctors', 'DoctorController::getDoctors');
