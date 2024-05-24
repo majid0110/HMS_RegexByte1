@@ -622,6 +622,14 @@ class salesModel extends Model
     $result = $query->getRowArray();
     return $result['Sum'] ?? 0;
 }
-
+public function getExpiryData($productId, $businessId)
+{
+    $db = \Config\Database::connect();
+    $query = $db->table('itemsExpiry')
+                ->where('idInventory', $productId)
+                ->where('businessID', $businessId)
+                ->get();
+    return $query->getResultArray();
+}
 
 }

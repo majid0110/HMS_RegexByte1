@@ -459,82 +459,54 @@
                                                                 data-dismiss="modal">&times;</button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form method="POST"
-                                                                action="<?= base_url('updateExpiry/' . $item['idItem']); ?>">
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <p class="card-description">Expiry Details</p>
-                                                                        <table class="table table-bordered">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th>Inventory</th>
-                                                                                    <th>Expiry Date</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                                <?php if (!empty($expiries)): ?>
-                                                                                    <?php foreach ($expiries as $expiry): ?>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <input type="number"
-                                                                                                    class="form-control expiry-inventory"
-                                                                                                    name="expiry_inventory[<?= $expiry['expiryID']; ?>]"
-                                                                                                    value="<?= $expiry['inventory']; ?>" />
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <input type="date"
-                                                                                                    class="form-control"
-                                                                                                    name="expiry_date[<?= $expiry['expiryID']; ?>]"
-                                                                                                    value="<?= $expiry['expiryDate']; ?>" />
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    <?php endforeach; ?>
-                                                                                <?php else: ?>
-                                                                                    <!-- Provide empty fields for adding new expiry data -->
-                                                                                    <tr>
-                                                                                        <td>
-                                                                                            <input type="number"
-                                                                                                class="form-control expiry-inventory"
-                                                                                                name="expiry_inventory[new_1]"
-                                                                                                value="" />
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <input type="date"
-                                                                                                class="form-control"
-                                                                                                name="expiry_date[new_1]"
-                                                                                                value="" />
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td>
-                                                                                            <input type="number"
-                                                                                                class="form-control expiry-inventory"
-                                                                                                name="expiry_inventory[new_2]"
-                                                                                                value="" />
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <input type="date"
-                                                                                                class="form-control"
-                                                                                                name="expiry_date[new_2]"
-                                                                                                value="" />
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                <?php endif; ?>
-                                                                            </tbody>
-                                                                        </table>
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            id="add-expiry-row"
-                                                                            <?= (isset($item['inventory'])) ? 'disabled' : '' ?>>Add More</button>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- Modal Footer -->
-                                                                <div class="modal-footer">
-                                                                    <button type="submit"
-                                                                        class="btn btn-primary">Save</button>
-                                                                    <button type="button" class="btn btn-danger"
-                                                                        data-dismiss="modal">Close</button>
-                                                                </div>
-                                                            </form>
+                                                        <form method="POST" action="<?= base_url('updateExpiry/' . $item['idItem']); ?>">
+    <div class="row">
+        <div class="col-md-12">
+            <p>Total Inventory: <?= $item['inventory'] ?></p>
+            <h6>Total Inventory: <b><?= $item['inventory'] ?></b></h6>
+            <p class="card-description">Expiry Details</p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Inventory</th>
+                        <th>Expiry Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($expiries)): ?>
+                        <?php foreach ($expiries as $expiry): ?>
+                            <tr>
+                                <td>
+                                    <input type="number" class="form-control expiry-inventory" name="expiry_inventory[<?= $expiry['expiryID']; ?>]" value="<?= $expiry['inventory']; ?>" required />
+                                </td>
+                                <td>
+                                    <input type="date" class="form-control" name="expiry_date[<?= $expiry['expiryID']; ?>]" value="<?= date('Y-m-d', strtotime($expiry['expiryDate'])); ?>" required />
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td>
+                                <input type="number" class="form-control expiry-inventory" name="expiry_inventory[new_1]" value="" required />
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" name="expiry_date[new_1]" value="" required />
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-secondary" id="add-expiry-row" <?= (isset($item['inventory'])) ? 'disabled' : '' ?>>Add More</button>
+        </div>
+    </div>
+    <!-- Modal Footer -->
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+    </div>
+</form>
+
+
                                                         </div>
 
                                                     </div>
@@ -612,10 +584,10 @@
 
             newRow.innerHTML = `
             <td>
-                <input type="number" class="form-control expiry-inventory" name="expiry_inventory[new_${rowCount}]" value="" />
+                <input type="number" class="form-control expiry-inventory" name="expiry_inventory[new_${rowCount}]" value="" required/>
             </td>
             <td>
-                <input type="date" class="form-control" name="expiry_date[new_${rowCount}]" value="" />
+                <input type="date" class="form-control" name="expiry_date[new_${rowCount}]" value="" required/>
             </td>
         `;
 

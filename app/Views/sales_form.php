@@ -434,19 +434,23 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <?php foreach ($services as $service): ?>
-                                <tr data-service-type-id="<?= $service['idArtMenu']; ?>">
-                                  <td class="title">
-                                    <?= $service['Name']; ?>
-                                  </td>
-                                  <td class="fee" contenteditable="true">
-                                    <?= $service['Price']; ?>
-                                  </td>
-                                  <td><span class="badge badge-primary badge-pill hover-effect"
-                                      onclick="addService()">ADD</span></td>
-                                </tr>
-
-                              <?php endforeach; ?>
+                            <?php foreach ($services as $service): ?>
+    <tr data-service-type-id="<?= $service['idArtMenu']; ?>">
+        <td class="title"><?= $service['Name']; ?></td>
+        <td class="fee" contenteditable="true"><?= $service['Price']; ?></td>
+        <?php if ($isExpiry && !empty($service['expiryData'])): ?>
+            <td>
+                <select class="form-control expiry-dropdown">
+                    <option value="">Select Expiry Date</option>
+                    <?php foreach ($service['expiryData'] as $expiry): ?>
+                        <option value="<?= $expiry['expiryID'] ?>"><?= $expiry['expiryDate'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </td>
+        <?php endif; ?>
+        <td><span class="badge badge-primary badge-pill hover-effect" onclick="addService()">ADD</span></td>
+    </tr>
+<?php endforeach; ?>
                             </tbody>
                           </table>
                         </div>
@@ -548,7 +552,7 @@
         }
       });
     });
-    function addServiceRow(serviceType, serviceTypeId, serviceFee) {
+    function addServiceRow(serviceType, serviceTypeId, serviceFee, expiryId = null) {
       var exists = false;
 
       $('#serviceTableBody tr').each(function () {
@@ -565,6 +569,7 @@
           '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
           '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
           '<td contenteditable="true" class="editable-discount">0</td>' +
+          '<td><input type="hidden" class="expiry-id" value="' + expiryId + '"></td>' +
           '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)">Remove</button></td>' +
           '</tr>';
         $('#serviceTableBody').append(newRow);
@@ -599,13 +604,14 @@
 
 
       $('#serviceTypeList .badge').click(function () {
-        var serviceTypeRow = $(this).closest('tr');
-        var serviceTypeId = serviceTypeRow.data('service-type-id');
-        var serviceType = serviceTypeRow.find('.title').text().trim();
-        var serviceFee = serviceTypeRow.find('.fee').text().trim();
-        addServiceRow(serviceType, serviceTypeId, serviceFee);
-        calculateTotalFee();
-      });
+    var serviceTypeRow = $(this).closest('tr');
+    var serviceTypeId = serviceTypeRow.data('service-type-id');
+    var serviceType = serviceTypeRow.find('.title').text().trim();
+    var serviceFee = serviceTypeRow.find('.fee').text().trim();
+    var expiryId = serviceTypeRow.find('.expiry-dropdown').val();
+    addServiceRow(serviceType, serviceTypeId, serviceFee, expiryId);
+    calculateTotalFee();
+});
 
       function attachAddServiceHandler() {
         $('#serviceTypeList .badge').click(function () {
@@ -716,21 +722,22 @@
         var services = [];
         $('#serviceTableBody tr').each(function () {
           var serviceTypeRow = $(this);
-        var serviceTypeId = serviceTypeRow.find('td:first').data('service-type-id');
-        var serviceName = serviceTypeRow.find('td:eq(0)').text();
-        var fee = parseFloat(serviceTypeRow.find('td:eq(1)').text());
-        var quantityInput = serviceTypeRow.find('.editable-quantity');
-        var quantity = parseFloat(quantityInput.val());
-        console.log("Quantity for " + serviceName + ": " + quantity); 
-        var discount = parseFloat(serviceTypeRow.find('.editable-discount').text());
+          var serviceTypeId = serviceTypeRow.find('td:first').data('service-type-id');
+          var serviceName = serviceTypeRow.find('td:eq(0)').text();
+          var fee = parseFloat(serviceTypeRow.find('td:eq(1)').text());
+          var quantityInput = serviceTypeRow.find('.editable-quantity');
+          var quantity = parseFloat(quantityInput.val());
+          var discount = parseFloat(serviceTypeRow.find('.editable-discount').text());
+          var expiryId = serviceTypeRow.find('.expiry-id').val();
 
-        services.push({
+          services.push({
             serviceTypeId: serviceTypeId,
             serviceName: serviceName,
             fee: fee,
             quantity: quantity,
-            discount: discount
-        });
+            discount: discount,
+            expiryId: expiryId
+          });
         });
         $.ajax({
           method: 'POST',

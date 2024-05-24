@@ -17,6 +17,11 @@ class ItemsInventoryModel extends Model
             ->update();
     }
 
+    public function getInventoryByItemId($idItem)
+    {
+        return $this->where('idItem', $idItem)->first();
+    }
+
     public function getRatioDataForServices($idArtMenus, $businessID)
     {
 
@@ -41,10 +46,6 @@ class ItemsInventoryModel extends Model
         }
     }
 
-    public function getInventoryByItemId($idItem)
-    {
-        return $this->where('idItem', $idItem)->first();
-    }
 
     public function getRatio($idArtMenu, $idBusiness)
     {
@@ -64,13 +65,15 @@ class ItemsInventoryModel extends Model
             ->update();
     }
 
-    public function getExpiriesByInventoryId($idInventory)
-    {
-        return $this->db->table('itemsexpiry')
-            ->where('idInventory', $idInventory)
-            ->get()
-            ->getResultArray();
-    }
+
+
+public function getExpiriesByItemId($idItem)
+{
+    return $this->db->table('itemsexpiry')
+        ->where('idInventory', $idItem)
+        ->get()
+        ->getResultArray();
+}
 
     // public function updateExpiry($expiryID, $data)
     // {

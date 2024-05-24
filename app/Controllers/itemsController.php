@@ -123,31 +123,62 @@ class itemsController extends Controller
         return view('items_table', $data);
     }
 
+    // public function edititem($idItem)
+    // {
+    //     $servicesModel = new ServicesModel();
+    //     $data = [
+    //         'units' => $servicesModel->getUnits(),
+    //         'categories' => $servicesModel->getCategories(),
+    //         'tax' => $servicesModel->getTaxes(),
+    //     ];
+    //     $Model = new itemsModel();
+    //     $data['warehouse'] = $Model->getIdWarehouse();
+    //     $data['item'] = $Model->find($idItem);
+
+    //     $inventoryModel = new ItemsInventoryModel();
+    //     $inventory = $inventoryModel->getInventoryByItemId($idItem);
+    //     $data['item']['inventory'] = $inventory ? $inventory['inventory'] : '';
+
+    //     $data['expiries'] = $inventoryModel->getExpiriesByInventoryId($inventory['idInventory']);
+
+    //     $configModel = new ConfigModel();
+    //     $businessID = session()->get('businessID');
+    //     $config = $configModel->where('businessID', $businessID)->first();
+    //     $data['isExpiry'] = $config ? $config['isExpiry'] : 0;
+
+    //     return view('edit_item_form.php', $data);
+    // }
+
     public function edititem($idItem)
-    {
-        $servicesModel = new ServicesModel();
-        $data = [
-            'units' => $servicesModel->getUnits(),
-            'categories' => $servicesModel->getCategories(),
-            'tax' => $servicesModel->getTaxes(),
-        ];
-        $Model = new itemsModel();
-        $data['warehouse'] = $Model->getIdWarehouse();
-        $data['item'] = $Model->find($idItem);
+{
+    $servicesModel = new ServicesModel();
+    $data = [
+        'units' => $servicesModel->getUnits(),
+        'categories' => $servicesModel->getCategories(),
+        'tax' => $servicesModel->getTaxes(),
+    ];
 
-        $inventoryModel = new ItemsInventoryModel();
-        $inventory = $inventoryModel->getInventoryByItemId($idItem);
-        $data['item']['inventory'] = $inventory ? $inventory['inventory'] : '';
+    $Model = new itemsModel();
+    $data['warehouse'] = $Model->getIdWarehouse();
+    $data['item'] = $Model->find($idItem);
 
-        $data['expiries'] = $inventoryModel->getExpiriesByInventoryId($inventory['idInventory']);
+    $inventoryModel = new ItemsInventoryModel();
+    $inventory = $inventoryModel->getInventoryByItemId($idItem);
 
-        $configModel = new ConfigModel();
-        $businessID = session()->get('businessID');
-        $config = $configModel->where('businessID', $businessID)->first();
-        $data['isExpiry'] = $config ? $config['isExpiry'] : 0;
+    $data['item']['inventory'] = $inventory ? $inventory['inventory'] : '';
+    $idInventory = $inventory['idInventory'] ?? null;
 
-        return view('edit_item_form.php', $data);
-    }
+    $data['expiries'] = $inventoryModel->getExpiriesByItemId($idItem);
+
+
+    $configModel = new ConfigModel();
+    $businessID = session()->get('businessID');
+    $config = $configModel->where('businessID', $businessID)->first();
+    $data['isExpiry'] = $config ? $config['isExpiry'] : 0;
+
+    return view('edit_item_form.php', $data);
+}
+
 
     public function editcat($idCatArt)
     {
@@ -449,27 +480,20 @@ class itemsController extends Controller
         $Model->update($idItem, $formData);
 
         $formDataInventory = [
-            'idItem' => $idItem,
             'inventory' => $this->request->getPost('inventory'),
             'idWarehouse' => $idWarehouse,
         ];
+    
         $inventoryModel = new ItemsInventoryModel();
-        $inventoryModel->changeInventory($idItem, $formDataInventory);
-
-        $expiryInventory = $this->request->getPost('expiry_inventory');
-        $expiryDate = $this->request->getPost('expiry_date');
-        $expiryData = [];
-
-        foreach ($expiryInventory as $expiryID => $inventory) {
-            if (isset($expiryDate[$expiryID])) {
-                $expiryData[$expiryID] = [
-                    'inventory' => $inventory,
-                    'expiryDate' => $expiryDate[$expiryID],
-                ];
-            }
+        $inventory = $inventoryModel->getInventoryByItemId($idItem);
+    
+        if ($inventory) {
+            $inventoryModel->updateInventory($inventory['idInventory'], $formDataInventory['inventory']);
+        } else {
+            $formDataInventory['idItem'] = $idItem;
+            $inventoryModel->insert($formDataInventory);
         }
-        $inventoryModel->updateExpiry($idItem, $expiryData);
-
+    
         session()->setFlashdata('success', 'Service updated successfully..!!');
         return redirect()->to(base_url("/items_table"));
     }
@@ -505,7 +529,7 @@ class itemsController extends Controller
         }
 
         session()->setFlashdata('success', 'Expiry details updated successfully!');
-        return redirect()->to(base_url("/edititem"));
+        return redirect()->to(base_url("/items_table"));
     }
 
 
