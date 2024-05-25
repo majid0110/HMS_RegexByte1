@@ -65,15 +65,21 @@ class ItemsInventoryModel extends Model
             ->update();
     }
 
+    public function deleteExpiry($expiryID)
+    {
+        $db = \Config\Database::connect();
+        $db->table('itemsexpiry')->where('expiryID', $expiryID)->delete();
+        return $db->affectedRows();
+    }
 
 
-public function getExpiriesByItemId($idItem)
-{
-    return $this->db->table('itemsexpiry')
-        ->where('idInventory', $idItem)
-        ->get()
-        ->getResultArray();
-}
+    public function getExpiriesByItemId($idItem)
+    {
+        return $this->db->table('itemsexpiry')
+            ->where('idInventory', $idItem)
+            ->get()
+            ->getResultArray();
+    }
 
     // public function updateExpiry($expiryID, $data)
     // {

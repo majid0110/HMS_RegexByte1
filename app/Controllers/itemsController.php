@@ -150,34 +150,34 @@ class itemsController extends Controller
     // }
 
     public function edititem($idItem)
-{
-    $servicesModel = new ServicesModel();
-    $data = [
-        'units' => $servicesModel->getUnits(),
-        'categories' => $servicesModel->getCategories(),
-        'tax' => $servicesModel->getTaxes(),
-    ];
+    {
+        $servicesModel = new ServicesModel();
+        $data = [
+            'units' => $servicesModel->getUnits(),
+            'categories' => $servicesModel->getCategories(),
+            'tax' => $servicesModel->getTaxes(),
+        ];
 
-    $Model = new itemsModel();
-    $data['warehouse'] = $Model->getIdWarehouse();
-    $data['item'] = $Model->find($idItem);
+        $Model = new itemsModel();
+        $data['warehouse'] = $Model->getIdWarehouse();
+        $data['item'] = $Model->find($idItem);
 
-    $inventoryModel = new ItemsInventoryModel();
-    $inventory = $inventoryModel->getInventoryByItemId($idItem);
+        $inventoryModel = new ItemsInventoryModel();
+        $inventory = $inventoryModel->getInventoryByItemId($idItem);
 
-    $data['item']['inventory'] = $inventory ? $inventory['inventory'] : '';
-    $idInventory = $inventory['idInventory'] ?? null;
+        $data['item']['inventory'] = $inventory ? $inventory['inventory'] : '';
+        $idInventory = $inventory['idInventory'] ?? null;
 
-    $data['expiries'] = $inventoryModel->getExpiriesByItemId($idItem);
+        $data['expiries'] = $inventoryModel->getExpiriesByItemId($idItem);
 
 
-    $configModel = new ConfigModel();
-    $businessID = session()->get('businessID');
-    $config = $configModel->where('businessID', $businessID)->first();
-    $data['isExpiry'] = $config ? $config['isExpiry'] : 0;
+        $configModel = new ConfigModel();
+        $businessID = session()->get('businessID');
+        $config = $configModel->where('businessID', $businessID)->first();
+        $data['isExpiry'] = $config ? $config['isExpiry'] : 0;
 
-    return view('edit_item_form.php', $data);
-}
+        return view('edit_item_form.php', $data);
+    }
 
 
     public function editcat($idCatArt)
@@ -483,17 +483,17 @@ class itemsController extends Controller
             'inventory' => $this->request->getPost('inventory'),
             'idWarehouse' => $idWarehouse,
         ];
-    
+
         $inventoryModel = new ItemsInventoryModel();
         $inventory = $inventoryModel->getInventoryByItemId($idItem);
-    
+
         if ($inventory) {
             $inventoryModel->updateInventory($inventory['idInventory'], $formDataInventory['inventory']);
         } else {
             $formDataInventory['idItem'] = $idItem;
             $inventoryModel->insert($formDataInventory);
         }
-    
+
         session()->setFlashdata('success', 'Service updated successfully..!!');
         return redirect()->to(base_url("/items_table"));
     }
@@ -510,6 +510,27 @@ class itemsController extends Controller
 
         $expiryInventory = $this->request->getPost('expiry_inventory');
         $expiryDates = $this->request->getPost('expiry_date');
+        $removeExpiryIds = array_filter($this->request->getPost('remove_expiry_ids')); // Filter out empty values
+
+        $mainInventory = $this->request->getPost('mainInventory');
+        $totalExpiryInventory = array_sum($expiryInventory);
+
+
+        if ($totalExpiryInventory > $mainInventory) {
+            session()->setFlashdata('error', 'The total expiry inventory cannot exceed the main inventory.');
+            return redirect()->to(base_url('edititem/' . $idItem));
+        }
+
+        if ($removeExpiryIds) {
+            foreach ($removeExpiryIds as $expiryID) {
+                if (!empty($expiryID)) {
+                    $affectedRows = $expiryModel->deleteExpiry($expiryID);
+                    if ($affectedRows === 0) {
+                        log_message('error', 'Failed to delete expiry record with ID: ' . $expiryID);
+                    }
+                }
+            }
+        }
 
         if ($expiryInventory && $expiryDates) {
             foreach ($expiryInventory as $expiryID => $inventory) {
@@ -520,7 +541,7 @@ class itemsController extends Controller
                     'expiryDate' => $expiryDate,
                 ];
 
-                if ($expiryModel->expiryExists($idItem, $expiryDate)) {
+                if (is_numeric($expiryID) && $expiryID > 0) {
                     $expiryModel->updateExpiryByInventoryAndDate($idItem, $expiryDate, $expiryData);
                 } else {
                     $expiryModel->insertExpiry($expiryData);
@@ -529,7 +550,7 @@ class itemsController extends Controller
         }
 
         session()->setFlashdata('success', 'Expiry details updated successfully!');
-        return redirect()->to(base_url("/items_table"));
+        return redirect()->to(base_url('edititem/' . $idItem));
     }
 
 
