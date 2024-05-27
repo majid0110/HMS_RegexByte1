@@ -237,6 +237,7 @@
                                                 <th>Currancy</th>
                                                 <th>Payment Method</th>
                                                 <th>Status</th>
+                                                <th>Fee</th>
                                                 <th>Date</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -259,6 +260,9 @@
                                                     </td>
                                                     <td>
                                                         <?= $Sale['Status']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $Sale['Value']; ?>
                                                     </td>
                                                     <td>
                                                         <?= $Sale['Date']; ?>

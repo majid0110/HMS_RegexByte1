@@ -7,6 +7,8 @@
 
   <link rel="stylesheet" href="./public/assets/vendors_s/select2/select2.min.css">
   <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
   <style>
     .badge-pill:hover {
       background-color: #52CDFF;
@@ -430,27 +432,46 @@
                               <tr>
                                 <th>Name</th>
                                 <th>Price</th>
+                                <th>Expiry</th>
                                 <th>Action</th>
                               </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($services as $service): ?>
-    <tr data-service-type-id="<?= $service['idArtMenu']; ?>">
-        <td class="title"><?= $service['Name']; ?></td>
-        <td class="fee" contenteditable="true"><?= $service['Price']; ?></td>
-        <?php if ($isExpiry && !empty($service['expiryData'])): ?>
-            <td>
-                <select class="form-control expiry-dropdown">
-                    <option value="">Select Expiry Date</option>
-                    <?php foreach ($service['expiryData'] as $expiry): ?>
-                        <option value="<?= $expiry['expiryID'] ?>"><?= $expiry['expiryDate'] ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </td>
-        <?php endif; ?>
-        <td><span class="badge badge-primary badge-pill hover-effect" onclick="addService()">ADD</span></td>
-    </tr>
-<?php endforeach; ?>
+                              <?php foreach ($services as $service): ?>
+                                <tr data-service-type-id="<?= $service['idArtMenu']; ?>">
+                                  <td class="title"><?= $service['Name']; ?></td>
+                                  <td class="fee" contenteditable="true"><?= $service['Price']; ?></td>
+                                  <td>
+                                    <?php
+                                    $businessID = session()->get('businessID');
+                                    $serviceExpiries = $salesModel->getServiceExpiry($service['idArtMenu'], $businessID);
+                                    if (count($serviceExpiries) > 0) {
+                                      ?>
+                                      <select class="form-control expiry-dropdown">
+                                        <option value="">Select Expiry</option>
+                                        <?php
+                                        $firstExpiryDate = null;
+                                        foreach ($serviceExpiries as $expiry) {
+                                          $expiryDate = $expiry['expiryDate'];
+                                          if ($firstExpiryDate === null) {
+                                            $firstExpiryDate = $expiryDate;
+                                            echo '<option value="' . $expiryDate . '" selected>' . date('Y-m-d', strtotime($expiryDate)) . '</option>'; // Add selected attribute to the first option
+                                          } else {
+                                            echo '<option value="' . $expiryDate . '">' . date('Y-m-d', strtotime($expiryDate)) . '</option>';
+                                          }
+                                        }
+                                        ?>
+                                      </select>
+                                      <?php
+                                    } else {
+                                      echo '--';
+                                    }
+                                    ?>
+                                  </td>
+                                  <td><span class="badge badge-primary badge-pill hover-effect"
+                                      onclick="addService()">ADD</span></td>
+                                </tr>
+                              <?php endforeach; ?>
                             </tbody>
                           </table>
                         </div>
@@ -480,6 +501,7 @@
                           <th>Amount</th>
                           <th>Quantity</th>
                           <th>Discount</th>
+                          <th>Expiry</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
@@ -552,7 +574,7 @@
         }
       });
     });
-    function addServiceRow(serviceType, serviceTypeId, serviceFee, expiryId = null) {
+    function addServiceRow(serviceType, serviceTypeId, serviceFee, expiryDate) {
       var exists = false;
 
       $('#serviceTableBody tr').each(function () {
@@ -565,12 +587,20 @@
 
       if (!exists) {
         var newRow = '<tr>' +
+          // '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
+          // '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
+          // '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
+          // '<td contenteditable="true" class="editable-discount">0</td>' +
+          // '<td><input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate + '</td>' +
+          // '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)">Remove</button></td>' +
+          // '</tr>';
+
           '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
           '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
           '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
           '<td contenteditable="true" class="editable-discount">0</td>' +
-          '<td><input type="hidden" class="expiry-id" value="' + expiryId + '"></td>' +
-          '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)">Remove</button></td>' +
+          '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate : 'Nil') + '</td>' +
+          '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
           '</tr>';
         $('#serviceTableBody').append(newRow);
         calculateTotalFee();
@@ -604,14 +634,14 @@
 
 
       $('#serviceTypeList .badge').click(function () {
-    var serviceTypeRow = $(this).closest('tr');
-    var serviceTypeId = serviceTypeRow.data('service-type-id');
-    var serviceType = serviceTypeRow.find('.title').text().trim();
-    var serviceFee = serviceTypeRow.find('.fee').text().trim();
-    var expiryId = serviceTypeRow.find('.expiry-dropdown').val();
-    addServiceRow(serviceType, serviceTypeId, serviceFee, expiryId);
-    calculateTotalFee();
-});
+        var serviceTypeRow = $(this).closest('tr');
+        var serviceTypeId = serviceTypeRow.data('service-type-id');
+        var serviceType = serviceTypeRow.find('.title').text().trim();
+        var serviceFee = serviceTypeRow.find('.fee').text().trim();
+        var expiryDate = serviceTypeRow.find('.expiry-dropdown').val();
+        addServiceRow(serviceType, serviceTypeId, serviceFee, expiryDate);
+        calculateTotalFee();
+      });
 
       function attachAddServiceHandler() {
         $('#serviceTypeList .badge').click(function () {
@@ -728,7 +758,13 @@
           var quantityInput = serviceTypeRow.find('.editable-quantity');
           var quantity = parseFloat(quantityInput.val());
           var discount = parseFloat(serviceTypeRow.find('.editable-discount').text());
-          var expiryId = serviceTypeRow.find('.expiry-id').val();
+          var expiryDate = serviceTypeRow.find('.expiry-date').val();
+
+          if (expiryDate === undefined) {
+            expiryDate = '1970-01-01';
+          }
+
+          console.log(expiryDate);
 
           services.push({
             serviceTypeId: serviceTypeId,
@@ -736,7 +772,7 @@
             fee: fee,
             quantity: quantity,
             discount: discount,
-            expiryId: expiryId
+            expiryDate: expiryDate
           });
         });
         $.ajax({

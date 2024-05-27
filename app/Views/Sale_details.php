@@ -393,29 +393,28 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3">
-                                        <u><b>Notes:</b></u><br />
+    <u><b>Notes:</b></u><br />
                                         <?= $ServiceDetails[0]['Notes']; ?><br />
                                     </td>
                                 </tr>
                                 <tr class="heading">
-                                    <td>Service Type</td>
-                                    <td>Quantity</td>
-                                    <td>Price</td>
-
-                                </tr>
-
-                                <?php foreach ($ServiceDetails as $detail): ?>
+                                <td>Service Type</td>
+                                <td>Quantity</td>
+                                <td>Price</td>
+                                
+                            </tr>
+                            <?php foreach ($ServiceDetails as $detail): ?>
                                     <tr class="item">
                                         <td>
                                             <?= $detail['ServiceTypeName']; ?>
-                                        </td>
-                                        <td>
-                                            <?= $detail['Quantity']; ?>
-                                        </td>
-                                        <td>
-                                            <?= $detail['Price']; ?>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td>
+                                                <?= $detail['Quantity']; ?>
+                                            </td>
+                                            <td>
+                                                <?= $detail['Price']; ?>
+                                            </td>
+                                        </tr>
                                 <?php endforeach; ?>
                                 <tr class="total">
                                     <td></td>

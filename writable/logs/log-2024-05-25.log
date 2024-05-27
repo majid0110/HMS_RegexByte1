@@ -129,3 +129,100 @@ INFO - 2024-05-25 08:29:04 --> Session: Class initialized using 'CodeIgniter\Ses
 INFO - 2024-05-25 09:08:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-05-25 09:46:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-05-25 09:48:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-25 11:07:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-25 11:11:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-25 11:11:29 --> Undefined property: CodeIgniter\View\View::$salesModel
+in APPPATH\Views\sales_form.php on line 445.
+ 1 APPPATH\Views\sales_form.php(445): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: CodeIgniter\\View\\View::$salesModel', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\sales_form.php', 445)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\sales_form.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('sales_form.php', [], true)
+ 5 APPPATH\Controllers\SalesController.php(43): view('sales_form.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\SalesController->sales_form()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SalesController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-25 11:15:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-25 11:15:37 --> Undefined property: CodeIgniter\View\View::$salesModel
+in APPPATH\Views\sales_form.php on line 445.
+ 1 APPPATH\Views\sales_form.php(445): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: CodeIgniter\\View\\View::$salesModel', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\sales_form.php', 445)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\sales_form.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('sales_form.php', [], true)
+ 5 APPPATH\Controllers\SalesController.php(43): view('sales_form.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\SalesController->sales_form()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SalesController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-25 11:18:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-25 11:18:26 --> Undefined variable $data
+in APPPATH\Views\sales_form.php on line 445.
+ 1 APPPATH\Views\sales_form.php(445): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\sales_form.php', 445)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\sales_form.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('sales_form.php', [], true)
+ 5 APPPATH\Controllers\SalesController.php(44): view('sales_form.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\SalesController->sales_form()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SalesController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-25 11:19:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-25 11:19:52 --> syntax error, unexpected token "/"
+in APPPATH\Views\sales_form.php on line 446.
+ 1 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('sales_form.php', [], true)
+ 3 APPPATH\Controllers\SalesController.php(44): view('sales_form.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\SalesController->sales_form()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SalesController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-25 11:20:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-25 11:20:09 --> Undefined property: CodeIgniter\View\View::$salesModel
+in APPPATH\Views\sales_form.php on line 445.
+ 1 APPPATH\Views\sales_form.php(445): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: CodeIgniter\\View\\View::$salesModel', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\sales_form.php', 445)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\sales_form.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('sales_form.php', [], true)
+ 5 APPPATH\Controllers\SalesController.php(44): view('sales_form.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\SalesController->sales_form()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SalesController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-25 11:23:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-05-25 11:23:33 --> mysqli_sql_exception: Unknown column 'ii.idArtMenu' in 'on clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `ie`.`ex...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `ie`.`ex...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `ie`.`ex...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `ie`.`ex...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\salesModel.php(644): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Views\sales_form.php(447): App\Models\salesModel->getServiceExpiry('172', '39')
+#6 C:\xampp\htdocs\HMS_RegexByte\system\View\View.php(228): include('C:\\xampp\\htdocs...')
+#7 C:\xampp\htdocs\HMS_RegexByte\system\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#8 C:\xampp\htdocs\HMS_RegexByte\system\Common.php(1190): CodeIgniter\View\View->render('sales_form.php', Array, true)
+#9 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\SalesController.php(44): view('sales_form.php', Array)
+#10 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\SalesController->sales_form()
+#11 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SalesController))
+#12 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#14 {main}
+CRITICAL - 2024-05-25 11:23:33 --> Unknown column 'ii.idArtMenu' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `ie`.`expiryDate`
+FROM `itemsexpiry` `ie`
+JOIN `itemsinventory` `ii` ON `ie`.`idInventory` = `ii`.`idInventory`
+JOIN `artmenu` `am` ON `ii`.`idArtMenu` = `am`.`idArtMenu`
+WHERE `am`.`idArtMenu` = :am.idArtMenu:
+AND `am`.`idBusiness` = :am.idBusiness:', [...], false)
+ 2 APPPATH\Models\salesModel.php(644): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Views\sales_form.php(447): App\Models\salesModel->getServiceExpiry('172', '39')
+ 4 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\sales_form.php')
+ 5 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('sales_form.php', [], true)
+ 7 APPPATH\Controllers\SalesController.php(44): view('sales_form.php', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\SalesController->sales_form()
+ 9 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SalesController))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-25 11:34:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-25 11:38:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

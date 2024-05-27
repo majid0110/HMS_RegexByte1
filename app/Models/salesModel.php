@@ -584,52 +584,81 @@ class salesModel extends Model
     // }
 
     public function getTotalServiceDetailFee($search = null, $payment = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
-{
-    $businessId = session()->get('businessID');
-    $builder = $this->db->table('invoicedetail');
-    $builder->selectSum('Sum'); 
-    $builder->join('invoices', 'invoices.idReceipts = invoicedetail.idReceipts');
-    $builder->join('client', 'client.idClient = invoices.idClient');
-    $builder->join('currency', 'currency.id = invoices.idCurrency');
-    $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
+    {
+        $businessId = session()->get('businessID');
+        $builder = $this->db->table('invoicedetail');
+        $builder->selectSum('Sum');
+        $builder->join('invoices', 'invoices.idReceipts = invoicedetail.idReceipts');
+        $builder->join('client', 'client.idClient = invoices.idClient');
+        $builder->join('currency', 'currency.id = invoices.idCurrency');
+        $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
 
-    if (!empty($search)) {
-        $builder->groupStart()
-            ->orLike('client.client', $search)
-            ->like('client.contact', $search)
-            ->orLike('client.age', $search)
-            ->orLike('client.gender', $search)
-            ->like('client.state', $search)
-            ->like('paymentmethods.idPaymentMethods', $search)
-            ->like('client.clientUniqueId', $search)
-            ->groupEnd();
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->orLike('client.client', $search)
+                ->like('client.contact', $search)
+                ->orLike('client.age', $search)
+                ->orLike('client.gender', $search)
+                ->like('client.state', $search)
+                ->like('paymentmethods.idPaymentMethods', $search)
+                ->like('client.clientUniqueId', $search)
+                ->groupEnd();
+        }
+
+        if (!empty($payment)) {
+            $builder->where('paymentmethods.idPaymentMethods', $payment);
+        }
+
+        if (!empty($clientName)) {
+            $builder->where('client.client', $clientName);
+        }
+
+        if (!empty($fromDate) && !empty($toDate)) {
+            $builder->where('invoices.timeStamp >=', $fromDate)
+                ->where('invoices.timeStamp <=', $toDate);
+        }
+
+        $query = $builder->get();
+        $result = $query->getRowArray();
+        return $result['Sum'] ?? 0;
+    }
+    public function getExpiryData($productId, $businessId)
+    {
+        $db = \Config\Database::connect();
+        $query = $db->table('itemsExpiry')
+            ->where('idInventory', $productId)
+            ->where('businessID', $businessId)
+            ->get();
+        return $query->getResultArray();
     }
 
-    if (!empty($payment)) {
-        $builder->where('paymentmethods.idPaymentMethods', $payment);
-    }
+    // public function getServiceExpiry($serviceId, $businessID)
+    // {
+    //     $db = \Config\Database::connect();
+    //     $query = $db->table('itemsexpiry ie')
+    //         ->select('ie.expiryDate')
+    //         ->join('itemsinventory ii', 'ie.idInventory = ii.idItem')
+    //         ->join('artmenu am', 'ii.idArtMenu = am.idArtMenu')
+    //         ->where('am.idArtMenu', $serviceId)
+    //         ->where('am.idBusiness', $businessID)
+    //         ->get();
 
-    if (!empty($clientName)) {
-        $builder->where('client.client', $clientName);
-    }
+    //     return $query->getResultArray();
+    // }
 
-    if (!empty($fromDate) && !empty($toDate)) {
-        $builder->where('invoices.timeStamp >=', $fromDate)
-            ->where('invoices.timeStamp <=', $toDate);
-    }
+    public function getServiceExpiry($serviceId, $businessID)
+    {
+        $db = \Config\Database::connect();
+        $query = $db->table('itemsexpiry ie')
+            ->select('ie.expiryDate')
+            ->join('ratio r', 'ie.idInventory = r.idItem')
+            ->join('itemsinventory ii', 'ie.idInventory = ii.idInventory')
+            ->join('artmenu am', 'r.idArtMenu = am.idArtMenu')
+            ->where('am.idArtMenu', $serviceId)
+            ->where('r.idBusiness', $businessID)
+            ->get();
 
-    $query = $builder->get();
-    $result = $query->getRowArray();
-    return $result['Sum'] ?? 0;
-}
-public function getExpiryData($productId, $businessId)
-{
-    $db = \Config\Database::connect();
-    $query = $db->table('itemsExpiry')
-                ->where('idInventory', $productId)
-                ->where('businessID', $businessId)
-                ->get();
-    return $query->getResultArray();
-}
+        return $query->getResultArray();
+    }
 
 }

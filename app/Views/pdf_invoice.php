@@ -149,8 +149,9 @@
         <table>
             <tr>
                 <td style="text-align: left;"><b>Service</b></td>
-                <td style="text-align: right; padding-left:40%;"><b>Quantity</b></td>
-                <td style="text-align: right;padding-left:4%;"><b>Fee</b></td>
+                <td style="text-align: right;padding-left:40%;"><b>Fee</b></td>
+                <td style="text-align: right; padding-left:4%;"><b>Quantity</b></td>
+                <td style="text-align: right;padding-left:4%;"><b>Total</b></td>
             </tr>
 
             <?php
@@ -158,9 +159,10 @@
                 foreach ($services as $service) {
                     echo '<tr>';
                     echo '<td style="margin-left: 20px;">' . $service['serviceName'] . '</td>';
-                    echo '<td  style="text-align: right;padding-left:40%;">' . $service['quantity'] . '</td>';
-                    echo '<td style="text-align: right; padding-left:4%;">' . number_format((float)$service['fee'] * (float)$service['quantity'], 2) . '</td>';
-                    // echo '<td style="text-align: right; padding-left:4%;">' . number_format($service['fee'], 2) . '</td>';
+                    echo '<td style="text-align: right; padding-left:40%;">' . number_format($service['fee'], 2) . '</td>';
+                    echo '<td  style="text-align: right;padding-left:4%;">' . $service['quantity'] . '</td>';
+                    echo '<td style="text-align: right; padding-left:4%;">' . number_format((float) $service['fee'] * (float) $service['quantity'], 2) . '</td>';
+
                     echo '</tr>';
                 }
             } else {
@@ -179,12 +181,29 @@
                     <?php
                     $totalAmount = 0;
                     foreach ($services as $service) {
-                        $totalAmount += (float)$service['quantity'] * (float)$service['fee'];
+                        $totalAmount += (float) $service['quantity'] * (float) $service['fee'];
                     }
                     echo number_format($totalAmount, 2);
                     ?>
                 </td>
             </tr>
+            <tr>
+                <td style="width: 50%; text-align: left;">&nbsp;</td>
+                <td style="width: 25%; text-align: right; padding-right:10px;"><b>Discount</b>
+                    <?= $service['discount'] ?>%
+
+                </td>
+            </tr>
+
+            <tr>
+                <td style="width: 50%; text-align: left;">&nbsp;</td>
+                <td style="width: 25%; text-align: right; padding-right:10px;"><b>Discounted PKR</b>
+                    <?= number_format($discountedTotal, 2) ?>
+
+
+                </td>
+            </tr>
+
         </table>
         <br>
 

@@ -143,4 +143,50 @@ class ItemsInventoryModel extends Model
             ->update($expiryData);
     }
 
+    public function getExpiryInventory($idItem, $expiryDate)
+    {
+        $db = \Config\Database::connect();
+        $query = $db->table('itemsexpiry')
+            ->select('expiryID, inventory')
+            ->where('idItem', $idItem)
+            ->where('expiryDate', $expiryDate)
+            ->get();
+
+        return $query->getRowArray();
+    }
+
+    public function subtractFromInventoryByExpiry($expiryID, $quantity)
+    {
+        $db = \Config\Database::connect();
+        $db->table('itemsexpiry')
+            ->where('expiryID', $expiryID)
+            ->set('inventory', 'inventory - ' . $quantity, false)
+            ->update();
+    }
+
+    // public function getRatio($idArtMenu, $idBusiness) {
+    //     return $this->db->table('ratio')
+    //         ->select('idItem, ratio')
+    //         ->where('idArtMenu', $idArtMenu)
+    //         ->where('idBusiness', $idBusiness)
+    //         ->get()
+    //         ->getResult();
+    // }
+
+    // public function subtractFromInventory($idItem, $quantity) {
+    //     $this->db->table($this->table)
+    //         ->where('idItem', $idItem)
+    //         ->set('inventory', 'inventory - ' . $quantity, FALSE)
+    //         ->update();
+    // }
+
+    public function subtractFromExpiryInventory($idItem, $expiryDate, $quantity)
+    {
+        $this->db->table('itemsexpiry')
+            ->where('idInventory', $idItem)
+            ->where('expiryDate', $expiryDate)
+            ->set('inventory', 'inventory - ' . $quantity, FALSE)
+            ->update();
+    }
+
 }
