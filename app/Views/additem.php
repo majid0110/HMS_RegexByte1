@@ -190,7 +190,6 @@
                             style="    margin-left: 9rem; display=flex" checked disabled>
                         <span style="margin-left: 11rem;margin-top: -19px;">Item</span>
                         </input>
-                        <!-- <label class="col-sm-3 col-form-label">Main Client</label>  -->
                     </div>
                     <!-- </div> -->
                 </div>
@@ -206,10 +205,8 @@
         $(document).ready(function () {
             $('.select2').select2();
 
-            // Close button click event
             $('#closeAddClientModal').click(function (e) {
-                e.preventDefault(); // Prevent the default anchor behavior
-                // Assuming your form is wrapped in a modal, you can close it like this:
+                e.preventDefault();
                 $('#addItemModal').modal('hide');
             });
         });

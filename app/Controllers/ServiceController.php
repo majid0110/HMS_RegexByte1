@@ -7,7 +7,7 @@ use CodeIgniter\Controller;
 use App\Models\LabModel;
 use App\Models\DoctorModel;
 use App\Models\ClientModel;
-use App\Models\AppointmentModel;
+use App\Models\itemsModel;
 use App\Models\TestModel;
 use App\Models\LabtestdetailsModel;
 use App\Models\ServicesModel;
@@ -32,6 +32,24 @@ class ServiceController extends Controller
             'tax' => $servicesModel->getTaxes(),
         ];
         return view('Services_form.php', $data);
+    }
+
+    public function ServicesForm()
+    {
+        $servicesModel = new ServicesModel();
+        $data = [
+            'units' => $servicesModel->getUnits(),
+            'categories' => $servicesModel->getCategories(),
+            'tax' => $servicesModel->getTaxes(),
+        ];
+        return view('Services_form1', $data);
+    }
+
+    public function getItems()
+    {
+        $itemModel = new itemsModel();
+        $data['items'] = $itemModel->getItems();
+        return view('link_Items', $data);
     }
 
     public function Services_form1()
@@ -62,27 +80,27 @@ class ServiceController extends Controller
     // }
 
     public function Services_table()
-{
-    $session = session();
-    if (!$session->get('ID')) {
-        return redirect()->to(base_url("/session_expired"));
+    {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
+
+        $Model = new ServicesModel();
+
+        $currentPage = $this->request->getVar('page') ? (int) $this->request->getVar('page') : 1;
+        $perPage = 20;
+
+        $data['activeItems'] = $Model->getActiveItems();
+
+        $data['Services'] = $Model->getServices($perPage, $currentPage);
+
+        $pager = service('pager');
+        $total = $Model->getServicesCount();
+        $data['pager'] = $pager->makeLinks($currentPage, $perPage, $total, 'default_full');
+
+        return view('Services_table.php', $data);
     }
-
-    $Model = new ServicesModel();
-
-    $currentPage = $this->request->getVar('page') ? (int)$this->request->getVar('page') : 1;
-    $perPage = 20; 
-
-    $data['activeItems'] = $Model->getActiveItems();
-
-    $data['Services'] = $Model->getServices($perPage, $currentPage);
-
-    $pager = service('pager');
-    $total = $Model->getServicesCount();
-    $data['pager'] = $pager->makeLinks($currentPage, $perPage, $total, 'default_full');
-
-    return view('Services_table.php', $data);
-}
 
 
     public function editService($idArtMenu)

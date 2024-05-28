@@ -44,6 +44,8 @@ class SalesController extends Controller
         return view('sales_form.php', $data);
     }
 
+
+
     public function getAllServices()
     {
         $model = new salesModel();

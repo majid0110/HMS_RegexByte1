@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
@@ -134,6 +136,10 @@
 
         .pagination a.active {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-lg {
+            max-width: 80%;
         }
     </style>
 </head>
@@ -341,24 +347,30 @@
                                 <?php $successMessage = session()->getFlashdata('success');
                                 $errorMessage = session()->getFlashdata('error'); ?>
                                 <h4 class="card-title">Services Table</h4>
-                                <button type="button" class="btn btn-Primary" data-toggle="modal"
-                                    data-target="#addServiceModal">Add</button>
+                                <!-- <button type="button" class="btn btn-primary" id="addServiceBtn">Add</button> -->
+
+                                <button type="button" class="btn btn-primary" id="openModalBtn">
+                                    Add
+                                </button>
                                 <a href="<?= base_url('transferItemsToServices'); ?>" class="btn btn-Dark">Transfer
                                     Items</a>
                                 <hr>
-                                <div class="modal fade" id="addServiceModal" tabindex="-1" role="dialog"
-                                    aria-labelledby="addServiceModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="addServiceModalLabel">Add Service</h5>
+                                                <h9 class="modal-title" id="exampleModalLabel">Add Service</h9>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body" id="addServiceModalBody">
-                                                <!-- Form content will be loaded dynamically here -->
+                                            <div class="modal-body" id="modalContent">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
                                             </div>
                                         </div>
                                     </div>
@@ -426,12 +438,15 @@
         <!-- container-scroller -->
         <!-- plugins:js -->
         <script src="../public/assets/vendors/js/vendor.bundle.base.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <!-- endinject -->
         <!-- Plugin js for this page -->
         <script src="../public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
         <!-- End plugin js for this page -->
         <!-- inject:js -->
-        <script>
+        <!-- <script>
             $(document).ready(function () {
                 function showToast(message, type) {
                     const toastContainer = document.createElement('div');
@@ -455,21 +470,26 @@
                     showToast('<?= $errorMessage ?>', 'error');
                 <?php endif; ?>
             });
-        </script>
+        </script> -->
+
         <script>
-            $(document).ready(function () {
-                // Handle button click
-                $('.btn-Primary').click(function () {
-                    // Get the form content dynamically (you may need to adjust the URL)
-                    $.get('<?= base_url('Services_form1') ?>', function (data) {
-                        // Inject the form content into the modal body
-                        $('#addServiceModalBody').html(data);
-                        // Show the modal
-                        $('#addServiceModal').modal('show');
+            document.addEventListener("DOMContentLoaded", function () {
+                var openModalBtn = document.getElementById('openModalBtn');
+
+                if (openModalBtn) {
+                    openModalBtn.addEventListener('click', function () {
+                        fetch('ServicesForm')
+                            .then(response => response.text())
+                            .then(data => {
+                                document.getElementById('modalContent').innerHTML = data;
+                                $('#exampleModal').modal('show');
+                            })
+                            .catch(error => console.error('Error:', error));
                     });
-                });
+                }
             });
         </script>
+
 
 
 

@@ -458,6 +458,9 @@
                                                                         </h6>
                                                                         <input type="hidden" name="mainInventory"
                                                                             value="<?= $item['inventory'] ?>">
+
+                                                                        <input type="hidden" name="idWarehouse"
+                                                                            value="<?= $item['idWarehouse']; ?>">
                                                                         <p class="card-description">Expiry Details</p>
                                                                         <table class="table table-bordered">
                                                                             <thead>

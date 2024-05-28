@@ -78,7 +78,7 @@
             border-top-color: #dc3545;
         }
 
-          .pagination-container {
+        .pagination-container {
             display: flex;
             justify-content: center;
             margin-top: 20px;
@@ -139,7 +139,7 @@
 <body>
     <div class="container-scroller">
         <!-- partial:./public/assets/partials/_navbar.html -->
- 
+
         <div class="container-fluid page-body-wrapper">
             <!-- partial:./public/assets/partials/_settings-panel.html -->
             <div class="theme-setting-wrapper">
@@ -357,8 +357,8 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                            <th>S.No</th>
-                                            <th>Code</th>
+                                                <th>S.No</th>
+                                                <th>Code</th>
                                                 <th>Name</th>
                                                 <th>Price</th>
                                                 <th>Status</th>
@@ -369,11 +369,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php $serialNumber = 1; ?>
+                                            <?php $serialNumber = 1; ?>
                                             <?php foreach ($items as $item): ?>
                                                 <tr>
-                                                <td><?= $serialNumber++ ?></td>
-                                                <td>
+                                                    <td><?= $serialNumber++ ?></td>
+                                                    <td>
                                                         <?= $item['Code'] ?>
                                                     </td>
                                                     <td>
@@ -418,17 +418,16 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body" id="addItemModalBody">
-                                                    <!-- Form content will be loaded dynamically here -->
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="pagination-container">
-                                    <div class="pagination">
-                                        <?= $pager ?>
+                                        <div class="pagination">
+                                            <?= $pager ?>
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                             </div>
                         </div>

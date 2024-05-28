@@ -16,7 +16,12 @@ class ItemsInventoryModel extends Model
             ->where('idInventory', $idInventory)
             ->update();
     }
-
+    public function getInventoryId($idItem, $idWarehouse)
+    {
+        return $this->where('idItem', $idItem)
+            ->where('idWarehouse', $idWarehouse)
+            ->first();
+    }
     public function getInventoryByItemId($idItem)
     {
         return $this->where('idItem', $idItem)->first();
@@ -133,6 +138,7 @@ class ItemsInventoryModel extends Model
             ->countAllResults() > 0;
     }
 
+
     public function updateExpiryByInventoryAndDate($idInventory, $expiryDate, $expiryData)
     {
         $db = \Config\Database::connect();
@@ -142,6 +148,7 @@ class ItemsInventoryModel extends Model
             ->where('expiryDate', $expiryDate)
             ->update($expiryData);
     }
+
 
     public function getExpiryInventory($idItem, $expiryDate)
     {
@@ -153,6 +160,16 @@ class ItemsInventoryModel extends Model
             ->get();
 
         return $query->getRowArray();
+    }
+
+    public function findExpiryByInventoryAndDate($idInventory, $expiryDate)
+    {
+        $db = \Config\Database::connect();
+        return $db->table('itemsexpiry')
+            ->where('idInventory', $idInventory)
+            ->where('expiryDate', $expiryDate)
+            ->get()
+            ->getFirstRow('array');
     }
 
     public function subtractFromInventoryByExpiry($expiryID, $quantity)

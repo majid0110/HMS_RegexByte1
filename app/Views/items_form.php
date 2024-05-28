@@ -189,7 +189,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Item Expiry</label>
                             <div class="col-sm-9">
-                                <input type="date" class="form-control" name="expiry" />
+                                <input type="date" class="form-control" name="expiry" required />
                             </div>
                         </div>
                     </div>

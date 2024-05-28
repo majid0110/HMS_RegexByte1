@@ -543,45 +543,6 @@ class salesModel extends Model
         return $pagerLinks;
     }
 
-    // public function getTotalServiceDetailFee($search = null, $payment = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
-    // {
-    //     $businessId = session()->get('businessID');
-    //     $builder = $this->db->table('invoicedetail');
-    //     $builder->join('invoices', 'invoices.idReceipts = invoicedetail.idReceipts');
-    //     $builder->join('client', 'client.idClient = invoices.idClient');
-    //     $builder->join('currency', 'currency.id = invoices.idCurrency');
-    //     $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
-
-    //     if (!empty($search)) {
-    //         $builder->groupStart()
-    //             ->orLike('client.client', $search)
-    //             ->like('client.contact', $search)
-    //             ->orLike('client.age', $search)
-    //             ->orLike('client.gender', $search)
-    //             ->like('client.state', $search)
-    //             ->like('paymentmethods.idPaymentMethods', $search)
-    //             ->like('client.clientUniqueId', $search)
-    //             ->groupEnd();
-    //     }
-
-    //     if (!empty($payment)) {
-    //         $builder->where('paymentmethods.idPaymentMethods', $payment);
-    //     }
-
-    //     if (!empty($clientName)) {
-    //         $builder->where('client.client', $clientName);
-    //     }
-
-    //     if (!empty($fromDate) && !empty($toDate)) {
-    //         $builder->where('invoices.timeStamp >=', $fromDate)
-    //             ->where('invoices.timeStamp <=', $toDate);
-    //     }
-
-    //     $builder->limit($perPage, $offset);
-    //     $query = $builder->get();
-    //     $result = $query->getRowArray();
-    //     return $result['Sum'] ?? 0;
-    // }
 
     public function getTotalServiceDetailFee($search = null, $payment = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
     {
@@ -632,15 +593,17 @@ class salesModel extends Model
         return $query->getResultArray();
     }
 
+
     // public function getServiceExpiry($serviceId, $businessID)
     // {
     //     $db = \Config\Database::connect();
     //     $query = $db->table('itemsexpiry ie')
     //         ->select('ie.expiryDate')
-    //         ->join('itemsinventory ii', 'ie.idInventory = ii.idItem')
-    //         ->join('artmenu am', 'ii.idArtMenu = am.idArtMenu')
+    //         ->join('ratio r', 'ie.idInventory = r.idItem')
+    //         ->join('itemsinventory ii', 'ie.idInventory = ii.idInventory')
+    //         ->join('artmenu am', 'r.idArtMenu = am.idArtMenu')
     //         ->where('am.idArtMenu', $serviceId)
-    //         ->where('am.idBusiness', $businessID)
+    //         ->where('r.idBusiness', $businessID)
     //         ->get();
 
     //     return $query->getResultArray();
@@ -649,16 +612,31 @@ class salesModel extends Model
     public function getServiceExpiry($serviceId, $businessID)
     {
         $db = \Config\Database::connect();
-        $query = $db->table('itemsexpiry ie')
-            ->select('ie.expiryDate')
-            ->join('ratio r', 'ie.idInventory = r.idItem')
-            ->join('itemsinventory ii', 'ie.idInventory = ii.idInventory')
-            ->join('artmenu am', 'r.idArtMenu = am.idArtMenu')
-            ->where('am.idArtMenu', $serviceId)
-            ->where('r.idBusiness', $businessID)
+        $ratioQuery = $db->table('ratio')
+            ->select('idItem')
+            ->where('idArtMenu', $serviceId)
+            ->where('idBusiness', $businessID)
             ->get();
-
-        return $query->getResultArray();
+        $ratioResult = $ratioQuery->getResultArray();
+        if (empty($ratioResult)) {
+            return [];
+        }
+        $idItem = array_column($ratioResult, 'idItem');
+        $inventoryQuery = $db->table('itemsinventory')
+            ->select('idInventory')
+            ->whereIn('idItem', $idItem)
+            ->get();
+        $inventoryResult = $inventoryQuery->getResultArray();
+        if (empty($inventoryResult)) {
+            return [];
+        }
+        $idInventory = array_column($inventoryResult, 'idInventory');
+        $expiryQuery = $db->table('itemsexpiry')
+            ->select('expiryDate')
+            ->whereIn('idInventory', $idInventory)
+            ->get();
+        return $expiryQuery->getResultArray();
     }
+
 
 }

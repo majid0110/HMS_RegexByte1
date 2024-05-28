@@ -27,6 +27,10 @@ class itemsModel extends Model
         'isSendExpire',
     ];
 
+    public function getItem()
+    {
+        return $this->select('idItem, Code, Name')->findAll();
+    }
     public function getServices()
     {
         $builder = $this->db->table('artmenu');
@@ -85,35 +89,35 @@ class itemsModel extends Model
     //     return $result;
     // }
 
-public function getItems($perPage = 20, $currentPage = 1)
-{
-    $session = \Config\Services::session();
-    $businessID = $session->get('businessID');
+    public function getItems($perPage = 20, $currentPage = 1)
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
 
-    $offset = ($currentPage - 1) * $perPage;
+        $offset = ($currentPage - 1) * $perPage;
 
-    $builder = $this->db->table('itemswarehouse');
-    $result = $builder->join('units', 'units.idUnit = itemswarehouse.Unit')
-        ->join('itemsinventory', 'itemsinventory.idItem = itemswarehouse.idItem')
-        ->select('itemswarehouse.*, units.name as unit_name, itemsinventory.inventory as inventory')
-        ->where('itemswarehouse.idBusiness', $businessID)
-        ->orderBy('itemswarehouse.idItem', 'DESC')
-        ->limit($perPage, $offset)
-        ->get()
-        ->getResultArray();
+        $builder = $this->db->table('itemswarehouse');
+        $result = $builder->join('units', 'units.idUnit = itemswarehouse.Unit')
+            ->join('itemsinventory', 'itemsinventory.idItem = itemswarehouse.idItem')
+            ->select('itemswarehouse.*, units.name as unit_name, itemsinventory.inventory as inventory')
+            ->where('itemswarehouse.idBusiness', $businessID)
+            ->orderBy('itemswarehouse.idItem', 'DESC')
+            ->limit($perPage, $offset)
+            ->get()
+            ->getResultArray();
 
-    return $result;
-}
+        return $result;
+    }
 
-public function getItemsCount()
-{
-    $session = \Config\Services::session();
-    $businessID = $session->get('businessID');
+    public function getItemsCount()
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
 
-    $builder = $this->db->table('itemswarehouse');
-    $builder->where('itemswarehouse.idBusiness', $businessID);
-    return $builder->countAllResults();
-}
+        $builder = $this->db->table('itemswarehouse');
+        $builder->where('itemswarehouse.idBusiness', $businessID);
+        return $builder->countAllResults();
+    }
 
 
     // public function getItems()
