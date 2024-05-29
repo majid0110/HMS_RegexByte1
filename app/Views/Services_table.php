@@ -139,7 +139,7 @@
         }
 
         .modal-lg {
-            max-width: 80%;
+            max-width: 100%;
         }
     </style>
 </head>
@@ -149,7 +149,7 @@
         <!-- partial:./public/assets/partials/_navbar.html -->
 
         <!-- partial -->
-        <div class="container-fluid page-body-wrapper">
+        <div class="container-fluid page-body-wrapper" style="padding-left:unset; padding-right: unset;">
             <!-- partial:./public/assets/partials/_settings-panel.html -->
             <div class="theme-setting-wrapper">
                 <div id="settings-trigger"><i class="ti-settings"></i></div>
@@ -344,29 +344,24 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <?php $successMessage = session()->getFlashdata('success');
-                                $errorMessage = session()->getFlashdata('error'); ?>
                                 <h4 class="card-title">Services Table</h4>
-                                <!-- <button type="button" class="btn btn-primary" id="addServiceBtn">Add</button> -->
-
-                                <button type="button" class="btn btn-primary" id="openModalBtn">
-                                    Add
-                                </button>
-                                <a href="<?= base_url('transferItemsToServices'); ?>" class="btn btn-Dark">Transfer
+                                <a href="<?= base_url('ServicesForm'); ?>" class="btn btn-primary">Add</a>
+                                <!-- <button type="button" class="btn btn-primary" id="openMainModalBtn">Add</button> -->
+                                <a href="<?= base_url('transferItemsToServices'); ?>" class="btn btn-dark">Transfer
                                     Items</a>
                                 <hr>
-                                <div class="modal fade" id="exampleModal" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="mainModal" tabindex="-1" aria-labelledby="mainModalLabel"
+                                    aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h9 class="modal-title" id="exampleModalLabel">Add Service</h9>
+                                                <h5 class="modal-title" id="mainModalLabel">Add Service</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body" id="modalContent">
+                                            <div class="modal-body" id="mainModalContent">
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -375,7 +370,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <thead>
@@ -390,20 +384,11 @@
                                         <tbody>
                                             <?php foreach ($Services as $Service): ?>
                                                 <tr>
+                                                    <td><?= $Service['Name']; ?></td>
+                                                    <td><?= $Service['Price']; ?></td>
+                                                    <td><?= $Service['status']; ?></td>
+                                                    <td><?= $Service['name']; ?></td>
                                                     <td>
-                                                        <?= $Service['Name']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?= $Service['Price']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?= $Service['status']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?= $Service['name']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <!-- Action buttons: Edit, Delete -->
                                                         <a href="<?= base_url('editService/' . $Service['idArtMenu']); ?>"
                                                             class="btn btn-info btn-sm">Edit</a>
                                                         <a href="<?= base_url('deleteService/' . $Service['idArtMenu']); ?>"
@@ -415,7 +400,6 @@
                                         </tbody>
                                     </table>
                                 </div>
-
                                 <div class="pagination-container">
                                     <div class="pagination">
                                         <?= $pager ?>
@@ -424,14 +408,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- content-wrapper ends -->
-                    <!-- partial:./public/assets/partials/_footer.html -->
-                    <?php include 'include_common/footer.php'; ?>
-                    <!-- partial -->
                 </div>
-
-
-                <!-- main-panel ends -->
+                <?php include 'include_common/footer.php'; ?>
             </div>
             <!-- page-body-wrapper ends -->
         </div>
@@ -474,20 +452,30 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                var openModalBtn = document.getElementById('openModalBtn');
-
-                if (openModalBtn) {
-                    openModalBtn.addEventListener('click', function () {
+                var openMainModalBtn = document.getElementById('openMainModalBtn');
+                if (openMainModalBtn) {
+                    openMainModalBtn.addEventListener('click', function () {
                         fetch('ServicesForm')
                             .then(response => response.text())
                             .then(data => {
-                                document.getElementById('modalContent').innerHTML = data;
-                                $('#exampleModal').modal('show');
+                                document.getElementById('mainModalContent').innerHTML = data;
+                                $('#mainModal').modal('show');
+                                initNestedModal();
                             })
                             .catch(error => console.error('Error:', error));
                     });
                 }
             });
+
+            function initNestedModal() {
+                $('#linkItemsBtn').click(function () {
+                    $('#linkItemsModal').modal('show');
+                });
+
+                $('#linkItemsModal').on('shown.bs.modal', function () {
+                    $(this).find('.modal-body').focus();
+                });
+            }
         </script>
 
 

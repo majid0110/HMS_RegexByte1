@@ -27,9 +27,27 @@ class itemsModel extends Model
         'isSendExpire',
     ];
 
+    // public function getItem()
+    // {
+    //     return $this->select('idItem, Code, Name')->findAll();
+    // }
+
     public function getItem()
     {
-        return $this->select('idItem, Code, Name')->findAll();
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+
+        $builder = $this->db->table('itemswarehouse');
+        $result = $builder
+            // ->join('ratio', 'ratio.idItem = itemswarehouse.idItem')
+            // ->join('itemsinventory', 'itemsinventory.idItem = itemswarehouse.idItem')
+            ->select('*')
+            ->where('idBusiness', $businessID)
+            ->orderBy('idItem', 'DESC')
+            ->get()
+            ->getResultArray();
+
+        return $result;
     }
     public function getServices()
     {

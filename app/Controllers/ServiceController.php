@@ -48,7 +48,7 @@ class ServiceController extends Controller
     public function getItems()
     {
         $itemModel = new itemsModel();
-        $data['items'] = $itemModel->getItems();
+        $data['items'] = $itemModel->getItem();
         return view('link_Items', $data);
     }
 
@@ -135,6 +135,8 @@ class ServiceController extends Controller
 
 
         $img = $request->getFile('img');
+        $Service = $this->request->getPost('isService') ? 1 : 0;
+        print_r($Service);
 
         $formData = [
             'BarCode' => $this->request->getPost('bcode'),
@@ -151,7 +153,7 @@ class ServiceController extends Controller
             'status' => $this->request->getPost('cstatus'),
             'Characteristic1' => $this->request->getPost('char_1'),
             'Characteristic2' => $this->request->getPost('char_2'),
-            'isService' => 1,
+            'isService' => $this->request->getPost('isExpiry') ? 1 : 0,
             'Barcode' => $this->request->getPost('bcode'),
             'idBusiness' => $businessID,
             'idPoint_of_sale' => 1,
@@ -168,11 +170,40 @@ class ServiceController extends Controller
             $formData['Image'] = 'defaults/download.png';
         }
 
+
         $servicesModel = new ServicesModel();
         $servicesModel->insert($formData);
+        $lastInsertedId = $servicesModel->getInsertID();
 
+
+        if ($Service == 0) {
+            $selectedItems = $this->request->getPost('selected_items');
+            $items = $this->request->getPost('items');
+            $ratio = $this->request->getPost('ratio');
+
+            if ($selectedItems) {
+                $servicesModel = new ServicesModel();
+
+                foreach ($selectedItems as $itemId) {
+                    if (isset($items[$itemId])) {
+                        $itemDetails = $items[$itemId];
+                        $idItem = $itemDetails['idItem'];
+                        // $ratio = $itemDetails['ratio'];
+
+                        $rationData = [
+                            'idArtMenu' => $lastInsertedId,
+                            'idItem' => $idItem,
+                            'ratio' => $ratio,
+                            'idBusiness' => $businessID
+                        ];
+                        $servicesModel->linkItem($rationData);
+                    }
+                }
+            }
+        }
         session()->setFlashdata('success', 'Service Added..!!');
         return redirect()->to(base_url("/Services_table"));
+
     }
 
     // public function deleteService($idArtMenu)
