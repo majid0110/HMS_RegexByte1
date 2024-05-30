@@ -233,7 +233,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">SERVICES</h4>
-                                    <!-- EditService_form.php -->
+                                    <button id="linkItemsBtn" class="btn btn-Primary">Link Items</button>
                                     <form method="POST"
                                         action="<?= base_url('updateService/' . $service['idArtMenu']); ?>"
                                         enctype="multipart/form-data">
@@ -425,16 +425,13 @@
                                         </div>
 
                                         <div class="row">
-                                            <!-- Other Details -->
                                             <div class="col-md-6">
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Service</label>
                                                     <div class="col-sm-9">
-                                                        <input type="checkbox" class="form-check-input" name="service"
-                                                            style="margin-left: 9rem; display=flex" checked disabled>
-                                                        <span
-                                                            style="margin-left: 11rem;margin-top: -19px;">Service</span>
-                                                        </input>
+                                                        <input type="checkbox" id="isService" class="form-check-input"
+                                                            name="service" value="1" <?= isset($service['isService']) && $service['isService'] == 1 ? 'checked' : ''; ?>>
+                                                        <label for="isService"
+                                                            style="margin-left: 1rem;">Service</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -446,6 +443,30 @@
                                             </div>
                                         </div>
                                     </form>
+                                    <input type="hidden" id="idArtMenuInput" value="<?= $service['idArtMenu'] ?>">
+
+                                    <div class="modal fade" id="linkItemsModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="linkItemsModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="linkItemsModalLabel">Link Items</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body" id="linkItemsModalBody">
+                                                    <!-- Content will be loaded here dynamically -->
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
@@ -474,6 +495,60 @@
     <script src="../public/assets/vendors_s/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
+    <script>
+        $(document).ready(function () {
+            $('#linkItemsBtn').click(function () {
+                var idArtMenu = $('#idArtMenuInput').val();
+                $('#linkItemsModal').modal('show');
+
+                $('#linkItemsModal').on('shown.bs.modal', function () {
+                    $('#linkItemsModalBody').load('<?= base_url('getItems'); ?>', function(response, status, xhr) {
+                        if (status === "error") {
+                            const msg = "Sorry but there was an error: ";
+                            $("#linkItemsModalBody").html(msg + xhr.status + " " + xhr.statusText);
+                            console.error('Error loading content:', xhr.status, xhr.statusText);
+                        } else {
+                            // Set the action attribute of the form in the dialog box
+                            $('#linkItemsModalBody form').attr('action', '<?= base_url('updateService') ?>/' + idArtMenu);
+                            console.log('Content loaded successfully');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <!-- <script>
+        $(document).ready(function () {
+            var isService = $('#isService').prop('checked');
+            $('#linkItemsBtn').prop('disabled', isService);
+
+            $('#isService').change(function () {
+                var isService = $(this).prop('checked');
+                $('#linkItemsBtn').prop('disabled', isService);
+            });
+
+            $(document).ready(function () {
+                $('#linkItemsBtn').click(function () {
+                    console.log('Link Items button clicked');
+                    $('#linkItemsModal').modal('show');
+                });
+
+                $('#linkItemsModal').on('shown.bs.modal', function () {
+                    console.log('Nested modal shown');
+                    $('#linkItemsModalBody').load('getItems', function (response, status, xhr) {
+                        if (status === "error") {
+                            console.log(error);
+                            const msg = "Sorry but there was an error: ";
+                            $("#linkItemsModalBody").html(msg + xhr.status + " " + xhr.statusText);
+                            console.error('Error loading content:', xhr.status, xhr.statusText);
+                        } else {
+                            console.log('Content loaded successfully');
+                        }
+                    });
+                });
+            });
+        });
+    </script> -->
     <script src="../public/assets/js_s/off-canvas.js"></script>
     <script src="../public/assets/js_s/hoverable-collapse.js"></script>
     <script src="../public/assets/js_s/template.js"></script>

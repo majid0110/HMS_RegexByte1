@@ -232,4 +232,23 @@ class ServicesModel extends Model
     {
         return $this->db->table('ratio')->insert($rationData);
     }
+
+    public function updatelinkItem($rationData)
+    {
+        $builder = $this->db->table('ratio');
+        $existingData = $builder->where('idArtMenu', $rationData['idArtMenu'])
+            ->where('idItem', $rationData['idItem'])
+            ->get()
+            ->getRow();
+
+        if ($existingData) {
+            $builder->where('idArtMenu', $rationData['idArtMenu'])
+                ->where('idItem', $rationData['idItem'])
+                ->update($rationData);
+        } else {
+            $builder->insert($rationData);
+        }
+
+        return true;
+    }
 }

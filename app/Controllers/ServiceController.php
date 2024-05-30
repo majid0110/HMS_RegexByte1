@@ -52,6 +52,13 @@ class ServiceController extends Controller
         return view('link_Items', $data);
     }
 
+    public function getItemsForEditService()
+    {
+        $itemModel = new itemsModel();
+        $data['items'] = $itemModel->getItem();
+        return view('edit_service_linkitem', $data);
+    }
+
     public function Services_form1()
     {
         $session = session();
@@ -267,6 +274,7 @@ class ServiceController extends Controller
 
         $session = \Config\Services::session();
         $businessID = $session->get('businessID');
+        $Service = $this->request->getPost('service') ? 1 : 0;
 
         $img = $request->getFile('img');
 
@@ -285,11 +293,11 @@ class ServiceController extends Controller
             'status' => $this->request->getPost('cstatus'),
             'Characteristic1' => $this->request->getPost('char_1'),
             'Characteristic2' => $this->request->getPost('char_2'),
-            'isService' => 1,
+            'isService' => $Service,
             'Barcode' => $this->request->getPost('bcode'),
             'idBusiness' => $businessID,
             'idPoint_of_sale' => 1,
-            'Cost' => $this->request->getpost('cost'),
+            'Cost' => $this->request->getPost('cost'),
             'idTVSH' => 0,
             'noTvshType' => 0,
         ];
@@ -301,8 +309,36 @@ class ServiceController extends Controller
             $formData['Image'] = 'defaults/download.png';
         }
         $servicesModel->update($idArtMenu, $formData);
+        // print_r($formData);
+        // die();
 
-        session()->setFlashdata('success', 'Service updated successfully..!!');
+        if ($Service == 0) {
+            $selectedItems = $this->request->getPost('selected_items');
+            $items = $this->request->getPost('items');
+            $ratio = $this->request->getPost('ratio');
+
+            if ($selectedItems) {
+                $servicesModel = new ServicesModel();
+
+                foreach ($selectedItems as $itemId) {
+                    if (isset($items[$itemId])) {
+                        $itemDetails = $items[$itemId];
+                        $idItem = $itemDetails['idItem'];
+                        // $ratio = $itemDetails['ratio'];
+
+                        $rationData = [
+                            'idArtMenu' => $idArtMenu,
+                            'idItem' => $idItem,
+                            'ratio' => $ratio,
+                            'idBusiness' => $businessID
+                        ];
+                        // print_r($rationData);
+
+                        $servicesModel->updatelinkItem($rationData);
+                    }
+                }
+            }
+        }
         return redirect()->to(base_url("/Services_table"));
     }
 
