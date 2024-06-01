@@ -134,16 +134,93 @@ class ServiceController extends Controller
 //                                                 Main Logic
 //-------------------------------------------------------------------------------------------------------------------------
 
+    // public function saveArtMenu()
+    // {
+    //     $session = \Config\Services::session();
+    //     $request = \Config\Services::request();
+    //     $businessID = $session->get('businessID');
+
+
+    //     $img = $request->getFile('img');
+    //     $Service = $this->request->getPost('isService') ? 1 : 0;
+    //     print_r($Service);
+
+    //     $formData = [
+    //         'BarCode' => $this->request->getPost('bcode'),
+    //         'Code' => $this->request->getPost('code'),
+    //         'Name' => $this->request->getPost('name'),
+    //         'Image' => $img,
+    //         'Price' => $this->request->getPost('price'),
+    //         'Promotional_Price' => $this->request->getPost('pro_price'),
+    //         'idCatArt' => $this->request->getPost('category'),
+    //         'Notes' => $this->request->getPost('notes'),
+    //         'idUnit' => $this->request->getPost('unit'),
+    //         'Product_mix' => $this->request->getPost('p_max'),
+    //         'Tax' => $this->request->getPost('tax'),
+    //         'status' => $this->request->getPost('cstatus'),
+    //         'Characteristic1' => $this->request->getPost('char_1'),
+    //         'Characteristic2' => $this->request->getPost('char_2'),
+    //         'isService' => $this->request->getPost('isExpiry') ? 1 : 0,
+    //         'Barcode' => $this->request->getPost('bcode'),
+    //         'idBusiness' => $businessID,
+    //         'idPoint_of_sale' => 1,
+    //         'Cost' => $this->request->getpost('cost'),
+    //         'idTVSH' => 0,
+    //         'noTvshType' => 0,
+    //     ];
+
+    //     if ($img && $img->isValid() && !$img->hasMoved()) {
+    //         $newName = $img->getName();
+    //         $img->move(FCPATH . 'uploads', $newName);
+    //         $formData['Image'] = $newName;
+    //     } else {
+    //         $formData['Image'] = 'defaults/download.png';
+    //     }
+
+
+    //     $servicesModel = new ServicesModel();
+    //     $servicesModel->insert($formData);
+    //     $lastInsertedId = $servicesModel->getInsertID();
+
+
+    //     if ($Service == 0) {
+    //         $selectedItems = $this->request->getPost('selected_items');
+    //         $items = $this->request->getPost('items');
+    //         $ratio = $this->request->getPost('ratio');
+
+    //         if ($selectedItems) {
+    //             $servicesModel = new ServicesModel();
+
+    //             foreach ($selectedItems as $itemId) {
+    //                 if (isset($items[$itemId])) {
+    //                     $itemDetails = $items[$itemId];
+    //                     $idItem = $itemDetails['idItem'];
+    //                     // $ratio = $itemDetails['ratio'];
+
+    //                     $rationData = [
+    //                         'idArtMenu' => $lastInsertedId,
+    //                         'idItem' => $idItem,
+    //                         'ratio' => $ratio,
+    //                         'idBusiness' => $businessID
+    //                     ];
+    //                     $servicesModel->linkItem($rationData);
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     session()->setFlashdata('success', 'Service Added..!!');
+    //     return redirect()->to(base_url("/Services_table"));
+
+    // }
+
     public function saveArtMenu()
     {
         $session = \Config\Services::session();
         $request = \Config\Services::request();
         $businessID = $session->get('businessID');
 
-
         $img = $request->getFile('img');
         $Service = $this->request->getPost('isService') ? 1 : 0;
-        print_r($Service);
 
         $formData = [
             'BarCode' => $this->request->getPost('bcode'),
@@ -164,7 +241,7 @@ class ServiceController extends Controller
             'Barcode' => $this->request->getPost('bcode'),
             'idBusiness' => $businessID,
             'idPoint_of_sale' => 1,
-            'Cost' => $this->request->getpost('cost'),
+            'Cost' => $this->request->getPost('cost'),
             'idTVSH' => 0,
             'noTvshType' => 0,
         ];
@@ -177,41 +254,54 @@ class ServiceController extends Controller
             $formData['Image'] = 'defaults/download.png';
         }
 
-
         $servicesModel = new ServicesModel();
+
+        // Start transaction
+        $db = \Config\Database::connect();
+        $db->transStart();
+
         $servicesModel->insert($formData);
         $lastInsertedId = $servicesModel->getInsertID();
-
 
         if ($Service == 0) {
             $selectedItems = $this->request->getPost('selected_items');
             $items = $this->request->getPost('items');
             $ratio = $this->request->getPost('ratio');
 
-            if ($selectedItems) {
-                $servicesModel = new ServicesModel();
+            if (!$selectedItems) {
+                // Rollback transaction
+                $db->transRollback();
+                session()->setFlashdata('error', 'You must link this service to an item.');
+                return redirect()->to(base_url("/ServicesForm"));
+            }
 
-                foreach ($selectedItems as $itemId) {
-                    if (isset($items[$itemId])) {
-                        $itemDetails = $items[$itemId];
-                        $idItem = $itemDetails['idItem'];
-                        // $ratio = $itemDetails['ratio'];
+            foreach ($selectedItems as $itemId) {
+                if (isset($items[$itemId])) {
+                    $itemDetails = $items[$itemId];
+                    $idItem = $itemDetails['idItem'];
 
-                        $rationData = [
-                            'idArtMenu' => $lastInsertedId,
-                            'idItem' => $idItem,
-                            'ratio' => $ratio,
-                            'idBusiness' => $businessID
-                        ];
-                        $servicesModel->linkItem($rationData);
-                    }
+                    $rationData = [
+                        'idArtMenu' => $lastInsertedId,
+                        'idItem' => $idItem,
+                        'ratio' => $ratio,
+                        'idBusiness' => $businessID
+                    ];
+                    $servicesModel->linkItem($rationData);
                 }
             }
         }
-        session()->setFlashdata('success', 'Service Added..!!');
-        return redirect()->to(base_url("/Services_table"));
 
+        if ($db->transStatus() === FALSE) {
+            $db->transRollback();
+            session()->setFlashdata('error', 'There was an error adding the service.');
+        } else {
+            $db->transComplete();
+            session()->setFlashdata('success', 'Service Added..!!');
+        }
+
+        return redirect()->to(base_url("/Services_table"));
     }
+
 
     // public function deleteService($idArtMenu)
     // {

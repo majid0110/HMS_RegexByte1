@@ -10,6 +10,58 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        .toast {
+            position: fixed;
+            top: 10rem;
+            right: 20px;
+            background-color: orange;
+            color: #fff;
+            padding: 16px 24px;
+            border-radius: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: all 0.5s ease-in-out;
+            z-index: 999;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast.success {
+            background-color: #6495ED;
+        }
+
+        .toast.error {
+            background-color: #dc3545;
+        }
+
+        .toast::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px;
+            border-style: solid;
+            border-color: transparent transparent transparent transparent;
+        }
+
+        .toast.success::before {
+            border-top-color: #6495ED;
+        }
+
+        .toast.error::before {
+            border-top-color: #dc3545;
+        }
+    </style>
 </head>
 
 <body>
@@ -211,6 +263,10 @@
                         <div class="col-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
+                                    <?php
+                                    $successMessage = session()->getFlashdata('success');
+                                    $errorMessage = session()->getFlashdata('error');
+                                    ?>
                                     <h4 class="card-title">ADD Service</h4>
 
                                     <button id="linkItemsBtn" class="btn btn-Primary">Link Items</button>
@@ -412,7 +468,8 @@
 
                                     <div class="modal fade" id="linkItemsModal" tabindex="-1" role="dialog"
                                         aria-labelledby="linkItemsModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                            role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="linkItemsModalLabel">Link Items</h5>
@@ -490,28 +547,31 @@
             });
         });
     </script>
-    <!-- <script>
+    <script>
         $(document).ready(function () {
-            $('#linkItemsBtn').click(function () {
-                console.log('Link Items button clicked');
-                $('#linkItemsModal').modal('show');
-            });
+            function showToast(message, type) {
+                const toastContainer = document.createElement('div');
+                toastContainer.classList.add('toast', type);
+                toastContainer.textContent = message;
+                document.body.appendChild(toastContainer);
 
-            $('#linkItemsModal').on('shown.bs.modal', function () {
-                console.log('Nested modal shown');
-                $('#linkItemsModalBody').load('getItems', function (response, status, xhr) {
-                    if (status === "error") {
-                        const msg = "Sorry but there was an error: ";
-                        $("#linkItemsModalBody").html(msg + xhr.status + " " + xhr.statusText);
-                        console.error('Error loading content:', xhr.status, xhr.statusText);
-                    } else {
-                        console.log('Content loaded successfully');
-                    }
-                });
-            });
+                toastContainer.classList.add('show');
+
+                setTimeout(function () {
+                    toastContainer.classList.remove('show');
+                    setTimeout(function () {
+                        toastContainer.remove();
+                    }, 500);
+                }, 5000);
+            }
+            <?php if ($successMessage = session()->getFlashdata('success')): ?>
+                showToast('<?= $successMessage ?>', 'success');
+            <?php endif; ?>
+            <?php if ($errorMessage = session()->getFlashdata('error')): ?>
+                showToast('<?= $errorMessage ?>', 'error');
+            <?php endif; ?>
         });
-    </script> -->
-
+    </script>
 
     <!-- End plugin js for this page -->
     <!-- inject:js -->

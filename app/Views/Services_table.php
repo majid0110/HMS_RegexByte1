@@ -341,6 +341,18 @@
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
+                    <?php
+                    $successMessage = session()->getFlashdata('success');
+                    $errorMessage = session()->getFlashdata('error');
+
+                    if ($successMessage) {
+                        echo '<div class="alert alert-success">' . $successMessage . '</div>';
+                    }
+
+                    if ($errorMessage) {
+                        echo '<div class="alert alert-danger">' . $errorMessage . '</div>';
+                    }
+                    ?>
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">

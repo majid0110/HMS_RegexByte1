@@ -107,7 +107,7 @@ class itemsModel extends Model
     //     return $result;
     // }
 
-    public function getItems($perPage = 20, $currentPage = 1)
+    public function getItems($perPage = 2, $currentPage = 1)
     {
         $session = \Config\Services::session();
         $businessID = $session->get('businessID');
@@ -312,5 +312,13 @@ class itemsModel extends Model
             ->update($formData);
     }
 
+    public function isExpiry($businessID)
+    {
+        return $this->db->table('config')
+            ->select('isExpiry')
+            ->where('businessID', $businessID)
+            ->get()
+            ->getResultArray();
+    }
 
 }

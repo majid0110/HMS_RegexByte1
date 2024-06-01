@@ -39,6 +39,11 @@ class itemsController extends Controller
         ];
         $Model = new itemsModel();
         $data['warehouse'] = $Model->getIdWarehouse();
+
+        $configModel = new ConfigModel();
+        $businessID = session()->get('businessID');
+        $config = $configModel->where('businessID', $businessID)->first();
+        $data['isExpiry'] = $config ? $config['isExpiry'] : 0;
         return view('items_form.php', $data);
     }
 
@@ -108,6 +113,20 @@ class itemsController extends Controller
         if (!$session->get('ID')) {
             return redirect()->to(base_url("/login"));
         }
+
+        $servicesModel = new ServicesModel();
+        $data = [
+            'units' => $servicesModel->getUnits(),
+            'categories' => $servicesModel->getCategories(),
+            'tax' => $servicesModel->getTaxes(),
+        ];
+        $Model = new itemsModel();
+        $data['warehouse'] = $Model->getIdWarehouse();
+        $configModel = new ConfigModel();
+        $businessID = session()->get('businessID');
+        $config = $configModel->where('businessID', $businessID)->first();
+        $data['isExpiry'] = $config ? $config['isExpiry'] : 0;
+
 
         $model = new itemsModel();
 
@@ -270,12 +289,17 @@ class itemsController extends Controller
         ];
         $IdInventory = $itemsModel->insertItemInventory($formDataInventory);
 
-        $ItemExpiry = [
-            'idInventory' => $IdInventory,
-            'inventory' => $Inventory,
-            'expiryDate' => $this->request->getPost('expiry'),
-        ];
-        $itemsModel->insertItemExpiry($ItemExpiry);
+
+        $isExpiry = $itemsModel->isExpiry($businessID);
+
+        if ($isExpiry == 1) {
+            $ItemExpiry = [
+                'idInventory' => $IdInventory,
+                'inventory' => $Inventory,
+                'expiryDate' => $this->request->getPost('expiry'),
+            ];
+            $itemsModel->insertItemExpiry($ItemExpiry);
+        }
 
         session()->setFlashdata('success', 'Item Added..!!');
         return redirect()->to(base_url("/items_table"));

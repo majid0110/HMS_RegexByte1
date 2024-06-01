@@ -8,17 +8,7 @@
 </head>
 
 <body>
-    <a href="#" id="closeAddClientModal"
-        style="position: absolute; top: 10px; right: 10px; font-size: 20px; color: #333;">
-        <i class="mdi mdi-close"></i>
-    </a>
 
-
-    <h3>
-        <small class="text-muted" style="margin-left: 30rem;">
-            ADD CLIENT
-        </small>
-    </h3>
     <form class="pt-3" method="POST" action="<?php echo base_url() . "saveitems"; ?>" enctype="multipart/form-data">
         <p class="card-description">
             Items Details
@@ -107,7 +97,7 @@
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Units</label>
                     <div class="col-sm-9">
-                        <select class="form-control" name="unit">
+                        <select class="form-control" name="Unit">
                             <?php foreach ($units as $unit): ?>
                                 <option value="<?= $unit['idUnit'] ?>">
                                     <?= $unit['name'] ?>
@@ -122,7 +112,7 @@
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Warehouse</label>
                     <div class="col-sm-9">
-                        <select class="form-control" name="unit">
+                        <select class="form-control" name="warehouse">
                             <?php foreach ($warehouse as $warehouse): ?>
                                 <option value="<?= $warehouse['idWarehouse'] ?>">
                                     <?= $warehouse['name'] ?>
@@ -181,19 +171,29 @@
                 </div>
             </div>
 
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group row">
-                        <!-- <label class="col-sm-3 col-form-label">Main Client</label>  -->
-                        <!-- <div class="col-sm-9"> -->
-                        <input type="checkbox" class="form-check-input" name="service"
-                            style="    margin-left: 9rem; display=flex" checked disabled>
-                        <span style="margin-left: 11rem;margin-top: -19px;">Item</span>
-                        </input>
+                        <label class="col-sm-3 col-form-label">Inventory</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" name="inventory" />
+                        </div>
                     </div>
-                    <!-- </div> -->
                 </div>
-            </div>
+
+                <?php if ($isExpiry == 1): ?>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Item Expiry</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" id="expiryField" name="expiry" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
             <div class="row">
                 <div class="col-md-6">
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -202,14 +202,16 @@
     </form>
 
     <script>
-        $(document).ready(function () {
-            $('.select2').select2();
+        window.onload = function () {
+            var expiryField = document.getElementById("expiryField");
+            var isExpiry = <?php echo $isExpiry; ?>; 
 
-            $('#closeAddClientModal').click(function (e) {
-                e.preventDefault();
-                $('#addItemModal').modal('hide');
-            });
-        });
+            if (isExpiry === 1) {
+                expiryField.required = true;
+            } else {
+                expiryField.required = false;
+            }
+        }
     </script>
 </body>
 
