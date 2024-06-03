@@ -1,6 +1,7 @@
 <div class="table-responsive">
     <form method="post" action="">
         <input type="hidden" name="idArtMenu" value="<?= $service['idArtMenu']; ?>">
+
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -28,10 +29,12 @@
                             <input type="hidden" name="items[<?= $item['idItem']; ?>][Name]" value="<?= $item['Name']; ?>">
                         </td>
                         <td>
-                            <input type="number" style="width:4rem" name="ratio" value="1" min="1" step="any">
+                            <input type="number" style="width:4rem" name="items[<?= $item['idItem']; ?>][ratio]"
+                                value="<?= $item['ratio']; ?>" min="1" step="any">
                         </td>
                         <td>
-                            <input type="checkbox" name="selected_items[]" value="<?= $item['idItem']; ?>">
+                            <input type="checkbox" name="selected_items[]" value="<?= $item['idItem']; ?>"
+                                <?= ($item['is_linked'] == 1) ? 'checked' : ''; ?>>
                         </td>
                     </tr>
                 <?php endforeach; ?>

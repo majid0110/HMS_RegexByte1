@@ -141,6 +141,21 @@
         .modal-lg {
             max-width: 100%;
         }
+
+        .text-bg-success {
+            background-color: #73ad31;
+            color: white;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+        }
+
+        .text-bg-danger {
+            background-color: red;
+            color: white;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+        }
+    </style>
     </style>
 </head>
 
@@ -341,21 +356,13 @@
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
-                    <?php
-                    $successMessage = session()->getFlashdata('success');
-                    $errorMessage = session()->getFlashdata('error');
-
-                    if ($successMessage) {
-                        echo '<div class="alert alert-success">' . $successMessage . '</div>';
-                    }
-
-                    if ($errorMessage) {
-                        echo '<div class="alert alert-danger">' . $errorMessage . '</div>';
-                    }
-                    ?>
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
+                                <?php
+                                $successMessage = session()->getFlashdata('success');
+                                $errorMessage = session()->getFlashdata('error');
+                                ?>
                                 <h4 class="card-title">Services Table</h4>
                                 <a href="<?= base_url('ServicesForm'); ?>" class="btn btn-primary">Add</a>
                                 <!-- <button type="button" class="btn btn-primary" id="openMainModalBtn">Add</button> -->
@@ -386,20 +393,34 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
+                                                <th>S.No</th>
+                                                <th>Code</th>
                                                 <th>Service Name</th>
                                                 <th>Price</th>
                                                 <th>Status</th>
                                                 <th>Unit</th>
+                                                <th>IsService</th>
+                                                <th>Status</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php $serialNumber = 1; ?>
                                             <?php foreach ($Services as $Service): ?>
                                                 <tr>
+                                                    <td><?= $serialNumber++ ?></td>
+                                                    <td><?= $Service['Code']; ?></td>
+                                                    <td><?= $Service['Name']; ?></td>
                                                     <td><?= $Service['Name']; ?></td>
                                                     <td><?= $Service['Price']; ?></td>
-                                                    <td><?= $Service['status']; ?></td>
                                                     <td><?= $Service['name']; ?></td>
+                                                    <td><?= $Service['isService']; ?></td>
+                                                    <td>
+                                                        <span
+                                                            class="<?= $Service['status'] == 'Active' ? 'text-bg-success' : 'text-bg-danger'; ?>">
+                                                            <?= $Service['status']; ?>
+                                                        </span>
+                                                    </td>
                                                     <td>
                                                         <a href="<?= base_url('editService/' . $Service['idArtMenu']); ?>"
                                                             class="btn btn-info btn-sm">Edit</a>
@@ -436,32 +457,6 @@
         <script src="../public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
         <!-- End plugin js for this page -->
         <!-- inject:js -->
-        <!-- <script>
-            $(document).ready(function () {
-                function showToast(message, type) {
-                    const toastContainer = document.createElement('div');
-                    toastContainer.classList.add('toast', type);
-                    toastContainer.textContent = message;
-                    document.body.appendChild(toastContainer);
-
-                    toastContainer.classList.add('show');
-
-                    setTimeout(function () {
-                        toastContainer.classList.remove('show');
-                        setTimeout(function () {
-                            toastContainer.remove();
-                        }, 500);
-                    }, 5000);
-                }
-                <?php if ($successMessage = session()->getFlashdata('success')): ?>
-                    showToast('<?= $successMessage ?>', 'success');
-                <?php endif; ?>
-                <?php if ($errorMessage = session()->getFlashdata('error')): ?>
-                    showToast('<?= $errorMessage ?>', 'error');
-                <?php endif; ?>
-            });
-        </script> -->
-
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 var openMainModalBtn = document.getElementById('openMainModalBtn');
@@ -488,6 +483,32 @@
                     $(this).find('.modal-body').focus();
                 });
             }
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                function showToast(message, type) {
+                    const toastContainer = document.createElement('div');
+                    toastContainer.classList.add('toast', type);
+                    toastContainer.textContent = message;
+                    document.body.appendChild(toastContainer);
+
+                    toastContainer.classList.add('show');
+
+                    setTimeout(function () {
+                        toastContainer.classList.remove('show');
+                        setTimeout(function () {
+                            toastContainer.remove();
+                        }, 500);
+                    }, 5000);
+                }
+                <?php if ($successMessage = session()->getFlashdata('success')): ?>
+                    showToast('<?= $successMessage ?>', 'success');
+                <?php endif; ?>
+                <?php if ($errorMessage = session()->getFlashdata('error')): ?>
+                    showToast('<?= $errorMessage ?>', 'error');
+                <?php endif; ?>
+            });
         </script>
 
 

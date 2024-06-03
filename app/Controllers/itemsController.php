@@ -259,9 +259,15 @@ class itemsController extends Controller
         $idWarehouse = $this->request->getPost('warehouse');
         $Inventory = $this->request->getPost('inventory');
 
+        $itemsModel = new itemsModel();
+        $lastCode = $itemsModel->select('Code')->where('idBusiness', $businessID)->orderBy('Code', 'DESC')->limit(1)->first();
+        $newCode = $lastCode ? intval($lastCode['Code']) + 1 : 1;
+
+
         $formData = [
             'barcode' => $this->request->getPost('bcode'),
-            'Code' => $this->request->getPost('code'),
+            // 'Code' => $this->request->getPost('code'),
+            'Code' => $newCode,
             'Name' => $this->request->getPost('name'),
             'Cost' => $this->request->getpost('cost'),
             'Minimum' => $this->request->getpost('min'),
@@ -277,9 +283,6 @@ class itemsController extends Controller
             'isSendEmail' => 1,
             'isSendExpire' => 0,
         ];
-
-        $itemsModel = new itemsModel();
-
 
         $insertedItemId = $itemsModel->insertItemWarehouse($formData);
         $formDataInventory = [

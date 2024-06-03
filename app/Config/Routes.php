@@ -162,6 +162,7 @@ $routes->post('updateService', 'ServiceController::updateService');
 $routes->get('ServicesForm', 'ServiceController::ServicesForm');
 $routes->get('getItems', 'ServiceController::getItems');
 $routes->get('getItemsForEditService', 'ServiceController::getItemsForEditService');
+$routes->get('getItemsForEditService/(:num)', 'ServiceController::getItemsForEditService/$1');
 
 
 

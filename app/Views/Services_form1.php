@@ -11,6 +11,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <style>
         .toast {
             position: fixed;
@@ -289,7 +295,8 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Code</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="code" required />
+                                                        <input type="text" class="form-control" name="code"
+                                                            value="<?= esc($newCode); ?>" required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -322,8 +329,8 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Price</label>
                                                     <div class="col-sm-9">
-                                                        <input type="number" class="form-control" name="price"
-                                                            Value="0" />
+                                                        <input type="number" class="form-control" name="price" Value="0"
+                                                            step=".01" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -332,7 +339,7 @@
                                                     <label class="col-sm-3 col-form-label">Promotional Price</label>
                                                     <div class="col-sm-9">
                                                         <input type="number" class="form-control" Value="0"
-                                                            name="pro_price" />
+                                                            name="pro_price" step=".01" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -342,8 +349,8 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Cost</label>
                                                     <div class="col-sm-9">
-                                                        <input type="number" class="form-control" name="cost"
-                                                            Value="0" />
+                                                        <input type="number" class="form-control" name="cost" Value="0"
+                                                            step=".01" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -357,7 +364,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Category</label>
                                                     <div class="col-sm-9">
-                                                        <select class="form-control" name="category">
+                                                        <select class="form-control" name="category" required>
                                                             <?php foreach ($categories as $category): ?>
                                                                 <option value="<?= $category['idCatArt'] ?>">
                                                                     <?= $category['name'] ?>
@@ -474,17 +481,12 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="linkItemsModalLabel">Link Items</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
+                                                        aria-label="Close" id="closeModal">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body" id="linkItemsModalBody">
                                                     <!-- Content will be loaded here dynamically -->
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -532,6 +534,10 @@
                     $('#linkItemsModal').modal('show');
                 });
 
+                $('#closeModal').click(function () {
+                    $('#linkItemsModal').modal('hide');
+                });
+
                 $('#linkItemsModal').on('shown.bs.modal', function () {
                     console.log('Nested modal shown');
                     $('#linkItemsModalBody').load('getItems', function (response, status, xhr) {
@@ -571,6 +577,7 @@
                 showToast('<?= $errorMessage ?>', 'error');
             <?php endif; ?>
         });
+
     </script>
 
     <!-- End plugin js for this page -->

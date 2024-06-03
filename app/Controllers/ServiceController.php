@@ -37,10 +37,16 @@ class ServiceController extends Controller
     public function ServicesForm()
     {
         $servicesModel = new ServicesModel();
+        $businessID = session()->get('businessID');
+
+        $lastCode = $servicesModel->select('Code')->where('idBusiness', $businessID)->orderBy('Code', 'DESC')->limit(1)->first();
+        $newCode = $lastCode ? intval($lastCode['Code']) + 1 : 1;
+
         $data = [
             'units' => $servicesModel->getUnits(),
             'categories' => $servicesModel->getCategories(),
             'tax' => $servicesModel->getTaxes(),
+            'newCode' => $newCode,
         ];
         return view('Services_form1', $data);
     }
@@ -52,12 +58,29 @@ class ServiceController extends Controller
         return view('link_Items', $data);
     }
 
-    public function getItemsForEditService()
+    // public function getItemsForEditService($idArtMenu)
+    // {
+    //     $itemModel = new itemsModel();
+    //     $data['items'] = $itemModel->getItemforedit($idArtMenu);
+
+    //     return view('edit_service_linkitem', $data);
+    // }
+
+    public function getItemsForEditService($idArtMenu)
     {
         $itemModel = new itemsModel();
-        $data['items'] = $itemModel->getItem();
+        $data['items'] = $itemModel->getItemforedit($idArtMenu);
+        $data['service'] = [
+            'idArtMenu' => $idArtMenu
+        ];
         return view('edit_service_linkitem', $data);
     }
+    // public function getItemsForEditService()
+    // {
+    //     $itemModel = new itemsModel();
+    //     $data['items'] = $itemModel->getItem();
+    //     return view('edit_service_linkitem', $data);
+    // }
 
     public function Services_form1()
     {
@@ -222,10 +245,24 @@ class ServiceController extends Controller
         $img = $request->getFile('img');
         $Service = $this->request->getPost('isService') ? 1 : 0;
 
+        $servicesModel = new ServicesModel();
+        // $lastCode = $servicesModel->select('Code')->where('idBusiness', $businessID)->orderBy('Code', 'DESC')->limit(1)->first();
+        // $newCode = $lastCode ? intval($lastCode['Code']) + 1 : 1;
+
+        $name = $this->request->getPost('name');
+        $code = $this->request->getPost('code');
+
+        $existingService = $servicesModel->where('Code', $code)->where('Name', $name)->where('idBusiness', $businessID)->first();
+        if ($existingService) {
+            session()->setFlashdata('error', 'The same service already exists.');
+            return redirect()->to(base_url("/ServicesForm"));
+        }
+
         $formData = [
             'BarCode' => $this->request->getPost('bcode'),
-            'Code' => $this->request->getPost('code'),
-            'Name' => $this->request->getPost('name'),
+            // 'Code' => $this->request->getPost('code'),
+            'Code' => $code,
+            'Name' => $name,
             'Image' => $img,
             'Price' => $this->request->getPost('price'),
             'Promotional_Price' => $this->request->getPost('pro_price'),
@@ -242,7 +279,7 @@ class ServiceController extends Controller
             'idBusiness' => $businessID,
             'idPoint_of_sale' => 1,
             'Cost' => $this->request->getPost('cost'),
-            'idTVSH' => 0,
+            'idTVSH' => $this->request->getPost('tax'),
             'noTvshType' => 0,
         ];
 
@@ -255,8 +292,6 @@ class ServiceController extends Controller
         }
 
         $servicesModel = new ServicesModel();
-
-        // Start transaction
         $db = \Config\Database::connect();
         $db->transStart();
 
@@ -269,7 +304,6 @@ class ServiceController extends Controller
             $ratio = $this->request->getPost('ratio');
 
             if (!$selectedItems) {
-                // Rollback transaction
                 $db->transRollback();
                 session()->setFlashdata('error', 'You must link this service to an item.');
                 return redirect()->to(base_url("/ServicesForm"));
@@ -279,6 +313,8 @@ class ServiceController extends Controller
                 if (isset($items[$itemId])) {
                     $itemDetails = $items[$itemId];
                     $idItem = $itemDetails['idItem'];
+                    $ratio = $itemDetails['ratio'];
+
 
                     $rationData = [
                         'idArtMenu' => $lastInsertedId,
@@ -286,6 +322,7 @@ class ServiceController extends Controller
                         'ratio' => $ratio,
                         'idBusiness' => $businessID
                     ];
+
                     $servicesModel->linkItem($rationData);
                 }
             }

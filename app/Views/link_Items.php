@@ -27,7 +27,8 @@
                             <input type="hidden" name="items[<?= $item['idItem']; ?>][Name]" value="<?= $item['Name']; ?>">
                         </td>
                         <td>
-                            <input type="number" style="width:4rem" name="ratio" value="1" min="1" step="any">
+                            <input type="number" style="width:4rem" name="items[<?= $item['idItem']; ?>][ratio]" value="1"
+                                min="1" step="any">
                         </td>
                         <td>
                             <input type="checkbox" name="selected_items[]" value="<?= $item['idItem']; ?>">

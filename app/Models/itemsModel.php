@@ -49,6 +49,47 @@ class itemsModel extends Model
 
         return $result;
     }
+
+    public function getItemforedit($idArtMenu)
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+
+        $builder = $this->db->table('itemswarehouse iw');
+        $builder->select('iw.*, COALESCE(r.ratio, 0) AS ratio, IF(r.idItem IS NOT NULL, 1, 0) AS is_linked');
+        $builder->join('ratio r', 'r.idItem = iw.idItem AND r.idArtMenu = ' . $idArtMenu, 'left');
+        $builder->where('iw.idBusiness', $businessID);
+        $builder->orderBy('iw.idItem', 'DESC');
+
+        $result = $builder->get()->getResultArray();
+
+        return $result;
+    }
+
+    // public function getItemforedit($idArtMenu)
+    // {
+    //     $session = \Config\Services::session();
+    //     $businessID = $session->get('businessID');
+
+    //     $builder = $this->db->table('itemswarehouse');
+    //     $builder->select('itemswarehouse.*, r.ratio');
+    //     $builder->join('ratio r', 'r.idItem = itemswarehouse.idItem AND r.idArtMenu = ' . $idArtMenu, 'left');
+    //     $builder->where('itemswarehouse.idBusiness', $businessID);
+    //     $builder->orderBy('itemswarehouse.idItem', 'DESC');
+
+    //     $result = $builder->get()->getResultArray();
+
+    //     $linkedItems = array_column($result, 'idItem', 'idItem');
+    //     $ratios = array_column($result, 'ratio', 'idItem');
+
+    //     return [
+    //         'items' => $result,
+    //         'linkedItems' => $linkedItems,
+    //         'ratios' => $ratios,
+    //     ];
+    // }
+
+
     public function getServices()
     {
         $builder = $this->db->table('artmenu');

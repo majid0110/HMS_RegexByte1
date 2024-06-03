@@ -459,11 +459,6 @@
                                                 <div class="modal-body" id="linkItemsModalBody">
                                                     <!-- Content will be loaded here dynamically -->
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -502,7 +497,7 @@
                 $('#linkItemsModal').modal('show');
 
                 $('#linkItemsModal').on('shown.bs.modal', function () {
-                    $('#linkItemsModalBody').load('<?= base_url('getItems'); ?>', function(response, status, xhr) {
+                    $('#linkItemsModalBody').load('<?= base_url('getItemsForEditService/') ?>' + idArtMenu, function(response, status, xhr) {
                         if (status === "error") {
                             const msg = "Sorry but there was an error: ";
                             $("#linkItemsModalBody").html(msg + xhr.status + " " + xhr.statusText);
