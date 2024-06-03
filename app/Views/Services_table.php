@@ -156,7 +156,6 @@
             border-radius: 0.2rem;
         }
     </style>
-    </style>
 </head>
 
 <body>

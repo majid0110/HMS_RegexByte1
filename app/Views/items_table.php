@@ -130,6 +130,20 @@
         .modal-lg {
             max-width: 80%;
         }
+
+        .text-bg-success {
+            background-color: #73ad31;
+            color: white;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+        }
+
+        .text-bg-danger {
+            background-color: red;
+            color: white;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+        }
     </style>
 </head>
 
@@ -186,7 +200,12 @@
                                                     <td><?= $item['Code'] ?></td>
                                                     <td><?= $item['Name'] ?></td>
                                                     <td><?= $item['Cost'] ?></td>
-                                                    <td><?= $item['status'] ?></td>
+                                                    <td>
+                                                        <span
+                                                            class="<?= $item['status'] == 'Active' ? 'text-bg-success' : 'text-bg-danger'; ?>">
+                                                            <?= $item['status']; ?>
+                                                        </span>
+                                                    </td>
                                                     <td><?= $item['unit_name'] ?></td>
                                                     <td><?= $item['inventory'] ?></td>
                                                     <td>
@@ -229,7 +248,7 @@
                             </button>
                         </div>
                         <div class="modal-body" id="addItemModalBody">
-                            <?php include ('additem.php'); ?>
+                            <?php include ('items_form.php'); ?>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

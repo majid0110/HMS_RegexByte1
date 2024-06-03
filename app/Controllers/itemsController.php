@@ -65,11 +65,17 @@ class itemsController extends Controller
         if (!$session->get('ID')) {
             return redirect()->to(base_url("/login"));
         }
+        $businessID = session()->get('businessID');
+        $itemsModel = new itemsModel();
+        $lastCode = $itemsModel->select('Code')->where('idBusiness', $businessID)->orderBy('Code', 'DESC')->limit(1)->first();
+        $newCode = $lastCode ? intval($lastCode['Code']) + 1 : 1;
+
         $servicesModel = new ServicesModel();
         $data = [
             'units' => $servicesModel->getUnits(),
             'categories' => $servicesModel->getCategories(),
             'tax' => $servicesModel->getTaxes(),
+            'newCode' => $newCode,
         ];
         $Model = new itemsModel();
         $data['warehouse'] = $Model->getIdWarehouse();
@@ -263,11 +269,20 @@ class itemsController extends Controller
         $lastCode = $itemsModel->select('Code')->where('idBusiness', $businessID)->orderBy('Code', 'DESC')->limit(1)->first();
         $newCode = $lastCode ? intval($lastCode['Code']) + 1 : 1;
 
+        $code = 123;
+        $name = $this->request->getPost('name');
+
+        $existingService = $itemsModel->where('Code', $code)->where('Name', $name)->where('idBusiness', $businessID)->first();
+        if ($existingService) {
+            session()->setFlashdata('error', 'The same service already exists.');
+            return redirect()->to(base_url("/items_table"));
+        }
+
 
         $formData = [
             'barcode' => $this->request->getPost('bcode'),
             // 'Code' => $this->request->getPost('code'),
-            'Code' => $newCode,
+            'Code' => $code,
             'Name' => $this->request->getPost('name'),
             'Cost' => $this->request->getpost('cost'),
             'Minimum' => $this->request->getpost('min'),

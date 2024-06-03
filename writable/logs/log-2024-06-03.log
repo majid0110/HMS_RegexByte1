@@ -458,3 +458,88 @@ INFO - 2024-06-03 12:26:53 --> Session: Class initialized using 'CodeIgniter\Ses
 INFO - 2024-06-03 12:27:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-06-03 12:27:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-06-03 12:27:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:33:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:33:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:35:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:35:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:35:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:35:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:36:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:36:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:37:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:37:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:41:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:42:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:42:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:42:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:42:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:46:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-03 12:46:24 --> Undefined variable $newCode
+in APPPATH\Views\additem.php on line 29.
+ 1 APPPATH\Views\additem.php(29): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $newCode', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\additem.php', 29)
+ 2 APPPATH\Views\items_table.php(232): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\additem.php')
+ 3 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\items_table.php')
+ 4 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('items_table', [], true)
+ 6 APPPATH\Controllers\itemsController.php(148): view('items_table', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->items_table()
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-03 12:48:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:48:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:50:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 12:54:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-03 12:54:49 --> include(additem): Failed to open stream: No such file or directory
+in APPPATH\Views\items_table.php on line 232.
+ 1 APPPATH\Views\items_table.php(232): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(additem): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\items_table.php', 232)
+ 2 APPPATH\Views\items_table.php(232): include()
+ 3 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\items_table.php')
+ 4 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('items_table', [], true)
+ 6 APPPATH\Controllers\itemsController.php(148): view('items_table', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->items_table()
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-03 12:55:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-03 12:55:36 --> Undefined variable $newCode
+in APPPATH\Views\items_form.php on line 32.
+ 1 APPPATH\Views\items_form.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $newCode', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\items_form.php', 32)
+ 2 APPPATH\Views\items_table.php(232): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\items_form.php')
+ 3 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\items_table.php')
+ 4 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('items_table', [], true)
+ 6 APPPATH\Controllers\itemsController.php(148): view('items_table', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->items_table()
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-03 12:56:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 13:02:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-03 13:02:52 --> Undefined variable $Service
+in APPPATH\Views\items_table.php on line 205.
+ 1 APPPATH\Views\items_table.php(205): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $Service', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\items_table.php', 205)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\items_table.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('items_table', [], true)
+ 5 APPPATH\Controllers\itemsController.php(148): view('items_table', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->items_table()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-03 13:03:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-03 13:03:19 --> Undefined variable $newCode
+in APPPATH\Views\items_form.php on line 32.
+ 1 APPPATH\Views\items_form.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $newCode', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\items_form.php', 32)
+ 2 APPPATH\Views\items_table.php(251): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\items_form.php')
+ 3 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\items_table.php')
+ 4 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('items_table', [], true)
+ 6 APPPATH\Controllers\itemsController.php(148): view('items_table', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\itemsController->items_table()
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\itemsController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-06-03 13:03:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-03 13:04:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
