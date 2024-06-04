@@ -226,10 +226,11 @@
                                         <input type="hidden" name="businessID"
                                             value="<?= session()->get('businessID'); ?>" />
                                         <div>
-                                            <input type="checkbox" id="isExpiry" name="isExpiry" value="1">
+                                            <input type="checkbox" id="isExpiry" name="isExpiry" value="1"
+                                                <?= $configData['isExpiry'] == 1 ? 'checked' : ''; ?>>
                                             <label for="isExpiry" style="margin-left: 1rem;">Enable Expiry</label>
                                         </div>
-                                        <div style=" margin-top: 2rem;">
+                                        <div style="margin-top: 2rem;">
                                             <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                                         </div>
                                     </form>
@@ -241,10 +242,9 @@
                 <!-- content-wrapper ends -->
                 <!-- partial:../../partials/_footer.html -->
                 <?php include 'include_common/footer.php'; ?>
-
-
                 <!-- partial -->
             </div>
+
             <!-- main-panel ends -->
         </div>
         <!-- page-body-wrapper ends -->

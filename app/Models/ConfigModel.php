@@ -9,6 +9,10 @@ class ConfigModel extends Model
     protected $primaryKey = 'id';
     protected $allowedFields = ['businessID', 'isExpiry'];
 
+    public function getConfig($businessID)
+    {
+        return $this->where('businessID', $businessID)->first();
+    }
     public function updateConfig($businessID, $data)
     {
         $existingConfig = $this->where('businessID', $businessID)->first();

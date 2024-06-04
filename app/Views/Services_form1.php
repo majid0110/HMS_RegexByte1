@@ -373,8 +373,9 @@
                                                                 <?php endforeach; ?>
                                                             </select>
                                                             <div class="input-group-append">
-                                                                <button class="btn btn-primary" type="button"
-                                                                    data-toggle="modal" data-target="#addCategoryModal">
+                                                                <button style="height: 2.1rem;" class="btn btn-primary"
+                                                                    type="button" data-toggle="modal"
+                                                                    data-target="#addCategoryModal">
                                                                     <i class="mdi mdi-plus"></i>
                                                                 </button>
                                                             </div>

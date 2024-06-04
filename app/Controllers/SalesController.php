@@ -70,6 +70,176 @@ class SalesController extends Controller
 //                                                 Main Logic
 //-------------------------------------------------------------------------------------------------------------------------
 
+    // public function submitServices()
+    // {
+    //     $db = \Config\Database::connect();
+    //     try {
+    //         $invoice = new InvoiceModel();
+    //         $invoiceDetailModel = new InvoiceDetailModel();
+    //         $clientId = $this->request->getPost('clientId');
+    //         $clientName = $this->request->getPost('clientName');
+    //         $exchange = $this->request->getPost('exchange');
+    //         $currency = $this->request->getPost('currency');
+    //         $currencyName = $this->request->getPost('currencyName');
+    //         $paymentMethod = $this->request->getPost('paymentMethodName');
+    //         $paymentMethodName = $this->request->getPost('paymentName');
+    //         $paymentMethodID = $this->request->getPost('paymentMethodId');
+    //         $totalFee = $this->request->getPost('totalFee');
+    //         $services = $this->request->getPost('services');
+    //         $session = \Config\Services::session();
+    //         $businessID = $session->get('businessID');
+    //         $UserID = $session->get('ID');
+    //         $db->transBegin();
+
+    //         if (!is_null($services)) {
+    //             $totalFee = 0;
+    //             foreach ($services as $service) {
+    //                 if (isset($service['fee']) && isset($service['quantity'])) {
+    //                     $fee = (float) $service['fee'];
+    //                     $quantity = (int) $service['quantity'];
+    //                     $totalFee += $fee * $quantity;
+    //                 } else {
+    //                     throw new \Exception('Service fee or quantity is not set.');
+    //                 }
+    //             }
+    //         } else {
+    //             throw new \Exception('Services data is null.');
+    //         }
+
+    //         $lastInvoiceNumber = $invoice->select('invOrdNum')->orderBy('invOrdNum', 'DESC')->limit(1)->first();
+    //         $newInvoiceNumber = $lastInvoiceNumber ? $lastInvoiceNumber['invOrdNum'] + 1 : 1;
+    //         $invoiceData = [
+    //             'idClient' => $clientId,
+    //             'Value' => $totalFee,
+    //             'idTable' => 0,
+    //             'idUser' => $UserID,
+    //             'Status' => 'closed',
+    //             'serial_number' => 0,
+    //             'idBusiness' => $businessID,
+    //             'idCancellation' => 0,
+    //             'invOrdNum' => $newInvoiceNumber,
+    //             'selfissue' => 0,
+    //             'FIC' => 0,
+    //             'ValueTVSH' => 0,
+    //             'idCurrency' => $currency,
+    //             'rate' => $exchange,
+    //             'paymentMethod' => $paymentMethodID,
+    //             'closeShift' => 0,
+    //             'isSummaryInvoice' => 0,
+    //             'seial_nr' => 0,
+    //             'idPoint_of_sale' => 0,
+    //             'imported_invoice_number' => 0,
+    //             'isExport' => 0,
+    //             'isReverseCharge' => 0,
+    //             'Contract' => 0,
+    //             'deliveryid' => 0,
+    //             'invoice_period_start_date' => 0,
+    //             'invoice_period_end_date' => 0,
+    //             'filename' => 0,
+    //             'dokumenti' => 0,
+    //             'lloji_fatures_id' => 0,
+    //             'InvoiceNotes' => 0,
+    //         ];
+    //         $invoice->insertInvoice($invoiceData);
+    //         $idPayment = $invoice->getInsertID();
+
+    //         $discountedTotal = $totalFee;
+    //         foreach ($services as $service) {
+    //             $discount = $service['discount'];
+    //             $quantity = (int) $service['quantity'];
+    //             $fee = (float) $service['fee'];
+    //             $sum = $quantity * $fee;
+    //             // $discountedSum = $sum - ($sum * ($discount / 100));
+    //             $discountedTotal -= ($sum * ($discount / 100));
+
+    //             $expiryDate = $service['expiryDate'];
+    //             $serviceData = [
+    //                 'idReceipts' => $idPayment,
+    //                 'Nr' => 0,
+    //                 'idArtMenu' => $service['serviceTypeId'],
+    //                 'Quantity' => $quantity,
+    //                 'Price' => $fee,
+    //                 'Sum' => $sum,
+    //                 'idBusiness' => $businessID,
+    //                 'IdTax' => 1,
+    //                 'ValueTax' => 0,
+    //                 'idMag' => 1,
+    //                 'name' => $service['serviceName'],
+    //                 'idSummaryInvoice' => 0,
+    //                 'Discount' => $discount,
+    //             ];
+    //             $invoiceDetailModel->insert($serviceData);
+
+    //             $idArtMenu = $service['serviceTypeId'];
+    //             $Model = new ItemsInventoryModel();
+    //             $ratioData = $Model->getRatio($idArtMenu, $businessID);
+
+    //             foreach ($ratioData as $data) {
+    //                 $idItem = $data->idItem;
+    //                 $ratio = $data->ratio;
+    //                 $inventorySubtract = $quantity * $ratio;
+
+    //                 $Model->subtractFromInventory($idItem, $inventorySubtract);
+    //                 $Model->subtractFromExpiryInventory($idItem, $expiryDate, $inventorySubtract);
+
+    //             }
+    //         }
+
+    //         $paymentDetailsModel = new InvoiceDetailsModel();
+    //         $paymentDetailsData = [
+    //             'value' => $totalFee,
+    //             'idUser' => $UserID,
+    //             'idAnullim' => 0,
+    //             'method' => $paymentMethod,
+    //             'idPaymentMethod' => $paymentMethodID,
+    //             'exchange' => $exchange,
+    //             'nr_serial' => 0,
+    //         ];
+    //         $paymentDetailsModel->insert($paymentDetailsData);
+    //         $idReceipt = $paymentDetailsModel->getInsertID();
+    //         $paymentDetailsModel->insertInvoicePayment([
+    //             'idReceipt' => $idPayment,
+    //             'idPayment' => $idReceipt,
+    //         ]);
+
+    //         $db->transCommit();
+
+    //         $clientModel = new ClientModel();
+    //         $Age = $clientModel->getclientAge($businessID, $clientId);
+    //         $Gender = $clientModel->getclientGender($businessID, $clientId);
+    //         $clientUnique = $clientModel->getclientUnique($businessID, $clientId);
+    //         $InvoiceNumber = $invoice->getinvoiceNumber($businessID, $idPayment);
+    //         $operatorName = session()->get('fName');
+
+    //         $mpdf = new \Mpdf\Mpdf();
+    //         $pdfContent = view('pdf_invoice', [
+    //             'invoiceData' => $invoiceData,
+    //             'services' => $services,
+    //             'paymentDetailsData' => $paymentDetailsData,
+    //             'clientName' => $clientName,
+    //             'currencyName' => $currencyName,
+    //             'paymentMethodName' => $paymentMethodName,
+    //             'Age' => $Age,
+    //             'clientUnique' => $clientUnique,
+    //             'Gender' => $Gender,
+    //             'InvoiceNumber' => $InvoiceNumber,
+    //             'operatorName' => $operatorName,
+    //             'discountedTotal' => $discountedTotal,
+    //         ]);
+    //         $mpdf->WriteHTML($pdfContent);
+    //         $pdfBinary = $mpdf->Output('', 'S');
+    //         return $this->response->setJSON([
+    //             'status' => 'success',
+    //             'message' => 'Data inserted successfully',
+    //             'pdfContent' => base64_encode($pdfBinary),
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         $db->transRollback();
+    //         log_message('error', 'Error retrieving data: ' . $e->getMessage());
+    //         return $this->response->setJSON(['error' => 'Error retrieving data.', 'message' => $e->getMessage()]);
+    //     }
+    // }
+
     public function submitServices()
     {
         $db = \Config\Database::connect();
@@ -90,7 +260,7 @@ class SalesController extends Controller
             $businessID = $session->get('businessID');
             $UserID = $session->get('ID');
             $db->transBegin();
-
+    
             if (!is_null($services)) {
                 $totalFee = 0;
                 foreach ($services as $service) {
@@ -105,7 +275,7 @@ class SalesController extends Controller
             } else {
                 throw new \Exception('Services data is null.');
             }
-
+    
             $lastInvoiceNumber = $invoice->select('invOrdNum')->orderBy('invOrdNum', 'DESC')->limit(1)->first();
             $newInvoiceNumber = $lastInvoiceNumber ? $lastInvoiceNumber['invOrdNum'] + 1 : 1;
             $invoiceData = [
@@ -142,16 +312,15 @@ class SalesController extends Controller
             ];
             $invoice->insertInvoice($invoiceData);
             $idPayment = $invoice->getInsertID();
-
+    
             $discountedTotal = $totalFee;
             foreach ($services as $service) {
                 $discount = $service['discount'];
                 $quantity = (int) $service['quantity'];
                 $fee = (float) $service['fee'];
                 $sum = $quantity * $fee;
-                // $discountedSum = $sum - ($sum * ($discount / 100));
                 $discountedTotal -= ($sum * ($discount / 100));
-
+    
                 $expiryDate = $service['expiryDate'];
                 $serviceData = [
                     'idReceipts' => $idPayment,
@@ -169,20 +338,22 @@ class SalesController extends Controller
                     'Discount' => $discount,
                 ];
                 $invoiceDetailModel->insert($serviceData);
-
+    
                 $idArtMenu = $service['serviceTypeId'];
                 $Model = new ItemsInventoryModel();
                 $ratioData = $Model->getRatio($idArtMenu, $businessID);
-
+    
                 foreach ($ratioData as $data) {
                     $idItem = $data->idItem;
                     $ratio = $data->ratio;
                     $inventorySubtract = $quantity * $ratio;
+    
+                    // Subtracting inventory and expiry inventory for each item
                     $Model->subtractFromInventory($idItem, $inventorySubtract);
                     $Model->subtractFromExpiryInventory($idItem, $expiryDate, $inventorySubtract);
                 }
             }
-
+    
             $paymentDetailsModel = new InvoiceDetailsModel();
             $paymentDetailsData = [
                 'value' => $totalFee,
@@ -199,16 +370,16 @@ class SalesController extends Controller
                 'idReceipt' => $idPayment,
                 'idPayment' => $idReceipt,
             ]);
-
+    
             $db->transCommit();
-
+    
             $clientModel = new ClientModel();
             $Age = $clientModel->getclientAge($businessID, $clientId);
             $Gender = $clientModel->getclientGender($businessID, $clientId);
             $clientUnique = $clientModel->getclientUnique($businessID, $clientId);
             $InvoiceNumber = $invoice->getinvoiceNumber($businessID, $idPayment);
             $operatorName = session()->get('fName');
-
+    
             $mpdf = new \Mpdf\Mpdf();
             $pdfContent = view('pdf_invoice', [
                 'invoiceData' => $invoiceData,
@@ -237,6 +408,8 @@ class SalesController extends Controller
             return $this->response->setJSON(['error' => 'Error retrieving data.', 'message' => $e->getMessage()]);
         }
     }
+    
+
 
     // public function submitServices()
     // {

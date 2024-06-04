@@ -14,9 +14,20 @@ class ConfigureController extends Controller
         return view('add_config.php');
     }
 
+    // public function config_settings()
+    // {
+    //     return view('config_Settings.php');
+    // }
+
     public function config_settings()
     {
-        return view('config_Settings.php');
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+
+        $configModel = new ConfigModel();
+        $configData = $configModel->getConfig($businessID);
+
+        return view('config_Settings', ['configData' => $configData]);
     }
 
     public function config_form($businessTableID)
