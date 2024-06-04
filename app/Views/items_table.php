@@ -177,6 +177,27 @@
                                         data-target="#exampleModal">Add</button>
                                 </span>
                                 <hr>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <div class="col-sm-9">
+                                                <input type="text" id="searchInput" class="form-control"
+                                                    placeholder="Search by name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <div class="col-sm-9">
+                                                <select id="statusFilter" class="form-control">
+                                                    <option value="">All</option>
+                                                    <option value="Active">Active</option>
+                                                    <option value="Inactive">Inactive</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="table-responsive">
                                     <table class="table table-striped">
@@ -192,7 +213,7 @@
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="itemsTableBody">
                                             <?php $serialNumber = 1; ?>
                                             <?php foreach ($items as $item): ?>
                                                 <tr>
@@ -290,13 +311,32 @@
                     }, 500);
                 }, 5000);
             }
+
             <?php if ($successMessage = session()->getFlashdata('success')): ?>
                 showToast('<?= $successMessage ?>', 'success');
             <?php endif; ?>
             <?php if ($errorMessage = session()->getFlashdata('error')): ?>
                 showToast('<?= $errorMessage ?>', 'error');
             <?php endif; ?>
+
+            function filterTable() {
+                var searchValue = $('#searchInput').val().toLowerCase();
+                var statusValue = $('#statusFilter').val().toLowerCase();
+
+                $('#itemsTableBody tr').filter(function () {
+                    var nameMatch = $(this).find('td:nth-child(3)').text().toLowerCase().indexOf(searchValue) > -1;
+                    var statusMatch = statusValue === "" || (
+                        (statusValue === "active" && $(this).find('td:nth-child(5) span').hasClass('text-bg-success')) ||
+                        (statusValue === "inactive" && $(this).find('td:nth-child(5) span').hasClass('text-bg-danger'))
+                    );
+                    $(this).toggle(nameMatch && statusMatch);
+                });
+            }
+
+            $('#searchInput').on('keyup', filterTable);
+            $('#statusFilter').on('change', filterTable);
         });
+
     </script>
     <!-- End plugin js for this page -->
 </body>

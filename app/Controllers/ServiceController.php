@@ -48,6 +48,8 @@ class ServiceController extends Controller
             'tax' => $servicesModel->getTaxes(),
             'newCode' => $newCode,
         ];
+        $Model = new itemsModel();
+        $data['sectors'] = $Model->getSectors();
         return view('Services_form1', $data);
     }
 

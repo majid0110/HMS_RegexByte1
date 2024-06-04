@@ -100,6 +100,18 @@ class itemsController extends Controller
         return view('cat_form.php', $data);
     }
 
+    public function cat_form_dialog()
+    {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/login"));
+        }
+        $Model = new itemsModel();
+        $data['sectors'] = $Model->getSectors();
+
+        return view('cat_form_dialog.php', $data);
+    }
+
 
     // public function items_table()
     // {
@@ -686,6 +698,25 @@ class itemsController extends Controller
 
         session()->setFlashdata('success', 'Item Added..!!');
         return redirect()->to(base_url("/category_table"));
+    }
+
+    public function saveCatart_fromDialog()
+    {
+        $itemsModel = new itemsModel();
+        $session = \Config\Services::session();
+        $request = \Config\Services::request();
+        $businessID = $session->get('businessID');
+
+        $data = [
+            'name' => $this->request->getPost('name'),
+            'idSector' => $this->request->getPost('id_sec'),
+            'notes' => $this->request->getPost('notes'),
+            'idBusiness' => $businessID,
+        ];
+        $itemsModel->insertCatart($data);
+
+        session()->setFlashdata('success', 'Category Added..!!');
+        return redirect()->to(base_url("/ServicesForm"));
     }
     public function deletecat($idCatArt)
     {

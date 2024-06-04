@@ -11,7 +11,8 @@
 
 <body>
 
-    <form class="pt-3" method="POST" action="<?php echo base_url() . "saveCatart"; ?>" enctype="multipart/form-data">
+    <form class="pt-3" method="POST" action="<?php echo base_url() . "saveCatart_fromDialog"; ?>"
+        enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group row">
@@ -40,7 +41,7 @@
 
             <div class="col-md-6">
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Notes</label>
+                    <label class="col-sm-3 col-form-label">Nooooootes</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="notes" />
                     </div>

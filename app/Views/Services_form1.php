@@ -364,13 +364,21 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Category</label>
                                                     <div class="col-sm-9">
-                                                        <select class="form-control" name="category" required>
-                                                            <?php foreach ($categories as $category): ?>
-                                                                <option value="<?= $category['idCatArt'] ?>">
-                                                                    <?= $category['name'] ?>
-                                                                </option>
-                                                            <?php endforeach; ?>
-                                                        </select>
+                                                        <div class="input-group">
+                                                            <select class="form-control" name="category" required>
+                                                                <?php foreach ($categories as $category): ?>
+                                                                    <option value="<?= $category['idCatArt'] ?>">
+                                                                        <?= $category['name'] ?>
+                                                                    </option>
+                                                                <?php endforeach; ?>
+                                                            </select>
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-primary" type="button"
+                                                                    data-toggle="modal" data-target="#addCategoryModal">
+                                                                    <i class="mdi mdi-plus"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -472,6 +480,24 @@
                                                 </div>
                                             </div>
                                     </form>
+                                    <!-- Add Category Modal -->
+                                    <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="addCategoryModalLabel">Add Category</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <?php include 'cat_form_dialog.php'; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="modal fade" id="linkItemsModal" tabindex="-1" role="dialog"
                                         aria-labelledby="linkItemsModalLabel" aria-hidden="true">
@@ -550,6 +576,22 @@
                         }
                     });
                 });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#addCategoryModal').on('shown.bs.modal', function () {
+                var iframeContent = $('#categoryFormIframe').contents();
+                iframeContent.find('form').on('submit', function (e) {
+                    e.preventDefault();
+                    $('#addCategoryModal').modal('hide');
+                });
+            });
+
+            $('#addCategoryModal').on('hidden.bs.modal', function () {
+                var iframeContent = $('#categoryFormIframe').contents();
+                iframeContent.find('form').off('submit');
             });
         });
     </script>

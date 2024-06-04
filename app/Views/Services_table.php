@@ -368,6 +368,29 @@
                                 <a href="<?= base_url('transferItemsToServices'); ?>" class="btn btn-dark">Transfer
                                     Items</a>
                                 <hr>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <div class="col-sm-9">
+                                                <input type="text" id="searchInputService" class="form-control"
+                                                    placeholder="Search by name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <div class="col-sm-9">
+                                                <select id="statusFilterService" class="form-control">
+                                                    <option value="">All</option>
+                                                    <option value="Active">Active</option>
+                                                    <option value="Inactive">Inactive</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="modal fade" id="mainModal" tabindex="-1" aria-labelledby="mainModalLabel"
                                     aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
@@ -403,7 +426,7 @@
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="itemsTableBody">
                                             <?php $serialNumber = 1; ?>
                                             <?php foreach ($Services as $Service): ?>
                                                 <tr>
@@ -447,13 +470,14 @@
         </div>
         <!-- container-scroller -->
         <!-- plugins:js -->
-        <script src="../public/assets/vendors/js/vendor.bundle.base.js"></script>
+        <script src="./public/assets/vendors/js/vendor.bundle.base.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="./public/assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- endinject -->
         <!-- Plugin js for this page -->
-        <script src="../public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+        <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
         <!-- End plugin js for this page -->
         <!-- inject:js -->
         <script>
@@ -507,7 +531,24 @@
                 <?php if ($errorMessage = session()->getFlashdata('error')): ?>
                     showToast('<?= $errorMessage ?>', 'error');
                 <?php endif; ?>
+
+                function filterServiceTable() {
+                    var searchValue = $('#searchInputService').val().toLowerCase();
+                    var statusValue = $('#statusFilterService').val().toLowerCase();
+
+                    $('table tbody tr').filter(function () {
+                        var nameMatch = $(this).find('td:nth-child(3)').text().toLowerCase().indexOf(searchValue) > -1;
+                        var statusMatch = statusValue === "" || (
+                            (statusValue === "active" && $(this).find('td:nth-child(8) span').hasClass('text-bg-success')) ||
+                            (statusValue === "inactive" && $(this).find('td:nth-child(8) span').hasClass('text-bg-danger'))
+                        );
+                        $(this).toggle(nameMatch && statusMatch);
+                    });
+                }
+                $('#searchInputService').on('keyup', filterServiceTable);
+                $('#statusFilterService').on('change', filterServiceTable);
             });
+
         </script>
 
 
