@@ -52,23 +52,104 @@ class ItemsInventoryModel extends Model
     }
 
 
-    public function getRatio($idArtMenu, $idBusiness)
+    // public function getRatio($idArtMenu, $idBusiness)
+    // {
+    //     return $this->db->table('ratio')
+    //         ->select('idItem, ratio')
+    //         ->where('idArtMenu', $idArtMenu)
+    //         ->where('idBusiness', $idBusiness)
+    //         ->get()
+    //         ->getResult();
+    // }
+
+    // public function subtractFromInventory($idItem, $quantity)
+    // {
+    //     $this->db->table('itemsinventory')
+    //         ->where('idItem', $idItem)
+    //         ->set('inventory', 'inventory - ' . $quantity, FALSE)
+    //         ->update();
+    // }
+
+
+    public function subtractFromInventory($idArtMenu, $quantity, $businessID, $expiryDate)
     {
-        return $this->db->table('ratio')
-            ->select('idItem, ratio')
-            ->where('idArtMenu', $idArtMenu)
-            ->where('idBusiness', $idBusiness)
-            ->get()
-            ->getResult();
+        $idItems = $this->getRatioData($idArtMenu, $businessID);
+        $ratio = 1;
+
+        foreach ($idItems as $idItem) {
+            $inventorySubtract = $quantity * $ratio;
+
+            log_message('debug', 'Updating inventory for item: ' . $idItem . ' with quantity: ' . $inventorySubtract);
+            $this->db->table('itemsinventory')
+                ->where('idItem', $idItem)
+                ->set('inventory', 'inventory - ' . $inventorySubtract, FALSE)
+                ->update();
+
+            if ($this->isExpiryEnabled($businessID)) {
+                $this->db->table('itemsexpiry')
+                    ->where('idInventory', $idItem)
+                    ->where('expiryDate', $expiryDate)
+                    ->set('inventory', 'inventory - ' . $inventorySubtract, FALSE)
+                    ->update();
+            }
+        }
     }
 
-    public function subtractFromInventory($idItem, $quantity)
+    public function isExpiryEnabled($businessID)
     {
-        $this->db->table('itemsinventory')
-            ->where('idItem', $idItem)
-            ->set('inventory', 'inventory - ' . $quantity, FALSE)
-            ->update();
+        $query = $this->db->table('config')
+            ->select('isExpiry')
+            ->where('businessID', $businessID)
+            ->get();
+
+        if ($query->getNumRows() > 0) {
+            return $query->getRow()->isExpiry == 1;
+        }
+        return false;
     }
+
+    // public function getRatio($idArtMenu, $idBusiness)
+    // {
+    //     return $this->db->table('ratio')
+    //         ->select('idItem, ratio')
+    //         ->where('idArtMenu', $idArtMenu)
+    //         ->where('idBusiness', $idBusiness)
+    //         ->get()
+    //         ->getResult();
+    // }
+
+    public function getRatioData($idArtMenu, $idBusiness)
+    {
+        $query = $this->db->table('ratio')
+            ->select('idItem')
+            ->where('idArtMenu', $idArtMenu)
+            ->where('idBusiness', $idBusiness)
+            ->get();
+
+        $result = $query->getResultArray();
+        $idItems = [];
+
+        foreach ($result as $row) {
+            $idItems[] = $row['idItem'];
+        }
+
+        return $idItems;
+    }
+
+    // public function getRatioData($idArtMenu, $idBusiness)
+    // {
+    //     $query = $this->db->table('ratio')
+    //         ->select('idItem')
+    //         ->where('idArtMenu', $idArtMenu)
+    //         ->where('idBusiness', $idBusiness)
+    //         ->get();
+
+    //     $result = $query->getResultArray();
+    //     $idItems = array_column($result, 'idItem');
+
+    //     return $idItems;
+    // }
+
 
     public function deleteExpiry($expiryID)
     {
@@ -205,5 +286,6 @@ class ItemsInventoryModel extends Model
             ->set('inventory', 'inventory - ' . $quantity, FALSE)
             ->update();
     }
+
 
 }

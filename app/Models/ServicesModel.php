@@ -94,6 +94,15 @@ class ServicesModel extends Model
             ->getResultArray();
     }
 
+    public function getItm($name, $code)
+    {
+        $builder = $this->db->table('artmenu');
+        $builder->where('Code', $code);
+        $builder->where('Name', $name);
+        return $builder->countAllResults();
+    }
+
+
     public function getServicesCount()
     {
         $businessID = session()->get('businessID');
@@ -132,33 +141,19 @@ class ServicesModel extends Model
     //     return $builder->insertBatch($data, $escape, $batchSize);
     // }
 
-    public function insertBatch(?array $data = null, ?bool $escape = null, int $batchSize = 100, bool $testing = false)
+    public function insertArtMenu($dataToInsertArtmenu)
     {
-        $builder = $this->db->table('artmenu');
-
-        // Perform batch insertion
-        $builder->insertBatch($data, $escape, $batchSize);
-
-        // Retrieve the last inserted IDs manually
-        $insertedIds = [];
-        $lastInsertId = $this->db->insertID();
-        $numInsertedRows = count($data);
-        for ($i = 0; $i < $numInsertedRows; $i++) {
-            $insertedIds[] = $lastInsertId - $numInsertedRows + $i + 1;
-        }
-
-        // Return the insertion IDs
-        return $insertedIds;
+        $this->db->table('artmenu')->insert($dataToInsertArtmenu);
+        return $this->db->insertID();
     }
 
 
-    public function insertBatchRatio(?array $data = null, ?bool $escape = null, int $batchSize = 100, bool $testing = false)
+
+
+    public function insertRatio($ratioData)
     {
-        $builder = $this->db->table('ratio');
-        return $builder->insertBatch($data, $escape, $batchSize);
+        $this->db->table('ratio')->insert($ratioData);
     }
-
-
     public function deleteService($idArtMenu)
     {
         $db = \Config\Database::connect();

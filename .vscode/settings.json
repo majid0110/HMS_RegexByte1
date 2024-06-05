@@ -1,3 +1,6 @@
 {
-    "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+
+  "php.debug.executablePath": "C:\\Xampp\\php\\php.exe",
+  "php.validate.executablePath": "C:\\Xampp\\php\\php.exe"
 }

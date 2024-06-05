@@ -260,7 +260,7 @@ class SalesController extends Controller
             $businessID = $session->get('businessID');
             $UserID = $session->get('ID');
             $db->transBegin();
-    
+
             if (!is_null($services)) {
                 $totalFee = 0;
                 foreach ($services as $service) {
@@ -275,7 +275,7 @@ class SalesController extends Controller
             } else {
                 throw new \Exception('Services data is null.');
             }
-    
+
             $lastInvoiceNumber = $invoice->select('invOrdNum')->orderBy('invOrdNum', 'DESC')->limit(1)->first();
             $newInvoiceNumber = $lastInvoiceNumber ? $lastInvoiceNumber['invOrdNum'] + 1 : 1;
             $invoiceData = [
@@ -312,15 +312,16 @@ class SalesController extends Controller
             ];
             $invoice->insertInvoice($invoiceData);
             $idPayment = $invoice->getInsertID();
-    
+
             $discountedTotal = $totalFee;
+
             foreach ($services as $service) {
                 $discount = $service['discount'];
                 $quantity = (int) $service['quantity'];
                 $fee = (float) $service['fee'];
                 $sum = $quantity * $fee;
                 $discountedTotal -= ($sum * ($discount / 100));
-    
+
                 $expiryDate = $service['expiryDate'];
                 $serviceData = [
                     'idReceipts' => $idPayment,
@@ -338,22 +339,52 @@ class SalesController extends Controller
                     'Discount' => $discount,
                 ];
                 $invoiceDetailModel->insert($serviceData);
-    
+
                 $idArtMenu = $service['serviceTypeId'];
                 $Model = new ItemsInventoryModel();
-                $ratioData = $Model->getRatio($idArtMenu, $businessID);
-    
-                foreach ($ratioData as $data) {
-                    $idItem = $data->idItem;
-                    $ratio = $data->ratio;
-                    $inventorySubtract = $quantity * $ratio;
-    
-                    // Subtracting inventory and expiry inventory for each item
-                    $Model->subtractFromInventory($idItem, $inventorySubtract);
-                    $Model->subtractFromExpiryInventory($idItem, $expiryDate, $inventorySubtract);
-                }
+                $Model->subtractFromInventory($idArtMenu, $quantity, $businessID, $expiryDate);
             }
-    
+
+            // foreach ($services as $service) {
+            //     $discount = $service['discount'];
+            //     $quantity = (int) $service['quantity'];
+            //     $fee = (float) $service['fee'];
+            //     $sum = $quantity * $fee;
+            //     $discountedTotal -= ($sum * ($discount / 100));
+
+            //     $expiryDate = $service['expiryDate'];
+            //     $serviceData = [
+            //         'idReceipts' => $idPayment,
+            //         'Nr' => 0,
+            //         'idArtMenu' => $service['serviceTypeId'],
+            //         'Quantity' => $quantity,
+            //         'Price' => $fee,
+            //         'Sum' => $sum,
+            //         'idBusiness' => $businessID,
+            //         'IdTax' => 1,
+            //         'ValueTax' => 0,
+            //         'idMag' => 1,
+            //         'name' => $service['serviceName'],
+            //         'idSummaryInvoice' => 0,
+            //         'Discount' => $discount,
+            //     ];
+            //     $invoiceDetailModel->insert($serviceData);
+
+            //     $idArtMenu = $service['serviceTypeId'];
+            //     $Model = new ItemsInventoryModel();
+            //     $ratioData = $Model->getRatio($idArtMenu, $businessID);
+
+            //     foreach ($ratioData as $data) {
+            //         $idItem = $data->idItem;
+            //         $ratio = $data->ratio;
+            //         $inventorySubtract = $quantity * $ratio;
+
+            //         // Subtracting inventory and expiry inventory for each item
+            //         $Model->subtractFromInventory($idItem, $inventorySubtract);
+            //         $Model->subtractFromExpiryInventory($idItem, $expiryDate, $inventorySubtract);
+            //     }
+            // }
+
             $paymentDetailsModel = new InvoiceDetailsModel();
             $paymentDetailsData = [
                 'value' => $totalFee,
@@ -370,16 +401,16 @@ class SalesController extends Controller
                 'idReceipt' => $idPayment,
                 'idPayment' => $idReceipt,
             ]);
-    
+
             $db->transCommit();
-    
+
             $clientModel = new ClientModel();
             $Age = $clientModel->getclientAge($businessID, $clientId);
             $Gender = $clientModel->getclientGender($businessID, $clientId);
             $clientUnique = $clientModel->getclientUnique($businessID, $clientId);
             $InvoiceNumber = $invoice->getinvoiceNumber($businessID, $idPayment);
             $operatorName = session()->get('fName');
-    
+
             $mpdf = new \Mpdf\Mpdf();
             $pdfContent = view('pdf_invoice', [
                 'invoiceData' => $invoiceData,
@@ -408,7 +439,7 @@ class SalesController extends Controller
             return $this->response->setJSON(['error' => 'Error retrieving data.', 'message' => $e->getMessage()]);
         }
     }
-    
+
 
 
     // public function submitServices()
