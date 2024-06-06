@@ -239,7 +239,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <?php if ($isExpiry == 1): ?>
-                                        <button type="button" class="btn btn-outline-success btn-fw" data-toggle="modal"
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
                                             data-target="#expiryModal" id="toggle-expiry-table"
                                             style="margin-left: 50rem; margin-bottom: -2rem;">
                                             Manage Expiry

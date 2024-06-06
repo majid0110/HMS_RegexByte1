@@ -172,10 +172,19 @@ class ItemsInventoryModel extends Model
 
     public function getExpiriesByItemId($idItem)
     {
-        return $this->db->table('itemsexpiry')
-            ->where('idInventory', $idItem)
-            ->get()
-            ->getResultArray();
+        $query = $this->db->table('itemsinventory')
+            ->select('idInventory')
+            ->where('idItem', $idItem)
+            ->get();
+
+        if ($query->getNumRows() > 0) {
+            $idInventory = $query->getRow()->idInventory;
+
+            return $this->db->table('itemsexpiry')
+                ->where('idInventory', $idInventory)
+                ->get()
+                ->getResultArray();
+        }
     }
 
     // public function updateExpiry($expiryID, $data)
