@@ -86,11 +86,22 @@ class ItemsInventoryModel extends Model
                 ->update();
 
             if ($this->isExpiryEnabled($businessID)) {
-                $this->db->table('itemsexpiry')
-                    ->where('idInventory', $idItem)
-                    ->where('expiryDate', $expiryDate)
-                    ->set('inventory', 'inventory - ' . $inventorySubtract, FALSE)
-                    ->update();
+
+                $query = $this->db->table('itemsinventory')
+                    ->select('idInventory')
+                    ->where('idItem', $idItem)
+                    ->get();
+
+                if ($query->getNumRows() > 0) {
+                    $idInventory = $query->getRow()->idInventory;
+
+
+                    $this->db->table('itemsexpiry')
+                        ->where('idInventory', $idInventory)
+                        ->where('expiryDate', $expiryDate)
+                        ->set('inventory', 'inventory - ' . $inventorySubtract, FALSE)
+                        ->update();
+                }
             }
         }
     }

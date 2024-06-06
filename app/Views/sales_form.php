@@ -158,7 +158,7 @@
 <body>
   <div class="container-scroller">
     <!-- partial -->
-    <div class="container-fluid page-body-wrappers">
+    <div class="container-fluid page-body-wrappers" style="padding-top: 7%">
       <!-- partial:../../partials/_settings-panel.html -->
       <div class="theme-setting-wrapper">
         <div id="settings-trigger"><i class="ti-settings"></i></div>
@@ -432,7 +432,9 @@
                               <tr>
                                 <th>Name</th>
                                 <th>Price</th>
-                                <th>Expiry</th>
+                                <?php if ($isExpiry == 1): ?>
+                                  <th>Expiry</th>
+                                <?php endif; ?>
                                 <th>Action</th>
                               </tr>
                             </thead>
@@ -441,39 +443,42 @@
                                 <tr data-service-type-id="<?= $service['idArtMenu']; ?>">
                                   <td class="title"><?= $service['Name']; ?></td>
                                   <td class="fee" contenteditable="true"><?= $service['Price']; ?></td>
-                                  <td>
-                                    <?php
-                                    $businessID = session()->get('businessID');
-                                    $serviceExpiries = $salesModel->getServiceExpiry($service['idArtMenu'], $businessID);
-                                    if (count($serviceExpiries) > 0) {
-                                      ?>
-                                      <select class="form-control expiry-dropdown">
-                                        <option value="">Select Expiry</option>
-                                        <?php
-                                        $firstExpiryDate = null;
-                                        foreach ($serviceExpiries as $expiry) {
-                                          $expiryDate = $expiry['expiryDate'];
-                                          if ($firstExpiryDate === null) {
-                                            $firstExpiryDate = $expiryDate;
-                                            echo '<option value="' . $expiryDate . '" selected>' . date('Y-m-d', strtotime($expiryDate)) . '</option>'; // Add selected attribute to the first option
-                                          } else {
-                                            echo '<option value="' . $expiryDate . '">' . date('Y-m-d', strtotime($expiryDate)) . '</option>';
-                                          }
-                                        }
-                                        ?>
-                                      </select>
+                                  <?php if ($isExpiry == 1): ?>
+                                    <td>
                                       <?php
-                                    } else {
-                                      echo '--';
-                                    }
-                                    ?>
-                                  </td>
+                                      $businessID = session()->get('businessID');
+                                      $serviceExpiries = $salesModel->getServiceExpiry($service['idArtMenu'], $businessID);
+                                      if (count($serviceExpiries) > 0) {
+                                        ?>
+                                        <select class="form-control expiry-dropdown">
+                                          <option value="">Select Expiry</option>
+                                          <?php
+                                          $firstExpiryDate = null;
+                                          foreach ($serviceExpiries as $expiry) {
+                                            $expiryDate = $expiry['expiryDate'];
+                                            if ($firstExpiryDate === null) {
+                                              $firstExpiryDate = $expiryDate;
+                                              echo '<option value="' . $expiryDate . '" selected>' . date('Y-m-d', strtotime($expiryDate)) . '</option>'; // Add selected attribute to the first option
+                                            } else {
+                                              echo '<option value="' . $expiryDate . '">' . date('Y-m-d', strtotime($expiryDate)) . '</option>';
+                                            }
+                                          }
+                                          ?>
+                                        </select>
+                                        <?php
+                                      } else {
+                                        echo '--';
+                                      }
+                                      ?>
+                                    </td>
+                                  <?php endif; ?>
                                   <td><span class="badge badge-primary badge-pill hover-effect"
                                       onclick="addService()">ADD</span></td>
                                 </tr>
                               <?php endforeach; ?>
                             </tbody>
                           </table>
+
                         </div>
                       </div>
                     </div>
@@ -487,6 +492,9 @@
                   <p class="card-description"
                     style="margin-top: -19px; margin-bottom: -10px; font-weight: bold; color: black;">
                     SUMMARY
+                    <button type="button" style="margin-left:64% ;"
+                      class="btn btn-outline-info btn-icon-text">Invoice</button>
+
                   </p>
                   <div class="row" style="margin-top: 8px;margin-bottom: -7px;">
                     <div class="col-md-6" id="clientDetailsLeft"></div>
@@ -501,7 +509,10 @@
                           <th>Amount</th>
                           <th>Quantity</th>
                           <th>Discount</th>
-                          <th>Expiry</th>
+                          <!-- <th>Expiry</th> -->
+                          <?php if ($isExpiry == 1): ?>
+                            <th>Expiry</th>
+                          <?php endif; ?>
                           <th>Actions</th>
                         </tr>
                       </thead>
@@ -516,7 +527,7 @@
                 </div>
                 <div style="height: 58px; margin-left: 1.4em; font-weight: 900; font-size: 150px">
                   <!-- <button class="btn btn-primary btn-fw" id="insertBtn">Save</button> -->
-                  <button type="button" class="btn btn-outline-info btn-icon-text" id="insertBtn">Print
+                  <button type="button" class="btn btn-outline-info btn-icon-text" id="insertBtn">Invoice & Pay
                     <i class="ti-printer btn-icon-append"></i>
                   </button>
                 </div>
@@ -586,21 +597,18 @@
       });
 
       if (!exists) {
-        var newRow = '<tr>' +
-          // '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
-          // '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
-          // '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
-          // '<td contenteditable="true" class="editable-discount">0</td>' +
-          // '<td><input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate + '</td>' +
-          // '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)">Remove</button></td>' +
-          // '</tr>';
 
+        var newRow = '<tr>' +
           '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
           '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
           '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
-          '<td contenteditable="true" class="editable-discount">0</td>' +
-          '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate : 'Nil') + '</td>' +
-          '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
+          '<td contenteditable="true" class="editable-discount">0</td>';
+
+        <?php if ($isExpiry == 1): ?>
+          newRow += '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate : 'Nil') + '</td>';
+        <?php endif; ?>
+
+        newRow += '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
           '</tr>';
         $('#serviceTableBody').append(newRow);
         calculateTotalFee();

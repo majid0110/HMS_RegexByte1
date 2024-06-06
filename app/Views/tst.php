@@ -7,6 +7,8 @@
 
   <link rel="stylesheet" href="./public/assets/vendors_s/select2/select2.min.css">
   <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
   <style>
     .badge-pill:hover {
       background-color: #52CDFF;
@@ -430,22 +432,45 @@
                               <tr>
                                 <th>Name</th>
                                 <th>Price</th>
+                                <th>Expiry</th>
                                 <th>Action</th>
                               </tr>
                             </thead>
                             <tbody>
                               <?php foreach ($services as $service): ?>
                                 <tr data-service-type-id="<?= $service['idArtMenu']; ?>">
-                                  <td class="title">
-                                    <?= $service['Name']; ?>
-                                  </td>
-                                  <td class="fee" contenteditable="true">
-                                    <?= $service['Price']; ?>
+                                  <td class="title"><?= $service['Name']; ?></td>
+                                  <td class="fee" contenteditable="true"><?= $service['Price']; ?></td>
+                                  <td>
+                                    <?php
+                                    $businessID = session()->get('businessID');
+                                    $serviceExpiries = $salesModel->getServiceExpiry($service['idArtMenu'], $businessID);
+                                    if (count($serviceExpiries) > 0) {
+                                      ?>
+                                      <select class="form-control expiry-dropdown">
+                                        <option value="">Select Expiry</option>
+                                        <?php
+                                        $firstExpiryDate = null;
+                                        foreach ($serviceExpiries as $expiry) {
+                                          $expiryDate = $expiry['expiryDate'];
+                                          if ($firstExpiryDate === null) {
+                                            $firstExpiryDate = $expiryDate;
+                                            echo '<option value="' . $expiryDate . '" selected>' . date('Y-m-d', strtotime($expiryDate)) . '</option>'; // Add selected attribute to the first option
+                                          } else {
+                                            echo '<option value="' . $expiryDate . '">' . date('Y-m-d', strtotime($expiryDate)) . '</option>';
+                                          }
+                                        }
+                                        ?>
+                                      </select>
+                                      <?php
+                                    } else {
+                                      echo '--';
+                                    }
+                                    ?>
                                   </td>
                                   <td><span class="badge badge-primary badge-pill hover-effect"
                                       onclick="addService()">ADD</span></td>
                                 </tr>
-
                               <?php endforeach; ?>
                             </tbody>
                           </table>
@@ -476,6 +501,7 @@
                           <th>Amount</th>
                           <th>Quantity</th>
                           <th>Discount</th>
+                          <th>Expiry</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
@@ -548,7 +574,7 @@
         }
       });
     });
-    function addServiceRow(serviceType, serviceTypeId, serviceFee) {
+    function addServiceRow(serviceType, serviceTypeId, serviceFee, expiryDate) {
       var exists = false;
 
       $('#serviceTableBody tr').each(function () {
@@ -561,11 +587,20 @@
 
       if (!exists) {
         var newRow = '<tr>' +
+          // '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
+          // '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
+          // '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
+          // '<td contenteditable="true" class="editable-discount">0</td>' +
+          // '<td><input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate + '</td>' +
+          // '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)">Remove</button></td>' +
+          // '</tr>';
+
           '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
           '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
           '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
           '<td contenteditable="true" class="editable-discount">0</td>' +
-          '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)">Remove</button></td>' +
+          '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate : 'Nil') + '</td>' +
+          '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
           '</tr>';
         $('#serviceTableBody').append(newRow);
         calculateTotalFee();
@@ -603,7 +638,8 @@
         var serviceTypeId = serviceTypeRow.data('service-type-id');
         var serviceType = serviceTypeRow.find('.title').text().trim();
         var serviceFee = serviceTypeRow.find('.fee').text().trim();
-        addServiceRow(serviceType, serviceTypeId, serviceFee);
+        var expiryDate = serviceTypeRow.find('.expiry-dropdown').val();
+        addServiceRow(serviceType, serviceTypeId, serviceFee, expiryDate);
         calculateTotalFee();
       });
 
@@ -721,15 +757,22 @@
           var fee = parseFloat(serviceTypeRow.find('td:eq(1)').text());
           var quantityInput = serviceTypeRow.find('.editable-quantity');
           var quantity = parseFloat(quantityInput.val());
-          console.log("Quantity for " + serviceName + ": " + quantity);
           var discount = parseFloat(serviceTypeRow.find('.editable-discount').text());
+          var expiryDate = serviceTypeRow.find('.expiry-date').val();
+
+          if (expiryDate === undefined) {
+            expiryDate = '1970-01-01';
+          }
+
+          console.log(expiryDate);
 
           services.push({
             serviceTypeId: serviceTypeId,
             serviceName: serviceName,
             fee: fee,
             quantity: quantity,
-            discount: discount
+            discount: discount,
+            expiryDate: expiryDate
           });
         });
         $.ajax({
@@ -794,84 +837,6 @@
   <script src="./public/assets/js_s/typeahead.js"></script>
   <script src="./public/assets/js_s/select2.js"></script>
   <!-- End custom js for this page-->
-</body>
-
-</html>
-
-====================================================================================
-<!DOCTYPE html>
-<html>
-
-<head>
-  <style>
-    .table-body-scrollable {
-      max-height: 250px;
-      overflow-y: auto;
-    }
-
-    .table-body-scrollable table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .table-body-scrollable table thead,
-    .table-body-scrollable table tbody tr {
-      display: table;
-      width: 100%;
-      table-layout: fixed;
-    }
-
-    .table-body-scrollable table tbody {
-      display: block;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="table-responsive">
-    <form method="post" action="<?php echo base_url() . 'saveArtMenu'; ?>">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Code</th>
-            <th>Name</th>
-            <th>Ratio</th>
-            <th>Choose</th>
-          </tr>
-        </thead>
-      </table>
-      <div class="table-body-scrollable">
-        <table class="table table-striped">
-          <tbody>
-            <?php foreach ($items as $item): ?>
-              <tr>
-                <td>
-                  <?= $item['idItem']; ?>
-                  <input type="hidden" name="items[<?= $item['idItem']; ?>][idItem]" value="<?= $item['idItem']; ?>">
-                </td>
-                <td>
-                  <?= $item['Code']; ?>
-                  <input type="hidden" name="items[<?= $item['idItem']; ?>][Code]" value="<?= $item['Code']; ?>">
-                </td>
-                <td>
-                  <?= $item['Name']; ?>
-                  <input type="hidden" name="items[<?= $item['idItem']; ?>][Name]" value="<?= $item['Name']; ?>">
-                </td>
-                <td>
-                  <input type="number" style="width:4rem" name="ratio" value="1" min="1" step="any">
-                </td>
-                <td>
-                  <input type="checkbox" name="selected_items[]" value="<?= $item['idItem']; ?>">
-                </td>
-              </tr>
-            <?php endforeach; ?>
-          </tbody>
-        </table>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-  </div>
 </body>
 
 </html>
