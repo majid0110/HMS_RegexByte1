@@ -574,6 +574,7 @@
       $('#discountedTotal').text((totalFee - discountAmount).toFixed(2));
     }
 
+
     $('#search').on('input', function () {
       var searchText = $(this).val().toLowerCase();
       $('#serviceTypeList tbody tr').each(function () {
@@ -597,28 +598,28 @@
       });
 
       if (!exists) {
-        var newRow = '<tr>' +
-
-          '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
-          '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
-          '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
-          '<td contenteditable="true" class="editable-discount">0</td>' +
-          '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate : 'Nil') + '</td>' +
-          '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
-          '</tr>';
-
         // var newRow = '<tr>' +
+
         //   '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
         //   '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
         //   '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
-        //   '<td contenteditable="true" class="editable-discount">0</td>';
-
-        // <?php if ($isExpiry == 1): ?>
-          //   newRow += '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate : 'Nil') + '</td>';
-          // <?php endif; ?>
-
-        // newRow += '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
+        //   '<td contenteditable="true" class="editable-discount">0</td>' +
+        //   '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate : 'Nil') + '</td>' +
+        // '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
         //   '</tr>';
+
+        var newRow = '<tr>' +
+          '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
+          '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
+          '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
+          '<td contenteditable="true" class="editable-discount">0</td>';
+
+        <?php if ($isExpiry == 1): ?>
+          newRow += '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate : 'Nil') + '</td>';
+        <?php endif; ?>
+
+        newRow += '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
+          '</tr>';
         $('#serviceTableBody').append(newRow);
         calculateTotalFee();
 

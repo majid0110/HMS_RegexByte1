@@ -7,6 +7,9 @@
 
   <link rel="stylesheet" href="./public/assets/vendors_s/select2/select2.min.css" />
   <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
   <style>
     .badge-pill:hover {
@@ -83,6 +86,48 @@
 
     @media screen and (min-width: 1200px) {
       .form-group {}
+    }
+
+    .center-dropdown .select2-dropdown {
+      text-align: left;
+    }
+
+
+
+    .select2-container .select2-selection--single {
+      height: 2rem;
+      text-align: left;
+      padding: 0;
+    }
+
+    .select2-selection--single {
+      height: 33px;
+    }
+
+    .select2-container .select2-selection--single .select2-selection__rendered {
+      text-align: left;
+      padding: 2%;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+      line-height: normal;
+      /* padding: 0; */
+    }
+
+    .select2-container--default .select2-results>.select2-results__options {
+      background: #E9ECEF;
+    }
+
+    .select2-search--dropdown {
+      background: #E9ECEF;
+    }
+
+    .select2-container--default .select2-search--dropdown .select2-search__field {
+      background: #E9ECEF;
+    }
+
+    .select2-container .select2-selection--single .select2-selection__rendered {
+      text-align: left;
     }
   </style>
 </head>
@@ -407,6 +452,20 @@
 
           <script>
             $(document).ready(function () {
+
+              $('#clientName').select2({
+                // placeholder: 'Select a client',
+                // allowClear: true
+              });
+
+              var initialClientId = $('#clientName').val();
+              loadAppointments(initialClientId);
+
+              $('#clientName').change(function () {
+                var clientId = $(this).val();
+                updateClientDetails(clientId);
+                loadAppointments(clientId);
+              });
               var initialClientId = $('#clientName').val();
               loadAppointments(initialClientId);
 
