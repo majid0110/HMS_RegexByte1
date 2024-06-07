@@ -651,6 +651,7 @@
       });
 
 
+
       $('#serviceTypeList .badge').click(function () {
         var serviceTypeRow = $(this).closest('tr');
         var serviceTypeId = serviceTypeRow.data('service-type-id');

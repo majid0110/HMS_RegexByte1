@@ -31,11 +31,18 @@ class itemsController extends Controller
     public function items_form()
     {
 
+        $session = session();
+        $businessID = $session->get('businessID');
+        $itemsModel = new itemsModel();
+        $lastCode = $itemsModel->select('Code')->where('idBusiness', $businessID)->orderBy('Code', 'DESC')->limit(1)->first();
+        $newCode = $lastCode ? intval($lastCode['Code']) + 1 : 1;
+
         $servicesModel = new ServicesModel();
         $data = [
             'units' => $servicesModel->getUnits(),
             'categories' => $servicesModel->getCategories(),
             'tax' => $servicesModel->getTaxes(),
+            'newCode' => $newCode,
         ];
         $Model = new itemsModel();
         $data['warehouse'] = $Model->getIdWarehouse();
@@ -65,7 +72,8 @@ class itemsController extends Controller
         if (!$session->get('ID')) {
             return redirect()->to(base_url("/login"));
         }
-        $businessID = session()->get('businessID');
+
+        $businessID = $session->get('businessID');
         $itemsModel = new itemsModel();
         $lastCode = $itemsModel->select('Code')->where('idBusiness', $businessID)->orderBy('Code', 'DESC')->limit(1)->first();
         $newCode = $lastCode ? intval($lastCode['Code']) + 1 : 1;
@@ -77,16 +85,46 @@ class itemsController extends Controller
             'tax' => $servicesModel->getTaxes(),
             'newCode' => $newCode,
         ];
-        $Model = new itemsModel();
-        $data['warehouse'] = $Model->getIdWarehouse();
+
+        $data['warehouse'] = $itemsModel->getIdWarehouse();
 
         $configModel = new ConfigModel();
-        $businessID = session()->get('businessID');
         $config = $configModel->where('businessID', $businessID)->first();
         $data['isExpiry'] = $config ? $config['isExpiry'] : 0;
 
-        return view('items_form.php', $data);
+        $data['sectors'] = $itemsModel->getSectors();
+        return view('items_form', $data);
     }
+
+
+    // public function additem()
+    // {
+    //     $session = session();
+    //     if (!$session->get('ID')) {
+    //         return redirect()->to(base_url("/login"));
+    //     }
+    //     $businessID = session()->get('businessID');
+    //     $itemsModel = new itemsModel();
+    //     $lastCode = $itemsModel->select('Code')->where('idBusiness', $businessID)->orderBy('Code', 'DESC')->limit(1)->first();
+    //     $newCode = $lastCode ? intval($lastCode['Code']) + 1 : 1;
+
+    //     $servicesModel = new ServicesModel();
+    //     $data = [
+    //         'units' => $servicesModel->getUnits(),
+    //         'categories' => $servicesModel->getCategories(),
+    //         'tax' => $servicesModel->getTaxes(),
+    //         'newCode' => $newCode,
+    //     ];
+    //     $Model = new itemsModel();
+    //     $data['warehouse'] = $Model->getIdWarehouse();
+
+    //     $configModel = new ConfigModel();
+    //     $businessID = session()->get('businessID');
+    //     $config = $configModel->where('businessID', $businessID)->first();
+    //     $data['isExpiry'] = $config ? $config['isExpiry'] : 0;
+
+    //     return view('items_form.php', $data);
+    // }
 
     public function addcat()
     {
@@ -281,7 +319,7 @@ class itemsController extends Controller
         $lastCode = $itemsModel->select('Code')->where('idBusiness', $businessID)->orderBy('Code', 'DESC')->limit(1)->first();
         $newCode = $lastCode ? intval($lastCode['Code']) + 1 : 1;
 
-        $code = 123;
+        $code = $this->request->getPost('code');
         $name = $this->request->getPost('name');
 
         $existingService = $itemsModel->where('Code', $code)->where('Name', $name)->where('idBusiness', $businessID)->first();
@@ -717,6 +755,25 @@ class itemsController extends Controller
 
         session()->setFlashdata('success', 'Category Added..!!');
         return redirect()->to(base_url("/ServicesForm"));
+    }
+
+    public function saveCatart_fromitemsDialog()
+    {
+        $itemsModel = new itemsModel();
+        $session = \Config\Services::session();
+        $request = \Config\Services::request();
+        $businessID = $session->get('businessID');
+
+        $data = [
+            'name' => $this->request->getPost('name'),
+            'idSector' => $this->request->getPost('id_sec'),
+            'notes' => $this->request->getPost('notes'),
+            'idBusiness' => $businessID,
+        ];
+        $itemsModel->insertCatart($data);
+
+        session()->setFlashdata('success', 'Category Added..!!');
+        return redirect()->to(base_url("/additem"));
     }
     public function deletecat($idCatArt)
     {

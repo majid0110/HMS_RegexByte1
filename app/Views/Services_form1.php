@@ -330,7 +330,7 @@
                                                     <label class="col-sm-3 col-form-label">Price</label>
                                                     <div class="col-sm-9">
                                                         <input type="number" class="form-control" name="price" Value="0"
-                                                            step=".01" />
+                                                            step=".000000001" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -339,7 +339,7 @@
                                                     <label class="col-sm-3 col-form-label">Promotional Price</label>
                                                     <div class="col-sm-9">
                                                         <input type="number" class="form-control" Value="0"
-                                                            name="pro_price" step=".01" />
+                                                            name="pro_price" step=".000000001" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -350,7 +350,7 @@
                                                     <label class="col-sm-3 col-form-label">Cost</label>
                                                     <div class="col-sm-9">
                                                         <input type="number" class="form-control" name="cost" Value="0"
-                                                            step=".01" />
+                                                            step=".000000001" />
                                                     </div>
                                                 </div>
                                             </div>

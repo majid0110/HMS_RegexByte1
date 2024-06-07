@@ -276,7 +276,7 @@ class ServiceController extends Controller
             'status' => $this->request->getPost('cstatus'),
             'Characteristic1' => $this->request->getPost('char_1'),
             'Characteristic2' => $this->request->getPost('char_2'),
-            'isService' => $this->request->getPost('isExpiry') ? 1 : 0,
+            'isService' => $this->request->getPost('isService') ? 1 : 0,
             'Barcode' => $this->request->getPost('bcode'),
             'idBusiness' => $businessID,
             'idPoint_of_sale' => 1,

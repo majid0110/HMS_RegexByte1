@@ -419,7 +419,6 @@
                                                 <th>Code</th>
                                                 <th>Service Name</th>
                                                 <th>Price</th>
-                                                <th>Status</th>
                                                 <th>Unit</th>
                                                 <th>IsService</th>
                                                 <th>Status</th>
@@ -433,9 +432,9 @@
                                                     <td><?= $serialNumber++ ?></td>
                                                     <td><?= $Service['Code']; ?></td>
                                                     <td><?= $Service['Name']; ?></td>
-                                                    <td><?= $Service['Name']; ?></td>
                                                     <td><?= $Service['Price']; ?></td>
-                                                    <td><?= $Service['name']; ?></td>
+
+                                                    <td><?= $Service['unit']; ?></td>
                                                     <td><?= $Service['isService']; ?></td>
                                                     <td>
                                                         <span

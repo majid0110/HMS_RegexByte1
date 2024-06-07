@@ -11,7 +11,7 @@
 
 <body>
 
-    <form class="pt-3" method="POST" action="<?php echo base_url() . "saveCatart_fromDialog"; ?>"
+    <form class="pt-3" method="POST" action="<?php echo base_url() . "saveCatart_fromitemsDialog"; ?>"
         enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-6">

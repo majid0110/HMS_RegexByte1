@@ -86,7 +86,7 @@ class ServicesModel extends Model
 
         $builder = $this->db->table('artmenu');
         return $builder->join('units', 'units.idUnit = artmenu.idUnit')
-            ->select('artmenu.*, units.name')
+            ->select('artmenu.*, units.name as unit')
             ->where('artmenu.idBusiness', $businessID)
             ->orderBy('artmenu.idArtMenu', 'DESC')
             ->limit($perPage, $offset)

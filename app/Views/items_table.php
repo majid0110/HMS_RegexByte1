@@ -173,8 +173,9 @@
                                             <button type="submit" class="btn btn-primary ms-2">Import Excel</button>
                                         </div>
                                     </form>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#exampleModal">Add</button>
+                                    <!-- <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal">Add</button> -->
+                                    <a href="<?= base_url('additem'); ?>" class="btn btn-primary">Add</a>
                                 </span>
                                 <hr>
                                 <div class="row">
@@ -269,7 +270,7 @@
                             </button>
                         </div>
                         <div class="modal-body" id="addItemModalBody">
-                            <?php include ('items_form.php'); ?>
+                            <!-- php include ('items_form.php'); add tags in start and at end -->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

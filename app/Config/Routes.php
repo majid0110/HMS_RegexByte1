@@ -239,6 +239,7 @@ $routes->post('transferItems', 'itemsController::transferItems');
 $routes->get('/category_table', 'itemsController::category_table');
 $routes->post('/saveCatart', 'itemsController::saveCatart');
 $routes->post('/saveCatart_fromDialog', 'itemsController::saveCatart_fromDialog');
+$routes->post('/saveCatart_fromitemsDialog', 'itemsController::saveCatart_fromitemsDialog');
 
 $routes->get('/addcat', 'itemsController::addcat');
 $routes->get('/cat_form_dialog', 'itemsController::cat_form_dialog');
