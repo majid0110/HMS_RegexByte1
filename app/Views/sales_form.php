@@ -555,6 +555,25 @@
       dropdownAutoWidth: true,
     });
 
+    // function calculateTotalFee() {
+    //   var totalFee = 0;
+    //   var discountAmount = 0;
+
+    //   $('#serviceTableBody tr').each(function () {
+    //     var quantity = parseFloat($(this).find('.editable-quantity').val());
+    //     var fee = parseFloat($(this).find('.editable-fee').text());
+    //     var discount = parseFloat($(this).find('.editable-discount').text());
+    //     var rowTotal = quantity * fee;
+    //     var rowDiscountAmount = rowTotal * (discount / 100);
+    //     discountAmount += rowDiscountAmount;
+    //     totalFee += rowTotal - rowDiscountAmount;
+    //   });
+
+    //   $('#totalFee').text(totalFee.toFixed(2));
+    //   $('#discountAmount').text(discountAmount.toFixed(2));
+    //   $('#discountedTotal').text((totalFee - discountAmount).toFixed(2));
+    // }
+
     function calculateTotalFee() {
       var totalFee = 0;
       var discountAmount = 0;
@@ -566,13 +585,16 @@
         var rowTotal = quantity * fee;
         var rowDiscountAmount = rowTotal * (discount / 100);
         discountAmount += rowDiscountAmount;
-        totalFee += rowTotal - rowDiscountAmount;
+        totalFee += rowTotal;
       });
+
+      var discountedTotal = totalFee - discountAmount;
 
       $('#totalFee').text(totalFee.toFixed(2));
       $('#discountAmount').text(discountAmount.toFixed(2));
-      $('#discountedTotal').text((totalFee - discountAmount).toFixed(2));
+      $('#discountedTotal').text(discountedTotal.toFixed(2));
     }
+
 
 
     $('#search').on('input', function () {

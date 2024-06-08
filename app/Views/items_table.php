@@ -164,7 +164,7 @@
                                 ?>
                                 <h4 class="card-title">Items</h4>
                                 <span>
-                                    <form action="<?= base_url('transferItems') ?>" method="post"
+                                    <form id="importForm" action="<?= base_url('transferItems') ?>" method="post"
                                         enctype="multipart/form-data">
                                         <div class="form-group d-flex align-items-end"
                                             style="margin-left: 30rem; margin-bottom: -4rem;">
@@ -173,6 +173,10 @@
                                             <button type="submit" class="btn btn-primary ms-2">Import Excel</button>
                                         </div>
                                     </form>
+                                    <!-- <div class="progress" style="display: none; margin-top: 20px;">
+                                        <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;"
+                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                    </div> -->
                                     <!-- <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#exampleModal">Add</button> -->
                                     <a href="<?= base_url('additem'); ?>" class="btn btn-primary">Add</a>
@@ -294,6 +298,64 @@
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- <script>
+        $('#importForm').on('submit', function (e) {
+            e.preventDefault();
+
+            var formData = new FormData(this);
+
+            $.ajax({
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener('progress', function (e) {
+                        if (e.lengthComputable) {
+                            var percentComplete = Math.round((e.loaded / e.total) * 100);
+                            $('#progressBar').width(percentComplete + '%');
+                            $('#progressBar').attr('aria-valuenow', percentComplete);
+                            $('#progressBar').text(percentComplete + '%');
+                        }
+                    }, false);
+
+                    return xhr;
+                },
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                    $('.progress').show();
+                    $('#progressBar').width('0%');
+                    $('#progressBar').attr('aria-valuenow', 0);
+                    $('#progressBar').text('0%');
+                },
+                success: function (response, textStatus, jqXHR) {
+                    if (jqXHR.responseText.includes('redirect')) {
+                        window.location.href = '<?= base_url('/items_table') ?>';
+                    } else {
+                        try {
+                            var data = JSON.parse(response);
+                            if (data.success) {
+                                // Handle success case
+                            } else if (data.error) {
+                                alert(data.error);
+                            }
+                        } catch (e) {
+                            console.error('Error parsing server response:', e);
+                        }
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert('An error occurred while processing the file: ' + xhr.responseText);
+                }
+            });
+        });
+    </script> -->
+
 
     <script>
         $(document).ready(function () {

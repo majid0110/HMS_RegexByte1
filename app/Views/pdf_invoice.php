@@ -151,6 +151,7 @@
                 <td style="text-align: left;"><b>Service</b></td>
                 <td style="text-align: right;padding-left:40%;"><b>Fee</b></td>
                 <td style="text-align: right; padding-left:4%;"><b>Quantity</b></td>
+                <td style="text-align: right; padding-left:4%;"><b>Discount</b></td>
                 <td style="text-align: right;padding-left:4%;"><b>Total</b></td>
             </tr>
 
@@ -160,9 +161,12 @@
                     echo '<tr>';
                     echo '<td style="margin-left: 20px;">' . $service['serviceName'] . '</td>';
                     echo '<td style="text-align: right; padding-left:40%;">' . number_format($service['fee'], 2) . '</td>';
-                    echo '<td  style="text-align: right;padding-left:4%;">' . $service['quantity'] . '</td>';
-                    echo '<td style="text-align: right; padding-left:4%;">' . number_format((float) $service['fee'] * (float) $service['quantity'], 2) . '</td>';
+                    echo '<td style="text-align: right;padding-left:4%;">' . $service['quantity'] . '</td>';
 
+                    $discountAmount = ($service['fee'] * $service['discount']) / 100;
+                    echo '<td style="text-align: right;padding-left:4%;">' . number_format($discountAmount, 2) . '</td>';
+
+                    echo '<td style="text-align: right; padding-left:4%;">' . number_format((float) $service['fee'] * (float) $service['quantity'] - $discountAmount, 2) . '</td>';
                     echo '</tr>';
                 }
             } else {
@@ -171,6 +175,7 @@
                 echo '</tr>';
             }
             ?>
+
         </table>
 
         <hr>
