@@ -1,8 +1,7 @@
 <?php
-// Retrieve modules from session data
 $modules = $session->get('modules');
 $userPermissions = $session->get('user_permissions');
-$modulePermissions = $session->get('module_permissions'); // Assuming you store user permissions in the session
+$modulePermissions = $session->get('module_permissions');
 
 ?>
 

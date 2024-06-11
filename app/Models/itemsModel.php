@@ -50,6 +50,26 @@ class itemsModel extends Model
         return $result;
     }
 
+    public function countItemsByBusinessID($businessID)
+    {
+        return $this->db->table('itemswarehouse')->where('idBusiness', $businessID)->countAllResults();
+    }
+
+    public function getExpiringItems($businessID)
+    {
+        $builder = $this->db->table('itemswarehouse iw');
+        $builder->select('iw.Name, iw.Code, ie.expiryDate');
+        $builder->join('itemsinventory ii', 'iw.idItem = ii.idItem', 'inner');
+        $builder->join('itemsexpiry ie', 'ii.idInventory = ie.idInventory', 'inner');
+        $builder->where('iw.idBusiness', $businessID);
+        $builder->where('ie.expiryDate BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 1 MONTH)');
+        $builder->orderBy('ie.expiryDate', 'ASC');
+
+        $result = $builder->get()->getResult();
+
+        return $result;
+    }
+
     public function getItemforedit($idArtMenu)
     {
         $session = \Config\Services::session();

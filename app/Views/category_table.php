@@ -230,7 +230,7 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <h4 class="card-title">Items</h4>
+                                <h4 class="card-title">Category</h4>
                                 <button type="button" class="btn btn-Primary" id="add-item-btn" data-toggle="modal"
                                     data-target="#addcatModal">Add</button>
                                 <hr>
@@ -256,7 +256,6 @@
                                                     <?= $catart['notes']; ?>
                                                 </td>
                                                 <td>
-                                                    <!-- Action buttons: Edit, Delete -->
                                                     <a href="<?= base_url('editcat/' . $catart['idCatArt']); ?>"
                                                         class="btn btn-info btn-sm">Edit</a>
                                                     <a href="<?= base_url('deletecat/' . $catart['idCatArt']); ?>"

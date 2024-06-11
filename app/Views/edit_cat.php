@@ -232,7 +232,7 @@
                         <div class="col-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Edit ITEMS</h4>
+                                    <h4 class="card-title">Edit Categories</h4>
                                     <!-- EditService_form.php -->
                                     <form method="POST" action="<?= base_url('updatecat/' . $category['idCatArt']); ?>"
                                         enctype="multipart/form-data">

@@ -22,6 +22,11 @@
       font-weight: 750;
     }
 
+    .quantity-box {
+      width: 50px;
+      text-align: center;
+    }
+
     .twitter-typeahead {
       max-width: 100%;
       width: 100%;
@@ -366,7 +371,7 @@
                           <select class="typeahead form-control select2" name="clientName" id="clientId">
                             <?php foreach ($client_names as $client): ?>
                               <option value="<?= $client['idClient']; ?>">
-                                <?= $client['client']; ?>
+                                <?= $client['clientUniqueId']; ?> - <?= $client['client']; ?>
                               </option>
                             <?php endforeach; ?>
                           </select>
@@ -492,8 +497,8 @@
                   <p class="card-description"
                     style="margin-top: -19px; margin-bottom: -10px; font-weight: bold; color: black;">
                     SUMMARY
-                    <button type="button" style="margin-left:64% ;"
-                      class="btn btn-outline-info btn-icon-text">Invoice</button>
+                    <!-- <button type="button" style="margin-left:64% ;"
+                      class="btn btn-outline-info btn-icon-text">Invoice</button> -->
 
                   </p>
                   <div class="row" style="margin-top: 8px;margin-bottom: -7px;">
@@ -525,8 +530,9 @@
                   <p>Discount: <span id="discountAmount">0</span></p>
                   <p>Discounted Total: <span id="discountedTotal">0</span></p>
                 </div>
-                <div style="height: 58px; margin-left: 1.4em; font-weight: 900; font-size: 150px">
+                <div style="height: 58px; margin-left: 7.4em; font-weight: 900;">
                   <!-- <button class="btn btn-primary btn-fw" id="insertBtn">Save</button> -->
+                  <button type="button" class="btn btn-outline-info btn-icon-text">Invoice</button>
                   <button type="button" class="btn btn-outline-info btn-icon-text" id="insertBtn">Invoice & Pay
                     <i class="ti-printer btn-icon-append"></i>
                   </button>
@@ -620,28 +626,33 @@
       });
 
       if (!exists) {
-        // var newRow = '<tr>' +
-
-        //   '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
-        //   '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
-        //   '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
-        //   '<td contenteditable="true" class="editable-discount">0</td>' +
-        //   '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate : 'Nil') + '</td>' +
-        // '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
-        //   '</tr>';
 
         var newRow = '<tr>' +
           '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
-          '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
-          '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
-          '<td contenteditable="true" class="editable-discount">0</td>';
+          '<td contenteditable="true" class="editable-fee" style="text-align: center;">' + serviceFee + '</td>' +
+          '<td><div class="quantity-input"><span class="quantity-decrement" style="margin-right: -2%; padding: 0%; border-radius: 100%; background:#9da3d5;">-</span><input type="text" class="editable-quantity form-control quantity-box" style="width: 50px; padding: 0%;" value="1"><span class="quantity-increment" style="margin-left: -2%; padding: 0%; border-radius: 100%; margin-right: 1rem; background:#9da3d5;">+</span></div></td>' +
+          '<td contenteditable="true" class="editable-discount" style="text-align: center;">0</td>';
 
         <?php if ($isExpiry == 1): ?>
-          newRow += '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate : 'Nil') + '</td>';
+          newRow += '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate.split(' ')[0] : 'Nil') + '</td>';
         <?php endif; ?>
 
         newRow += '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
           '</tr>';
+
+
+        // var newRow = '<tr>' +
+        //   '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
+        //   '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
+        //   '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
+        //   '<td contenteditable="true" class="editable-discount">0</td>';
+
+        // <?php if ($isExpiry == 1): ?>
+          //   newRow += '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate : 'Nil') + '</td>';
+          // <?php endif; ?>
+
+        // newRow += '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
+        //   '</tr>';
         $('#serviceTableBody').append(newRow);
         calculateTotalFee();
 

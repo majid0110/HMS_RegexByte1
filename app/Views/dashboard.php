@@ -14,6 +14,98 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+  <style>
+    .blinking-name {
+      animation: blink-animation 1s steps(5, start) infinite;
+      -webkit-animation: blink-animation 1s steps(5, start) infinite;
+      background-color: yellow;
+    }
+
+    .blinking-days {
+      animation: blink-animation 1s steps(5, start) infinite;
+      -webkit-animation: blink-animation 1s steps(5, start) infinite;
+    }
+
+    @keyframes blink-animation {
+      to {
+        visibility: hidden;
+      }
+    }
+
+    @-webkit-keyframes blink-animation {
+      to {
+        visibility: hidden;
+      }
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    .text-danger {
+      color: red;
+    }
+
+    .text-warning {
+      color: yellow;
+    }
+
+    @keyframes blink-animation {
+      to {
+        visibility: hidden;
+      }
+    }
+
+    @-webkit-keyframes blink-animation {
+      to {
+        visibility: hidden;
+      }
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    /* .blinking-name {
+      background-color: orange;
+      color: darkblue;
+      padding: 0.25rem 0.5rem;
+      animation: blink-animation 1s steps(5, start) infinite;
+    }
+
+    @keyframes blink-animation {
+      to {
+        visibility: hidden;
+      }
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    .table {
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 1rem;
+      background-color: transparent;
+    }
+
+    .table th,
+    .table td {
+      padding: 0.75rem;
+      vertical-align: top;
+      border-top: 1px solid #dee2e6;
+    }
+
+    .table thead th {
+      vertical-align: bottom;
+      border-bottom: 2px solid #dee2e6;
+    }
+
+    .table tbody+tbody {
+      border-top: 2px solid #dee2e6;
+    } */
+  </style>
 </head>
 
 <body>
@@ -213,49 +305,44 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="home-tab">
-                <div class="d-sm-flex align-items-center justify-content-between border-bottom">
-                  <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item">
-                      <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab" href="#overview" role="tab"
-                        aria-controls="overview" aria-selected="true">Overview</a>
-                    </li>
-                    <!-- <li class="nav-item">
-                      <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#audiences" role="tab" aria-selected="false">Audiences</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#demographics" role="tab" aria-selected="false">Demographics</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link border-0" id="more-tab" data-bs-toggle="tab" href="#more" role="tab" aria-selected="false">More</a>
-                    </li> -->
-                  </ul>
-                  <div>
-                    <div class="btn-wrapper">
-                      <a href="#" class="btn btn-otline-dark align-items-center"><i class="icon-share"></i> Share</a>
-                      <a href="#" class="btn btn-otline-dark"><i class="icon-printer"></i> Print</a>
-                      <a href="#" class="btn btn-primary text-white me-0"><i class="icon-download"></i> Export</a>
-                    </div>
-                  </div>
-                </div>
                 <div class="tab-content tab-content-basic">
                   <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
                     <div class="row">
                       <div class="col-sm-12">
                         <div class="statistics-details d-flex align-items-center justify-content-between">
-                          <div>
-                            <div>
+
+                          <?php if ($isHospital): ?>
+                            <div class="d-none d-md-block">
                               <h3 class="statistics-title">Total Doctors</h3>
                               <p class="rate-percentage">
                                 <?php echo $totalDoctorCount; ?>
                               </p>
                             </div>
-                          </div>
-                          <div>
-                            <h3 class="statistics-title">Total Clients</h3>
-                            <p class="rate-percentage">
-                              <?php echo $totalClientCount; ?>
-                            </p>
-                          </div>
+                          <?php else: ?>
+                            <div class="d-none d-md-block">
+                              <h3 class="statistics-title">Total Items</h3>
+                              <p class="rate-percentage">
+                                <?php echo $totalItemCount; ?>
+                              </p>
+                            </div>
+                          <?php endif; ?>
+
+
+                          <?php if ($isHospital): ?>
+                            <div class="d-none d-md-block">
+                              <h3 class="statistics-title">Total Patients</h3>
+                              <p class="rate-percentage">
+                                <?php echo $totalClientCount; ?>
+                              </p>
+                            </div>
+                          <?php else: ?>
+                            <div class="d-none d-md-block">
+                              <h3 class="statistics-title">Total Clients</h3>
+                              <p class="rate-percentage">
+                                <?php echo $totalClientCount; ?>
+                              </p>
+                            </div>
+                          <?php endif; ?>
 
                           <div>
                             <h3 class="statistics-title">Total Appointments</h3>
@@ -264,12 +351,28 @@
                             </p>
 
                           </div>
-                          <div class="d-none d-md-block">
+
+                          <?php if ($isHospital): ?>
+                            <div class="d-none d-md-block">
+                              <h3 class="statistics-title">Total Revenue</h3>
+                              <p class="rate-percentage">
+                                <?php echo $totalRevenue; ?>
+                              </p>
+                            </div>
+                          <?php else: ?>
+                            <div class="d-none d-md-block">
+                              <h3 class="statistics-title">Total Sales</h3>
+                              <p class="rate-percentage">
+                                <?php echo $totalRevenue; ?>
+                              </p>
+                            </div>
+                          <?php endif; ?>
+                          <!-- <div class="d-none d-md-block">
                             <h3 class="statistics-title">Appointments Revenue</h3>
                             <p class="rate-percentage">
                               <?php echo $totalAppointmentsRevenue; ?>
                             </p>
-                          </div>
+                          </div> -->
 
                           <!-- <div class="d-none d-md-block">
                             <h3 class="statistics-title">Total Revenue</h3>
@@ -472,7 +575,7 @@
                             <div class="card-body">
                               <div class="d-sm-flex justify-content-between align-items-start">
                                 <div>
-                                  <h4 class="card-title card-title-dash">Hospital Revenue</h4>
+                                  <h4 class="card-title card-title-dash">Revenue</h4>
                                   <p class="card-subtitle card-subtitle-dash">Monthly Report</p>
                                 </div>
                                 <div>
@@ -597,95 +700,105 @@
                           </div>
                         </div>
                       </div>
+
                       <div class="row flex-grow">
                         <div class="col-12 grid-margin stretch-card">
                           <div class="card card-rounded">
+
                             <div class="card-body">
-                              <div class="d-sm-flex justify-content-between align-items-start">
-                                <div>
-                                  <h4 class="card-title card-title-dash">Doctor Details</h4>
-                                  <!-- <p class="card-subtitle card-subtitle-dash">You have 50+ new requests</p> -->
+                              <?php if ($isHospital): ?>
+                                <div class="d-sm-flex justify-content-between align-items-start">
+                                  <div>
+                                    <h4 class="card-title card-title-dash">Doctor Details</h4>
+                                    <!-- <p class="card-subtitle card-subtitle-dash">You have 50+ new requests</p> -->
+                                  </div>
+                                  <div>
+                                    <!-- <button class="btn btn-primary btn-lg text-white mb-0 me-0" type="button"><i class="mdi mdi-account-plus"></i>Add new member</button> -->
+                                  </div>
                                 </div>
-                                <div>
-                                  <!-- <button class="btn btn-primary btn-lg text-white mb-0 me-0" type="button"><i class="mdi mdi-account-plus"></i>Add new member</button> -->
-                                </div>
-                              </div>
-                              <div class="table-responsive mt-1">
-                                <table class="table select-table">
-                                  <thead>
-                                    <tr>
-                                      <th>
-                                        <div class="form-check form-check-flat mt-0">
-                                          <label class="form-check-label">
-                                            <!-- <input type="checkbox" class="form-check-input" aria-checked="false"> -->
-                                            <i class="input-helper"></i>
-                                          </label>
-                                        </div>
-                                      </th>
-                                      <th>Profile</th>
-                                      <th>Specialization</th>
-                                      <th>Experience(years)</th>
-                                      <th>Total Appointments</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <?php foreach ($doctorDetails as $doctor): ?>
+                                <div class="table-responsive mt-1">
+                                  <table class="table select-table">
+                                    <thead>
                                       <tr>
-                                        <td>
-                                          <!-- <div class="form-check form-check-flat mt-0">
+                                        <th>
+                                          <div class="form-check form-check-flat mt-0">
+                                            <label class="form-check-label">
+                                              <!-- <input type="checkbox" class="form-check-input" aria-checked="false"> -->
+                                              <i class="input-helper"></i>
+                                            </label>
+                                          </div>
+                                        </th>
+                                        <th>Profile</th>
+                                        <th>Specialization</th>
+                                        <th>Experience(years)</th>
+                                        <th>Total Appointments</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php foreach ($doctorDetails as $doctor): ?>
+                                        <tr>
+                                          <td>
+                                            <!-- <div class="form-check form-check-flat mt-0">
                                               <label class="form-check-label">
                                                 <input type="checkbox" class="form-check-input" aria-checked="false">
                                                 <i class="input-helper"></i>
                                               </label>
                                             </div> -->
-                                        </td>
-                                        <td>
-                                          <div class="d-flex ">
-                                            <!-- Assuming you have an 'Image' field in your doctor's table -->
-                                            <?php
-                                            $imagePath = base_url('uploads/') . $doctor['ProfileImageURL'];
-                                            ?>
-                                            <img src="<?php echo $imagePath; ?>" alt="Profile Image">
-                                            <div>
-                                              <h6>
-                                                <?php echo $doctor['FirstName'] . ' ' . $doctor['LastName']; ?>
-                                              </h6>
-                                              <p>
-                                                <?php echo $doctor['ContactNumber']; ?>
-                                              </p>
+                                          </td>
+                                          <td>
+                                            <div class="d-flex ">
+                                              <!-- Assuming you have an 'Image' field in your doctor's table -->
+                                              <?php
+                                              $imagePath = base_url('uploads/') . $doctor['ProfileImageURL'];
+                                              ?>
+                                              <img src="<?php echo $imagePath; ?>" alt="Profile Image">
+                                              <div>
+                                                <h6>
+                                                  <?php echo $doctor['FirstName'] . ' ' . $doctor['LastName']; ?>
+                                                </h6>
+                                                <p>
+                                                  <?php echo $doctor['ContactNumber']; ?>
+                                                </p>
+                                              </div>
                                             </div>
-                                          </div>
-                                        </td>
-                                        <td>
-                                          <p>
-                                            <?php echo $doctor['specialization_N']; ?>
-                                          </p>
-                                        </td>
-                                        <td>
-                                          <p style="padding-left: 50px;">
-                                            <?php echo $doctor['ExperienceYears']; ?>
-                                          </p>
-                                        </td>
-                                        <td>
-                                          <!-- Assuming you have a field for total appointments in your doctor's table -->
-                                          <p style="padding-left: 50px;" class="rate-percentage">
-                                            <?php echo $doctor['totalAppointments']; ?>
-                                          </p>
-                                        </td>
-                                      </tr>
-                                    <?php endforeach; ?>
-                                  </tbody>
-                                </table>
-                              </div>
-
+                                          </td>
+                                          <td>
+                                            <p>
+                                              <?php echo $doctor['specialization_N']; ?>
+                                            </p>
+                                          </td>
+                                          <td>
+                                            <p style="padding-left: 50px;">
+                                              <?php echo $doctor['ExperienceYears']; ?>
+                                            </p>
+                                          </td>
+                                          <td>
+                                            <!-- Assuming you have a field for total appointments in your doctor's table -->
+                                            <p style="padding-left: 50px;" class="rate-percentage">
+                                              <?php echo $doctor['totalAppointments']; ?>
+                                            </p>
+                                          </td>
+                                        </tr>
+                                      <?php endforeach; ?>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              <?php endif; ?>
                             </div>
                           </div>
                         </div>
                       </div>
+
+
+
                       <div class="row flex-grow">
+
                         <div class="col-md-6 col-lg-6 grid-margin stretch-card">
+
                           <div class="card card-rounded">
+
                             <div class="card-body card-rounded">
+
                               <h4 class="card-title card-title-dash">Recent Appointments</h4>
 
                               <!-- Column Names -->
@@ -719,7 +832,9 @@
                               <?php endforeach; ?>
 
                             </div>
+
                           </div>
+
                         </div>
                         <div class="col-md-6 col-lg-6 grid-margin stretch-card">
                           <div class="card card-rounded">
@@ -759,8 +874,8 @@
                       </div>
                     </div>
                     <div class="col-lg-4 d-flex flex-column">
-                      <div class="row flex-grow">
-                        <!-- <div class="col-12 grid-margin stretch-card">
+                      <!-- <div class="row flex-grow"> -->
+                      <!-- <div class="col-12 grid-margin stretch-card">
                           <div class="card card-rounded">
                             <div class="card-body">
                               <div class="row">
@@ -826,10 +941,10 @@
                             </div>
                           </div>
                         </div> -->
-                      </div>
+                      <!-- </div>  -->
                       <div class="row flex-grow">
                         <div class="col-12 grid-margin stretch-card">
-                          <div class="card card-rounded">
+                          <!-- <div class="card card-rounded">
                             <div class="card-body">
                               <div class="row">
                                 <div class="col-lg-12">
@@ -841,7 +956,55 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          </div> -->
+                          <?php if ($isExpiry == 1): ?>
+                            <div class="card card-rounded">
+                              <div class="card-body card-rounded">
+                                <h4 class="card-title card-title-dash">Items Expiring Soon</h4>
+
+                                <!-- Table -->
+                                <div class="table-responsive">
+                                  <table class="table table-striped">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Days</th>
+                                        <th scope="col">Item Name</th>
+                                        <th scope="col">Code</th>
+                                        <th scope="col">Expiry</th>
+
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php foreach ($expiringItems as $item): ?>
+                                        <?php
+                                        $daysUntilExpiry = (strtotime($item->expiryDate) - time()) / (60 * 60 * 24);
+                                        $daysUntilExpiry = ceil($daysUntilExpiry);
+                                        ?>
+                                        <tr>
+                                          <td>
+                                            <?php if ($daysUntilExpiry <= 7): ?>
+                                              <span class="blinking-days text-danger"><?= $daysUntilExpiry; ?> days</span>
+                                            <?php elseif ($daysUntilExpiry <= 30): ?>
+                                              <span class="text-warning"><?= $daysUntilExpiry; ?> days</span>
+                                            <?php else: ?>
+                                              <?= $daysUntilExpiry; ?> days
+                                            <?php endif; ?>
+                                          </td>
+                                          <td><?= $item->Name; ?></td>
+                                          <td><?= $item->Code; ?></td>
+                                          <td><?= date('Y-m-d', strtotime($item->expiryDate)); ?></td>
+                                        </tr>
+                                      <?php endforeach; ?>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          <?php endif; ?>
+
+
+
+
                         </div>
                       </div>
                       <div class="row flex-grow">

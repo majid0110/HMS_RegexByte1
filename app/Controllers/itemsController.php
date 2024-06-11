@@ -258,7 +258,7 @@ class itemsController extends Controller
     public function editcat($idCatArt)
     {
         $Model = new itemsModel();
-        $data['category'] = $Model->getCatartCategory($idCatArt); // Fetch category data to pre-fill the form
+        $data['category'] = $Model->getCatartCategory($idCatArt);
         $data['sectors'] = $Model->getSectors();
 
         return view('edit_cat.php', $data);

@@ -9,6 +9,9 @@ use App\Models\LoginModel;
 use App\Models\DoctorModel;
 use App\Models\AppointmentModel;
 use App\Models\RoleModel;
+use App\Models\itemsModel;
+use App\Models\ConfigModel;
+
 
 class LoginController extends Controller
 {
@@ -197,9 +200,32 @@ class LoginController extends Controller
     public function dashboard()
     {
         $businessID = session()->get('businessID');
+
+        $businessModel = new LoginModel('business');
+        $business = $businessModel->find($businessID);
+        $businessTypeID = $business['businessTypeID'];
+
+        $businessTypeModel = new LoginModel('businesstype');
+        $businessType = $businessTypeModel->find($businessTypeID);
+        $isHospital = strtolower($businessType['businessType']) === 'hospital';
+        $data['isHospital'] = $isHospital;
+
+        $itemModel = new itemsModel();
+        $data['expiringItems'] = $itemModel->getExpiringItems($businessID);
+
+        $configModel = new ConfigModel();
+        $config = $configModel->where('businessID', $businessID)->first();
+        $data['isExpiry'] = $config ? $config['isExpiry'] : 0;
+
         $model = new DoctorModel();
         $totalDoctorCount = $model->countDoctorsByBusinessID($businessID);
         $data['totalDoctorCount'] = $totalDoctorCount;
+
+        $totalItemCount = $itemModel->countItemsByBusinessID($businessID);
+        $data['totalItemCount'] = $totalItemCount;
+
+
+
         $Model = new ClientModel();
         $totalClientCount = $Model->countClientsByBusinessID($businessID);
         $data['totalClientCount'] = $totalClientCount;
