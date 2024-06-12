@@ -124,7 +124,7 @@ class LabController extends Controller
             $appointmentId = $this->request->getPost('appointmentId');
             $tests = $this->request->getPost('tests');
 
-            if (!empty ($tests)) {
+            if (!empty($tests)) {
                 foreach ($tests as $test) {
                     $data = [
                         'testTypeId' => $test['testTypeId'],
@@ -186,7 +186,7 @@ class LabController extends Controller
             $clientId = $this->request->getPost('clientId');
             log_message('info', 'Client ID: ' . $clientId);
 
-            if (empty ($clientId)) {
+            if (empty($clientId)) {
                 throw new \Exception('Invalid client ID.');
             }
 
@@ -294,7 +294,7 @@ class LabController extends Controller
             // }
 
 
-            if (empty ($appointmentId)) {
+            if (empty($appointmentId)) {
                 $appointment = 'Non';
                 $appointmentType = 'Non';
                 $doctorName = 'Non';
@@ -317,6 +317,7 @@ class LabController extends Controller
             $clientModel = new ClientModel();
             $Age = $clientModel->getclientAge($businessID, $clientID);
             $Gender = $clientModel->getclientGender($businessID, $clientID);
+            $clientName1 = $clientModel->getclientName($businessID, $clientId);
             $clientUnique = $clientModel->getclientUnique($businessID, $clientID);
             $operatorName = session()->get('fName');
             $Model = new TestModel();
@@ -329,6 +330,7 @@ class LabController extends Controller
                 'data' => $data,
                 'detailsData' => $detailsData,
                 'Age' => $Age,
+                'clientName1' => $clientName1,
                 'appointment' => $appointment,
                 'Gender' => $Gender,
                 'clientUnique' => $clientUnique,

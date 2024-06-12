@@ -61,9 +61,11 @@
             <td style="padding-left: 7% ;text-align: left;">Invoice# <b>
                     <?= $InvoiceNumber ?>
                 </b> </td>
-            <td style="padding-left:13%;text-align: right;">Patient Unique# <b>
+            <td style="padding-left:13%;text-align: right;">
+                <?= $isHospital ? 'Patient Unique#' : 'Client Unique#' ?> <b>
                     <?= $clientUnique ?>
-                </b> </td>
+                </b>
+            </td>
         </tr>
         <tr style="text-align: left">
             <td style="padding-left: 7% ; text-align: left;">Date:<b>
@@ -114,7 +116,7 @@
             $time = $currentDateTime->format('h:i:s');
             ?>
             <tr>
-                <td style=" width: 50%; white-space: nowrap;">Patient:<b>
+                <td style=" width: 50%; white-space: nowrap;"> <?= $isHospital ? 'Patient' : 'Client' ?><b>
                         <?= $clientName ?>
                     </b></td>
                 <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Gender:<b>
@@ -122,14 +124,19 @@
                     </b></td>
             </tr>
             <tr>
-                <td style=" width: 50%; white-space: nowrap;text-align: left;padding-right:15px;">Age:<b>
-                        <?= $Age; ?>
-                    </b></td>
-                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Operator:<b>
+                <?php if ($isHospital): ?>
+                    <td style="width: 50%; white-space: nowrap; text-align: left; padding-right: 15px;">Age:<b>
+                            <?= $Age; ?>
+                        </b>
+                    </td>
+                <?php else: ?>
+                    <td style="width: 50%;"></td>
+                <?php endif; ?>
+                <td style="width: 50%; white-space: nowrap; text-align: right; padding-left: 13%;">Operator:<b>
                         <?= $operatorName; ?>
-                    </b></td>
+                    </b>
+                </td>
             </tr>
-
             <tr>
 
                 <td style=" width: 50%; white-space: nowrap;">PaymentMethod:<b>

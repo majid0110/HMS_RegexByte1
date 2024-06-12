@@ -344,13 +344,21 @@
                             </div>
                           <?php endif; ?>
 
-                          <div>
-                            <h3 class="statistics-title">Total Appointments</h3>
-                            <p class="rate-percentage">
-                              <?php echo $totalAppointmentsCount; ?>
-                            </p>
-
-                          </div>
+                          <?php if ($isHospital): ?>
+                            <div>
+                              <h3 class="statistics-title">Total Appointments</h3>
+                              <p class="rate-percentage">
+                                <?php echo $totalAppointmentsCount; ?>
+                              </p>
+                            </div>
+                          <?php else: ?>
+                            <div>
+                              <h3 class="statistics-title">Total Inventory</h3>
+                              <p class="rate-percentage">
+                                <?php echo $totalInventoryCount; ?>
+                              </p>
+                            </div>
+                          <?php endif; ?>
 
                           <?php if ($isHospital): ?>
                             <div class="d-none d-md-block">
@@ -395,7 +403,7 @@
                             <div class="card-body">
                               <div class="d-sm-flex justify-content-between align-items-start">
                                 <div>
-                                  <h4 class="card-title card-title-dash">Appointments Revenue</h4>
+                                  <h4 class="card-title card-title-dash">Revenue</h4>
                                   <h5 class="card-subtitle card-subtitle-dash">Weekly Report</h5>
                                 </div>
                                 <div id="performance-line-legend"></div>
@@ -530,38 +538,41 @@
                         </div>
                         <div class="col-md-6 col-lg-12 grid-margin stretch-card">
                           <div class="card card-rounded">
-                            <div class="card-body">
-                              <div class="row">
-                                <div class="col-sm-6">
-                                  <div class="d-flex justify-content-between align-items-center mb-2 mb-sm-0">
-                                    <div class="circle-progress-width">
-                                      <div id="totalVisitors" class="progressbar-js-circle pr-2"></div>
-                                    </div>
-                                    <div>
-                                      <p class="text-small mb-2">Total Appointment</p>
-                                      <h4 class="mb-0 fw-bold">
-                                        <?php echo $totalAppointmentsCount; ?>
-                                      </h4>
+                            <?php if ($isHospital): ?>
+                              <div class="card-body">
+                                <div class="row">
+                                  <div class="col-sm-6">
+                                    <div class="d-flex justify-content-between align-items-center mb-2 mb-sm-0">
+                                      <div class="circle-progress-width">
+                                        <div id="totalVisitors" class="progressbar-js-circle pr-2"></div>
+                                      </div>
+                                      <div>
+                                        <p class="text-small mb-2">Total Appointment</p>
+                                        <h4 class="mb-0 fw-bold">
+                                          <?php echo $totalAppointmentsCount; ?>
+                                        </h4>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                                <div class="col-sm-6">
-                                  <div class="d-flex justify-content-between align-items-center">
-                                    <div class="circle-progress-width">
-                                      <div id="visitperday" class="progressbar-js-circle pr-2"></div>
-                                    </div>
-                                    <div>
-                                      <p class="text-small mb-2">Total Tests </p>
-                                      <h4 class="mb-0 fw-bold">
-                                        <?php echo $totalTests; ?>
-                                      </h4>
+                                  <div class="col-sm-6">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                      <div class="circle-progress-width">
+                                        <div id="visitperday" class="progressbar-js-circle pr-2"></div>
+                                      </div>
+                                      <div>
+                                        <p class="text-small mb-2">Total Tests </p>
+                                        <h4 class="mb-0 fw-bold">
+                                          <?php echo $totalTests; ?>
+                                        </h4>
 
 
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
+                            <?php endif; ?>
+
                           </div>
                         </div>
                       </div>

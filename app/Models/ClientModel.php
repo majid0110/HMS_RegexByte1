@@ -104,6 +104,16 @@ class ClientModel extends Model
             ->getRowArray()['clientUniqueId'] ?? null;
     }
 
+    public function getclientName($businessID, $clientID)
+    {
+        return $this->db->table($this->table)
+            ->where('idBusiness', $businessID)
+            ->where('idClient', $clientID)
+            ->select('client')
+            ->get()
+            ->getRowArray()['client'] ?? null;
+    }
+
     public function getclientGender($businessID, $clientID)
     {
         return $this->db->table($this->table)

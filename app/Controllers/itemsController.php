@@ -12,6 +12,7 @@ use App\Models\ServicesModel;
 use App\Models\SectorsModel;
 use App\Models\itemsModel;
 use App\Models\DoctorModel;
+use App\Models\LoginModel;
 use App\Models\ConfigModel;
 use Mpdf\Mpdf;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -26,8 +27,20 @@ class itemsController extends Controller
 
     public function Managment_form()
     {
-        return view('Managment_form.php');
+        $businessID = session()->get('businessID');
+
+        $businessModel = new LoginModel('business');
+        $business = $businessModel->find($businessID);
+        $businessTypeID = $business['businessTypeID'];
+
+        $businessTypeModel = new LoginModel('businesstype');
+        $businessType = $businessTypeModel->find($businessTypeID);
+        $isHospital = strtolower($businessType['businessType']) === 'hospital';
+        $data['isHospital'] = $isHospital;
+
+        return view('Managment_form.php', $data);
     }
+
     public function items_form()
     {
 

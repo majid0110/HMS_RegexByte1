@@ -603,17 +603,30 @@
 
 
 
+    // $('#search').on('input', function () {
+    //   var searchText = $(this).val().toLowerCase();
+    //   $('#serviceTypeList tbody tr').each(function () {
+    //     var serviceType = $(this).find('.title').text().toLowerCase();
+    //     if (serviceTypeType.includes(searchText)) {
+    //       $(this).show();
+    //     } else {
+    //       $(this).hide();
+    //     }
+    //   });
+    // });
+
     $('#search').on('input', function () {
       var searchText = $(this).val().toLowerCase();
       $('#serviceTypeList tbody tr').each(function () {
         var serviceType = $(this).find('.title').text().toLowerCase();
-        if (serviceTypeType.includes(searchText)) {
+        if (serviceType.includes(searchText)) {
           $(this).show();
         } else {
           $(this).hide();
         }
       });
     });
+
     function addServiceRow(serviceType, serviceTypeId, serviceFee, expiryDate) {
       var exists = false;
 

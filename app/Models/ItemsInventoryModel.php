@@ -169,6 +169,18 @@ class ItemsInventoryModel extends Model
         return $db->affectedRows();
     }
 
+    public function countInventoryByBusinessID($businessID)
+    {
+        $query = $this->db->table('itemsinventory')
+            ->selectSum('itemsinventory.inventory', 'totalInventory')
+            ->join('itemswarehouse', 'itemsinventory.idItem = itemswarehouse.idItem')
+            ->where('itemswarehouse.idBusiness', $businessID)
+            ->get();
+
+        return $query->getRow()->totalInventory;
+    }
+
+
 
     public function getExpiriesByItemId($idItem)
     {

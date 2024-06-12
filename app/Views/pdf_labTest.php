@@ -149,7 +149,8 @@
         <table>
             <tr>
                 <td style=" width: 50%; white-space: nowrap;">Patient:<b>
-                        <?= $data['clientName'] ?>
+                        <?= $clientName1; ?>
+                        <!-- <?= $data['clientName'] ?> -->
                     </b></td>
                 <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Gender:<b>
                         <?= $Gender; ?>
@@ -200,7 +201,7 @@
 
             <?php
 
-            if (!empty ($detailsData)) {
+            if (!empty($detailsData)) {
                 foreach ($detailsData as $testItem) {
                     echo '<tr>';
                     echo '<td style="margin-left: 20px;">' . $testItem['testName'] . '</td>';

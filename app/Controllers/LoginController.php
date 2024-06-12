@@ -11,6 +11,7 @@ use App\Models\AppointmentModel;
 use App\Models\RoleModel;
 use App\Models\itemsModel;
 use App\Models\ConfigModel;
+use App\Models\ItemsInventoryModel;
 
 
 class LoginController extends Controller
@@ -224,6 +225,10 @@ class LoginController extends Controller
         $totalItemCount = $itemModel->countItemsByBusinessID($businessID);
         $data['totalItemCount'] = $totalItemCount;
 
+        $inventoryModel = new ItemsInventoryModel();
+        $totalInventoryCount = $inventoryModel->countInventoryByBusinessID($businessID);
+        $data['totalInventoryCount'] = $totalInventoryCount;
+
 
 
         $Model = new ClientModel();
@@ -232,7 +237,7 @@ class LoginController extends Controller
         $appointmentModel = new AppointmentModel();
         $totalAppointmentsCount = $appointmentModel->countAppointmentsByBusinessID($businessID);
         $data['totalAppointmentsCount'] = $totalAppointmentsCount;
-        // Get most recent appointments
+        // Get most recent appointments countInventoryByBusinessID
         $data['recentAppointments'] = $appointmentModel->getRecentAppointmentsByBusinessID($businessID, 6);
         // Combine the data
         $totalAppointmentsRevenue = $appointmentModel->getTotalAppointmentsRevenue($businessID);

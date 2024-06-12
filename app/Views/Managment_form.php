@@ -293,53 +293,56 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3 grid-margin stretch-card">
-                            <div class="card" onclick="window.location.href='<?= base_url('specilization_table'); ?>';">
-                                <div class="card-body"
-                                    style="display: flex; flex-direction: column; align-items: center;">
-                                    <h4 class="card-title" style="text-align:center">Doctor Specialization</h4>
-                                    <div class="media">
-                                        <i class="icon-lg mdi mdi-stethoscope" style="height:45px; width:45px;"></i>
+                        <?php if ($isHospital): ?>
+                            <div class="col-md-3 grid-margin stretch-card">
+                                <div class="card" onclick="window.location.href='<?= base_url('specilization_table'); ?>';">
+                                    <div class="card-body"
+                                        style="display: flex; flex-direction: column; align-items: center;">
+                                        <h4 class="card-title" style="text-align:center">Doctor Specialization</h4>
+                                        <div class="media">
+                                            <i class="icon-lg mdi mdi-stethoscope" style="height:45px; width:45px;"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3 grid-margin stretch-card">
-                            <div class="card" onclick="window.location.href='<?= base_url('appointments_table'); ?>';">
-                                <div class="card-body"
-                                    style="display: flex; flex-direction: column; align-items: center;">
-                                    <h4 class="card-title" style="text-align:center">Appointments</h4>
-                                    <div class="media">
-                                        <i class="icon-lg mdi mdi-calendar-clock" style="height:45px; width:45px;"></i>
+                            <div class="col-md-3 grid-margin stretch-card">
+                                <div class="card" onclick="window.location.href='<?= base_url('appointments_table'); ?>';">
+                                    <div class="card-body"
+                                        style="display: flex; flex-direction: column; align-items: center;">
+                                        <h4 class="card-title" style="text-align:center">Appointments</h4>
+                                        <div class="media">
+                                            <i class="icon-lg mdi mdi-calendar-clock" style="height:45px; width:45px;"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 grid-margin stretch-card">
-                            <div class="card" onclick="window.location.href='<?= base_url('labServices_form'); ?>';">
-                                <div class="card-body"
-                                    style="display: flex; flex-direction: column; align-items: center;">
-                                    <h4 class="card-title" style="text-align:center">Lab Tests</h4>
-                                    <div class="media">
-                                        <i class="icon-lg mdi mdi-hospital-building"
-                                            style="height:45px; width:45px;"></i>
+                            <div class="col-md-3 grid-margin stretch-card">
+                                <div class="card" onclick="window.location.href='<?= base_url('labServices_form'); ?>';">
+                                    <div class="card-body"
+                                        style="display: flex; flex-direction: column; align-items: center;">
+                                        <h4 class="card-title" style="text-align:center">Lab Tests</h4>
+                                        <div class="media">
+                                            <i class="icon-lg mdi mdi-hospital-building"
+                                                style="height:45px; width:45px;"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3 grid-margin stretch-card">
-                            <div class="card" onclick="window.location.href='<?= base_url('labtest_table'); ?>';">
-                                <div class="card-body"
-                                    style="display: flex; flex-direction: column; align-items: center;">
-                                    <h4 class="card-title" style="text-align:center">Manage Tests</h4>
-                                    <div class="media">
-                                        <i class="icon-lg mdi mdi-test-tube" style="height:45px; width:45px;"></i>
+                            <div class="col-md-3 grid-margin stretch-card">
+                                <div class="card" onclick="window.location.href='<?= base_url('labtest_table'); ?>';">
+                                    <div class="card-body"
+                                        style="display: flex; flex-direction: column; align-items: center;">
+                                        <h4 class="card-title" style="text-align:center">Manage Tests</h4>
+                                        <div class="media">
+                                            <i class="icon-lg mdi mdi-test-tube" style="height:45px; width:45px;"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                        <?php endif; ?>
                         <div class="col-md-3 grid-margin stretch-card">
                             <div class="card" onclick="window.location.href='<?= base_url('Sales_table'); ?>';">
                                 <div class="card-body"

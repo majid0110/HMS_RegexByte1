@@ -11,6 +11,7 @@ use App\Models\InvoiceModel;
 use App\Models\InvoiceDetailsModel;
 use App\Models\ItemsInventoryModel;
 use App\Models\salesModel;
+use App\Models\LoginModel;
 use App\Models\ConfigModel;
 use Mpdf\Mpdf;
 
@@ -404,10 +405,21 @@ class SalesController extends Controller
 
             $db->transCommit();
 
+            $businessID = session()->get('businessID');
+
+            $businessModel = new LoginModel('business');
+            $business = $businessModel->find($businessID);
+            $businessTypeID = $business['businessTypeID'];
+
+            $businessTypeModel = new LoginModel('businesstype');
+            $businessType = $businessTypeModel->find($businessTypeID);
+            $isHospital = strtolower($businessType['businessType']) === 'hospital';
+
             $clientModel = new ClientModel();
             $Age = $clientModel->getclientAge($businessID, $clientId);
             $Gender = $clientModel->getclientGender($businessID, $clientId);
             $clientUnique = $clientModel->getclientUnique($businessID, $clientId);
+            $clientName1 = $clientModel->getclientName($businessID, $clientId);
             $InvoiceNumber = $invoice->getinvoiceNumber($businessID, $idPayment);
             $operatorName = session()->get('fName');
 
@@ -416,7 +428,7 @@ class SalesController extends Controller
                 'invoiceData' => $invoiceData,
                 'services' => $services,
                 'paymentDetailsData' => $paymentDetailsData,
-                'clientName' => $clientName,
+                'clientName' => $clientName1,
                 'currencyName' => $currencyName,
                 'paymentMethodName' => $paymentMethodName,
                 'Age' => $Age,
@@ -425,6 +437,7 @@ class SalesController extends Controller
                 'InvoiceNumber' => $InvoiceNumber,
                 'operatorName' => $operatorName,
                 'discountedTotal' => $discountedTotal,
+                'isHospital' => $isHospital
             ]);
             $mpdf->WriteHTML($pdfContent);
             $pdfBinary = $mpdf->Output('', 'S');
