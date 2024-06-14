@@ -22,6 +22,11 @@
       font-weight: 750;
     }
 
+    .quantity-box {
+      width: 50px;
+      text-align: center;
+    }
+
     .twitter-typeahead {
       max-width: 100%;
       width: 100%;
@@ -158,7 +163,7 @@
 <body>
   <div class="container-scroller">
     <!-- partial -->
-    <div class="container-fluid page-body-wrappers">
+    <div class="container-fluid page-body-wrappers" style="padding-top: 7%">
       <!-- partial:../../partials/_settings-panel.html -->
       <div class="theme-setting-wrapper">
         <div id="settings-trigger"><i class="ti-settings"></i></div>
@@ -366,7 +371,7 @@
                           <select class="typeahead form-control select2" name="clientName" id="clientId">
                             <?php foreach ($client_names as $client): ?>
                               <option value="<?= $client['idClient']; ?>">
-                                <?= $client['client']; ?>
+                                <?= $client['clientUniqueId']; ?> - <?= $client['client']; ?>
                               </option>
                             <?php endforeach; ?>
                           </select>
@@ -432,7 +437,9 @@
                               <tr>
                                 <th>Name</th>
                                 <th>Price</th>
-                                <th>Expiry</th>
+                                <?php if ($isExpiry == 1): ?>
+                                  <th>Expiry</th>
+                                <?php endif; ?>
                                 <th>Action</th>
                               </tr>
                             </thead>
@@ -441,39 +448,42 @@
                                 <tr data-service-type-id="<?= $service['idArtMenu']; ?>">
                                   <td class="title"><?= $service['Name']; ?></td>
                                   <td class="fee" contenteditable="true"><?= $service['Price']; ?></td>
-                                  <td>
-                                    <?php
-                                    $businessID = session()->get('businessID');
-                                    $serviceExpiries = $salesModel->getServiceExpiry($service['idArtMenu'], $businessID);
-                                    if (count($serviceExpiries) > 0) {
-                                      ?>
-                                      <select class="form-control expiry-dropdown">
-                                        <option value="">Select Expiry</option>
-                                        <?php
-                                        $firstExpiryDate = null;
-                                        foreach ($serviceExpiries as $expiry) {
-                                          $expiryDate = $expiry['expiryDate'];
-                                          if ($firstExpiryDate === null) {
-                                            $firstExpiryDate = $expiryDate;
-                                            echo '<option value="' . $expiryDate . '" selected>' . date('Y-m-d', strtotime($expiryDate)) . '</option>'; // Add selected attribute to the first option
-                                          } else {
-                                            echo '<option value="' . $expiryDate . '">' . date('Y-m-d', strtotime($expiryDate)) . '</option>';
-                                          }
-                                        }
-                                        ?>
-                                      </select>
+                                  <?php if ($isExpiry == 1): ?>
+                                    <td>
                                       <?php
-                                    } else {
-                                      echo '--';
-                                    }
-                                    ?>
-                                  </td>
+                                      $businessID = session()->get('businessID');
+                                      $serviceExpiries = $salesModel->getServiceExpiry($service['idArtMenu'], $businessID);
+                                      if (count($serviceExpiries) > 0) {
+                                        ?>
+                                        <select class="form-control expiry-dropdown">
+                                          <option value="">Select Expiry</option>
+                                          <?php
+                                          $firstExpiryDate = null;
+                                          foreach ($serviceExpiries as $expiry) {
+                                            $expiryDate = $expiry['expiryDate'];
+                                            if ($firstExpiryDate === null) {
+                                              $firstExpiryDate = $expiryDate;
+                                              echo '<option value="' . $expiryDate . '" selected>' . date('Y-m-d', strtotime($expiryDate)) . '</option>'; // Add selected attribute to the first option
+                                            } else {
+                                              echo '<option value="' . $expiryDate . '">' . date('Y-m-d', strtotime($expiryDate)) . '</option>';
+                                            }
+                                          }
+                                          ?>
+                                        </select>
+                                        <?php
+                                      } else {
+                                        echo '--';
+                                      }
+                                      ?>
+                                    </td>
+                                  <?php endif; ?>
                                   <td><span class="badge badge-primary badge-pill hover-effect"
                                       onclick="addService()">ADD</span></td>
                                 </tr>
                               <?php endforeach; ?>
                             </tbody>
                           </table>
+
                         </div>
                       </div>
                     </div>
@@ -487,6 +497,9 @@
                   <p class="card-description"
                     style="margin-top: -19px; margin-bottom: -10px; font-weight: bold; color: black;">
                     SUMMARY
+                    <!-- <button type="button" style="margin-left:64% ;"
+                      class="btn btn-outline-info btn-icon-text">Invoice</button> -->
+
                   </p>
                   <div class="row" style="margin-top: 8px;margin-bottom: -7px;">
                     <div class="col-md-6" id="clientDetailsLeft"></div>
@@ -501,7 +514,10 @@
                           <th>Amount</th>
                           <th>Quantity</th>
                           <th>Discount</th>
-                          <th>Expiry</th>
+                          <!-- <th>Expiry</th> -->
+                          <?php if ($isExpiry == 1): ?>
+                            <th>Expiry</th>
+                          <?php endif; ?>
                           <th>Actions</th>
                         </tr>
                       </thead>
@@ -514,9 +530,10 @@
                   <p>Discount: <span id="discountAmount">0</span></p>
                   <p>Discounted Total: <span id="discountedTotal">0</span></p>
                 </div>
-                <div style="height: 58px; margin-left: 1.4em; font-weight: 900; font-size: 150px">
+                <div style="height: 58px; margin-left: 7.4em; font-weight: 900;">
                   <!-- <button class="btn btn-primary btn-fw" id="insertBtn">Save</button> -->
-                  <button type="button" class="btn btn-outline-info btn-icon-text" id="insertBtn">Print
+                  <button type="button" class="btn btn-outline-info btn-icon-text">Invoice</button>
+                  <button type="button" class="btn btn-outline-info btn-icon-text" id="insertBtn">Invoice & Pay
                     <i class="ti-printer btn-icon-append"></i>
                   </button>
                 </div>
@@ -544,6 +561,25 @@
       dropdownAutoWidth: true,
     });
 
+    // function calculateTotalFee() {
+    //   var totalFee = 0;
+    //   var discountAmount = 0;
+
+    //   $('#serviceTableBody tr').each(function () {
+    //     var quantity = parseFloat($(this).find('.editable-quantity').val());
+    //     var fee = parseFloat($(this).find('.editable-fee').text());
+    //     var discount = parseFloat($(this).find('.editable-discount').text());
+    //     var rowTotal = quantity * fee;
+    //     var rowDiscountAmount = rowTotal * (discount / 100);
+    //     discountAmount += rowDiscountAmount;
+    //     totalFee += rowTotal - rowDiscountAmount;
+    //   });
+
+    //   $('#totalFee').text(totalFee.toFixed(2));
+    //   $('#discountAmount').text(discountAmount.toFixed(2));
+    //   $('#discountedTotal').text((totalFee - discountAmount).toFixed(2));
+    // }
+
     function calculateTotalFee() {
       var totalFee = 0;
       var discountAmount = 0;
@@ -555,25 +591,42 @@
         var rowTotal = quantity * fee;
         var rowDiscountAmount = rowTotal * (discount / 100);
         discountAmount += rowDiscountAmount;
-        totalFee += rowTotal - rowDiscountAmount;
+        totalFee += rowTotal;
       });
+
+      var discountedTotal = totalFee - discountAmount;
 
       $('#totalFee').text(totalFee.toFixed(2));
       $('#discountAmount').text(discountAmount.toFixed(2));
-      $('#discountedTotal').text((totalFee - discountAmount).toFixed(2));
+      $('#discountedTotal').text(discountedTotal.toFixed(2));
     }
+
+
+
+    // $('#search').on('input', function () {
+    //   var searchText = $(this).val().toLowerCase();
+    //   $('#serviceTypeList tbody tr').each(function () {
+    //     var serviceType = $(this).find('.title').text().toLowerCase();
+    //     if (serviceTypeType.includes(searchText)) {
+    //       $(this).show();
+    //     } else {
+    //       $(this).hide();
+    //     }
+    //   });
+    // });
 
     $('#search').on('input', function () {
       var searchText = $(this).val().toLowerCase();
       $('#serviceTypeList tbody tr').each(function () {
         var serviceType = $(this).find('.title').text().toLowerCase();
-        if (serviceTypeType.includes(searchText)) {
+        if (serviceType.includes(searchText)) {
           $(this).show();
         } else {
           $(this).hide();
         }
       });
     });
+
     function addServiceRow(serviceType, serviceTypeId, serviceFee, expiryDate) {
       var exists = false;
 
@@ -586,22 +639,33 @@
       });
 
       if (!exists) {
-        var newRow = '<tr>' +
-          // '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
-          // '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
-          // '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
-          // '<td contenteditable="true" class="editable-discount">0</td>' +
-          // '<td><input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate + '</td>' +
-          // '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)">Remove</button></td>' +
-          // '</tr>';
 
+        var newRow = '<tr>' +
           '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
-          '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
-          '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
-          '<td contenteditable="true" class="editable-discount">0</td>' +
-          '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate : 'Nil') + '</td>' +
-          '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
+          '<td contenteditable="true" class="editable-fee" style="text-align: center;">' + serviceFee + '</td>' +
+          '<td><div class="quantity-input"><span class="quantity-decrement" style="margin-right: -2%; padding: 0%; border-radius: 100%; background:#9da3d5;">-</span><input type="text" class="editable-quantity form-control quantity-box" style="width: 50px; padding: 0%;" value="1"><span class="quantity-increment" style="margin-left: -2%; padding: 0%; border-radius: 100%; margin-right: 1rem; background:#9da3d5;">+</span></div></td>' +
+          '<td contenteditable="true" class="editable-discount" style="text-align: center;">0</td>';
+
+        <?php if ($isExpiry == 1): ?>
+          newRow += '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate.split(' ')[0] : 'Nil') + '</td>';
+        <?php endif; ?>
+
+        newRow += '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
           '</tr>';
+
+
+        // var newRow = '<tr>' +
+        //   '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
+        //   '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
+        //   '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
+        //   '<td contenteditable="true" class="editable-discount">0</td>';
+
+        // <?php if ($isExpiry == 1): ?>
+          //   newRow += '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate : 'Nil') + '</td>';
+          // <?php endif; ?>
+
+        // newRow += '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
+        //   '</tr>';
         $('#serviceTableBody').append(newRow);
         calculateTotalFee();
 
@@ -631,6 +695,7 @@
       $('#serviceTableBody').on('input', 'td[contenteditable="true"]', function () {
         calculateTotalFee();
       });
+
 
 
       $('#serviceTypeList .badge').click(function () {

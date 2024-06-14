@@ -27,7 +27,7 @@ class ConfigureController extends Controller
         $configModel = new ConfigModel();
         $configData = $configModel->getConfig($businessID);
 
-        return view('config_Settings', ['configData' => $configData]);
+        return view('Config_Settings', ['configData' => $configData]);
     }
 
     public function config_form($businessTableID)

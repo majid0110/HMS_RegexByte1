@@ -229,6 +229,8 @@ class LoginController extends Controller
         $totalInventoryCount = $inventoryModel->countInventoryByBusinessID($businessID);
         $data['totalInventoryCount'] = $totalInventoryCount;
 
+        $totalSalesToday = $inventoryModel->countInvoicesToday($businessID);
+        $data['totalSalesToday'] = $totalSalesToday;
 
 
         $Model = new ClientModel();

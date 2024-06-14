@@ -319,5 +319,41 @@ class ItemsInventoryModel extends Model
             ->update();
     }
 
+    public function countInvoicesToday($businessID)
+    {
+        $today = date('Y-m-d');
+
+        $query = $this->db->table('invoices')
+            ->where('idBusiness', $businessID)
+            ->where('Date', $today)
+            ->countAllResults();
+
+        return $query;
+    }
+
+    public function countSalesToday($businessID)
+    {
+        $today = date('Y-m-d');
+
+        $query = $this->db->table('invoices')
+            ->selectSum('invoicedetail.quantity')
+            ->join('invoicedetail', 'invoicedetail.idReceipts = invoices.idReceipts')
+            ->where('idBusiness', $businessID)
+            ->where('Date', $today)
+            ->countAllResults();
+
+        return $query;
+    }
+
+    // public function countInventoryByBusinessID($businessID)
+    // {
+    //     $query = $this->db->table('itemsinventory')
+    //         ->selectSum('itemsinventory.inventory', 'totalInventory')
+    //         ->join('itemswarehouse', 'itemsinventory.idItem = itemswarehouse.idItem')
+    //         ->where('itemswarehouse.idBusiness', $businessID)
+    //         ->get();
+
+    //     return $query->getRow()->totalInventory;
+    // }
 
 }

@@ -351,14 +351,29 @@
                                 <?php echo $totalAppointmentsCount; ?>
                               </p>
                             </div>
-                          <?php else: ?>
-                            <div>
-                              <h3 class="statistics-title">Total Inventory</h3>
-                              <p class="rate-percentage">
-                                <?php echo $totalInventoryCount; ?>
-                              </p>
-                            </div>
+
                           <?php endif; ?>
+
+                          <div>
+                            <h3 class="statistics-title">Total Inventory</h3>
+                            <p class="rate-percentage">
+                              <?php echo $totalInventoryCount; ?>
+                            </p>
+                          </div>
+
+                          <div>
+                            <h3 class="statistics-title">Invoice Today</h3>
+                            <p class="rate-percentage">
+                              <?php echo $totalSalesToday; ?>
+                            </p>
+                          </div>
+
+                          <div>
+                            <h3 class="statistics-title">Sales Today</h3>
+                            <p class="rate-percentage">
+                              <?php echo $totalSalesToday; ?>
+                            </p>
+                          </div>
 
                           <?php if ($isHospital): ?>
                             <div class="d-none d-md-block">
@@ -805,81 +820,84 @@
                       <div class="row flex-grow">
 
                         <div class="col-md-6 col-lg-6 grid-margin stretch-card">
+                          <?php if ($isHospital): ?>
+                            <div class="card card-rounded">
 
-                          <div class="card card-rounded">
+                              <div class="card-body card-rounded">
 
-                            <div class="card-body card-rounded">
 
-                              <h4 class="card-title card-title-dash">Recent Appointments</h4>
+                                <h4 class="card-title card-title-dash">Recent Appointments</h4>
 
-                              <!-- Column Names -->
-                              <div class="list align-items-center border-bottom py-2">
-                                <div class="wrapper w-100">
-                                  <div class="d-flex justify-content-between align-items-center">
-                                    <p class="mb-2 font-weight-medium">Client Name</p>
-                                    <p class="mb-2 font-weight-medium">Appointment Date</p>
-                                    <p class="mb-2 font-weight-medium">Appointment Fee</p>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <!-- Data Rows -->
-                              <?php foreach ($recentAppointments as $appointment): ?>
+                                <!-- Column Names -->
                                 <div class="list align-items-center border-bottom py-2">
                                   <div class="wrapper w-100">
                                     <div class="d-flex justify-content-between align-items-center">
-                                      <p class="mb-0 text-small text-muted">
-                                        <?= $appointment->clientName; ?>
-                                      </p>
-                                      <p class="mb-0 text-small text-muted">
-                                        <?= $appointment->appointmentDate; ?>
-                                      </p>
-                                      <p class="mb-0 text-small text-muted">
-                                        <?= $appointment->appointmentFee; ?>
-                                      </p>
+                                      <p class="mb-2 font-weight-medium">Client Name</p>
+                                      <p class="mb-2 font-weight-medium">Appointment Date</p>
+                                      <p class="mb-2 font-weight-medium">Appointment Fee</p>
                                     </div>
                                   </div>
                                 </div>
-                              <?php endforeach; ?>
+
+                                <!-- Data Rows -->
+                                <?php foreach ($recentAppointments as $appointment): ?>
+                                  <div class="list align-items-center border-bottom py-2">
+                                    <div class="wrapper w-100">
+                                      <div class="d-flex justify-content-between align-items-center">
+                                        <p class="mb-0 text-small text-muted">
+                                          <?= $appointment->clientName; ?>
+                                        </p>
+                                        <p class="mb-0 text-small text-muted">
+                                          <?= $appointment->appointmentDate; ?>
+                                        </p>
+                                        <p class="mb-0 text-small text-muted">
+                                          <?= $appointment->appointmentFee; ?>
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                <?php endforeach; ?>
+
+                              </div>
 
                             </div>
-
-                          </div>
-
+                          <?php endif; ?>
                         </div>
                         <div class="col-md-6 col-lg-6 grid-margin stretch-card">
-                          <div class="card card-rounded">
-                            <div class="card-body card-rounded">
-                              <h4 class="card-title card-title-dash">Recent Tests</h4>
+                          <?php if ($isHospital): ?>
+                            <div class="card card-rounded">
+                              <div class="card-body card-rounded">
+                                <h4 class="card-title card-title-dash">Recent Tests</h4>
 
-                              <!-- Column Names -->
-                              <div class="list align-items-center border-bottom py-2">
-                                <div class="wrapper w-100">
-                                  <div class="d-flex justify-content-between align-items-center">
-                                    <p class="mb-2 font-weight-medium">Test Name</p>
-                                    <p class="mb-2 font-weight-medium">Test Fee</p>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <!-- Data Rows -->
-                              <?php foreach ($TestDetails as $Detail): ?>
+                                <!-- Column Names -->
                                 <div class="list align-items-center border-bottom py-2">
                                   <div class="wrapper w-100">
                                     <div class="d-flex justify-content-between align-items-center">
-                                      <p class="mb-0 text-small text-muted">
-                                        <?= $Detail['title']; ?>
-                                      </p>
-                                      <p class="mb-0 text-small text-muted">
-                                        <?= $Detail['test_fee']; ?>
-                                      </p>
+                                      <p class="mb-2 font-weight-medium">Test Name</p>
+                                      <p class="mb-2 font-weight-medium">Test Fee</p>
                                     </div>
                                   </div>
                                 </div>
-                              <?php endforeach; ?>
 
+                                <!-- Data Rows -->
+                                <?php foreach ($TestDetails as $Detail): ?>
+                                  <div class="list align-items-center border-bottom py-2">
+                                    <div class="wrapper w-100">
+                                      <div class="d-flex justify-content-between align-items-center">
+                                        <p class="mb-0 text-small text-muted">
+                                          <?= $Detail['title']; ?>
+                                        </p>
+                                        <p class="mb-0 text-small text-muted">
+                                          <?= $Detail['test_fee']; ?>
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                <?php endforeach; ?>
+
+                              </div>
                             </div>
-                          </div>
+                          <?php endif; ?>
                         </div>
 
                       </div>

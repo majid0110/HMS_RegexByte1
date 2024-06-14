@@ -166,15 +166,16 @@ $routes->get('getItemsForEditService/(:num)', 'ServiceController::getItemsForEdi
 
 
 
-
 //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Sales Routes
 //-------------------------------------------------------------------------------------------------------------------------
 $routes->get('/sales_form', 'SalesController::sales_form');
 $routes->post('SalesController/submitServices', 'SalesController::submitServices');
+$routes->post('SalesController/submitInvoice', 'SalesController::submitInvoice');
 
 $routes->post('SalesController/submitServices', 'SalesController::submitServices');
 $routes->post('submitServices', 'SalesController::submitServices');
+$routes->post('submitInvoice', 'SalesController::submitInvoice');
 $routes->get('/Sales_table', 'SalesController::Sales_table');
 $routes->get('/deleteSales/(:num)', 'SalesController::deleteSales/$1');
 $routes->get('viewServiceDetails/(:num)', 'SalesController::viewServiceDetails/$1');

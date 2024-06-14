@@ -532,7 +532,7 @@
                 </div>
                 <div style="height: 58px; margin-left: 7.4em; font-weight: 900;">
                   <!-- <button class="btn btn-primary btn-fw" id="insertBtn">Save</button> -->
-                  <button type="button" class="btn btn-outline-info btn-icon-text">Invoice</button>
+                  <button type="button" class="btn btn-outline-info btn-icon-text" id="invoiceBtn">Invoice</button>
                   <button type="button" class="btn btn-outline-info btn-icon-text" id="insertBtn">Invoice & Pay
                     <i class="ti-printer btn-icon-append"></i>
                   </button>
@@ -643,7 +643,7 @@
         var newRow = '<tr>' +
           '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
           '<td contenteditable="true" class="editable-fee" style="text-align: center;">' + serviceFee + '</td>' +
-          '<td><div class="quantity-input"><span class="quantity-decrement" style="margin-right: -2%; padding: 0%; border-radius: 100%; background:#9da3d5;">-</span><input type="text" class="editable-quantity form-control quantity-box" style="width: 50px; padding: 0%;" value="1"><span class="quantity-increment" style="margin-left: -2%; padding: 0%; border-radius: 100%; margin-right: 1rem; background:#9da3d5;">+</span></div></td>' +
+          '<td><div class="quantity-input"><span class="quantity-decrement btn btn-danger btn-sm" style="font-size: 17px;margin-left: 30%; border-radius: 50%; margin-right: -8%;">-</span><input type="text" class="editable-quantity form-control quantity-box" style="width: 40px; padding: 0%;" value="1"><span class="quantity-increment btn btn-success btn-sm" style="margin-right: 30%;font-size: 17px;margin-left: -7%; border-radius: 50%; ">+</span></div></td>' +
           '<td contenteditable="true" class="editable-discount" style="text-align: center;">0</td>';
 
         <?php if ($isExpiry == 1): ?>
@@ -738,6 +738,10 @@
 
       $('#insertBtn').off('click').on('click', function () {
         insertData();
+      });
+
+      $('#invoiceBtn').click(function () {
+        submitInvoice();
       });
 
       $('#serviceTypeList .badge-pill').mouseenter(function () {
@@ -880,6 +884,89 @@
         });
       }
     });
+
+    function submitInvoice() {
+      var clientId = $('select[name="clientName"]').val();
+      var clientName = $('select[name="clientName"] option:selected').text();
+      var paymentMethodOption = $('select[name="Payment"] option:selected');
+      var paymentMethodId = paymentMethodOption.data('payment-id');
+      var paymentName = paymentMethodOption.text();
+      var paymentMethodName = paymentMethodOption.text();
+      var currency = $('select[name="Currency"]').val();
+      var currencyName = $('select[name="Currency"] option:selected').text();
+      var exchange = $('#exchangeInput').val();
+      var totalFee = parseFloat($('#totalFee').text());
+
+      if (!clientId || isNaN(totalFee)) {
+        alert('Invalid data for insertion.');
+        return;
+      }
+
+      var services = [];
+      $('#serviceTableBody tr').each(function () {
+        var serviceTypeRow = $(this);
+        var serviceTypeId = serviceTypeRow.find('td:first').data('service-type-id');
+        var serviceName = serviceTypeRow.find('td:eq(0)').text();
+        var fee = parseFloat(serviceTypeRow.find('td:eq(1)').text());
+        var quantityInput = serviceTypeRow.find('.editable-quantity');
+        var quantity = parseFloat(quantityInput.val());
+        var discount = parseFloat(serviceTypeRow.find('.editable-discount').text());
+        var expiryDate = serviceTypeRow.find('.expiry-date').val();
+
+        if (expiryDate === undefined) {
+          expiryDate = '1970-01-01';
+        }
+
+        services.push({
+          serviceTypeId: serviceTypeId,
+          serviceName: serviceName,
+          fee: fee,
+          quantity: quantity,
+          discount: discount,
+          expiryDate: expiryDate
+        });
+      });
+
+      $.ajax({
+        method: 'POST',
+        url: '<?= site_url('SalesController/submitInvoice') ?>',
+        dataType: "json",
+        data: {
+          clientId: clientId,
+          clientName: clientName,
+          currencyName: currencyName,
+          paymentMethodId: paymentMethodId,
+          paymentName: paymentName,
+          paymentMethodName: paymentMethodName,
+          currency: currency,
+          exchange: exchange,
+          totalFee: totalFee,
+          services: services
+        },
+        success: function (response) {
+          // alert('Data inserted successfully!');
+          console.log('Data inserted successfully:', response);
+          if (response.pdfContent) {
+            var decodedPdfContent = atob(response.pdfContent);
+            var blob = new Blob([new Uint8Array(decodedPdfContent.split('').map(function (c) {
+              return c.charCodeAt(0);
+            }))], {
+              type: 'application/pdf'
+            });
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            //   link.download = 'your_file_name.pdf'; // Specify the desired file name
+            link.click();
+          }
+          $('#serviceTableBody').empty();
+          $('#totalFee').text('0');
+        },
+        error: function (error) {
+          console.error('Error submitting invoice:', error);
+        }
+      });
+    }
+
   </script>
 
 

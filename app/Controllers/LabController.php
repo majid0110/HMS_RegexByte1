@@ -20,7 +20,7 @@ class LabController extends Controller
     {
         $Model = new LabModel();
         $data['Tests'] = $Model->getTestDetails();
-        return view('LabServices_form.php', $data);
+        return view('labServices_form.php', $data);
     }
     public function lab_test_form()
     {

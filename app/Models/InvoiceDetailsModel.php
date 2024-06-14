@@ -11,14 +11,23 @@ class InvoiceDetailsModel extends Model
     protected $allowedFields = ['value', 'idUser', 'date', 'timestamp', 'idAnullim', 'method', 'idPaymentMethod', 'exchange', 'nr_serial'];
 
 
-    public function insertInvoicePayment($data)
-    {
-        $this->table = 'invoicepayment';
-        $this->primaryKey = 'IdInvPay';
-        $this->allowedFields = ['idReceipt', 'idPayment'];
+    // public function insertInvoicePayment($InvoicePayment)
+    // {
+    //     $this->table = 'invoicepayment';
+    //     $this->primaryKey = 'IdInvPay';
+    //     $this->allowedFields = ['idReceipt', 'idPayment'];
 
-        return $this->insert($data);
+    //     return $this->insert($InvoicePayment);
+    // }
+
+    public function insertInvoicePayment($InvoicePayment)
+    {
+        $this->db->table('invoicepayment')
+            ->insert($InvoicePayment);
     }
+
+
+
 
     public function updateItemsWarehouse($idArtMenu, $quantity)
     {
@@ -41,5 +50,5 @@ class InvoiceDetailsModel extends Model
     }
 
 
-    
+
 }
