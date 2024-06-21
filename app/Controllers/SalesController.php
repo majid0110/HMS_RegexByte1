@@ -55,6 +55,45 @@ class SalesController extends Controller
         return $this->response->setJSON(['services' => $services]);
     }
 
+    public function PayInvoice()
+    {
+        $sales = new SalesModel();
+        $data['payments'] = $sales->getpayment();
+        $data['currencies'] = $sales->getCurrancy();
+
+        $invOrdNum = $this->request->getVar('invOrdNum');
+
+        $invoice = $sales->getInvoiceByOrdNum($invOrdNum);
+
+        if ($invoice) {
+            $data['valueToPay'] = $invoice->Value;
+            $data['client'] = $invoice->idClient;
+            $data['idReceipts'] = $invoice->idReceipts;
+        } else {
+            $data['valueToPay'] = null;
+
+            log_message('error', "Invoice not found for invOrdNum: {$invOrdNum}");
+        }
+        return view('PayInovice.php', $data);
+    }
+
+    // public function PayInvoice($idReceipts)
+    // {
+    //     $sales = new SalesModel();
+    //     $data['payments'] = $sales->getpayment();
+    //     $data['currencies'] = $sales->getCurrancy();
+
+    //     $invoice = $sales->getInvoiceByIdReceipts($idReceipts);
+
+    //     if ($invoice) {
+    //         $data['valueToPay'] = $invoice->Value;
+    //     } else {
+    //         $data['valueToPay'] = null;
+    //         log_message('error', "Invoice not found for idReceipts: {$idReceipts}");
+    //     }
+
+    //     return view('PayInovice.php', $data);
+    // }
     public function Sales_table()
     {
         $session = session();
@@ -460,7 +499,39 @@ class SalesController extends Controller
         }
     }
 
+    public function Payment()
+    {
 
+
+        $exchange = $this->request->getPost('exchange');
+        $value = $this->request->getPost('Value');
+        $currencyName = $this->request->getPost('currencyName');
+        $paymentMethod = $this->request->getPost('Payment');
+        $client = $this->request->getPost('client');
+        $idReceipts = $this->request->getPost('idReceipts');
+        // $paymentMethodID = $this->request->getPost('paymentMethodId');
+
+        $paymentDetailsModel = new InvoiceDetailsModel();
+        $paymentDetailsData = [
+            'value' => $value,
+            'idUser' => 19,
+            'idAnullim' => 0,
+            'method' => $paymentMethod,
+            'idPaymentMethod' => $paymentMethod,
+            'exchange' => $exchange,
+            'nr_serial' => 0,
+        ];
+        $paymentDetailsModel->insert($paymentDetailsData);
+        $idPayment = $paymentDetailsModel->getInsertID();
+
+        $InvoicePayment = [
+            'idReceipt' => $idReceipts,
+            'idPayment' => $idPayment,
+
+        ];
+        $paymentDetailsModel->insertInvoicePayment($InvoicePayment);
+
+    }
 
     public function submitInvoice()
     {

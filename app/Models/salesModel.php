@@ -638,5 +638,34 @@ class salesModel extends Model
         return $expiryQuery->getResultArray();
     }
 
+    public function getInvoiceByOrdNum($invOrdNum)
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+        return $this->db->table('invoices')
+            ->where('invOrdNum', $invOrdNum)
+            ->where('idBusiness', $businessID)
+            ->get()
+            ->getRow();
+    }
+
+    public function getInvoiceByIdReceipts($idReceipts)
+    {
+
+        return $this->db->table('invoices')
+            ->where('idReceipts', $idReceipts)
+            ->get()
+            ->getRow();
+    }
+
+    // public function getpayment()
+    // {
+    //     return $this->db->table('paymentmethods')
+    //         ->select('idPaymentMethods, Method')
+    //         ->get()
+    //         ->getResultArray();
+    // }
+
+
 
 }

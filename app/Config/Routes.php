@@ -173,6 +173,10 @@ $routes->get('/sales_form', 'SalesController::sales_form');
 $routes->post('SalesController/submitServices', 'SalesController::submitServices');
 $routes->post('SalesController/submitInvoice', 'SalesController::submitInvoice');
 
+$routes->get('/PayInvoice', 'SalesController::PayInvoice');
+$routes->get('/PayInvoice/(:num)', 'SalesController::PayInvoice/$1');
+
+$routes->post('/Payment', 'SalesController::Payment');
 $routes->post('SalesController/submitServices', 'SalesController::submitServices');
 $routes->post('submitServices', 'SalesController::submitServices');
 $routes->post('submitInvoice', 'SalesController::submitInvoice');
