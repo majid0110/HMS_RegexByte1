@@ -753,6 +753,20 @@ class SalesController extends Controller
         return view('Sale_details', $data);
     }
 
+    public function downloadPDF($idReceipts)
+    {
+        $model = new salesModel();
+        $data['ServiceDetails'] = $model->getSalesDetails($idReceipts);
+
+        $html = view('invoice_pdf', $data);
+
+        $mpdf = new \Mpdf\Mpdf();
+
+        $mpdf->WriteHTML($html);
+
+        $mpdf->Output('invoice_' . $idReceipts . '.pdf', \Mpdf\Output\Destination::DOWNLOAD);
+    }
+
     public function deleteService($idReceipts)
     {
         $model = new salesModel();

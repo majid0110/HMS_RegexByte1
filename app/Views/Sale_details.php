@@ -139,12 +139,12 @@
                                             <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#payModal" onclick="loadPayInvoice('<?= $ServiceDetails[0]['invOrdNum']; ?>')">Pay</button> -->
                                             <tr>
                                                 <td class="title">
-                                                      <?php
-                                                      $session = session();
-                                                      if ($session->has('businessProfileImage')) {
-                                                          echo '<img class="img-xs rounded-circle larger-profile-img" style="width: 90px; height: 90px;" src="' . $session->get('businessProfileImage') . '" alt="Profile image">';
-                                                      }
-                                                      ?>
+                                                    <?php
+                                                    $session = session();
+                                                    if ($session->has('businessProfileImage')) {
+                                                        echo '<img class="img-xs rounded-circle larger-profile-img" style="width: 90px; height: 90px;" src="' . $session->get('businessProfileImage') . '" alt="Profile image">';
+                                                    }
+                                                    ?>
                                                     <style="width: 100%; max-width: 300px" />
                                                 </td>
 
@@ -161,6 +161,15 @@
                                                 </td>
                                                 <td></td>
                                         </table>
+
+                                        <!-- <a href="<?= base_url('SalesController/downloadPDF/' . $ServiceDetails[0]['idReceipts']); ?>"
+                                            class="btn btn-primary">Download PDF</a> -->
+
+                                        <a href="<?= base_url('SalesController/downloadPDF/' . $ServiceDetails[0]['idReceipts']); ?>"
+                                            class="btn btn-primary text-white me-0"
+                                            style="margin-left: 67%;height: 1.6rem; padding: 0%; width: 6rem;font-size: medium;background: #08088f;"><i
+                                                class="icon-download"></i>
+                                            Export</a>
                                         <hr>
                                         <p>
                                             Status:
@@ -171,22 +180,24 @@
                                             </span><br />
                                             Created: <?= (new DateTime($ServiceDetails[0]['InvoiceDate']))->format('F d, Y'); ?><br />
                                         </p>
-                                        
+
 
                                         <?php if ($ServiceDetails[0]['Status'] == 'closed'): ?>
-                                        <a
-                                            href="<?= base_url('sales/deleteService/' . $ServiceDetails[0]['idReceipts']); ?>">
+                                            <a
+                                                href="<?= base_url('sales/deleteService/' . $ServiceDetails[0]['idReceipts']); ?>">
 
-                                            <button onclick="deleteService()" type="button"
-                                                class="btn btn-danger btn-icon"
-                                                style="margin-left: 23rem;margin-left: 49rem; margin-top: -52px;">
-                                                <i class="mdi mdi-delete"></i> 
-                                            </button>
-                                        </a>
+                                                <button onclick="deleteService()" type="button"
+                                                    class="btn btn-danger btn-icon"
+                                                    style="margin-left: 23rem;margin-left: 49rem; margin-top: -52px;">
+                                                    <i class="mdi mdi-delete"></i>
+                                                </button>
+                                            </a>
 
-                                            <?php else: ?>
-                                                <button type="button" style="margin-top: -3rem;margin-left: 89%;" class="btn btn-primary" data-toggle="modal" data-target="#payModal" onclick="loadPayInvoice('<?= $ServiceDetails[0]['invOrdNum']; ?>')">Pay</button>
-                                            <?php endif; ?>
+                                        <?php else: ?>
+                                            <button type="button" style="margin-top: -3rem;margin-left: 89%;"
+                                                class="btn btn-primary" data-toggle="modal" data-target="#payModal"
+                                                onclick="loadPayInvoice('<?= $ServiceDetails[0]['invOrdNum']; ?>')">Pay</button>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
 
@@ -213,28 +224,28 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3">
-    <u><b>Notes:</b></u><br />
+                                        <u><b>Notes:</b></u><br />
                                         <?= $ServiceDetails[0]['Notes']; ?><br />
                                     </td>
                                 </tr>
                                 <tr class="heading">
-                                <td>Service Type</td>
-                                <td>Quantity</td>
-                                <td>Price</td>
-                                
-                            </tr>
-                            <?php foreach ($ServiceDetails as $detail): ?>
-                                        <tr class="item">
-                                            <td>
-                                                <?= $detail['ServiceTypeName']; ?>
-                                                </td>
-                                                <td>
-                                                    <?= $detail['Quantity']; ?>
-                                                </td>
-                                                <td>
-                                                    <?= $detail['Price']; ?>
-                                                </td>
-                                            </tr>
+                                    <td>Service Type</td>
+                                    <td>Quantity</td>
+                                    <td>Price</td>
+
+                                </tr>
+                                <?php foreach ($ServiceDetails as $detail): ?>
+                                    <tr class="item">
+                                        <td>
+                                            <?= $detail['ServiceTypeName']; ?>
+                                        </td>
+                                        <td>
+                                            <?= $detail['Quantity']; ?>
+                                        </td>
+                                        <td>
+                                            <?= $detail['Price']; ?>
+                                        </td>
+                                    </tr>
                                 <?php endforeach; ?>
                                 <tr class="total">
                                     <td></td>
@@ -243,21 +254,22 @@
                             </table>
 
                             <!-- Modal -->
-<div class="modal fade" id="payModal" tabindex="-1" role="dialog" aria-labelledby="payModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="payModalLabel">Pay Invoice</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="payInvoiceContent"></div>
-            </div>
-        </div>
-    </div>
-</div>
+                            <div class="modal fade" id="payModal" tabindex="-1" role="dialog"
+                                aria-labelledby="payModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="payModalLabel">Pay Invoice</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="payInvoiceContent"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -286,12 +298,12 @@
                 .catch(error => console.error('Error:', error));
         }
     </script>
-    
-<script>
-    function loadPayInvoice(invOrdNum) {
-        $('#payInvoiceContent').load('/HMS_RegexByte/PayInvoice?invOrdNum=' + invOrdNum);
-    }
-</script>
+
+    <script>
+        function loadPayInvoice(invOrdNum) {
+            $('#payInvoiceContent').load('/HMS_RegexByte/PayInvoice?invOrdNum=' + invOrdNum);
+        }
+    </script>
 
 
 
@@ -302,8 +314,8 @@
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script src="../public/assets/vendors_s/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
