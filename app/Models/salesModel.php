@@ -638,16 +638,66 @@ class salesModel extends Model
         return $expiryQuery->getResultArray();
     }
 
+    // public function getInvoiceByOrdNum($invOrdNum)
+    // {
+    //     $session = \Config\Services::session();
+    //     $businessID = $session->get('businessID');
+    //     return $this->db->table('invoices')
+    //         ->where('invOrdNum', $invOrdNum)
+    //         ->where('idBusiness', $businessID)
+    //         ->get()
+    //         ->getRow();
+    // }
+
+    // public function getInvoiceByOrdNum($invOrdNum)
+    // {
+    //     $session = \Config\Services::session();
+    //     $businessID = $session->get('businessID');
+
+    //     $invoice = $this->db->table('invoices')
+    //         ->where('invOrdNum', $invOrdNum)
+    //         ->where('idBusiness', $businessID)
+    //         ->get()
+    //         ->getRow();
+
+    //     if ($invoice) {
+    //         $payments = $this->db->table('invoicepaymentdetails')
+    //             ->selectSum('value')
+    //             ->where('idReceipt', $invoice->idReceipts)
+    //             ->get()
+    //             ->getRow();
+    //         $totalPaid = $payments->value ?? 0;
+    //         $invoice->remainingValue = $invoice->Value - $totalPaid;
+    //     }
+
+    //     return $invoice;
+    // }
+
     public function getInvoiceByOrdNum($invOrdNum)
     {
         $session = \Config\Services::session();
         $businessID = $session->get('businessID');
-        return $this->db->table('invoices')
+        $invoice = $this->db->table('invoices')
             ->where('invOrdNum', $invOrdNum)
             ->where('idBusiness', $businessID)
             ->get()
             ->getRow();
+
+        if ($invoice) {
+            $payments = $this->db->table('invoicepaymentdetails')
+                ->selectSum('invoicepaymentdetails.value', 'totalPaid')
+                ->join('invoicepayment', 'invoicepayment.idPayment = invoicepaymentdetails.idPayment')
+                ->where('invoicepayment.idReceipt', $invoice->idReceipts)
+                ->get()
+                ->getRow();
+
+            $totalPaid = $payments->totalPaid ?? 0;
+            $invoice->remainingValue = $invoice->Value - $totalPaid;
+        }
+
+        return $invoice;
     }
+
 
     public function getInvoiceByIdReceipts($idReceipts)
     {

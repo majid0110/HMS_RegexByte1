@@ -17,6 +17,12 @@ use Mpdf\Mpdf;
 
 class SalesController extends Controller
 {
+    protected $db;
+
+    public function __construct()
+    {
+        $this->db = \Config\Database::connect();
+    }
 
     //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Returning Views
@@ -66,12 +72,18 @@ class SalesController extends Controller
         $invoice = $sales->getInvoiceByOrdNum($invOrdNum);
 
         if ($invoice) {
-            $data['valueToPay'] = $invoice->Value;
+            $data['valueToPay'] = $invoice->remainingValue;
             $data['client'] = $invoice->idClient;
             $data['idReceipts'] = $invoice->idReceipts;
+
+            // if ($invoice->remainingValue <= 0) {
+            //     $this->db->table('invoices')
+            //         ->where('idReceipts', $invoice->idReceipts)
+            //         ->update(['Status' => 'closed']);
+            // }
         } else {
             $data['valueToPay'] = null;
-
+            $data['idReceipts'] = null;
             log_message('error', "Invoice not found for invOrdNum: {$invOrdNum}");
         }
         return view('PayInovice.php', $data);
@@ -501,7 +513,8 @@ class SalesController extends Controller
 
     public function Payment()
     {
-
+        $session = \Config\Services::session();
+        $UserID = $session->get('ID');
 
         $exchange = $this->request->getPost('exchange');
         $value = $this->request->getPost('Value');
@@ -514,7 +527,7 @@ class SalesController extends Controller
         $paymentDetailsModel = new InvoiceDetailsModel();
         $paymentDetailsData = [
             'value' => $value,
-            'idUser' => 19,
+            'idUser' => $UserID,
             'idAnullim' => 0,
             'method' => $paymentMethod,
             'idPaymentMethod' => $paymentMethod,
@@ -530,6 +543,20 @@ class SalesController extends Controller
 
         ];
         $paymentDetailsModel->insertInvoicePayment($InvoicePayment);
+
+        $invoiceModel = new InvoiceModel();
+        $invoice = $invoiceModel->getInvoiceById($idReceipts);
+
+        if ($invoice) {
+            $totalPaid = $invoice->totalPaid + $value;
+            if ($totalPaid >= $invoice->Value) {
+                $invoiceModel->updateInvoiceStatus($idReceipts, 'closed');
+                echo ('status changed');
+            }
+        }
+
+        return redirect()->to(base_url("/Sales_table"));
+        // return redirect()->back();
 
     }
 

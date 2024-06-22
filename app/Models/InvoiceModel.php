@@ -66,23 +66,55 @@ class InvoiceModel extends Model
     // }
 
     public function updateItemInventory($idItem, $quantity)
-{
-    $db = \Config\Database::connect();
-    $builder = $db->table('itemsinventory');
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('itemsinventory');
 
-    // First, fetch the current inventory value
-    $currentInventory = $builder->select('inventory')
-        ->where('idItem', $idItem)
-        ->get()
-        ->getRowArray();
-
-    if ($currentInventory) {
-        $newInventory = $currentInventory['inventory'] - $quantity;
-
-        // Then, update the inventory with the new value
-        $builder->set('inventory', $newInventory)
+        // First, fetch the current inventory value
+        $currentInventory = $builder->select('inventory')
             ->where('idItem', $idItem)
-            ->update();
+            ->get()
+            ->getRowArray();
+
+        if ($currentInventory) {
+            $newInventory = $currentInventory['inventory'] - $quantity;
+
+            // Then, update the inventory with the new value
+            $builder->set('inventory', $newInventory)
+                ->where('idItem', $idItem)
+                ->update();
+        }
     }
-}
+
+    public function getInvoiceById($idReceipts)
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+
+        $invoice = $this->db->table('invoices')
+            ->where('idReceipts', $idReceipts)
+            ->where('idBusiness', $businessID)
+            ->get()
+            ->getRow();
+
+        if ($invoice) {
+            $payments = $this->db->table('invoicepaymentdetails')
+                ->selectSum('invoicepaymentdetails.value', 'totalPaid')
+                ->join('invoicepayment', 'invoicepayment.idPayment = invoicepaymentdetails.idPayment')
+                ->where('invoicepayment.idReceipt', $invoice->idReceipts)
+                ->get()
+                ->getRow();
+
+            $invoice->totalPaid = $payments->totalPaid ?? 0;
+        }
+
+        return $invoice;
+    }
+
+    public function updateInvoiceStatus($idReceipts, $status)
+    {
+        $this->db->table($this->table)
+            ->where('idReceipts', $idReceipts)
+            ->update(['status' => $status]);
+    }
 }
