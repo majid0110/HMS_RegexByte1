@@ -116,7 +116,32 @@ class salesModel extends Model
             ->getResultArray();
     }
 
-    // Inside your salesModel
+    public function getPaymentDetails($idReceipts)
+    {
+        return $this->db->table('invoicepayment')
+            ->join('invoicepaymentdetails', 'invoicepaymentdetails.idPayment = invoicepayment.idPayment')
+            ->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoicepaymentdetails.method', 'left')
+            ->join('currency', 'currency.id = invoicepaymentdetails.idPaymentMethod', 'left')
+            ->where('invoicepayment.idReceipt', $idReceipts)
+            ->select('invoicepaymentdetails.*, paymentmethods.Method as PaymentMethodName, currency.Currency as Currency')
+            ->get()
+            ->getResultArray();
+    }
+
+    public function duplicateInvoice($idReceipts)
+    {
+        $invoice = $this->db->table('invoices')->where('idReceipts', $idReceipts)->get()->getRowArray();
+
+        if ($invoice) {
+            unset($invoice['idReceipts']);
+            // $invoice['Status'] = 'canceled';
+
+            return $this->db->table('invoices')->insert($invoice);
+        }
+
+        return false;
+    }
+
 
     public function updateServiceToZero($idReceipts)
     {
@@ -716,6 +741,16 @@ class salesModel extends Model
     //         ->getResultArray();
     // }
 
+    public function cancelInvoice($idReceipts)
+    {
+        $model = new salesModel();
+        $result = $model->duplicateInvoice($idReceipts);
 
+        if ($result) {
+            return redirect()->to('/viewServiceDetails/' . $idReceipts)->with('success', 'Invoice duplicated successfully');
+        } else {
+            return redirect()->to('/viewServiceDetails/' . $idReceipts)->with('error', 'Failed to duplicate invoice');
+        }
+    }
 
 }

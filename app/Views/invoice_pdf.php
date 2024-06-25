@@ -2,7 +2,6 @@
 
 <head>
     <style>
-        /* Add any necessary CSS styles for your PDF here */
         body {
             font-family: Arial, sans-serif;
         }
@@ -11,7 +10,7 @@
             max-width: 800px;
             margin: auto;
             padding: 30px;
-            border: 1px solid #eee;
+            border: 1px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
             font-size: 16px;
             line-height: 24px;
@@ -65,23 +64,6 @@
                     <table>
                         <tr>
                             <td class="title">
-                                <img src="path_to_your_logo" style="width:100%; max-width:300px;">
-                            </td>
-                            <td>
-                                Invoice #: <?= $ServiceDetails[0]['invOrdNum']; ?><br>
-                                Created: <?= (new DateTime($ServiceDetails[0]['InvoiceDate']))->format('F d, Y'); ?><br>
-                                Due: <?= $ServiceDetails[0]['due']; ?>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-            <tr class="information">
-                <td colspan="2">
-                    <table>
-                        <tr>
-                            <td class="title">
                                 <?php
                                 $session = session();
                                 if ($session->has('businessProfileImage')) {
@@ -102,10 +84,30 @@
                                 }
                                 ?>
                             </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+        </table>
+        <hr>
+        <table>
+            <tr class="information">
+                <td colspan="2">
+                    <table>
+                        <tr>
                             <td>
-                                <?= $ServiceDetails[0]['client']; ?><br>
-                                <?= $ServiceDetails[0]['contact']; ?><br>
-                                <?= $ServiceDetails[0]['email']; ?>
+                                <u><b>Invoice Details:</b></u><br />
+                                Invoice #: <?= $ServiceDetails[0]['invOrdNum']; ?><br />
+                                Due: <?= $ServiceDetails[0]['due']; ?><br />
+                                Payment Method: <?= $ServiceDetails[0]['PaymentMethod']; ?><br />
+                                Currency: <?= $ServiceDetails[0]['Currency']; ?><br />
+                            </td>
+                            <td>
+                                <u><b>Client Details:</b></u><br />
+                                Client: <?= $ServiceDetails[0]['client']; ?><br />
+                                Contact: <?= $ServiceDetails[0]['contact']; ?><br />
+                                Email: <?= $ServiceDetails[0]['email']; ?><br />
                             </td>
                         </tr>
                     </table>
@@ -114,20 +116,37 @@
 
             <tr class="heading">
                 <td>Service Type</td>
+                <td>Quantity</td>
                 <td>Price</td>
+
             </tr>
+            <?php
+            $total = 0;
+            foreach ($ServiceDetails as $detail) {
+                $total += $detail['Price'] * $detail['Quantity'];
+            }
+            ?>
 
             <?php foreach ($ServiceDetails as $detail): ?>
                 <tr class="item">
-                    <td><?= $detail['ServiceTypeName']; ?></td>
-                    <td><?= $detail['Price']; ?></td>
+                    <td>
+                        <?= $detail['ServiceTypeName']; ?>
+                    </td>
+                    <td>
+                        <?= $detail['Quantity']; ?>
+                    </td>
+                    <td>
+                        <?= $detail['Price']; ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
-
             <tr class="total">
                 <td></td>
-                <td>Total: <?= $ServiceDetails[0]['Value']; ?></td>
+                <td>Total: <?= $total; ?></td>
             </tr>
+
+
+
         </table>
     </div>
 </body>

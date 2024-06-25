@@ -518,7 +518,7 @@ class SalesController extends Controller
 
         $exchange = $this->request->getPost('exchange');
         $value = $this->request->getPost('Value');
-        $currencyName = $this->request->getPost('currencyName');
+        $currencyName = $this->request->getPost('Currency');
         $paymentMethod = $this->request->getPost('Payment');
         $client = $this->request->getPost('client');
         $idReceipts = $this->request->getPost('idReceipts');
@@ -529,7 +529,7 @@ class SalesController extends Controller
             'value' => $value,
             'idUser' => $UserID,
             'idAnullim' => 0,
-            'method' => $paymentMethod,
+            'method' => $currencyName,
             'idPaymentMethod' => $paymentMethod,
             'exchange' => $exchange,
             'nr_serial' => 0,
@@ -750,6 +750,7 @@ class SalesController extends Controller
     {
         $model = new salesModel();
         $data['ServiceDetails'] = $model->getSalesDetails($idReceipts);
+        $data['PaymentDetails'] = $model->getPaymentDetails($idReceipts);
         return view('Sale_details', $data);
     }
 
@@ -771,7 +772,6 @@ class SalesController extends Controller
     {
         $model = new salesModel();
 
-        // Add your logic to update values to zero
         $result = $model->updateServiceToZero($idReceipts);
 
         if ($result) {
@@ -781,6 +781,19 @@ class SalesController extends Controller
         }
     }
 
+    public function cancelInvoice($idReceipts)
+    {
+        $model = new salesModel();
+        $result = $model->duplicateInvoice($idReceipts);
+
+        if ($result) {
+
+            return redirect()->to(base_url('/viewServiceDetails/' . $idReceipts));
+            // return redirect()->to('/viewServiceDetails/' . $idReceipts)->with('success', 'Invoice duplicated successfully');
+        } else {
+            return redirect()->to('/viewServiceDetails/' . $idReceipts)->with('error', 'Failed to duplicate invoice');
+        }
+    }
 
 
 

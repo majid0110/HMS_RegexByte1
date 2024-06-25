@@ -25,6 +25,22 @@
     <link rel="stylesheet" href="./public/assets/css/vertical-layout-light/style.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="./public/assets/images/favicon.png" />
+
+    <style>
+        .text-bg-success {
+            background-color: #73ad31;
+            color: white;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+        }
+
+        .text-bg-danger {
+            background-color: red;
+            color: white;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -259,26 +275,28 @@
                                                         <?= $Sale['PaymentMethod']; ?>
                                                     </td>
                                                     <td>
-                                                        <?= $Sale['Status']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?= $Sale['Value']; ?>
-                                                    </td>
+                                                        <span
+                                                            class="<?= $Sale['Status'] == 'closed' ? 'text-bg-success' : 'text-bg-danger'; ?>">
+                                                            <?= $Sale['Status']; ?>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['Value']; ?>
+                                                            </td>
                                                     <td>
                                                         <?= $Sale['Date']; ?>
-                                                    </td>
+                                                        </td>
                                                     <td>
                                                         <a href="<?= base_url('viewServiceDetails/' . $Sale['idReceipts']); ?>"
-                                                            class="btn btn-info btn-sm">View Details</a>
-
-                                                        <a href="<?= base_url('deleteSales/' . $Sale['idReceipts']); ?>"
-                                                            onclick="return confirm('Are you sure you want to delete this Record?');"
-                                                            class="btn btn-danger btn-sm">Delete</a>
+                                                            class="btn btn-info btn-sm">View Details</a> <a
+                                                            href="<?= base_url('deleteSales/' . $Sale['idReceipts']); ?>"
+                                                            onclick="return confirm('Are you sure you want to delete this
+                                                        Record?');" class="btn btn-danger btn-sm">Delete</a>
 
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
-                                        </tbody>
+                                            </tbody>
                                     </table>
                                 </div>
                             </div>

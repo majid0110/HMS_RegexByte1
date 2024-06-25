@@ -162,14 +162,21 @@
                                                 <td></td>
                                         </table>
 
+                                        <a href="<?= base_url('SalesController/cancelInvoice/' . $ServiceDetails[0]['idReceipts']); ?>"
+                                            class="btn btn-warning text-white me-0"
+                                            style="margin-left: 85%; height: 1.6rem; padding: 0%; width: 6rem; font-size: medium; background: #ff0000;">
+                                            Cancel
+                                        </a>
+
                                         <!-- <a href="<?= base_url('SalesController/downloadPDF/' . $ServiceDetails[0]['idReceipts']); ?>"
                                             class="btn btn-primary">Download PDF</a> -->
 
                                         <a href="<?= base_url('SalesController/downloadPDF/' . $ServiceDetails[0]['idReceipts']); ?>"
                                             class="btn btn-primary text-white me-0"
-                                            style="margin-left: 67%;height: 1.6rem; padding: 0%; width: 6rem;font-size: medium;background: #08088f;"><i
-                                                class="icon-download"></i>
-                                            Export</a>
+                                            style="margin-left: 85%;height: 1.6rem; padding: 0%; width: 6rem;font-size: medium;background: #08088f;"><i
+                                                class="icon-File"></i>
+                                            Download PDF</a>
+
                                         <hr>
                                         <p>
                                             Status:
@@ -234,6 +241,13 @@
                                     <td>Price</td>
 
                                 </tr>
+                                <?php
+                                $total = 0;
+                                foreach ($ServiceDetails as $detail) {
+                                    $total += $detail['Price'] * $detail['Quantity'];
+                                }
+                                ?>
+
                                 <?php foreach ($ServiceDetails as $detail): ?>
                                     <tr class="item">
                                         <td>
@@ -249,8 +263,44 @@
                                 <?php endforeach; ?>
                                 <tr class="total">
                                     <td></td>
-                                    <td>Total: <?= $ServiceDetails[0]['Value']; ?></td>
+                                    <td>Total: <?= $total; ?></td>
                                 </tr>
+
+                            </table>
+                            <h3>Payment Records</h3>
+                            <table cellpadding="0" cellspacing="0">
+                                <tr class="heading">
+                                    <td>ID Payment</td>
+                                    <td>Value</td>
+                                    <td>Date</td>
+                                    <td>Method</td>
+                                    <td>Currency</td>
+                                    <td>Exchange</td>
+
+                                </tr>
+                                <?php foreach ($PaymentDetails as $payment): ?>
+                                    <tr class="item">
+                                        <td>
+                                            <?= $payment['idPayment']; ?>
+                                        </td>
+                                        <td>
+                                            <?= $payment['value']; ?>
+                                        </td>
+                                        <td>
+                                            <?= $payment['date']; ?>
+                                        </td>
+                                        <td>
+                                            <?= $payment['PaymentMethodName']; ?>
+                                        </td>
+                                        <td>
+                                            <?= $payment['Currency']; ?>
+                                        </td>
+                                        <td>
+                                            <?= $payment['exchange']; ?>
+                                        </td>
+
+                                    </tr>
+                                <?php endforeach; ?>
                             </table>
 
                             <!-- Modal -->

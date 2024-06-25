@@ -198,6 +198,8 @@ $routes->get('/generateExcelServiceDetailReport', 'ReportsController::generateEx
 $routes->post('generateExcelServiceDetailReport', 'ReportsController::generateExcelServiceDetailReport');
 
 $routes->get('SalesController/downloadPDF/(:num)', 'SalesController::downloadPDF/$1');
+$routes->get('SalesController/cancelInvoice/(:num)', 'SalesController::cancelInvoice/$1');
+
 
 //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Reports Routes
