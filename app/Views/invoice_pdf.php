@@ -1,153 +1,189 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #333;
+            background-color: #fff;
+            margin: 0;
+            padding: 20px;
         }
 
         .invoice-box {
             max-width: 800px;
             margin: auto;
-            padding: 30px;
-            border: 1px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-            font-size: 16px;
-            line-height: 24px;
+            padding: 20px;
+            border: 1px solid #ddd;
         }
 
-        .invoice-box table {
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .company-details,
+        .client-details {
+            width: 45%;
+        }
+
+        .invoice-details {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
             width: 100%;
-            line-height: inherit;
-            text-align: left;
+            border-collapse: collapse;
         }
 
-        .invoice-box table td {
-            padding: 5px;
-            vertical-align: top;
-        }
 
-        .invoice-box table tr.top table td {
-            padding-bottom: 20px;
-        }
-
-        .invoice-box table tr.information table td {
-            padding-bottom: 40px;
-        }
-
-        .invoice-box table tr.heading td {
-            background: #eee;
-            border-bottom: 1px solid #ddd;
+        .total {
             font-weight: bold;
+            text-align: right;
         }
 
-        .invoice-box table tr.details td {
-            padding-bottom: 20px;
+        .qr-code {
+            text-align: center;
+            margin: 20px 0;
         }
 
-        .invoice-box table tr.item td {
-            border-bottom: 1px solid #eee;
-        }
-
-        .invoice-box table tr.total td:nth-child(2) {
-            border-top: 2px solid #eee;
-            font-weight: bold;
+        .footer {
+            text-align: center;
+            margin-top: 30px;
         }
     </style>
 </head>
 
 <body>
-    <div class="invoice-box">
-        <table cellpadding="0" cellspacing="0">
-            <tr class="top">
-                <td colspan="2">
-                    <table>
-                        <tr>
-                            <td class="title">
-                                <?php
-                                $session = session();
-                                if ($session->has('businessProfileImage')) {
-                                    echo '<img class="img-xs rounded-circle larger-profile-img" style="width: 90px; height: 90px;" src="' . $session->get('businessProfileImage') . '" alt="Profile image">';
-                                }
-                                ?>
-                                <style="width: 100%; max-width: 300px" />
-                            </td>
+    <?php
+    $session = session();
+    ?>
+    <div>
+        <div class="header">
+            <table>
+                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#payModal" onclick="loadPayInvoice('<?= $ServiceDetails[0]['invOrdNum']; ?>')">Pay</button> -->
+                <tr>
+                    <td class="title">
+                        <?php
+                        $session = session();
+                        if ($session->has('businessProfileImage')) {
+                            echo '<img class="img-xs rounded-circle larger-profile-img" style="width: 90px; height: 90px;" src="' . $session->get('businessProfileImage') . '" alt="Profile image">';
+                        }
+                        ?>
+                        <style="width: 100%; max-width: 350px" />
+                    </td>
 
-                            <td>
+                    <td style="text-align: center;">
+                        <div class="invoice-details" style="display: inline-block; text-align: left;">
+                            <h2>Invoice <?= $ServiceDetails[0]['invOrdNum']; ?> / <?= date("Y"); ?></h2>
+                            <p style="font-weight: bold;">
+                                Date: <?= date("Y-m-d H:i:s"); ?><br>
                                 <?php
                                 $session = session();
                                 if ($session->has('businessName') && $session->has('phoneNumber')) {
-
-                                    echo '<strong>' . $session->get('businessName') . '<br>';
-                                    echo '<strong>' . $session->get('phoneNumber') . '<br>';
-                                    echo '<strong>' . $session->get('business_address') . '<br>';
+                                    echo 'Operator Name:' . $session->get('fName') . '<br>';
+                                    echo '' . $session->get('businessName') . '<br>';
+                                    echo '' . $session->get('phoneNumber') . '<br>';
+                                    echo '' . $session->get('business_address') . '<br>';
                                 }
                                 ?>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
+                            </p>
+                        </div>
+                    </td>
 
-        </table>
-        <hr>
+
+
+                    <td>
+
+                    </td>
+                    <td class="title">
+                        <?php
+                        $session = session();
+                        if ($session->has('businessProfileImage')) {
+                            echo '<img class="img-xs rounded-circle larger-profile-img" style="width: 90px; height: 90px;" src="' . $session->get('businessProfileImage') . '" alt="Profile image">';
+                        }
+                        ?>
+                        <style="width: 100%; max-width: 300px" />
+                    </td>
+            </table>
+        </div>
+
         <table>
-            <tr class="information">
-                <td colspan="2">
-                    <table>
-                        <tr>
-                            <td>
-                                <u><b>Invoice Details:</b></u><br />
-                                Invoice #: <?= $ServiceDetails[0]['invOrdNum']; ?><br />
-                                Due: <?= $ServiceDetails[0]['due']; ?><br />
-                                Payment Method: <?= $ServiceDetails[0]['PaymentMethod']; ?><br />
-                                Currency: <?= $ServiceDetails[0]['Currency']; ?><br />
-                            </td>
-                            <td>
-                                <u><b>Client Details:</b></u><br />
-                                Client: <?= $ServiceDetails[0]['client']; ?><br />
-                                Contact: <?= $ServiceDetails[0]['contact']; ?><br />
-                                Email: <?= $ServiceDetails[0]['email']; ?><br />
-                            </td>
-                        </tr>
-                    </table>
+            <tr>
+                <td>
+
+                    <b>Seller:</b><br /> <?= $session->get('businessName') ?? 'Business Name'; ?><br /><br />
+                    <b>Address:</b><br /> <?= $session->get('business_address') ?? 'Business Address'; ?><br /><br />
+                    <b>Phone No:</b><br /> <?= $session->get('phoneNumber') ?? 'Phone Number'; ?><br />
+                </td>
+                <td>
+
+                    <b>Buyer:</b><br /> <?= $ServiceDetails[0]['client']; ?><br /><br />
+                    <b>Address:</b><br /> <?= $ServiceDetails[0]['address']; ?><br />
+                    <b>Contact:</b><br /> <?= $ServiceDetails[0]['contact']; ?><br /><br />
+
                 </td>
             </tr>
-
-            <tr class="heading">
-                <td>Service Type</td>
-                <td>Quantity</td>
-                <td>Price</td>
-
-            </tr>
-            <?php
-            $total = 0;
-            foreach ($ServiceDetails as $detail) {
-                $total += $detail['Price'] * $detail['Quantity'];
-            }
-            ?>
-
-            <?php foreach ($ServiceDetails as $detail): ?>
-                <tr class="item">
-                    <td>
-                        <?= $detail['ServiceTypeName']; ?>
-                    </td>
-                    <td>
-                        <?= $detail['Quantity']; ?>
-                    </td>
-                    <td>
-                        <?= $detail['Price']; ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-            <tr class="total">
-                <td></td>
-                <td>Total: <?= $total; ?></td>
-            </tr>
-
-
-
         </table>
+
+        <br>
+
+        <table>
+            <thead>
+                <tr>
+                    <th
+                        style="padding: 10px; text-align: left; border-top: 2px solid #ddd; border-bottom: 2px solid #ddd;">
+                        Code</th>
+                    <th
+                        style="padding: 10px; text-align: left; border-top: 2px solid #ddd; border-bottom: 2px solid #ddd;">
+                        Service Type</th>
+                    <th
+                        style="padding: 10px; text-align: left; border-top: 2px solid #ddd; border-bottom: 2px solid #ddd;">
+                        Quantity</th>
+                    <th
+                        style="padding: 10px; text-align: left; border-top: 2px solid #ddd; border-bottom: 2px solid #ddd;">
+                        Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $total = 0;
+                foreach ($ServiceDetails as $detail) {
+                    $total += $detail['Price'] * $detail['Quantity'];
+                }
+                ?>
+                <?php foreach ($ServiceDetails as $detail): ?>
+                    <tr class="item">
+                        <td>
+                            <?= $detail['Code']; ?>
+                        </td>
+                        <td>
+                            <?= $detail['ServiceTypeName']; ?>
+                        </td>
+                        <td>
+                            <?= $detail['Quantity']; ?>
+                        </td>
+                        <td>
+                            <?= $detail['Price']; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <p class="total">VALUE: <?= $total; ?></p>
+
+
+        <div class="footer">
+            <p>Thank you for your business. Please make the payment by the due date.</p>
+        </div>
     </div>
 </body>
 

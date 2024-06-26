@@ -111,7 +111,7 @@ class salesModel extends Model
             ->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod', 'left') // Join with paymentmethods table
             ->join('currency', 'currency.id = invoices.idCurrency', 'left')
             ->where('invoicedetail.idReceipts', $idReceipts)
-            ->select('invoicedetail.*, artmenu.Name as ServiceTypeName,invoices.Notes, invoices.invOrdNum, invoices.Status, invoices.Value, invoices.invoice_period_end_date as due, invoices.Date as InvoiceDate, invoices.Time as InvoiceTime, client.*, paymentmethods.Method as PaymentMethod, currency.Currency as Currency')
+            ->select('invoicedetail.*, artmenu.Name as ServiceTypeName,artmenu.Code as Code,invoices.Notes, invoices.invOrdNum, invoices.Status, invoices.Value, invoices.invoice_period_end_date as due, invoices.Date as InvoiceDate, invoices.Time as InvoiceTime, client.*, paymentmethods.Method as PaymentMethod, currency.Currency as Currency')
             ->get()
             ->getResultArray();
     }
