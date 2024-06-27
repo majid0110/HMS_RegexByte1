@@ -757,11 +757,18 @@ class SalesController extends Controller
     public function downloadPDF($idReceipts)
     {
         $model = new salesModel();
-        $data['ServiceDetails'] = $model->getSalesDetails($idReceipts);
+        $data['ServiceDetails'] = $model->getSalesDetails1($idReceipts);
 
         $html = view('invoice_pdf', $data);
 
-        $mpdf = new \Mpdf\Mpdf();
+        // $mpdf = new \Mpdf\Mpdf();
+        $mpdf = new \Mpdf\Mpdf([
+            'margin_left' => 11,
+            'margin_right' => 11,
+            'margin_top' => 11,
+            'margin_bottom' => 8,
+        ]);
+
 
         $mpdf->WriteHTML($html);
 

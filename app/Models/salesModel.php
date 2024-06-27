@@ -111,10 +111,26 @@ class salesModel extends Model
             ->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod', 'left') // Join with paymentmethods table
             ->join('currency', 'currency.id = invoices.idCurrency', 'left')
             ->where('invoicedetail.idReceipts', $idReceipts)
-            ->select('invoicedetail.*, artmenu.Name as ServiceTypeName,artmenu.Code as Code,invoices.Notes, invoices.invOrdNum, invoices.Status, invoices.Value, invoices.invoice_period_end_date as due, invoices.Date as InvoiceDate, invoices.Time as InvoiceTime, client.*, paymentmethods.Method as PaymentMethod, currency.Currency as Currency')
+            ->select('invoicedetail.*, artmenu.idUnit as Unit,artmenu.Name as ServiceTypeName,artmenu.Code as Code,invoices.Notes, invoices.invOrdNum, invoices.Status, invoices.Value, invoices.invoice_period_end_date as due, invoices.Date as InvoiceDate, invoices.Time as InvoiceTime, client.*, paymentmethods.Method as PaymentMethod, currency.Currency as Currency')
             ->get()
             ->getResultArray();
     }
+
+    public function getSalesDetails1($idReceipts)
+    {
+        return $this->db->table('invoicedetail')
+            ->join('artmenu', 'artmenu.idArtMenu = invoicedetail.idArtMenu')
+            ->join('invoices', 'invoices.idReceipts = invoicedetail.idReceipts')
+            ->join('client', 'client.idClient = invoices.idClient')
+            ->join('units', 'units.idUnit = artmenu.idUnit')
+            ->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod', 'left')
+            ->join('currency', 'currency.id = invoices.idCurrency', 'left')
+            ->where('invoicedetail.idReceipts', $idReceipts)
+            ->select('invoicedetail.*, units.name as Unit,artmenu.Name as ServiceTypeName, artmenu.Code as Code, invoices.Notes, invoices.invOrdNum, invoices.Status, invoices.Value, invoices.invoice_period_end_date as due, invoices.timeStamp as InvoiceDate, invoices.Time as InvoiceTime,invoices.ValueTVSH as TVSH, client.*, paymentmethods.Method as PaymentMethod, currency.Currency as Currency, invoicedetail.Discount') // Added invoicedetail.Discount
+            ->get()
+            ->getResultArray();
+    }
+
 
     public function getPaymentDetails($idReceipts)
     {
