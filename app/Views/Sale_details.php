@@ -164,7 +164,7 @@
 
                                         <a href="<?= base_url('SalesController/cancelInvoice/' . $ServiceDetails[0]['idReceipts']); ?>"
                                             class="btn btn-warning text-white me-0"
-                                            style="margin-left: 85%; height: 1.6rem; padding: 0%; width: 6rem; font-size: medium; background: #ff0000;">
+                                            style="margin-left: 73%; height: 1.6rem; padding: 0%; width: 6rem; font-size: medium; background: #ff0000;">
                                             Cancel
                                         </a>
 
@@ -173,7 +173,7 @@
 
                                         <a href="<?= base_url('SalesController/downloadPDF/' . $ServiceDetails[0]['idReceipts']); ?>"
                                             class="btn btn-primary text-white me-0"
-                                            style="margin-left: 85%;height: 1.6rem; padding: 0%; width: 6rem;font-size: medium;background: #08088f;"><i
+                                            style="height: 1.6rem; padding: 0%; width: 7rem;font-size: medium;background: #08088f;"><i
                                                 class="icon-File"></i>
                                             Download PDF</a>
 

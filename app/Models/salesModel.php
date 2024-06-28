@@ -147,6 +147,15 @@ class salesModel extends Model
     public function duplicateInvoice($idReceipts)
     {
         $invoice = $this->db->table('invoices')->where('idReceipts', $idReceipts)->get()->getRowArray();
+        $data = [
+            'Quantity' => 0,
+            'Price' => 0,
+            'Sum' => 0,
+        ];
+
+        $this->db->table('invoicedetail')
+            ->where('idReceipts', $idReceipts)
+            ->update($data);
 
         if ($invoice) {
             unset($invoice['idReceipts']);

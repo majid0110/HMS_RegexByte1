@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            color: #333;
+            color: #000000;
             background-color: #fff;
             margin: 0;
             padding: 1px;
@@ -43,6 +43,10 @@
         .total {
             font-weight: bold;
             text-align: right;
+            padding: 0%;
+            margin-top: 1px;
+            margin-bottom: 2px;
+
         }
 
         .qr-code {
@@ -84,16 +88,16 @@
                     <td style="width: 33.33%; text-align: center;">
                         <div class="invoice-details" style="display: inline-block; text-align: left;">
                             <p style="font-weight: bold;">Invoice <?= $ServiceDetails[0]['invOrdNum']; ?> /
-                                <?= date("Y"); ?>
+                                <?= date("Y"); ?> <br>
                             </p>
                             <p style="font-weight: bold;">
                                 Date: <?= $ServiceDetails[0]['InvoiceDate']; ?><br>
                                 <?php
                                 if ($session->has('businessName') && $session->has('phoneNumber')) {
                                     echo 'Operator Name: ' . $session->get('fName') . '<br>';
-                                    echo '' . $session->get('businessName') . '<br>';
-                                    echo '' . $session->get('phoneNumber') . '<br>';
-                                    echo '' . $session->get('business_address') . '<br>';
+                                    echo 'Business:' . $session->get('businessName') . '<br>';
+                                    echo 'Phone:' . $session->get('phoneNumber') . '<br>';
+                                    echo 'Address' . $session->get('business_address') . '<br>';
                                 }
                                 ?>
                             </p>
@@ -119,6 +123,8 @@
                         style="font-size: small;"><?= $ServiceDetails[0]['client']; ?></span><br /><br />
                     <b>Address:</b><br /> <span
                         style="font-size: small;"><?= $ServiceDetails[0]['address']; ?></span><br />
+                    <b>City/Country</b><br /> <span style="font-size: small;"><?= $ServiceDetails[0]['city']; ?> /
+                        <?= $ServiceDetails[0]['state']; ?></span><br /><br />
                     <b>Contact:</b><br /><span style="font-size: small;">
                         <?= $ServiceDetails[0]['contact']; ?><br /></span><br />
                     <b>CNIC:</b><br /> <span
