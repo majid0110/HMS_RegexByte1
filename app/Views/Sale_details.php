@@ -136,7 +136,6 @@
                                     <td colspan="3">
 
                                         <table>
-                                            <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#payModal" onclick="loadPayInvoice('<?= $ServiceDetails[0]['invOrdNum']; ?>')">Pay</button> -->
                                             <tr>
                                                 <td class="title">
                                                     <?php
@@ -167,6 +166,19 @@
                                             style="margin-left: 73%; height: 1.6rem; padding: 0%; width: 6rem; font-size: medium; background: #ff0000;">
                                             Cancel
                                         </a>
+
+                                        <a href="<?= base_url('correctInvoice/' . $ServiceDetails[0]['idReceipts']); ?>"
+                                            class="btn btn-info text-white me-0"
+                                            style="margin-left: 10px; height: 1.6rem; padding: 0%; width: 6rem; font-size: medium; background: #17a2b8;">
+                                            Correct
+                                        </a>
+
+                                        <a href="#" class="btn btn-warning text-white me-0" data-toggle="modal"
+                                            data-target="#correctModal"
+                                            style="margin-left: 73%; height: 1.6rem; padding: 0%; width: 6rem; font-size: medium; background: #ffa500;">
+                                            Correct-1
+                                        </a>
+
 
                                         <!-- <a href="<?= base_url('SalesController/downloadPDF/' . $ServiceDetails[0]['idReceipts']); ?>"
                                             class="btn btn-primary">Download PDF</a> -->
@@ -331,6 +343,153 @@
         <?php include 'include_common/footer.php'; ?>
         <!-- partial -->
     </div>
+
+    <!-- Correct Modal -->
+    <div class="modal fade" id="correctModal" tabindex="-1" role="dialog" aria-labelledby="correctModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="correctModalLabel">Correct Invoice</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="correctInvoiceForm" action="<?= base_url('SalesController/UpdateInvoice'); ?>"
+                        method="post">
+                        <input type="hidden" name="invoiceId" value="<?= $ServiceDetails[0]['idReceipts']; ?>">
+
+                        <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="client">Client</label>
+                                    <select class="form-control" id="client" name="client" required>
+                                        <?php foreach ($clients as $client): ?>
+                                            <option value="<?= $client['idClient']; ?>" <?= $client['idClient'] == $ServiceDetails[0]['idClient'] ? 'selected' : ''; ?>>
+                                                <?= $client['client']; ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Client Email</label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        value="<?= $ServiceDetails[0]['email']; ?>" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="contact">Client Contact</label>
+                                    <input type="text" class="form-control" id="contact" name="contact"
+                                        value="<?= $ServiceDetails[0]['contact']; ?>" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="currency">Currency</label>
+                                        <select class="form-control" id="currency" name="currency" required>
+                                            <?php foreach ($currencies as $currency): ?>
+                                                <option value="<?= $currency['id']; ?>" <?= $currency['Currency'] == $ServiceDetails[0]['Currency'] ? 'selected' : ''; ?>>
+                                                    <?= $currency['Currency']; ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="invoiceDate">Invoice Date</label>
+                                    <input type="date" class="form-control" id="invoiceDate" name="invoiceDate"
+                                        value="<?= (new DateTime($ServiceDetails[0]['InvoiceDate']))->format('Y-m-d'); ?>"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="paymentMethod">Payment Method</label>
+                                        <select class="form-control" id="paymentMethod" name="paymentMethod" required>
+                                            <?php foreach ($payments as $method): ?>
+                                                <option value="<?= $method['idPaymentMethods']; ?>" <?= $method['Method'] == $ServiceDetails[0]['PaymentMethod'] ? 'selected' : ''; ?>>
+                                                    <?= $method['Method']; ?>
+                                                </option>
+                                            <?php endforeach; ?>    
+                                        </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="notes">Notes</label>
+                            <textarea class="form-control" id="notes" name="notes"
+                                required><?= $ServiceDetails[0]['Notes']; ?></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <h4>Service Details</h4>
+                            <table class="table">
+            <thead>
+                <tr>
+                    <th>Service Type</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($ServiceDetails as $index => $detail): ?>
+                    <tr>
+                        <td>
+                            <input type="hidden" name="ServiceDetails[<?= $index; ?>][idArtMenu]" value="<?= $detail['idArtMenu']; ?>">
+                            <input type="text" class="form-control" id="serviceType_<?= $index; ?>"
+                                value="<?= $detail['ServiceTypeName']; ?>" readonly>
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="quantity_<?= $index; ?>"
+                                name="ServiceDetails[<?= $index; ?>][Quantity]"
+                                value="<?= $detail['Quantity']; ?>" required>
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="price_<?= $index; ?>"
+                                name="ServiceDetails[<?= $index; ?>][Price]"
+                                value="<?= $detail['Price']; ?>" required>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Confirm</button>
+                    </form>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadCorrectInvoice(invOrdNum) {
+            $('#correctInvoiceContent').load('/HMS_RegexByte/CorrectInvoice?invOrdNum=' + invOrdNum);
+        }
+
+        $(document).on('click', '[data-target="#correctModal"]', function () {
+            var invOrdNum = '<?= $ServiceDetails[0]['invOrdNum']; ?>';
+            loadCorrectInvoice(invOrdNum);
+        });
+    </script>
+
     <script>
         function deleteService() {
             var idReceipts = <?= $ServiceDetails[0]['idReceipts']; ?>;

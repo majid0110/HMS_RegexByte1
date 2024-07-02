@@ -74,7 +74,7 @@
     $session = session();
     ?>
     <div>
-        <div class="website-url">www.regegbyte.com</div>
+        <div class="website-url">www.regexbyte.com</div>
         <div class="header">
             <table style="width: 100%;">
                 <tr>
@@ -115,15 +115,17 @@
                         style="font-size: small;"><?= $session->get('businessName') ?? 'Business Name'; ?></span><br /><br />
                     <b>Address:</b><br /> <span
                         style="font-size: small;"><?= $session->get('business_address') ?? 'Business Address'; ?></span><br /><br />
-                    <b>Phone No:</b><br /> <span
-                        style="font-size: small;"><?= $session->get('phoneNumber') ?? 'Phone Number'; ?></span><br />
+                    <b>City/Country:</b><br /> <span style="font-size: small;">Mardan/Pakistan</span><br /> <br />
+                    <b>Contact:</b><br /> <span
+                        style="font-size: small;"><?= $session->get('phoneNumber') ?? 'Phone Number'; ?></span><br /><br />
+                    <b>RegNo:</b><br /> <span style="font-size: small;">Regex12903134</span><br />
                 </td>
                 <td>
                     <b>Buyer:</b><br /><span
                         style="font-size: small;"><?= $ServiceDetails[0]['client']; ?></span><br /><br />
                     <b>Address:</b><br /> <span
-                        style="font-size: small;"><?= $ServiceDetails[0]['address']; ?></span><br />
-                    <b>City/Country</b><br /> <span style="font-size: small;"><?= $ServiceDetails[0]['city']; ?> /
+                        style="font-size: small;"><?= $ServiceDetails[0]['address']; ?></span><br /><br />
+                    <b>City/Country</b><br /> <span style="font-size: small;"><?= $ServiceDetails[0]['city']; ?>
                         <?= $ServiceDetails[0]['state']; ?></span><br /><br />
                     <b>Contact:</b><br /><span style="font-size: small;">
                         <?= $ServiceDetails[0]['contact']; ?><br /></span><br />
@@ -149,9 +151,10 @@
                     <th style="padding: 10px; text-align: left;  border-bottom: 2px solid #000000;">
                         PRICE</th>
                     <th style="padding: 10px; text-align: left;  border-bottom: 2px solid #000000;">
-                        TOTAL</th>
+                        TAX</th>
                     <th style="padding: 10px; text-align: left;  border-bottom: 2px solid #000000;">
-                        TVSH</th>
+                        TOTAL</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -173,8 +176,9 @@
                         <td style="text-align: left; font-size: x-small"><?= $detail['Unit']; ?></td>
                         <td style="text-align: left; font-size: x-small"><?= $detail['Quantity']; ?></td>
                         <td style="text-align: left; font-size: x-small"><?= $detail['Price']; ?></td>
-                        <td style="text-align: left; font-size: x-small"><?= $detail['Quantity'] * $detail['Price']; ?></td>
                         <td style="text-align: left; font-size: x-small"><?= $detail['TVSH']; ?></td>
+                        <td style="text-align: left; font-size: x-small"><?= $detail['Quantity'] * $detail['Price']; ?></td>
+
                     </tr>
                 <?php endforeach; ?>
             </tbody>

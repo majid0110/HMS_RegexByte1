@@ -201,6 +201,13 @@ $routes->get('SalesController/downloadPDF/(:num)', 'SalesController::downloadPDF
 $routes->get('SalesController/cancelInvoice/(:num)', 'SalesController::cancelInvoice/$1');
 
 
+$routes->get('/correctInvoice/(:num)', 'SalesController::correctInvoice/$1');
+// $routes->get('/edititem/(:num)', 'itemsController::edititem/$1');
+$routes->post('SalesController/UpdateInvoice/(:num)', 'SalesController::UpdateInvoice/$1');
+$routes->post('SalesController/UpdateInvoice', 'SalesController::UpdateInvoice');
+
+
+
 //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Reports Routes
 //-------------------------------------------------------------------------------------------------------------------------

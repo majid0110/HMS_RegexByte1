@@ -46,6 +46,81 @@ class InvoiceModel extends Model
     {
         return $this->insert($data);
     }
+    public function getSalesDetails($idReceipts)
+    {
+        return $this->db->table('salesdetails')->where('idReceipts', $idReceipts)->get()->getResultArray();
+    }
+
+    // public function insertInvoiceDetail($data)
+    // {
+    //     return $this->db->table('invoicedetail')->insert($data);
+    // }
+    public function insertInvoice1($data)
+    {
+        $this->insert($data);
+        return $this->insertID();
+    }
+
+    public function getInvoicePaymentsByReceiptId($idReceipts)
+    {
+        return $this->db->table('invoicepayment')
+            ->where('idReceipt', $idReceipts)
+            ->get()
+            ->getResult();
+    }
+
+    public function getPaymentDetailsByReceiptId($idReceipts)
+    {
+        return $this->db->table('invoicepaymentdetails')
+            ->join('invoicepayment', 'invoicepayment.idPayment = invoicepaymentdetails.idPayment')
+            ->where('invoicepayment.idReceipt', $idReceipts)
+            ->get()
+            ->getResult();
+    }
+
+    public function getPaymentDetailsById($idPayment)
+    {
+        return $this->db->table('invoicepaymentdetails')
+            ->where('idPayment', $idPayment)
+            ->get()
+            ->getResult();
+    }
+
+    public function insertPaymentDetail($data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('invoicepaymentdetails');
+        $builder->insert($data);
+        return $this->insertID();
+    }
+
+    public function insertInvoicePayment($data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('invoicepayment');
+        return $builder->insert($data);
+    }
+
+    public function insertInvoiceReference($data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('invoicerefrences');
+        return $builder->insert($data);
+    }
+
+    public function insertInvoiceDetail($data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('invoicedetail');
+        return $builder->insert($data);
+    }
+    public function getInvoiceDetailsByReceiptId($idReceipts)
+    {
+        return $this->db->table('invoicedetail')
+            ->where('idReceipts', $idReceipts)
+            ->get()
+            ->getResult();
+    }
 
     public function getinvoiceNumber($businessID, $idPayment)
     {

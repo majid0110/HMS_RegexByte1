@@ -167,6 +167,21 @@ class salesModel extends Model
         return false;
     }
 
+    public function UpdateInvoice($idReceipts, $data)
+    {
+        $invoice = $this->db->table('invoices')->where('idReceipts', $idReceipts)->get()->getRowArray();
+        $this->db->table('invoices')
+            ->where('idReceipts', $idReceipts)
+            ->update($data);
+
+        if ($invoice) {
+            unset($invoice['idReceipts']);
+
+            return $this->db->table('invoices')->insert($invoice);
+        }
+
+
+    }
 
     public function updateServiceToZero($idReceipts)
     {
