@@ -162,21 +162,19 @@
                                         </table>
 
                                         <a href="<?= base_url('SalesController/cancelInvoice/' . $ServiceDetails[0]['idReceipts']); ?>"
-                                            class="btn btn-warning text-white me-0"
-                                            style="margin-left: 73%; height: 1.6rem; padding: 0%; width: 6rem; font-size: medium; background: #ff0000;">
+                                            class="btn btn-primary text-white me-0" style="margin-left: 61%;">
                                             Cancel
                                         </a>
-
+<!-- 
                                         <a href="<?= base_url('correctInvoice/' . $ServiceDetails[0]['idReceipts']); ?>"
                                             class="btn btn-info text-white me-0"
                                             style="margin-left: 10px; height: 1.6rem; padding: 0%; width: 6rem; font-size: medium; background: #17a2b8;">
                                             Correct
-                                        </a>
+                                        </a> -->
 
-                                        <a href="#" class="btn btn-warning text-white me-0" data-toggle="modal"
-                                            data-target="#correctModal"
-                                            style="margin-left: 73%; height: 1.6rem; padding: 0%; width: 6rem; font-size: medium; background: #ffa500;">
-                                            Correct-1
+                                        <a href="#" class="btn btn-primary text-white me-0" data-toggle="modal"
+                                            data-target="#correctModal">
+                                            Correct
                                         </a>
 
 
@@ -184,8 +182,7 @@
                                             class="btn btn-primary">Download PDF</a> -->
 
                                         <a href="<?= base_url('SalesController/downloadPDF/' . $ServiceDetails[0]['idReceipts']); ?>"
-                                            class="btn btn-primary text-white me-0"
-                                            style="height: 1.6rem; padding: 0%; width: 7rem;font-size: medium;background: #08088f;"><i
+                                            class="btn btn-primary text-white me-0"><i
                                                 class="icon-File"></i>
                                             Download PDF</a>
 
@@ -437,36 +434,43 @@
 
                         <div class="form-group">
                             <h4>Service Details</h4>
+                            
                             <table class="table">
-            <thead>
-                <tr>
-                    <th>Service Type</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($ServiceDetails as $index => $detail): ?>
-                    <tr>
-                        <td>
-                            <input type="hidden" name="ServiceDetails[<?= $index; ?>][idArtMenu]" value="<?= $detail['idArtMenu']; ?>">
-                            <input type="text" class="form-control" id="serviceType_<?= $index; ?>"
-                                value="<?= $detail['ServiceTypeName']; ?>" readonly>
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="quantity_<?= $index; ?>"
-                                name="ServiceDetails[<?= $index; ?>][Quantity]"
-                                value="<?= $detail['Quantity']; ?>" required>
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="price_<?= $index; ?>"
-                                name="ServiceDetails[<?= $index; ?>][Price]"
-                                value="<?= $detail['Price']; ?>" required>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                                <thead>
+                                    <tr>
+                                        <th>Service Type</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach ($ServiceDetails as $index => $detail): ?>
+                                    <tr>
+                                        <td>
+                                            <input type="hidden" name="ServiceDetails[<?= $index; ?>][idArtMenu]" value="<?= $detail['idArtMenu']; ?>">
+                                            <input type="text" class="form-control" id="serviceType_<?= $index; ?>"
+                                            value="<?= $detail['ServiceTypeName']; ?>" readonly>
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" id="quantity_<?= $index; ?>"
+                                            name="ServiceDetails[<?= $index; ?>][Quantity]"
+                                            value="<?= $detail['Quantity']; ?>" required
+                                            oninput="calculateTotalValue()">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" id="price_<?= $index; ?>"
+                                            name="ServiceDetails[<?= $index; ?>][Price]"
+                                            value="<?= $detail['Price']; ?>" required
+                                            oninput="calculateTotalValue()">
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                            <div class="form-group">
+                                <label for="totalValue">Value:</label>
+                                    <input type="text" class="form-control" name="totalValue" id="totalValue" readonly>
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Confirm</button>
@@ -488,6 +492,22 @@
             var invOrdNum = '<?= $ServiceDetails[0]['invOrdNum']; ?>';
             loadCorrectInvoice(invOrdNum);
         });
+    </script>
+
+    <script>
+        function calculateTotalValue() {
+            var totalValue = 0;
+            <?php foreach ($ServiceDetails as $index => $detail): ?>
+                var quantity = parseFloat(document.getElementById('quantity_<?= $index; ?>').value) || 0;
+                var price = parseFloat(document.getElementById('price_<?= $index; ?>').value) || 0;
+                totalValue += quantity * price;
+            <?php endforeach; ?>
+            document.getElementById('totalValue').value = totalValue.toFixed(2);
+        }
+
+        window.onload = function() {
+            calculateTotalValue();
+        };
     </script>
 
     <script>
