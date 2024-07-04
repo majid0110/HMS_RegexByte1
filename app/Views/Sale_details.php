@@ -19,6 +19,10 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="../public/assets/css_s/vertical-layout-light/style.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url('public/assets/vendors_s/select2/select2.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('public/assets/vendors_s/bootstrap/css/bootstrap.min.css') ?>">
+</head>
 
     <!-- endinject -->
     <!-- <link rel="shortcut icon" href="../public/assets/images_s/regexbyte.png" /> -->
@@ -134,6 +138,7 @@
                             <table cellpadding="0" cellspacing="0">
                                 <tr class="top">
                                     <td colspan="3">
+                                  
 
                                         <table>
                                             <tr>
@@ -160,6 +165,9 @@
                                                 </td>
                                                 <td></td>
                                         </table>
+
+                                      
+
 
                                         <a href="<?= base_url('SalesController/cancelInvoice/' . $ServiceDetails[0]['idReceipts']); ?>"
                                             class="btn btn-primary text-white me-0" style="margin-left: 61%;">
@@ -210,9 +218,11 @@
                                             </a>
 
                                         <?php else: ?>
-                                            <button type="button" style="margin-top: -3rem;margin-left: 89%;"
+                                            <!-- <button type="button" style="margin-top: -3rem;margin-left: 89%;"
                                                 class="btn btn-primary" data-toggle="modal" data-target="#payModal"
-                                                onclick="loadPayInvoice('<?= $ServiceDetails[0]['invOrdNum']; ?>')">Pay</button>
+                                                onclick="loadPayInvoice('<?= $ServiceDetails[0]['invOrdNum']; ?>')">Pay</button> -->
+
+                                                <button type="button" style="margin-top: -3rem;margin-left: 89%;" class="btn btn-primary" data-toggle="modal" data-target="#serviceDetailsModal">Pay</button>
                                         <?php endif; ?>
                                     </td>
                                 </tr>
@@ -227,6 +237,31 @@
                                                     Due: <?= $ServiceDetails[0]['due']; ?><br />
                                                     Payment Method: <?= $ServiceDetails[0]['PaymentMethod']; ?><br />
                                                     Currency: <?= $ServiceDetails[0]['Currency']; ?><br />
+                                                    <div class="reference-invoices" style="margin-top: 0px ;">
+        <table class="table" style = "width: 20px;">
+            <thead>
+                <tr>
+                    <th>Receipt Reference</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (!empty($referenceInvoices)): ?>
+                    <?php foreach ($referenceInvoices as $reference): ?>
+                        <tr>
+                            <td style="padding:0%;"> <a href="<?= base_url('viewServiceDetails/' . $reference['idReceipt']); ?>" class="btn btn-link">
+                                    <?= $reference['idReceipt']; ?>
+                                </a></td>
+                           
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="3">No reference invoices found.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
                                                 </td>
                                                 <td>
                                                     <u><b>Client Details:</b></u><br />
@@ -312,23 +347,77 @@
                                 <?php endforeach; ?>
                             </table>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="payModal" tabindex="-1" role="dialog"
-                                aria-labelledby="payModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="payModalLabel">Pay Invoice</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div id="payInvoiceContent"></div>
-                                        </div>
-                                    </div>
+                            <div class="modal fade" id="serviceDetailsModal" tabindex="-1" role="dialog" aria-labelledby="serviceDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="serviceDetailsModalLabel">Payment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="pt-3" method="POST" action="<?= base_url('Payment') ?>" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col">
+                                <label>Value to Pay</label>
+                                <div>
+                                    <input type="text" class="form-control" name="valueToPay" value="<?= isset($valueToPay) ? $valueToPay : '' ?>" readonly>
                                 </div>
                             </div>
+                            <div class="col">
+                                <label>Value</label>
+                                <div>
+                                    <input class="typeahead form-control" type="number" name="Value" placeholder="Value">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>Currency</label>
+                                <div id="the-basics">
+                                    <select class="typeahead form-control" name="Currency">
+                                        <?php foreach ($currencies as $currency): ?>
+                                            <option value="<?= $currency['id'] ?>"><?= $currency['Currency'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Payment Method</label>
+                                <div id="the-basics">
+                                    <select class="typeahead form-control" name="Payment">
+                                        <?php foreach ($payments as $payment): ?>
+                                            <option value="<?= $payment['idPaymentMethods'] ?>" data-payment-id="<?= $payment['idPaymentMethods'] ?>"><?= $payment['Method'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>Exchange</label>
+                                <div id="bloodhound">
+                                    <input class="typeahead form-control" type="number" name="exchange" value='1.0' id="exchangeInput" placeholder="Exchange Rate">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <input type="hidden" name="client" class="form-control" value="<?= isset($client) ? $client : '' ?>" readonly>
+                            </div>
+                        </div>
+                        <input type="hidden" name="idReceipts" value="<?= isset($idReceipts) ? $idReceipts : '' ?>">
+
+                        <div class="row" style="margin-top: 1rem;">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary">Pay</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
                         </div>
                     </div>
@@ -510,6 +599,31 @@
         };
     </script>
 
+<script>
+    $(document).ready(function() {
+        // Assuming you have a way to trigger this modal
+        $('#payModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var invOrdNum = button.data('invordnum'); // Extract info from data-* attributes
+
+            // If necessary, you can make an AJAX call to fetch additional data based on invOrdNum
+            // and populate the modal form fields. Since we're not using AJAX here, this is just an example:
+            /*
+            $.ajax({
+                url: '<?= base_url("getInvoiceDetails"); ?>',
+                method: 'POST',
+                data: { invOrdNum: invOrdNum },
+                success: function(response) {
+                    $('#valueToPay').val(response.valueToPay);
+                    // Populate other fields as necessary
+                }
+            });
+            */
+        });
+    });
+</script>
+
+
     <script>
         function deleteService() {
             var idReceipts = <?= $ServiceDetails[0]['idReceipts']; ?>;
@@ -564,7 +678,19 @@
     <script src="../public/assets/js_s/file-upload.js"></script>
     <script src="../public/assets/js_s/typeahead.js"></script>
     <script src="../public/assets/js_s/select2.js"></script>
-
+    <script src="<?= base_url('public/assets/vendors_s/js/vendor.bundle.base.js') ?>"></script>
+    <script src="<?= base_url('public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js') ?>"></script>
+    <script src="<?= base_url('public/assets/vendors_s/select2/select2.min.js') ?>"></script>
+    <script src="<?= base_url('public/assets/vendors_s/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+    <script src="<?= base_url('public/assets/vendors_s/bootstrap-datepicker/bootstrap-datepicker.min.js') ?>"></script>
+    <script src="<?= base_url('public/assets/js_s/off-canvas.js') ?>"></script>
+    <script src="<?= base_url('public/assets/js_s/hoverable-collapse.js') ?>"></script>
+    <script src="<?= base_url('public/assets/js_s/template.js') ?>"></script>
+    <script src="<?= base_url('public/assets/js_s/settings.js') ?>"></script>
+    <script src="<?= base_url('public/assets/js_s/todolist.js') ?>"></script>
+    <script src="<?= base_url('public/assets/js_s/file-upload.js') ?>"></script>
+    <script src="<?= base_url('public/assets/js_s/typeahead.js') ?>"></script>
+    <script src="<?= base_url('public/assets/js_s/select2.js') ?>"></script>
 
 </body>
 

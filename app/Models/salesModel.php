@@ -55,6 +55,8 @@ class salesModel extends Model
             ->getResultArray();
     }
 
+
+
     public function getCategories()
     {
         return $this->db->table('catart')
@@ -738,12 +740,12 @@ class salesModel extends Model
     //     return $invoice;
     // }
 
-    public function getInvoiceByOrdNum($invOrdNum)
+    public function getInvoiceByOrdNum($idReceipts)
     {
         $session = \Config\Services::session();
         $businessID = $session->get('businessID');
         $invoice = $this->db->table('invoices')
-            ->where('invOrdNum', $invOrdNum)
+            ->where('idReceipts', $idReceipts)
             ->where('idBusiness', $businessID)
             ->get()
             ->getRow();
@@ -764,6 +766,15 @@ class salesModel extends Model
     }
 
 
+    public function getReferenceInvoices($idReceipts)
+    {
+        return $this->db->table('invoicerefrences')
+            ->select('referenceID, idReceipt, receiptReference')
+            ->where('idReceipt', $idReceipts)
+            ->orWhere('receiptReference', $idReceipts)
+            ->get()
+            ->getResultArray();
+    }
     public function getInvoiceByIdReceipts($idReceipts)
     {
 

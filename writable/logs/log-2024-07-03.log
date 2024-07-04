@@ -179,3 +179,28 @@ INFO - 2024-07-03 11:25:29 --> Session: Class initialized using 'CodeIgniter\Ses
 INFO - 2024-07-03 11:28:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-07-03 11:29:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-07-03 11:32:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-03 11:55:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-03 11:55:01 --> Call to undefined method App\Models\salesModel::getInvoiceById
+in SYSTEMPATH\Model.php on line 873.
+ 1 APPPATH\Controllers\SalesController.php(782): CodeIgniter\Model->__call('getInvoiceById', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\SalesController->viewServiceDetails('513')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SalesController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-03 11:59:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-03 11:59:50 --> Undefined property: stdClass::$remainingValue
+in APPPATH\Controllers\SalesController.php on line 83.
+ 1 APPPATH\Controllers\SalesController.php(83): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$remainingValue', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Controllers\\SalesController.php', 83)
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\SalesController->viewServiceDetails('513')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SalesController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-03 12:15:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-07-03 12:15:33 --> Invoice not found for invOrdNum: 
+CRITICAL - 2024-07-03 12:15:33 --> Undefined property: stdClass::$remainingValue
+in APPPATH\Controllers\SalesController.php on line 102.
+ 1 APPPATH\Controllers\SalesController.php(102): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$remainingValue', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Controllers\\SalesController.php', 102)
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\SalesController->viewServiceDetails('513')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SalesController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()

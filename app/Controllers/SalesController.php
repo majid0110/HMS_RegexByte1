@@ -72,7 +72,8 @@ class SalesController extends Controller
         $data['payments'] = $sales->getpayment();
         $data['currencies'] = $sales->getCurrancy();
 
-        $invOrdNum = $this->request->getVar('invOrdNum');
+        // $invOrdNum = $this->request->getVar('invOrdNum');
+        $invOrdNum = 3;
 
         $invoice = $sales->getInvoiceByOrdNum($invOrdNum);
 
@@ -92,6 +93,42 @@ class SalesController extends Controller
             log_message('error', "Invoice not found for invOrdNum: {$invOrdNum}");
         }
         return view('PayInovice.php', $data);
+    }
+
+    public function viewServiceDetails($idReceipts)
+    {
+        $model = new salesModel();
+        $clientModel = new ClientModel();
+
+        $data['payments'] = $model->getpayment();
+        $data['currencies'] = $model->getCurrancy();
+
+        $data['ServiceDetails'] = $model->getSalesDetails($idReceipts);
+        $data['PaymentDetails'] = $model->getPaymentDetails($idReceipts);
+        $data['clients'] = $clientModel->findAll();
+
+        $invOrdNum = 3;
+        $invoice = $model->getInvoiceByOrdNum($idReceipts);
+        // $invoice = $model->getInvoiceByOrdNum($invOrdNum);
+
+
+        // $invOrdNum = $this->request->getVar('invOrdNum');
+        // $test = $invoice->remainingValue;
+
+        // print_r($invOrdNum);
+        // die();
+        if ($invoice) {
+            $data['valueToPay'] = $invoice->remainingValue;
+            $data['client'] = $invoice->idClient;
+            $data['idReceipts'] = $invoice->idReceipts;
+        } else {
+            $data['valueToPay'] = null;
+            $data['idReceipts'] = null;
+        }
+
+        $data['referenceInvoices'] = $model->getReferenceInvoices($idReceipts);
+
+        return view('Sale_details', $data);
     }
 
     // public function PayInvoice($idReceipts)
@@ -750,20 +787,23 @@ class SalesController extends Controller
             return redirect()->to(base_url("/Sales_table"));
         }
     }
+    //------------------------------------------------------------------------------------------------------------
+    // public function viewServiceDetails($idReceipts)
+    // {
+    //     $model = new salesModel();
+    //     $clientModel = new ClientModel();
 
-    public function viewServiceDetails($idReceipts)
-    {
-        $model = new salesModel();
-        $clientModel = new ClientModel();
+    //     $data['payments'] = $model->getpayment();
+    //     $data['currencies'] = $model->getCurrancy();
 
-        $data['payments'] = $model->getpayment();
-        $data['currencies'] = $model->getCurrancy();
+    //     $data['ServiceDetails'] = $model->getSalesDetails($idReceipts);
+    //     $data['PaymentDetails'] = $model->getPaymentDetails($idReceipts);
+    //     $data['clients'] = $clientModel->findAll();
+    //     return view('Sale_details', $data);
+    // }
+    //-------------------------------------------------------------------------------------------------------------------
 
-        $data['ServiceDetails'] = $model->getSalesDetails($idReceipts);
-        $data['PaymentDetails'] = $model->getPaymentDetails($idReceipts);
-        $data['clients'] = $clientModel->findAll();
-        return view('Sale_details', $data);
-    }
+
 
     public function downloadPDF($idReceipts)
     {
