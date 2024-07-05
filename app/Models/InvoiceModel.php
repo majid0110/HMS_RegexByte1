@@ -69,6 +69,18 @@ class InvoiceModel extends Model
             ->getResult();
     }
 
+    public function getLatestInvoice()
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+        return $this->db->table('invoices')
+            ->orderBy('invOrdNum', 'DESC')
+            ->where('idBusiness', $businessID)
+            ->limit(1)
+            ->get()
+            ->getRowArray();
+    }
+
     public function getPaymentDetailsByReceiptId($idReceipts)
     {
         return $this->db->table('invoicepaymentdetails')

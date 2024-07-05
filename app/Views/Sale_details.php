@@ -170,7 +170,7 @@
 
 
                                         <a href="<?= base_url('SalesController/cancelInvoice/' . $ServiceDetails[0]['idReceipts']); ?>"
-                                            class="btn btn-primary text-white me-0" style="margin-left: 61%;">
+                                            class="btn btn-danger text-white me-0" style="margin-left: 61%;">
                                             Cancel
                                         </a>
 <!-- 
@@ -238,30 +238,30 @@
                                                     Payment Method: <?= $ServiceDetails[0]['PaymentMethod']; ?><br />
                                                     Currency: <?= $ServiceDetails[0]['Currency']; ?><br />
                                                     <div class="reference-invoices" style="margin-top: 0px ;">
-        <table class="table" style = "width: 20px;">
-            <thead>
-                <tr>
-                    <th>Receipt Reference</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (!empty($referenceInvoices)): ?>
-                    <?php foreach ($referenceInvoices as $reference): ?>
-                        <tr>
-                            <td style="padding:0%;"> <a href="<?= base_url('viewServiceDetails/' . $reference['idReceipt']); ?>" class="btn btn-link">
-                                    <?= $reference['idReceipt']; ?>
-                                </a></td>
+                                                        <table class="table" style = "width: 20px;">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Receipt Reference</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php if (!empty($referenceInvoices)): ?>
+                                                                    <?php foreach ($referenceInvoices as $reference): ?>
+                                                                        <tr>
+                                                                            <td style="padding:0%;"> <a href="<?= base_url('viewServiceDetails/' . $reference['idReceipt']); ?>" class="btn btn-link">
+                                                                                <?= $reference['idReceipt']; ?>
+                                                                            </a></td>
                            
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <tr>
-                        <td colspan="3">No reference invoices found.</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
-    </div>
+                                                                        </tr>
+                                                                    <?php endforeach; ?>
+                                                                <?php else: ?>
+                                                                    <tr>
+                                                                        <td colspan="3">No reference invoices found.</td>
+                                                                    </tr>
+                                                                <?php endif; ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     <u><b>Client Details:</b></u><br />

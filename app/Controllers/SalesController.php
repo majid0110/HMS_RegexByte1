@@ -4,6 +4,9 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
+
 
 use App\Models\InvoiceDetailModel;
 use App\Models\ClientModel;
@@ -163,177 +166,6 @@ class SalesController extends Controller
     //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Main Logic
 //-------------------------------------------------------------------------------------------------------------------------
-
-    // public function submitServices()
-    // {
-    //     $db = \Config\Database::connect();
-    //     try {
-    //         $invoice = new InvoiceModel();
-    //         $invoiceDetailModel = new InvoiceDetailModel();
-    //         $clientId = $this->request->getPost('clientId');
-    //         $clientName = $this->request->getPost('clientName');
-    //         $exchange = $this->request->getPost('exchange');
-    //         $currency = $this->request->getPost('currency');
-    //         $currencyName = $this->request->getPost('currencyName');
-    //         $paymentMethod = $this->request->getPost('paymentMethodName');
-    //         $paymentMethodName = $this->request->getPost('paymentName');
-    //         $paymentMethodID = $this->request->getPost('paymentMethodId');
-    //         $totalFee = $this->request->getPost('totalFee');
-    //         $services = $this->request->getPost('services');
-    //         $session = \Config\Services::session();
-    //         $businessID = $session->get('businessID');
-    //         $UserID = $session->get('ID');
-    //         $db->transBegin();
-
-    //         if (!is_null($services)) {
-    //             $totalFee = 0;
-    //             foreach ($services as $service) {
-    //                 if (isset($service['fee']) && isset($service['quantity'])) {
-    //                     $fee = (float) $service['fee'];
-    //                     $quantity = (int) $service['quantity'];
-    //                     $totalFee += $fee * $quantity;
-    //                 } else {
-    //                     throw new \Exception('Service fee or quantity is not set.');
-    //                 }
-    //             }
-    //         } else {
-    //             throw new \Exception('Services data is null.');
-    //         }
-
-    //         $lastInvoiceNumber = $invoice->select('invOrdNum')->orderBy('invOrdNum', 'DESC')->limit(1)->first();
-    //         $newInvoiceNumber = $lastInvoiceNumber ? $lastInvoiceNumber['invOrdNum'] + 1 : 1;
-    //         $invoiceData = [
-    //             'idClient' => $clientId,
-    //             'Value' => $totalFee,
-    //             'idTable' => 0,
-    //             'idUser' => $UserID,
-    //             'Status' => 'closed',
-    //             'serial_number' => 0,
-    //             'idBusiness' => $businessID,
-    //             'idCancellation' => 0,
-    //             'invOrdNum' => $newInvoiceNumber,
-    //             'selfissue' => 0,
-    //             'FIC' => 0,
-    //             'ValueTVSH' => 0,
-    //             'idCurrency' => $currency,
-    //             'rate' => $exchange,
-    //             'paymentMethod' => $paymentMethodID,
-    //             'closeShift' => 0,
-    //             'isSummaryInvoice' => 0,
-    //             'seial_nr' => 0,
-    //             'idPoint_of_sale' => 0,
-    //             'imported_invoice_number' => 0,
-    //             'isExport' => 0,
-    //             'isReverseCharge' => 0,
-    //             'Contract' => 0,
-    //             'deliveryid' => 0,
-    //             'invoice_period_start_date' => 0,
-    //             'invoice_period_end_date' => 0,
-    //             'filename' => 0,
-    //             'dokumenti' => 0,
-    //             'lloji_fatures_id' => 0,
-    //             'InvoiceNotes' => 0,
-    //         ];
-    //         $invoice->insertInvoice($invoiceData);
-    //         $idPayment = $invoice->getInsertID();
-
-    //         $discountedTotal = $totalFee;
-    //         foreach ($services as $service) {
-    //             $discount = $service['discount'];
-    //             $quantity = (int) $service['quantity'];
-    //             $fee = (float) $service['fee'];
-    //             $sum = $quantity * $fee;
-    //             // $discountedSum = $sum - ($sum * ($discount / 100));
-    //             $discountedTotal -= ($sum * ($discount / 100));
-
-    //             $expiryDate = $service['expiryDate'];
-    //             $serviceData = [
-    //                 'idReceipts' => $idPayment,
-    //                 'Nr' => 0,
-    //                 'idArtMenu' => $service['serviceTypeId'],
-    //                 'Quantity' => $quantity,
-    //                 'Price' => $fee,
-    //                 'Sum' => $sum,
-    //                 'idBusiness' => $businessID,
-    //                 'IdTax' => 1,
-    //                 'ValueTax' => 0,
-    //                 'idMag' => 1,
-    //                 'name' => $service['serviceName'],
-    //                 'idSummaryInvoice' => 0,
-    //                 'Discount' => $discount,
-    //             ];
-    //             $invoiceDetailModel->insert($serviceData);
-
-    //             $idArtMenu = $service['serviceTypeId'];
-    //             $Model = new ItemsInventoryModel();
-    //             $ratioData = $Model->getRatio($idArtMenu, $businessID);
-
-    //             foreach ($ratioData as $data) {
-    //                 $idItem = $data->idItem;
-    //                 $ratio = $data->ratio;
-    //                 $inventorySubtract = $quantity * $ratio;
-
-    //                 $Model->subtractFromInventory($idItem, $inventorySubtract);
-    //                 $Model->subtractFromExpiryInventory($idItem, $expiryDate, $inventorySubtract);
-
-    //             }
-    //         }
-
-    //         $paymentDetailsModel = new InvoiceDetailsModel();
-    //         $paymentDetailsData = [
-    //             'value' => $totalFee,
-    //             'idUser' => $UserID,
-    //             'idAnullim' => 0,
-    //             'method' => $paymentMethod,
-    //             'idPaymentMethod' => $paymentMethodID,
-    //             'exchange' => $exchange,
-    //             'nr_serial' => 0,
-    //         ];
-    //         $paymentDetailsModel->insert($paymentDetailsData);
-    //         $idReceipt = $paymentDetailsModel->getInsertID();
-    //         $paymentDetailsModel->insertInvoicePayment([
-    //             'idReceipt' => $idPayment,
-    //             'idPayment' => $idReceipt,
-    //         ]);
-
-    //         $db->transCommit();
-
-    //         $clientModel = new ClientModel();
-    //         $Age = $clientModel->getclientAge($businessID, $clientId);
-    //         $Gender = $clientModel->getclientGender($businessID, $clientId);
-    //         $clientUnique = $clientModel->getclientUnique($businessID, $clientId);
-    //         $InvoiceNumber = $invoice->getinvoiceNumber($businessID, $idPayment);
-    //         $operatorName = session()->get('fName');
-
-    //         $mpdf = new \Mpdf\Mpdf();
-    //         $pdfContent = view('pdf_invoice', [
-    //             'invoiceData' => $invoiceData,
-    //             'services' => $services,
-    //             'paymentDetailsData' => $paymentDetailsData,
-    //             'clientName' => $clientName,
-    //             'currencyName' => $currencyName,
-    //             'paymentMethodName' => $paymentMethodName,
-    //             'Age' => $Age,
-    //             'clientUnique' => $clientUnique,
-    //             'Gender' => $Gender,
-    //             'InvoiceNumber' => $InvoiceNumber,
-    //             'operatorName' => $operatorName,
-    //             'discountedTotal' => $discountedTotal,
-    //         ]);
-    //         $mpdf->WriteHTML($pdfContent);
-    //         $pdfBinary = $mpdf->Output('', 'S');
-    //         return $this->response->setJSON([
-    //             'status' => 'success',
-    //             'message' => 'Data inserted successfully',
-    //             'pdfContent' => base64_encode($pdfBinary),
-    //         ]);
-    //     } catch (\Exception $e) {
-    //         $db->transRollback();
-    //         log_message('error', 'Error retrieving data: ' . $e->getMessage());
-    //         return $this->response->setJSON(['error' => 'Error retrieving data.', 'message' => $e->getMessage()]);
-    //     }
-    // }
-
     public function submitServices()
     {
         $db = \Config\Database::connect();
@@ -805,14 +637,45 @@ class SalesController extends Controller
 
 
 
+    // public function downloadPDF($idReceipts)
+    // {
+    //     $model = new salesModel();
+    //     $data['ServiceDetails'] = $model->getSalesDetails1($idReceipts);
+
+    //     $html = view('invoice_pdf', $data);
+
+    //     // $mpdf = new \Mpdf\Mpdf();
+    //     $mpdf = new \Mpdf\Mpdf([
+    //         'margin_left' => 11,
+    //         'margin_right' => 11,
+    //         'margin_top' => 11,
+    //         'margin_bottom' => 8,
+    //     ]);
+
+
+    //     $mpdf->WriteHTML($html);
+
+    //     $mpdf->Output('invoice_' . $idReceipts . '.pdf', \Mpdf\Output\Destination::DOWNLOAD);
+    // }
+
+
     public function downloadPDF($idReceipts)
     {
         $model = new salesModel();
         $data['ServiceDetails'] = $model->getSalesDetails1($idReceipts);
 
+        $qrContent = base_url('viewServiceDetails/' . $idReceipts);
+        $qrCode = new QrCode($qrContent);
+        $qrCode->setSize(90);
+
+        $writer = new PngWriter();
+        $result = $writer->write($qrCode);
+
+        $qrDataUri = $result->getDataUri();
+        $data['qrDataUri'] = $qrDataUri;
+
         $html = view('invoice_pdf', $data);
 
-        // $mpdf = new \Mpdf\Mpdf();
         $mpdf = new \Mpdf\Mpdf([
             'margin_left' => 11,
             'margin_right' => 11,
@@ -820,11 +683,11 @@ class SalesController extends Controller
             'margin_bottom' => 8,
         ]);
 
-
         $mpdf->WriteHTML($html);
-
         $mpdf->Output('invoice_' . $idReceipts . '.pdf', \Mpdf\Output\Destination::DOWNLOAD);
     }
+
+
 
     public function deleteService($idReceipts)
     {
@@ -920,8 +783,9 @@ class SalesController extends Controller
             unset($newInvoiceData['idReceipts']);
 
             $newInvoiceData['Value'] = -$invoiceArray['Value'];
+            $newInvoiceData['notes'] = 'Cancelled';
             $newInvoiceData['timeStamp'] = date('Y-m-d H:i:s');
-            $newInvoiceData['invOrdNum'] = $invoiceArray['invOrdNum'] + 1;
+            $newInvoiceData['invOrdNum'] = $this->getNextInvOrdNum();
             $newInvoiceData['idUser'] = $currentUserId;
 
             $newInvoiceId = $model->insertInvoice1($newInvoiceData);
@@ -976,137 +840,8 @@ class SalesController extends Controller
 
 
 
-    public function UpdateInvoice()
-    {
-        $request = service('request');
-
-        $session = \Config\Services::session();
-        $currentUserId = $session->get('ID');
-
-        $invoiceId = $request->getPost('invoiceId');
-        $clientId = $request->getPost('client');
-        $clientEmail = $request->getPost('email');
-        $clientContact = $request->getPost('contact');
-        $currencyId = $request->getPost('currency');
-        $invoiceDate = $request->getPost('invoiceDate');
-        $paymentMethodId = $request->getPost('paymentMethod');
-        $notes = $request->getPost('notes');
-        $serviceDetails = $request->getPost('ServiceDetails');
-        $totalValue = $request->getPost('totalValue');
-
-        $model = new InvoiceModel();
-
-        $originalInvoice = $model->getInvoiceById($invoiceId);
-        $originalInvoiceDetails = $model->getInvoiceDetailsByReceiptId($invoiceId);
-        $originalInvoicePayments = $model->getInvoicePaymentsByReceiptId($invoiceId);
-
-        if ($originalInvoice) {
-
-            $newInvoiceData = (array) $originalInvoice;
-            unset($newInvoiceData['idReceipts']);
-
-
-            $newInvoiceData['idClient'] = $clientId;
-            $newInvoiceData['idCurrency'] = $currencyId;
-            $newInvoiceData['Date'] = $invoiceDate;
-            $newInvoiceData['Value'] = $totalValue;
-            $newInvoiceData['paymentMethod'] = $paymentMethodId;
-            $newInvoiceData['Notes'] = $notes;
-            $newInvoiceData['idUser'] = $currentUserId;
-            $newInvoiceData['timeStamp'] = date('Y-m-d H:i:s');
-            $newInvoiceData['invOrdNum'] = $originalInvoice->invOrdNum + 1;
-
-            $newInvoiceId = $model->insertInvoice($newInvoiceData);
-
-            if ($newInvoiceId) {
-                $referenceData = [
-                    'idReceipt' => $newInvoiceId,
-                    'receiptReference' => $invoiceId
-                ];
-                $model->insertInvoiceReference($referenceData);
-            }
-
-        }
-
-        foreach ($serviceDetails as $detail) {
-            $newDetail = [];
-            foreach ($originalInvoiceDetails as $originalDetail) {
-                if ($originalDetail->idArtMenu == $detail['idArtMenu']) {
-                    $newDetail = (array) $originalDetail;
-                    break;
-                }
-            }
-            unset($newDetail['idInvoiceDetail']);
-            $newDetail['idReceipts'] = $newInvoiceId;
-            $newDetail['Quantity'] = $detail['Quantity'];
-            $newDetail['Price'] = $detail['Price'];
-            $newDetail['Sum'] = $detail['Quantity'] * $detail['Price'];
-
-            $model->insertInvoiceDetail($newDetail);
-        }
-
-        foreach ($originalInvoicePayments as $payment) {
-            $paymentArray = (array) $payment;
-            unset($paymentArray['idInvPay']);
-
-            $paymentDetails = $model->getPaymentDetailsById($paymentArray['idPayment']);
-            foreach ($paymentDetails as $paymentDetail) {
-                $paymentDetailArray = (array) $paymentDetail;
-                unset($paymentDetailArray['idPayment']);
-
-                $paymentDetailArray['value'] = $totalValue;
-                $paymentDetailArray['timestamp'] = date('Y-m-d H:i:s');
-                $paymentDetailArray['idUser'] = $currentUserId;
-                $paymentDetailArray['idPaymentMethod'] = $paymentMethodId;
-                $newPaymentId = $model->insertPaymentDetail($paymentDetailArray);
-
-                $model->insertInvoicePayment([
-                    'idReceipt' => $newInvoiceId,
-                    'idPayment' => $newPaymentId
-                ]);
-            }
-        }
-
-
-
-        return redirect()->to(base_url('viewServiceDetails/' . $newInvoiceId));
-    }
-
-
-
     // public function UpdateInvoice()
     // {
-    //     // $request = service('request');
-
-    //     // $session = \Config\Services::session();
-    //     // $currentUserId = $session->get('ID');
-
-    //     // $invoiceId = $request->getPost('invoiceId');
-    //     // $clientId = $request->getPost('client');
-    //     // $clientEmail = $request->getPost('email');
-    //     // $clientContact = $request->getPost('contact');
-    //     // $currencyId = $request->getPost('currency');
-    //     // $invoiceDate = $request->getPost('invoiceDate');
-    //     // $paymentMethodId = $request->getPost('paymentMethod');
-    //     // $notes = $request->getPost('notes');
-    //     // $serviceDetails = $request->getPost('ServiceDetails');
-
-    //     // $model = new InvoiceModel();
-
-    //     // $data = [
-    //     //     'idClient' => $clientId,
-    //     //     // 'email' => $clientEmail,
-    //     //     // 'contact' => $clientContact,
-    //     //     'idCurrency	' => $currencyId,
-    //     //     'Date' => $invoiceDate,
-    //     //     'paymentMethod' => $paymentMethodId,
-    //     //     'Notes' => $notes,
-    //     //     'idUser' => $currentUserId,
-    //     //     'idBusiness' => 39
-    //     // ];
-
-    //     // $newInvoiceId = $model->insertInvoice($data);
-
     //     $request = service('request');
 
     //     $session = \Config\Services::session();
@@ -1121,11 +856,13 @@ class SalesController extends Controller
     //     $paymentMethodId = $request->getPost('paymentMethod');
     //     $notes = $request->getPost('notes');
     //     $serviceDetails = $request->getPost('ServiceDetails');
+    //     $totalValue = $request->getPost('totalValue');
 
     //     $model = new InvoiceModel();
 
     //     $originalInvoice = $model->getInvoiceById($invoiceId);
     //     $originalInvoiceDetails = $model->getInvoiceDetailsByReceiptId($invoiceId);
+    //     $originalInvoicePayments = $model->getInvoicePaymentsByReceiptId($invoiceId);
 
     //     if ($originalInvoice) {
 
@@ -1136,6 +873,7 @@ class SalesController extends Controller
     //         $newInvoiceData['idClient'] = $clientId;
     //         $newInvoiceData['idCurrency'] = $currencyId;
     //         $newInvoiceData['Date'] = $invoiceDate;
+    //         $newInvoiceData['Value'] = $totalValue;
     //         $newInvoiceData['paymentMethod'] = $paymentMethodId;
     //         $newInvoiceData['Notes'] = $notes;
     //         $newInvoiceData['idUser'] = $currentUserId;
@@ -1163,6 +901,7 @@ class SalesController extends Controller
     //             }
     //         }
     //         unset($newDetail['idInvoiceDetail']);
+    //         $newDetail['idReceipts'] = $newInvoiceId;
     //         $newDetail['Quantity'] = $detail['Quantity'];
     //         $newDetail['Price'] = $detail['Price'];
     //         $newDetail['Sum'] = $detail['Quantity'] * $detail['Price'];
@@ -1170,11 +909,141 @@ class SalesController extends Controller
     //         $model->insertInvoiceDetail($newDetail);
     //     }
 
+    //     foreach ($originalInvoicePayments as $payment) {
+    //         $paymentArray = (array) $payment;
+    //         unset($paymentArray['idInvPay']);
+
+    //         $paymentDetails = $model->getPaymentDetailsById($paymentArray['idPayment']);
+    //         foreach ($paymentDetails as $paymentDetail) {
+    //             $paymentDetailArray = (array) $paymentDetail;
+    //             unset($paymentDetailArray['idPayment']);
+
+    //             $paymentDetailArray['value'] = $totalValue;
+    //             $paymentDetailArray['timestamp'] = date('Y-m-d H:i:s');
+    //             $paymentDetailArray['idUser'] = $currentUserId;
+    //             $paymentDetailArray['idPaymentMethod'] = $paymentMethodId;
+    //             $newPaymentId = $model->insertPaymentDetail($paymentDetailArray);
+
+    //             $model->insertInvoicePayment([
+    //                 'idReceipt' => $newInvoiceId,
+    //                 'idPayment' => $newPaymentId
+    //             ]);
+    //         }
+    //     }
 
 
-    //     return redirect()->to(base_url('viewServiceDetails/' . $invoiceId));
+
+    //     return redirect()->to(base_url('viewServiceDetails/' . $newInvoiceId));
     // }
 
+
+
+    public function UpdateInvoice()
+    {
+        $request = service('request');
+        $session = \Config\Services::session();
+        $currentUserId = $session->get('ID');
+
+        $invoiceId = $request->getPost('invoiceId');
+        $clientId = $request->getPost('client');
+        $clientEmail = $request->getPost('email');
+        $clientContact = $request->getPost('contact');
+        $currencyId = $request->getPost('currency');
+        $invoiceDate = $request->getPost('invoiceDate');
+        $paymentMethodId = $request->getPost('paymentMethod');
+        $notes = $request->getPost('notes');
+        $serviceDetails = $request->getPost('ServiceDetails');
+        $totalValue = $request->getPost('totalValue');
+
+        $model = new InvoiceModel();
+
+        $originalInvoice = $model->getInvoiceById($invoiceId);
+        $originalInvoiceDetails = $model->getInvoiceDetailsByReceiptId($invoiceId);
+        $originalInvoicePayments = $model->getInvoicePaymentsByReceiptId($invoiceId);
+
+        if ($originalInvoice) {
+
+            $this->cancelInvoice($invoiceId);
+
+            $newInvoiceData = (array) $originalInvoice;
+            unset($newInvoiceData['idReceipts']);
+
+            $newInvoiceData['idClient'] = $clientId;
+            $newInvoiceData['idCurrency'] = $currencyId;
+            $newInvoiceData['Date'] = $invoiceDate;
+            $newInvoiceData['Value'] = $totalValue;
+            $newInvoiceData['paymentMethod'] = $paymentMethodId;
+            $newInvoiceData['Notes'] = $notes;
+            $newInvoiceData['idUser'] = $currentUserId;
+            $newInvoiceData['timeStamp'] = date('Y-m-d H:i:s');
+            $newInvoiceData['invOrdNum'] = $this->getNextInvOrdNum();
+
+            $newInvoiceId = $model->insertInvoice($newInvoiceData);
+
+            if ($newInvoiceId) {
+                $referenceData = [
+                    'idReceipt' => $newInvoiceId,
+                    'receiptReference' => $invoiceId
+                ];
+                $model->insertInvoiceReference($referenceData);
+
+                foreach ($serviceDetails as $detail) {
+                    $newDetail = [];
+                    foreach ($originalInvoiceDetails as $originalDetail) {
+                        if ($originalDetail->idArtMenu == $detail['idArtMenu']) {
+                            $newDetail = (array) $originalDetail;
+                            break;
+                        }
+                    }
+                    unset($newDetail['idInvoiceDetail']);
+                    $newDetail['idReceipts'] = $newInvoiceId;
+                    $newDetail['Quantity'] = $detail['Quantity'];
+                    $newDetail['Price'] = $detail['Price'];
+                    $newDetail['Sum'] = $detail['Quantity'] * $detail['Price'];
+
+                    $model->insertInvoiceDetail($newDetail);
+                }
+
+                foreach ($originalInvoicePayments as $payment) {
+                    $paymentArray = (array) $payment;
+                    unset($paymentArray['idInvPay']);
+
+                    $paymentDetails = $model->getPaymentDetailsById($paymentArray['idPayment']);
+                    foreach ($paymentDetails as $paymentDetail) {
+                        $paymentDetailArray = (array) $paymentDetail;
+                        unset($paymentDetailArray['idPayment']);
+
+                        $paymentDetailArray['value'] = $totalValue;
+                        $paymentDetailArray['timestamp'] = date('Y-m-d H:i:s');
+                        $paymentDetailArray['idUser'] = $currentUserId;
+                        $paymentDetailArray['idPaymentMethod'] = $paymentMethodId;
+                        $newPaymentId = $model->insertPaymentDetail($paymentDetailArray);
+
+                        $model->insertInvoicePayment([
+                            'idReceipt' => $newInvoiceId,
+                            'idPayment' => $newPaymentId
+                        ]);
+                    }
+                }
+
+                return redirect()->to(base_url('viewServiceDetails/' . $newInvoiceId));
+            }
+        }
+
+        return redirect()->back()->with('error', 'Failed to update the invoice.');
+    }
+
+    private function getNextInvOrdNum()
+    {
+        $model = new InvoiceModel();
+        $latestInvoice = $model->getLatestInvoice();
+
+        if ($latestInvoice) {
+            return $latestInvoice['invOrdNum'] + 1;
+        }
+
+        return 1;
+    }
 
 
 }

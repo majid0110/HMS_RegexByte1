@@ -103,7 +103,10 @@
                             </p>
                         </div>
                     </td>
-                    <td style="width: 33.33%;"></td>
+                    <td style="width: 33.33%; text-align: center;">
+                        <img src="<?= $qrDataUri ?>" alt="QR Code" style="width: 100px; height: 100px;">
+                    </td>
+                    <!-- <td style="width: 33.33%;"></td> -->
                 </tr>
             </table>
         </div>
