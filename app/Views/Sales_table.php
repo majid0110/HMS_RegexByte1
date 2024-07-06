@@ -34,6 +34,21 @@
             border-radius: 0.2rem;
         }
 
+        .text-bg-editted {
+            background-color: yellow;
+            color: white;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+        }
+
+        .text-bg-cancelled {
+            background-color: red;
+            color: white;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+        }
+
+
         .text-bg-danger {
             background-color: red;
             color: white;
@@ -254,6 +269,7 @@
                                                 <th>Payment Method</th>
                                                 <th>Status</th>
                                                 <th>Fee</th>
+                                                <th>Notes</th>
                                                 <th>Date</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -278,14 +294,20 @@
                                                         <span
                                                             class="<?= $Sale['Status'] == 'closed' ? 'text-bg-success' : 'text-bg-danger'; ?>">
                                                             <?= $Sale['Status']; ?>
-                                                            </span>
-                                                        </td>
-                                                        <td>
-                                                            <?= $Sale['Value']; ?>
-                                                            </td>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <?= $Sale['Value']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                            class="<?= $Sale['Notes'] == 'Cancelled' ? 'text-bg-cancelled' : 'text-bg-editted'; ?>">
+                                                            <?= $Sale['Notes']; ?>
+                                                        </span>
+                                                    </td>
                                                     <td>
                                                         <?= $Sale['Date']; ?>
-                                                        </td>
+                                                    </td>
                                                     <td>
                                                         <a href="<?= base_url('viewServiceDetails/' . $Sale['idReceipts']); ?>"
                                                             class="btn btn-info btn-sm">View Details</a> <a
@@ -296,7 +318,7 @@
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
-                                            </tbody>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>

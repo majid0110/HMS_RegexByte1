@@ -103,10 +103,11 @@
                             </p>
                         </div>
                     </td>
-                    <td style="width: 33.33%; text-align: center;">
-                        <img src="<?= $qrDataUri ?>" alt="QR Code" style="width: 100px; height: 100px;">
+                    <td style="width: 33.33%; text-align: right; ">
+                        <img src="<?= $qrDataUri ?>" alt="QR Code" style="width: 110px; height: 110px;">
                     </td>
-                    <!-- <td style="width: 33.33%;"></td> -->
+                    <!-- <td style=" width: 33.33%;">
+                    </td> -->
                 </tr>
             </table>
         </div>
@@ -143,19 +144,19 @@
         <table>
             <thead>
                 <tr>
-                    <th style="padding: 10px; text-align: left; border-bottom: 2px solid #000000;">
+                    <th style="text-align: left; border-bottom: 2px solid #000000;">
                         CODE</th>
-                    <th style="padding: 10px; text-align: left; border-bottom: 2px solid #000000;">
+                    <th style="text-align: left; border-bottom: 2px solid #000000;">
                         ITEM</th>
-                    <th style="padding: 10px; text-align: left;  border-bottom: 2px solid #000000;">
+                    <th style="text-align: left;  border-bottom: 2px solid #000000;">
                         UNIT</th>
-                    <th style="padding: 10px; text-align: left;  border-bottom: 2px solid #000000;">
+                    <th style="text-align: left;  border-bottom: 2px solid #000000;">
                         QUANTITY</th>
-                    <th style="padding: 10px; text-align: left;  border-bottom: 2px solid #000000;">
+                    <th style="text-align: left;  border-bottom: 2px solid #000000;">
                         PRICE</th>
-                    <th style="padding: 10px; text-align: left;  border-bottom: 2px solid #000000;">
+                    <th style="text-align: left;  border-bottom: 2px solid #000000;">
                         TAX</th>
-                    <th style="padding: 10px; text-align: left;  border-bottom: 2px solid #000000;">
+                    <th style="text-align: left;  border-bottom: 2px solid #000000;">
                         TOTAL</th>
 
                 </tr>

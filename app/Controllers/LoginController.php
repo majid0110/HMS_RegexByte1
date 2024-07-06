@@ -200,6 +200,10 @@ class LoginController extends Controller
 //------------------------------------------------------------------------------------------------------------------------
     public function dashboard()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
         $businessID = session()->get('businessID');
 
         $businessModel = new LoginModel('business');

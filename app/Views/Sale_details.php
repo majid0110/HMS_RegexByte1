@@ -248,7 +248,7 @@
                                                                 <?php if (!empty($referenceInvoices)): ?>
                                                                     <?php foreach ($referenceInvoices as $reference): ?>
                                                                         <tr>
-                                                                            <td style="padding:0%;"> <a href="<?= base_url('viewServiceDetails/' . $reference['idReceipt']); ?>" class="btn btn-link">
+                                                                            <td style="padding:0%;">Reference Invoice#<a href="<?= base_url('viewServiceDetails/' . $reference['idReceipt']); ?>" class="btn btn-link">
                                                                                 <?= $reference['idReceipt']; ?>
                                                                             </a></td>
                            
