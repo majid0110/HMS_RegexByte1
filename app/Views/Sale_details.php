@@ -166,11 +166,13 @@
                                                 <td></td>
                                         </table>
 
+                                        <span style=" font-family: fantasy;font-size: larger; color: <?= $ServiceDetails[0]['Notes'] === 'Cancelled' ? 'red' : 'green'; ?>"> <?= $ServiceDetails[0]['Notes']; ?></span>
+
                                       
 
 
                                         <a href="<?= base_url('SalesController/cancelInvoice/' . $ServiceDetails[0]['idReceipts']); ?>"
-                                            class="btn btn-danger text-white me-0" style="margin-left: 61%;">
+                                            class="btn btn-danger text-white me-0" style="margin-left: 51%;">
                                             Cancel
                                         </a>
 <!-- 
@@ -206,18 +208,8 @@
                                         </p>
 
 
-                                        <?php if ($ServiceDetails[0]['Status'] == 'closed'): ?>
-                                            <a
-                                                href="<?= base_url('sales/deleteService/' . $ServiceDetails[0]['idReceipts']); ?>">
-
-                                                <button onclick="deleteService()" type="button"
-                                                    class="btn btn-danger btn-icon"
-                                                    style="margin-left: 23rem;margin-left: 49rem; margin-top: -52px;">
-                                                    <i class="mdi mdi-delete"></i>
-                                                </button>
-                                            </a>
-
-                                        <?php else: ?>
+                                        <?php if ($ServiceDetails[0]['Status'] == 'open'): ?>
+                                           
                                             <!-- <button type="button" style="margin-top: -3rem;margin-left: 89%;"
                                                 class="btn btn-primary" data-toggle="modal" data-target="#payModal"
                                                 onclick="loadPayInvoice('<?= $ServiceDetails[0]['invOrdNum']; ?>')">Pay</button> -->
@@ -228,6 +220,7 @@
                                 </tr>
 
                                 <tr class="information">
+                               
                                     <td colspan="3">
                                         <table>
                                             <tr>
@@ -248,9 +241,9 @@
                                                                 <?php if (!empty($referenceInvoices)): ?>
                                                                     <?php foreach ($referenceInvoices as $reference): ?>
                                                                         <tr>
-                                                                            <td style="padding:0%;">Reference Invoice#<a href="<?= base_url('viewServiceDetails/' . $reference['idReceipt']); ?>" class="btn btn-link">
+                                                                            <td style="padding:0%;">Reference Invoice#<a href="<?= base_url('viewServiceDetails/' . $reference['idReceipt']); ?>" class="btn btn-link"  target="_blank">
                                                                                 <?= $reference['idReceipt']; ?>
-                                                                            </a></td>
+                                                                            <i class="mdi mdi-open-in-new"></i></a></td>
                            
                                                                         </tr>
                                                                     <?php endforeach; ?>

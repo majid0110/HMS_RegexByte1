@@ -36,7 +36,7 @@
 
         .text-bg-editted {
             background-color: yellow;
-            color: white;
+            color: black;
             padding: 0.2rem 0.4rem;
             border-radius: 0.2rem;
         }
@@ -265,7 +265,7 @@
                                             <tr>
                                                 <th>Invoice NO #</th>
                                                 <th>Client Name</th>
-                                                <th>Currancy</th>
+                                                <th>Currency</th>
                                                 <th>Payment Method</th>
                                                 <th>Status</th>
                                                 <th>Fee</th>
@@ -300,8 +300,16 @@
                                                         <?= $Sale['Value']; ?>
                                                     </td>
                                                     <td>
-                                                        <span
-                                                            class="<?= $Sale['Notes'] == 'Cancelled' ? 'text-bg-cancelled' : 'text-bg-editted'; ?>">
+                                                        <span class="<?php
+                                                        if ($Sale['Notes'] == 'Cancelled') {
+                                                            echo 'text-bg-cancelled';
+                                                        } elseif ($Sale['Notes'] == 'Corrective') {
+                                                            echo 'text-bg-editted';
+                                                        } else {
+
+                                                            echo 'text-bg-default';
+                                                        }
+                                                        ?>">
                                                             <?= $Sale['Notes']; ?>
                                                         </span>
                                                     </td>

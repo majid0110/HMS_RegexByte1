@@ -299,7 +299,7 @@
                         <div class="col-md-3 grid-margin stretch-card">
                             <div class="card" onclick="window.location.href='<?= base_url('services_report'); ?>';">
                                 <div class="card-body">
-                                    <h4 class="card-title" style="text-align:center">Services Report</h4>
+                                    <h4 class="card-title" style="text-align:center">Sales Report</h4>
                                     <div class="media">
                                         <!-- <i class="ti-world icon-md text-info d-flex align-self-start me-3"></i> -->
                                         <svg style="margin: 0px auto" height="45px" width="45px"
@@ -318,7 +318,7 @@
                         <div class="col-md-3 grid-margin stretch-card">
                             <div class="card" onclick="window.location.href='<?= base_url('services_details'); ?>';">
                                 <div class="card-body">
-                                    <h4 class="card-title" style="text-align:center">Services Details</h4>
+                                    <h4 class="card-title" style="text-align:center">Sales Details</h4>
                                     <div class="media">
                                         <!-- <i class="ti-world icon-md text-info d-flex align-self-start me-3"></i> -->
                                         <svg style="margin: 0px auto" height="45px" width="45px"

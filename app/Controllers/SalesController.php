@@ -720,7 +720,7 @@ class SalesController extends Controller
             unset($newInvoiceData['idReceipts']);
 
             $newInvoiceData['Value'] = -$invoiceArray['Value'];
-            $newInvoiceData['notes'] = 'Cancelled';
+            $newInvoiceData['Notes'] = 'Cancelled';
             $newInvoiceData['timeStamp'] = date('Y-m-d H:i:s');
             $newInvoiceData['invOrdNum'] = $this->getNextInvOrdNum();
             $newInvoiceData['idUser'] = $currentUserId;
@@ -810,10 +810,12 @@ class SalesController extends Controller
             $newInvoiceData['Date'] = $invoiceDate;
             $newInvoiceData['Value'] = $totalValue;
             $newInvoiceData['paymentMethod'] = $paymentMethodId;
-            $newInvoiceData['Notes'] = $notes;
+            $newInvoiceData['Notes'] = 'Corrective';
+            $newInvoiceData['InvoiceNotes'] = $notes;
             $newInvoiceData['idUser'] = $currentUserId;
             $newInvoiceData['timeStamp'] = date('Y-m-d H:i:s');
             $newInvoiceData['invOrdNum'] = $this->getNextInvOrdNum();
+
 
             $newInvoiceId = $model->insertInvoice($newInvoiceData);
 

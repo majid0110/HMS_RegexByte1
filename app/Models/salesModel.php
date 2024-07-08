@@ -412,8 +412,8 @@ class salesModel extends Model
         }
 
         if (!empty($fromDate) && !empty($toDate)) {
-            $builder->where('invoices.timeStamp >=', $fromDate)
-                ->where('invoices.timeStamp <=', $toDate);
+            $builder->where('invoices.Date >=', $fromDate)
+                ->where('invoices.Date <=', $toDate);
         }
 
 
@@ -554,8 +554,8 @@ class salesModel extends Model
         }
 
         if (!empty($fromDate) && !empty($toDate)) {
-            $builder->where('invoices.timeStamp >=', $fromDate)
-                ->where('invoices.timeStamp <=', $toDate);
+            $builder->where('invoices.Date >=', $fromDate)
+                ->where('invoices.Date <=', $toDate);
         }
 
         $builder->where('invoices.idBusiness', $businessId);
@@ -597,8 +597,8 @@ class salesModel extends Model
         }
 
         if (!empty($fromDate) && !empty($toDate)) {
-            $builder->where('invoices.timeStamp >=', $fromDate)
-                ->where('invoices.timeStamp <=', $toDate);
+            $builder->where('invoices.Date >=', $fromDate)
+                ->where('invoices.Date <=', $toDate);
         }
 
         $totalQuery = $builder->get();
@@ -642,8 +642,8 @@ class salesModel extends Model
         }
 
         if (!empty($fromDate) && !empty($toDate)) {
-            $builder->where('invoices.timeStamp >=', $fromDate)
-                ->where('invoices.timeStamp <=', $toDate);
+            $builder->where('invoices.Date >=', $fromDate)
+                ->where('invoices.Date <=', $toDate);
         }
 
         $query = $builder->get();
