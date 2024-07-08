@@ -643,7 +643,7 @@
                                   data: {
                                     labels: <?= json_encode(array_column($combinedData, 'label')); ?>,
                                     datasets: [{
-                                      label: 'Monthly Hospital Revenue',
+                                      label: 'Monthly Revenue',
                                       data: <?= json_encode(array_column($combinedData, 'total')); ?>,
                                       backgroundColor: 'rgba(75, 192, 192, 0.7)',
                                       borderColor: 'rgba(75, 192, 192, 1)',
@@ -674,7 +674,7 @@
                                         beginAtZero: true,
                                         title: {
                                           display: true,
-                                          text: 'Total Hospital Revenue',
+                                          text: 'Total Revenue',
                                           color: '#333'
                                         },
                                         grid: {
@@ -695,7 +695,7 @@
                                       },
                                       title: {
                                         display: true,
-                                        text: 'Monthly Total Hospital Revenue',
+                                        text: 'Total Monthly Revenue',
                                         color: '#444',
                                         font: {
                                           size: 16,

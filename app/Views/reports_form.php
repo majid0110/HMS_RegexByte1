@@ -236,65 +236,67 @@
                     ?>
                     <div class="row">
 
-                        <div class="col-md-3 grid-margin stretch-card">
-                            <div class="card" onclick="window.location.href='<?= base_url('appointment_report'); ?>';">
-                                <div class="card-body">
-                                    <h4 class="card-title" style="text-align:center">Appointment Report</h4>
-                                    <div class="media">
-                                        <!-- <i class="ti-world icon-md text-info d-flex align-self-center"></i> -->
-                                        <svg style="margin: 0px auto" height="45px" width="45px"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                        </svg>
+                        <?php if ($isHospital): ?>
+                            <div class="col-md-3 grid-margin stretch-card">
+                                <div class="card" onclick="window.location.href='<?= base_url('appointment_report'); ?>';">
+                                    <div class="card-body">
+                                        <h4 class="card-title" style="text-align:center">Appointment Report</h4>
+                                        <div class="media">
+                                            <!-- <i class="ti-world icon-md text-info d-flex align-self-center"></i> -->
+                                            <svg style="margin: 0px auto" height="45px" width="45px"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                                            </svg>
 
-                                        <div class="media-body">
-                                            <!-- Your content goes here -->
+                                            <div class="media-body">
+                                                <!-- Your content goes here -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 grid-margin stretch-card">
-                            <div class="card" onclick="window.location.href='<?= base_url('lab_report'); ?>';">
-                                <div class="card-body">
-                                    <h4 class="card-title" style="text-align:center">Lab Report</h4>
-                                    <div class="media">
-                                        <!-- <i class="ti-world icon-md text-info d-flex align-self-start me-3"></i> -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" style="margin: 0px auto" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="45"
-                                            height="45">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
-                                        </svg>
+                            <div class="col-md-3 grid-margin stretch-card">
+                                <div class="card" onclick="window.location.href='<?= base_url('lab_report'); ?>';">
+                                    <div class="card-body">
+                                        <h4 class="card-title" style="text-align:center">Lab Report</h4>
+                                        <div class="media">
+                                            <!-- <i class="ti-world icon-md text-info d-flex align-self-start me-3"></i> -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" style="margin: 0px auto" fill="none"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="45"
+                                                height="45">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                                            </svg>
 
-                                        <div class="media-body">
+                                            <div class="media-body">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3 grid-margin stretch-card">
-                            <div class="card" onclick="window.location.href='<?= base_url('lab_details'); ?>';">
-                                <div class="card-body">
-                                    <h4 class="card-title" style="text-align:center">Lab Details</h4>
-                                    <div class="media">
+                            <div class="col-md-3 grid-margin stretch-card">
+                                <div class="card" onclick="window.location.href='<?= base_url('lab_details'); ?>';">
+                                    <div class="card-body">
+                                        <h4 class="card-title" style="text-align:center">Lab Details</h4>
+                                        <div class="media">
 
-                                        <svg style="margin: 0px auto" height="45px" width="45px"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75" />
-                                        </svg>
+                                            <svg style="margin: 0px auto" height="45px" width="45px"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75" />
+                                            </svg>
 
-                                        <div class="media-body">
+                                            <div class="media-body">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php endif; ?>
 
                         <div class="col-md-3 grid-margin stretch-card">
                             <div class="card" onclick="window.location.href='<?= base_url('services_report'); ?>';">

@@ -26,7 +26,18 @@ class ReportsController extends Controller
     }
     public function reports_form()
     {
-        return view('reports_form.php');
+        $businessID = session()->get('businessID');
+
+        $businessModel = new LoginModel('business');
+        $business = $businessModel->find($businessID);
+        $businessTypeID = $business['businessTypeID'];
+
+        $businessTypeModel = new LoginModel('businesstype');
+        $businessType = $businessTypeModel->find($businessTypeID);
+        $isHospital = strtolower($businessType['businessType']) === 'hospital';
+        $data['isHospital'] = $isHospital;
+
+        return view('reports_form.php', $data);
     }
 
 
