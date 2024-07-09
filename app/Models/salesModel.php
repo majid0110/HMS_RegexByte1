@@ -56,7 +56,6 @@ class salesModel extends Model
     }
 
 
-
     public function getCategories()
     {
         return $this->db->table('catart')

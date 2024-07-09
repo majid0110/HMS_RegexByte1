@@ -172,7 +172,7 @@
 
 
                                         <a href="<?= base_url('SalesController/cancelInvoice/' . $ServiceDetails[0]['idReceipts']); ?>"
-                                            class="btn btn-danger text-white me-0" style="margin-left: 51%;">
+                                            class="btn btn-danger text-white me-0" style="margin-left: 48%;">
                                             Cancel
                                         </a>
 <!-- 
@@ -516,7 +516,8 @@
 
                         <div class="form-group">
                             <h4>Service Details</h4>
-                            
+                            <button type="button" class="btn btn-primary" id="addRowBtn">+</button>
+
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -565,16 +566,85 @@
         </div>
     </div>
 
-    <script>
-        function loadCorrectInvoice(invOrdNum) {
-            $('#correctInvoiceContent').load('/HMS_RegexByte/CorrectInvoice?invOrdNum=' + invOrdNum);
-        }
 
-        $(document).on('click', '[data-target="#correctModal"]', function () {
-            var invOrdNum = '<?= $ServiceDetails[0]['invOrdNum']; ?>';
-            loadCorrectInvoice(invOrdNum);
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    function calculateTotalValue() {
+        let totalValue = 0;
+        document.querySelectorAll('input[name^="ServiceDetails"][name$="[Quantity]"]').forEach((quantityInput, index) => {
+            let priceInput = document.querySelector(`input[name="ServiceDetails[${index}][Price]"]`);
+            let quantity = parseFloat(quantityInput.value) || 0;
+            let price = parseFloat(priceInput.value) || 0;
+            totalValue += quantity * price;
         });
-    </script>
+        document.getElementById('totalValue').value = totalValue.toFixed(2);
+    }
+
+    document.getElementById('addRowBtn').addEventListener('click', function() {
+        var tableBody = document.querySelector('#correctModal table tbody');
+        var rowCount = tableBody.rows.length;
+        var newRow = tableBody.insertRow();
+
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+
+        cell1.innerHTML = `<input type="hidden" name="ServiceDetails[${rowCount}][idArtMenu]" value="">
+                           <select class="form-control" id="serviceType_${rowCount}" name="ServiceDetails[${rowCount}][ServiceTypeName]" required>
+                               <?php foreach ($services as $service): ?>
+                                   <option value="<?= $service['idArtMenu']; ?>"><?= $service['Name']; ?></option>
+                               <?php endforeach; ?>
+                           </select>`;
+        cell2.innerHTML = `<input type="number" class="form-control" id="quantity_${rowCount}" name="ServiceDetails[${rowCount}][Quantity]" required>`;
+        cell3.innerHTML = `<input type="number" class="form-control" id="price_${rowCount}" name="ServiceDetails[${rowCount}][Price]" required>`;
+
+        newRow.querySelector('input[name^="ServiceDetails"][name$="[Quantity]"]').addEventListener('input', calculateTotalValue);
+        newRow.querySelector('input[name^="ServiceDetails"][name$="[Price]"]').addEventListener('input', calculateTotalValue);
+    });
+
+    calculateTotalValue();
+
+    function loadCorrectInvoice(invOrdNum) {
+        $('#correctInvoiceContent').load('/HMS_RegexByte/CorrectInvoice?invOrdNum=' + invOrdNum);
+    }
+
+    $(document).on('click', '[data-target="#correctModal"]', function () {
+        var invOrdNum = '<?= $ServiceDetails[0]['invOrdNum']; ?>';
+        loadCorrectInvoice(invOrdNum);
+    });
+
+    document.querySelectorAll('input[name^="ServiceDetails"]').forEach(input => {
+        input.addEventListener('input', calculateTotalValue);
+    });
+});
+</script>
+
+
+
+
+
+    <!-- <script>
+document.getElementById('addRowBtn').addEventListener('click', function() {
+    var tableBody = document.querySelector('#correctModal table tbody');
+    var rowCount = tableBody.rows.length;
+    var newRow = tableBody.insertRow();
+
+    var cell1 = newRow.insertCell(0);
+    var cell2 = newRow.insertCell(1);
+    var cell3 = newRow.insertCell(2);
+
+    cell1.innerHTML = `<input type="hidden" name="ServiceDetails[${rowCount}][idArtMenu]" value="">
+                       <select class="form-control" id="serviceType_${rowCount}" name="ServiceDetails[${rowCount}][ServiceTypeName]" required>
+                           <?php foreach ($services as $service): ?>
+                               <option value="<?= $service['idArtMenu']; ?>"><?= $service['Name']; ?></option>
+                           <?php endforeach; ?>
+                       </select>`;
+    cell2.innerHTML = `<input type="number" class="form-control" id="quantity_${rowCount}" name="ServiceDetails[${rowCount}][Quantity]" required oninput="calculateTotalValue()">`;
+    cell3.innerHTML = `<input type="number" class="form-control" id="price_${rowCount}" name="ServiceDetails[${rowCount}][Price]" required oninput="calculateTotalValue()">`;
+});
+</script>
+
+
 
     <script>
         function calculateTotalValue() {
@@ -590,7 +660,7 @@
         window.onload = function() {
             calculateTotalValue();
         };
-    </script>
+    </script> -->
 
 <script>
     $(document).ready(function() {
@@ -642,6 +712,16 @@
     </script>
 
 
+<!-- <script>
+        function loadCorrectInvoice(invOrdNum) {
+            $('#correctInvoiceContent').load('/HMS_RegexByte/CorrectInvoice?invOrdNum=' + invOrdNum);
+        }
+
+        $(document).on('click', '[data-target="#correctModal"]', function () {
+            var invOrdNum = '<?= $ServiceDetails[0]['invOrdNum']; ?>';
+            loadCorrectInvoice(invOrdNum);
+        });
+    </script> -->
 
     <!-- main-panel ends -->
     </div>
