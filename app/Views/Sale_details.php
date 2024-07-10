@@ -546,6 +546,7 @@
                                             value="<?= $detail['Price']; ?>" required
                                             oninput="calculateTotalValue()">
                                         </td>
+                                        
                                     </tr>
                                 <?php endforeach; ?>
                                 </tbody>

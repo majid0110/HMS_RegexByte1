@@ -277,3 +277,12 @@ $routes->post('/updateSector/(:num)', 'itemsController::updateSector/$1');
 $routes->post('ServiceController/transferItemsToServices', 'ServiceController::transferItemsToServices');
 $routes->get('/transferItemsToServices', 'ServiceController::transferItemsToServices');
 $routes->post('/transferItemsToServices', 'ServiceController::transferItemsToServices');
+
+//----------------------------------------------------------------------------------------------------------------
+//                                              Expenses Routes
+//----------------------------------------------------------------------------------------------------------------
+$routes->get('/expenses_form', 'ExpenseController::expenses_form');
+$routes->post('/save_expense', 'ExpenseController::save_expense');
+$routes->get('/expenses_table', 'ExpenseController::expenses_table');
+$routes->get('deleteExpense/(:num)', 'ExpenseController::deleteExpense/$1');
+$routes->get('/editExpense/(:num)', 'ExpenseController::editExpense/$1');

@@ -4,7 +4,7 @@
 <html lang="en">
 
 <head>
-  
+
   <link rel="stylesheet" href="./public/assets/vendors_s/select2/select2.min.css">
   <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css">
 
@@ -42,14 +42,17 @@
         <i class="settings-close ti-close"></i>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab"
+              aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
+            <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab"
+              aria-controls="chats-section">CHATS</a>
           </li>
         </ul>
         <div class="tab-content" id="setting-content">
-          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
+            aria-labelledby="todo-section">
             <div class="add-items d-flex px-3 mb-0">
               <form class="form w-100">
                 <div class="form-group d-flex">
@@ -133,7 +136,8 @@
             </div>
             <ul class="chat-list">
               <li class="list active">
-                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Thomas Douglas</p>
                   <p>Available</p>
@@ -141,7 +145,8 @@
                 <small class="text-muted my-auto">19 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg" alt="image"><span
+                    class="offline"></span></div>
                 <div class="info">
                   <div class="wrapper d-flex">
                     <p>Catherine</p>
@@ -152,7 +157,8 @@
                 <small class="text-muted my-auto">23 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Daniel Russell</p>
                   <p>Available</p>
@@ -160,7 +166,8 @@
                 <small class="text-muted my-auto">14 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg" alt="image"><span
+                    class="offline"></span></div>
                 <div class="info">
                   <p>James Richardson</p>
                   <p>Away</p>
@@ -168,7 +175,8 @@
                 <small class="text-muted my-auto">2 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Madeline Kennedy</p>
                   <p>Available</p>
@@ -176,7 +184,8 @@
                 <small class="text-muted my-auto">5 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Sarah Graves</p>
                   <p>Available</p>
@@ -211,7 +220,8 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">REGISTER BUSINESS</h4>
-                  <form class="form-sample" method="post" action="<?php echo base_url() . 'store'; ?>" enctype="multipart/form-data">
+                  <form class="form-sample" method="post" action="<?php echo base_url() . 'store'; ?>"
+                    enctype="multipart/form-data">
                     <p class="card-description">
                       Business Info
                     </p>
@@ -220,7 +230,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Business Name</label>
                           <div class="col-sm-9">
-                            <input type="text" name="BusinessName" class="form-control" required/>
+                            <input type="text" name="BusinessName" class="form-control" required />
                           </div>
                         </div>
                       </div>
@@ -228,7 +238,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Reg Name</label>
                           <div class="col-sm-9">
-                            <input type="text" name="RegName" class="form-control" required/>
+                            <input type="text" name="RegName" class="form-control" required />
                           </div>
                         </div>
                       </div>
@@ -239,7 +249,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Email</label>
                           <div class="col-sm-9">
-                            <input type="email" name="Email" class="form-control" placeholder="" required/>
+                            <input type="email" name="Email" class="form-control" placeholder="" required />
                           </div>
                         </div>
                       </div>
@@ -247,7 +257,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Phone</label>
                           <div class="col-sm-9">
-                            <input type="tel" name="Phone" class="form-control" placeholder="" required/>
+                            <input type="tel" name="Phone" class="form-control" placeholder="" required />
                           </div>
                         </div>
                       </div>
@@ -258,127 +268,127 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Address </label>
                           <div class="col-sm-9">
-                            <input type="text" name="Address" class="form-control" required/>
+                            <input type="text" name="Address" class="form-control" required />
                           </div>
                         </div>
                       </div>
-                     <!-- app/Views/your_form_view.php -->
-                     <div class="col-md-6">
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Business Type</label>
-        <div class="col-sm-9">
-            <select class="form-control" name="businessType">
-                <?php foreach ($business as $category) : ?>
-                    <option value="<?= $category['ID']; ?>"><?= $category['businessType']; ?></option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-    </div>
-</div>
+                      <!-- app/Views/your_form_view.php -->
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Business Type</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" name="businessType">
+                              <?php foreach ($business as $category): ?>
+                                <option value="<?= $category['ID']; ?>"><?= $category['businessType']; ?></option>
+                              <?php endforeach; ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
 
 
-                    <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Charges </label>
-                          <div class="col-sm-9">
-                            <input type="number" name="fee" class="form-control" Value="0" required/>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Charges </label>
+                            <div class="col-sm-9">
+                              <input type="number" name="fee" class="form-control" Value="0" required />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                   
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Upload Image </label>
-                          <div class="col-sm-9">
-                            <input type="file" class="form-control-file" name="image" required/>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
 
-                    <p class="card-description">
-                      User Info
-                    </p>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">First Name</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control" name="first_name" required/>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Upload Image </label>
+                            <div class="col-sm-9">
+                              <input type="file" class="form-control-file" name="image" required />
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Last Name</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control" name="last_name" required/>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Email</label>
-                          <div class="col-sm-9">
-                            <input type="email" class="form-control" name="user_email" required/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Phone</label>
-                          <div class="col-sm-9">
-                            <input type="tel" class="form-control" name="user_phone" required/>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Address</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control" name="user_address" required/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Password</label>
-                          <div class="col-sm-9">
-                            <input type="password" class="form-control" name="user_password" required/>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
 
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">CNIC Number</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control" name="cnic_number" required/>
+                      <p class="card-description">
+                        User Info
+                      </p>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">First Name</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" name="first_name" required />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Last Name</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" name="last_name" required />
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">User Profile</label>
-                          <div class="col-sm-9">
-                            <input type="file" class="form-control-file" name="cnic_image" required/>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                              <input type="email" class="form-control" name="user_email" required />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Phone</label>
+                            <div class="col-sm-9">
+                              <input type="tel" class="form-control" name="user_phone" required />
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Address</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" name="user_address" required />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Password</label>
+                            <div class="col-sm-9">
+                              <input type="password" class="form-control" name="user_password" required />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
-                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        </div>
-                                    </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">CNIC Number</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" name="cnic_number" required />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">User Profile</label>
+                            <div class="col-sm-9">
+                              <input type="file" class="form-control-file" name="cnic_image" required />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                      </div>
 
                   </form>
                 </div>

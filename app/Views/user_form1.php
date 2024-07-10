@@ -41,14 +41,17 @@
         <i class="settings-close ti-close"></i>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab"
+              aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
+            <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab"
+              aria-controls="chats-section">CHATS</a>
           </li>
         </ul>
         <div class="tab-content" id="setting-content">
-          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
+            aria-labelledby="todo-section">
             <div class="add-items d-flex px-3 mb-0">
               <form class="form w-100">
                 <div class="form-group d-flex">
@@ -132,7 +135,8 @@
             </div>
             <ul class="chat-list">
               <li class="list active">
-                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Thomas Douglas</p>
                   <p>Available</p>
@@ -140,7 +144,8 @@
                 <small class="text-muted my-auto">19 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg" alt="image"><span
+                    class="offline"></span></div>
                 <div class="info">
                   <div class="wrapper d-flex">
                     <p>Catherine</p>
@@ -151,7 +156,8 @@
                 <small class="text-muted my-auto">23 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Daniel Russell</p>
                   <p>Available</p>
@@ -159,7 +165,8 @@
                 <small class="text-muted my-auto">14 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg" alt="image"><span
+                    class="offline"></span></div>
                 <div class="info">
                   <p>James Richardson</p>
                   <p>Away</p>
@@ -167,7 +174,8 @@
                 <small class="text-muted my-auto">2 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Madeline Kennedy</p>
                   <p>Available</p>
@@ -175,7 +183,8 @@
                 <small class="text-muted my-auto">5 min</small>
               </li>
               <li class="list">
-                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg" alt="image"><span class="online"></span></div>
+                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg" alt="image"><span
+                    class="online"></span></div>
                 <div class="info">
                   <p>Sarah Graves</p>
                   <p>Available</p>
@@ -284,7 +293,7 @@
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
@@ -295,12 +304,12 @@
                         </div>
                       </div>
                       <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Profile Image </label>
-                                        <div class="col-sm-9">
-                                            <input type="file" class="form-control-file" name="image" />
-                                        </div>
-                                    </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Profile Image </label>
+                          <div class="col-sm-9">
+                            <input type="file" class="form-control-file" name="image" />
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div class="row">
@@ -330,7 +339,7 @@
         <!-- content-wrapper ends -->
         <!-- partial:../../partials/_footer.html -->
         <?php include 'include_common/footer.php'; ?>
-      
+
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
