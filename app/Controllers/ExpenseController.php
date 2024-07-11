@@ -22,6 +22,19 @@ class ExpenseController extends Controller
         return view('expenses_form.php', $data);
     }
 
+
+    public function expenses_form1()
+    {
+        $clientModel = new ClientModel();
+        $expenseModel = new ExpenseModel();
+
+        $data['client_names'] = $clientModel->getClientNames();
+        $data['categories'] = $expenseModel->getExpenseCategories();
+        $data['users'] = $expenseModel->getUsers();
+
+        return view('testExp.php', $data);
+    }
+
     public function expenses_table()
     {
         $expenseModel = new ExpenseModel();
@@ -41,6 +54,18 @@ class ExpenseController extends Controller
 
 
         return view('editExpense.php', $data);
+    }
+
+    public function expenseCategory_table()
+    {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/login"));
+        }
+        $expenseModel = new ExpenseModel();
+        $data['category'] = $expenseModel->getExpenseCategory();
+
+        return view('expenseCategory_table', $data);
     }
 
     //--------------------------------------------------------------------------------------------------------
@@ -91,8 +116,6 @@ class ExpenseController extends Controller
         }
 
     }
-
-
     public function deleteExpense($id)
     {
 
@@ -101,5 +124,54 @@ class ExpenseController extends Controller
 
         return redirect()->to(base_url("/expenses_table"));
     }
+
+    public function addExpenseCategory()
+    {
+        $expenseModel = new ExpenseModel();
+
+        $title = $this->request->getPost('title');
+        $deleted = $this->request->getPost('deleted');
+
+        $data = [
+            'title' => $title,
+            'deleted' => $deleted
+        ];
+
+        if ($expenseModel->insertExpenseCategory($data)) {
+            return redirect()->to(base_url("/expenseCategory_table"))->with('success', 'Category added successfully.');
+        } else {
+            return redirect()->to(base_url("/expenseCategory_table"))->with('error', 'Failed to add category.');
+        }
+    }
+
+    public function deleteExpenseCat($id)
+    {
+
+        $expenseModel = new ExpenseModel();
+        $expenseModel->deleteExpenseCat($id);
+
+        return redirect()->to(base_url("/expenseCategory_table"))->with('success', 'Category Deleted successfully.');
+    }
+
+    public function updateExpenseCategory()
+    {
+        $expenseModel = new ExpenseModel();
+
+        $id = $this->request->getPost('id');
+        $title = $this->request->getPost('title');
+        $deleted = $this->request->getPost('deleted');
+
+        $data = [
+            'title' => $title,
+            'deleted' => $deleted
+        ];
+
+        if ($expenseModel->EditExpenseCategory($id, $data)) {
+            return redirect()->to(base_url("/expenseCategory_table"))->with('success', 'Category added successfully.');
+        } else {
+            return redirect()->to(base_url("/expenseCategory_table"))->with('error', 'Failed to add category.');
+        }
+    }
+
 
 }

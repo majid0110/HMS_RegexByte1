@@ -451,26 +451,7 @@
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="email">Client Email</label>
-                                    <input type="email" class="form-control" id="email" name="email"
-                                        value="<?= $ServiceDetails[0]['email']; ?>" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="contact">Client Contact</label>
-                                    <input type="text" class="form-control" id="contact" name="contact"
-                                        value="<?= $ServiceDetails[0]['contact']; ?>" required>
-                                </div>
-                            </div>
-
+                            </div>                            
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="currency">Currency</label>
@@ -511,7 +492,7 @@
                         <div class="form-group">
                             <label for="notes">Notes</label>
                             <textarea class="form-control" id="notes" name="notes"
-                                required><?= $ServiceDetails[0]['Notes']; ?></textarea>
+                                ><?= $ServiceDetails[0]['Notes']; ?></textarea>
                         </div>
 
                         <div class="form-group">

@@ -40,6 +40,7 @@ class InvoiceModel extends Model
         'dokumenti',
         'lloji_fatures_id',
         'InvoiceNotes',
+        'Notes',
     ];
 
     public function insertInvoice($data)

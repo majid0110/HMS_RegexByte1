@@ -14,10 +14,6 @@ class ConfigureController extends Controller
         return view('add_config.php');
     }
 
-    // public function config_settings()
-    // {
-    //     return view('config_Settings.php');
-    // }
 
     public function config_settings()
     {
@@ -27,8 +23,23 @@ class ConfigureController extends Controller
         $configModel = new ConfigModel();
         $configData = $configModel->getConfig($businessID);
 
+        if (empty($configData)) {
+            $configData = ['isExpiry' => 0];
+        }
+
         return view('Config_Settings', ['configData' => $configData]);
     }
+
+    // public function config_settings()
+    // {
+    //     $session = \Config\Services::session();
+    //     $businessID = $session->get('businessID');
+
+    //     $configModel = new ConfigModel();
+    //     $configData = $configModel->getConfig($businessID);
+
+    //     return view('Config_Settings', ['configData' => $configData]);
+    // }
 
     public function config_form($businessTableID)
     {

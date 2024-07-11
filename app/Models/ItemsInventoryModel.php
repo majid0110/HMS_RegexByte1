@@ -331,6 +331,21 @@ class ItemsInventoryModel extends Model
         return $query;
     }
 
+    public function sumInvoiceValuesToday($businessID)
+    {
+        $today = date('Y-m-d');
+
+        $query = $this->db->table('invoices')
+            ->selectSum('Value')
+            ->where('idBusiness', $businessID)
+            ->where('Date', $today)
+            ->get();
+
+        $result = $query->getRow();
+
+        return $result->Value;
+    }
+
     public function countSalesToday($businessID)
     {
         $today = date('Y-m-d');

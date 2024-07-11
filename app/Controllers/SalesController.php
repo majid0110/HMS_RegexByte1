@@ -228,7 +228,7 @@ class SalesController extends Controller
                 'filename' => 0,
                 'dokumenti' => 0,
                 'lloji_fatures_id' => 0,
-                'InvoiceNotes' => 0,
+                'InvoiceNotes' => '',
             ];
             $invoice->insertInvoice($invoiceData);
             $idPayment = $invoice->getInsertID();
@@ -496,7 +496,7 @@ class SalesController extends Controller
                 'filename' => 0,
                 'dokumenti' => 0,
                 'lloji_fatures_id' => 0,
-                'InvoiceNotes' => 0,
+                'InvoiceNotes' => '',
             ];
             $invoice->insertInvoice($invoiceData);
             $idPayment = $invoice->getInsertID();
@@ -793,10 +793,8 @@ class SalesController extends Controller
         $originalInvoicePayments = $model->getInvoicePaymentsByReceiptId($invoiceId);
 
         if ($originalInvoice) {
-            // Cancel the original invoice
             $this->cancelInvoice($invoiceId);
 
-            // Create new invoice data
             $newInvoiceData = (array) $originalInvoice;
             unset($newInvoiceData['idReceipts']);
 
@@ -811,23 +809,20 @@ class SalesController extends Controller
             $newInvoiceData['timeStamp'] = date('Y-m-d H:i:s');
             $newInvoiceData['invOrdNum'] = $this->getNextInvOrdNum();
 
-            // Insert new invoice
+
             $newInvoiceId = $model->insertInvoice($newInvoiceData);
 
             if ($newInvoiceId) {
-                // Insert invoice reference
                 $referenceData = [
                     'idReceipt' => $newInvoiceId,
                     'receiptReference' => $invoiceId
                 ];
                 $model->insertInvoiceReference($referenceData);
 
-                // Process service details
                 foreach ($serviceDetails as $index => $detail) {
                     $newDetail = [];
                     $isNewRow = true;
 
-                    // Check if this is an existing row or a new one
                     foreach ($originalInvoiceDetails as $originalDetail) {
                         if ($originalDetail->idArtMenu == $detail['idArtMenu']) {
                             $newDetail = (array) $originalDetail;
@@ -852,12 +847,10 @@ class SalesController extends Controller
 
 
                     } else {
-                        // This is an existing row, so we update it
                         unset($newDetail['idInvoiceDetail']);
                         $newDetail['idReceipts'] = $newInvoiceId;
                     }
 
-                    // Update common fields for both new and existing rows
                     $newDetail['Quantity'] = $detail['Quantity'];
                     $newDetail['Price'] = $detail['Price'];
                     $newDetail['Sum'] = $detail['Quantity'] * $detail['Price'];
@@ -865,7 +858,6 @@ class SalesController extends Controller
                     $model->insertInvoiceDetail($newDetail);
                 }
 
-                // Process payments
                 foreach ($originalInvoicePayments as $payment) {
                     $paymentArray = (array) $payment;
                     unset($paymentArray['idInvPay']);

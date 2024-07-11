@@ -70,6 +70,14 @@ class ExpenseModel extends Model
 
     }
 
+    public function deleteExpenseCat($id)
+    {
+        $this->db->table('expense_categories')
+            ->where('id', $id)
+            ->delete();
+
+    }
+
 
     public function getExpensedetails($id)
     {
@@ -77,6 +85,29 @@ class ExpenseModel extends Model
             ->where('id', $id)
             ->get()
             ->getRowArray();
+    }
+
+    public function getExpenseCategory()
+    {
+        $builder = $this->db->table('expense_categories');
+        $builder->orderBy('id', 'DESC');
+        $result = $builder->get()->getResultArray();
+
+        return $result;
+    }
+
+    public function insertExpenseCategory($data)
+    {
+
+        return $this->db->table('expense_categories')->insert($data);
+    }
+
+    public function EditExpenseCategory($id, $data)
+    {
+
+        return $this->db->table('expense_categories')
+            ->where('id', $id)
+            ->update($data);
     }
 
 

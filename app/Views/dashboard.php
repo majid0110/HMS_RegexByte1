@@ -371,7 +371,7 @@
                           <div>
                             <h3 class="statistics-title">Sales Today</h3>
                             <p class="rate-percentage">
-                              <?php echo $totalSalesToday; ?>
+                              <?php echo $totalSaleValueToday; ?>
                             </p>
                           </div>
 

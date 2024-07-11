@@ -45,7 +45,7 @@
                                                     <label class="col-sm-3 col-form-label">Date of Expense</label>
                                                     <div class="col-sm-9">
                                                         <input type="date" class="form-control" name="date_exp"
-                                                            required />
+                                                            value="<?= date('Y-m-d'); ?>" required />
                                                     </div>
                                                 </div>
                                             </div>
