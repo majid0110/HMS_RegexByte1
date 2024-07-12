@@ -35,10 +35,30 @@ class ExpenseController extends Controller
         return view('testExp.php', $data);
     }
 
+
     public function expenses_table()
     {
         $expenseModel = new ExpenseModel();
-        $data['expenses'] = $expenseModel->getExpenses();
+        $clientModel = new ClientModel();
+
+        $filters = [
+            'clientName' => $this->request->getGet('clientName'),
+            'userName' => $this->request->getGet('userName'),
+            'projectId' => $this->request->getGet('projectId'),
+            'fromDate' => $this->request->getGet('fromDate'),
+            'toDate' => $this->request->getGet('toDate'),
+            'search' => $this->request->getGet('search')
+        ];
+
+        $data['expenses'] = $expenseModel->getExpenses($filters);
+        $data['client_names'] = $clientModel->getClientNames();
+        $data['users'] = $expenseModel->getUsers();
+        $data['projects'] = $expenseModel->getExpenseProject();
+
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON($data['expenses']);
+        }
+
         return view('expenses_table.php', $data);
     }
 

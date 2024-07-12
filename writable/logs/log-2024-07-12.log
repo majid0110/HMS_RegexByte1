@@ -1,0 +1,229 @@
+INFO - 2024-07-12 05:50:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 05:51:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 05:51:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 05:54:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 05:54:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-12 05:54:39 --> unlink(C:\xampp\htdocs\HMS_RegexByte\writable\debugbar/debugbar_1720698156.006780.json): No such file or directory
+in SYSTEMPATH\Debug\Toolbar\Collectors\History.php on line 80.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'unlink(C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1720698156.006780.json): No such file or directory', 'C:\\xampp\\htdocs\\HMS_RegexByte\\system\\Debug\\Toolbar\\Collectors\\History.php', 80)
+ 2 SYSTEMPATH\Debug\Toolbar\Collectors\History.php(80): unlink('C:\\xampp\\htdocs\\HMS_RegexByte\\writable\\debugbar/debugbar_1720698156.006780.json')
+ 3 SYSTEMPATH\Debug\Toolbar.php(497): CodeIgniter\Debug\Toolbar\Collectors\History->setFiles('1720763651.322179', 20)
+ 4 SYSTEMPATH\Debug\Toolbar.php(476): CodeIgniter\Debug\Toolbar->format([...], 'html')
+ 5 APPPATH\Config\Events.php(47): CodeIgniter\Debug\Toolbar->respond()
+ 6 SYSTEMPATH\Events\Events.php(154): CodeIgniter\Events\Events::Config\{closure}()
+ 7 SYSTEMPATH\CodeIgniter.php(442): CodeIgniter\Events\Events::trigger('pre_system')
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-12 06:07:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 06:08:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-12 06:08:00 --> Undefined variable $user_names
+in APPPATH\Views\expenses_table.php on line 43.
+ 1 APPPATH\Views\expenses_table.php(43): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $user_names', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\expenses_table.php', 43)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\expenses_table.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('expenses_table.php', [], true)
+ 5 APPPATH\Controllers\ExpenseController.php(47): view('expenses_table.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-12 06:08:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 06:17:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-07-12 06:17:25 --> mysqli_sql_exception: Unknown column 'project_id' in 'field list' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `id`, `p...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id`, `p...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id`, `p...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `id`, `p...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(38): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(44): App\Models\ExpenseModel->getExpenseCategories()
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-12 06:17:25 --> Unknown column 'project_id' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `id`, `project_id`
+FROM `expense_categories`', [], false)
+ 2 APPPATH\Models\ExpenseModel.php(38): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(44): App\Models\ExpenseModel->getExpenseCategories()
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-12 06:18:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 06:19:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 06:19:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 06:40:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-12 06:40:29 --> Call to undefined method App\Models\ExpenseModel::getClientNames
+in SYSTEMPATH\Model.php on line 873.
+ 1 APPPATH\Controllers\ExpenseController.php(55): CodeIgniter\Model->__call('getClientNames', [])
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-12 06:43:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-12 06:43:18 --> Call to undefined method App\Models\ExpenseModel::getProjects
+in SYSTEMPATH\Model.php on line 873.
+ 1 APPPATH\Controllers\ExpenseController.php(58): CodeIgniter\Model->__call('getProjects', [])
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-12 06:43:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 06:45:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 06:55:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-12 06:55:06 --> Call to undefined method App\Models\ExpenseModel::getClientNames
+in SYSTEMPATH\Model.php on line 873.
+ 1 APPPATH\Controllers\ExpenseController.php(64): CodeIgniter\Model->__call('getClientNames', [])
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-12 06:56:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 06:56:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 06:56:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 06:56:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:20:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:21:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:21:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:21:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:31:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:31:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:31:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:32:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:32:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:37:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:37:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:37:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:37:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:37:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:37:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:38:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:38:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:38:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:38:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:38:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:38:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:38:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:40:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:40:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:40:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:40:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:40:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:40:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:41:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:41:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 07:46:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:07:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:07:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:09:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:09:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:10:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:10:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:10:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:11:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-12 10:11:10 --> foreach() argument must be of type array|object, null given
+in APPPATH\Views\include_common\sidebar.php on line 19.
+ 1 APPPATH\Views\include_common\sidebar.php(19): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, null given', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\include_common\\sidebar.php', 19)
+ 2 APPPATH\Views\expenses_table.php(14): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\include_common\\sidebar.php')
+ 3 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\expenses_table.php')
+ 4 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('expenses_table.php', [], true)
+ 6 APPPATH\Controllers\ExpenseController.php(73): view('expenses_table.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-12 10:11:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:11:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:11:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:11:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:29:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:29:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-07-12 10:29:51 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(53): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-12 10:29:51 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(53): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-12 10:30:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:30:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:33:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:33:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:33:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-07-12 10:33:20 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(53): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-12 10:33:20 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE `client`.`client` = :client.client:
+AND   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client.1: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(53): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-12 10:33:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:56:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 10:56:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 11:11:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 11:11:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 11:11:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 11:11:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 11:11:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-12 11:12:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
