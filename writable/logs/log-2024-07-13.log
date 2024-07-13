@@ -1,0 +1,1291 @@
+INFO - 2024-07-13 04:49:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 04:49:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 04:59:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 04:59:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:08:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 05:08:46 --> Undefined variable $34542
+in APPPATH\Controllers\LoginController.php on line 276.
+ 1 APPPATH\Controllers\LoginController.php(276): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $34542', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Controllers\\LoginController.php', 276)
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LoginController->dashboard()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 05:09:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 05:09:09 --> Undefined variable $TotalExpenditure
+in APPPATH\Views\dashboard.php on line 381.
+ 1 APPPATH\Views\dashboard.php(381): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $TotalExpenditure', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\dashboard.php', 381)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('dashboard.php', [], true)
+ 5 APPPATH\Controllers\LoginController.php(332): view('dashboard.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LoginController->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 05:11:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 05:11:17 --> Undefined variable $TotalExpenditure
+in APPPATH\Views\dashboard.php on line 381.
+ 1 APPPATH\Views\dashboard.php(381): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $TotalExpenditure', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\dashboard.php', 381)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('dashboard.php', [], true)
+ 5 APPPATH\Controllers\LoginController.php(332): view('dashboard.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LoginController->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 05:11:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:19:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:25:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:26:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:27:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:28:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:29:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:29:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:30:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:30:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:30:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:32:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:41:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:41:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:42:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:43:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:06:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:11:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:11:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:11:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:13:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:14:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:14:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:24:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:24:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:24:34 --> Search term: 
+INFO - 2024-07-13 07:24:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:24:46 --> Search term: test
+ERROR - 2024-07-13 07:24:46 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:24:46 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:26:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:26:07 --> Search term: 
+INFO - 2024-07-13 07:26:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:26:22 --> Search term: 
+INFO - 2024-07-13 07:29:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:29:05 --> Search term: 
+INFO - 2024-07-13 07:33:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:23 --> Search term: 
+INFO - 2024-07-13 07:33:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:36 --> Search term: t
+ERROR - 2024-07-13 07:33:36 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:36 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:33:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:36 --> Search term: te
+ERROR - 2024-07-13 07:33:36 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:37 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:33:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:37 --> Search term: tes
+ERROR - 2024-07-13 07:33:37 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:37 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:33:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:37 --> Search term: test
+ERROR - 2024-07-13 07:33:37 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:38 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:33:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:49 --> Search term: tes
+ERROR - 2024-07-13 07:33:49 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:49 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:33:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:49 --> Search term: te
+ERROR - 2024-07-13 07:33:49 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:50 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:33:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:50 --> Search term: t
+ERROR - 2024-07-13 07:33:50 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:50 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:33:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:50 --> Search term: 
+INFO - 2024-07-13 07:33:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:52 --> Search term: r
+ERROR - 2024-07-13 07:33:52 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:52 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:33:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:53 --> Search term: re
+ERROR - 2024-07-13 07:33:53 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:53 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:33:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:53 --> Search term: ren
+ERROR - 2024-07-13 07:33:53 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:53 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:33:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:54 --> Search term: rent
+ERROR - 2024-07-13 07:33:54 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:54 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:33:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:54 --> Search term: r
+ERROR - 2024-07-13 07:33:54 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:55 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:33:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:55 --> Search term: 
+INFO - 2024-07-13 07:33:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:55 --> Search term: re
+ERROR - 2024-07-13 07:33:56 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:56 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:33:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:56 --> Search term: R
+ERROR - 2024-07-13 07:33:56 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:56 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:33:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:57 --> Search term: ren
+ERROR - 2024-07-13 07:33:57 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:57 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:33:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:57 --> Search term: Re
+ERROR - 2024-07-13 07:33:57 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:57 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:33:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:58 --> Search term: Ren
+ERROR - 2024-07-13 07:33:58 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:58 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:33:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:33:58 --> Search term: Rent
+ERROR - 2024-07-13 07:33:58 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:33:59 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:34:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:34:48 --> Search term in controller: 
+INFO - 2024-07-13 07:35:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:35:03 --> Search term in controller: te
+ERROR - 2024-07-13 07:35:03 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:35:04 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:35:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:35:04 --> Search term in controller: t
+ERROR - 2024-07-13 07:35:04 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:35:04 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:35:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:35:04 --> Search term in controller: tes
+ERROR - 2024-07-13 07:35:04 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:35:05 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:35:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-07-13 07:35:05 --> Search term in controller: test
+ERROR - 2024-07-13 07:35:05 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:35:05 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:36:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:36:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-07-13 07:36:52 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:36:52 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:36:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-07-13 07:36:52 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:36:52 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:36:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-07-13 07:36:53 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:36:53 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:36:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-07-13 07:36:53 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:36:53 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:37:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-07-13 07:37:09 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:37:09 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE `client`.`client` = :client.client:
+AND   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client.1: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:37:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-07-13 07:37:15 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:37:15 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE `client`.`client` = :client.client:
+AND   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client.1: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:37:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-07-13 07:37:15 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:37:15 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE `client`.`client` = :client.client:
+AND   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client.1: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:37:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-07-13 07:37:16 --> mysqli_sql_exception: Unknown column 'projects.name' in 'where clause' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `expense...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `expense...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `expense...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expense...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-13 07:37:16 --> Unknown column 'projects.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `expenses`.*, `client`.`client` as `clientName`, `users`.`fName` as `userName`, `expense_categories`.`title` as `Category`
+FROM `expenses`
+JOIN `client` ON `client`.`idClient` = `expenses`.`client_id`
+JOIN `users` ON `users`.`ID` = `expenses`.`user_id`
+JOIN `expense_categories` ON `expense_categories`.`id` = `expenses`.`category_id`
+WHERE `client`.`client` = :client.client:
+AND   (
+`expenses`.`title` LIKE :expenses.title: ESCAPE \'!\'
+OR  `client`.`client` LIKE :client.client.1: ESCAPE \'!\'
+OR  `users`.`fName` LIKE :users.fName: ESCAPE \'!\'
+OR  `expense_categories`.`title` LIKE :expense_categories.title: ESCAPE \'!\'
+OR  `projects`.`name` LIKE :projects.name: ESCAPE \'!\'
+OR  `expenses`.`amount` LIKE :expenses.amount: ESCAPE \'!\'
+OR  `expenses`.`expense_date` LIKE :expenses.expense_date: ESCAPE \'!\'
+ )', [...], false)
+ 2 APPPATH\Models\ExpenseModel.php(108): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\ExpenseController.php(55): App\Models\ExpenseModel->getExpenses([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->expenses_table()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:37:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:37:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:37:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:53:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:53:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:53:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:53:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:53:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:53:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:53:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:53:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:53:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:58:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:58:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 07:58:54 --> Call to a member function isValid() on null
+in APPPATH\Controllers\ExpenseController.php on line 102.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->save_expense()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 07:59:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:13:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:13:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 09:13:13 --> Call to a member function isValid() on null
+in APPPATH\Controllers\ExpenseController.php on line 105.
+ 1 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\ExpenseController->save_expense()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ExpenseController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 09:14:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:14:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:15:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:21:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:22:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:22:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:23:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:23:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:23:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:34:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:35:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:35:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:35:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:38:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:38:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:38:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 09:38:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 10:01:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 10:02:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 10:33:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 11:01:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 11:01:53 --> Call to undefined method App\Models\LoginModel::getMonthlyAppointmentsRevenue
+in SYSTEMPATH\Model.php on line 873.
+ 1 APPPATH\Controllers\LoginController.php(284): CodeIgniter\Model->__call('getMonthlyAppointmentsRevenue', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LoginController->dashboard()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 11:02:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 11:02:53 --> Undefined variable $181
+in APPPATH\Controllers\LoginController.php on line 287.
+ 1 APPPATH\Controllers\LoginController.php(287): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $181', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Controllers\\LoginController.php', 287)
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LoginController->dashboard()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-13 11:03:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 11:04:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 11:04:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 11:05:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 11:05:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 11:05:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

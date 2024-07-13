@@ -291,3 +291,4 @@ $routes->post('/addExpenseCategory', 'ExpenseController::addExpenseCategory');
 $routes->get('deleteExpenseCat/(:num)', 'ExpenseController::deleteExpenseCat/$1');
 $routes->post('/updateExpenseCategory', 'ExpenseController::updateExpenseCategory');
 $routes->get('/expenses_form1', 'ExpenseController::expenses_form1');
+$routes->post('export_expenses', 'ExpenseController::exportExpenses');

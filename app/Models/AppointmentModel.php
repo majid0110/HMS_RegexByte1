@@ -417,6 +417,17 @@ class AppointmentModel extends Model
         return $query->getRow()->totalAppointmentsRevenue;
     }
 
+    public function getMonthlyAppointmentsRevenue($businessID)
+    {
+        $query = $this->selectSum('appointmentFee', 'totalAppointmentsRevenue')
+            ->where('MONTH(appointmentDate)', date('m'))
+            ->where('YEAR(appointmentDate)', date('Y'))
+            ->where('businessID', $businessID)
+            ->get();
+
+        return $query->getRow()->totalAppointmentsRevenue;
+    }
+
     public function fetchAppointmentData($businessID)
     {
         $this->select('appointment.appointmentDate, 

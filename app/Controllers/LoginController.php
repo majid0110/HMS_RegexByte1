@@ -267,10 +267,25 @@ class LoginController extends Controller
         $data['userDetails'] = $getAllBusinessUsers->getuserprofile();
         $model = new LoginModel('labtestdetails');
         $totalTests = $model->getTotalTests($businessID);
+
+        $TotalExpenditure = $model->getTotalExpenditure();
+        $data['TotalExpenditure'] = $TotalExpenditure;
+
+        $TotalMonthlyExpenditure = $model->getMonthlyExpenditure();
+        $data['TotalMonthlyExpenditure'] = $TotalMonthlyExpenditure;
+
+
         $data['totalTests'] = $totalTests;
         $InvoiceModel = new LoginModel('invoices');
         $totalServiceRevenue = $InvoiceModel->getTotalServiceRevenue($businessID);
         $data['totalServiceRevenue'] = $totalServiceRevenue;
+
+        $MonthlyServiceRevenue = $InvoiceModel->getMonthlyServiceRevenue($businessID);
+        $MonthlyppointmentsRevenue = $appointmentModel->getMonthlyAppointmentsRevenue($businessID);
+        $MonthlyTestRevenue = $InvoiceModel->getMonthlyTestRevenue($businessID);
+        $MonthlyRevenue = $MonthlyServiceRevenue + $MonthlyppointmentsRevenue + $MonthlyTestRevenue;
+        $data['MonthlyRevenue'] = $MonthlyRevenue;
+
         $labModel = new LoginModel('labtest');
         $totalTestRevenue = $labModel->getTotalTestRevenue($businessID);
         $data['totalTestRevenue'] = $totalTestRevenue;

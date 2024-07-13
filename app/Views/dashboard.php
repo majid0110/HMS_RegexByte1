@@ -375,6 +375,13 @@
                             </p>
                           </div>
 
+                          <div class="d-none d-md-block">
+                            <h3 class="statistics-title">Total Expenditure</h3>
+                            <p class="rate-percentage">
+                              <?php echo $TotalExpenditure; ?>
+                            </p>
+                          </div>
+
                           <?php if ($isHospital): ?>
                             <div class="d-none d-md-block">
                               <h3 class="statistics-title">Total Revenue</h3>
@@ -551,6 +558,76 @@
                             </div>
                           </div>
                         </div>
+
+                        <!-- --------------------------------------------------------------------------- -->
+
+                        <div class="col-md-6 col-lg-12 grid-margin stretch-card">
+                          <div class="card bg-primary card-rounded">
+                            <div class="card-body pb-0">
+                              <h4 class="card-title card-title-dash text-white mb-4">Monthly Income vs Expenses</h4>
+                              <div class="row">
+                                <div class="col-sm-6">
+                                  <p class="status-summary-ight-white mb-1">Monthly Income</p>
+                                  <h2 class="text-info">
+                                    <?php echo $MonthlyRevenue; ?>
+                                  </h2>
+                                  <p class="status-summary-ight-white mt-2 mb-1">Monthly Expenses</p>
+                                  <h2 class="text-danger">
+                                    <?php echo $TotalMonthlyExpenditure; ?>
+                                  </h2>
+                                </div>
+                                <div class="col-sm-6">
+                                  <div class="status-summary-chart-wrapper pb-4">
+                                    <canvas id="incomeExpensesChart"></canvas>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <script>
+                          document.addEventListener('DOMContentLoaded', function () {
+                            var ctx = document.getElementById('incomeExpensesChart').getContext('2d');
+                            var incomeExpensesChart = new Chart(ctx, {
+                              type: 'doughnut',
+                              data: {
+                                labels: ['Income', 'Expenses'],
+                                datasets: [{
+                                  data: [<?php echo $MonthlyRevenue; ?>, <?php echo $TotalMonthlyExpenditure; ?>],
+                                  backgroundColor: ['#36A2EB', '#FF6384'],
+                                  hoverBackgroundColor: ['#2693e6', '#ff4d6d']
+                                }]
+                              },
+                              options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                legend: {
+                                  display: false
+                                },
+                                cutoutPercentage: 70,
+                                tooltips: {
+                                  callbacks: {
+                                    label: function (tooltipItem, data) {
+                                      var dataset = data.datasets[tooltipItem.datasetIndex];
+                                      var total = dataset.data.reduce(function (previousValue, currentValue) {
+                                        return previousValue + currentValue;
+                                      });
+                                      var currentValue = dataset.data[tooltipItem.index];
+                                      var percentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                                      return data.labels[tooltipItem.index] + ": " + currentValue + " (" + percentage + "%)";
+                                    }
+                                  }
+                                }
+                              }
+                            });
+                          });
+                        </script>
+
+                        <!-- ---------------------------------------------------------------------------- -->
+
+
+
                         <div class="col-md-6 col-lg-12 grid-margin stretch-card">
                           <div class="card card-rounded">
                             <?php if ($isHospital): ?>
@@ -593,6 +670,7 @@
                       </div>
                     </div>
                   </div>
+
                   <div class="row">
                     <div class="col-lg-8 d-flex flex-column">
                       <div class="row ">

@@ -252,10 +252,60 @@ class LoginModel extends Model
         return $result->totalRevenue;
     }
 
+    public function getMonthlyServiceRevenue($businessID)
+    {
+        $query = $this->db->table('invoices')
+            ->selectSum('Value', 'totalRevenue')
+            ->where('MONTH(Date)', date('m'))
+            ->where('YEAR(Date)', date('Y'))
+            ->where('idBusiness', $businessID)
+            ->get();
+
+        $result = $query->getRow();
+        return $result->totalRevenue;
+    }
+
+    public function getTotalExpenditure()
+    {
+        $query = $this->db->table('expenses')
+            ->selectSum('amount', 'TotalExpenditure')
+            ->get();
+
+        $result = $query->getRow();
+        return $result->TotalExpenditure;
+    }
+
+
+    public function getMonthlyExpenditure()
+    {
+        $query = $this->db->table('expenses')
+            ->selectSum('amount', 'TotalExpenditure')
+            ->where('MONTH(expense_date)', date('m'))
+            ->where('YEAR(expense_date)', date('Y'))
+            ->get();
+
+        $result = $query->getRow();
+        return $result->TotalExpenditure;
+    }
+
+
     public function getTotalTestRevenue($businessID)
     {
         $query = $this->db->table('labtest')
             ->selectSum('fee', 'totalRevenue')
+            ->where('businessId', $businessID)
+            ->get();
+
+        $result = $query->getRow();
+        return $result->totalRevenue;
+    }
+
+    public function getMonthlyTestRevenue($businessID)
+    {
+        $query = $this->db->table('labtest')
+            ->selectSum('fee', 'totalRevenue')
+            ->where('MONTH(CreatedAT)', date('m'))
+            ->where('YEAR(CreatedAT)', date('Y'))
             ->where('businessId', $businessID)
             ->get();
 

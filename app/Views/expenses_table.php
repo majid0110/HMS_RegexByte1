@@ -19,7 +19,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Expense</h4>
-                                <div class="table-responsive">
+                                <form class="pt-3" method="POST" action="<?php echo base_url() . "export_expenses"; ?>"
+                                    enctype="multipart/form-data">
 
                                     <div class="form-group row">
                                         <div class="col-md-2">
@@ -75,7 +76,21 @@
                                         </div>
                                     </div>
 
-                                    <hr>
+                                    <div class="col-md-3">
+
+                                        <label>Search</label>
+                                        <input class="form-control" type="text" name="search" id="searchInput"
+                                            placeholder="Search">
+                                    </div>
+
+                                    <button type="submit" name="export" value="export"
+                                        style="align-self: flex-end;color: white;background-color: #172D88;border-color: #172D88;height: 33px;font-size: 12px;font-weight: 500;box-sizing: border-box;border: 1px solid #CADDFF;padding: 8px 15px;border-radius: 6px;align-items: center;">
+                                        <i class="ti-download"></i>
+                                        Export
+                                    </button>
+                                </form>
+                                <hr>
+                                <div class="table-responsive">
                                     <!-- <div class="table-responsive"> -->
                                     <table class="table table-striped" id="expensesTable">
                                         <thead>
@@ -170,6 +185,7 @@
                 var search = $('#searchInput').val();
 
                 console.log(search);
+                console.log(clientName);
 
                 $.ajax({
                     url: '<?= base_url('expenses_table') ?>',
@@ -206,7 +222,12 @@
                 });
             }
 
-            $('#clientInput, #userInput, #projectInput, #fromDateInput, #toDateInput, #searchInput').on('change', function () {
+            $('#clientInput, #userInput, #projectInput, #fromDateInput, #toDateInput').on('change', function () {
+                updateTable();
+            });
+
+            $('#searchInput').on('input', function () {
+                console.log('Search input changed:', $(this).val());
                 updateTable();
             });
         });
