@@ -14,6 +14,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
   <style>
     .blinking-name {
       animation: blink-animation 1s steps(5, start) infinite;
@@ -113,7 +119,7 @@
     <!-- partial:partials/_navbar.html -->
 
     <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
+    <div class="container-fluid page-body-wrapper" style="padding: 0%;">
       <!-- partial:partials/_settings-panel.html -->
       <div class="theme-setting-wrapper">
         <div id="settings-trigger"><i class="ti-settings"></i></div>
@@ -305,6 +311,20 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="home-tab">
+                <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab" role="tab"
+                        aria-controls="overview" aria-selected="true">Overview</a>
+                    </li>
+                  </ul>
+                  <div>
+                    <div class="btn-wrapper">
+                      <button class="btn btn-primary text-white me-0" data-toggle="modal"
+                        data-target="#expenseModal">Expenses</button>
+                    </div>
+                  </div>
+                </div>
                 <div class="tab-content tab-content-basic">
                   <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
                     <div class="row">
@@ -568,11 +588,11 @@
                               <div class="row">
                                 <div class="col-sm-6">
                                   <p class="status-summary-ight-white mb-1">Monthly Income</p>
-                                  <h2 class="text-info">
+                                  <h2 style="color: #32CD32;">
                                     <?php echo $MonthlyRevenue; ?>
                                   </h2>
                                   <p class="status-summary-ight-white mt-2 mb-1">Monthly Expenses</p>
-                                  <h2 class="text-danger">
+                                  <h2 style="color: #FFA500;">
                                     <?php echo $TotalMonthlyExpenditure; ?>
                                   </h2>
                                 </div>
@@ -1199,6 +1219,151 @@
   </div>
   <!-- content-wrapper ends -->
   <!-- partial:partials/_footer.html -->
+  <!-- Modal -->
+  <div class="modal fade" id="expenseModal" tabindex="-1" role="dialog" aria-labelledby="expenseModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="expenseModalLabel">Add Expense</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="pt-3" method="POST" action="<?php echo base_url() . 'save_expense'; ?>"
+            enctype="multipart/form-data">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Date of Expense</label>
+                  <div class="col-sm-9">
+                    <input type="date" class="form-control" name="date_exp" value="<?= date('Y-m-d'); ?>" required />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Category</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" name="category">
+                      <?php foreach ($categories as $category): ?>
+                        <option value="<?= $category['id'] ?>"><?= $category['title'] ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Amount</label>
+                  <div class="col-sm-9">
+                    <input type="number" class="form-control" name="amount" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Project</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" name="project" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Title</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" name="title" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Description</label>
+                  <div class="col-sm-9">
+                    <textarea type="text" class="form-control" name="description"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Client Name</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" name="client">
+                      <?php foreach ($client_names as $client): ?>
+                        <option value="<?= $client['idClient']; ?>"><?= $client['clientUniqueId']; ?> -
+                          <?= $client['client']; ?>
+                        </option>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Team Member</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" name="teamMember">
+                      <?php foreach ($users as $user): ?>
+                        <option value="<?= $user['ID'] ?>"><?= $user['fName'] ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">TAX</label>
+                  <div class="col-sm-9">
+                    <input type="number" class="form-control" name="tax_1" value="0.0" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Second TAX</label>
+                  <div class="col-sm-9">
+                    <input type="number" class="form-control" name="tax_2" value="0.0" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <input type="checkbox" class="form-check-input" name="recurring"
+                    style="margin-left: 9rem; display:flex">
+                  <span style="margin-left: 11rem; margin-top: -19px;">Recurring</span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label"></label>
+                  <div class="col-sm-9">
+                    <input type="file" class="form-control-file" name="image" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- partial -->
   </div>

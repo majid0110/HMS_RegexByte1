@@ -12,6 +12,7 @@ use App\Models\RoleModel;
 use App\Models\itemsModel;
 use App\Models\ConfigModel;
 use App\Models\ItemsInventoryModel;
+use App\Models\ExpenseModel;
 
 
 class LoginController extends Controller
@@ -115,52 +116,6 @@ class LoginController extends Controller
         $data['roleName'] = $Model->getAllRoles('role');
         return view('edit_user.php', $data);
     }
-
-    // public function update_role($roleID)
-    // {
-    //     // Retrieve the role data from the form submission
-    //     $roleName = $this->request->getPost('role_name');
-    //     $roleDescription = $this->request->getPost('role_description');
-    //     $permissions = $this->request->getPost('permissions'); // Assuming permissions are submitted as an array
-
-    //     // Load the RoleModel
-    //     $roleModel = new RoleModel();
-    //     $role = $roleModel->find($roleID);
-
-    //     // Check if the role exists
-    //     if (!$role) {
-    //         return redirect()->to(base_url('roles'))->with('error', 'Role not found.');
-    //     }
-
-    //     // Prepare role data for update
-    //     $roleData = [
-    //         'role_name' => $roleName,
-    //         'role_description' => $roleDescription,
-    //     ];
-
-    //     // Update the role details
-    //     $roleModel->update($roleID, $roleData);
-
-    //     // Update role permissions
-    //     $rolePermissions = [];
-    //     foreach ($permissions as $moduleID => $permission) {
-    //         $rolePermissions[] = [
-    //             'roleID' => $roleID,
-    //             'moduleID' => $moduleID,
-    //             'can_view' => isset ($permission['view']) ? 1 : 0,
-    //             'can_insert' => isset ($permission['add']) ? 1 : 0,
-    //             'can_update' => isset ($permission['update']) ? 1 : 0,
-    //             'can_delete' => isset ($permission['delete']) ? 1 : 0,
-    //         ];
-    //     }
-
-    //     // Update role permissions in the database
-    //     $rolePermissionModel = new RolePermissionModel();
-    //     $rolePermissionModel->updateRolePermissions($roleID, $rolePermissions);
-
-    //     // Redirect back to roles view with success message
-    //     return redirect()->to(base_url('roles'))->with('success', 'Role updated successfully.');
-    // }
     public function update_role($roleID)
     {
 
@@ -237,10 +192,15 @@ class LoginController extends Controller
         $data['totalSalesToday'] = $totalSalesToday;
 
         $totalSaleValueToday = $inventoryModel->sumInvoiceValuesToday($businessID);
-        $data['totalSaleValueToday'] = $totalSaleValueToday;
+        $data['totalSaleValueToday'] = $totalSaleValueToday ?? 0;
 
+
+        $expenseModel = new ExpenseModel();
+        $data['categories'] = $expenseModel->getExpenseCategories();
+        $data['users'] = $expenseModel->getUsers();
 
         $Model = new ClientModel();
+        $data['client_names'] = $Model->getClientNames();
         $totalClientCount = $Model->countClientsByBusinessID($businessID);
         $data['totalClientCount'] = $totalClientCount;
         $appointmentModel = new AppointmentModel();

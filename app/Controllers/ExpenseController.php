@@ -174,7 +174,6 @@ class ExpenseController extends Controller
             'search' => $this->request->getPost('search')
         ];
 
-        // Assuming the getExpenses method handles filters appropriately
         $expenses = $expenseModel->getExpenses($filters);
 
         if (empty($expenses)) {
