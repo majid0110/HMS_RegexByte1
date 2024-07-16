@@ -9,6 +9,13 @@
   <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+
+  <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
   <style>
     .badge-pill:hover {
       background-color: #52CDFF;
@@ -360,11 +367,14 @@
                   <p class="card-description"
                     style="margin-top: -19px; margin-bottom: -10px; font-weight: bold; color: black">
                     Services
-                  </p>
 
+                    <button class="btn btn-primary text-white me-0" data-toggle="modal"
+                      data-target="#expenseModal">ADD</button>
+                  </p>
                   <form class="pt-3" method="POST" action="<?php echo base_url() . "submitTests"; ?>"
                     enctype="multipart/form-data">
                     <div class="form-group row" style="margin-bottom: 6px;">
+
                       <div class="col">
                         <label>Client Name</label>
                         <div id="the-basics">
@@ -542,6 +552,188 @@
           </div>
         </div>
 
+
+        <!-- --------------------Model------------------------ -->
+        <div class="modal fade" id="expenseModal" tabindex="-1" role="dialog" aria-labelledby="expenseModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="expenseModalLabel">Add Cient</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form class="pt-3" method="POST" action="<?php echo base_url() . "saveClient"; ?>"
+                  enctype="multipart/form-data">
+                  <p class="card-description">
+                    Personal info
+                  </p>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Client Name</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" name="cName" required />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Client Contact</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" name="cphone" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Identification Type</label>
+                        <div class="col-sm-9">
+                          <select class="form-control" name="idType" />
+                          <option>CNIC</option>
+                          <option>Passport</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Client CNIC</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" name="CNIC" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" name="cemail">Client Email</label>
+                        <div class="col-sm-9">
+                          <input type="email" class="form-control" name="cemail" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="card-description">
+                    Other Details
+                  </p>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Status</label>
+                        <div class="col-sm-9">
+                          <select class="form-control" name="cstatus" required>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Def</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" name="cdef" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Limit Expense</label>
+                        <div class="col-sm-9">
+                          <input type="number" class="form-control" name="expense" Value="0.0" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Discount</label>
+                        <div class="col-sm-9">
+                          <input type="number" class="form-control" Value="0.0" name="discount" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <!-- <label class="col-sm-3 col-form-label">Main Client</label>  -->
+                        <!-- <div class="col-sm-9"> -->
+                        <input type="checkbox" class="form-check-input" name="mclient"
+                          style="    margin-left: 9rem; display=flex">
+                        <span style="margin-left: 11rem;margin-top: -19px;">Main Client</span>
+                        </input>
+                        <!-- <label class="col-sm-3 col-form-label">Main Client</label>  -->
+                      </div>
+                      <!-- </div> -->
+                    </div>
+                  </div>
+
+
+                  <p class="card-description">
+                    Address Details
+                  </p>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Address</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" name="address" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">City</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" name="city" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">State</label>
+                        <div class="col-sm-9">
+                          <select class="form-control" name='state'>
+                            <option>Pakistan</option>
+                            <option>Others</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Code</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" name="code" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Add a submit button -->
+                  <div class="row">
+                    <div class="col-md-6">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- Include footer -->
         <?php include 'include_common/footer.php'; ?>

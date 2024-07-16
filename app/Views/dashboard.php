@@ -119,7 +119,7 @@
     <!-- partial:partials/_navbar.html -->
 
     <!-- partial -->
-    <div class="container-fluid page-body-wrapper" style="padding: 0%;">
+    <div class="container-fluid page-body-wrapper" style="padding-top: 7%; padding-left: 0%; padding-right:0%;">
       <!-- partial:partials/_settings-panel.html -->
       <div class="theme-setting-wrapper">
         <div id="settings-trigger"><i class="ti-settings"></i></div>

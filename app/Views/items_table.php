@@ -173,6 +173,27 @@
                                             <button type="submit" class="btn btn-primary ms-2">Import Excel</button>
                                         </div>
                                     </form>
+
+                                    <div class="modal fade" id="progressModal" tabindex="-1"
+                                        aria-labelledby="progressModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="progressModalLabel">Importing Items</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="progress">
+                                                        <div id="progressBar" class="progress-bar" role="progressbar"
+                                                            style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
+                                                            aria-valuemax="100">0%</div>
+                                                    </div>
+                                                    <div id="progressStatus" class="mt-3">Starting import...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                     <!-- <div class="progress" style="display: none; margin-top: 20px;">
                                         <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;"
                                             aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
@@ -355,7 +376,63 @@
             });
         });
     </script> -->
+    <script>
+        $(document).ready(function () {
+            function showProgressModal() {
+                $('#progressModal').modal('show');
+            }
 
+            function updateProgressBar(percentComplete, status) {
+                $('#progressBar').width(percentComplete + '%');
+                $('#progressBar').attr('aria-valuenow', percentComplete);
+                $('#progressBar').text(percentComplete + '%');
+                $('#progressStatus').text(status);
+            }
+
+            $('#importForm').on('submit', function (e) {
+                e.preventDefault();
+
+                var formData = new FormData(this);
+                showProgressModal();
+                updateProgressBar(0, 'Starting import...');
+
+                $.ajax({
+                    xhr: function () {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener('progress', function (e) {
+                            if (e.lengthComputable) {
+                                var percentComplete = Math.round((e.loaded / e.total) * 100);
+                                updateProgressBar(percentComplete, 'Uploading file...');
+                            }
+                        }, false);
+
+                        return xhr;
+                    },
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        if (response.success) {
+                            updateProgressBar(100, 'Import complete!');
+                            setTimeout(function () {
+                                $('#progressModal').modal('hide');
+                                location.reload();
+                            }, 2000);
+                        } else {
+                            updateProgressBar(100, 'Import failed: ' + (response.error || 'Unknown error'));
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        updateProgressBar(100, 'An error occurred: ' + (xhr.responseText || error));
+                    }
+                });
+            });
+        });
+
+
+    </script>
 
     <script>
         $(document).ready(function () {
