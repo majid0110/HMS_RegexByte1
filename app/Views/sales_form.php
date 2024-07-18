@@ -158,6 +158,20 @@
       margin: 0 5px;
     }
 
+    #loadingOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+
     #discountAmount,
     #discountedTotal {
       /* font-weight: 900;
@@ -368,8 +382,8 @@
                     style="margin-top: -19px; margin-bottom: -10px; font-weight: bold; color: black">
                     Services
 
-                    <button class="btn btn-primary text-white me-0" data-toggle="modal"
-                      data-target="#expenseModal">ADD</button>
+                    <!-- <button class="btn btn-primary text-white me-0" data-toggle="modal"
+                      data-target="#expenseModal">ADD</button> -->
                   </p>
                   <form class="pt-3" method="POST" action="<?php echo base_url() . "submitTests"; ?>"
                     enctype="multipart/form-data">
@@ -377,14 +391,19 @@
 
                       <div class="col">
                         <label>Client Name</label>
-                        <div id="the-basics">
-                          <select class="typeahead form-control select2" name="clientName" id="clientId">
+                        <div class="input-group">
+                          <select class="form-control select2" name="clientName" id="clientId">
                             <?php foreach ($client_names as $client): ?>
                               <option value="<?= $client['idClient']; ?>">
                                 <?= $client['clientUniqueId']; ?> - <?= $client['client']; ?>
                               </option>
                             <?php endforeach; ?>
                           </select>
+                          <div class="input-group-append">
+                            <button class="btn btn-primary text-white" type="button" data-toggle="modal"
+                              data-target="#expenseModal"
+                              style="padding: 0;line-height: 1;width: 58px;height: 33px;margin-left: -2px;font-size: x-large;">+</button>
+                          </div>
                         </div>
                       </div>
                       <div class="col">
@@ -455,7 +474,8 @@
                             </thead>
                             <tbody>
                               <?php foreach ($services as $service): ?>
-                                <tr data-service-type-id="<?= $service['idArtMenu']; ?>">
+                                <tr data-service-type-id="<?= $service['idArtMenu']; ?>"
+                                  data-idtvsh="<?= $service['idTVSH']; ?>">
                                   <td class="title"><?= $service['Name']; ?></td>
                                   <td class="fee" contenteditable="true"><?= $service['Price']; ?></td>
                                   <?php if ($isExpiry == 1): ?>
@@ -524,7 +544,7 @@
                           <th>Amount</th>
                           <th>Quantity</th>
                           <th>Discount</th>
-                          <!-- <th>Expiry</th> -->
+                          <th>Tax</th>
                           <?php if ($isExpiry == 1): ?>
                             <th>Expiry</th>
                           <?php endif; ?>
@@ -538,15 +558,24 @@
                 <div style="margin-left: 368px; font-weight: 900; font-size: 150px">
                   <p>Total Fee: <span id="totalFee">0</span></p>
                   <p>Discount: <span id="discountAmount">0</span></p>
+                  <p>Tax: <span id="taxAmount">0</span></p>
                   <p>Discounted Total: <span id="discountedTotal">0</span></p>
                 </div>
+
                 <div style="height: 58px; margin-left: 7.4em; font-weight: 900;">
-                  <!-- <button class="btn btn-primary btn-fw" id="insertBtn">Save</button> -->
+                  <button type="button" class="btn btn-outline-info btn-icon-text action-btn"
+                    id="invoiceBtn">Invoice</button>
+                  <button type="button" class="btn btn-outline-info btn-icon-text action-btn" id="insertBtn">Invoice &
+                    Pay
+                    <i class="ti-printer btn-icon-append"></i>
+                  </button>
+                </div>
+                <!-- <div style="height: 58px; margin-left: 7.4em; font-weight: 900;">
                   <button type="button" class="btn btn-outline-info btn-icon-text" id="invoiceBtn">Invoice</button>
                   <button type="button" class="btn btn-outline-info btn-icon-text" id="insertBtn">Invoice & Pay
                     <i class="ti-printer btn-icon-append"></i>
                   </button>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -565,7 +594,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form class="pt-3" method="POST" action="<?php echo base_url() . "saveClient"; ?>"
+                <form class="pt-3" method="POST" action="<?php echo base_url() . "saveClientfromSales"; ?>"
                   enctype="multipart/form-data">
                   <p class="card-description">
                     Personal info
@@ -616,6 +645,17 @@
                         <label class="col-sm-3 col-form-label" name="cemail">Client Email</label>
                         <div class="col-sm-9">
                           <input type="email" class="form-control" name="cemail" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" name="gender">Gender</label>
+                        <div class="col-sm-9">
+                          <select class="form-control" name="gender" required />
+                          <option>Male</option>
+                          <option>Female</option>
+                          </select>
                         </div>
                       </div>
                     </div>
@@ -734,7 +774,11 @@
             </div>
           </div>
         </div>
-
+        <div id="loadingOverlay" class="d-none">
+          <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
         <!-- Include footer -->
         <?php include 'include_common/footer.php'; ?>
       </div>
@@ -764,48 +808,45 @@
     //     var rowTotal = quantity * fee;
     //     var rowDiscountAmount = rowTotal * (discount / 100);
     //     discountAmount += rowDiscountAmount;
-    //     totalFee += rowTotal - rowDiscountAmount;
+    //     totalFee += rowTotal;
     //   });
+
+    //   var discountedTotal = totalFee - discountAmount;
 
     //   $('#totalFee').text(totalFee.toFixed(2));
     //   $('#discountAmount').text(discountAmount.toFixed(2));
-    //   $('#discountedTotal').text((totalFee - discountAmount).toFixed(2));
+    //   $('#discountedTotal').text(discountedTotal.toFixed(2));
     // }
 
     function calculateTotalFee() {
       var totalFee = 0;
       var discountAmount = 0;
+      var taxAmount = 0;
 
       $('#serviceTableBody tr').each(function () {
         var quantity = parseFloat($(this).find('.editable-quantity').val());
         var fee = parseFloat($(this).find('.editable-fee').text());
         var discount = parseFloat($(this).find('.editable-discount').text());
+        var idTVSH = parseFloat($(this).find('.tax-rate').text()) / 100;
+
         var rowTotal = quantity * fee;
         var rowDiscountAmount = rowTotal * (discount / 100);
+        var rowDiscountedTotal = rowTotal - rowDiscountAmount;
+        var rowTaxAmount = rowDiscountedTotal * idTVSH;
+
         discountAmount += rowDiscountAmount;
+        taxAmount += rowTaxAmount;
         totalFee += rowTotal;
       });
 
       var discountedTotal = totalFee - discountAmount;
+      var finalTotal = discountedTotal + taxAmount;
 
       $('#totalFee').text(totalFee.toFixed(2));
       $('#discountAmount').text(discountAmount.toFixed(2));
-      $('#discountedTotal').text(discountedTotal.toFixed(2));
+      $('#taxAmount').text(taxAmount.toFixed(2));
+      $('#discountedTotal').text(finalTotal.toFixed(2));
     }
-
-
-
-    // $('#search').on('input', function () {
-    //   var searchText = $(this).val().toLowerCase();
-    //   $('#serviceTypeList tbody tr').each(function () {
-    //     var serviceType = $(this).find('.title').text().toLowerCase();
-    //     if (serviceTypeType.includes(searchText)) {
-    //       $(this).show();
-    //     } else {
-    //       $(this).hide();
-    //     }
-    //   });
-    // });
 
     $('#search').on('input', function () {
       var searchText = $(this).val().toLowerCase();
@@ -819,7 +860,7 @@
       });
     });
 
-    function addServiceRow(serviceType, serviceTypeId, serviceFee, expiryDate) {
+    function addServiceRow(serviceType, serviceTypeId, serviceFee, expiryDate, idTVSH) {
       var exists = false;
 
       $('#serviceTableBody tr').each(function () {
@@ -831,12 +872,12 @@
       });
 
       if (!exists) {
-
         var newRow = '<tr>' +
           '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
           '<td contenteditable="true" class="editable-fee" style="text-align: center;">' + serviceFee + '</td>' +
           '<td><div class="quantity-input"><span class="quantity-decrement btn btn-danger btn-sm" style="font-size: 17px;margin-left: 30%; border-radius: 50%; margin-right: -8%;">-</span><input type="text" class="editable-quantity form-control quantity-box" style="width: 40px; padding: 0%;" value="1"><span class="quantity-increment btn btn-success btn-sm" style="margin-right: 30%;font-size: 17px;margin-left: -7%; border-radius: 50%; ">+</span></div></td>' +
-          '<td contenteditable="true" class="editable-discount" style="text-align: center;">0</td>';
+          '<td contenteditable="true" class="editable-discount" style="text-align: center;">0</td>' +
+          '<td class="tax-rate">' + idTVSH + '</td>';
 
         <?php if ($isExpiry == 1): ?>
           newRow += '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate.split(' ')[0] : 'Nil') + '</td>';
@@ -845,19 +886,6 @@
         newRow += '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
           '</tr>';
 
-
-        // var newRow = '<tr>' +
-        //   '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
-        //   '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
-        //   '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
-        //   '<td contenteditable="true" class="editable-discount">0</td>';
-
-        // <?php if ($isExpiry == 1): ?>
-          //   newRow += '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate : 'Nil') + '</td>';
-          // <?php endif; ?>
-
-        // newRow += '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
-        //   '</tr>';
         $('#serviceTableBody').append(newRow);
         calculateTotalFee();
 
@@ -896,7 +924,8 @@
         var serviceType = serviceTypeRow.find('.title').text().trim();
         var serviceFee = serviceTypeRow.find('.fee').text().trim();
         var expiryDate = serviceTypeRow.find('.expiry-dropdown').val();
-        addServiceRow(serviceType, serviceTypeId, serviceFee, expiryDate);
+        var idTVSH = serviceTypeRow.data('idtvsh');
+        addServiceRow(serviceType, serviceTypeId, serviceFee, expiryDate, idTVSH);
         calculateTotalFee();
       });
 
@@ -982,8 +1011,46 @@
         calculateTotalFee(-serviceFee);
       });
 
+      // function disableButtons() {
+      //   $('.action-btn').prop('disabled', true);
+      // }
+
+      // function enableButtons() {
+      //   $('.action-btn').prop('disabled', false);
+      // }
+
+      function showLoading() {
+        $('#loadingOverlay').removeClass('d-none');
+      }
+
+      function hideLoading() {
+        $('#loadingOverlay').addClass('d-none');
+      }
+
+      function disableButtons() {
+        $('.action-btn').prop('disabled', true);
+      }
+
+      function enableButtons() {
+        $('.action-btn').prop('disabled', false);
+      }
+
+      $('#insertBtn').off('click').on('click', function (e) {
+        e.preventDefault();
+        disableButtons();
+        showLoading();
+        insertData();
+      });
+
+      $('#invoiceBtn').off('click').on('click', function (e) {
+        e.preventDefault();
+        disableButtons();
+        showLoading();
+        submitInvoice();
+      });
 
       function insertData() {
+        // disableButtons();
         var clientId = $('select[name="clientName"]').val();
         var clientName = $('select[name="clientName"] option:selected').text();
         var paymentMethodOption = $('select[name="Payment"] option:selected');
@@ -993,6 +1060,7 @@
         var currency = $('select[name="Currency"]').val();
         var currencyName = $('select[name="Currency"] option:selected').text();
         var exchange = $('#exchangeInput').val();
+        // var idTVSH = parseFloat(serviceTypeRow.find('.tax-rate').text());
         var totalFee = parseFloat($('#totalFee').text());
 
         // var quantity = parseFloat($('#quantityInput').val());
@@ -1053,7 +1121,7 @@
             services: services
           },
           success: function (response) {
-            // alert('Data inserted successfully!');
+
             console.log('Data inserted successfully:', response);
             if (response.pdfContent) {
               var decodedPdfContent = atob(response.pdfContent);
@@ -1063,9 +1131,15 @@
                 type: 'application/pdf'
               });
               var link = document.createElement('a');
-              link.href = window.URL.createObjectURL(blob);
-              //   link.download = 'your_file_name.pdf'; // Specify the desired file name
+              var url = window.URL.createObjectURL(blob);
+              link.href = url;
+              link.target = '_blank';
               link.click();
+
+              setTimeout(function () {
+                window.URL.revokeObjectURL(url);
+              }, 100);
+              location.reload();
             }
             $('#serviceTableBody').empty();
             $('#totalFee').text('0');
@@ -1073,11 +1147,13 @@
           error: function (error) {
             console.error('Error inserting data:', error);
           }
+
         });
       }
     });
 
     function submitInvoice() {
+      // disableButtons();
       var clientId = $('select[name="clientName"]').val();
       var clientName = $('select[name="clientName"] option:selected').text();
       var paymentMethodOption = $('select[name="Payment"] option:selected');
@@ -1105,6 +1181,9 @@
         var discount = parseFloat(serviceTypeRow.find('.editable-discount').text());
         var expiryDate = serviceTypeRow.find('.expiry-date').val();
 
+
+
+
         if (expiryDate === undefined) {
           expiryDate = '1970-01-01';
         }
@@ -1115,9 +1194,12 @@
           fee: fee,
           quantity: quantity,
           discount: discount,
+
           expiryDate: expiryDate
         });
       });
+
+      console.log(services);
 
       $.ajax({
         method: 'POST',
@@ -1136,8 +1218,7 @@
           services: services
         },
         success: function (response) {
-          // alert('Data inserted successfully!');
-          console.log('Data inserted successfully:', response);
+          // console.log('Data inserted successfully:', response);
           if (response.pdfContent) {
             var decodedPdfContent = atob(response.pdfContent);
             var blob = new Blob([new Uint8Array(decodedPdfContent.split('').map(function (c) {
@@ -1146,16 +1227,24 @@
               type: 'application/pdf'
             });
             var link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            //   link.download = 'your_file_name.pdf'; // Specify the desired file name
+            var url = window.URL.createObjectURL(blob);
+            link.href = url;
+            link.target = '_blank';
             link.click();
+
+            setTimeout(function () {
+              window.URL.revokeObjectURL(url);
+            }, 100);
+
+            location.reload();
           }
           $('#serviceTableBody').empty();
           $('#totalFee').text('0');
         },
         error: function (error) {
-          console.error('Error submitting invoice:', error);
+          console.error('Error inserting data:', error);
         }
+
       });
     }
 

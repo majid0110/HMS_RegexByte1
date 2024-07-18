@@ -124,6 +124,7 @@
                                                     <label class="col-sm-3 col-form-label">Client Name</label>
                                                     <div class="col-sm-9">
                                                         <select class="form-control" name="client">
+                                                            <option value="">-- Select Client --</option>
                                                             <?php foreach ($client_names as $client): ?>
                                                                 <option value="<?= $client['idClient']; ?>">
                                                                     <?= $client['clientUniqueId']; ?> -
@@ -134,6 +135,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="col-md-6">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Team Member</label>

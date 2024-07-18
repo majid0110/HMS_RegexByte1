@@ -246,4 +246,37 @@ class ServicesModel extends Model
 
         return true;
     }
+
+
+    public function getServiceByCodeAndName($serviceCode, $serviceName, $businessID)
+    {
+        return $this->db->table('artmenu')
+            ->select('*')
+            ->where('Code', $serviceCode)
+            ->where('Name', $serviceName)
+            ->where('idBusiness', $businessID)
+            ->get()
+            ->getRowArray();
+    }
+
+
+
+    public function updateService($idArtMenu, $formData)
+    {
+        $this->db->table('artmenu')
+            ->where('idArtMenu', $idArtMenu)
+            ->update($formData);
+    }
+
+    public function insertService($data)
+    {
+        try {
+            $this->db->table('artmenu')->insert($data);
+            return $this->db->insertID();
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+
 }

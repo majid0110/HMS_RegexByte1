@@ -363,102 +363,135 @@
                                 $errorMessage = session()->getFlashdata('error');
                                 ?>
                                 <h4 class="card-title">Services Table</h4>
-                                <a href="<?= base_url('ServicesForm'); ?>" class="btn btn-primary">Add</a>
-                                <!-- <button type="button" class="btn btn-primary" id="openMainModalBtn">Add</button> -->
-                                <a href="<?= base_url('transferItemsToServices'); ?>" class="btn btn-dark">Transfer
-                                    Items</a>
-                                <hr>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <div class="col-sm-9">
-                                                <input type="text" id="searchInputService" class="form-control"
-                                                    placeholder="Search by name">
-                                            </div>
+                                <span>
+                                    <form id="importForm" action="<?= base_url('transferServices') ?>" method="post"
+                                        enctype="multipart/form-data">
+                                        <div class="form-group d-flex align-items-end"
+                                            style="margin-left: 30rem; margin-bottom: -4rem;">
+                                            <input type="file" name="excel_file" class="form-control" required
+                                                style="width: auto; height: auto;">
+                                            <button type="submit" class="btn btn-primary ms-2">Import Excel</button>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <div class="col-sm-9">
-                                                <select id="statusFilterService" class="form-control">
-                                                    <option value="">All</option>
-                                                    <option value="Active">Active</option>
-                                                    <option value="Inactive">Inactive</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </form>
 
-                                <div class="modal fade" id="mainModal" tabindex="-1" aria-labelledby="mainModalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="mainModalLabel">Add Service</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body" id="mainModalContent">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
+                                    <div class="modal fade" id="progressModal" tabindex="-1"
+                                        aria-labelledby="progressModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="progressModalLabel">Importing Services
+                                                    </h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="progress">
+                                                        <div id="progressBar" class="progress-bar" role="progressbar"
+                                                            style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
+                                                            aria-valuemax="100">0%</div>
+                                                    </div>
+                                                    <div id="progressStatus" class="mt-3">Starting import...</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>S.No</th>
-                                                <th>Code</th>
-                                                <th>Service Name</th>
-                                                <th>Price</th>
-                                                <th>Unit</th>
-                                                <th>IsService</th>
-                                                <th>Status</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="itemsTableBody">
-                                            <?php $serialNumber = 1; ?>
-                                            <?php foreach ($Services as $Service): ?>
+
+
+                                    <a href="<?= base_url('ServicesForm'); ?>" class="btn btn-primary">Add</a>
+                                    <!-- <button type="button" class="btn btn-primary" id="openMainModalBtn">Add</button> -->
+                                    <a href="<?= base_url('transferItemsToServices'); ?>" class="btn btn-dark">Transfer
+                                        Items</a>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <div class="col-sm-9">
+                                                    <input type="text" id="searchInputService" class="form-control"
+                                                        placeholder="Search by name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <div class="col-sm-9">
+                                                    <select id="statusFilterService" class="form-control">
+                                                        <option value="">All</option>
+                                                        <option value="Active">Active</option>
+                                                        <option value="Inactive">Inactive</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal fade" id="mainModal" tabindex="-1"
+                                        aria-labelledby="mainModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="mainModalLabel">Add Service</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body" id="mainModalContent">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
                                                 <tr>
-                                                    <td><?= $serialNumber++ ?></td>
-                                                    <td><?= $Service['Code']; ?></td>
-                                                    <td><?= $Service['Name']; ?></td>
-                                                    <td><?= $Service['Price']; ?></td>
-
-                                                    <td><?= $Service['unit']; ?></td>
-                                                    <td><?= $Service['isService']; ?></td>
-                                                    <td>
-                                                        <span
-                                                            class="<?= $Service['status'] == 'Active' ? 'text-bg-success' : 'text-bg-danger'; ?>">
-                                                            <?= $Service['status']; ?>
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        <a href="<?= base_url('editService/' . $Service['idArtMenu']); ?>"
-                                                            class="btn btn-info btn-sm">Edit</a>
-                                                        <a href="<?= base_url('deleteService/' . $Service['idArtMenu']); ?>"
-                                                            onclick="return confirm('Are you sure you want to delete this Service?');"
-                                                            class="btn btn-danger btn-sm">Delete</a>
-                                                    </td>
+                                                    <th>S.No</th>
+                                                    <th>Code</th>
+                                                    <th>Service Name</th>
+                                                    <th>Price</th>
+                                                    <th>Unit</th>
+                                                    <th>IsService</th>
+                                                    <th>Status</th>
+                                                    <th>Actions</th>
                                                 </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="pagination-container">
-                                    <div class="pagination">
-                                        <?= $pager ?>
+                                            </thead>
+                                            <tbody id="itemsTableBody">
+                                                <?php $serialNumber = 1; ?>
+                                                <?php foreach ($Services as $Service): ?>
+                                                    <tr>
+                                                        <td><?= $serialNumber++ ?></td>
+                                                        <td><?= $Service['Code']; ?></td>
+                                                        <td><?= $Service['Name']; ?></td>
+                                                        <td><?= $Service['Price']; ?></td>
+
+                                                        <td><?= $Service['unit']; ?></td>
+                                                        <td><?= $Service['isService']; ?></td>
+                                                        <td>
+                                                            <span
+                                                                class="<?= $Service['status'] == 'Active' ? 'text-bg-success' : 'text-bg-danger'; ?>">
+                                                                <?= $Service['status']; ?>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <a href="<?= base_url('editService/' . $Service['idArtMenu']); ?>"
+                                                                class="btn btn-info btn-sm">Edit</a>
+                                                            <a href="<?= base_url('deleteService/' . $Service['idArtMenu']); ?>"
+                                                                onclick="return confirm('Are you sure you want to delete this Service?');"
+                                                                class="btn btn-danger btn-sm">Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </div>
+                                    <div class="pagination-container">
+                                        <div class="pagination">
+                                            <?= $pager ?>
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -479,6 +512,77 @@
         <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
         <!-- End plugin js for this page -->
         <!-- inject:js -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Include jQuery and Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+        <script>
+            $(document).ready(function () {
+                function showProgressModal() {
+                    $('#progressModal').modal('show');
+                }
+
+                function updateProgressBar(percentComplete, status) {
+                    $('#progressBar').width(percentComplete + '%');
+                    $('#progressBar').attr('aria-valuenow', percentComplete);
+                    $('#progressBar').text(percentComplete + '%');
+                    $('#progressStatus').text(status);
+                }
+
+                $('#importForm').on('submit', function (e) {
+                    e.preventDefault();
+
+                    var formData = new FormData(this);
+                    showProgressModal();
+                    updateProgressBar(0, 'Starting import...');
+
+                    $.ajax({
+                        xhr: function () {
+                            var xhr = new window.XMLHttpRequest();
+                            xhr.upload.addEventListener('progress', function (e) {
+                                if (e.lengthComputable) {
+                                    var percentComplete = Math.round((e.loaded / e.total) * 100);
+                                    updateProgressBar(percentComplete, 'Uploading file...');
+                                }
+                            }, false);
+
+                            xhr.addEventListener('progress', function (e) {
+                                if (e.lengthComputable) {
+                                    var percentComplete = Math.round((e.loaded / e.total) * 100);
+                                    updateProgressBar(percentComplete, 'Processing file...');
+                                }
+                            }, false);
+
+                            return xhr;
+                        },
+                        type: 'POST',
+                        url: $(this).attr('action'),
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function (response) {
+                            if (response.success) {
+                                updateProgressBar(100, 'Import complete!');
+                                setTimeout(function () {
+                                    $('#progressModal').modal('hide');
+                                    location.reload();
+                                }, 2000);
+                            } else {
+                                updateProgressBar(100, 'Import failed: ' + (response.error || 'Unknown error'));
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            updateProgressBar(100, 'An error occurred: ' + (xhr.responseText || error));
+                        }
+                    });
+                });
+            });
+        </script>
+
+
+
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 var openMainModalBtn = document.getElementById('openMainModalBtn');

@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -1297,15 +1297,17 @@
                   <label class="col-sm-3 col-form-label">Client Name</label>
                   <div class="col-sm-9">
                     <select class="form-control" name="client">
+                      <option value="">-- Select Client --</option>
                       <?php foreach ($client_names as $client): ?>
-                        <option value="<?= $client['idClient']; ?>"><?= $client['clientUniqueId']; ?> -
-                          <?= $client['client']; ?>
+                        <option value="<?= $client['idClient']; ?>">
+                          <?= $client['clientUniqueId']; ?> - <?= $client['client']; ?>
                         </option>
                       <?php endforeach; ?>
                     </select>
                   </div>
                 </div>
               </div>
+
               <div class="col-md-6">
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Team Member</label>

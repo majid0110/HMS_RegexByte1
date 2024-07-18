@@ -165,6 +165,8 @@ $routes->get('getItemsForEditService', 'ServiceController::getItemsForEditServic
 $routes->get('getItemsForEditService/(:num)', 'ServiceController::getItemsForEditService/$1');
 
 
+$routes->get('transferServices', 'ServiceController::transferServices');
+$routes->post('transferServices', 'ServiceController::transferServices');
 
 //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Sales Routes
@@ -206,7 +208,7 @@ $routes->get('/correctInvoice/(:num)', 'SalesController::correctInvoice/$1');
 $routes->post('SalesController/UpdateInvoice/(:num)', 'SalesController::UpdateInvoice/$1');
 $routes->post('SalesController/UpdateInvoice', 'SalesController::UpdateInvoice');
 
-
+$routes->post('/saveClientfromSales', 'SalesController::saveClientProfile');
 
 //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Reports Routes

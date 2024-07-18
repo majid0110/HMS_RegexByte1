@@ -292,8 +292,11 @@
                   <h4 class="card-title" style="margin-top: -7x;">BOOK APPOINTMENT</h4>
                   <form class="pt-3" id="appointmentForm" method="POST"
                     action="<?php echo base_url() . "saveAppointment"; ?>" enctype="multipart/form-data">
+                    <input type="hidden" name="clientName" id="clientNameInput">
+
+
                     <div class="row">
-                      <div class="col-md-6">
+                      <!-- <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Patient Name</label>
                           <div class="col-sm-9">
@@ -306,21 +309,37 @@
                             </select>
                           </div>
                         </div>
-
-                      </div>
-
-                      <input type="hidden" name="clientName" id="clientNameInput">
-
+                      </div> -->
 
                       <div class="col-md-6">
-                        <!-- <a href="#" class="btn btn-rounded btn-fw" id="openAddClientModal">
-                          <i class="mdi mdi-account-plus"> Add Client</i>
-                        </a> -->
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Patient Name</label>
+                          <div class="col-sm-9">
+                            <div class="input-group">
+                              <select class="form-control select2" name="clientId" id="clientId">
+                                <?php foreach ($client_names as $client): ?>
+                                  <option value="<?= $client['idClient']; ?>">
+                                    <?= $client['clientUniqueId']; ?> - <?= $client['client']; ?>
+                                  </option>
+                                <?php endforeach; ?>
+                              </select>
+                              <div class="input-group-append">
+                                <button class="btn btn-primary text-white" type="button" data-toggle="modal"
+                                  data-target="#expenseModal" id="openAddClientModal"
+                                  style="padding: 0;line-height: 1;width: 58px;margin-left: -2px;height: 29px;display: flex;align-items: center; justify-content: center;font-size: x-large;">+</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <!-- <div class="col-md-6">
                         <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"
                           id="openAddClientModal">
                           <i class="ti-user"> Add</i>
                         </button>
-                      </div>
+                      </div> -->
 
                     </div>
                     <div class="row" style="margin-top: -16px;">

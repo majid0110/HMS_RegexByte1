@@ -1,574 +1,1293 @@
-<?php include 'include_common/head1.php'; ?>
+<?php include 'include_common/head.php'; ?>
 <?php include 'include_common/navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/tables/basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:35 GMT -->
-
 <head>
-    <!-- <link rel="stylesheet" href="/public/assets/vendors_s/datatables.net-bs4/dataTables.bootstrap4.css">
-    <link rel="stylesheet" href="/public/assets/js_s/select.dataTables.min.css">
-    <link rel="stylesheet" href="../public/assets/vendors_s/feather/feather.css">
-    <link rel="stylesheet" href="../public/assets/vendors_s/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../public/assets/vendors_s/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="../public/assets/vendors_s/typicons/typicons.css">
-    <link rel="stylesheet" href="../public/assets/vendors_s/simple-line-icons/css/simple-line-icons.css">
-    <link rel="stylesheet" href="../public/assets/vendors_s/css/vendor.bundle.base.css"> -->
-    <!-- endinject -->
 
-    <!-- inject:css -->
-    <link rel="stylesheet" href="../public/assets/css_s/vertical-layout-light/style.css">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./public/assets/vendors_s/select2/select2.min.css">
+    <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- endinject -->
-    <!-- <link rel="shortcut icon" href="../public/assets/images_s/regexbyte.png" /> -->
+
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 
     <style>
-        .invoice-box {
-            max-width: 800px;
-            margin: auto;
-            padding: 30px;
-            border: 1px solid #eee;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-            font-size: 16px;
-            line-height: 24px;
-            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-            color: #555;
+        .badge-pill:hover {
+            background-color: #52CDFF;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bolder;
+            border: #52CDFF;
         }
 
-        p {
-            font-size: medium;
-            font-family: math;
+        #clientDetails {
+            font-weight: 750;
         }
 
-        .invoice-box table {
+        .quantity-box {
+            width: 50px;
+            text-align: center;
+        }
+
+        .twitter-typeahead {
+            max-width: 100%;
             width: 100%;
-            line-height: inherit;
+
+        }
+
+        #serviceTableBodyContainer {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        #summaryTableContainer {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .active {
+            background: #52CDFF;
+            color: #fff;
+
+        }
+
+        .table thead th,
+        .table tbody td {
+            padding: 8px;
+        }
+
+        .table thead,
+        .table tbody {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        .table tbody tr {
+            height: 0px;
+        }
+
+        .table thead tr {
+            height: 0px;
+
+        }
+
+        .table-container {
+            max-height: 220px;
+            /* Adjust the height as needed */
+            overflow-y: auto;
+        }
+
+        .center-dropdown .select2-dropdown {
             text-align: left;
-            font-family: monospace;
         }
 
-        @keyframes blink {
-            0% {
-                opacity: 1;
-            }
 
-            50% {
-                opacity: 0;
-            }
 
-            100% {
-                opacity: 1;
-            }
+        .select2-container .select2-selection--single {
+            height: 2rem;
+            text-align: left;
+            padding: 0;
         }
 
-        .blinking {
-            animation: blink 2s infinite;
+        .select2-selection--single {
+            height: 33px;
         }
 
-        .invoice-box table td {
-            padding: 5px;
-            vertical-align: top;
+        .select2-container .select2-selection--single .select2-selection__rendered {
+            text-align: left;
+            padding: 2%;
         }
 
-        .invoice-box table tr td:nth-child(2) {
-            text-align: right;
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: normal;
+            /* padding: 0; */
         }
 
-        .invoice-box table tr.top table td {
-            padding-bottom: 20px;
+        .select2-container--default .select2-results>.select2-results__options {
+            background: #E9ECEF;
         }
 
-        .invoice-box table tr.top table td.title {
-            font-size: 45px;
-            line-height: 45px;
-            color: #333;
+        .select2-search--dropdown {
+            background: #E9ECEF;
         }
 
-        .invoice-box table tr.information table td {
-            padding-bottom: 40px;
+        .select2-container--default .select2-search--dropdown .select2-search__field {
+            background: #E9ECEF;
         }
 
-        .invoice-box table tr.heading td {
-            background: #eee;
-            border-bottom: 1px solid #ddd;
-            font-weight: bold;
+        .select2-container .select2-selection--single .select2-selection__rendered {
+            text-align: left;
         }
 
-        .invoice-box table tr.details td {
-            padding-bottom: 20px;
+        .page-body-wrappers {
+            min-height: calc(100vh - 97px);
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-direction: row;
+            flex-direction: row;
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 75px;
         }
 
-        .invoice-box table tr.item td {
-            border-bottom: 1px solid #eee;
+        .select2-selection .select2-selection--single {
+            height: 2rem;
         }
 
-        .invoice-box table tr.item.last td {
-            border-bottom: none;
+        .quantity-input {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .invoice-box table tr.total td:nth-child(2) {
-            border-top: 2px solid #eee;
-            font-weight: bold;
+        .quantity-input span {
+            cursor: pointer;
+            font-size: 16px;
+            padding: 0 5px;
+        }
+
+        .quantity-input input {
+            width: 50px;
+            text-align: center;
+            margin: 0 5px;
+        }
+
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+
+        #discountAmount,
+        #discountedTotal {
+            /* font-weight: 900;
+      font-size: 150px; */
         }
     </style>
+
 </head>
 
 <body>
     <div class="container-scroller">
-        <!-- partial:./public/assets/partials/_navbar.html -->
-
         <!-- partial -->
-        <div class="container-fluid page-body-wrapper">
-
-            <!-- partial -->
-            <!-- partial:./public/assets/partials/_sidebar.html -->
-            <?php include 'include_common/sidebar.php'; ?>
-            <!-- partial -->
-            <div class="main-panel" style="padding: 20px; background: #F4F5F7">
-                <div class="content-wrapper" style="background: #F4F5F7;">
-
-                    <div class="col-lg-12 grid-margin stretch-card">
-                        <div class="invoice-box"
-                            style="max-width: 950px; margin: auto; border-radius: 30px; background: snow; width: 85rem; padding: 30px; border: 1px solid #eee; box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); font-size: 16px; line-height: 24px; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; color: #555;">
-                            <table cellpadding="0" cellspacing="0">
-                                <tr class="top">
-                                    <td colspan="3">
-
-                                        <table>
-                                            <tr>
-                                                <td class="title">
-                                                    <?php
-                                                    $session = session();
-                                                    if ($session->has('businessProfileImage')) {
-                                                        echo '<img class="img-xs rounded-circle larger-profile-img" style="width: 90px; height: 90px;" src="' . $session->get('businessProfileImage') . '" alt="Profile image">';
-                                                    }
-                                                    ?>
-                                                    <style="width: 100%; max-width: 300px" />
-                                                </td>
-
-                                                <td>
-                                                    <?php
-                                                    $session = session();
-                                                    if ($session->has('businessName') && $session->has('phoneNumber')) {
-
-                                                        echo '<strong>' . $session->get('businessName') . '<br>';
-                                                        echo '<strong>' . $session->get('phoneNumber') . '<br>';
-                                                        echo '<strong>' . $session->get('business_address') . '<br>';
-                                                    }
-                                                    ?>
-                                                </td>
-                                                <td></td>
-                                        </table>
-
-                                        <a href="<?= base_url('SalesController/cancelInvoice/' . $ServiceDetails[0]['idReceipts']); ?>"
-                                            class="btn btn-primary text-white me-0" style="margin-left: 61%;">
-                                            Cancel
-                                        </a>
-<!-- 
-                                        <a href="<?= base_url('correctInvoice/' . $ServiceDetails[0]['idReceipts']); ?>"
-                                            class="btn btn-info text-white me-0"
-                                            style="margin-left: 10px; height: 1.6rem; padding: 0%; width: 6rem; font-size: medium; background: #17a2b8;">
-                                            Correct
-                                        </a> -->
-
-                                        <a href="#" class="btn btn-primary text-white me-0" data-toggle="modal"
-                                            data-target="#correctModal">
-                                            Correct
-                                        </a>
-
-
-                                        <!-- <a href="<?= base_url('SalesController/downloadPDF/' . $ServiceDetails[0]['idReceipts']); ?>"
-                                            class="btn btn-primary">Download PDF</a> -->
-
-                                        <a href="<?= base_url('SalesController/downloadPDF/' . $ServiceDetails[0]['idReceipts']); ?>"
-                                            class="btn btn-primary text-white me-0"><i
-                                                class="icon-File"></i>
-                                            Download PDF</a>
-
-                                        <hr>
-                                        <p>
-                                            Status:
-                                            <span
-                                                style="color: <?= $ServiceDetails[0]['Status'] === 'closed' ? 'green' : 'red'; ?>"
-                                                class="<?= $ServiceDetails[0]['Status'] === 'open' ? 'blinking' : ''; ?>">
-                                                <?= $ServiceDetails[0]['Status']; ?>
-                                            </span><br />
-                                            Created: <?= (new DateTime($ServiceDetails[0]['InvoiceDate']))->format('F d, Y'); ?><br />
-                                        </p>
-
-
-                                        <?php if ($ServiceDetails[0]['Status'] == 'closed'): ?>
-                                            <a
-                                                href="<?= base_url('sales/deleteService/' . $ServiceDetails[0]['idReceipts']); ?>">
-
-                                                <button onclick="deleteService()" type="button"
-                                                    class="btn btn-danger btn-icon"
-                                                    style="margin-left: 23rem;margin-left: 49rem; margin-top: -52px;">
-                                                    <i class="mdi mdi-delete"></i>
-                                                </button>
-                                            </a>
-
-                                        <?php else: ?>
-                                            <button type="button" style="margin-top: -3rem;margin-left: 89%;"
-                                                class="btn btn-primary" data-toggle="modal" data-target="#payModal"
-                                                onclick="loadPayInvoice('<?= $ServiceDetails[0]['invOrdNum']; ?>')">Pay</button>
-                                        <?php endif; ?>
-                                    </td>
-                                </tr>
-
-                                <tr class="information">
-                                    <td colspan="3">
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    <u><b>Invoice Details:</b></u><br />
-                                                    Invoice #: <?= $ServiceDetails[0]['invOrdNum']; ?><br />
-                                                    Due: <?= $ServiceDetails[0]['due']; ?><br />
-                                                    Payment Method: <?= $ServiceDetails[0]['PaymentMethod']; ?><br />
-                                                    Currency: <?= $ServiceDetails[0]['Currency']; ?><br />
-                                                </td>
-                                                <td>
-                                                    <u><b>Client Details:</b></u><br />
-                                                    Client: <?= $ServiceDetails[0]['client']; ?><br />
-                                                    Contact: <?= $ServiceDetails[0]['contact']; ?><br />
-                                                    Email: <?= $ServiceDetails[0]['email']; ?><br />
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <u><b>Notes:</b></u><br />
-                                        <?= $ServiceDetails[0]['Notes']; ?><br />
-                                    </td>
-                                </tr>
-                                <tr class="heading">
-                                    <td>Service Type</td>
-                                    <td>Quantity</td>
-                                    <td>Price</td>
-
-                                </tr>
-                                <?php
-                                $total = 0;
-                                foreach ($ServiceDetails as $detail) {
-                                    $total += $detail['Price'] * $detail['Quantity'];
-                                }
-                                ?>
-
-                                <?php foreach ($ServiceDetails as $detail): ?>
-                                    <tr class="item">
-                                        <td>
-                                            <?= $detail['ServiceTypeName']; ?>
-                                        </td>
-                                        <td>
-                                            <?= $detail['Quantity']; ?>
-                                        </td>
-                                        <td>
-                                            <?= $detail['Price']; ?>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                                <tr class="total">
-                                    <td></td>
-                                    <td>Total: <?= $total; ?></td>
-                                </tr>
-
-                            </table>
-                            <h3>Payment Records</h3>
-                            <table cellpadding="0" cellspacing="0">
-                                <tr class="heading">
-                                    <td>ID Payment</td>
-                                    <td>Value</td>
-                                    <td>Date</td>
-                                    <td>Method</td>
-                                    <td>Currency</td>
-                                    <td>Exchange</td>
-
-                                </tr>
-                                <?php foreach ($PaymentDetails as $payment): ?>
-                                    <tr class="item">
-                                        <td>
-                                            <?= $payment['idPayment']; ?>
-                                        </td>
-                                        <td>
-                                            <?= $payment['value']; ?>
-                                        </td>
-                                        <td>
-                                            <?= $payment['date']; ?>
-                                        </td>
-                                        <td>
-                                            <?= $payment['PaymentMethodName']; ?>
-                                        </td>
-                                        <td>
-                                            <?= $payment['Currency']; ?>
-                                        </td>
-                                        <td>
-                                            <?= $payment['exchange']; ?>
-                                        </td>
-
-                                    </tr>
-                                <?php endforeach; ?>
-                            </table>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="payModal" tabindex="-1" role="dialog"
-                                aria-labelledby="payModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="payModalLabel">Pay Invoice</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div id="payInvoiceContent"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+        <div class="container-fluid page-body-wrappers" style="padding-top: 7%">
+            <!-- partial:../../partials/_settings-panel.html -->
+            <div class="theme-setting-wrapper">
+                <div id="settings-trigger"><i class="ti-settings"></i></div>
+                <div id="theme-settings" class="settings-panel">
+                    <i class="settings-close ti-close"></i>
+                    <p class="settings-heading">SIDEBAR SKINS</p>
+                    <div class="sidebar-bg-options selected" id="sidebar-light-theme">
+                        <div class="img-ss rounded-circle bg-light border me-3"></div>Light
+                    </div>
+                    <div class="sidebar-bg-options" id="sidebar-dark-theme">
+                        <div class="img-ss rounded-circle bg-dark border me-3"></div>Dark
+                    </div>
+                    <p class="settings-heading mt-2">HEADER SKINS</p>
+                    <div class="color-tiles mx-0 px-4">
+                        <div class="tiles success"></div>
+                        <div class="tiles warning"></div>
+                        <div class="tiles danger"></div>
+                        <div class="tiles info"></div>
+                        <div class="tiles dark"></div>
+                        <div class="tiles default"></div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:./public/assets/partials/_footer.html -->
-        <?php include 'include_common/footer.php'; ?>
-        <!-- partial -->
-    </div>
-
-    <!-- Correct Modal -->
-    <div class="modal fade" id="correctModal" tabindex="-1" role="dialog" aria-labelledby="correctModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="correctModalLabel">Correct Invoice</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+            <div id="right-sidebar" class="settings-panel">
+                <i class="settings-close ti-close"></i>
+                <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab"
+                            aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab"
+                            aria-controls="chats-section">CHATS</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="setting-content">
+                    <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
+                        aria-labelledby="todo-section">
+                        <div class="add-items d-flex px-3 mb-0">
+                            <form class="form w-100">
+                                <div class="form-group d-flex">
+                                    <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
+                                    <button type="submit" class="add btn btn-primary todo-list-add-btn"
+                                        id="add-task">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="list-wrapper px-3">
+                            <ul class="d-flex flex-column-reverse todo-list">
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox">
+                                            Team review meeting at 3.00 PM
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox">
+                                            Prepare for presentation
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox">
+                                            Resolve all the low priority tickets due today
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                                <li class="completed">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox" checked>
+                                            Schedule meeting for next week
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                                <li class="completed">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox" checked>
+                                            Project review
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                            </ul>
+                        </div>
+                        <h4 class="px-3 text-muted mt-5 fw-light mb-0">Events</h4>
+                        <div class="events pt-4 px-3">
+                            <div class="wrapper d-flex mb-2">
+                                <i class="ti-control-record text-primary me-2"></i>
+                                <span>Feb 11 2018</span>
+                            </div>
+                            <p class="mb-0 font-weight-thin text-gray">Creating component page build a js</p>
+                            <p class="text-gray mb-0">The total number of sessions</p>
+                        </div>
+                        <div class="events pt-4 px-3">
+                            <div class="wrapper d-flex mb-2">
+                                <i class="ti-control-record text-primary me-2"></i>
+                                <span>Feb 7 2018</span>
+                            </div>
+                            <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
+                            <p class="text-gray mb-0 ">Call Sarah Graves</p>
+                        </div>
+                    </div>
+                    <!-- To do section tab ends -->
+                    <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
+                        <div class="d-flex align-items-center justify-content-between border-bottom">
+                            <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
+                            <small
+                                class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 fw-normal">See
+                                All</small>
+                        </div>
+                        <ul class="chat-list">
+                            <li class="list active">
+                                <div class="profile"><img src="./public/assets/images_s/faces/face1.jpg"
+                                        alt="image"><span class="online"></span></div>
+                                <div class="info">
+                                    <p>Thomas Douglas</p>
+                                    <p>Available</p>
+                                </div>
+                                <small class="text-muted my-auto">19 min</small>
+                            </li>
+                            <li class="list">
+                                <div class="profile"><img src="./public/assets/images_s/faces/face2.jpg"
+                                        alt="image"><span class="offline"></span></div>
+                                <div class="info">
+                                    <div class="wrapper d-flex">
+                                        <p>Catherine</p>
+                                    </div>
+                                    <p>Away</p>
+                                </div>
+                                <div class="badge badge-success badge-pill my-auto mx-2">4</div>
+                                <small class="text-muted my-auto">23 min</small>
+                            </li>
+                            <li class="list">
+                                <div class="profile"><img src="./public/assets/images_s/faces/face3.jpg"
+                                        alt="image"><span class="online"></span></div>
+                                <div class="info">
+                                    <p>Daniel Russell</p>
+                                    <p>Available</p>
+                                </div>
+                                <small class="text-muted my-auto">14 min</small>
+                            </li>
+                            <li class="list">
+                                <div class="profile"><img src="./public/assets/images_s/faces/face4.jpg"
+                                        alt="image"><span class="offline"></span></div>
+                                <div class="info">
+                                    <p>James Richardson</p>
+                                    <p>Away</p>
+                                </div>
+                                <small class="text-muted my-auto">2 min</small>
+                            </li>
+                            <li class="list">
+                                <div class="profile"><img src="./public/assets/images_s/faces/face5.jpg"
+                                        alt="image"><span class="online"></span></div>
+                                <div class="info">
+                                    <p>Madeline Kennedy</p>
+                                    <p>Available</p>
+                                </div>
+                                <small class="text-muted my-auto">5 min</small>
+                            </li>
+                            <li class="list">
+                                <div class="profile"><img src="./public/assets/images_s/faces/face6.jpg"
+                                        alt="image"><span class="online"></span></div>
+                                <div class="info">
+                                    <p>Sarah Graves</p>
+                                    <p>Available</p>
+                                </div>
+                                <small class="text-muted my-auto">47 min</small>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- chat tab ends -->
                 </div>
-                <div class="modal-body">
-                    <form id="correctInvoiceForm" action="<?= base_url('SalesController/UpdateInvoice'); ?>"
-                        method="post">
-                        <input type="hidden" name="invoiceId" value="<?= $ServiceDetails[0]['idReceipts']; ?>">
-
-                        <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="client">Client</label>
-                                    <select class="form-control" id="client" name="client" required>
-                                        <?php foreach ($clients as $client): ?>
-                                            <option value="<?= $client['idClient']; ?>" <?= $client['idClient'] == $ServiceDetails[0]['idClient'] ? 'selected' : ''; ?>>
-                                                <?= $client['client']; ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="email">Client Email</label>
-                                    <input type="email" class="form-control" id="email" name="email"
-                                        value="<?= $ServiceDetails[0]['email']; ?>" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="contact">Client Contact</label>
-                                    <input type="text" class="form-control" id="contact" name="contact"
-                                        value="<?= $ServiceDetails[0]['contact']; ?>" required>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="currency">Currency</label>
-                                        <select class="form-control" id="currency" name="currency" required>
-                                            <?php foreach ($currencies as $currency): ?>
-                                                <option value="<?= $currency['id']; ?>" <?= $currency['Currency'] == $ServiceDetails[0]['Currency'] ? 'selected' : ''; ?>>
-                                                    <?= $currency['Currency']; ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="invoiceDate">Invoice Date</label>
-                                    <input type="date" class="form-control" id="invoiceDate" name="invoiceDate"
-                                        value="<?= (new DateTime($ServiceDetails[0]['InvoiceDate']))->format('Y-m-d'); ?>"
-                                        required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="paymentMethod">Payment Method</label>
-                                        <select class="form-control" id="paymentMethod" name="paymentMethod" required>
-                                            <?php foreach ($payments as $method): ?>
-                                                <option value="<?= $method['idPaymentMethods']; ?>" <?= $method['Method'] == $ServiceDetails[0]['PaymentMethod'] ? 'selected' : ''; ?>>
-                                                    <?= $method['Method']; ?>
-                                                </option>
-                                            <?php endforeach; ?>    
-                                        </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="notes">Notes</label>
-                            <textarea class="form-control" id="notes" name="notes"
-                                required><?= $ServiceDetails[0]['Notes']; ?></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <h4>Service Details</h4>
-                            
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Service Type</th>
-                                        <th>Quantity</th>
-                                        <th>Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <?php foreach ($ServiceDetails as $index => $detail): ?>
-                                    <tr>
-                                        <td>
-                                            <input type="hidden" name="ServiceDetails[<?= $index; ?>][idArtMenu]" value="<?= $detail['idArtMenu']; ?>">
-                                            <input type="text" class="form-control" id="serviceType_<?= $index; ?>"
-                                            value="<?= $detail['ServiceTypeName']; ?>" readonly>
-                                        </td>
-                                        <td>
-                                            <input type="number" class="form-control" id="quantity_<?= $index; ?>"
-                                            name="ServiceDetails[<?= $index; ?>][Quantity]"
-                                            value="<?= $detail['Quantity']; ?>" required
-                                            oninput="calculateTotalValue()">
-                                        </td>
-                                        <td>
-                                            <input type="number" class="form-control" id="price_<?= $index; ?>"
-                                            name="ServiceDetails[<?= $index; ?>][Price]"
-                                            value="<?= $detail['Price']; ?>" required
-                                            oninput="calculateTotalValue()">
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                            <div class="form-group">
-                                <label for="totalValue">Value:</label>
-                                    <input type="text" class="form-control" name="totalValue" id="totalValue" readonly>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Confirm</button>
-                    </form>
-
-                </div>
-
-
             </div>
+            <!-- partial -->
+            <!-- partial:../../partials/_sidebar.html -->
+            <?php include 'include_common/sidebar.php'; ?>
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row" style="margin-top: -22px;">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <p class="card-description"
+                                        style="margin-top: -19px; margin-bottom: -10px; font-weight: bold; color: black">
+                                        Services
+
+                                        <!-- <button class="btn btn-primary text-white me-0" data-toggle="modal"
+                      data-target="#expenseModal">ADD</button> -->
+                                    </p>
+                                    <form class="pt-3" method="POST" action="<?php echo base_url() . "submitTests"; ?>"
+                                        enctype="multipart/form-data">
+                                        <div class="form-group row" style="margin-bottom: 6px;">
+
+                                            <div class="col">
+                                                <label>Client Name</label>
+                                                <div class="input-group">
+                                                    <select class="form-control select2" name="clientName"
+                                                        id="clientId">
+                                                        <?php foreach ($client_names as $client): ?>
+                                                            <option value="<?= $client['idClient']; ?>">
+                                                                <?= $client['clientUniqueId']; ?> -
+                                                                <?= $client['client']; ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-primary text-white" type="button"
+                                                            data-toggle="modal" data-target="#expenseModal"
+                                                            style="padding: 0;line-height: 1;width: 58px;height: 33px;margin-left: -2px;font-size: x-large;">+</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <label>Payment Method</label>
+                                                <div id="the-basics">
+                                                    <select class="typeahead form-control" name="Payment">
+                                                        <?php foreach ($payments as $payment): ?>
+                                                            <option value="<?= $payment['idPaymentMethods']; ?>"
+                                                                data-payment-id="<?= $payment['idPaymentMethods']; ?>">
+                                                                <?= $payment['Method']; ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row" style="margin-bottom: 6px;">
+                                            <div class="col">
+                                                <label>Currency</label>
+                                                <div id="the-basics">
+                                                    <select class="typeahead form-control" name="Currency">
+                                                        <?php foreach ($currencies as $currency): ?>
+                                                            <option value="<?= $currency['id']; ?>">
+                                                                <?= $currency['Currency']; ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <label>Exchange</label>
+                                                <div id="bloodhound">
+                                                    <input class="typeahead form-control" type="Number" name="exchange"
+                                                        value='1.0' id="exchangeInput" placeholder="Exchange Rate">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row" style="margin-bottom: 6px;">
+                                            <div class="col">
+                                                <label for="categoryDropdown">Category:</label>
+                                                <select class="form-control" id="categoryDropdown">
+                                                    <option value="">All Categories</option>
+                                                    <?php foreach ($categories as $category): ?>
+                                                        <option value="<?= $category['idCatArt']; ?>">
+                                                            <?= $category['name']; ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <label for="search">Search:</label>
+                                                <input type="text" id="search" class="form-control"
+                                                    placeholder="Enter service type or fee">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 6px;">
+                                            <div id="serviceTableBodyContainer">
+                                                <div class="table-container">
+                                                    <table class="table" id="serviceTypeList">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Name</th>
+                                                                <th>Price</th>
+                                                                <?php if ($isExpiry == 1): ?>
+                                                                    <th>Expiry</th>
+                                                                <?php endif; ?>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php foreach ($services as $service): ?>
+                                                                <tr data-service-type-id="<?= $service['idArtMenu']; ?>">
+                                                                    <td class="title"><?= $service['Name']; ?></td>
+                                                                    <td class="fee" contenteditable="true">
+                                                                        <?= $service['Price']; ?></td>
+                                                                    <?php if ($isExpiry == 1): ?>
+                                                                        <td>
+                                                                            <?php
+                                                                            $businessID = session()->get('businessID');
+                                                                            $serviceExpiries = $salesModel->getServiceExpiry($service['idArtMenu'], $businessID);
+                                                                            if (count($serviceExpiries) > 0) {
+                                                                                ?>
+                                                                                <select class="form-control expiry-dropdown">
+                                                                                    <option value="">Select Expiry</option>
+                                                                                    <?php
+                                                                                    $firstExpiryDate = null;
+                                                                                    foreach ($serviceExpiries as $expiry) {
+                                                                                        $expiryDate = $expiry['expiryDate'];
+                                                                                        if ($firstExpiryDate === null) {
+                                                                                            $firstExpiryDate = $expiryDate;
+                                                                                            echo '<option value="' . $expiryDate . '" selected>' . date('Y-m-d', strtotime($expiryDate)) . '</option>'; // Add selected attribute to the first option
+                                                                                        } else {
+                                                                                            echo '<option value="' . $expiryDate . '">' . date('Y-m-d', strtotime($expiryDate)) . '</option>';
+                                                                                        }
+                                                                                    }
+                                                                                    ?>
+                                                                                </select>
+                                                                                <?php
+                                                                            } else {
+                                                                                echo '--';
+                                                                            }
+                                                                            ?>
+                                                                        </td>
+                                                                    <?php endif; ?>
+                                                                    <td><span
+                                                                            class="badge badge-primary badge-pill hover-effect"
+                                                                            onclick="addService()">ADD</span></td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <p class="card-description"
+                                        style="margin-top: -19px; margin-bottom: -10px; font-weight: bold; color: black;">
+                                        SUMMARY
+                                        <!-- <button type="button" style="margin-left:64% ;"
+                      class="btn btn-outline-info btn-icon-text">Invoice</button> -->
+
+                                    </p>
+                                    <div class="row" style="margin-top: 8px;margin-bottom: -7px;">
+                                        <div class="col-md-6" id="clientDetailsLeft"></div>
+                                        <div class="col-md-6" id="clientDetailsRight"></div>
+                                    </div>
+                                    <hr>
+                                    <div id="summaryTableContainer">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Service</th>
+                                                    <th>Amount</th>
+                                                    <th>Quantity</th>
+                                                    <th>Discount</th>
+                                                    <!-- <th>Expiry</th> -->
+                                                    <?php if ($isExpiry == 1): ?>
+                                                        <th>Expiry</th>
+                                                    <?php endif; ?>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="serviceTableBody"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div style="margin-left: 368px; font-weight: 900; font-size: 150px">
+                                    <p>Total Fee: <span id="totalFee">0</span></p>
+                                    <p>Discount: <span id="discountAmount">0</span></p>
+                                    <p>Discounted Total: <span id="discountedTotal">0</span></p>
+                                </div>
+
+                                <div style="height: 58px; margin-left: 7.4em; font-weight: 900;">
+                                    <button type="button" class="btn btn-outline-info btn-icon-text action-btn"
+                                        id="invoiceBtn">Invoice</button>
+                                    <button type="button" class="btn btn-outline-info btn-icon-text action-btn"
+                                        id="insertBtn">Invoice &
+                                        Pay
+                                        <i class="ti-printer btn-icon-append"></i>
+                                    </button>
+                                </div>
+                                <!-- <div style="height: 58px; margin-left: 7.4em; font-weight: 900;">
+                  <button type="button" class="btn btn-outline-info btn-icon-text" id="invoiceBtn">Invoice</button>
+                  <button type="button" class="btn btn-outline-info btn-icon-text" id="insertBtn">Invoice & Pay
+                    <i class="ti-printer btn-icon-append"></i>
+                  </button>
+                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- --------------------Model------------------------ -->
+                <div class="modal fade" id="expenseModal" tabindex="-1" role="dialog"
+                    aria-labelledby="expenseModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="expenseModalLabel">Add Cient</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="pt-3" method="POST"
+                                    action="<?php echo base_url() . "saveClientfromSales"; ?>"
+                                    enctype="multipart/form-data">
+                                    <p class="card-description">
+                                        Personal info
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Client Name</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" name="cName" required />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Client Contact</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" name="cphone" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Identification Type</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control" name="idType" />
+                                                    <option>CNIC</option>
+                                                    <option>Passport</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Client CNIC</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" name="CNIC" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label" name="cemail">Client
+                                                    Email</label>
+                                                <div class="col-sm-9">
+                                                    <input type="email" class="form-control" name="cemail" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label" name="gender">Gender</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control" name="gender" required />
+                                                    <option>Male</option>
+                                                    <option>Female</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="card-description">
+                                        Other Details
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Status</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control" name="cstatus" required>
+                                                        <option value="Active">Active</option>
+                                                        <option value="Inactive">Inactive</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Def</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" name="cdef" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Limit Expense</label>
+                                                <div class="col-sm-9">
+                                                    <input type="number" class="form-control" name="expense"
+                                                        Value="0.0" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Discount</label>
+                                                <div class="col-sm-9">
+                                                    <input type="number" class="form-control" Value="0.0"
+                                                        name="discount" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <!-- <label class="col-sm-3 col-form-label">Main Client</label>  -->
+                                                <!-- <div class="col-sm-9"> -->
+                                                <input type="checkbox" class="form-check-input" name="mclient"
+                                                    style="    margin-left: 9rem; display=flex">
+                                                <span style="margin-left: 11rem;margin-top: -19px;">Main Client</span>
+                                                </input>
+                                                <!-- <label class="col-sm-3 col-form-label">Main Client</label>  -->
+                                            </div>
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+
+
+                                    <p class="card-description">
+                                        Address Details
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Address</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" name="address" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">City</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" name="city" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">State</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control" name='state'>
+                                                        <option>Pakistan</option>
+                                                        <option>Others</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Code</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" name="code" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Add a submit button -->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="loadingOverlay" class="d-none">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                <!-- Include footer -->
+                <?php include 'include_common/footer.php'; ?>
+            </div>
+
+            <!-- main-panel ends -->
         </div>
+        <!-- page-body-wrapper ends -->
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../vendors/js/vendor.bundle.base.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 
     <script>
-        function loadCorrectInvoice(invOrdNum) {
-            $('#correctInvoiceContent').load('/HMS_RegexByte/CorrectInvoice?invOrdNum=' + invOrdNum);
-        }
-
-        $(document).on('click', '[data-target="#correctModal"]', function () {
-            var invOrdNum = '<?= $ServiceDetails[0]['invOrdNum']; ?>';
-            loadCorrectInvoice(invOrdNum);
+        $('.select2').select2({
+            dropdownAutoWidth: true,
         });
-    </script>
 
-    <script>
-        function calculateTotalValue() {
-            var totalValue = 0;
-            <?php foreach ($ServiceDetails as $index => $detail): ?>
-                var quantity = parseFloat(document.getElementById('quantity_<?= $index; ?>').value) || 0;
-                var price = parseFloat(document.getElementById('price_<?= $index; ?>').value) || 0;
-                totalValue += quantity * price;
-            <?php endforeach; ?>
-            document.getElementById('totalValue').value = totalValue.toFixed(2);
+        // function calculateTotalFee() {
+        //   var totalFee = 0;
+        //   var discountAmount = 0;
+
+        //   $('#serviceTableBody tr').each(function () {
+        //     var quantity = parseFloat($(this).find('.editable-quantity').val());
+        //     var fee = parseFloat($(this).find('.editable-fee').text());
+        //     var discount = parseFloat($(this).find('.editable-discount').text());
+        //     var rowTotal = quantity * fee;
+        //     var rowDiscountAmount = rowTotal * (discount / 100);
+        //     discountAmount += rowDiscountAmount;
+        //     totalFee += rowTotal - rowDiscountAmount;
+        //   });
+
+        //   $('#totalFee').text(totalFee.toFixed(2));
+        //   $('#discountAmount').text(discountAmount.toFixed(2));
+        //   $('#discountedTotal').text((totalFee - discountAmount).toFixed(2));
+        // }
+
+        function calculateTotalFee() {
+            var totalFee = 0;
+            var discountAmount = 0;
+
+            $('#serviceTableBody tr').each(function () {
+                var quantity = parseFloat($(this).find('.editable-quantity').val());
+                var fee = parseFloat($(this).find('.editable-fee').text());
+                var discount = parseFloat($(this).find('.editable-discount').text());
+                var rowTotal = quantity * fee;
+                var rowDiscountAmount = rowTotal * (discount / 100);
+                discountAmount += rowDiscountAmount;
+                totalFee += rowTotal;
+            });
+
+            var discountedTotal = totalFee - discountAmount;
+
+            $('#totalFee').text(totalFee.toFixed(2));
+            $('#discountAmount').text(discountAmount.toFixed(2));
+            $('#discountedTotal').text(discountedTotal.toFixed(2));
         }
 
-        window.onload = function() {
-            calculateTotalValue();
-        };
-    </script>
 
-    <script>
-        function deleteService() {
-            var idReceipts = <?= $ServiceDetails[0]['idReceipts']; ?>;
 
-            fetch('/sales/deleteService/' + idReceipts)
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Service deleted successfully');
-                        alert('Service deleted successfully');
-                    } else {
-                        console.error('Error deleting service:', error);
-                        alert('Error deleting service');
+        // $('#search').on('input', function () {
+        //   var searchText = $(this).val().toLowerCase();
+        //   $('#serviceTypeList tbody tr').each(function () {
+        //     var serviceType = $(this).find('.title').text().toLowerCase();
+        //     if (serviceTypeType.includes(searchText)) {
+        //       $(this).show();
+        //     } else {
+        //       $(this).hide();
+        //     }
+        //   });
+        // });
+
+        $('#search').on('input', function () {
+            var searchText = $(this).val().toLowerCase();
+            $('#serviceTypeList tbody tr').each(function () {
+                var serviceType = $(this).find('.title').text().toLowerCase();
+                if (serviceType.includes(searchText)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+
+        function addServiceRow(serviceType, serviceTypeId, serviceFee, expiryDate) {
+            var exists = false;
+
+            $('#serviceTableBody tr').each(function () {
+                var existingServiceTypeId = $(this).find('td:first').data('service-type-id');
+                if (existingServiceTypeId === serviceTypeId) {
+                    exists = true;
+                    return false;
+                }
+            });
+
+            if (!exists) {
+
+                var newRow = '<tr>' +
+                    '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
+                    '<td contenteditable="true" class="editable-fee" style="text-align: center;">' + serviceFee + '</td>' +
+                    '<td><div class="quantity-input"><span class="quantity-decrement btn btn-danger btn-sm" style="font-size: 17px;margin-left: 30%; border-radius: 50%; margin-right: -8%;">-</span><input type="text" class="editable-quantity form-control quantity-box" style="width: 40px; padding: 0%;" value="1"><span class="quantity-increment btn btn-success btn-sm" style="margin-right: 30%;font-size: 17px;margin-left: -7%; border-radius: 50%; ">+</span></div></td>' +
+                    '<td contenteditable="true" class="editable-discount" style="text-align: center;">0</td>';
+
+                <?php if ($isExpiry == 1): ?>
+                    newRow += '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate.split(' ')[0] : 'Nil') + '</td>';
+                <?php endif; ?>
+
+                newRow += '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
+                    '</tr>';
+
+
+                // var newRow = '<tr>' +
+                //   '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
+                //   '<td contenteditable="true" class="editable-fee">' + serviceFee + '</td>' +
+                //   '<td><div class="quantity-input"><span class="quantity-decrement">-</span><input type="text" class="editable-quantity form-control" value="1"><span class="quantity-increment">+</span></div></td>' +
+                //   '<td contenteditable="true" class="editable-discount">0</td>';
+
+                // <?php if ($isExpiry == 1): ?>
+                    //   newRow += '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate : 'Nil') + '</td>';
+                    // <?php endif; ?>
+
+                // newRow += '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeServiceRow(this)"><i class="mdi mdi-delete"></i></button></td>' +
+                //   '</tr>';
+                $('#serviceTableBody').append(newRow);
+                calculateTotalFee();
+
+                var newRowElement = $('#serviceTableBody tr:last');
+                newRowElement.find('.quantity-increment').click(function () {
+                    var quantityInput = $(this).closest('td').find('.editable-quantity');
+                    var currentQuantity = parseInt(quantityInput.val());
+                    quantityInput.val(currentQuantity + 1);
+                    calculateTotalFee();
+                });
+
+                newRowElement.find('.quantity-decrement').click(function () {
+                    var quantityInput = $(this).closest('td').find('.editable-quantity');
+                    var currentQuantity = parseInt(quantityInput.val());
+                    if (currentQuantity > 1) {
+                        quantityInput.val(currentQuantity - 1);
+                        calculateTotalFee();
                     }
-                })
-                .catch(error => console.error('Error:', error));
+                });
+            } else {
+                alert('This service is already added to the summary.');
+            }
         }
+
+
+        $(document).ready(function () {
+            $('#serviceTableBody').on('input', 'td[contenteditable="true"]', function () {
+                calculateTotalFee();
+            });
+
+
+
+            $('#serviceTypeList .badge').click(function () {
+                var serviceTypeRow = $(this).closest('tr');
+                var serviceTypeId = serviceTypeRow.data('service-type-id');
+                var serviceType = serviceTypeRow.find('.title').text().trim();
+                var serviceFee = serviceTypeRow.find('.fee').text().trim();
+                var expiryDate = serviceTypeRow.find('.expiry-dropdown').val();
+                addServiceRow(serviceType, serviceTypeId, serviceFee, expiryDate);
+                calculateTotalFee();
+            });
+
+            function attachAddServiceHandler() {
+                $('#serviceTypeList .badge').click(function () {
+                    var serviceTypeRow = $(this).closest('tr');
+                    var serviceTypeId = serviceTypeRow.data('service-type-id');
+                    var serviceType = serviceTypeRow.find('.title').text().trim();
+                    var serviceFee = serviceTypeRow.find('.fee').text().trim();
+                    addServiceRow(serviceType, serviceTypeId, serviceFee);
+                    calculateTotalFee();
+                });
+            }
+
+            $('#categoryDropdown').change(function () {
+                var categoryId = $(this).val();
+                filterServices(categoryId);
+            });
+
+            function filterServices(categoryId) {
+                $.ajax({
+                    url: '<?php echo base_url() . "SalesController/filterServices"; ?>',
+                    type: 'POST',
+                    data: { categoryId: categoryId },
+                    dataType: 'html',
+                    success: function (data) {
+                        $('#serviceTableBodyContainer').html(data);
+                    }
+                });
+            }
+
+            $('#insertBtn').off('click').on('click', function () {
+                insertData();
+            });
+
+            $('#invoiceBtn').click(function () {
+                submitInvoice();
+            });
+
+            $('#serviceTypeList .badge-pill').mouseenter(function () {
+                $(this).addClass('hover-effect');
+            });
+
+            $('#serviceTypeList .badge-pill').mouseleave(function () {
+                $(this).removeClass('hover-effect');
+            });
+
+            $('select[name="clientName"]').change(function () {
+                updateSelectedDetails();
+            });
+
+            $('select[name="Payment"]').change(function () {
+                updateSelectedDetails();
+            });
+
+            $('select[name="Currency"]').change(function () {
+                updateSelectedDetails();
+            });
+
+            $('#exchangeInput').on('input', function () {
+                updateSelectedDetails();
+            });
+
+            function updateSelectedDetails() {
+                var selectedClientName = $('select[name="clientName"] option:selected').text();
+                var selectedPaymentMethod = $('select[name="Payment"] option:selected').text();
+                var selectedCurrency = $('select[name="Currency"] option:selected').text();
+                var selectedExchange = $('#exchangeInput').val();
+
+                $('#clientDetailsLeft').html('Client: ' + selectedClientName +
+                    '<br>Payment Method: ' + selectedPaymentMethod);
+
+                $('#clientDetailsRight').html('Currency: ' + selectedCurrency +
+                    '<br>Exchange: ' + (selectedExchange !== undefined ? selectedExchange : 'N/A'));
+            }
+
+
+
+            $('#serviceTableBody').on('click', '.remove-btn', function () {
+                var row = $(this).closest('tr');
+                var serviceFee = parseFloat(row.find('td:eq(1)').text());
+                row.remove();
+                calculateTotalFee(-serviceFee);
+            });
+
+            // function disableButtons() {
+            //   $('.action-btn').prop('disabled', true);
+            // }
+
+            // function enableButtons() {
+            //   $('.action-btn').prop('disabled', false);
+            // }
+
+            function showLoading() {
+                $('#loadingOverlay').removeClass('d-none');
+            }
+
+            function hideLoading() {
+                $('#loadingOverlay').addClass('d-none');
+            }
+
+            function disableButtons() {
+                $('.action-btn').prop('disabled', true);
+            }
+
+            function enableButtons() {
+                $('.action-btn').prop('disabled', false);
+            }
+
+            $('#insertBtn').off('click').on('click', function (e) {
+                e.preventDefault();
+                disableButtons();
+                showLoading();
+                insertData();
+            });
+
+            $('#invoiceBtn').off('click').on('click', function (e) {
+                e.preventDefault();
+                disableButtons();
+                showLoading();
+                submitInvoice();
+            });
+
+            function insertData() {
+                // disableButtons();
+                var clientId = $('select[name="clientName"]').val();
+                var clientName = $('select[name="clientName"] option:selected').text();
+                var paymentMethodOption = $('select[name="Payment"] option:selected');
+                var paymentMethodId = paymentMethodOption.data('payment-id');
+                var paymentName = paymentMethodOption.text();
+                var paymentMethodName = paymentMethodOption.text();
+                var currency = $('select[name="Currency"]').val();
+                var currencyName = $('select[name="Currency"] option:selected').text();
+                var exchange = $('#exchangeInput').val();
+                var totalFee = parseFloat($('#totalFee').text());
+
+                // var quantity = parseFloat($('#quantityInput').val());
+
+                // console.log("Quantity: ", quantity);
+                // console.log("Client ID: ", clientId);
+                // console.log("Client Name: ", clientName);
+                // console.log("Payment Method ID: ", paymentMethodId);
+                // console.log("Payment Name: ", paymentName);
+                // console.log("Currency: ", currency);
+                // console.log("Exchange: ", exchange);
+                // console.log("Total Fee: ", totalFee);
+
+                if (!clientId || isNaN(totalFee)) {
+                    alert('Invalid data for insertion.');
+                    return;
+                }
+                var services = [];
+                $('#serviceTableBody tr').each(function () {
+                    var serviceTypeRow = $(this);
+                    var serviceTypeId = serviceTypeRow.find('td:first').data('service-type-id');
+                    var serviceName = serviceTypeRow.find('td:eq(0)').text();
+                    var fee = parseFloat(serviceTypeRow.find('td:eq(1)').text());
+                    var quantityInput = serviceTypeRow.find('.editable-quantity');
+                    var quantity = parseFloat(quantityInput.val());
+                    var discount = parseFloat(serviceTypeRow.find('.editable-discount').text());
+                    var expiryDate = serviceTypeRow.find('.expiry-date').val();
+
+                    if (expiryDate === undefined) {
+                        expiryDate = '1970-01-01';
+                    }
+
+                    console.log(expiryDate);
+
+                    services.push({
+                        serviceTypeId: serviceTypeId,
+                        serviceName: serviceName,
+                        fee: fee,
+                        quantity: quantity,
+                        discount: discount,
+                        expiryDate: expiryDate
+                    });
+                });
+                $.ajax({
+                    method: 'POST',
+                    url: '<?= site_url('SalesController/submitServices') ?>',
+                    dataType: "json",
+                    data: {
+                        clientId: clientId,
+                        clientName: clientName,
+                        currencyName: currencyName,
+                        paymentMethodId: paymentMethodId,
+                        paymentName: paymentName,
+                        paymentMethodName: paymentMethodName,
+                        currency: currency,
+                        exchange: exchange,
+                        totalFee: totalFee,
+                        services: services
+                    },
+                    success: function (response) {
+
+                        console.log('Data inserted successfully:', response);
+                        if (response.pdfContent) {
+                            var decodedPdfContent = atob(response.pdfContent);
+                            var blob = new Blob([new Uint8Array(decodedPdfContent.split('').map(function (c) {
+                                return c.charCodeAt(0);
+                            }))], {
+                                type: 'application/pdf'
+                            });
+                            var link = document.createElement('a');
+                            var url = window.URL.createObjectURL(blob);
+                            link.href = url;
+                            link.target = '_blank';
+                            link.click();
+
+                            setTimeout(function () {
+                                window.URL.revokeObjectURL(url);
+                            }, 100);
+                            location.reload();
+                        }
+                        $('#serviceTableBody').empty();
+                        $('#totalFee').text('0');
+                    },
+                    error: function (error) {
+                        console.error('Error inserting data:', error);
+                    }
+
+                });
+            }
+        });
+
+        function submitInvoice() {
+            // disableButtons();
+            var clientId = $('select[name="clientName"]').val();
+            var clientName = $('select[name="clientName"] option:selected').text();
+            var paymentMethodOption = $('select[name="Payment"] option:selected');
+            var paymentMethodId = paymentMethodOption.data('payment-id');
+            var paymentName = paymentMethodOption.text();
+            var paymentMethodName = paymentMethodOption.text();
+            var currency = $('select[name="Currency"]').val();
+            var currencyName = $('select[name="Currency"] option:selected').text();
+            var exchange = $('#exchangeInput').val();
+            var totalFee = parseFloat($('#totalFee').text());
+
+            if (!clientId || isNaN(totalFee)) {
+                alert('Invalid data for insertion.');
+                return;
+            }
+
+            var services = [];
+            $('#serviceTableBody tr').each(function () {
+                var serviceTypeRow = $(this);
+                var serviceTypeId = serviceTypeRow.find('td:first').data('service-type-id');
+                var serviceName = serviceTypeRow.find('td:eq(0)').text();
+                var fee = parseFloat(serviceTypeRow.find('td:eq(1)').text());
+                var quantityInput = serviceTypeRow.find('.editable-quantity');
+                var quantity = parseFloat(quantityInput.val());
+                var discount = parseFloat(serviceTypeRow.find('.editable-discount').text());
+                var expiryDate = serviceTypeRow.find('.expiry-date').val();
+
+                if (expiryDate === undefined) {
+                    expiryDate = '1970-01-01';
+                }
+
+                services.push({
+                    serviceTypeId: serviceTypeId,
+                    serviceName: serviceName,
+                    fee: fee,
+                    quantity: quantity,
+                    discount: discount,
+                    expiryDate: expiryDate
+                });
+            });
+
+            $.ajax({
+                method: 'POST',
+                url: '<?= site_url('SalesController/submitInvoice') ?>',
+                dataType: "json",
+                data: {
+                    clientId: clientId,
+                    clientName: clientName,
+                    currencyName: currencyName,
+                    paymentMethodId: paymentMethodId,
+                    paymentName: paymentName,
+                    paymentMethodName: paymentMethodName,
+                    currency: currency,
+                    exchange: exchange,
+                    totalFee: totalFee,
+                    services: services
+                },
+                success: function (response) {
+                    // console.log('Data inserted successfully:', response);
+                    if (response.pdfContent) {
+                        var decodedPdfContent = atob(response.pdfContent);
+                        var blob = new Blob([new Uint8Array(decodedPdfContent.split('').map(function (c) {
+                            return c.charCodeAt(0);
+                        }))], {
+                            type: 'application/pdf'
+                        });
+                        var link = document.createElement('a');
+                        var url = window.URL.createObjectURL(blob);
+                        link.href = url;
+                        link.target = '_blank';
+                        link.click();
+
+                        setTimeout(function () {
+                            window.URL.revokeObjectURL(url);
+                        }, 100);
+
+                        location.reload();
+                    }
+                    $('#serviceTableBody').empty();
+                    $('#totalFee').text('0');
+                },
+                error: function (error) {
+                    console.error('Error inserting data:', error);
+                }
+
+            });
+        }
+
     </script>
 
-    <script>
-        function loadPayInvoice(invOrdNum) {
-            $('#payInvoiceContent').load('/HMS_RegexByte/PayInvoice?invOrdNum=' + invOrdNum);
-        }
-    </script>
 
-
-
-    <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-    </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <script src="../public/assets/vendors_s/js/vendor.bundle.base.js"></script>
+    <script src="./public/assets/vendors_s/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
-    <script src="../public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js"></script>
-    <script src="../public/assets/vendors_s/select2/select2.min.js"></script>
-    <script src="../public/assets/vendors_s/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="./public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js"></script>
+    <script src="./public/assets/vendors_s/select2/select2.min.js"></script>
+    <script src="./public/assets/vendors_s/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="../public/assets/js_s/off-canvas.js"></script>
-    <script src="../public/assets/js_s/hoverable-collapse.js"></script>
-    <script src="../public/assets/js_s/template.js"></script>
-    <script src="../public/assets/js_s/settings.js"></script>
-    <script src="../public/assets/js_s/todolist.js"></script>
+    <script src="./public/assets/js_s/off-canvas.js"></script>
+    <script src="./public/assets/js_s/hoverable-collapse.js"></script>
+    <script src="./public/assets/js_s/template.js"></script>
+    <script src="./public/assets/js_s/settings.js"></script>
+    <script src="./public/assets/js_s/todolist.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page-->
-    <script src="../public/assets/js_s/file-upload.js"></script>
-    <script src="../public/assets/js_s/typeahead.js"></script>
-    <script src="../public/assets/js_s/select2.js"></script>
-
-
+    <script src="./public/assets/js_s/file-upload.js"></script>
+    <script src="./public/assets/js_s/typeahead.js"></script>
+    <script src="./public/assets/js_s/select2.js"></script>
+    <!-- End custom js for this page-->
 </body>
-
-
-<!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/tables/basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:35 GMT -->
 
 </html>

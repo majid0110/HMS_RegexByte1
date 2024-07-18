@@ -11,6 +11,7 @@ use App\Models\itemsModel;
 use App\Models\TestModel;
 use App\Models\LabtestdetailsModel;
 use App\Models\ServicesModel;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class ServiceController extends Controller
 {
@@ -621,6 +622,151 @@ class ServiceController extends Controller
             }
         }
         return false;
+    }
+
+    public function transferServices()
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+        $file = $this->request->getFile('excel_file');
+
+        if ($file->isValid() && !$file->hasMoved()) {
+            $fileExtension = $file->getClientExtension();
+            if ($fileExtension != 'xlsx' && $fileExtension != 'xls') {
+                return $this->response->setJSON(['success' => false, 'error' => 'Only Excel files are allowed.']);
+            }
+
+            try {
+                $excelReader = IOFactory::createReaderForFile($file->getTempName());
+                $spreadsheet = $excelReader->load($file->getTempName());
+                $worksheet = $spreadsheet->getActiveSheet();
+                $rows = $worksheet->toArray();
+
+                $Model = new ServicesModel();
+                $itemsModel = new ItemsModel();
+                $totalRows = count($rows);
+                $processedRows = 0;
+
+                foreach ($rows as $key => $row) {
+
+                    if ($key === 0 || empty(array_filter($row))) {
+                        continue;
+                    }
+
+                    $serviceName = $row[1];
+                    $serviceCode = $row[2];
+
+                    $existingService = $Model->getServiceByCodeAndName($serviceCode, $serviceName, $businessID);
+
+                    if ($existingService) {
+                        $insertedServiceId = $existingService['idArtMenu'];
+
+                        $unitName = $row[5];
+                        $unit = $itemsModel->getUnitByName($unitName, $businessID);
+
+                        if ($unit) {
+                            $idUnit = $unit['idUnit'];
+                        } else {
+                            $newUnit = [
+                                'name' => $unitName,
+                                'notes' => null,
+                                'idBusiness' => $businessID,
+                                'unitCode' => 000,
+                            ];
+                            $idUnit = $itemsModel->insertUnit($newUnit);
+                        }
+
+                        $formDataWarehouse = [
+                            'Barcode' => $row[0],
+                            'Name' => $serviceName,
+                            'Notes' => $row[3],
+                            'idCatArt' => $existingService['idCatArt'],
+                            'idTVSH' => $row[7],
+                            'Cost' => $row[6],
+                            'idUnit' => $idUnit,
+                            'Price' => $row[8],
+                            'Product_mix' => $row[9],
+                            'characteristic1' => $row[10],
+                            'characteristic2' => $row[11],
+                            'Code' => $serviceCode,
+                            'idBusiness' => $businessID,
+                            'status' => $row[12] ?? 'Active',
+                            'noTvshType' => 1,
+                            'idPoint_of_sale' => 0,
+                            'isService' => 1,
+                        ];
+
+                        $Model->updateService($insertedServiceId, $formDataWarehouse);
+                        session()->setFlashdata('success', 'Data updated successfully!');
+                    } else {
+                        $categoryName = $row[4];
+                        $category = $itemsModel->getCategoryByName($categoryName, $businessID);
+
+                        if ($category) {
+                            $idCatArt = $category['idCatArt'];
+                        } else {
+                            $newCategory = [
+                                'name' => $categoryName,
+                                'idSector' => 3,
+                                'notes' => null,
+                                'idBusiness' => $businessID,
+                            ];
+                            $idCatArt = $itemsModel->insertCategory($newCategory);
+                        }
+
+                        $unitName = $row[5];
+                        $unit = $itemsModel->getUnitByName($unitName, $businessID);
+
+                        if ($unit) {
+                            $idUnit = $unit['idUnit'];
+                        } else {
+                            $newUnit = [
+                                'name' => $unitName,
+                                'notes' => null,
+                                'idBusiness' => $businessID,
+                                'unitCode' => 000,
+                            ];
+                            $idUnit = $itemsModel->insertUnit($newUnit);
+                        }
+
+                        $formDataWarehouse = [
+                            'Barcode' => $row[0],
+                            'Name' => $serviceName,
+                            'Notes' => $row[3],
+                            'idCatArt' => $idCatArt,
+                            'idTVSH' => $row[7],
+                            'Cost' => $row[6],
+                            'idUnit' => $idUnit,
+                            'Price' => $row[8],
+                            'Product_mix' => $row[9],
+                            'characteristic1' => $row[10],
+                            'characteristic2' => $row[11],
+                            'Code' => $serviceCode,
+                            'idBusiness' => $businessID,
+                            'status' => $row[12] ?? 'Active',
+                            'noTvshType' => 1,
+                            'idPoint_of_sale' => 0,
+                            'isService' => 1,
+                        ];
+
+                        $insertedServiceId = $Model->insertService($formDataWarehouse);
+                        session()->setFlashdata('success', 'Data imported successfully!');
+                    }
+
+                    $processedRows++;
+                    $progress = ($processedRows / $totalRows) * 100;
+                    $session->set('import_progress', $progress);
+                }
+
+                return $this->response->setJSON(['success' => true]);
+            } catch (\PhpOffice\PhpSpreadsheet\Reader\Exception $e) {
+                return $this->response->setJSON(['success' => false, 'error' => 'Error reading the Excel file: ' . $e->getMessage()]);
+            } catch (\Exception $e) {
+                return $this->response->setJSON(['success' => false, 'error' => 'An unexpected error occurred: ' . $e->getMessage()]);
+            }
+        } else {
+            return $this->response->setJSON(['success' => false, 'error' => 'Error uploading the Excel file.']);
+        }
     }
 
 

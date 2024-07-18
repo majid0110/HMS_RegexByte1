@@ -49,7 +49,7 @@ class salesModel extends Model
     public function getServices()
     {
         return $this->db->table('artmenu')
-            ->select('idArtMenu, Name, Price, idCatArt')
+            ->select('idArtMenu, Name, Price, idCatArt, idTVSH')
             ->where('status', 'Active')
             ->get()
             ->getResultArray();
