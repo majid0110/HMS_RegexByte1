@@ -127,6 +127,8 @@ class ServiceController extends Controller
         $data['activeItems'] = $Model->getActiveItems();
 
         $data['Services'] = $Model->getServices($perPage, $currentPage);
+        $data['currentPage'] = $currentPage;
+        $data['perPage'] = $perPage;
 
         $pager = service('pager');
         $total = $Model->getServicesCount();

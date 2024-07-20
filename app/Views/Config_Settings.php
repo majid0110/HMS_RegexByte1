@@ -230,6 +230,12 @@
                                                 <?= $configData['isExpiry'] == 1 ? 'checked' : ''; ?>>
                                             <label for="isExpiry" style="margin-left: 1rem;">Enable Expiry</label>
                                         </div>
+
+                                        <div>
+                                            <input type="checkbox" id="istable" name="isTable" value="1"
+                                                <?= $configData['isTable'] == 1 ? 'checked' : ''; ?>>
+                                            <label for="isExpiry" style="margin-left: 1rem;">IsTable</label>
+                                        </div>
                                         <div style="margin-top: 2rem;">
                                             <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                                         </div>
@@ -237,6 +243,31 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="row">
+                        <?php if ($configData['isTable'] == 1): ?>
+                            <div class="col-12 grid-margin">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Create Tables</h4>
+                                        <form method="POST" action="<?= base_url('createTables'); ?>">
+                                            <input type="hidden" name="businessID"
+                                                value="<?= session()->get('businessID'); ?>" />
+                                            <div id="tableForm" style="margin-top: 1rem;">
+                                                <label for="noOfTables">Enter No of Tables:</label>
+                                                <input type="number" id="noOfTables" name="noOfTables" class="form-control">
+                                            </div>
+                                            <div style="margin-top: 2rem;">
+                                                <button type="submit" class="btn btn-primary btn-sm">Create</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+
                     </div>
                 </div>
                 <!-- content-wrapper ends -->
@@ -252,6 +283,12 @@
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="./public/assets/vendors_s/js/vendor.bundle.base.js"></script>
+
+    <script>
+        function toggleTableForm(isChecked) {
+            document.getElementById('tableForm').style.display = isChecked ? 'block' : 'none';
+        }
+    </script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="./public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js"></script>
@@ -270,6 +307,7 @@
     <script src="./public/assets/js_s/typeahead.js"></script>
     <script src="./public/assets/js_s/select2.js"></script>
     <!-- End custom js for this page-->
+
 </body>
 
 </html>

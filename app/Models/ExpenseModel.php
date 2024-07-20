@@ -112,7 +112,7 @@ class ExpenseModel extends Model
     public function getExpenses($filters = [])
     {
         $builder = $this->db->table('expenses')
-            ->join('client', 'client.idClient = expenses.client_id')
+            ->join('client', 'client.idClient = expenses.client_id', 'left')
             ->join('users', 'users.ID = expenses.user_id')
             ->join('expense_categories', 'expense_categories.id = expenses.category_id')
             ->select('expenses.*, client.client as clientName, users.fName as userName, expense_categories.title as Category');

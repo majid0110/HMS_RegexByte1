@@ -459,7 +459,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="itemsTableBody">
-                                                <?php $serialNumber = 1; ?>
+                                                <?php
+                                                $serialNumber = ($currentPage - 1) * $perPage + 1;
+                                                ?>
                                                 <?php foreach ($Services as $Service): ?>
                                                     <tr>
                                                         <td><?= $serialNumber++ ?></td>

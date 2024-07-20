@@ -3,6 +3,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<head>
+    <style>
+        a.btn.disabled {
+            pointer-events: none;
+            opacity: 0.65;
+        }
+    </style>
+</head>
 
 <body>
     <div class="container-scroller">
@@ -115,7 +123,7 @@
                                                         <?= $expense['title']; ?>
                                                     </td>
                                                     <td>
-                                                        <?= $expense['clientName']; ?>
+                                                        <?= isset($expense['clientName']) ? $expense['clientName'] : '-'; ?>
                                                     </td>
                                                     <td>
                                                         <?= $expense['userName']; ?>
@@ -141,8 +149,9 @@
                                                             class="btn btn-info btn-sm">Edit</a>
 
                                                         <a href="<?= base_url('deleteExpense/' . $expense['id']); ?>"
-                                                            onclick="return confirm('Are you sure you want to delete this Record?');"
-                                                            class="btn btn-danger btn-sm">Delete</a>
+                                                            onclick="if (this.classList.contains('disabled')) { return false; } return confirm('Are you sure you want to delete this Record?');"
+                                                            class="btn btn-danger btn-sm disabled" tabindex="-1"
+                                                            aria-disabled="true">Delete</a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -241,6 +250,9 @@
     <!-- Custom js for this page-->
     <!-- End custom js for this page-->
 </body>
+<!-- 
+<a href="<?= base_url('deleteExpense/' . $expense['id']); ?>"
+    onclick="return confirm('Are you sure you want to delete this Record?');" class="btn btn-danger btn-sm">Delete</a> -->
 
 
 <!-- Mirrored from demo.bootstrapdash.com/star-admin2-free/template/pages/tables/basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 05:42:35 GMT -->

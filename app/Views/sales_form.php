@@ -17,6 +17,71 @@
 
 
   <style>
+    .table-fixed {
+      table-layout: fixed;
+      width: 100%;
+    }
+
+    .table-fixed th,
+    .table-fixed td {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .table-fixed th:hover,
+    .table-fixed td:hover {
+      overflow: visible;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+
+    /* Adjust these widths as needed */
+    .col-name {
+      width: 40%;
+    }
+
+    .col-price {
+      width: 20%;
+    }
+
+    .col-expiry {
+      width: 20%;
+    }
+
+    .col-action {
+      width: 20%;
+    }
+
+    /* For the summary table */
+    .col-service {
+      width: 25%;
+    }
+
+    .col-amount {
+      width: 15%;
+    }
+
+    .col-quantity {
+      width: 15%;
+    }
+
+    .col-discount {
+      width: 15%;
+    }
+
+    .col-tax {
+      width: 15%;
+    }
+
+    .col-expiry-summary {
+      width: 15%;
+    }
+
+    .col-actions {
+      width: 15%;
+    }
+
     .badge-pill:hover {
       background-color: #52CDFF;
       color: #fff;
@@ -461,7 +526,7 @@
                     <div class="form-group" style="margin-bottom: 6px;">
                       <div id="serviceTableBodyContainer">
                         <div class="table-container">
-                          <table class="table" id="serviceTypeList">
+                          <table class="table table-fixed" id="serviceTypeList">
                             <thead>
                               <tr>
                                 <th>Name</th>
@@ -476,7 +541,7 @@
                               <?php foreach ($services as $service): ?>
                                 <tr data-service-type-id="<?= $service['idArtMenu']; ?>"
                                   data-idtvsh="<?= $service['idTVSH']; ?>">
-                                  <td class="title"><?= $service['Name']; ?></td>
+                                  <td class="title" class="col-name"><?= $service['Name']; ?></td>
                                   <td class="fee" contenteditable="true"><?= $service['Price']; ?></td>
                                   <?php if ($isExpiry == 1): ?>
                                     <td>
@@ -537,7 +602,7 @@
                   </div>
                   <hr>
                   <div id="summaryTableContainer">
-                    <table class="table">
+                    <table class="table table-fixed">
                       <thead>
                         <tr>
                           <th>Service</th>
@@ -656,6 +721,16 @@
                           <option>Male</option>
                           <option>Female</option>
                           </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" name="age">Client Age</label>
+                        <div class="col-sm-9">
+                          <input type="number" class="form-control" name="age" />
                         </div>
                       </div>
                     </div>
@@ -797,27 +872,6 @@
       dropdownAutoWidth: true,
     });
 
-    // function calculateTotalFee() {
-    //   var totalFee = 0;
-    //   var discountAmount = 0;
-
-    //   $('#serviceTableBody tr').each(function () {
-    //     var quantity = parseFloat($(this).find('.editable-quantity').val());
-    //     var fee = parseFloat($(this).find('.editable-fee').text());
-    //     var discount = parseFloat($(this).find('.editable-discount').text());
-    //     var rowTotal = quantity * fee;
-    //     var rowDiscountAmount = rowTotal * (discount / 100);
-    //     discountAmount += rowDiscountAmount;
-    //     totalFee += rowTotal;
-    //   });
-
-    //   var discountedTotal = totalFee - discountAmount;
-
-    //   $('#totalFee').text(totalFee.toFixed(2));
-    //   $('#discountAmount').text(discountAmount.toFixed(2));
-    //   $('#discountedTotal').text(discountedTotal.toFixed(2));
-    // }
-
     function calculateTotalFee() {
       var totalFee = 0;
       var discountAmount = 0;
@@ -837,6 +891,8 @@
         discountAmount += rowDiscountAmount;
         taxAmount += rowTaxAmount;
         totalFee += rowTotal;
+
+        $(this).data('calculatedTax', rowTaxAmount);
       });
 
       var discountedTotal = totalFee - discountAmount;
@@ -1011,13 +1067,6 @@
         calculateTotalFee(-serviceFee);
       });
 
-      // function disableButtons() {
-      //   $('.action-btn').prop('disabled', true);
-      // }
-
-      // function enableButtons() {
-      //   $('.action-btn').prop('disabled', false);
-      // }
 
       function showLoading() {
         $('#loadingOverlay').removeClass('d-none');
@@ -1060,8 +1109,8 @@
         var currency = $('select[name="Currency"]').val();
         var currencyName = $('select[name="Currency"] option:selected').text();
         var exchange = $('#exchangeInput').val();
-        // var idTVSH = parseFloat(serviceTypeRow.find('.tax-rate').text());
         var totalFee = parseFloat($('#totalFee').text());
+        var totalTax = parseFloat($('#taxAmount').text());
 
         // var quantity = parseFloat($('#quantityInput').val());
 
@@ -1078,6 +1127,7 @@
           alert('Invalid data for insertion.');
           return;
         }
+
         var services = [];
         $('#serviceTableBody tr').each(function () {
           var serviceTypeRow = $(this);
@@ -1088,6 +1138,8 @@
           var quantity = parseFloat(quantityInput.val());
           var discount = parseFloat(serviceTypeRow.find('.editable-discount').text());
           var expiryDate = serviceTypeRow.find('.expiry-date').val();
+          var taxRate = parseFloat(serviceTypeRow.find('.tax-rate').text());
+          var calculatedTax = serviceTypeRow.data('calculatedTax');
 
           if (expiryDate === undefined) {
             expiryDate = '1970-01-01';
@@ -1101,7 +1153,9 @@
             fee: fee,
             quantity: quantity,
             discount: discount,
-            expiryDate: expiryDate
+            expiryDate: expiryDate,
+            taxRate: taxRate,
+            calculatedTax: calculatedTax
           });
         });
         $.ajax({
@@ -1118,6 +1172,7 @@
             currency: currency,
             exchange: exchange,
             totalFee: totalFee,
+            totalTax: totalTax,
             services: services
           },
           success: function (response) {

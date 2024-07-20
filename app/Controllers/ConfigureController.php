@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use App\Models\ConfigureModel;
+use App\Models\TablesModel;
 use App\Models\ConfigModel;
 use CodeIgniter\CLI\Console;
 
@@ -24,11 +25,12 @@ class ConfigureController extends Controller
         $configData = $configModel->getConfig($businessID);
 
         if (empty($configData)) {
-            $configData = ['isExpiry' => 0];
+            $configData = ['isExpiry' => 0, 'isTable' => 0];
         }
 
         return view('Config_Settings', ['configData' => $configData]);
     }
+
 
     // public function config_settings()
     // {
@@ -90,11 +92,42 @@ class ConfigureController extends Controller
         $session = \Config\Services::session();
         $businessID = $this->request->getPost('businessID');
         $isExpiry = $this->request->getPost('isExpiry') ? 1 : 0;
+        $isTable = $this->request->getPost('isTable') ? 1 : 0;
+
 
         $configModel = new ConfigModel();
-        $configModel->updateConfig($businessID, ['isExpiry' => $isExpiry]);
+        $configModel->updateConfig($businessID, ['isExpiry' => $isExpiry, 'isTable' => $isTable]);
 
         session()->setFlashdata('success', 'Configuration updated successfully!');
-        return redirect()->to(base_url('/configure'));
+        return redirect()->to(base_url('/config_settings'));
+    }
+
+    public function createTables()
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+        $noOfTables = $this->request->getPost('noOfTables');
+        $tableModel = new TablesModel();
+        for ($i = 1; $i <= $noOfTables; $i++) {
+
+            $TableData = [
+                'name' => 'Table' . $i,
+                'pozX' => 0,
+                'pozY' => 0,
+                'Status' => 'Active',
+                'notes' => 'test',
+                'idBusiness' => $businessID,
+                'Def' => 0,
+                'idUserActive' => 0,
+                'size' => 0,
+                'idPoint_of_sale' => 1,
+                'booking_status' => 1
+            ];
+
+            $tableModel->insert($TableData);
+        }
+
+
+        return redirect()->to(base_url('config_settings'));
     }
 }

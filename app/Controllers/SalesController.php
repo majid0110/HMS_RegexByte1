@@ -161,73 +161,73 @@ class SalesController extends Controller
 //                                                 Main Logic
 //-------------------------------------------------------------------------------------------------------------------------
 
-// saving client from sales form
-public function saveClientProfile()
-{
-    $request = \Config\Services::request();
-    $session = \Config\Services::session();
+    // saving client from sales form
+    public function saveClientProfile()
+    {
+        $request = \Config\Services::request();
+        $session = \Config\Services::session();
 
-    $model = new ClientModel();
-    $businessID = $session->get('businessID');
-    $mainClient = $request->getPost('mclient') ? 1 : 0;
+        $model = new ClientModel();
+        $businessID = $session->get('businessID');
+        $mainClient = $request->getPost('mclient') ? 1 : 0;
 
-    if ($mainClient == 1) {
-        $model->resetMainClients();
+        if ($mainClient == 1) {
+            $model->resetMainClients();
+        }
+
+        $clientUniqueId = $this->generateUniqueClientId($businessID);
+
+        $data = [
+            'client' => $request->getPost('cName'),
+            'contact' => $request->getPost('cphone'),
+            'email' => $request->getPost('cemail'),
+            'CNIC' => $request->getPost('CNIC'),
+            'status' => $request->getPost('cstatus'),
+            'Def' => $request->getPost('cdef'),
+            'idBusiness' => $businessID,
+            'identification_type' => $request->getPost('idType'),
+            'limitExpense' => $request->getPost('expense'),
+            'discount' => $request->getPost('discount'),
+            'mainClient' => $mainClient,
+            'address' => $request->getPost('address'),
+            'city' => $request->getPost('city'),
+            'state' => $request->getPost('state'),
+            'gender' => $request->getPost('gender'),
+            'age' => $request->getPost('age'),
+            'code' => $request->getPost('code'),
+            'clientUniqueId' => $clientUniqueId,
+        ];
+
+        $model->saveClient($data);
+
+        session()->setFlashdata('success', 'Client Added..!!');
+
+        return redirect()->to(base_url("/sales_form"));
     }
 
-    $clientUniqueId = $this->generateUniqueClientId($businessID);
+    private function generateUniqueClientId($businessID)
+    {
+        $model = new ClientModel();
+        $lastClientId = (int) $this->getLastClientId($businessID);
+        $nextClientId = sprintf('%04d', $lastClientId + 1);
 
-    $data = [
-        'client' => $request->getPost('cName'),
-        'contact' => $request->getPost('cphone'),
-        'email' => $request->getPost('cemail'),
-        'CNIC' => $request->getPost('CNIC'),
-        'status' => $request->getPost('cstatus'),
-        'Def' => $request->getPost('cdef'),
-        'idBusiness' => $businessID,
-        'identification_type' => $request->getPost('idType'),
-        'limitExpense' => $request->getPost('expense'),
-        'discount' => $request->getPost('discount'),
-        'mainClient' => $mainClient,
-        'address' => $request->getPost('address'),
-        'city' => $request->getPost('city'),
-        'state' => $request->getPost('state'),
-        'gender' => $request->getPost('gender'),
-        'age' => $request->getPost('age'),
-        'code' => $request->getPost('code'),
-        'clientUniqueId' => $clientUniqueId,
-    ];
+        return $nextClientId;
+    }
 
-    $model->saveClient($data);
+    private function getLastClientId($businessID)
+    {
+        $model = new ClientModel();
 
-    session()->setFlashdata('success', 'Client Added..!!');
+        $lastClient = $model
+            ->where('idBusiness', $businessID)
+            ->orderBy('clientUniqueId', 'DESC')
+            ->first();
 
-    return redirect()->to(base_url("/sales_form"));
-}
-
-private function generateUniqueClientId($businessID)
-{
-    $model = new ClientModel();
-    $lastClientId = (int) $this->getLastClientId($businessID);
-    $nextClientId = sprintf('%04d', $lastClientId + 1);
-
-    return $nextClientId;
-}
-
-private function getLastClientId($businessID)
-{
-    $model = new ClientModel();
-
-    $lastClient = $model
-        ->where('idBusiness', $businessID)
-        ->orderBy('clientUniqueId', 'DESC')
-        ->first();
-
-    return $lastClient ? (int) $lastClient['clientUniqueId'] : 0;
-}
+        return $lastClient ? (int) $lastClient['clientUniqueId'] : 0;
+    }
 
 
-public function submitServices()
+    public function submitServices()
     {
         $db = \Config\Database::connect();
         try {
@@ -243,6 +243,9 @@ public function submitServices()
             $paymentMethodID = $this->request->getPost('paymentMethodId');
             $totalFee = $this->request->getPost('totalFee');
             $services = $this->request->getPost('services');
+
+            $totalTax = $this->request->getPost('totalTax');
+
             $session = \Config\Services::session();
             $businessID = $session->get('businessID');
             $UserID = $session->get('ID');
@@ -277,7 +280,7 @@ public function submitServices()
                 'invOrdNum' => $newInvoiceNumber,
                 'selfissue' => 0,
                 'FIC' => 0,
-                'ValueTVSH' => 0,
+                'ValueTVSH' => $totalTax,
                 'idCurrency' => $currency,
                 'rate' => $exchange,
                 'paymentMethod' => $paymentMethodID,
@@ -319,7 +322,7 @@ public function submitServices()
                     'Sum' => $sum,
                     'idBusiness' => $businessID,
                     'IdTax' => 1,
-                    'ValueTax' => 0,
+                    'ValueTax' => $service['calculatedTax'],
                     'idMag' => 1,
                     'name' => $service['serviceName'],
                     'idSummaryInvoice' => 0,
