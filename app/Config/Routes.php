@@ -298,3 +298,9 @@ $routes->get('/config_form/(:num)', 'ConfigureController::config_form/$1');
 $routes->post('/update/(:num)', 'ConfigureController::update/$1');
 $routes->post('updateConfig', 'ConfigureController::updateConfig');
 $routes->post('createTables', 'ConfigureController::createTables');
+
+
+//----------------------------------------------------------------------------------------------------------------
+//                                              New-Sales Routes
+//----------------------------------------------------------------------------------------------------------------
+$routes->get('/New_SalesFrom', 'newSalesController::New_SalesFrom');

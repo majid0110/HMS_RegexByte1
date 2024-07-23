@@ -887,6 +887,7 @@
         var rowDiscountAmount = rowTotal * (discount / 100);
         var rowDiscountedTotal = rowTotal - rowDiscountAmount;
         var rowTaxAmount = rowDiscountedTotal * idTVSH;
+        // var rowTaxAmount = idTVSH;
 
         discountAmount += rowDiscountAmount;
         taxAmount += rowTaxAmount;
@@ -1209,6 +1210,7 @@
 
     function submitInvoice() {
       // disableButtons();
+
       var clientId = $('select[name="clientName"]').val();
       var clientName = $('select[name="clientName"] option:selected').text();
       var paymentMethodOption = $('select[name="Payment"] option:selected');
@@ -1219,6 +1221,7 @@
       var currencyName = $('select[name="Currency"] option:selected').text();
       var exchange = $('#exchangeInput').val();
       var totalFee = parseFloat($('#totalFee').text());
+      var totalTax = parseFloat($('#taxAmount').text());
 
       if (!clientId || isNaN(totalFee)) {
         alert('Invalid data for insertion.');
@@ -1235,6 +1238,8 @@
         var quantity = parseFloat(quantityInput.val());
         var discount = parseFloat(serviceTypeRow.find('.editable-discount').text());
         var expiryDate = serviceTypeRow.find('.expiry-date').val();
+        var taxRate = parseFloat(serviceTypeRow.find('.tax-rate').text());
+        var calculatedTax = serviceTypeRow.data('calculatedTax');
 
 
 
@@ -1249,8 +1254,9 @@
           fee: fee,
           quantity: quantity,
           discount: discount,
-
-          expiryDate: expiryDate
+          expiryDate: expiryDate,
+          taxRate: taxRate,
+          calculatedTax: calculatedTax
         });
       });
 
@@ -1270,6 +1276,7 @@
           currency: currency,
           exchange: exchange,
           totalFee: totalFee,
+          totalTax: totalTax,
           services: services
         },
         success: function (response) {

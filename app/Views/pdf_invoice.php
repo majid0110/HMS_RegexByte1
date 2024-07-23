@@ -159,6 +159,7 @@
                 <td style="text-align: right;padding-left:40%;"><b>Fee</b></td>
                 <td style="text-align: right; padding-left:4%;"><b>Quantity</b></td>
                 <td style="text-align: right; padding-left:4%;"><b>Discount</b></td>
+                <td style="text-align: right; padding-left:4%;"><b>Tax</b></td>
                 <td style="text-align: right;padding-left:4%;"><b>Total</b></td>
             </tr>
 
@@ -172,6 +173,7 @@
 
                     $discountAmount = ($service['fee'] * $service['discount']) / 100;
                     echo '<td style="text-align: right;padding-left:4%;">' . number_format($discountAmount, 2) . '</td>';
+                    echo '<td style="text-align: right;padding-left:4%;">' . number_format($service['calculatedTax'], 2) . '</td>';
 
                     echo '<td style="text-align: right; padding-left:4%;">' . number_format((float) $service['fee'] * (float) $service['quantity'] - $discountAmount, 2) . '</td>';
                     echo '</tr>';
@@ -186,6 +188,14 @@
         </table>
 
         <hr>
+
+        <?php
+        $totalTax = 0;
+        foreach ($services as $service) {
+            $totalTax += $service['calculatedTax'];
+        }
+        ?>
+
         <table style="width: 100%;">
             <tr>
                 <td style="width: 50%; text-align: left;">&nbsp;</td>
@@ -206,11 +216,16 @@
 
                 </td>
             </tr>
-
+            <tr>
+                <td style="width: 50%; text-align: left;">&nbsp;</td>
+                <td style="width: 25%; text-align: right; padding-right:10px;"><b>Total Tax</b> PKR:
+                    <?= number_format($totalTax, 2) ?>
+                </td>
+            </tr>
             <tr>
                 <td style="width: 50%; text-align: left;">&nbsp;</td>
                 <td style="width: 25%; text-align: right; padding-right:10px;"><b>Discounted PKR</b>
-                    <?= number_format($discountedTotal, 2) ?>
+                    <?= number_format($discountedTotal + $totalTax, 2) ?>
 
 
                 </td>

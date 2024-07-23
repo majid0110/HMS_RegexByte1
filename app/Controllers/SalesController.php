@@ -514,6 +514,9 @@ class SalesController extends Controller
             $paymentMethodID = $this->request->getPost('paymentMethodId');
             $totalFee = $this->request->getPost('totalFee');
             $services = $this->request->getPost('services');
+
+            $totalTax = $this->request->getPost('totalTax');
+
             $session = \Config\Services::session();
             $businessID = $session->get('businessID');
             $UserID = $session->get('ID');
@@ -548,7 +551,7 @@ class SalesController extends Controller
                 'invOrdNum' => $newInvoiceNumber,
                 'selfissue' => 0,
                 'FIC' => 0,
-                'ValueTVSH' => 0,
+                'ValueTVSH' => $totalTax,
                 'idCurrency' => $currency,
                 'rate' => $exchange,
                 'paymentMethod' => $paymentMethodID,
@@ -590,7 +593,7 @@ class SalesController extends Controller
                     'Sum' => $sum,
                     'idBusiness' => $businessID,
                     'IdTax' => 1,
-                    'ValueTax' => 0,
+                    'ValueTax' => $service['calculatedTax'],
                     'idMag' => 1,
                     'name' => $service['serviceName'],
                     'idSummaryInvoice' => 0,
