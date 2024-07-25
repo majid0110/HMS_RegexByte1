@@ -1146,7 +1146,7 @@
             expiryDate = '1970-01-01';
           }
 
-          console.log(expiryDate);
+          console.log(services);
 
           services.push({
             serviceTypeId: serviceTypeId,

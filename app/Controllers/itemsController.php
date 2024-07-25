@@ -372,13 +372,14 @@ class itemsController extends Controller
 
 
         $isExpiry = $itemsModel->isExpiry($businessID);
-
-        if ($isExpiry == 1) {
+        // $isExpiry = 1;
+        if ($isExpiry === 1) {
             $ItemExpiry = [
                 'idInventory' => $IdInventory,
                 'inventory' => $Inventory,
                 'expiryDate' => $this->request->getPost('expiry'),
             ];
+
             $itemsModel->insertItemExpiry($ItemExpiry);
         }
 

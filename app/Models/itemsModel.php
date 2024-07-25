@@ -375,11 +375,12 @@ class itemsModel extends Model
 
     public function isExpiry($businessID)
     {
-        return $this->db->table('config')
-            ->select('isExpiry')
-            ->where('businessID', $businessID)
-            ->get()
-            ->getResultArray();
+        $builder = $this->db->table('config');
+        $builder->select('isExpiry');
+        $builder->where('businessID', $businessID);
+        $query = $builder->get();
+        $result = $query->getRowArray();
+        return isset($result['isExpiry']) ? (int) $result['isExpiry'] : 0;
     }
 
 }

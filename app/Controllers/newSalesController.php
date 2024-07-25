@@ -40,7 +40,26 @@ class newSalesController extends Controller
         $data['services'] = $sales->getServices();
         $data['categories'] = $sales->getCategories();
         $data['salesModel'] = $sales;
+
+        $configModel = new ConfigModel();
+        $businessID = session()->get('businessID');
+        $config = $configModel->where('businessID', $businessID)->first();
+        $data['isExpiry'] = $config ? $config['isExpiry'] : 0;
+
         return view('New_SalesFrom.php', $data);
+    }
+
+    public function filterServices()
+    {
+        $categoryId = $this->request->getPost('categoryId');
+
+        if (empty($categoryId)) {
+            $categoryId = null;
+        }
+
+        $model = new salesModel();
+        $data['services'] = $model->getServicesByCategory($categoryId);
+        echo view('New_service_table_partial.php', $data);
     }
 
 }

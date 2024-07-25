@@ -304,3 +304,4 @@ $routes->post('createTables', 'ConfigureController::createTables');
 //                                              New-Sales Routes
 //----------------------------------------------------------------------------------------------------------------
 $routes->get('/New_SalesFrom', 'newSalesController::New_SalesFrom');
+$routes->post('newSalesController/filterServices', 'newSalesController::filterServices');
