@@ -20,6 +20,7 @@
         .selected-item,
         .selected-category {
             background-color: blue !important;
+            border-color: blue !important;
             color: white !important;
         }
 
@@ -284,8 +285,8 @@
                 </div>
                 <div class="search-container">
                     <div>
-                        <input type="text" placeholder="Search...">
-                        <button>Search</button>
+                        <input type="text" class="search-input" placeholder="Search...">
+                        <button class="search-button">Search</button>
                     </div>
                     <div class="item-list-container">
                         <div class="item-list">
@@ -313,6 +314,7 @@
                             <?php endforeach; ?>
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -647,17 +649,50 @@
 
         $(document).ready(function () {
 
+            $('.search-input').on('keyup', function () {
+                var searchTerm = $(this).val().toLowerCase();
+
+                $('.item-list .item').each(function () {
+                    var itemName = $(this).find('div:first').text().toLowerCase();
+                    if (itemName.includes(searchTerm)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+
+            $('.search-button').on('click', function () {
+                var searchTerm = $('.search-input').val().toLowerCase();
+
+                $('.item-list .item').each(function () {
+                    var itemName = $(this).find('div:first').text().toLowerCase();
+                    if (itemName.includes(searchTerm)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+
             function addServiceRow(serviceId, serviceName, servicePrice, serviceTax, expiryHtml) {
+                var expiryColumn = isExpiry == 1 ? `<td>${expiryHtml}</td>` : '';
                 var rowHtml = `
-            <tr data-service-id="${serviceId}">
-                <td>${serviceName}</td>
-                <td contenteditable="true" class="editable-price">${servicePrice}</td>
-                <td><input type="number" class="editable-quantity" value="1" min="1"></td>
-                <td><input type="number" class="editable-discount" value="0" min="0" max="100"></td>
-                <td class="tax-rate">${serviceTax}</td>
-                ${expiryHtml ? `<td>${expiryHtml}</td>` : '<td>-</td>'}
-                <td><button class="delete-button">Delete</button></td>
-            </tr>`;
+    <tr data-service-id="${serviceId}">
+        <td>${serviceName}</td>
+        <td contenteditable="true" class="editable-price">${servicePrice}</td>
+        <td>
+            <div class="quantity-input" style="display: flex;flex-direction: row;justify-content: space-evenly;">
+                <span class="quantity-decrement btn btn-danger btn-sm" style="font-size: 17px;border-radius: 50%;">-</span>
+                <input type="text" class="editable-quantity form-control quantity-box" style="width: 40px; padding: 2%;" value="1">
+                <span class="quantity-increment btn btn-success btn-sm" style="border-radius: 50%; ">+</span>
+            </div>
+        </td>
+        <td><input type="number" class="editable-discount" value="0" min="0" max="100"></td>
+        <td class="tax-rate">${serviceTax}</td>
+        ${expiryColumn}
+        <td><button class="delete-button">Delete</button></td>
+    </tr>`;
 
                 $('#serviceTableBody').append(rowHtml);
                 calculateTotals();
@@ -682,6 +717,31 @@
                 }
             });
 
+            $('#serviceTableBody').on('click', '.quantity-increment', function () {
+                var input = $(this).siblings('.editable-quantity');
+                var value = parseInt(input.val(), 10);
+                input.val(value + 1);
+                calculateTotals();
+            });
+
+            // Event listener for quantity decrement
+            $('#serviceTableBody').on('click', '.quantity-decrement', function () {
+                var input = $(this).siblings('.editable-quantity');
+                var value = parseInt(input.val(), 10);
+                if (value > 1) {
+                    input.val(value - 1);
+                    calculateTotals();
+                }
+            });
+
+            // Event listener for manual quantity input
+            $('#serviceTableBody').on('input', '.editable-quantity', function () {
+                var value = parseInt($(this).val(), 10);
+                if (isNaN(value) || value < 1) {
+                    $(this).val(1);
+                }
+                calculateTotals();
+            });
 
             $('#serviceTableBody').on('click', '.delete-button', function () {
                 $(this).closest('tr').remove();
