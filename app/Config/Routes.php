@@ -72,6 +72,8 @@ $routes->get('/appointments_table', 'AppointmentController::appointments_table')
 $routes->get('/deleteAppointment/(:num)', 'AppointmentController::deleteAppointment/$1');
 $routes->post('/saveClient', 'AppointmentController::saveClientProfile');
 $routes->post('AppointmentController/saveAppointment', 'AppointmentController::saveAppointment');
+$routes->post('AppointmentController/saveOpdAppointment', 'AppointmentController::saveOpdAppointment');
+
 
 $routes->post('AppointmentController/printToken', 'AppointmentController::printToken');
 
@@ -87,6 +89,9 @@ $routes->get('viewAppointmentDetails/(:num)', 'AppointmentController::viewAppoin
 $routes->get('/edit_fee/(:num)', 'DoctorController::editDoctorFee/$1');
 $routes->get('/edit_fee/(:num)', 'DoctorController::editDoctorFee/$1');
 $routes->post('/updateDoctorFee/(:num)', 'DoctorController::updateDoctorFee/$1');
+
+$routes->get('/GenearalOPD', 'AppointmentController::GenearalOpd_form');
+
 //----------------------------------------------------------------------------------Doctor
 $routes->post('updateDoctor', 'DoctorController::updateDoctor');
 // $routes->get('DoctorController/editDoctor/(:num)', 'DoctorController::editDoctor/$1');

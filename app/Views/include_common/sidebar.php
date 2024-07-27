@@ -63,6 +63,27 @@ $modulePermissions = $session->get('module_permissions');
             <?php
             $moduleID = $module['id'];
 
+            $isAppointmentsModule = $module['module_name'] === 'General-OPD';
+
+            $canView = $isAppointmentsModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            ?>
+
+            <?php if ($canView): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url('GenearalOPD'); ?>">
+                        <i class="menu-icon mdi mdi-alarm-check"></i>
+                        <span class="menu-title">
+                            <?= $module['module_name'] ?>
+                        </span>
+                    </a>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <?php foreach ($modules as $module): ?>
+            <?php
+            $moduleID = $module['id'];
+
             $isAppointmentsModule = $module['module_name'] === 'Appointments';
 
             $canView = $isAppointmentsModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
@@ -79,6 +100,8 @@ $modulePermissions = $session->get('module_permissions');
                 </li>
             <?php endif; ?>
         <?php endforeach; ?>
+
+
 
         <!-- For Laboratory Services module -->
         <?php foreach ($modules as $module): ?>

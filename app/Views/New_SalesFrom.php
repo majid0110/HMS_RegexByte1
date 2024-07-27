@@ -17,10 +17,14 @@
             background-color: #007bff;
         }
 
-        .selected-item,
-        .selected-category {
+        .selected-item {
             background-color: blue !important;
             border-color: blue !important;
+            color: white !important;
+        }
+
+        .selected-category {
+            background-color: blue !important;
             color: white !important;
         }
 
@@ -78,12 +82,12 @@
         .item-list {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            gap: 10px;
             height: 255px;
         }
 
         .item {
-            width: 31%;
+            width: calc(33.33% - 10px);
             height: 6rem;
             box-sizing: border-box;
             padding: 3px;
@@ -91,8 +95,6 @@
             background-color: whitesmoke;
             border: 1px solid #ddd;
             text-align: center;
-            margin-right: 9px;
-            margin-bottom: 8px;
             border-radius: 15px;
             cursor: pointer;
         }
@@ -113,7 +115,7 @@
         }
 
         .dropdown-buttons {
-            height: 300px;
+            height: 263px;
             overflow-y: auto;
             overflow-x: hidden;
         }
@@ -276,6 +278,9 @@
         <div class="content">
             <div class="left-side">
                 <div class="Newsidebar">
+                    <div bis_skin_checked="1">
+                        <button class="btn btn-danger" onclick="window.history.back();">Back</button>
+                    </div>
                     <div class="dropdown-buttons">
                         <?php foreach ($categories as $category): ?>
                             <button class="dropdown-button"
@@ -400,7 +405,6 @@
                         <p>Discounted Total: <span id="discountedTotal">0</span></p>
                     </div>
                     <div class="buttons">
-                        <button class="btn btn-danger">Back</button><br>
                         <button class="btn btn-success" id="invoiceBtn">Invoice</button><br>
                         <button class="btn btn-primary" id="insertBtn">Invoice & Pay
                         </button>
@@ -770,6 +774,7 @@
             });
 
             $('.dropdown-button').click(function () {
+                $('.dropdown-button').removeClass('selected-category');
                 $(this).addClass('selected-category');
                 var categoryId = $(this).val();
                 filterServices(categoryId);

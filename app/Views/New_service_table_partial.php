@@ -8,14 +8,27 @@
         .item-list-container {
             width: 95%;
             margin-top: 10px;
-            overflow-y: hidden;
+            /* overflow-y: auto; */
         }
 
         .item-list {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            gap: 10px;
             height: 255px;
+        }
+
+        .item {
+            width: calc(33.33% - 10px);
+            height: 6rem;
+            box-sizing: border-box;
+            padding: 3px;
+            font-size: small;
+            background-color: whitesmoke;
+            border: 1px solid #ddd;
+            text-align: center;
+            border-radius: 15px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -32,8 +45,6 @@
             <?php endforeach; ?>
         </div>
     </div>
-    </div>
-
 </body>
 
 </html>
