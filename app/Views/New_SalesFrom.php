@@ -617,6 +617,14 @@
         </div>
     </div>
 
+    <div id="loading-overlay"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.8); z-index: 9999;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <div class="spinner-border text-primary" role="status">
+            </div>
+        </div>
+    </div>
+
     <script>
         var isExpiry = <?php echo json_encode($isExpiry); ?>;
         function calculateTotals() {
@@ -728,7 +736,6 @@
                 calculateTotals();
             });
 
-            // Event listener for quantity decrement
             $('#serviceTableBody').on('click', '.quantity-decrement', function () {
                 var input = $(this).siblings('.editable-quantity');
                 var value = parseInt(input.val(), 10);
@@ -738,7 +745,6 @@
                 }
             });
 
-            // Event listener for manual quantity input
             $('#serviceTableBody').on('input', '.editable-quantity', function () {
                 var value = parseInt($(this).val(), 10);
                 if (isNaN(value) || value < 1) {
@@ -809,6 +815,8 @@
             // attachItemHandlers();
 
             function insertData() {
+                $('#loading-overlay').show();
+
                 var clientId = $('select[name="clientName"]').val();
                 var clientName = $('select[name="clientName"] option:selected').text();
                 var paymentMethodOption = $('select[name="Payment"] option:selected');
@@ -899,13 +907,19 @@
                         $('#taxAmount').text('0');
                         $('#discountedTotal').text('0');
                         calculateTotals();
+
+                        $('#loading-overlay').hide();
+                        location.reload();
                     },
                     error: function (error) {
                         console.error('Error inserting data:', error);
+                        $('#loading-overlay').hide();
                     }
                 });
             }
             function submitInvoice() {
+                $('#loading-overlay').show();
+
                 var clientId = $('select[name="clientName"]').val();
                 var clientName = $('select[name="clientName"] option:selected').text();
                 var paymentMethodOption = $('select[name="Payment"] option:selected');
@@ -996,9 +1010,14 @@
                         $('#taxAmount').text('0');
                         $('#discountedTotal').text('0');
                         calculateTotals();
+
+                        $('#loading-overlay').hide();
+                        location.reload();
                     },
                     error: function (error) {
                         console.error('Error inserting data:', error);
+                        $('#loading-overlay').hide();
+
                     }
                 });
             }

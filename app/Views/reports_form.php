@@ -298,7 +298,7 @@
                             </div>
 
                             <div class="col-md-3 grid-margin stretch-card">
-                                <div class="card" onclick="window.location.href='<?= base_url('camp_details'); ?>';">
+                                <div class="card" onclick="window.location.href='<?= base_url('camp_report'); ?>';">
                                     <div class="card-body">
                                         <h4 class="card-title" style="text-align:center">Camp Details</h4>
                                         <div class="media">

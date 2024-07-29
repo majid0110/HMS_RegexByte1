@@ -216,12 +216,16 @@ class AppointmentModel extends Model
         $builder->join('client', 'client.idClient = appointment.clientID');
 
         if (!empty($doctor)) {
-            $builder->like('CONCAT(doctorprofile.FirstName, " ", doctorprofile.LastName)', $doctor);
+            $builder->groupStart()
+                ->like('CONCAT_WS(" ", doctorprofile.FirstName, doctorprofile.LastName)', $doctor)
+                ->groupEnd();
         }
+
 
         if (!empty($client)) {
             $builder->like('client.client', $client);
         }
+
 
         if (!empty($fromDate) && !empty($toDate)) {
             $builder->where('appointment.appointmentDate >=', $fromDate)
@@ -525,34 +529,7 @@ class AppointmentModel extends Model
     // }
 
 
-    // public function viewAppointmentDetails($appointmentID)
-    // {
-    //     return $this->db->table('appointment')
-    //         ->join('client', 'client.idClient = appointment.clientID')
-    //         ->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID')
-    //         ->join('specialization', 'specialization.s_id = doctorprofile.Specialization', 'left')
-    //         ->join('fee_type', 'fee_type.f_id = appointment.appointmentType', 'left')
-    //         ->join('labtest', 'labtest.appointmentId = appointment.appointmentID', 'left')
-    //         ->where('appointment.appointmentID', $appointmentID)
-    //         ->select('appointment.*, client.client as client, client.contact as contact, client.gender as gender, client.clientUniqueId as unique,client.clientUniqueId as clientUniqueId, doctorprofile.FirstName as doctorFirstName, doctorprofile.LastName as doctorLastName, specialization.specialization_N as Specialization, doctorprofile.ContactNumber as doctorContact, labtest.test_id as labTestId, labtest.fee as labTestFee, labtest.hospitalCharges as labHospitalCharges, fee_type.FeeType as AppointmentType')
-    //         ->get()
-    //         ->getResultArray();
-    // }
 
-    // public function viewAppointmentDetails($appointmentID)
-    // {
-    //     return $this->db->table('appointment')
-    //         ->join('client', 'client.idClient = appointment.clientID')
-    //         ->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID')
-    //         ->join('specialization', 'specialization.s_id = doctorprofile.Specialization', 'left')
-    //         ->join('fee_type', 'fee_type.f_id = appointment.appointmentType', 'left')
-    //         ->join('labtest', 'labtest.appointmentId = appointment.appointmentID', 'left')
-    //         ->join('labtestdetails', 'labtestdetails.labTestID = labtest.test_id', 'left')
-    //         ->where('appointment.appointmentID', $appointmentID)
-    //         ->select('appointment.*, client.client as client, client.contact as contact, client.gender as gender, client.clientUniqueId as unique, client.clientUniqueId as clientUniqueId, doctorprofile.FirstName as doctorFirstName, doctorprofile.LastName as doctorLastName, specialization.specialization_N as Specialization, doctorprofile.ContactNumber as doctorContact, labtest.test_id as labTestId, labtestdetails.labtest_id as labTestDetailsId, labtestdetails.testTypeID as testTypeId, labtestdetails.fee as labTestFee, labtestdetails.createdAT as labTestCreatedAt, labtest.hospitalCharges as labHospitalCharges, fee_type.FeeType as AppointmentType')
-    //         ->get()
-    //         ->getResultArray();
-    // }
     public function viewAppointmentDetails($appointmentID)
     {
         return $this->db->table('appointment')

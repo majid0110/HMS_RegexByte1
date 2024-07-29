@@ -215,11 +215,18 @@ $routes->get('/reports_form', 'ReportsController::reports_form');
 $routes->get('/appointment_report', 'ReportsController::appointment_report');
 $routes->post('appointment_report', 'ReportsController::appointment_report');
 
+$routes->get('/camp_report', 'ReportsController::camp_report');
+$routes->post('camp_report', 'ReportsController::camp_report');
+
+
 $routes->get('/lab_details', 'ReportsController::lab_details');
 $routes->post('/lab_details', 'ReportsController::lab_details');
 
 $routes->get('/generateExcelAppointments', 'ReportsController::generateExcelAppointments');
 $routes->post('generateExcelAppointments', 'ReportsController::generateExcelAppointments');
+
+$routes->post('generateExcelCampReport', 'ReportsController::generateExcelCampReport');
+
 //----------------------------------------------
 $routes->get('/lab_report', 'ReportsController::lab_report');
 $routes->post('lab_report', 'ReportsController::lab_report');

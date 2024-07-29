@@ -74,6 +74,8 @@ class AppointmentController extends Controller
 
         return view('OPD_form.php', $data);
     }
+
+
     public function viewAppointmentDetails($appointmentID)
     {
         $session = session();

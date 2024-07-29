@@ -11,7 +11,7 @@ use App\Models\TestModel;
 use App\Models\LoginModel;
 use App\Models\salesModel;
 use App\Models\ServicesModel;
-use App\Models\ConfigureModel;
+use App\Models\OpdModel;
 use CodeIgniter\CLI\Console;
 use App\Models\ClientModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -98,7 +98,56 @@ class ReportsController extends Controller
         return view('appointment_report', $data);
     }
 
-    public function generateExcelAppointments()
+
+    //------------------------------------Camp Appointment
+    public function camp_report()
+    {
+
+        $Model = new OpdModel();
+        $clientModel = new ClientModel();
+        $data['client_names'] = $clientModel->getClientNames();
+        $model = new DoctorModel();
+        $data['doctor_names'] = $model->getDoctorNames();
+        $model = new AppointmentModel();
+
+        $search = $this->request->getPost('search');
+        $doctor = $this->request->getPost('doctor');
+        $client = $this->request->getPost('client');
+        $fromDate = $this->request->getPost('fromDate');
+        $toDate = $this->request->getPost('toDate');
+
+        $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+        $perPage = 20;
+
+        $data['pager'] = $Model->getPager($search, $doctor, $client, $fromDate, $toDate, $perPage, $currentPage);
+
+        $data['Campdata'] = $Model->getCampDetails($search, $doctor, $client, $fromDate, $toDate, $perPage, ($currentPage - 1) * $perPage);
+
+        $data['totalHospitalCharges'] = $Model->getTotalCampcharges($doctor, $client, $fromDate, $toDate);
+        $data['totalFeeByClient'] = $Model->getTotalFeeByClient($client, $fromDate, $toDate);
+        $data['totalFeeByDateRange'] = $Model->getTotalFeeByDateRange($fromDate, $toDate);
+
+        if ($this->request->isAJAX()) {
+            try {
+                $tableContent = view('Camp_Report_Partial', $data);
+                return $this->response->setJSON([
+                    'success' => true,
+                    'tableContent' => $tableContent,
+                    // 'totalFeeByDoctor' => $data['totalFeeByDoctor'],
+                    // 'totalFeeByClient' => $data['totalFeeByClient'],
+                    'totalHospitalCharges' => $data['totalHospitalCharges'],
+                    'totalFeeByDateRange' => $data['totalFeeByDateRange'],
+                    'pager' => $data['pager']
+                ]);
+            } catch (\Exception $e) {
+                return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+            }
+        } else {
+            return view('camp_details', $data);
+        }
+    }
+
+    public function generateExcelCampReport()
     {
         $headerStyle = [
             'font' => ['bold' => true],
@@ -118,15 +167,15 @@ class ReportsController extends Controller
                 ],
             ],
         ];
-        $Model = new AppointmentModel();
+        $Model = new OpdModel();
         $search = $this->request->getPost('search');
         $doctor = $this->request->getPost('doctor');
         $client = $this->request->getPost('client');
         $fromDate = $this->request->getPost('fromDate');
         $toDate = $this->request->getPost('toDate');
-        $appointments = $Model->getAppointments($search, $doctor, $client, $fromDate, $toDate);
+        $campData = $Model->getCampDetails($search, $doctor, $client, $fromDate, $toDate);
 
-        if (empty($appointments)) {
+        if (empty($campData)) {
             return redirect()->back()->with('error', 'No data available to generate report.');
         }
 
@@ -135,12 +184,10 @@ class ReportsController extends Controller
 
         $session = \Config\Services::session();
         $businessName = session()->get('businessName');
-        $businessTypeName = $businessName;
-        $sheet->setCellValue('A1', 'Hospital Name: ' . $businessTypeName);
-        $sheet->mergeCells('A1:G1');
+        $sheet->setCellValue('A1', 'Hospital Name: ' . $businessName);
+        $sheet->mergeCells('A1:F1');
         $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
         $sheet->getStyle('A1')->applyFromArray($headerStyle);
-
 
         $generatedBy = session()->get('fName');
         $generatedDate = date('Y-m-d H:i:s');
@@ -149,10 +196,9 @@ class ReportsController extends Controller
         $sheet->setCellValue('D2', "Generated Date: $generatedDate");
         $sheet->getStyle('D2')->applyFromArray($headerStyle);
         $sheet->mergeCells('A2:C2');
-        $sheet->mergeCells('D2:G2');
+        $sheet->mergeCells('D2:F2');
         $sheet->getStyle('A2')->getAlignment()->setHorizontal('right');
         $sheet->getStyle('D2')->getAlignment()->setHorizontal('left');
-
 
         $filterRow = 3;
         if (!empty($doctor)) {
@@ -168,7 +214,7 @@ class ReportsController extends Controller
             $filterRow++;
         }
 
-        $headers = ['Client Name', 'Doctor Name', 'Appointment Type', 'Appointment Date', 'Doctor Fee', 'Hospital Fee', 'Total Fee'];
+        $headers = ['Client Name', 'Doctor Name', 'Appointment Type', 'Appointment Date', 'Fee', 'Total Fee'];
         foreach ($headers as $col => $header) {
             $cell = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($col + 1) . ($filterRow);
             $sheet->setCellValue($cell, $header);
@@ -178,34 +224,32 @@ class ReportsController extends Controller
         }
 
         $row = $filterRow + 1;
-        foreach ($appointments as $appointment) {
-            $sheet->setCellValue('A' . $row, $appointment['clientName']);
-            $sheet->setCellValue('B' . $row, $appointment['doctorFirstName'] . ' ' . $appointment['doctorLastName']);
-            $sheet->setCellValue('C' . $row, $appointment['appointmentTypeName']);
-            $sheet->setCellValue('D' . $row, $appointment['appointmentDate']);
-            $sheet->setCellValue('E' . $row, $appointment['appointmentFee']);
-            $sheet->setCellValue('F' . $row, $appointment['hospitalCharges']);
-            $sheet->setCellValue('G' . $row, $appointment['appointmentFee'] + $appointment['hospitalCharges']);
-            $sheet->getStyle('A' . $row . ':G' . $row)->applyFromArray($borderStyle);
+        foreach ($campData as $camp) {
+            $sheet->setCellValue('A' . $row, $camp['clientName']);
+            $sheet->setCellValue('B' . $row, $camp['doctorFirstName'] . ' ' . $camp['doctorLastName']);
+            $sheet->setCellValue('C' . $row, $camp['appointmentTypeName']);
+            $sheet->setCellValue('D' . $row, $camp['appointmentDate']);
+            $sheet->setCellValue('E' . $row, $camp['appointmentFee']);
+            $sheet->setCellValue('F' . $row, $camp['appointmentFee']);  // Assuming total fee is the same as appointment fee
+            $sheet->getStyle('A' . $row . ':F' . $row)->applyFromArray($borderStyle);
             $row++;
         }
 
-        foreach (range('A', 'G') as $col) {
+        foreach (range('A', 'F') as $col) {
             $sheet->getColumnDimension($col)->setAutoSize(true);
         }
         $lastRow = $row;
         $sheet->setCellValue('D' . $lastRow, 'Total Fee:');
         $sheet->setCellValue('E' . $lastRow, '=SUM(E4:E' . ($lastRow - 1) . ')');
         $sheet->setCellValue('F' . $lastRow, '=SUM(F4:F' . ($lastRow - 1) . ')');
-        $sheet->setCellValue('G' . $lastRow, '=SUM(G4:G' . ($lastRow - 1) . ')');
-        $sheet->getStyle('D' . $lastRow . ':G' . $lastRow)->applyFromArray($borderStyle);
-        $lastRowRange = 'D' . $lastRow . ':G' . $lastRow;
+        $sheet->getStyle('D' . $lastRow . ':F' . $lastRow)->applyFromArray($borderStyle);
+        $lastRowRange = 'D' . $lastRow . ':F' . $lastRow;
         $sheet->getStyle($lastRowRange)->applyFromArray($borderStyle);
-        foreach (range('D', 'G') as $col) {
+        foreach (range('D', 'F') as $col) {
             $sheet->getStyle($col . $lastRow)->applyFromArray($headerStyle);
         }
         $writer = new Xlsx($spreadsheet);
-        $filename = 'appointments_report.xlsx';
+        $filename = 'camp_report.xlsx';
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename=' . $filename);
@@ -214,43 +258,7 @@ class ReportsController extends Controller
         exit;
     }
 
-
-    //---------------------------------------- Services Report + Excel
-
-    // public function services_report()
-    // {
-    //     $clientModel = new ClientModel();
-    //     $data['client_names'] = $clientModel->getClientNames();
-
-    //     $sales = new SalesModel();
-    //     $data['payments'] = $sales->getpayment();
-
-    //     $Model = new ServicesModel();
-    //     $data['totalServiceFee'] = $Model->getTotalServicesFee();
-
-    //     $Model = new SalesModel();
-    //     //$data['totalServiceFee'] = $Model->gettotalServiceFee();
-
-    //     $search = $this->request->getPost('search');
-    //     $paymentInput = $this->request->getPost('paymentInput');
-    //     $clientName = $this->request->getPost('clientName');
-    //     $fromDate = $this->request->getPost('fromDate');
-    //     $toDate = $this->request->getPost('toDate');
-
-    //     $data['Sales'] = $Model->getSalesReport($search, $paymentInput, $clientName, $fromDate, $toDate);
-    //     if ($this->request->isAJAX()) {
-    //         try {
-    //             $tableContent = view('ReportService', $data);
-    //             return $this->response->setJSON(['success' => true, 'tableContent' => $tableContent]);
-    //         } catch (\Exception $e) {
-    //             return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
-    //         }
-    //     } else {
-    //         return view('services_report', $data);
-    //     }
-    // }
-
-
+    //------------------------------------ Service Report + Excel
     public function services_report()
     {
         $clientModel = new ClientModel();
