@@ -255,6 +255,8 @@ $routes->post('updateExpiry/(:num)', 'itemsController::updateExpiry/$1');
 $routes->get('transferItems', 'itemsController::transferItems');
 $routes->post('transferItems', 'itemsController::transferItems');
 $routes->get('progressStatus', 'itemsController::progressStatus');
+$routes->post('importExcel', 'itemsController::importExcel');
+$routes->get('downloadTemplate', 'itemsController::downloadTemplate');
 
 //-------------------------------------------------------------------------------------------------------------------------
 //                                                 items Routes
