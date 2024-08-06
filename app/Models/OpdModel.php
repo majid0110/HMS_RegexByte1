@@ -15,7 +15,7 @@ class OpdModel extends Model
         return $this->insert($data);
     }
 
-    public function getCampDetails($search = null, $doctor = null, $client = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
+    public function getCampDetails($search = null, $doctor = null, $client = null, $fromDate = null, $toDate = null, $reportType = null, $perPage = 20, $offset = 0)
     {
         $builder = $this->db->table('generalopd');
         $builder->join('doctorprofile', 'doctorprofile.DoctorID = generalopd.doctorID');
@@ -51,6 +51,10 @@ class OpdModel extends Model
                 ->where('generalopd.appointmentDate <=', $toDate);
         }
 
+        if ($reportType !== null && $reportType !== '') {
+            $builder->where('generalopd.isFreeCamp', $reportType);
+        }
+
         $builder->orderBy('generalopd.appointmentDate', 'DESC');
         $builder->limit($perPage, $offset);
 
@@ -58,7 +62,7 @@ class OpdModel extends Model
         return $query->getResultArray();
     }
 
-    public function getTotalCampcharges($doctor = null, $client = null, $fromDate = null, $toDate = null)
+    public function getTotalCampcharges($doctor = null, $client = null, $fromDate = null, $toDate = null, $reportType = null)
     {
         $builder = $this->db->table('generalopd');
         $builder->selectSum('appointmentFee', 'totalHospitalCharges');
@@ -77,6 +81,11 @@ class OpdModel extends Model
             $builder->where('generalopd.appointmentDate >=', $fromDate)
                 ->where('generalopd.appointmentDate <=', $toDate);
         }
+
+        if ($reportType !== null && $reportType !== '') {
+            $builder->where('generalopd.isFreeCamp', $reportType);
+        }
+
 
         $query = $builder->get();
         $result = $query->getRowArray();
@@ -168,5 +177,20 @@ class OpdModel extends Model
 
         $pagerLinks = $pager->makeLinks($currentPage, $perPage, $total, 'default_full');
         return $pagerLinks;
+    }
+
+    public function getLastOPDAppointmentNo($businessID)
+    {
+        $query = $this->select('appointmentNo')
+            ->where('businessID', $businessID)
+            ->orderBy('appointmentOPD', 'DESC')
+            ->limit(1)
+            ->get();
+        if ($query->getNumRows() > 0) {
+            $result = $query->getRow();
+            return $result->appointmentNo;
+        } else {
+            return 0;
+        }
     }
 }

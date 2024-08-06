@@ -121,7 +121,7 @@ class ConfigureController extends Controller
                 'idUserActive' => 0,
                 'size' => 0,
                 'idPoint_of_sale' => 1,
-                'booking_status' => 1
+                'booking_status' => 0 // 0  for free, and 1 for booked, 2 reserved
             ];
 
             $tableModel->insert($TableData);

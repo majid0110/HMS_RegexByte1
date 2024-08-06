@@ -20,7 +20,7 @@ $modulePermissions = $session->get('module_permissions');
             <?php
             $moduleID = $module['id'];
 
-            $isSalesModule = $module['module_name'] === 'sales-2';
+            $isSalesModule = $module['module_name'] === 'Pharmacy';
 
             $canView = $isSalesModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
             ?>

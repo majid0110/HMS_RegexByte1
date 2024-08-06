@@ -1112,6 +1112,7 @@
         var exchange = $('#exchangeInput').val();
         var totalFee = parseFloat($('#totalFee').text());
         var totalTax = parseFloat($('#taxAmount').text());
+        var discountedTotal = parseFloat($('#discountedTotal').text());
 
         // var quantity = parseFloat($('#quantityInput').val());
 
@@ -1123,6 +1124,9 @@
         // console.log("Currency: ", currency);
         // console.log("Exchange: ", exchange);
         // console.log("Total Fee: ", totalFee);
+
+        // console.log("Discounted Fee: ", discountedTotal);
+
 
         if (!clientId || isNaN(totalFee)) {
           alert('Invalid data for insertion.');
@@ -1146,7 +1150,7 @@
             expiryDate = '1970-01-01';
           }
 
-          console.log(services);
+          // console.log(services);
 
           services.push({
             serviceTypeId: serviceTypeId,
@@ -1174,6 +1178,7 @@
             exchange: exchange,
             totalFee: totalFee,
             totalTax: totalTax,
+            discountedTotal: discountedTotal,
             services: services
           },
           success: function (response) {
@@ -1222,6 +1227,8 @@
       var exchange = $('#exchangeInput').val();
       var totalFee = parseFloat($('#totalFee').text());
       var totalTax = parseFloat($('#taxAmount').text());
+      var discountedTotal = parseFloat($('#discountedTotal').text());
+
 
       if (!clientId || isNaN(totalFee)) {
         alert('Invalid data for insertion.');
@@ -1256,7 +1263,8 @@
           discount: discount,
           expiryDate: expiryDate,
           taxRate: taxRate,
-          calculatedTax: calculatedTax
+          calculatedTax: calculatedTax,
+          discountedTotal: discountedTotal
         });
       });
 

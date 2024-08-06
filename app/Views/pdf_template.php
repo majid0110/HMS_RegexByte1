@@ -53,7 +53,7 @@
             <td style="padding-left: 7% ;text-align: left;">Invoice# <b>
                     <?= $InvoiceNumber ?>
                 </b> </td>
-            <td style="padding-left:13%;text-align: right;">Patient Unique# <b>
+            <td style="padding-left:13%;text-align: right;">Patient MR# <b>
                     <?= $clientUnique ?>
                 </b> </td>
         </tr>

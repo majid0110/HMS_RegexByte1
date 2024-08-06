@@ -12,26 +12,26 @@ class SectorsModel extends Model
 
     public function getSectors()
     {
-        return $this->findAll(); // Retrieve all sectors from the database
+        return $this->findAll();
     }
 
     public function saveSector($data)
     {
-        return $this->insert($data); // Insert a new sector into the database
+        return $this->insert($data);
     }
 
     public function getSectorById($id)
     {
-        return $this->find($id); // Retrieve a sector by its ID
+        return $this->find($id);
     }
 
     public function updateSector($id, $data)
     {
-        return $this->update($id, $data); // Update a sector
+        return $this->update($id, $data);
     }
 
     public function deleteSector($id)
     {
-        return $this->delete($id); // Delete a sector
+        return $this->delete($id);
     }
 }

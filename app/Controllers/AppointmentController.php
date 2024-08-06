@@ -156,6 +156,7 @@ class AppointmentController extends Controller
         $clientModel = new ClientModel();
         $Age = $clientModel->getclientAge($businessID, $clientID);
         $Gender = $clientModel->getclientGender($businessID, $clientID);
+        $clientName = $clientModel->getclientName($businessID, $clientID);
         $clientUnique = $clientModel->getclientUnique($businessID, $clientID);
         $Model = new AppointmentModel();
         $InvoiceNumber = $Model->getinvoiceNumber($businessID, $appointmentID);
@@ -195,6 +196,7 @@ class AppointmentController extends Controller
         $appointmentModel = new AppointmentModel();
         $doctorModel = new DoctorModel();
         $businessModel = new LoginModel("business");
+        $Model = new OpdModel();
 
         $clientID = $this->request->getPost('clientId');
         $doctorID = $this->request->getPost('doctor_id');
@@ -213,7 +215,7 @@ class AppointmentController extends Controller
         $businessID = session()->get('businessID');
         // $charges = $session->get('hospitalcharges');
 
-        $lastAppointmentNo = $appointmentModel->getLastAppointmentNo($businessID);
+        $lastAppointmentNo = $Model->getLastOPDAppointmentNo($businessID);
         $appointmentNo = intval($lastAppointmentNo) + 1;
 
         $data = [
@@ -229,7 +231,7 @@ class AppointmentController extends Controller
             'businessID' => $businessID,
         ];
 
-        $Model = new OpdModel();
+
         $Model->saveOPDAppointment($data);
 
         $appointmentID = $appointmentModel->getInsertID();

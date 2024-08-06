@@ -115,15 +115,16 @@ class ReportsController extends Controller
         $client = $this->request->getPost('client');
         $fromDate = $this->request->getPost('fromDate');
         $toDate = $this->request->getPost('toDate');
+        $reportType = $this->request->getPost('reportType');
 
         $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
         $perPage = 20;
 
         $data['pager'] = $Model->getPager($search, $doctor, $client, $fromDate, $toDate, $perPage, $currentPage);
 
-        $data['Campdata'] = $Model->getCampDetails($search, $doctor, $client, $fromDate, $toDate, $perPage, ($currentPage - 1) * $perPage);
+        $data['Campdata'] = $Model->getCampDetails($search, $doctor, $client, $fromDate, $toDate, $reportType, $perPage, ($currentPage - 1) * $perPage);
 
-        $data['totalHospitalCharges'] = $Model->getTotalCampcharges($doctor, $client, $fromDate, $toDate);
+        $data['totalHospitalCharges'] = $Model->getTotalCampcharges($doctor, $client, $fromDate, $toDate, $reportType);
         $data['totalFeeByClient'] = $Model->getTotalFeeByClient($client, $fromDate, $toDate);
         $data['totalFeeByDateRange'] = $Model->getTotalFeeByDateRange($fromDate, $toDate);
 
@@ -167,13 +168,16 @@ class ReportsController extends Controller
                 ],
             ],
         ];
+
         $Model = new OpdModel();
         $search = $this->request->getPost('search');
         $doctor = $this->request->getPost('doctor');
         $client = $this->request->getPost('client');
         $fromDate = $this->request->getPost('fromDate');
         $toDate = $this->request->getPost('toDate');
-        $campData = $Model->getCampDetails($search, $doctor, $client, $fromDate, $toDate);
+        $reportType = $this->request->getPost('reportType'); // New reportType filter
+
+        $campData = $Model->getCampDetails($search, $doctor, $client, $fromDate, $toDate, $reportType);
 
         if (empty($campData)) {
             return redirect()->back()->with('error', 'No data available to generate report.');
@@ -213,6 +217,11 @@ class ReportsController extends Controller
             $sheet->setCellValue('A' . $filterRow, 'Filter by Date Range: ' . $fromDate . ' to ' . $toDate);
             $filterRow++;
         }
+        if ($reportType !== null && $reportType !== '') {
+            $reportTypeName = $reportType == '0' ? 'OPD' : 'Free Camp';
+            $sheet->setCellValue('A' . $filterRow, 'Filter by Report Type: ' . $reportTypeName);
+            $filterRow++;
+        }
 
         $headers = ['Client Name', 'Doctor Name', 'Appointment Type', 'Appointment Date', 'Fee', 'Total Fee'];
         foreach ($headers as $col => $header) {
@@ -238,16 +247,17 @@ class ReportsController extends Controller
         foreach (range('A', 'F') as $col) {
             $sheet->getColumnDimension($col)->setAutoSize(true);
         }
+
         $lastRow = $row;
         $sheet->setCellValue('D' . $lastRow, 'Total Fee:');
-        $sheet->setCellValue('E' . $lastRow, '=SUM(E4:E' . ($lastRow - 1) . ')');
-        $sheet->setCellValue('F' . $lastRow, '=SUM(F4:F' . ($lastRow - 1) . ')');
+        $sheet->setCellValue('E' . $lastRow, '=SUM(E' . ($filterRow + 1) . ':E' . ($lastRow - 1) . ')');
+        $sheet->setCellValue('F' . $lastRow, '=SUM(F' . ($filterRow + 1) . ':F' . ($lastRow - 1) . ')');
         $sheet->getStyle('D' . $lastRow . ':F' . $lastRow)->applyFromArray($borderStyle);
-        $lastRowRange = 'D' . $lastRow . ':F' . $lastRow;
-        $sheet->getStyle($lastRowRange)->applyFromArray($borderStyle);
+
         foreach (range('D', 'F') as $col) {
             $sheet->getStyle($col . $lastRow)->applyFromArray($headerStyle);
         }
+
         $writer = new Xlsx($spreadsheet);
         $filename = 'camp_report.xlsx';
 
@@ -257,6 +267,7 @@ class ReportsController extends Controller
         $writer->save('php://output');
         exit;
     }
+
 
     //------------------------------------ Service Report + Excel
     public function services_report()

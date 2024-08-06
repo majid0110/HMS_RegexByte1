@@ -12,6 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
     <style>
         .body {
             background-color: #007bff;
@@ -47,7 +48,7 @@
 
         .left-side {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             width: 50%;
         }
 
@@ -123,32 +124,24 @@
         .form-row {
             display: flex;
             justify-content: space-between;
-            /* Distributes space evenly */
             align-items: center;
-            /* Vertically centers items */
             margin-bottom: 10px;
-            /* Adds space between rows if needed */
         }
 
         .form-row .col {
             flex: 1;
-            /* Allows columns to grow and shrink */
             margin-right: 10px;
-            /* Space between columns */
         }
 
         .form-row .col:last-child {
             margin-right: 0;
-            /* Removes margin from the last column */
         }
 
         .form-row label {
             display: block;
             font-weight: bold;
             margin-bottom: 5px;
-            /* Space between label and input */
         }
-
 
         .dropdown-button {
             border: 1px solid #ccc;
@@ -179,52 +172,10 @@
             justify-content: space-between;
         }
 
-        .top-row {
-            display: flex;
-            margin-bottom: 10px;
-        }
-
-        .top-row .dropdown-container {
-            flex: 1;
-            margin-right: 10px;
-        }
-
-        .top-row .search-container {
-            flex: 3;
-            display: flex;
-            align-items: center;
-        }
-
-        .top-row .search-container input {
-            flex: 1;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 5px;
-        }
-
-        .top-row .search-container button {
-            border: none;
-            background-color: #00b5ad;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-
         .right-side {
             flex: 1;
             display: flex;
             flex-direction: column;
-        }
-
-        /* .table-container {
-            margin-bottom: 20px;
-        } */
-
-        .form-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
         }
 
         .form-row select,
@@ -242,13 +193,11 @@
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 20px;
-            /* flex: 1; */
             width: 60%;
             height: -webkit-fill-available;
         }
 
         .invoice-info p {
-            /* font-family: fantasy; */
             font-width: 900;
             font-size: larger;
         }
@@ -269,60 +218,91 @@
             margin: 0 5px;
         }
     </style>
+
 </head>
 
-<body
-    style="background-image: url('<?= $baseURL ?>uploads/defaults/bg2.jpg');  background-repeat: no-repeat; background-size: cover;">
+<body style="background: #153e4e47;  background-repeat: no-repeat; background-size: cover;">
 
     <div class="container-fluid">
         <div class="content">
             <div class="left-side">
-                <div class="Newsidebar">
-                    <div bis_skin_checked="1">
-                        <button class="btn btn-danger" onclick="window.history.back();">Back</button>
-                    </div>
-                    <div class="dropdown-buttons">
-                        <?php foreach ($categories as $category): ?>
-                            <button class="dropdown-button"
-                                value="<?= $category['idCatArt']; ?>"><?= $category['name']; ?></button>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-                <div class="search-container">
-                    <div>
-                        <input type="text" class="search-input" placeholder="Search...">
-                        <button class="search-button">Search</button>
-                    </div>
-                    <div class="item-list-container">
-                        <div class="item-list">
-                            <?php foreach ($services as $service):
-                                $businessID = session()->get('businessID');
-                                $serviceExpiries = $salesModel->getServiceExpiry($service['idArtMenu'], $businessID);
-                                ?>
-                                <div class="item" data-service-id="<?= $service['idArtMenu']; ?>"
-                                    data-service-price="<?= $service['Price']; ?>"
-                                    data-service-tax="<?= $service['idTVSH']; ?>"
-                                    data-has-expiry="<?= count($serviceExpiries) > 0 ? '1' : '0' ?>">
-                                    <div style="font-weight: bolder;"><?= $service['Name']; ?></div>
-                                    <div style="margin-bottom:auto; font-size: small;"><?= $service['Price']; ?> pkr</div>
-                                    <?php if (count($serviceExpiries) > 0): ?>
-                                        <select class="expiry-dropdown" style="display:none;">
-                                            <option value="">Select Expiry</option>
-                                            <?php foreach ($serviceExpiries as $expiry): ?>
-                                                <option value="<?= $expiry['expiryDate'] ?>">
-                                                    <?= date('Y-m-d', strtotime($expiry['expiryDate'])) ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    <?php endif; ?>
-                                </div>
+                <div class="top-row">
+                    <div class="Newsidebar">
+                        <div bis_skin_checked="1">
+                            <button class="btn btn-primary" onclick="window.history.back();">Back</button>
+                        </div>
+                        <div class="dropdown-buttons">
+                            <?php foreach ($categories as $category): ?>
+                                <button class="dropdown-button"
+                                    value="<?= $category['idCatArt']; ?>"><?= $category['name']; ?></button>
                             <?php endforeach; ?>
                         </div>
                     </div>
+                    <div class="search-container">
+                        <div>
+                            <input type="text" class="search-input" placeholder="Search...">
+                            <button class="search-button">Search</button>
+                        </div>
+                        <div class="item-list-container">
+                            <div class="item-list">
+                                <?php foreach ($services as $service):
+                                    $businessID = session()->get('businessID');
+                                    $serviceExpiries = $salesModel->getServiceExpiry($service['idArtMenu'], $businessID);
+                                    ?>
+                                    <div class="item" style="align-content: center;"
+                                        data-service-id="<?= $service['idArtMenu']; ?>"
+                                        data-service-price="<?= $service['Price']; ?>"
+                                        data-service-tax="<?= $service['idTVSH']; ?>"
+                                        data-has-expiry="<?= count($serviceExpiries) > 0 ? '1' : '0' ?>">
+                                        <div style="font-weight: bolder;"><?= $service['Name']; ?></div>
+                                        <div style="margin-bottom:auto; font-size: small;"><?= $service['Price']; ?> pkr
+                                        </div>
+                                        <?php if (count($serviceExpiries) > 0): ?>
+                                            <select class="expiry-dropdown" style="display:none;">
+                                                <option value="">Select Expiry</option>
+                                                <?php foreach ($serviceExpiries as $expiry): ?>
+                                                    <option value="<?= $expiry['expiryDate'] ?>">
+                                                        <?= date('Y-m-d', strtotime($expiry['expiryDate'])) ?>
+                                                    </option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
 
+                    </div>
                 </div>
-            </div>
+                <?php if ($isTable): ?>
+                    <div class="tables-container" style="margin-top: 20px;">
+                        <h4>Tables</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Status</th>
+                                        <th>Size</th>
+                                        <th>Booking Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($tables as $table): ?>
+                                        <tr>
+                                            <td><?= $table['name'] ?></td>
+                                            <td><?= $table['Status'] ?></td>
+                                            <td><?= $table['size'] ?></td>
+                                            <td><?= $table['booking_status'] ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <?php endif; ?>
 
+            </div>
             <div class="right-side">
                 <div class="table-container">
                     <table class="table table-bordered" id="serviceTable">
@@ -413,6 +393,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- ===================================================== -->
     <div class="modal fade" id="expenseModal" tabindex="-1" role="dialog" aria-labelledby="expenseModalLabel"

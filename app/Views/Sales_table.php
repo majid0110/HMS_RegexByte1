@@ -318,10 +318,11 @@
                                                     </td>
                                                     <td>
                                                         <a href="<?= base_url('viewServiceDetails/' . $Sale['idReceipts']); ?>"
-                                                            class="btn btn-info btn-sm">View Details</a> <a
-                                                            href="<?= base_url('deleteSales/' . $Sale['idReceipts']); ?>"
-                                                            onclick="return confirm('Are you sure you want to delete this
-                                                        Record?');" class="btn btn-danger btn-sm">Delete</a>
+                                                            class="btn btn-info btn-sm">View Details</a>
+                                                        <a href="<?= base_url('deleteSales/' . $Sale['idReceipts']); ?>"
+                                                            class="btn btn-danger btn-sm delete-button"
+                                                            data-id="<?= $Sale['idReceipts'] ?>"
+                                                            style="pointer-events: none; display: none;">Delete</a>
 
                                                     </td>
                                                 </tr>
@@ -349,6 +350,8 @@
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="./public/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
+
     <!-- End plugin js for this page -->
     <!-- inject:js -->
     <script src="./public/assets/js/off-canvas.js"></script>

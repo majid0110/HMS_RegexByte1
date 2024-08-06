@@ -8,7 +8,7 @@ class LabtestdetailsModel extends Model
 {
     protected $table = 'labtestdetails';
     protected $primaryKey = 'labtest_id';
-    protected $allowedFields = ['labTestID', 'testTypeID', 'fee', 'createdAT'];
+    protected $allowedFields = ['labTestID', 'testTypeID', 'fee', 'actual_fee', 'discount', 'createdAT'];
 
     // public function savedetails($responseData)
     // {

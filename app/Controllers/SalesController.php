@@ -245,6 +245,7 @@ class SalesController extends Controller
             $services = $this->request->getPost('services');
 
             $totalTax = $this->request->getPost('totalTax');
+            $discountedTotal = $this->request->getPost('discountedTotal');
 
             $session = \Config\Services::session();
             $businessID = $session->get('businessID');
@@ -270,7 +271,8 @@ class SalesController extends Controller
             $newInvoiceNumber = $lastInvoiceNumber ? $lastInvoiceNumber['invOrdNum'] + 1 : 1;
             $invoiceData = [
                 'idClient' => $clientId,
-                'Value' => $totalFee,
+                'Value' => $discountedTotal,
+                'actual_Value' => $totalFee,
                 'idTable' => 0,
                 'idUser' => $UserID,
                 'Status' => 'closed',
@@ -311,6 +313,7 @@ class SalesController extends Controller
                 $fee = (float) $service['fee'];
                 $sum = $quantity * $fee;
                 $discountedTotal -= ($sum * ($discount / 100));
+                $sum = $quantity * $discountedTotal;
 
                 $expiryDate = $service['expiryDate'];
                 $serviceData = [
@@ -318,7 +321,8 @@ class SalesController extends Controller
                     'Nr' => 0,
                     'idArtMenu' => $service['serviceTypeId'],
                     'Quantity' => $quantity,
-                    'Price' => $fee,
+                    'Price' => $discountedTotal,
+                    'actual_Price' => $fee,
                     'Sum' => $sum,
                     'idBusiness' => $businessID,
                     'IdTax' => 1,
@@ -516,6 +520,7 @@ class SalesController extends Controller
             $services = $this->request->getPost('services');
 
             $totalTax = $this->request->getPost('totalTax');
+            $discountedTotal = $this->request->getPost('discountedTotal');
 
             $session = \Config\Services::session();
             $businessID = $session->get('businessID');
@@ -541,7 +546,8 @@ class SalesController extends Controller
             $newInvoiceNumber = $lastInvoiceNumber ? $lastInvoiceNumber['invOrdNum'] + 1 : 1;
             $invoiceData = [
                 'idClient' => $clientId,
-                'Value' => $totalFee,
+                'Value' => $discountedTotal,
+                'actual_Value' => $totalFee,
                 'idTable' => 0,
                 'idUser' => $UserID,
                 'Status' => 'open',
@@ -589,7 +595,8 @@ class SalesController extends Controller
                     'Nr' => 0,
                     'idArtMenu' => $service['serviceTypeId'],
                     'Quantity' => $quantity,
-                    'Price' => $fee,
+                    'Price' => $discountedTotal,
+                    'actual_Price' => $fee,
                     'Sum' => $sum,
                     'idBusiness' => $businessID,
                     'IdTax' => 1,

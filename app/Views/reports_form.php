@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="./public/assets/vendors_s/select2/select2.min.css">
     <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="./public/assets/vendors_s/select2-bootstrap-theme/select2-bootstrap.min.css"> -->
     <style>
         /* Add this style to make the cursor change to a pointer when hovering over the card */
         .card {
@@ -237,41 +238,50 @@
                     <div class="row">
 
                         <?php if ($isHospital): ?>
+
                             <div class="col-md-3 grid-margin stretch-card">
                                 <div class="card" onclick="window.location.href='<?= base_url('appointment_report'); ?>';">
-                                    <div class="card-body">
+                                    <div class="card-body"
+                                        style="display: flex; flex-direction: column; align-items: center;">
                                         <h4 class="card-title" style="text-align:center">Appointment Report</h4>
                                         <div class="media">
-                                            <!-- <i class="ti-world icon-md text-info d-flex align-self-center"></i> -->
-                                            <svg style="margin: 0px auto" height="45px" width="45px"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                            </svg>
-
-                                            <div class="media-body">
-                                                <!-- Your content goes here -->
-                                            </div>
+                                            <i class="icon-lg mdi mdi mdi-calendar-clock"
+                                                style="height:45px; width:45px;"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3 grid-margin stretch-card">
+                                <div class="card" onclick="window.location.href='<?= base_url('camp_report'); ?>';">
+                                    <div class="card-body"
+                                        style="display: flex; flex-direction: column; align-items: center;">
+                                        <h4 class="card-title" style="text-align:center">General-OPD Report </h4>
+                                        <div class="media">
+                                            <i class="icon-lg mdi mdi-hospital" style="height:45px; width:45px;"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="col-md-3 grid-margin stretch-card">
+                                <div class="card" onclick="window.location.href='<?= base_url('camp_report'); ?>';">
+                                    <div class="card-body"
+                                        style="display: flex; flex-direction: column; align-items: center;">
+                                        <h4 class="card-title" style="text-align:center">Camp Details</h4>
+                                        <div class="media">
+                                            <i class="icon-lg mdi mdi-tent" style="height:45px; width:45px;"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="col-md-3 grid-margin stretch-card">
                                 <div class="card" onclick="window.location.href='<?= base_url('lab_report'); ?>';">
-                                    <div class="card-body">
+                                    <div class="card-body"
+                                        style="display: flex; flex-direction: column; align-items: center;">
                                         <h4 class="card-title" style="text-align:center">Lab Report</h4>
                                         <div class="media">
-                                            <!-- <i class="ti-world icon-md text-info d-flex align-self-start me-3"></i> -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" style="margin: 0px auto" fill="none"
-                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="45"
-                                                height="45">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
-                                            </svg>
-
-                                            <div class="media-body">
-                                            </div>
+                                            <i class="icon-lg mdi mdi-test-tube" style="height:45px; width:45px;"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -279,59 +289,26 @@
 
                             <div class="col-md-3 grid-margin stretch-card">
                                 <div class="card" onclick="window.location.href='<?= base_url('lab_details'); ?>';">
-                                    <div class="card-body">
+                                    <div class="card-body"
+                                        style="display: flex; flex-direction: column; align-items: center;">
                                         <h4 class="card-title" style="text-align:center">Lab Details</h4>
                                         <div class="media">
-
-                                            <svg style="margin: 0px auto" height="45px" width="45px"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75" />
-                                            </svg>
-
-                                            <div class="media-body">
-                                            </div>
+                                            <i class="icon-lg mdi mdi-file-document-box"
+                                                style="height:45px; width:45px;"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-3 grid-margin stretch-card">
-                                <div class="card" onclick="window.location.href='<?= base_url('camp_report'); ?>';">
-                                    <div class="card-body">
-                                        <h4 class="card-title" style="text-align:center">Camp Details</h4>
-                                        <div class="media">
-
-                                            <svg style="margin: 0px auto" height="45px" width="45px"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75" />
-                                            </svg>
-
-                                            <div class="media-body">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         <?php endif; ?>
 
                         <div class="col-md-3 grid-margin stretch-card">
                             <div class="card" onclick="window.location.href='<?= base_url('services_report'); ?>';">
-                                <div class="card-body">
+                                <div class="card-body"
+                                    style="display: flex; flex-direction: column; align-items: center;">
                                     <h4 class="card-title" style="text-align:center">Sales Report</h4>
                                     <div class="media">
-                                        <!-- <i class="ti-world icon-md text-info d-flex align-self-start me-3"></i> -->
-                                        <svg style="margin: 0px auto" height="45px" width="45px"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
-                                        </svg>
-                                        <div class="media-body">
-                                        </div>
+                                        <i class="icon-lg mdi mdi-sale" style="height:45px; width:45px;"></i>
                                     </div>
                                 </div>
                             </div>
@@ -339,18 +316,12 @@
 
                         <div class="col-md-3 grid-margin stretch-card">
                             <div class="card" onclick="window.location.href='<?= base_url('services_details'); ?>';">
-                                <div class="card-body">
+                                <div class="card-body"
+                                    style="display: flex; flex-direction: column; align-items: center;">
                                     <h4 class="card-title" style="text-align:center">Sales Details</h4>
                                     <div class="media">
-                                        <!-- <i class="ti-world icon-md text-info d-flex align-self-start me-3"></i> -->
-                                        <svg style="margin: 0px auto" height="45px" width="45px"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
-                                        </svg>
-                                        <div class="media-body">
-                                        </div>
+                                        <i class="icon-lg mdi mdi-file-document-box"
+                                            style="height:45px; width:45px;"></i>
                                     </div>
                                 </div>
                             </div>

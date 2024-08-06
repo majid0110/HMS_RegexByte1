@@ -14,7 +14,7 @@ use App\Models\InvoiceModel;
 use App\Models\InvoiceDetailsModel;
 use App\Models\ItemsInventoryModel;
 use App\Models\salesModel;
-use App\Models\LoginModel;
+use App\Models\TablesModel;
 use App\Models\ServicesModel;
 use App\Models\ConfigModel;
 use Mpdf\Mpdf;
@@ -45,6 +45,13 @@ class newSalesController extends Controller
         $businessID = session()->get('businessID');
         $config = $configModel->where('businessID', $businessID)->first();
         $data['isExpiry'] = $config ? $config['isExpiry'] : 0;
+        $data['isTable'] = $config ? $config['isTable'] : 0;
+
+
+        if ($data['isTable']) {
+            $tableModel = new TablesModel();
+            $data['tables'] = $tableModel->where('idBusiness', $businessID)->findAll();
+        }
 
         return view('New_SalesFrom.php', $data);
     }

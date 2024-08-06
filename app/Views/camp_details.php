@@ -130,27 +130,32 @@
                         <div class="card">
                             <div class="card-body">
                                 <form action="<?= base_url('generateExcelCampReport'); ?>" method="post">
-                                    <div class="form-group row">
-                                        <div>
-                                            <div
-                                                style="width:100%; display: flex; align-items: center; justify-content: flex-end; gap:10px">
-                                                <button type="submit" class="btn btn-primary text-white me-0"
-                                                    style="align-self: flex-end;color: white;background-color: #172D88;border-color: #172D88;height: 33px;font-size: 12px;font-weight: 500;box-sizing: border-box;border: 1px solid #CADDFF;padding: 8px 15px;border-radius: 6px;align-items: center;">
-                                                    <i class=" ti-download"></i>
-                                                    Export
-                                                </button>
-                                                <div class="col-md-3">
 
-                                                    <label>Search</label>
-                                                    <input class="form-control" type="text" name="search"
-                                                        id="searchInput" placeholder="Search">
-                                                </div>
-
-                                            </div>
-
+                                    <div class="form-group row" style="margin-bottom: 0;">
+                                        <div class="col-md-3">
+                                            <label>Report Type</label>
+                                            <select class="form-control" name="reportType" id="reportTypeInput">
+                                                <option value="">All</option>
+                                                <option value="0">OPD</option>
+                                                <option value="1">Free Camp</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-3">
+                                            <button type="submit" class="btn btn-primary text-white me-0"
+                                                style="margin-left:60%; margin-top: 13%;align-self: flex-end;color: white;background-color: #172D88;border-color: #172D88;height: 33px;font-size: 12px;font-weight: 500;box-sizing: border-box;border: 1px solid #CADDFF;padding: 8px 15px;border-radius: 6px;align-items: center;">
+                                                <i class=" ti-download"></i>
+                                                Export
+                                            </button>
                                         </div>
 
+                                        <div class="col-md-3">
+                                            <label>Search</label>
+                                            <input class="form-control" type="text" name="search" id="searchInput"
+                                                placeholder="Search">
+                                        </div>
                                     </div>
+
                                     <div class="form-group row">
                                         <div class="col-md-3">
                                             <label>By Doctor</label>
@@ -288,18 +293,20 @@
         <!-- inject:js -->
         <script>
             $(document).ready(function () {
-                $('#searchInput, #doctorInput, #clientInput, #fromDateInput, #toDateInput').on('input change', function () {
+                $('#searchInput, #doctorInput, #clientInput, #fromDateInput, #toDateInput, #reportTypeInput').on('input change', function () {
                     var searchValue = $('#searchInput').val();
                     var doctorValue = $('#doctorInput').val();
                     var clientValue = $('#clientInput').val();
                     var fromDateValue = $('#fromDateInput').val();
                     var toDateValue = $('#toDateInput').val();
+                    var reportTypeValue = $('#reportTypeInput').val();
 
                     console.log('Search Value:', searchValue);
                     console.log('Doctor Value:', doctorValue);
                     console.log('Client Value:', clientValue);
                     console.log('From Date Value:', fromDateValue);
                     console.log('To Date Value:', toDateValue);
+                    console.log('Report Type Value:', reportTypeValue);
 
                     $.ajax({
                         type: 'POST',
@@ -309,13 +316,13 @@
                             doctor: doctorValue,
                             client: clientValue,
                             fromDate: fromDateValue,
-                            toDate: toDateValue
+                            toDate: toDateValue,
+                            reportType: reportTypeValue
                         },
                         dataType: 'json',
                         success: function (response) {
                             if (response.success) {
                                 $('.table-responsive').html(response.tableContent);
-                                // $('#total-fee-by-doctor p').text(response.totalFeeByDoctor);
                                 $('#total-fee-by-doctor').text(response.totalFeeByDoctor);
                                 $('#total-hospital-fee').text(response.totalHospitalCharges);
                                 $('#total-fee-by-client p').text(response.totalFeeByClient);

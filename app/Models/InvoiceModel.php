@@ -12,6 +12,7 @@ class InvoiceModel extends Model
     protected $allowedFields = [
         'idClient',
         'Value',
+        'actual_Value',
         'idTable',
         'idUser',
         'Status',

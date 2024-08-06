@@ -690,8 +690,8 @@ class itemsController extends Controller
     //     }
     // }
 
-   
-   
+
+
     // public function transferItems()
     // {
     //     $session = \Config\Services::session();
@@ -877,11 +877,12 @@ class itemsController extends Controller
                         continue;
                     }
 
-                    $this->processItemRow($row, $itemsModel, $businessID);
 
-                    if ($importType === 'both') {
-                        $this->processServiceRow($row,$itemsModel, $servicesModel, $businessID);
-                    }
+                    $this->processItemRow($row, $itemsModel, $businessID, $importType);
+
+                    // if ($importType === 'both') {
+                    //     $this->processServiceRow($row, $itemsModel, $servicesModel, $businessID);
+                    // }
 
                     $processedRows++;
                     $progress = ($processedRows / $totalRows) * 100;
@@ -897,7 +898,7 @@ class itemsController extends Controller
         }
     }
 
-    private function processItemRow($row, $itemsModel, $businessID)
+    private function processItemRow($row, $itemsModel, $businessID, $importType)
     {
         $itemName = $row[2];
         $itemCode = $row[1];
@@ -952,7 +953,7 @@ class itemsController extends Controller
             } else {
                 $newCategory = [
                     'name' => $categoryName,
-                    'idSector' => 3,
+                    'idSector' => 1,
                     'notes' => null,
                     'idBusiness' => $businessID,
                 ];
@@ -989,12 +990,13 @@ class itemsController extends Controller
                 'Code' => $itemCode,
                 'idBusiness' => $businessID,
                 'status' => 'Active',
-                'isSendEmail' => 1,
+                'isSendEmail' => 0,
                 'isSendExpire' => 0,
             ];
 
             $insertedItemId = $itemsModel->insertItemWarehouse($formDataWarehouse);
         }
+
 
         $formDataInventory = [
             'idItem' => $insertedItemId,
@@ -1003,9 +1005,15 @@ class itemsController extends Controller
         ];
 
         $itemsModel->insertOrUpdateItemInventory($formDataInventory);
+
+        $servicesModel = new ServicesModel();
+
+        if ($importType === 'both') {
+            $this->processServiceRow($row, $itemsModel, $servicesModel, $businessID, $insertedItemId, $idUnit);
+        }
     }
 
-    private function processServiceRow($row, $itemsModel, $servicesModel, $businessID)
+    private function processServiceRow($row, $itemsModel, $servicesModel, $businessID, $insertedItemId, $idUnit)
     {
         $serviceName = $row[2];
         $serviceCode = $row[1];
@@ -1022,7 +1030,7 @@ class itemsController extends Controller
                 'idCatArt' => $existingService['idCatArt'],
                 'idTVSH' => $row[5],
                 'Cost' => $row[8],
-                'idUnit' => $row[7],
+                'idUnit' => $idUnit,
                 'Price' => $row[10],
                 'Product_mix' => $row[11],
                 'characteristic1' => $row[14] ?? null,
@@ -1030,9 +1038,9 @@ class itemsController extends Controller
                 'Code' => $serviceCode,
                 'idBusiness' => $businessID,
                 'status' => 'Active',
-                'noTvshType' => 1,
-                'idPoint_of_sale' => 0,
-                'isService' => 1,
+                'noTvshType' => '',
+                'idPoint_of_sale' => 1,
+                'isService' => 0,
             ];
 
             $servicesModel->updateService($insertedServiceId, $formDataWarehouse);
@@ -1059,7 +1067,7 @@ class itemsController extends Controller
                 'idCatArt' => $idCatArt,
                 'idTVSH' => $row[5],
                 'Cost' => $row[8],
-                'idUnit' => $row[7],
+                'idUnit' => $idUnit,
                 'Price' => $row[10],
                 'Product_mix' => $row[11],
                 'characteristic1' => $row[14] ?? null,
@@ -1067,13 +1075,21 @@ class itemsController extends Controller
                 'Code' => $serviceCode,
                 'idBusiness' => $businessID,
                 'status' => 'Active',
-                'noTvshType' => 1,
-                'idPoint_of_sale' => 0,
-                'isService' => 1,
+                'noTvshType' => '',
+                'idPoint_of_sale' => 1,
+                'isService' => 0,
             ];
 
-            return $this->response->setJSON(['success' => false, 'error' => 'sending this data', $formDataWarehouse]);
-            $servicesModel->insertService($formDataWarehouse);
+            $serviceID = $servicesModel->insertService($formDataWarehouse);
+
+            $rationData = [
+                'idArtMenu' => $serviceID,
+                'idItem' => $insertedItemId,
+                'ratio' => 1,
+                'idBusiness' => $businessID
+            ];
+
+            $servicesModel->linkItem($rationData);
         }
     }
 

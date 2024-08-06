@@ -14,6 +14,7 @@ class InvoiceDetailModel extends Model
         'idArtMenu',
         'Quantity',
         'Price',
+        'actual_Price',
         'Sum',
         'idBusiness',
         'IdTax',
@@ -35,14 +36,14 @@ class InvoiceDetailModel extends Model
     }
 
     public function getIdItemByIdArtMenu($idArtMenu, $idBusiness)
-{
-    $db = \Config\Database::connect();
-    $builder = $db->table('ratio');
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('ratio');
 
-    return $builder->select('idItem, ratio')
-        ->where('idArtMenu', $idArtMenu)
-        ->where('idBusiness', $idBusiness)
-        ->get()
-        ->getRowArray();
-}
+        return $builder->select('idItem, ratio')
+            ->where('idArtMenu', $idArtMenu)
+            ->where('idBusiness', $idBusiness)
+            ->get()
+            ->getRowArray();
+    }
 }

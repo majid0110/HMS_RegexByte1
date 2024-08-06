@@ -230,6 +230,8 @@ class LabController extends Controller
             $appointmentId = $this->request->getPost('appointmentId');
             $tests = $this->request->getPost('tests');
             $clientName = $this->request->getPost('clientName');
+            $totalDiscount = $this->request->getPost('totalDiscount');
+            $discountedTotal = $this->request->getPost('discountedTotal');
 
             $session = \Config\Services::session();
             $businessID = $session->get('businessID');
@@ -251,7 +253,8 @@ class LabController extends Controller
 
             $data = [
                 'testTypeId' => 2,
-                'fee' => $totalFee,
+                'fee' => $discountedTotal,
+                'actual_fee' => $totalFee,
                 'userId' => $UserID,
                 'businessId' => $businessID,
                 'hospitalCharges' => $hospitalcharges,
@@ -275,24 +278,20 @@ class LabController extends Controller
                     'labTestID' => $labtestId,
                     'testTypeID' => $test['testTypeId'],
                     'testName' => $test['testName'],
-                    'fee' => $test['fee'],
+                    'fee' => $test['fee'] * (1 - $test['discount'] / 100),
+                    'actual_fee' => $test['fee'],
+                    'discount' => $test['discount']
                 ];
 
                 $detailsModel->insert([
                     'labTestID' => $labtestId,
                     'testTypeID' => $test['testTypeId'],
-                    'fee' => $test['fee'],
+                    'fee' => $test['fee'] * (1 - $test['discount'] / 100),
+                    'actual_fee' => $test['fee'],
+                    'discount' => $test['discount']
                 ]);
             }
             $db->transCommit();
-
-            // $appointmentId = $this->request->getPost('appointmentId');
-            // if (empty ($appointmentId)) {
-            //     $appointment = 'Non';
-            // } else {
-            //     $appointment = $appointmentId;
-            // }
-
 
             if (empty($appointmentId)) {
                 $appointment = 'Non';
@@ -313,7 +312,6 @@ class LabController extends Controller
             }
 
             $clientID = $this->request->getPost('clientId');
-            //$appointment = $this->request->getPost('appointmentId');
             $clientModel = new ClientModel();
             $Age = $clientModel->getclientAge($businessID, $clientID);
             $Gender = $clientModel->getclientGender($businessID, $clientID);
@@ -329,6 +327,7 @@ class LabController extends Controller
             $pdfContent = view('pdf_labTest', [
                 'data' => $data,
                 'detailsData' => $detailsData,
+                'TotalDiscount' => $totalDiscount,
                 'Age' => $Age,
                 'clientName1' => $clientName1,
                 'appointment' => $appointment,

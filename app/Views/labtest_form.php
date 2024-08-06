@@ -425,6 +425,7 @@
                         <tr>
                           <th>Test Type</th>
                           <th>Test Fee</th>
+                          <th>Discount (%)</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
@@ -433,8 +434,10 @@
                     </table>
                   </div>
                 </div>
-                <div style="margin-left: 368px; font-weight: 900; font-size: 150px">
+                <div style="margin-left: 65%; font-weight: 900; font-size: 150px">
                   <p>Total Fee: <span id="totalFee">0</span></p>
+                  <p>Total Discount: <span id="totalDiscount">0</span></p>
+                  <p>Discounted Total: <span id="discountedTotal">0</span></p>
                 </div>
                 <div style="height: 58px; margin-left: 1.4em; font-weight: 900; font-size: 150px">
                   <!-- <button class="btn btn-primary btn-fw" id="insertBtn">Save</button> -->
@@ -529,27 +532,17 @@
               function addTestRow(testType, testTypeId, testFee) {
                 var newRow = '<tr><td data-test-type-id="' + testTypeId + '">' + testType + '</td>' +
                   '<td contenteditable="true" class="editable-fee">' + testFee + '</td>' +
+                  '<td contenteditable="true" class="editable-discount">0</td>' +
                   '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeTestRow(this)">Remove</button></td></tr>';
                 $('#testTableBody').append(newRow);
 
-                $('#testTableBody').off('input', '.editable-fee').on('input', '.editable-fee', function () {
+                $('#testTableBody').off('input', '.editable-fee, .editable-discount').on('input', '.editable-fee, .editable-discount', function () {
                   calculateTotalFee();
                 });
 
                 calculateTotalFee();
               }
 
-              // function addTest(testType, testTypeId) {
-              //   var testFee = $('#testTypeList li:contains(' + testType + ') .fee').text();
-              //   var existingRow = $('#testTableBody td:contains(' + testType + ')').closest('tr');
-
-              //   if (existingRow.length > 0) {
-              //     existingRow.find('.editable-fee').text(testFee);
-              //   } else {
-              //     addTestRow(testType, testTypeId, testFee);
-              //   }
-              //   calculateTotalFee();
-              // }
 
               function addTest(testType, testTypeId) {
                 var testRow = $('#testTypeList tr[data-test-type-id="' + testTypeId + '"]');
@@ -588,13 +581,13 @@
               });
 
               function addTestRow(testType, testTypeId, testFee) {
-
                 var newRow = '<tr><td data-test-type-id="' + testTypeId + '">' + testType + '</td>' +
                   '<td contenteditable="true" class="editable-fee">' + testFee + '</td>' +
+                  '<td contenteditable="true" class="editable-discount">0</td>' +
                   '<td><button class="btn btn-danger btn-sm remove-btn" onclick="removeTestRow(this)">Remove</button></td></tr>';
                 $('#testTableBody').append(newRow);
 
-                $('#testTableBody').off('input', '.editable-fee').on('input', '.editable-fee', function () {
+                $('#testTableBody').off('input', '.editable-fee, .editable-discount').on('input', '.editable-fee, .editable-discount', function () {
                   calculateTotalFee();
                 });
 
@@ -609,18 +602,25 @@
               });
 
 
-
               function calculateTotalFee() {
                 var totalFee = 0;
+                var totalDiscount = 0;
 
                 $('#testTableBody tr').each(function () {
                   var fee = parseFloat($(this).find('td:eq(1)').text());
-                  if (!isNaN(fee)) {
+                  var discount = parseFloat($(this).find('td:eq(2)').text());
+                  if (!isNaN(fee) && !isNaN(discount)) {
+                    var discountAmount = fee * (discount / 100);
                     totalFee += fee;
+                    totalDiscount += discountAmount;
                   }
                 });
 
+                var discountedTotal = totalFee - totalDiscount;
+
                 $('#totalFee').text(totalFee.toFixed(2));
+                $('#totalDiscount').text(totalDiscount.toFixed(2));
+                $('#discountedTotal').text(discountedTotal.toFixed(2));
               }
 
               $('#insertBtn').click(function () {
@@ -630,17 +630,13 @@
 
               function insertData() {
                 var clientId = $('#clientName').val();
-                var clientName = $('#clientName option:selected').text(); // Add this line
+                var clientName = $('#clientName option:selected').text();
                 var appointmentId = $('#appointment').val();
                 var totalFee = parseFloat($('#totalFee').text());
+                var totalDiscount = parseFloat($('#totalDiscount').text());
+                var discountedTotal = parseFloat($('#discountedTotal').text());
 
-                console.log('Client ID:', clientId);
-                console.log('Appointment ID:', appointmentId);
-                console.log('Total Fee:', totalFee);
-
-
-
-                if (!clientId || isNaN(totalFee)) {
+                if (!clientId || isNaN(totalFee) || isNaN(totalDiscount) || isNaN(discountedTotal)) {
                   alert('Invalid data for insertion.');
                   return;
                 }
@@ -651,15 +647,16 @@
                   var testTypeId = $(this).find('td:eq(0)').data('test-type-id');
                   var testName = $(this).find('td:eq(0)').text();
                   var fee = parseFloat($(this).find('td:eq(1)').text());
+                  var discount = parseFloat($(this).find('td:eq(2)').text());
 
                   tests.push({
                     testTypeId: testTypeId,
                     testName: testName,
                     fee: fee,
+                    discount: discount,
                     appointmentId: appointmentId
                   });
                 });
-
 
                 $.ajax({
                   method: 'POST',
@@ -670,31 +667,26 @@
                     clientName: clientName,
                     appointmentId: appointmentId,
                     totalFee: totalFee,
+                    totalDiscount: totalDiscount,
+                    discountedTotal: discountedTotal,
                     tests: tests
                   },
                   success: function (response) {
                     console.log('Data inserted successfully:', response);
-
-                    // Check if PDF content is present
                     if (response.pdfContent) {
-                      // Decode base64 and use the PDF content as needed
                       var decodedPdfContent = atob(response.pdfContent);
-
-                      // Create a Blob from the decoded PDF content
                       var blob = new Blob([new Uint8Array(decodedPdfContent.split('').map(function (c) {
                         return c.charCodeAt(0);
                       }))], {
                         type: 'application/pdf'
                       });
 
-                      // Create a download link and trigger the download
                       var link = document.createElement('a');
                       link.href = window.URL.createObjectURL(blob);
                       //   link.download = 'your_file_name.pdf'; // Specify the desired file name
                       link.click();
                     }
 
-                    // Continue with other actions as needed
                     $('#testTableBody').empty();
                     $('#totalFee').text('0');
                   },
