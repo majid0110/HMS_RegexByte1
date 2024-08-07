@@ -232,16 +232,16 @@ class AppointmentController extends Controller
         ];
 
 
-        $Model->saveOPDAppointment($data);
+        $appointmentID = $Model->saveOPDAppointment($data);
 
-        $appointmentID = $appointmentModel->getInsertID();
         $clientID = $this->request->getPost('clientId');
         $clientModel = new ClientModel();
         $Age = $clientModel->getclientAge($businessID, $clientID);
         $Gender = $clientModel->getclientGender($businessID, $clientID);
         $clientUnique = $clientModel->getclientUnique($businessID, $clientID);
+        $clientName = $clientModel->getclientName($businessID, $clientID);
         $Model = new AppointmentModel();
-        $InvoiceNumber = $Model->getinvoiceNumber($businessID, $appointmentID);
+        $InvoiceNumber = $Model->getOPDinvoiceNumber($businessID, $appointmentID);
         $specializationName = $Model->getDoctorSpecialization($doctorID);
         $operatorName = session()->get('fName');
 

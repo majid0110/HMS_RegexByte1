@@ -12,9 +12,21 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
     <style>
         .body {
             background-color: #007bff;
+        }
+
+        .selected-item {
+            background-color: blue !important;
+            border-color: blue !important;
+            color: white !important;
+        }
+
+        .selected-category {
+            background-color: blue !important;
+            color: white !important;
         }
 
         .table-container {
@@ -36,7 +48,7 @@
 
         .left-side {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             width: 50%;
         }
 
@@ -71,21 +83,19 @@
         .item-list {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            gap: 10px;
             height: 255px;
         }
 
         .item {
-            width: 31%;
+            width: calc(33.33% - 10px);
             height: 6rem;
             box-sizing: border-box;
             padding: 3px;
             font-size: small;
-            background-color: #b6b5bd;
+            background-color: whitesmoke;
             border: 1px solid #ddd;
             text-align: center;
-            margin-right: 9px;
-            margin-bottom: 8px;
             border-radius: 15px;
             cursor: pointer;
         }
@@ -106,7 +116,7 @@
         }
 
         .dropdown-buttons {
-            height: 300px;
+            height: 263px;
             overflow-y: auto;
             overflow-x: hidden;
         }
@@ -114,32 +124,24 @@
         .form-row {
             display: flex;
             justify-content: space-between;
-            /* Distributes space evenly */
             align-items: center;
-            /* Vertically centers items */
             margin-bottom: 10px;
-            /* Adds space between rows if needed */
         }
 
         .form-row .col {
             flex: 1;
-            /* Allows columns to grow and shrink */
             margin-right: 10px;
-            /* Space between columns */
         }
 
         .form-row .col:last-child {
             margin-right: 0;
-            /* Removes margin from the last column */
         }
 
         .form-row label {
             display: block;
             font-weight: bold;
             margin-bottom: 5px;
-            /* Space between label and input */
         }
-
 
         .dropdown-button {
             border: 1px solid #ccc;
@@ -159,7 +161,7 @@
         .Newsidebar button {
             width: 95%;
             margin-bottom: 6px;
-            background-color: #b6b5bd;
+            background-color: whitesmoke;
             border: none;
             padding: 8px;
             border-radius: 5px;
@@ -170,52 +172,10 @@
             justify-content: space-between;
         }
 
-        .top-row {
-            display: flex;
-            margin-bottom: 10px;
-        }
-
-        .top-row .dropdown-container {
-            flex: 1;
-            margin-right: 10px;
-        }
-
-        .top-row .search-container {
-            flex: 3;
-            display: flex;
-            align-items: center;
-        }
-
-        .top-row .search-container input {
-            flex: 1;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 5px;
-        }
-
-        .top-row .search-container button {
-            border: none;
-            background-color: #00b5ad;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-
         .right-side {
             flex: 1;
             display: flex;
             flex-direction: column;
-        }
-
-        /* .table-container {
-            margin-bottom: 20px;
-        } */
-
-        .form-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
         }
 
         .form-row select,
@@ -233,13 +193,11 @@
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 20px;
-            /* flex: 1; */
             width: 60%;
             height: -webkit-fill-available;
         }
 
         .invoice-info p {
-            /* font-family: fantasy; */
             font-width: 900;
             font-size: larger;
         }
@@ -260,56 +218,94 @@
             margin: 0 5px;
         }
     </style>
+
 </head>
 
-<body
-    style="background-image: url('<?= $baseURL ?>uploads/defaults/bg2.jpg');  background-repeat: no-repeat; background-size: cover;">
+<body style="background: #153e4e47;  background-repeat: no-repeat; background-size: cover;">
 
     <div class="container-fluid">
         <div class="content">
             <div class="left-side">
-                <div class="Newsidebar">
-                    <div class="dropdown-buttons">
-                        <?php foreach ($categories as $category): ?>
-                            <button class="dropdown-button"
-                                value="<?= $category['idCatArt']; ?>"><?= $category['name']; ?></button>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-                <div class="search-container">
-                    <div>
-                        <input type="text" placeholder="Search...">
-                        <button>Search</button>
-                    </div>
-                    <div class="item-list-container">
-                        <div class="item-list">
-                            <?php foreach ($services as $service):
-                                $businessID = session()->get('businessID');
-                                $serviceExpiries = $salesModel->getServiceExpiry($service['idArtMenu'], $businessID);
-                                ?>
-                                <div class="item" data-service-id="<?= $service['idArtMenu']; ?>"
-                                    data-service-price="<?= $service['Price']; ?>"
-                                    data-service-tax="<?= $service['idTVSH']; ?>"
-                                    data-has-expiry="<?= count($serviceExpiries) > 0 ? '1' : '0' ?>">
-                                    <div style="font-weight: bolder;"><?= $service['Name']; ?></div>
-                                    <div style="margin-bottom:auto; font-size: small;"><?= $service['Price']; ?> pkr</div>
-                                    <?php if (count($serviceExpiries) > 0): ?>
-                                        <select class="expiry-dropdown" style="display:none;">
-                                            <option value="">Select Expiry</option>
-                                            <?php foreach ($serviceExpiries as $expiry): ?>
-                                                <option value="<?= $expiry['expiryDate'] ?>">
-                                                    <?= date('Y-m-d', strtotime($expiry['expiryDate'])) ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    <?php endif; ?>
-                                </div>
+                <div class="top-row">
+                    <div class="Newsidebar">
+                        <div bis_skin_checked="1">
+                            <button class="btn btn-primary" onclick="window.history.back();">Back</button>
+                        </div>
+                        <div class="dropdown-buttons">
+                            <?php foreach ($categories as $category): ?>
+                                <button class="dropdown-button"
+                                    value="<?= $category['idCatArt']; ?>"><?= $category['name']; ?></button>
                             <?php endforeach; ?>
                         </div>
                     </div>
-                </div>
-            </div>
+                    <div class="search-container">
+                        <div>
+                            <input type="text" class="search-input" placeholder="Search...">
+                            <button class="search-button">Search</button>
+                        </div>
+                        <div class="item-list-container">
+                            <div class="item-list">
+                                <?php foreach ($services as $service):
+                                    $businessID = session()->get('businessID');
+                                    $serviceExpiries = $salesModel->getServiceExpiry($service['idArtMenu'], $businessID);
+                                    ?>
+                                    <div class="item" style="align-content: center;"
+                                        data-service-id="<?= $service['idArtMenu']; ?>"
+                                        data-service-price="<?= $service['Price']; ?>"
+                                        data-service-tax="<?= $service['idTVSH']; ?>"
+                                        data-has-expiry="<?= count($serviceExpiries) > 0 ? '1' : '0' ?>">
+                                        <div style="font-weight: bolder;"><?= $service['Name']; ?></div>
+                                        <div style="margin-bottom:auto; font-size: small;"><?= $service['Price']; ?> pkr
+                                        </div>
+                                        <?php if (count($serviceExpiries) > 0): ?>
+                                            <select class="expiry-dropdown" style="display:none;">
+                                                <option value="">Select Expiry</option>
+                                                <?php foreach ($serviceExpiries as $expiry): ?>
+                                                    <option value="<?= $expiry['expiryDate'] ?>">
+                                                        <?= date('Y-m-d', strtotime($expiry['expiryDate'])) ?>
+                                                    </option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
+                <?php if ($isTable): ?>
+                    <div class="tables-container" style="margin-top: 20px; margin-right: 20px;">
+                        <h4>Tables</h4>
+                        <div class="table-responsive" style="height:14rem;">
+                            <table class="table table-bordered table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Select</th>
+                                        <th>Name</th>
+                                        <th>Status</th>
+                                        <th>Size</th>
+                                        <th>Booking Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($tables as $table): ?>
+                                        <tr>
+                                            <td><input type="radio" name="select_table" value="<?= $table['idTables'] ?>">
+                                            </td>
+                                            <td><?= $table['name'] ?></td>
+                                            <td><?= $table['Status'] ?></td>
+                                            <td><?= $table['size'] ?></td>
+                                            <td><?= $table['booking_status'] ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+            </div>
             <div class="right-side">
                 <div class="table-container">
                     <table class="table table-bordered" id="serviceTable">
@@ -392,12 +388,223 @@
                         <p>Discounted Total: <span id="discountedTotal">0</span></p>
                     </div>
                     <div class="buttons">
-                        <button class="btn btn-danger">Back</button><br>
                         <button class="btn btn-success" id="invoiceBtn">Invoice</button><br>
                         <button class="btn btn-primary" id="insertBtn">Invoice & Pay
                         </button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===================================================== -->
+    <div class="modal fade" id="expenseModal" tabindex="-1" role="dialog" aria-labelledby="expenseModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="expenseModalLabel">Add Cient</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="pt-3" method="POST" action="<?php echo base_url() . "saveClientfromSales"; ?>"
+                        enctype="multipart/form-data">
+                        <p class="card-description">
+                            Personal info
+                        </p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Client Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="cName" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Client Contact</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="cphone" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Identification Type</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" name="idType" />
+                                        <option>CNIC</option>
+                                        <option>Passport</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Client CNIC</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="CNIC" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" name="cemail">Client Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" class="form-control" name="cemail" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" name="gender">Gender</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" name="gender" required />
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" name="age">Client Age</label>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" name="age" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="card-description">
+                            Other Details
+                        </p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Status</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" name="cstatus" required>
+                                            <option value="Active">Active</option>
+                                            <option value="Inactive">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Def</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="cdef" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Limit Expense</label>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" name="expense" Value="0.0" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Discount</label>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" Value="0.0" name="discount" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <!-- <label class="col-sm-3 col-form-label">Main Client</label>  -->
+                                    <!-- <div class="col-sm-9"> -->
+                                    <input type="checkbox" class="form-check-input" name="mclient"
+                                        style="    margin-left: 9rem; display=flex">
+                                    <span style="margin-left: 11rem;margin-top: -19px;">Main Client</span>
+                                    </input>
+                                    <!-- <label class="col-sm-3 col-form-label">Main Client</label>  -->
+                                </div>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+
+
+                        <p class="card-description">
+                            Address Details
+                        </p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Address</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="address" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">City</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="city" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">State</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" name='state'>
+                                            <option>Pakistan</option>
+                                            <option>Others</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Code</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="code" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add a submit button -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading-overlay"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.8); z-index: 9999;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <div class="spinner-border text-primary" role="status">
             </div>
         </div>
     </div>
@@ -434,49 +641,100 @@
             $('#discountedTotal').text(discountedTotal.toFixed(2));
         }
 
-        function addServiceRow(serviceId, serviceName, servicePrice, serviceTax) {
-            if ($(`#serviceTableBody tr[data-service-id="${serviceId}"]`).length > 0) {
-                alert('This item is already added.');
-                return;
-            }
-
-            var $item = $(`.item[data-service-id="${serviceId}"]`);
-            var hasExpiry = $item.data('has-expiry') === 1;
-            var expiryHtml = hasExpiry ? $item.find('.expiry-dropdown').clone().show().prop('outerHTML') : '-';
-
-            var rowHtml = `
-        <tr data-service-id="${serviceId}">
-            <td>${serviceName}</td>
-            <td contenteditable="true" class="editable-price">${servicePrice}</td>
-            <td><input type="number" class="editable-quantity" value="1" min="1"></td>
-            <td><input type="number" class="editable-discount" value="0" min="0" max="100"></td>
-            <td class="tax-rate">${serviceTax}</td>`;
-
-            if (isExpiry == 1) {
-                rowHtml += `<td>${expiryHtml}</td>`;
-            }
-
-            rowHtml += `<td><button class="delete-button">Delete</button></td>
-        </tr>`;
-
-            $('#serviceTableBody').append(rowHtml);
-
-            calculateTotals();
-        }
 
 
         $(document).ready(function () {
 
+            $('.search-input').on('keyup', function () {
+                var searchTerm = $(this).val().toLowerCase();
 
-            $(document).on('click', '.item', function () {
+                $('.item-list .item').each(function () {
+                    var itemName = $(this).find('div:first').text().toLowerCase();
+                    if (itemName.includes(searchTerm)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+
+            $('.search-button').on('click', function () {
+                var searchTerm = $('.search-input').val().toLowerCase();
+
+                $('.item-list .item').each(function () {
+                    var itemName = $(this).find('div:first').text().toLowerCase();
+                    if (itemName.includes(searchTerm)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+
+            function addServiceRow(serviceId, serviceName, servicePrice, serviceTax, expiryHtml) {
+                var expiryColumn = isExpiry == 1 ? `<td>${expiryHtml}</td>` : '';
+                var rowHtml = `
+    <tr data-service-id="${serviceId}">
+        <td>${serviceName}</td>
+        <td contenteditable="true" class="editable-price">${servicePrice}</td>
+        <td>
+            <div class="quantity-input" style="display: flex;flex-direction: row;justify-content: space-evenly;">
+                <span class="quantity-decrement btn btn-danger btn-sm" style="font-size: 17px;border-radius: 50%;">-</span>
+                <input type="text" class="editable-quantity form-control quantity-box" style="width: 40px; padding: 2%;" value="1">
+                <span class="quantity-increment btn btn-success btn-sm" style="border-radius: 50%; ">+</span>
+            </div>
+        </td>
+        <td><input type="number" class="editable-discount" value="0" min="0" max="100"></td>
+        <td class="tax-rate">${serviceTax}</td>
+        ${expiryColumn}
+        <td><button class="delete-button">Delete</button></td>
+    </tr>`;
+
+                $('#serviceTableBody').append(rowHtml);
+                calculateTotals();
+            }
+
+            $(document).off('click', '.item').on('click', '.item', function () {
+                $(this).toggleClass('selected-item');
+
                 var serviceId = $(this).data('service-id');
                 var serviceName = $(this).find('div:first').text();
                 var servicePrice = $(this).data('service-price');
                 var serviceTax = $(this).data('service-tax');
                 var hasExpiry = $(this).data('has-expiry') === 1;
-                var expiryOptions = hasExpiry ? $(this).find('.expiry-dropdown').html() : '';
+                var expiryHtml = hasExpiry ? $(this).find('.expiry-dropdown').clone().show().prop('outerHTML') : '-';
 
-                addServiceRow(serviceId, serviceName, servicePrice, serviceTax, hasExpiry, expiryOptions);
+                var existingRow = $(`#serviceTableBody tr[data-service-id="${serviceId}"]`);
+
+                if (existingRow.length > 0) {
+                    alert(`This item (ID: ${serviceId}) is already added.`);
+                } else {
+                    addServiceRow(serviceId, serviceName, servicePrice, serviceTax, expiryHtml);
+                }
+            });
+
+            $('#serviceTableBody').on('click', '.quantity-increment', function () {
+                var input = $(this).siblings('.editable-quantity');
+                var value = parseInt(input.val(), 10);
+                input.val(value + 1);
+                calculateTotals();
+            });
+
+            $('#serviceTableBody').on('click', '.quantity-decrement', function () {
+                var input = $(this).siblings('.editable-quantity');
+                var value = parseInt(input.val(), 10);
+                if (value > 1) {
+                    input.val(value - 1);
+                    calculateTotals();
+                }
+            });
+
+            $('#serviceTableBody').on('input', '.editable-quantity', function () {
+                var value = parseInt($(this).val(), 10);
+                if (isNaN(value) || value < 1) {
+                    $(this).val(1);
+                }
+                calculateTotals();
             });
 
             $('#serviceTableBody').on('click', '.delete-button', function () {
@@ -500,7 +758,14 @@
                 submitInvoice();
             });
 
+            $('.category-tab').click(function () {
+                $('.category-tab').removeClass('selected-category');
+                $(this).addClass('selected-category');
+            });
+
             $('.dropdown-button').click(function () {
+                $('.dropdown-button').removeClass('selected-category');
+                $(this).addClass('selected-category');
                 var categoryId = $(this).val();
                 filterServices(categoryId);
             });
@@ -521,19 +786,21 @@
                 });
             }
 
-            function attachItemHandlers() {
-                $('.item').click(function () {
-                    var serviceId = $(this).data('service-id');
-                    var serviceName = $(this).find('div:first').text();
-                    var servicePrice = $(this).data('service-price');
-                    var serviceTax = $(this).data('service-tax');
+            // function attachItemHandlers() {
+            //     $('.item').click(function () {
+            //         var serviceId = $(this).data('service-id');
+            //         var serviceName = $(this).find('div:first').text();
+            //         var servicePrice = $(this).data('service-price');
+            //         var serviceTax = $(this).data('service-tax');
 
-                    addServiceRow(serviceId, serviceName, servicePrice, serviceTax);
-                });
-            }
-            attachItemHandlers();
+            //         addServiceRow(serviceId, serviceName, servicePrice, serviceTax);
+            //     });
+            // }
+            // attachItemHandlers();
 
             function insertData() {
+                $('#loading-overlay').show();
+
                 var clientId = $('select[name="clientName"]').val();
                 var clientName = $('select[name="clientName"] option:selected').text();
                 var paymentMethodOption = $('select[name="Payment"] option:selected');
@@ -624,13 +891,19 @@
                         $('#taxAmount').text('0');
                         $('#discountedTotal').text('0');
                         calculateTotals();
+
+                        $('#loading-overlay').hide();
+                        location.reload();
                     },
                     error: function (error) {
                         console.error('Error inserting data:', error);
+                        $('#loading-overlay').hide();
                     }
                 });
             }
             function submitInvoice() {
+                $('#loading-overlay').show();
+
                 var clientId = $('select[name="clientName"]').val();
                 var clientName = $('select[name="clientName"] option:selected').text();
                 var paymentMethodOption = $('select[name="Payment"] option:selected');
@@ -721,9 +994,14 @@
                         $('#taxAmount').text('0');
                         $('#discountedTotal').text('0');
                         calculateTotals();
+
+                        $('#loading-overlay').hide();
+                        location.reload();
                     },
                     error: function (error) {
                         console.error('Error inserting data:', error);
+                        $('#loading-overlay').hide();
+
                     }
                 });
             }

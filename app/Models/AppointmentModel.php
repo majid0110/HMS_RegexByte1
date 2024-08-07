@@ -52,6 +52,15 @@ class AppointmentModel extends Model
             ->getRowArray()['appointmentNo'] ?? null;
     }
 
+    public function getOPDinvoiceNumber($businessID, $appointmentID)
+    {
+        return $this->db->table('generalopd')
+            ->where('businessID', $businessID)
+            ->where('appointmentOPD', $appointmentID)
+            ->select('appointmentNo')
+            ->get()
+            ->getRowArray()['appointmentNo'] ?? null;
+    }
     public function getDoctorSpecialization($doctorID)
     {
         return $this->db->table('doctorprofile')

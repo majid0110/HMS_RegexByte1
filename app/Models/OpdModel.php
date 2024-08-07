@@ -12,8 +12,10 @@ class OpdModel extends Model
 
     public function saveOPDAppointment($data)
     {
-        return $this->insert($data);
+        $this->insert($data);
+        return $this->InsertId();
     }
+
 
     public function getCampDetails($search = null, $doctor = null, $client = null, $fromDate = null, $toDate = null, $reportType = null, $perPage = 20, $offset = 0)
     {

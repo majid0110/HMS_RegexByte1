@@ -102,14 +102,26 @@ class ConfigureController extends Controller
         return redirect()->to(base_url('/config_settings'));
     }
 
+
     public function createTables()
     {
         $session = \Config\Services::session();
         $businessID = $session->get('businessID');
-        $noOfTables = $this->request->getPost('noOfTables');
+        $noOfTables = (int) $this->request->getPost('noOfTables');
         $tableModel = new TablesModel();
-        for ($i = 1; $i <= $noOfTables; $i++) {
 
+        $highestTable = $tableModel->select('name')
+            ->like('name', 'Table%')
+            ->orderBy('name', 'DESC')
+            ->first();
+
+        $start = 1;
+        if ($highestTable) {
+            $lastNumber = (int) filter_var($highestTable['name'], FILTER_SANITIZE_NUMBER_INT);
+            $start = $lastNumber + 1;
+        }
+
+        for ($i = $start; $i < $start + $noOfTables; $i++) {
             $TableData = [
                 'name' => 'Table' . $i,
                 'pozX' => 0,
@@ -121,13 +133,42 @@ class ConfigureController extends Controller
                 'idUserActive' => 0,
                 'size' => 0,
                 'idPoint_of_sale' => 1,
-                'booking_status' => 0 // 0  for free, and 1 for booked, 2 reserved
+                'booking_status' => 0 // 0 for free, 1 for booked, 2 reserved
             ];
 
             $tableModel->insert($TableData);
         }
 
-
         return redirect()->to(base_url('config_settings'));
     }
+
+
+    // public function createTables()
+    // {
+    //     $session = \Config\Services::session();
+    //     $businessID = $session->get('businessID');
+    //     $noOfTables = $this->request->getPost('noOfTables');
+    //     $tableModel = new TablesModel();
+    //     for ($i = 1; $i <= $noOfTables; $i++) {
+
+    //         $TableData = [
+    //             'name' => 'Table' . $i,
+    //             'pozX' => 0,
+    //             'pozY' => 0,
+    //             'Status' => 'Active',
+    //             'notes' => 'test',
+    //             'idBusiness' => $businessID,
+    //             'Def' => 0,
+    //             'idUserActive' => 0,
+    //             'size' => 0,
+    //             'idPoint_of_sale' => 1,
+    //             'booking_status' => 0 // 0  for free, and 1 for booked, 2 reserved
+    //         ];
+
+    //         $tableModel->insert($TableData);
+    //     }
+
+
+    //     return redirect()->to(base_url('config_settings'));
+    // }
 }

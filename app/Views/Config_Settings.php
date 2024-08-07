@@ -221,7 +221,7 @@
                         <div class="col-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Manage Expiry</h4>
+                                    <h4 class="card-title">Configuration</h4>
                                     <form method="POST" action="<?= base_url('updateConfig'); ?>">
                                         <input type="hidden" name="businessID"
                                             value="<?= session()->get('businessID'); ?>" />

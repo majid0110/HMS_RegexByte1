@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\TablesModel;
 use CodeIgniter\Controller;
 
 use Endroid\QrCode\QrCode;
@@ -243,6 +244,7 @@ class SalesController extends Controller
             $paymentMethodID = $this->request->getPost('paymentMethodId');
             $totalFee = $this->request->getPost('totalFee');
             $services = $this->request->getPost('services');
+            $selectedTableId = $this->request->getPost('selectedTableId');
 
             $totalTax = $this->request->getPost('totalTax');
             $discountedTotal = $this->request->getPost('discountedTotal');
@@ -273,7 +275,7 @@ class SalesController extends Controller
                 'idClient' => $clientId,
                 'Value' => $discountedTotal,
                 'actual_Value' => $totalFee,
-                'idTable' => 0,
+                'idTable' => $selectedTableId,
                 'idUser' => $UserID,
                 'Status' => 'closed',
                 'serial_number' => 0,
@@ -339,46 +341,6 @@ class SalesController extends Controller
                 $Model->subtractFromInventory($idArtMenu, $quantity, $businessID, $expiryDate);
             }
 
-            // foreach ($services as $service) {
-            //     $discount = $service['discount'];
-            //     $quantity = (int) $service['quantity'];
-            //     $fee = (float) $service['fee'];
-            //     $sum = $quantity * $fee;
-            //     $discountedTotal -= ($sum * ($discount / 100));
-
-            //     $expiryDate = $service['expiryDate'];
-            //     $serviceData = [
-            //         'idReceipts' => $idPayment,
-            //         'Nr' => 0,
-            //         'idArtMenu' => $service['serviceTypeId'],
-            //         'Quantity' => $quantity,
-            //         'Price' => $fee,
-            //         'Sum' => $sum,
-            //         'idBusiness' => $businessID,
-            //         'IdTax' => 1,
-            //         'ValueTax' => 0,
-            //         'idMag' => 1,
-            //         'name' => $service['serviceName'],
-            //         'idSummaryInvoice' => 0,
-            //         'Discount' => $discount,
-            //     ];
-            //     $invoiceDetailModel->insert($serviceData);
-
-            //     $idArtMenu = $service['serviceTypeId'];
-            //     $Model = new ItemsInventoryModel();
-            //     $ratioData = $Model->getRatio($idArtMenu, $businessID);
-
-            //     foreach ($ratioData as $data) {
-            //         $idItem = $data->idItem;
-            //         $ratio = $data->ratio;
-            //         $inventorySubtract = $quantity * $ratio;
-
-            //         // Subtracting inventory and expiry inventory for each item
-            //         $Model->subtractFromInventory($idItem, $inventorySubtract);
-            //         $Model->subtractFromExpiryInventory($idItem, $expiryDate, $inventorySubtract);
-            //     }
-            // }
-
             $paymentDetailsModel = new InvoiceDetailsModel();
             $paymentDetailsData = [
                 'value' => $totalFee,
@@ -403,6 +365,15 @@ class SalesController extends Controller
             //     'idPayment' => $idReceipt,
             // ]);
 
+            if ($selectedTableId !== null) {
+                $data = [
+                    'idUserActive' => $UserID,
+                    'booking_status' => 1
+                ];
+
+                $TModel = new TablesModel();
+                $TModel->updateStatus($selectedTableId, $data);
+            }
             $db->transCommit();
 
             $businessID = session()->get('businessID');

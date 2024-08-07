@@ -53,7 +53,7 @@
             <td style="padding-left: 7% ;text-align: left;">Invoice# <b>
                     <?= $InvoiceNumber ?>
                 </b> </td>
-            <td style="padding-left:13%;text-align: right;">Patient MR# <b>
+            <td style="padding-left:11%;text-align: right;">Patient MR# <b>
                     <?= $clientUnique ?>
                 </b> </td>
         </tr>
@@ -105,16 +105,16 @@
                 <td style=" width: 50%; white-space: nowrap;">Patient:<b>
                         <?= $clientName ?>
                     </b></td>
-                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Gender:<b>
+                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:7%;">Gender:<b>
                         <?= $Gender; ?>
                     </b></td>
             </tr>
             <tr>
-                <td style=" width: 50%; white-space: nowrap;text-align: left;padding-right:15px;">Age:<b>
+                <td style=" width: 50%; white-space: nowrap;text-align: left;padding-right:10px;">Age:<b>
                         <?= $Age; ?>
                     </b></td>
 
-                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Operator:<b>
+                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:7%;">Operator:<b>
                         <?= $operatorName; ?>
                     </b></td>
 
@@ -124,7 +124,7 @@
                 <td style=" width: 50%; white-space: nowrap;">Doctor:<b>
                         <?= $doctorName ?>
                     </b></td>
-                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Specialization:<b>
+                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:08%;">Specialization:<b>
                         <?= $specializationName; ?>
                     </b></td>
             </tr>
@@ -136,7 +136,7 @@
         <table>
             <tr>
                 <td><b>Appointment</b></td>
-                <td style="text-align: right;padding-left: 50%;"><b>Fee</b></td>
+                <td style="text-align: right;padding-left: 43%;"><b>Fee</b></td>
             </tr>
 
             <tr>
@@ -148,7 +148,7 @@
                 <td style="margin-left: 20px;">
                     <?= $appointmentTypeName; ?>
                 </td>
-                <td style="text-align: right;padding-left: 50%;">
+                <td style="text-align: right;padding-left: 43%;">
                     <?= $total ?>.00
                 </td>
             </tr>
@@ -167,7 +167,7 @@
             <tr>
                 <td style="text-align: left;">&nbsp;</td>
 
-                <td style="text-align:  right; padding-right:8px" colspan="2"><b>Total</b> PKR
+                <td style="text-align:  right; padding-right:20px" colspan="2"><b>Total</b> PKR
                     <?= $total ?>.00
                 </td>
             </tr>

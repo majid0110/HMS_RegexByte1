@@ -20,4 +20,11 @@ class TablesModel extends Model
         'idPoint_of_sale',
         'booking_status'
     ];
+
+    public function updateStatus($id, $data)
+    {
+        return $this->db->table($this->table)
+            ->where('idTables', $id)
+            ->update($data);
+    }
 }
