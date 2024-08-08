@@ -25,7 +25,7 @@ class ConfigureController extends Controller
         $configData = $configModel->getConfig($businessID);
 
         if (empty($configData)) {
-            $configData = ['isExpiry' => 0, 'isTable' => 0];
+            $configData = ['isExpiry' => 0, 'isTable' => 0, 'enableService' => 0];
         }
 
         return view('Config_Settings', ['configData' => $configData]);
@@ -93,10 +93,11 @@ class ConfigureController extends Controller
         $businessID = $this->request->getPost('businessID');
         $isExpiry = $this->request->getPost('isExpiry') ? 1 : 0;
         $isTable = $this->request->getPost('isTable') ? 1 : 0;
+        $enableService = $this->request->getPost('enableService') ? 1 : 0;
 
 
         $configModel = new ConfigModel();
-        $configModel->updateConfig($businessID, ['isExpiry' => $isExpiry, 'isTable' => $isTable]);
+        $configModel->updateConfig($businessID, ['isExpiry' => $isExpiry, 'isTable' => $isTable, 'enableService' => $enableService]);
 
         session()->setFlashdata('success', 'Configuration updated successfully!');
         return redirect()->to(base_url('/config_settings'));

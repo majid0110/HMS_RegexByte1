@@ -55,7 +55,7 @@
             <td style="padding-left: 7% ;text-align: left;">Invoice# <b>
                     <?= $InvoiceNumber; ?>
                 </b> </td>
-            <td style="padding-left:13%;text-align: right;">Patient Unique# <b>
+            <td style="padding-left:13%;text-align: right;">Patient MR# <b>
                     <?= $clientUnique; ?>
                 </b> </td>
         </tr>
@@ -150,7 +150,7 @@
                 <td style="text-align: left;"><b>Test</b></td>
                 <td style="text-align: right; padding-left:40%;"><b>Quantity</b></td>
                 <td style="text-align: right;padding-left:4%;"><b>Fee</b></td>
-                <td style="text-align: right;padding-left:4%;"><b>%</b></td>
+                <!-- <td style="text-align: right;padding-left:4%;"><b>%</b></td> -->
                 <td style="text-align: right;padding-left:4%;"><b>Total</b></td>
 
 
@@ -160,11 +160,13 @@
 
             if (!empty($detailsData)) {
                 foreach ($detailsData as $testItem) {
+                    $discount_value = ($testItem['actual_fee'] * $testItem['discount']) / 100;
+
                     echo '<tr>';
                     echo '<td style="margin-left: 10px; width: 50px;">' . $testItem['testName'] . '</td>';
                     echo '<td  style="text-align: right;padding-left:10%;">1</td>';
                     echo '<td style="text-align: right; padding-left:4%;">' . number_format($testItem['actual_fee'], 2) . '</td>';
-                    echo '<td style="text-align: right; padding-left:4%;">' . $testItem['discount'] . '</td>';
+                    // echo '<td style="text-align: right; padding-left:4%;">' . number_format($discount_value, 2) . '</td>';
                     echo '<td style="text-align: right; padding-left:4%;">' . number_format($testItem['fee'], 2) . '</td>';
 
                     echo '</tr>';
@@ -181,20 +183,20 @@
         <table style="width: 100%;">
             <tr>
                 <td style="width: 50%; text-align: left;">&nbsp;</td>
-                <td style="width: 25%; text-align: right; padding-right:6px;"><b>Total</b> PKR:
+                <td style="width: 100%; text-align: right; padding-right:6px;"><b>Total :</b>
                     <?= $data['actual_fee']; ?>.00
                 </td>
             </tr>
             <tr>
                 <td style="width: 50%; text-align: left;">&nbsp;</td>
-                <td style="width: 25%; text-align: right; padding-right:6px;"><b>Total Discount</b> PKR:
+                <td style="width: 100%; text-align: right; padding-right:6px;"><b>Total Discount :</b>
                     <?= $TotalDiscount; ?>.00
                 </td>
             </tr>
             <tr>
                 <td style="width: 50%; text-align: left;">&nbsp;</td>
 
-                <td style="width: 25%; text-align: right; padding-right:6px;"><b>Discounted Total</b> PKR:
+                <td style="width: 100%; text-align: right; padding-right:6px;"><b>Discounted Total :</b>
                     <?= $data['fee']; ?>.00
                 </td>
             </tr>

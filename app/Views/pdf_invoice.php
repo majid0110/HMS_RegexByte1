@@ -61,7 +61,7 @@
             <td style="padding-left: 7% ;text-align: left;">Invoice# <b>
                     <?= $InvoiceNumber ?>
                 </b> </td>
-            <td style="padding-left:13%;text-align: right;">
+            <td style="padding-left:7%;text-align: right;">
                 <?= $isHospital ? 'Patient Unique#' : 'Client Unique#' ?> <b>
                     <?= $clientUnique ?>
                 </b>
@@ -71,7 +71,7 @@
             <td style="padding-left: 7% ; text-align: left;">Date:<b>
                     <?= $date; ?>
                 </b></td>
-            <td style="padding-left: 11%;text-align: right;">Time:<b>
+            <td style="padding-left: 7%;text-align: right;">Time:<b>
                     <?= $time; ?>
                 </b></td>
         </tr>
@@ -119,20 +119,22 @@
                 <td style=" width: 50%; white-space: nowrap;"> <?= $isHospital ? 'Patient' : 'Client' ?><b>
                         <?= $clientName ?>
                     </b></td>
-                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Gender:<b>
+                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:7%; padding-right: 10px">
+                    Gender:<b>
                         <?= $Gender; ?>
                     </b></td>
             </tr>
             <tr>
                 <?php if ($isHospital): ?>
-                    <td style="width: 50%; white-space: nowrap; text-align: left; padding-right: 15px;">Age:<b>
+                    <td style="width: 50%; white-space: nowrap; text-align: left; padding-right: 5px;">Age:<b>
                             <?= $Age; ?>
                         </b>
                     </td>
                 <?php else: ?>
                     <td style="width: 50%;"></td>
                 <?php endif; ?>
-                <td style="width: 50%; white-space: nowrap; text-align: right; padding-left: 13%;">Operator:<b>
+                <td style="width: 50%; white-space: nowrap; text-align: right; padding-left: 7%; padding-right: 10px">
+                    Operator:<b>
                         <?= $operatorName; ?>
                     </b>
                 </td>
@@ -142,7 +144,8 @@
                 <td style=" width: 50%; white-space: nowrap;">PaymentMethod:<b>
                         <?= $paymentMethodName; ?>
                     </b></td>
-                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Currency:<b>
+                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:7%;padding-right: 10px">
+                    Currency:<b>
                         <?= $currencyName; ?>
                     </b></td>
             </tr>
@@ -153,14 +156,14 @@
         </table>
         <hr>
 
-        <table>
+        <table style="font-size: 18px;">
             <tr>
                 <td style="text-align: left;"><b>Service</b></td>
-                <td style="text-align: right;padding-left:40%;"><b>Fee</b></td>
-                <td style="text-align: right; padding-left:4%;"><b>Quantity</b></td>
-                <td style="text-align: right; padding-left:4%;"><b>Discount</b></td>
+                <td style="text-align: right;padding-left:25px;"><b>Fee</b></td>
+                <td style="text-align: right; padding-left:4px;"><b>Qty</b></td>
+                <!-- <td style="text-align: right; padding-left:4%;"><b>Discount</b></td> -->
                 <td style="text-align: right; padding-left:4%;"><b>Tax</b></td>
-                <td style="text-align: right;padding-left:4%;"><b>Total</b></td>
+                <td style="text-align: right;padding-left:4%; padding-right: 10px;"><b>Total</b></td>
             </tr>
 
             <?php
@@ -168,14 +171,14 @@
                 foreach ($services as $service) {
                     echo '<tr>';
                     echo '<td style="margin-left: 20px;">' . $service['serviceName'] . '</td>';
-                    echo '<td style="text-align: right; padding-left:40%;">' . number_format($service['fee'], 2) . '</td>';
-                    echo '<td style="text-align: right;padding-left:4%;">' . $service['quantity'] . '</td>';
+                    echo '<td style="text-align: right; padding-left:25px;">' . number_format($service['fee'], 2) . '</td>';
+                    echo '<td style="text-align: right;padding-left:4px;">' . $service['quantity'] . '</td>';
 
                     $discountAmount = ($service['fee'] * $service['discount']) / 100;
-                    echo '<td style="text-align: right;padding-left:4%;">' . number_format($discountAmount, 2) . '</td>';
+                    // echo '<td style="text-align: right;padding-left:4%;">' . number_format($discountAmount, 2) . '</td>';
                     echo '<td style="text-align: right;padding-left:4%;">' . number_format($service['calculatedTax'], 2) . '</td>';
 
-                    echo '<td style="text-align: right; padding-left:4%;">' . number_format((float) $service['fee'] * (float) $service['quantity'] - $discountAmount, 2) . '</td>';
+                    echo '<td style="text-align: right; padding-left:4%; padding-right: 10px;">' . number_format((float) $service['fee'] * (float) $service['quantity'] - $discountAmount, 2) . '</td>';
                     echo '</tr>';
                 }
             } else {
@@ -196,10 +199,10 @@
         }
         ?>
 
-        <table style="width: 100%;">
+        <table style="width: 100%; font-size: 20px;">
             <tr>
                 <td style="width: 50%; text-align: left;">&nbsp;</td>
-                <td style="width: 25%; text-align: right; padding-right:10px;"><b>Total</b> PKR:
+                <td style="width: 100%; text-align: right; padding-right:10px; font-size: 18px;"><b>Total :</b>
                     <?php
                     $totalAmount = 0;
                     foreach ($services as $service) {
@@ -211,27 +214,28 @@
             </tr>
             <tr>
                 <td style="width: 50%; text-align: left;">&nbsp;</td>
-                <td style="width: 25%; text-align: right; padding-right:10px;"><b>Discount</b>
-                    <?= $service['discount'] ?>%
-
+                <?php
+                $discountValue = ($service['fee'] * $service['discount']) / 100;
+                ?>
+                <td style="width: 100%; text-align: right; padding-right:10px; font-size: 18px;">
+                    <b>Discount :</b> <?= number_format($discountValue, 2) ?>
                 </td>
             </tr>
             <tr>
                 <td style="width: 50%; text-align: left;">&nbsp;</td>
-                <td style="width: 25%; text-align: right; padding-right:10px;"><b>Total Tax</b> PKR:
+                <td style="width: 100%; text-align: right; padding-right:10px; font-size: 18px;"><b>Total Tax :</b>
                     <?= number_format($totalTax, 2) ?>
                 </td>
             </tr>
             <tr>
-                <td style="width: 50%; text-align: left;">&nbsp;</td>
-                <td style="width: 25%; text-align: right; padding-right:10px;"><b>Discounted PKR</b>
+                <td style="width: 30%; text-align: left;">&nbsp;</td>
+                <td style="width: 110%; text-align: right; padding-right:10px; font-size: 18px;"><b>Receiving Amount
+                        :</b>
                     <?= number_format($discountedTotal + $totalTax, 2) ?>
-
-
                 </td>
             </tr>
-
         </table>
+
         <br>
 
 

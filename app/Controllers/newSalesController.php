@@ -22,10 +22,22 @@ use Mpdf\Mpdf;
 class newSalesController extends Controller
 {
     protected $db;
+    protected $enableService;
 
     public function __construct()
     {
         $this->db = \Config\Database::connect();
+
+        $configModel = new ConfigModel();
+        $businessID = session()->get('businessID');
+        $config = $configModel->where('businessID', $businessID)->first();
+        $data['isExpiry'] = $config ? $config['isExpiry'] : 0;
+        $data['isTable'] = $config ? $config['isTable'] : 0;
+        // $data['enableService'] = $config ? $config['enableService'] : 0;
+
+        $this->enableService = $config ? $config['enableService'] : 0;
+
+
     }
 
     public function New_SalesFrom()
@@ -34,19 +46,23 @@ class newSalesController extends Controller
 
         $clientModel = new ClientModel();
         $data['client_names'] = $clientModel->getClientNames();
+
         $sales = new salesModel();
         $data['payments'] = $sales->getpayment();
         $data['currencies'] = $sales->getCurrancy();
-        $data['services'] = $sales->getServices();
-        $data['categories'] = $sales->getCategories();
-        $data['salesModel'] = $sales;
 
         $configModel = new ConfigModel();
         $businessID = session()->get('businessID');
         $config = $configModel->where('businessID', $businessID)->first();
         $data['isExpiry'] = $config ? $config['isExpiry'] : 0;
         $data['isTable'] = $config ? $config['isTable'] : 0;
+        // $data['enableService'] = $config ? $config['enableService'] : 0;
 
+        $enableService = $this->enableService;
+
+        $data['services'] = $sales->getServices2($enableService);
+        $data['categories'] = $sales->getCategories();
+        $data['salesModel'] = $sales;
 
         if ($data['isTable']) {
             $tableModel = new TablesModel();
@@ -55,6 +71,7 @@ class newSalesController extends Controller
 
         return view('New_SalesFrom.php', $data);
     }
+
 
     public function filterServices()
     {
@@ -65,7 +82,11 @@ class newSalesController extends Controller
         }
 
         $model = new salesModel();
-        $data['services'] = $model->getServicesByCategory($categoryId);
+
+        $enableService = $this->enableService;
+
+        // $data['services'] = $sales->getServices2($enableService);
+        $data['services'] = $model->getServicesByCategory2($categoryId, $enableService);
         echo view('New_service_table_partial.php', $data);
     }
 

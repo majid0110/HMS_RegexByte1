@@ -244,7 +244,7 @@ class SalesController extends Controller
             $paymentMethodID = $this->request->getPost('paymentMethodId');
             $totalFee = $this->request->getPost('totalFee');
             $services = $this->request->getPost('services');
-            $selectedTableId = $this->request->getPost('selectedTableId');
+            $selectedTableId = $this->request->getPost('selectedTableId') ?? null;
 
             $totalTax = $this->request->getPost('totalTax');
             $discountedTotal = $this->request->getPost('discountedTotal');
@@ -493,6 +493,9 @@ class SalesController extends Controller
             $totalTax = $this->request->getPost('totalTax');
             $discountedTotal = $this->request->getPost('discountedTotal');
 
+            $selectedTableId = $this->request->getPost('selectedTableId') ?? null;
+
+
             $session = \Config\Services::session();
             $businessID = $session->get('businessID');
             $UserID = $session->get('ID');
@@ -519,7 +522,7 @@ class SalesController extends Controller
                 'idClient' => $clientId,
                 'Value' => $discountedTotal,
                 'actual_Value' => $totalFee,
-                'idTable' => 0,
+                'idTable' => $selectedTableId,
                 'idUser' => $UserID,
                 'Status' => 'open',
                 'serial_number' => 0,
@@ -584,6 +587,15 @@ class SalesController extends Controller
                 $Model->subtractFromInventory($idArtMenu, $quantity, $businessID, $expiryDate);
             }
 
+            if ($selectedTableId !== null) {
+                $data = [
+                    'idUserActive' => $UserID,
+                    'booking_status' => 1
+                ];
+
+                $TModel = new TablesModel();
+                $TModel->updateStatus($selectedTableId, $data);
+            }
 
 
             $db->transCommit();

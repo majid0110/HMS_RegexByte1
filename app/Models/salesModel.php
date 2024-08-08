@@ -46,6 +46,18 @@ class salesModel extends Model
             ->getResultArray();
     }
 
+    public function getServices2($enableService)
+    {
+        $builder = $this->db->table('artmenu')
+            ->select('idArtMenu, Name, Price, idCatArt, idTVSH')
+            ->where('status', 'Active');
+
+        if ($enableService != 1) {
+            $builder->where('isService', 0);
+        }
+
+        return $builder->get()->getResultArray();
+    }
     public function getServices()
     {
         return $this->db->table('artmenu')
@@ -54,7 +66,6 @@ class salesModel extends Model
             ->get()
             ->getResultArray();
     }
-
 
     public function getCategories()
     {
@@ -432,6 +443,21 @@ class salesModel extends Model
         }
         return $builder->get()->getResultArray();
     }
+
+    public function getServicesByCategory2($categoryId, $enableService)
+    {
+
+        $builder = $this->db->table('artmenu');
+        if ($categoryId !== null) {
+            $builder->where('idCatArt', $categoryId);
+        }
+        if ($enableService != 1) {
+            $builder->where('isService', 0);
+        }
+        return $builder->get()->getResultArray();
+
+    }
+
 
     public function getSalesReport($search = null, $paymentInput = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
     {

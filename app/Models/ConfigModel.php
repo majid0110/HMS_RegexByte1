@@ -7,7 +7,7 @@ class ConfigModel extends Model
 {
     protected $table = 'config';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['businessID', 'isExpiry', 'isTable'];
+    protected $allowedFields = ['businessID', 'isExpiry', 'isTable', 'enableService'];
 
     public function getConfig($businessID)
     {

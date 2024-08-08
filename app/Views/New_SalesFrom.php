@@ -12,6 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <style>
         .body {
@@ -273,7 +274,9 @@
 </head>
 
 <body style="background: #153e4e47;  background-repeat: no-repeat; background-size: cover;">
-
+    <div id="fullscreen-toggle" style="position: fixed; top: 0px; right: 5px; z-index: 9999; cursor: pointer;">
+        <i class="fas fa-expand" style="font-size: 10px; color: #007bff;"></i>
+    </div>
     <div class="container-fluid">
         <div class="content">
             <div class="left-side">
@@ -692,6 +695,32 @@
         }
 
 
+        function toggleFullScreen() {
+            if (!document.fullscreenElement &&
+                !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {  // current working methods
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.msRequestFullscreen) {
+                    document.documentElement.msRequestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) {
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) {
+                    document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                }
+                $('#fullscreen-toggle i').removeClass('fa-expand').addClass('fa-compress');
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
+                $('#fullscreen-toggle i').removeClass('fa-compress').addClass('fa-expand');
+            }
+        }
 
         $(document).ready(function () {
 
@@ -797,6 +826,8 @@
                 calculateTotals();
             });
 
+            $('#fullscreen-toggle').click(toggleFullScreen);
+
             $('#serviceTableBody').on('blur', '.editable-price', function () {
                 calculateTotals();
             });
@@ -871,6 +902,7 @@
                 var totalFee = parseFloat($('#totalFee').text());
                 var totalTax = parseFloat($('#taxAmount').text());
                 var discountedTotal = parseFloat($('#discountedTotal').text());
+                var selectedTableId = null;
 
 
                 if (!clientId || isNaN(totalFee)) {
@@ -938,6 +970,7 @@
                         totalFee: totalFee,
                         totalTax: totalTax,
                         services: services,
+                        selectedTableId: selectedTableId,
                         discountedTotal: discountedTotal
                     },
                     success: function (response) {
@@ -1110,6 +1143,7 @@
                 var totalFee = parseFloat($('#totalFee').text());
                 var totalTax = parseFloat($('#taxAmount').text());
                 var discountedTotal = parseFloat($('#discountedTotal').text());
+                var selectedTableId = null;
 
 
                 if (!clientId || isNaN(totalFee)) {
@@ -1164,6 +1198,7 @@
                         totalFee: totalFee,
                         totalTax: totalTax,
                         discountedTotal: discountedTotal,
+                        selectedTableId: selectedTableId,
                         services: services
                     },
                     success: function (response) {
