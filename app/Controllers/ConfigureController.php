@@ -21,6 +21,13 @@ class ConfigureController extends Controller
         $session = \Config\Services::session();
         $businessID = $session->get('businessID');
 
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/login"));
+        }
+
+        $Tmodel = new TablesModel();
+        $data['Tables'] = $Tmodel->getTables();
+
         $configModel = new ConfigModel();
         $configData = $configModel->getConfig($businessID);
 
@@ -28,20 +35,11 @@ class ConfigureController extends Controller
             $configData = ['isExpiry' => 0, 'isTable' => 0, 'enableService' => 0];
         }
 
-        return view('Config_Settings', ['configData' => $configData]);
+        return view('Config_Settings', [
+            'configData' => $configData,
+            'Tables' => $data['Tables']
+        ]);
     }
-
-
-    // public function config_settings()
-    // {
-    //     $session = \Config\Services::session();
-    //     $businessID = $session->get('businessID');
-
-    //     $configModel = new ConfigModel();
-    //     $configData = $configModel->getConfig($businessID);
-
-    //     return view('Config_Settings', ['configData' => $configData]);
-    // }
 
     public function config_form($businessTableID)
     {
@@ -104,27 +102,70 @@ class ConfigureController extends Controller
     }
 
 
+    // public function createTables()
+    // {
+    //     $session = \Config\Services::session();
+    //     $businessID = $session->get('businessID');
+    //     $noOfTables = (int) $this->request->getPost('noOfTables');
+    //     $tableModel = new TablesModel();
+
+    //     $highestTable = $tableModel->select('name')
+    //         ->like('name', 'Table%')
+    //         ->orderBy('name', 'DESC')
+    //         ->first();
+
+    //     $start = 1;
+    //     if ($highestTable) {
+    //         $lastNumber = (int) filter_var($highestTable['name'], FILTER_SANITIZE_NUMBER_INT);
+    //         $start = $lastNumber + 1;
+    //     }
+
+    //     for ($i = $start; $i < $start + $noOfTables; $i++) {
+    //         $TableData = [
+    //             'name' => 'Table' . $i,
+    //             'pozX' => 0,
+    //             'pozY' => 0,
+    //             'Status' => 'Active',
+    //             'notes' => 'test',
+    //             'idBusiness' => $businessID,
+    //             'Def' => 0,
+    //             'idUserActive' => 0,
+    //             'size' => 0,
+    //             'idPoint_of_sale' => 1,
+    //             'booking_status' => 0 // 0 for free, 1 for booked, 2 reserved
+    //         ];
+
+    //         $tableModel->insert($TableData);
+    //     }
+
+    //     return redirect()->to(base_url('config_settings'));
+    // }
+
+
     public function createTables()
     {
         $session = \Config\Services::session();
         $businessID = $session->get('businessID');
         $noOfTables = (int) $this->request->getPost('noOfTables');
+        $type = $this->request->getPost('type');
         $tableModel = new TablesModel();
 
-        $highestTable = $tableModel->select('name')
-            ->like('name', 'Table%')
+        $prefix = ($type === 'Room') ? 'Room' : 'Table';
+
+        $highestEntry = $tableModel->select('name')
+            ->like('name', $prefix . '%')
             ->orderBy('name', 'DESC')
             ->first();
 
         $start = 1;
-        if ($highestTable) {
-            $lastNumber = (int) filter_var($highestTable['name'], FILTER_SANITIZE_NUMBER_INT);
+        if ($highestEntry) {
+            $lastNumber = (int) filter_var($highestEntry['name'], FILTER_SANITIZE_NUMBER_INT);
             $start = $lastNumber + 1;
         }
 
         for ($i = $start; $i < $start + $noOfTables; $i++) {
-            $TableData = [
-                'name' => 'Table' . $i,
+            $data = [
+                'name' => $prefix . $i,
                 'pozX' => 0,
                 'pozY' => 0,
                 'Status' => 'Active',
@@ -137,39 +178,11 @@ class ConfigureController extends Controller
                 'booking_status' => 0 // 0 for free, 1 for booked, 2 reserved
             ];
 
-            $tableModel->insert($TableData);
+            $tableModel->insert($data);
         }
 
         return redirect()->to(base_url('config_settings'));
     }
 
 
-    // public function createTables()
-    // {
-    //     $session = \Config\Services::session();
-    //     $businessID = $session->get('businessID');
-    //     $noOfTables = $this->request->getPost('noOfTables');
-    //     $tableModel = new TablesModel();
-    //     for ($i = 1; $i <= $noOfTables; $i++) {
-
-    //         $TableData = [
-    //             'name' => 'Table' . $i,
-    //             'pozX' => 0,
-    //             'pozY' => 0,
-    //             'Status' => 'Active',
-    //             'notes' => 'test',
-    //             'idBusiness' => $businessID,
-    //             'Def' => 0,
-    //             'idUserActive' => 0,
-    //             'size' => 0,
-    //             'idPoint_of_sale' => 1,
-    //             'booking_status' => 0 // 0  for free, and 1 for booked, 2 reserved
-    //         ];
-
-    //         $tableModel->insert($TableData);
-    //     }
-
-
-    //     return redirect()->to(base_url('config_settings'));
-    // }
 }

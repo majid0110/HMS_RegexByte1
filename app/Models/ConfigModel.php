@@ -26,5 +26,7 @@ class ConfigModel extends Model
             $this->insert($data);
         }
     }
+
+
 }
 

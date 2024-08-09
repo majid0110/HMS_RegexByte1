@@ -164,4 +164,14 @@ class DoctorModel extends Model
     {
         $this->db->table('specialization')->insert($data);
     }
+
+    public function getdoctorName($businessID, $doctorID)
+    {
+        return $this->db->table($this->table)
+            ->where('BusinessID', $businessID)
+            ->where('DoctorID', $doctorID)
+            ->select('FirstName')
+            ->get()
+            ->getRowArray()['FirstName'] ?? null;
+    }
 }

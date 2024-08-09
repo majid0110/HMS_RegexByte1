@@ -451,112 +451,61 @@
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <!-- Include Select2 JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
-  <!-- Initialize Select2 -->
   <script>
-    // $(document).ready(function () {
-    //   $('.select2').select2();
-    // });
-
     $(document).ready(function () {
       $('.select2').select2({
         dropdownAutoWidth: true
       });
-    });
-  </script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-      var appointmentTypeSelect = document.getElementById('app_type_id');
-      var appointmentTypeNameInput = document.getElementById('appointmentTypeNameInput');
-
-      appointmentTypeSelect.addEventListener('change', function () {
-        var selectedOption = appointmentTypeSelect.options[appointmentTypeSelect.selectedIndex];
-        var appointmentTypeName = selectedOption.getAttribute('data-appointment-type');
-
-        appointmentTypeNameInput.value = appointmentTypeName;
-      });
-    });
-  </script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-      var clientIdSelect = document.getElementById('clientId');
-      var clientNameInput = document.getElementById('clientNameInput');
-
-
-      clientIdSelect.addEventListener('change', function () {
-        var selectedOption = clientIdSelect.options[clientIdSelect.selectedIndex];
-        var clientName = selectedOption.text;
-
-        clientNameInput.value = clientName;
-      });
-    });
-  </script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var doctorIdSelect = document.getElementById('doctor_id');
-      var doctorNameInput = document.getElementById('doctorNameInput');
-
-      doctorIdSelect.addEventListener('change', function () {
-        var selectedOption = doctorIdSelect.options[doctorIdSelect.selectedIndex];
-        var doctorName = selectedOption ? selectedOption.text : '';
-
-        doctorNameInput.value = doctorName;
-      });
-    });
-  </script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      $('#openAddClientModal').on('click', function () {
-        $('#addClientModal').modal('show');
-        e.preventDefault();
-      });
-    });
-  </script>
-
-  <script>
-    $(document).ready(function () {
 
       fetchDoctors();
 
       $('#doctor_id').change(function () {
         updateAppointmentFee();
+        updateDoctorNameInput();
       });
 
       $('#app_type_id').change(function () {
         updateAppointmentFee();
+        updateAppointmentTypeNameInput();
+      });
+
+      $('#clientId').change(function () {
+        updateClientNameInput();
+      });
+
+      $('#openAddClientModal').on('click', function (e) {
+        $('#addClientModal').modal('show');
+        e.preventDefault();
       });
 
       function updateAppointmentFee() {
         var doctorId = $('#doctor_id').val();
         var feeTypeId = $('#app_type_id').val();
 
-        $.ajax({
-          type: 'POST',
-          url: '<?= site_url('DoctorController/fetchDoctorFee') ?>',
-          data: {
-            doctorID: doctorId,
-            feeTypeID: feeTypeId
-          },
-          dataType: 'json',
-          success: function (response) {
-
-            $('#appointmentFee').val(response.fee);
-          },
-          error: function (error) {
-            console.log(error);
-          }
-        });
+        if (doctorId && feeTypeId) {
+          $.ajax({
+            type: 'POST',
+            url: '<?= site_url('DoctorController/fetchDoctorFee') ?>',
+            data: {
+              doctorID: doctorId,
+              feeTypeID: feeTypeId
+            },
+            dataType: 'json',
+            success: function (response) {
+              $('#appointmentFee').val(response.fee);
+            },
+            error: function (error) {
+              console.log(error);
+            }
+          });
+        } else {
+          $('#appointmentFee').val('');
+        }
       }
 
       function fetchDoctors() {
@@ -566,50 +515,60 @@
           dataType: 'json',
           success: function (response) {
             populateDoctors(response.doctors);
+            updateAppointmentFee();
           },
           error: function (error) {
             console.log(error);
           }
         });
       }
+
       function populateDoctors(doctors) {
         var doctorDropdown = $('#doctor_id');
         doctorDropdown.empty();
 
+        doctorDropdown.append('<option value="">Select a doctor</option>');
+
         doctors.forEach(function (doctor) {
           doctorDropdown.append('<option value="' + doctor.DoctorID + '">' + doctor.FirstName + ' ' + doctor.LastName + '</option>');
         });
-      } z
-    });
-  </script>
-  <script>
-    $(document).ready(function () {
-      $('.select2').select2();
-    });
-  </script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      function viewPdf(pdfContent) {
-        const byteCharacters = atob(pdfContent);
-        const byteNumbers = new Array(byteCharacters.length);
 
-        for (let i = 0; i < byteCharacters.length; i++) {
-          byteNumbers[i] = byteCharacters.charCodeAt(i);
-        }
-
-        const byteArray = new Uint8Array(byteNumbers);
-        const blob = new Blob([byteArray], { type: 'application/pdf' });
-
-        const newWindow = window.open();
-        newWindow.document.write('<iframe width="100%" height="100%" src="' + URL.createObjectURL(blob) + '"></iframe>');
+        doctorDropdown.trigger('change');
       }
+
+      function updateDoctorNameInput() {
+        var selectedOption = $('#doctor_id option:selected');
+        var doctorName = selectedOption.val() ? selectedOption.text() : 'None';
+        $('#doctorNameInput').val(doctorName);
+      }
+
+      function updateAppointmentTypeNameInput() {
+        var selectedOption = $('#app_type_id option:selected');
+        var appointmentTypeName = selectedOption.val() ? selectedOption.text() : 'None';
+        $('#appointmentTypeNameInput').val(appointmentTypeName);
+      }
+
+      function updateClientNameInput() {
+        var selectedOption = $('#clientId option:selected');
+        var clientName = selectedOption.text();
+        $('#clientNameInput').val(clientName);
+      }
+
+      updateDoctorNameInput();
+      updateAppointmentTypeNameInput();
+      updateClientNameInput();
+
+      $('#appointmentForm').submit(function (e) {
+        e.preventDefault();
+        submitForm();
+      });
 
       function submitForm() {
         var formData = new FormData($('#appointmentForm')[0]);
 
         $.ajax({
           type: 'POST',
-          url: '<?= site_url('AppointmentController/saveAppointment') ?>',
+          url: '<?= site_url('AppointmentController/saveOpdAppointment') ?>',
           data: formData,
           contentType: false,
           cache: false,
@@ -629,30 +588,38 @@
           }
         });
       }
-      $('#appointmentForm').submit(function (e) {
-        e.preventDefault();
-        submitForm();
-      });
 
-    });
-  </script>
+      function viewPdf(pdfContent) {
+        const byteCharacters = atob(pdfContent);
+        const byteNumbers = new Array(byteCharacters.length);
 
-  <script>
-    function showToast(message, type) {
-      const toastContainer = document.createElement('div');
-      toastContainer.classList.add('toast', type);
-      toastContainer.textContent = message;
-      document.body.appendChild(toastContainer);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
 
-      toastContainer.classList.add('show');
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: 'application/pdf' });
 
-      setTimeout(function () {
-        toastContainer.classList.remove('show');
+        const newWindow = window.open();
+        newWindow.document.write('<iframe width="100%" height="100%" src="' + URL.createObjectURL(blob) + '"></iframe>');
+      }
+
+      function showToast(message, type) {
+        const toastContainer = document.createElement('div');
+        toastContainer.classList.add('toast', type);
+        toastContainer.textContent = message;
+        document.body.appendChild(toastContainer);
+
+        toastContainer.classList.add('show');
+
         setTimeout(function () {
-          toastContainer.remove();
-        }, 300);
-      }, 5000);
-    }
+          toastContainer.classList.remove('show');
+          setTimeout(function () {
+            toastContainer.remove();
+          }, 300);
+        }, 5000);
+      }
+    });
   </script>
   <script src="./public/assets/vendors_s/js/vendor.bundle.base.js"></script>
   <!-- endinject -->

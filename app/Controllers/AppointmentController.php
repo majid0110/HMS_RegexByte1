@@ -245,6 +245,9 @@ class AppointmentController extends Controller
         $specializationName = $Model->getDoctorSpecialization($doctorID);
         $operatorName = session()->get('fName');
 
+        // $DoctorModel = new DoctorModel();
+        // $doctorName = $DoctorModel->getdoctorName($businessID, $doctorID);
+
         // $total = $doctorFee + $charges;
 
         $mpdf = new Mpdf();

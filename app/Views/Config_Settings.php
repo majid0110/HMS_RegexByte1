@@ -77,14 +77,52 @@
                                         <form method="POST" action="<?= base_url('createTables'); ?>">
                                             <input type="hidden" name="businessID"
                                                 value="<?= session()->get('businessID'); ?>" />
+
+                                            <div style="margin-top: 1rem;">
+                                                <label>Select Type:</label><br>
+                                                <input type="radio" id="table" name="type" value="Table" checked>
+                                                <label for="table">Table</label><br>
+                                                <input type="radio" id="room" name="type" value="Room">
+                                                <label for="room">Room</label>
+                                            </div>
+
                                             <div id="tableForm" style="margin-top: 1rem;">
-                                                <label for="noOfTables">Enter No of Tables:</label>
+                                                <label for="noOfTables">Enter No of Tables/Rooms:</label>
                                                 <input type="number" id="noOfTables" name="noOfTables" class="form-control">
                                             </div>
+
                                             <div style="margin-top: 2rem;">
                                                 <button type="submit" class="btn btn-primary btn-sm">Create</button>
                                             </div>
                                         </form>
+                                        <div class="table-responsive" style="hight: 10rem;">
+                                            <table class="table table-striped">
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Size</th>
+                                                    <th>Notes</th>
+                                                    <th>Status</th>
+
+                                                </tr>
+
+                                                <?php foreach ($Tables as $Table): ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?= $Table['name']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Table['size']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Table['notes']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Table['Status']; ?>
+                                                        </td>
+
+                                                    <?php endforeach; ?>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -19,13 +19,32 @@
             background-color: #007bff;
         }
 
+        .table-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.table-legend > div {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.table-legend span {
+    margin-right: 5px;
+}
         .table-list-container {
             width: 97%;
             margin-top: 10px;
             overflow-y: auto;
             height: 14rem;
         }
-
+        .table-item.selected .selection-indicator {
+    display: block !important;
+}
         .table-list {
             display: flex;
             flex-wrap: wrap;
@@ -39,10 +58,29 @@
             box-sizing: border-box;
             padding: 3px;
             font-size: small;
-            border: 1px solid #ddd;
+            /* border: 1px solid #ddd; */
             text-align: center;
             border-radius: 15px;
             transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .table-item.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
         }
 
         .table-item.selectable {
@@ -55,12 +93,17 @@
         }
 
         .table-item.selected {
-            border: 2px solid blue;
+            box-shadow: 0 0 0 2px #007bff;
         }
 
         .table-item.unselectable {
             opacity: 0.6;
             cursor: not-allowed;
+        }
+
+        .table-item[style*="border-color: red"] {
+            border-width: 2px;
+            border-style: solid;
         }
 
         .selected-item {
@@ -335,22 +378,34 @@
                         <h4>Tables</h4>
                         <div class="table-list-container">
                             <div class="table-list">
-                                <?php foreach ($tables as $table):
-                                    $bgColor = $table['booking_status'] == 1 ? 'red' : ($table['booking_status'] == 2 ? 'gray' : 'whitesmoke');
-                                    $isSelectable = $table['booking_status'] == 0 ? 'selectable' : 'unselectable';
-                                    ?>
-                                    <div class="table-item <?= $isSelectable ?>"
-                                        style="align-content: center; background-color: <?= $bgColor ?>;"
-                                        data-table-id="<?= $table['idTables']; ?>">
-                                        <div style="font-weight: bolder;"><?= $table['name']; ?></div>
-                                        <div style="margin-bottom:auto; font-size: small;">Size: <?= $table['size']; ?></div>
-                                        <div style="font-size: small;">Status: <?= $table['Status']; ?></div>
-                                        <input type="radio" name="select_table" value="<?= $table['idTables'] ?>"
-                                            style="display: none;">
-                                    </div>
-                                <?php endforeach; ?>
+                            <?php foreach ($tables as $table):
+    $borderColor = $table['booking_status'] == 1 ? 'red' : '';
+    $bgColor = $table['booking_status'] == 2 ? 'gray' : 'whitesmoke';
+    $isSelectable = $table['booking_status'] == 2 ? 'unselectable' : 'selectable';
+    ?>
+    <div class="table-item <?= $isSelectable ?>"
+         style="align-content: center; background-color: <?= $bgColor ?>; border-color: <?= $borderColor ?>;"
+         data-table-id="<?= $table['idTables']; ?>">
+        <div style="font-weight: bolder;"><?= $table['name']; ?></div>
+        <div style="margin-bottom:auto; font-size: small;">Size: <?= $table['size']; ?></div>
+        <div style="font-size: small;">Status: <?= $table['Status']; ?></div>
+        <div class="selection-indicator" style="display: none; position: absolute; top: 5px; right: 5px; color: #007bff;">✓</div>
+        <input type="radio" name="select_table" value="<?= $table['idTables'] ?>"
+               style="display: none;">
+    </div>
+<?php endforeach; ?>
+
+                               
                             </div>
                         </div>
+                        <div class="table-legend" style="margin-top: 10px;">
+    <div><span style="display: inline-block; width: 20px; height: 20px; background-color: whitesmoke; border: 1px solid #ccc;"></span> Available</div>
+    <div><span style="display: inline-block; width: 20px; height: 20px; border: 2px solid red;"></span> In Use (Selectable)</div>
+    <div><span style="display: inline-block; width: 20px; height: 20px; background-color: gray;"></span> Unavailable</div>
+    <div><span style="display: inline-block; width: 20px; height: 20px; box-shadow: 0 0 0 2px #007bff; position: relative;">
+        <span style="position: absolute; top: 0; right: 0; color: #007bff;">✓</span>
+    </span> Selected</div>
+</div>
                     </div>
                 <?php endif; ?>
 
@@ -856,12 +911,14 @@
                 filterServices(categoryId);
             });
 
-            $('.table-item.selectable').click(function () {
-                $('.table-item').removeClass('selected');
-                $(this).addClass('selected');
-                $(this).find('input[type="radio"]').prop('checked', true);
-            });
 
+            $('.table-item').click(function() {
+    if (!$(this).hasClass('unselectable')) {
+        $('.table-item').removeClass('selected');
+        $(this).addClass('selected');
+        $(this).find('input[type="radio"]').prop('checked', true);
+            }
+});
             function getSelectedTableId() {
                 return $('.table-item.selected').data('table-id');
             }

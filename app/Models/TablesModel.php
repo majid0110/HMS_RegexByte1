@@ -27,4 +27,16 @@ class TablesModel extends Model
             ->where('idTables', $id)
             ->update($data);
     }
+
+    public function getTables()
+    {
+        $businessId = session()->get('businessID');
+        $builder = $this->db->table($this->table);
+        $builder->where('idBusiness', $businessId);
+        $builder->where('Status', 'Active');
+        $builder->orderBy('idTables', 'DESC');
+        $result = $builder->get()->getResultArray();
+
+        return $result;
+    }
 }
