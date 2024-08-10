@@ -206,4 +206,17 @@ class InvoiceModel extends Model
             ->where('idReceipts', $idReceipts)
             ->update(['status' => $status]);
     }
+
+    public function getInvoices($tableId)
+    {
+        return $this->db->table('invoices')
+            ->select('client.client as client, invoices.Value as value, invoices.ValueTVSH as Tax, users.fName as user, invoices.invOrdNum as InvoiceOrder, invoices.idTable as Table')
+            ->join('client', 'client.idClient = invoices.idClient')
+            ->join('users', 'users.ID = invoices.idUser')
+            ->where('invoices.idTable', $tableId)
+            ->get()
+            ->getResult();
+    }
+
+
 }

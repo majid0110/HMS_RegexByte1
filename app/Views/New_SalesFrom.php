@@ -14,37 +14,63 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
     <style>
+        #summaryInvoiceTable {
+            width: 100%;
+        }
+
+        #summaryInvoiceTable th,
+        #summaryInvoiceTable td {
+            text-align: right;
+        }
+
+        #summaryInvoiceTable th:first-child,
+        #summaryInvoiceTable td:first-child {
+            text-align: left;
+        }
+
+        #summaryInvoiceTable tfoot {
+            font-weight: bold;
+        }
+
         .body {
             background-color: #007bff;
         }
 
         .table-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-    font-size: 0.9em;
-}
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
 
-.table-legend > div {
-    display: flex;
-    align-items: center;
-    margin-right: 15px;
-}
+        .table-legend>div {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
 
-.table-legend span {
-    margin-right: 5px;
-}
+        .table-legend span {
+            margin-right: 5px;
+        }
+
         .table-list-container {
+            padding-top: 2px;
+            padding-left: 5px;
             width: 97%;
             margin-top: 10px;
             overflow-y: auto;
             height: 14rem;
         }
+
         .table-item.selected .selection-indicator {
-    display: block !important;
-}
+            display: block !important;
+        }
+
         .table-list {
             display: flex;
             flex-wrap: wrap;
@@ -164,6 +190,8 @@
 
         .item-list-container {
             width: 95%;
+            padding-top: 3px;
+            padding-left: 5px;
             margin-top: 10px;
             overflow-y: auto;
         }
@@ -378,34 +406,43 @@
                         <h4>Tables</h4>
                         <div class="table-list-container">
                             <div class="table-list">
-                            <?php foreach ($tables as $table):
-    $borderColor = $table['booking_status'] == 1 ? 'red' : '';
-    $bgColor = $table['booking_status'] == 2 ? 'gray' : 'whitesmoke';
-    $isSelectable = $table['booking_status'] == 2 ? 'unselectable' : 'selectable';
-    ?>
-    <div class="table-item <?= $isSelectable ?>"
-         style="align-content: center; background-color: <?= $bgColor ?>; border-color: <?= $borderColor ?>;"
-         data-table-id="<?= $table['idTables']; ?>">
-        <div style="font-weight: bolder;"><?= $table['name']; ?></div>
-        <div style="margin-bottom:auto; font-size: small;">Size: <?= $table['size']; ?></div>
-        <div style="font-size: small;">Status: <?= $table['Status']; ?></div>
-        <div class="selection-indicator" style="display: none; position: absolute; top: 5px; right: 5px; color: #007bff;">✓</div>
-        <input type="radio" name="select_table" value="<?= $table['idTables'] ?>"
-               style="display: none;">
-    </div>
-<?php endforeach; ?>
+                                <?php foreach ($tables as $table):
+                                    $borderColor = $table['booking_status'] == 1 ? 'red' : '';
+                                    $bgColor = $table['booking_status'] == 2 ? 'gray' : 'whitesmoke';
+                                    $isSelectable = $table['booking_status'] == 2 ? 'unselectable' : 'selectable';
+                                    ?>
+                                    <div class="table-item <?= $isSelectable ?>"
+                                        style="align-content: center; background-color: <?= $bgColor ?>; border-color: <?= $borderColor ?>;"
+                                        data-table-id="<?= $table['idTables']; ?>">
+                                        <div style="font-weight: bolder;"><?= $table['name']; ?></div>
+                                        <div style="margin-bottom:auto; font-size: small;">Size: <?= $table['size']; ?></div>
+                                        <div style="font-size: small;">Status: <?= $table['Status']; ?></div>
+                                        <div class="selection-indicator"
+                                            style="display: none; position: absolute; top: 5px; right: 5px; color: #007bff;">✓
+                                        </div>
+                                        <input type="radio" name="select_table" value="<?= $table['idTables'] ?>"
+                                            style="display: none;">
+                                    </div>
+                                <?php endforeach; ?>
 
-                               
+
                             </div>
                         </div>
                         <div class="table-legend" style="margin-top: 10px;">
-    <div><span style="display: inline-block; width: 20px; height: 20px; background-color: whitesmoke; border: 1px solid #ccc;"></span> Available</div>
-    <div><span style="display: inline-block; width: 20px; height: 20px; border: 2px solid red;"></span> In Use (Selectable)</div>
-    <div><span style="display: inline-block; width: 20px; height: 20px; background-color: gray;"></span> Unavailable</div>
-    <div><span style="display: inline-block; width: 20px; height: 20px; box-shadow: 0 0 0 2px #007bff; position: relative;">
-        <span style="position: absolute; top: 0; right: 0; color: #007bff;">✓</span>
-    </span> Selected</div>
-</div>
+                            <div><span
+                                    style="display: inline-block; width: 20px; height: 20px; background-color: whitesmoke; border: 1px solid #ccc;"></span>
+                                Available</div>
+                            <div><span
+                                    style="display: inline-block; width: 20px; height: 20px; border: 2px solid red;"></span>
+                                In Use (Selectable)</div>
+                            <div><span
+                                    style="display: inline-block; width: 20px; height: 20px; background-color: gray;"></span>
+                                Unavailable</div>
+                            <div><span
+                                    style="display: inline-block; width: 20px; height: 20px; box-shadow: 0 0 0 2px #007bff; position: relative;">
+                                    <span style="position: absolute; top: 0; right: 0; color: #007bff;">✓</span>
+                                </span> Selected</div>
+                        </div>
                     </div>
                 <?php endif; ?>
 
@@ -495,8 +532,13 @@
                         <button class="btn btn-success" id="invoiceBtn">Invoice</button><br>
                         <button class="btn btn-primary" id="insertBtn">Invoice & Pay
                         </button><br>
-                        <button class="btn btn-primary" id="orderBtn">Order</button>
+                        <!-- <button class="btn btn-primary" id="orderBtn">Order</button> -->
+
                     </div>
+                </div>
+                <div>
+                    <button class="btn btn-primary" id="orderBtn">Order</button>
+                    <button class="btn btn-primary" id="summaryBtn">Summary Invoice</button>
                 </div>
             </div>
         </div>
@@ -702,6 +744,53 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ===================================================== -->
+    <div class="modal fade" id="summaryInvoiceModal" tabindex="-1" role="dialog"
+        aria-labelledby="summaryInvoiceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="summaryInvoiceModalLabel">Summary Invoice</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <p> Table Name :</p>
+                        <table class="table table-bordered" id="summaryInvoiceTable">
+                            <thead>
+                                <tr>
+                                    <th>Invoice No</th>
+                                    <th>Client ID</th>
+                                    <th>User ID</th>
+                                    <th>Value</th>
+                                    <th>TVSH</th>
+                                    <th>Table</th>
+                                </tr>
+                            </thead>
+                            <tbody id="summaryInvoiceTableBody">
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Total</th>
+                                    <th id="totalValue">0</th>
+                                    <th id="totalTVSH">0</th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="summaryPayBtn">PAY</button>
                 </div>
             </div>
         </div>
@@ -912,13 +1001,13 @@
             });
 
 
-            $('.table-item').click(function() {
-    if (!$(this).hasClass('unselectable')) {
-        $('.table-item').removeClass('selected');
-        $(this).addClass('selected');
-        $(this).find('input[type="radio"]').prop('checked', true);
-            }
-});
+            $('.table-item').click(function () {
+                if (!$(this).hasClass('unselectable')) {
+                    $('.table-item').removeClass('selected');
+                    $(this).addClass('selected');
+                    $(this).find('input[type="radio"]').prop('checked', true);
+                }
+            });
             function getSelectedTableId() {
                 return $('.table-item.selected').data('table-id');
             }
@@ -927,6 +1016,61 @@
             function isTableSelected() {
                 return $('.table-item.selected').length > 0;
             }
+
+
+            $('#summaryBtn').click(function () {
+                if (isTable && !isTableSelected()) {
+                    alert('Please select a table first.');
+                    return;
+                }
+
+                var selectedTableId = isTable ? getSelectedTableId() : null;
+
+                $.ajax({
+                    url: '<?= site_url("newSalesController/getSummaryInvoices") ?>',
+                    type: 'POST',
+                    data: { tableId: selectedTableId },
+                    dataType: 'json',
+                    success: function (response) {
+                        populateSummaryModal(response);
+                        $('#summaryInvoiceModal').modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("An error occurred: " + error);
+                    }
+                });
+            });
+
+            function populateSummaryModal(invoices) {
+                var tableBody = $('#summaryInvoiceTableBody');
+                tableBody.empty();
+                var totalValue = 0;
+                var totalTVSH = 0;
+
+                // $('#summaryInvoiceModal .modal-body p').text('Table Name: ' + tableName);
+
+                invoices.forEach(function (invoice) {
+                    var row = `<tr>
+            <td>${invoice.InvoiceOrder}</td>
+            <td>${invoice.client}</td>
+            <td>${invoice.user}</td>
+            <td>${invoice.value}</td>
+            <td>${invoice.Tax}</td>
+            <td>${invoice.Table}</td>
+        </tr>`;
+                    tableBody.append(row);
+                    totalValue += parseFloat(invoice.value);
+                    totalTVSH += parseFloat(invoice.Tax);
+                });
+
+                $('#totalValue').text(totalValue.toFixed(2));
+                $('#totalTVSH').text(totalTVSH.toFixed(2));
+            }
+
+            $('#summaryPayBtn').click(function () {
+                alert('Processing payment...');
+                $('#summaryInvoiceModal').modal('hide');
+            });
 
             function filterServices(categoryId) {
                 $.ajax({

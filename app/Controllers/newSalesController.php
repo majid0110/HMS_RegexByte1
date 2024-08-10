@@ -90,4 +90,14 @@ class newSalesController extends Controller
         echo view('New_service_table_partial.php', $data);
     }
 
+    public function getSummaryInvoices()
+    {
+        $tableId = $this->request->getPost('tableId');
+
+        $InvoiceModel = new InvoiceModel();
+        $invoices = $InvoiceModel->getInvoices($tableId);
+
+        return $this->response->setJSON($invoices);
+    }
+
 }

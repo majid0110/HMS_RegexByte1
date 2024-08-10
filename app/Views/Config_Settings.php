@@ -95,7 +95,7 @@
                                                 <button type="submit" class="btn btn-primary btn-sm">Create</button>
                                             </div>
                                         </form>
-                                        <div class="table-responsive" style="hight: 10rem;">
+                                        <div class="table-responsive" style="hight: 10rem; ">
                                             <table class="table table-striped">
                                                 <tr>
                                                     <th>Name</th>
