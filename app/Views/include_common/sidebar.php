@@ -28,7 +28,7 @@ $modulePermissions = $session->get('module_permissions');
             <?php if ($canView): ?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('New_SalesFrom'); ?>">
-                        <i class="menu-icon mdi mdi-cash-multiple"></i>
+                        <i class="menu-icon mdi mdi-pharmacy"></i>
                         <span class="menu-title">
                             <?= $module['module_name'] ?>
                         </span>
@@ -71,7 +71,7 @@ $modulePermissions = $session->get('module_permissions');
             <?php if ($canView): ?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('GenearalOPD'); ?>">
-                        <i class="menu-icon mdi mdi-alarm-check"></i>
+                        <i class="menu-icon mdi mdi-alarm-plus"></i>
                         <span class="menu-title">
                             <?= $module['module_name'] ?>
                         </span>

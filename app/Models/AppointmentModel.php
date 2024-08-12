@@ -27,6 +27,8 @@ class AppointmentModel extends Model
             ->get()
             ->getResultArray();
     }
+
+
     public function getLastAppointmentNo($businessID)
     {
         $query = $this->select('appointmentNo')

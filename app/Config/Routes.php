@@ -90,7 +90,13 @@ $routes->get('/edit_fee/(:num)', 'DoctorController::editDoctorFee/$1');
 $routes->get('/edit_fee/(:num)', 'DoctorController::editDoctorFee/$1');
 $routes->post('/updateDoctorFee/(:num)', 'DoctorController::updateDoctorFee/$1');
 
+
+// ---------------------------------------------------------------------------General OPD
 $routes->get('/GenearalOPD', 'AppointmentController::GenearalOpd_form');
+$routes->get('/GeneralOPD_table', 'AppointmentController::GeneralOPD_table');
+$routes->get('/deleteGeneralOPD/(:num)', 'AppointmentController::deleteGeneralOPD/$1');
+
+
 
 //----------------------------------------------------------------------------------Doctor
 $routes->post('updateDoctor', 'DoctorController::updateDoctor');
@@ -322,3 +328,6 @@ $routes->post('newSalesController/filterServices', 'newSalesController::filterSe
 
 $routes->get('/getSummaryInvoices', 'newSalesController::getSummaryInvoices');
 $routes->post('newSalesController/getSummaryInvoices', 'newSalesController::getSummaryInvoices');
+
+$routes->get('newSalesController/submitSummary', 'newSalesController::submitSummary');
+$routes->post('newSalesController/submitSummary', 'newSalesController::submitSummary');

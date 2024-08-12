@@ -100,4 +100,102 @@ class newSalesController extends Controller
         return $this->response->setJSON($invoices);
     }
 
+    public function submitSummary()
+    {
+        $db = \Config\Database::connect();
+        try {
+            $invoice = new InvoiceModel();
+            $invoiceDetailModel = new InvoiceDetailModel();
+
+            $selectedTableId = $this->request->getPost('selectedTableId');
+            $totalValue = $this->request->getPost('totalValue');
+
+            $session = \Config\Services::session();
+            $businessID = $session->get('businessID');
+            $UserID = $session->get('ID');
+
+            log_message('debug', 'Selected Table ID: ' . $selectedTableId);
+            log_message('debug', 'Total Value: ' . $totalValue);
+
+            $db->transBegin();
+
+            $lastInvoiceResult = $invoice->where('idTable', $selectedTableId)
+                ->where('isSummaryInvoice', 0)
+                ->orderBy('idReceipts', 'DESC')
+                ->limit(1)
+                ->get();
+
+            if ($lastInvoiceResult === false) {
+                throw new \Exception('Error fetching last invoice for this table.');
+            }
+
+            $lastInvoice = $lastInvoiceResult->getRow();
+
+            if (!$lastInvoice) {
+                throw new \Exception('No previous invoice found for this table.');
+            }
+
+            $lastInvoiceNumberQuery = $invoice->select('invOrdNum')->orderBy('invOrdNum', 'DESC')->limit(1);
+            $lastInvoiceNumberResult = $lastInvoiceNumberQuery->get();
+
+            if ($lastInvoiceNumberResult === false) {
+                throw new \Exception('Error fetching last invoice number.');
+            }
+
+            $lastInvoiceNumber = $lastInvoiceNumberResult->getRow();
+            $newInvoiceNumber = $lastInvoiceNumber ? $lastInvoiceNumber->invOrdNum + 1 : 1;
+
+            $invoiceData = (array) $lastInvoice;
+            $invoiceData['Value'] = $totalValue;
+            $invoiceData['isSummaryInvoice'] = 1;
+            $invoiceData['invOrdNum'] = $newInvoiceNumber;
+            $invoiceData['Status'] = 'closed';
+            $invoiceData['idUser'] = $UserID;
+
+            $invoice->insert($invoiceData);
+            $idPayment = $invoice->getInsertID();
+
+            $paymentDetailsModel = new InvoiceDetailsModel();
+            $paymentDetailsData = [
+                'value' => $totalValue,
+                'idUser' => $UserID,
+                'idAnullim' => 0,
+                'method' => $lastInvoice->paymentMethod,
+                'idPaymentMethod' => $lastInvoice->paymentMethod,
+                'exchange' => $lastInvoice->rate,
+                'nr_serial' => 0,
+            ];
+            $paymentDetailsModel->insert($paymentDetailsData);
+            $idReceipt = $paymentDetailsModel->getInsertID();
+
+            $InvoicePayment = [
+                'idReceipt' => $idPayment,
+                'idPayment' => $idReceipt,
+            ];
+            $paymentDetailsModel->insertInvoicePayment($InvoicePayment);
+
+            $data = [
+                'idUserActive' => $UserID,
+                'booking_status' => 0
+            ];
+            $TModel = new TablesModel();
+            $TModel->updateStatus($selectedTableId, $data);
+
+            $db->transCommit();
+
+            return $this->response->setJSON([
+                'status' => 'success',
+                // 'message' => 'Summary invoice created successfully',
+                'message' => 'Payment Sucessful',
+            ]);
+        } catch (\Exception $e) {
+            $db->transRollback();
+            log_message('error', 'Error creating summary invoice: ' . $e->getMessage());
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Error creating summary invoice: ' . $e->getMessage()
+            ]);
+        }
+    }
+
 }

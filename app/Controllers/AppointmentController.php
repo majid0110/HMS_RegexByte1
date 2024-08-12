@@ -51,6 +51,20 @@ class AppointmentController extends Controller
         return view('appointments_form.php', $data);
     }
 
+    public function GeneralOPD_table()
+    {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
+        $session = \Config\Services::session();
+        $businessID = session()->get('businessID');
+        $Model = new OpdModel();
+        $data['OPD'] = $Model->getAllOPDAppointmentsByBusinessID($businessID);
+        return view('generalOPD_table.php', $data);
+    }
+
+
     public function GenearalOpd_form()
     {
         $session = session();
@@ -97,6 +111,19 @@ class AppointmentController extends Controller
         session()->setFlashdata('success', 'Appointment deleted...!!');
 
         return redirect()->to(base_url("/appointments_table"));
+    }
+
+    public function deleteGeneralOPD($appointmentOPD)
+    {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
+        $model = new AppointmentModel();
+        $model->deleteAppointment($appointmentOPD);
+        session()->setFlashdata('success', 'Appointment deleted...!!');
+
+        return redirect()->to(base_url("/generalOPD_table"));
     }
 
     public function fetchDoctorFee()

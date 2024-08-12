@@ -214,6 +214,7 @@ class InvoiceModel extends Model
             ->join('client', 'client.idClient = invoices.idClient')
             ->join('users', 'users.ID = invoices.idUser')
             ->where('invoices.idTable', $tableId)
+            ->where('invoices.Status', 'open')
             ->get()
             ->getResult();
     }

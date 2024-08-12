@@ -1067,10 +1067,10 @@
                 $('#totalTVSH').text(totalTVSH.toFixed(2));
             }
 
-            $('#summaryPayBtn').click(function () {
-                alert('Processing payment...');
-                $('#summaryInvoiceModal').modal('hide');
-            });
+            // $('#summaryPayBtn').click(function () {
+            //     alert('Processing payment...');
+            //     $('#summaryInvoiceModal').modal('hide');
+            // });
 
             function filterServices(categoryId) {
                 $.ajax({
@@ -1087,6 +1087,50 @@
                     }
                 });
             }
+
+            $('#summaryPayBtn').click(function () {
+                var selectedTableId = getSelectedTableId();
+                var totalValue = parseFloat($('#totalValue').text());
+
+                if (!selectedTableId) {
+                    alert('Please select a table first.');
+                    return;
+                }
+
+                if (isNaN(totalValue) || totalValue <= 0) {
+                    alert('Invalid total value.');
+                    return;
+                }
+
+                $('#loading-overlay').show();
+
+                $.ajax({
+                    url: '<?= site_url("newSalesController/submitSummary") ?>',
+                    type: 'POST',
+                    data: {
+                        selectedTableId: selectedTableId,
+                        totalValue: totalValue
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        $('#loading-overlay').hide();
+                        if (response.status === 'success') {
+                            alert(response.message);
+                            $('#summaryInvoiceModal').modal('hide');
+                            // Optionally, refresh the page or update the UI
+                            location.reload();
+                        } else {
+                            alert('Error: ' + response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        $('#loading-overlay').hide();
+                        console.error("An error occurred: " + error);
+                        alert('An error occurred while processing the summary invoice.');
+                    }
+                });
+            });
+
 
             function insertData() {
                 $('#loading-overlay').show();
@@ -1214,15 +1258,123 @@
                 return $('input[name="select_table"]:checked').length > 0;
             }
 
+            // function OrderData() {
+            //     $('#loading-overlay').show();
+
+            //     if (isTable && !isTableSelected()) {
+            //         alert('Please select a table before submitting the order.');
+            //         $('#loading-overlay').hide();
+            //         return;
+            //     }
+            //     var selectedTableId = isTable ? getSelectedTableId() : null;
+
+            //     var clientId = $('select[name="clientName"]').val();
+            //     var clientName = $('select[name="clientName"] option:selected').text();
+            //     var paymentMethodOption = $('select[name="Payment"] option:selected');
+            //     var paymentMethodId = paymentMethodOption.data('payment-id');
+            //     var paymentName = paymentMethodOption.text();
+            //     var paymentMethodName = paymentMethodOption.text();
+            //     var currency = $('select[name="Currency"]').val();
+            //     var currencyName = $('select[name="Currency"] option:selected').text();
+            //     var exchange = $('#exchangeInput').val();
+            //     var totalFee = parseFloat($('#totalFee').text());
+            //     var totalTax = parseFloat($('#taxAmount').text());
+            //     var discountedTotal = parseFloat($('#discountedTotal').text());
+
+            //     console.log('Table ID', selectedTableId);
+
+            //     if (!clientId || isNaN(totalFee)) {
+            //         alert('Invalid data for insertion.');
+            //         return;
+            //     }
+
+            //     var services = [];
+            //     $('#serviceTableBody tr').each(function () {
+            //         var serviceTypeRow = $(this);
+            //         var serviceTypeId = serviceTypeRow.data('service-id');
+            //         var serviceName = serviceTypeRow.find('td:eq(0)').text();
+            //         var fee = parseFloat(serviceTypeRow.find('.editable-price').text());
+            //         var quantity = parseInt(serviceTypeRow.find('.editable-quantity').val());
+            //         var discount = parseFloat(serviceTypeRow.find('.editable-discount').val());
+            //         var taxRate = parseFloat(serviceTypeRow.find('.tax-rate').text());
+            //         // var expiryDate = '1970-01-01';
+            //         // var expiryDate = serviceTypeRow.find('.expiry-date').val();
+            //         var expiryDate = serviceTypeRow.find('.expiry-dropdown').val() || serviceTypeRow.find('.expiry-date').val() || null;
+
+            //         var rowTotal = fee * quantity;
+            //         var rowDiscount = rowTotal * (discount / 100);
+            //         var rowTaxableAmount = rowTotal - rowDiscount;
+            //         var calculatedTax = rowTaxableAmount * (taxRate / 100);
+
+            //         services.push({
+            //             serviceTypeId: serviceTypeId,
+            //             serviceName: serviceName,
+            //             fee: fee,
+            //             quantity: quantity,
+            //             discount: discount,
+            //             expiryDate: expiryDate,
+            //             taxRate: taxRate,
+            //             calculatedTax: calculatedTax
+            //         });
+            //     });
+
+            //     $.ajax({
+            //         method: 'POST',
+            //         url: '<?= site_url('SalesController/submitServices') ?>',
+            //         dataType: "json",
+            //         data: {
+            //             clientId: clientId,
+            //             clientName: clientName,
+            //             currencyName: currencyName,
+            //             paymentMethodId: paymentMethodId,
+            //             paymentName: paymentName,
+            //             paymentMethodName: paymentMethodName,
+            //             currency: currency,
+            //             exchange: exchange,
+            //             totalFee: totalFee,
+            //             totalTax: totalTax,
+            //             selectedTableId: selectedTableId,
+            //             discountedTotal: discountedTotal,
+            //             services: services
+            //         },
+            //         success: function (response) {
+            //             console.log('Data inserted successfully:', response);
+            //             if (response.pdfContent) {
+            //                 var decodedPdfContent = atob(response.pdfContent);
+            //                 var blob = new Blob([new Uint8Array(decodedPdfContent.split('').map(function (c) {
+            //                     return c.charCodeAt(0);
+            //                 }))], {
+            //                     type: 'application/pdf'
+            //                 });
+            //                 var link = document.createElement('a');
+            //                 var url = window.URL.createObjectURL(blob);
+            //                 link.href = url;
+            //                 link.target = '_blank';
+            //                 link.click();
+
+            //                 setTimeout(function () {
+            //                     window.URL.revokeObjectURL(url);
+            //                 }, 100);
+            //             }
+            //             $('#serviceTableBody').empty();
+            //             $('#totalFee').text('0');
+            //             $('#discountAmount').text('0');
+            //             $('#taxAmount').text('0');
+            //             $('#discountedTotal').text('0');
+            //             calculateTotals();
+
+            //             $('#loading-overlay').hide();
+            //             location.reload();
+            //         },
+            //         error: function (error) {
+            //             console.error('Error inserting data:', error);
+            //             $('#loading-overlay').hide();
+            //         }
+            //     });
+            // }
+
             function OrderData() {
                 $('#loading-overlay').show();
-
-                if (isTable && !isTableSelected()) {
-                    alert('Please select a table before submitting the order.');
-                    $('#loading-overlay').hide();
-                    return;
-                }
-                var selectedTableId = isTable ? getSelectedTableId() : null;
 
                 var clientId = $('select[name="clientName"]').val();
                 var clientName = $('select[name="clientName"] option:selected').text();
@@ -1236,8 +1388,15 @@
                 var totalFee = parseFloat($('#totalFee').text());
                 var totalTax = parseFloat($('#taxAmount').text());
                 var discountedTotal = parseFloat($('#discountedTotal').text());
+                // var selectedTableId = null;
 
-                console.log('Table ID', selectedTableId);
+                if (isTable && !isTableSelected()) {
+                    alert('Please select a table before submitting the order.');
+                    $('#loading-overlay').hide();
+                    return;
+                }
+                var selectedTableId = isTable ? getSelectedTableId() : null;
+
 
                 if (!clientId || isNaN(totalFee)) {
                     alert('Invalid data for insertion.');
@@ -1274,9 +1433,10 @@
                     });
                 });
 
+                console.log(services);
                 $.ajax({
                     method: 'POST',
-                    url: '<?= site_url('SalesController/submitServices') ?>',
+                    url: '<?= site_url('SalesController/submitInvoice') ?>',
                     dataType: "json",
                     data: {
                         clientId: clientId,
@@ -1289,8 +1449,8 @@
                         exchange: exchange,
                         totalFee: totalFee,
                         totalTax: totalTax,
-                        selectedTableId: selectedTableId,
                         discountedTotal: discountedTotal,
+                        selectedTableId: selectedTableId,
                         services: services
                     },
                     success: function (response) {
@@ -1325,6 +1485,7 @@
                     error: function (error) {
                         console.error('Error inserting data:', error);
                         $('#loading-overlay').hide();
+
                     }
                 });
             }

@@ -195,4 +195,22 @@ class OpdModel extends Model
             return 0;
         }
     }
+
+    public function getAllOPDAppointmentsByBusinessID($businessID)
+    {
+        return $this->db->table('generalopd')
+            ->join('client', 'client.idClient = generalopd.clientID')
+            ->join('doctorprofile', 'doctorprofile.DoctorID = generalopd.doctorID')
+            ->join('fee_type', 'fee_type.f_id = generalopd.appointmentType')
+            ->select('generalopd.*, client.client as clientName, doctorprofile.FirstName as doctorFirstName, doctorprofile.LastName as doctorLastName,fee_type.FeeType as appointmentTypeName')
+            ->where('generalopd.businessID', $businessID)
+            ->orderBy('generalopd.appointmentDate', 'DESC')
+            ->get()
+            ->getResultArray();
+    }
+
+    public function deleteAppointment($appointmentOPD)
+    {
+        return $this->where('appointmentOPD', $appointmentOPD)->delete();
+    }
 }
