@@ -1,0 +1,121 @@
+INFO - 2024-08-13 04:56:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 04:56:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 04:56:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 04:56:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 04:56:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 04:57:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 05:07:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 05:37:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 05:37:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 05:37:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 05:43:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 06:53:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 06:53:16 --> Updating inventory for item: 6598 with quantity: 1
+DEBUG - 2024-08-13 06:53:16 --> Updating inventory for item: 6599 with quantity: 1
+INFO - 2024-08-13 06:53:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 06:54:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 06:54:08 --> Updating inventory for item: 6594 with quantity: 1
+INFO - 2024-08-13 06:54:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 06:54:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 06:54:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 06:54:37 --> Selected Table ID: 74
+DEBUG - 2024-08-13 06:54:37 --> Total Value: 3000
+INFO - 2024-08-13 06:54:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 07:19:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 07:19:56 --> Updating inventory for item: 6592 with quantity: 1
+INFO - 2024-08-13 07:20:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 07:20:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 07:20:42 --> Updating inventory for item: 6591 with quantity: 1
+INFO - 2024-08-13 07:20:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 07:21:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 07:21:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 07:21:30 --> Selected Table ID: 74
+DEBUG - 2024-08-13 07:21:30 --> Total Value: 900
+ERROR - 2024-08-13 07:21:30 --> Error creating summary invoice: Attempt to read property "paymentMethod" on array
+INFO - 2024-08-13 07:24:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 07:24:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 07:24:23 --> Selected Table ID: 74
+DEBUG - 2024-08-13 07:24:23 --> Total Value: 900
+INFO - 2024-08-13 07:24:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 07:30:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 07:30:18 --> Updating inventory for item: 6588 with quantity: 1
+DEBUG - 2024-08-13 07:30:18 --> Updating inventory for item: 6589 with quantity: 1
+DEBUG - 2024-08-13 07:30:18 --> Updating inventory for item: 6592 with quantity: 1
+INFO - 2024-08-13 07:30:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 07:38:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 07:38:31 --> Updating inventory for item: 6589 with quantity: 1
+DEBUG - 2024-08-13 07:38:31 --> Updating inventory for item: 6593 with quantity: 1
+INFO - 2024-08-13 07:38:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 07:43:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 07:43:44 --> Updating inventory for item: 6589 with quantity: 1
+DEBUG - 2024-08-13 07:43:44 --> Updating inventory for item: 6590 with quantity: 1
+DEBUG - 2024-08-13 07:43:44 --> Updating inventory for item: 6592 with quantity: 1
+INFO - 2024-08-13 07:43:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 07:52:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 07:53:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 07:53:12 --> Updating inventory for item: 6592 with quantity: 1
+DEBUG - 2024-08-13 07:53:12 --> Updating inventory for item: 6593 with quantity: 1
+DEBUG - 2024-08-13 07:53:12 --> Updating inventory for item: 6596 with quantity: 1
+ERROR - 2024-08-13 12:53:13 --> Error retrieving data: Undefined variable $ReceivingAmount
+INFO - 2024-08-13 07:53:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 07:53:26 --> Updating inventory for item: 6592 with quantity: 1
+DEBUG - 2024-08-13 07:53:26 --> Updating inventory for item: 6593 with quantity: 1
+DEBUG - 2024-08-13 07:53:26 --> Updating inventory for item: 6596 with quantity: 1
+ERROR - 2024-08-13 12:53:28 --> Error retrieving data: Undefined variable $ReceivingAmount
+INFO - 2024-08-13 07:54:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 07:55:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 07:55:41 --> Updating inventory for item: 6592 with quantity: 1
+DEBUG - 2024-08-13 07:55:42 --> Updating inventory for item: 6590 with quantity: 1
+DEBUG - 2024-08-13 07:55:43 --> Updating inventory for item: 6593 with quantity: 1
+INFO - 2024-08-13 07:55:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 07:57:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 07:57:03 --> Updating inventory for item: 6592 with quantity: 1
+DEBUG - 2024-08-13 07:57:03 --> Updating inventory for item: 6593 with quantity: 1
+DEBUG - 2024-08-13 07:57:03 --> Updating inventory for item: 6590 with quantity: 1
+INFO - 2024-08-13 07:57:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 07:58:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 07:58:03 --> Updating inventory for item: 6589 with quantity: 1
+DEBUG - 2024-08-13 07:58:03 --> Updating inventory for item: 6590 with quantity: 1
+DEBUG - 2024-08-13 07:58:03 --> Updating inventory for item: 6592 with quantity: 1
+INFO - 2024-08-13 07:58:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 07:59:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 07:59:07 --> Updating inventory for item: 6588 with quantity: 1
+DEBUG - 2024-08-13 07:59:07 --> Updating inventory for item: 6589 with quantity: 1
+INFO - 2024-08-13 07:59:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 09:27:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 09:29:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 09:29:48 --> Updating inventory for item: 6592 with quantity: 1
+DEBUG - 2024-08-13 09:29:48 --> Updating inventory for item: 6590 with quantity: 1
+DEBUG - 2024-08-13 09:29:48 --> Updating inventory for item: 6593 with quantity: 1
+INFO - 2024-08-13 09:29:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 09:32:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 09:32:14 --> Updating inventory for item: 6591 with quantity: 1
+DEBUG - 2024-08-13 09:32:14 --> Updating inventory for item: 6592 with quantity: 1
+INFO - 2024-08-13 09:32:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 09:33:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 09:33:39 --> Updating inventory for item: 6588 with quantity: 1
+DEBUG - 2024-08-13 09:33:39 --> Updating inventory for item: 6589 with quantity: 1
+DEBUG - 2024-08-13 09:33:39 --> Updating inventory for item: 6590 with quantity: 1
+DEBUG - 2024-08-13 09:33:39 --> Updating inventory for item: 6592 with quantity: 1
+DEBUG - 2024-08-13 09:33:39 --> Updating inventory for item: 6593 with quantity: 1
+INFO - 2024-08-13 09:33:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 09:37:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2024-08-13 09:37:37 --> Updating inventory for item: 6591 with quantity: 1
+DEBUG - 2024-08-13 09:37:37 --> Updating inventory for item: 6593 with quantity: 1
+DEBUG - 2024-08-13 09:37:37 --> Updating inventory for item: 6595 with quantity: 1
+DEBUG - 2024-08-13 09:37:37 --> Updating inventory for item: 6589 with quantity: 1
+DEBUG - 2024-08-13 09:37:37 --> Updating inventory for item: 6590 with quantity: 1
+INFO - 2024-08-13 09:37:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 09:58:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 09:59:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 09:59:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 10:02:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 10:02:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 10:05:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 10:06:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 10:07:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 10:07:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 10:10:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 10:10:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 10:11:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-13 10:11:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

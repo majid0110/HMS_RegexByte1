@@ -313,9 +313,9 @@ class SalesController extends Controller
                 $discount = $service['discount'];
                 $quantity = (int) $service['quantity'];
                 $fee = (float) $service['fee'];
-                $sum = $quantity * $fee;
-                $discountedTotal -= ($sum * ($discount / 100));
-                $sum = $quantity * $discountedTotal;
+
+                $discountedPrice = $fee - ($fee * ($discount / 100));
+                $sum = $quantity * $discountedPrice;
 
                 $expiryDate = $service['expiryDate'];
                 $serviceData = [
@@ -323,7 +323,7 @@ class SalesController extends Controller
                     'Nr' => 0,
                     'idArtMenu' => $service['serviceTypeId'],
                     'Quantity' => $quantity,
-                    'Price' => $discountedTotal,
+                    'Price' => $discountedPrice,
                     'actual_Price' => $fee,
                     'Sum' => $sum,
                     'idBusiness' => $businessID,
@@ -560,8 +560,9 @@ class SalesController extends Controller
                 $discount = $service['discount'];
                 $quantity = (int) $service['quantity'];
                 $fee = (float) $service['fee'];
-                $sum = $quantity * $fee;
-                $discountedTotal -= ($sum * ($discount / 100));
+
+                $discountedPrice = $fee - ($fee * ($discount / 100));
+                $sum = $quantity * $discountedPrice;
 
                 $expiryDate = $service['expiryDate'];
                 $serviceData = [
@@ -569,7 +570,7 @@ class SalesController extends Controller
                     'Nr' => 0,
                     'idArtMenu' => $service['serviceTypeId'],
                     'Quantity' => $quantity,
-                    'Price' => $discountedTotal,
+                    'Price' => $discountedPrice,
                     'actual_Price' => $fee,
                     'Sum' => $sum,
                     'idBusiness' => $businessID,

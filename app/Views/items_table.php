@@ -158,7 +158,7 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                            <a href="<?= base_url('downloadTemplate') ?>">Download Template</a>
+                                <a href="<?= base_url('downloadTemplate') ?>">Download Template</a>
                                 <?php
                                 $successMessage = session()->getFlashdata('success');
                                 $errorMessage = session()->getFlashdata('error');
@@ -171,26 +171,33 @@
                                             style="margin-left: 30rem; margin-bottom: -4rem;">
                                             <input type="file" name="excel_file" class="form-control" required
                                                 style="width: auto; height: auto;">
-                                                <button type="button" class="btn btn-primary" id="importExcelBtn">Import Excel</button>
+                                            <button type="button" class="btn btn-primary" id="importExcelBtn">Import
+                                                Excel</button>
                                         </div>
                                     </form>
 
-                                    <div class="modal fade" id="importOptionsModal" tabindex="-1" aria-labelledby="importOptionsModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="importOptionsModalLabel">Choose Import Option</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <button type="button" class="btn btn-primary btn-block" id="importItemsOnly">Import to Items Only</button>
-                <button type="button" class="btn btn-secondary btn-block" id="importItemsAndServices">Import to Items and Services</button>
-            </div>
-        </div>
-    </div>
-</div>
+                                    <div class="modal fade" id="importOptionsModal" tabindex="-1"
+                                        aria-labelledby="importOptionsModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="importOptionsModalLabel">Choose Import
+                                                        Option</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <button type="button" class="btn btn-primary btn-block"
+                                                        id="importItemsOnly">Import to Items Only</button>
+                                                    <button type="button" class="btn btn-secondary btn-block"
+                                                        id="importItemsAndServices">Import to Items and
+                                                        Services</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="modal fade" id="progressModal" tabindex="-1"
                                         aria-labelledby="progressModalLabel" aria-hidden="true">
@@ -343,71 +350,71 @@
 
 
     <script>
-   $(document).ready(function() {
-    $('#importExcelBtn').on('click', function(e) {
-        e.preventDefault();
-        $('#importOptionsModal').modal('show');
-    });
+        $(document).ready(function () {
+            $('#importExcelBtn').on('click', function (e) {
+                e.preventDefault();
+                $('#importOptionsModal').modal('show');
+            });
 
-    $('#importItemsOnly, #importItemsAndServices').on('click', function(e) {
-        e.preventDefault();
-        var importType = $(this).attr('id') === 'importItemsOnly' ? 'items' : 'both';
-        $('#importOptionsModal').modal('hide');
-        importExcel(importType);
-    });
+            $('#importItemsOnly, #importItemsAndServices').on('click', function (e) {
+                e.preventDefault();
+                var importType = $(this).attr('id') === 'importItemsOnly' ? 'items' : 'both';
+                $('#importOptionsModal').modal('hide');
+                importExcel(importType);
+            });
 
-    function importExcel(type) {
-        var formData = new FormData($('#importForm')[0]);
-        formData.append('importType', type);
+            function importExcel(type) {
+                var formData = new FormData($('#importForm')[0]);
+                formData.append('importType', type);
 
-        $.ajax({
-            xhr: function() {
-                var xhr = new window.XMLHttpRequest();
-                xhr.upload.addEventListener('progress', function(e) {
-                    if (e.lengthComputable) {
-                        var percentComplete = Math.round((e.loaded / e.total) * 100);
-                        updateProgressBar(percentComplete, 'Uploading file...');
+                $.ajax({
+                    xhr: function () {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener('progress', function (e) {
+                            if (e.lengthComputable) {
+                                var percentComplete = Math.round((e.loaded / e.total) * 100);
+                                updateProgressBar(percentComplete, 'Uploading file...');
+                            }
+                        }, false);
+                        return xhr;
+                    },
+                    type: 'POST',
+                    url: '<?= base_url('importExcel') ?>',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function () {
+                        showProgressModal();
+                        updateProgressBar(0, 'Starting import...');
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            updateProgressBar(100, 'Import complete!');
+                            setTimeout(function () {
+                                $('#progressModal').modal('hide');
+                                location.reload();
+                            }, 2000);
+                        } else {
+                            updateProgressBar(100, 'Import failed: ' + (response.error || 'Unknown error'));
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        updateProgressBar(100, 'An error occurred: ' + (xhr.responseText || error));
                     }
-                }, false);
-                return xhr;
-            },
-            type: 'POST',
-            url: '<?= base_url('importExcel') ?>',
-            data: formData,
-            contentType: false,
-            processData: false,
-            beforeSend: function() {
-                showProgressModal();
-                updateProgressBar(0, 'Starting import...');
-            },
-            success: function(response) {
-                if (response.success) {
-                    updateProgressBar(100, 'Import complete!');
-                    setTimeout(function() {
-                        $('#progressModal').modal('hide');
-                        location.reload();
-                    }, 2000);
-                } else {
-                    updateProgressBar(100, 'Import failed: ' + (response.error || 'Unknown error'));
-                }
-            },
-            error: function(xhr, status, error) {
-                updateProgressBar(100, 'An error occurred: ' + (xhr.responseText || error));
+                });
+            }
+
+            function showProgressModal() {
+                $('#progressModal').modal('show');
+            }
+
+            function updateProgressBar(percentComplete, status) {
+                $('#progressBar').width(percentComplete + '%');
+                $('#progressBar').attr('aria-valuenow', percentComplete);
+                $('#progressBar').text(percentComplete + '%');
+                $('#progressStatus').text(status);
             }
         });
-    }
-
-    function showProgressModal() {
-        $('#progressModal').modal('show');
-    }
-
-    function updateProgressBar(percentComplete, status) {
-        $('#progressBar').width(percentComplete + '%');
-        $('#progressBar').attr('aria-valuenow', percentComplete);
-        $('#progressBar').text(percentComplete + '%');
-        $('#progressStatus').text(status);
-    }
-});
 
     </script>
 

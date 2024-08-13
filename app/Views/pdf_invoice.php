@@ -215,10 +215,14 @@
             <tr>
                 <td style="width: 50%; text-align: left;">&nbsp;</td>
                 <?php
-                $discountValue = ($service['fee'] * $service['discount']) / 100;
+                $totalDiscount = 0;
+                foreach ($services as $service) {
+                    $discountValue = ($service['fee'] * $service['discount']) / 100;
+                    $totalDiscount += $discountValue * $service['quantity'];
+                }
                 ?>
                 <td style="width: 100%; text-align: right; padding-right:10px; font-size: 18px;">
-                    <b>Discount :</b> <?= number_format($discountValue, 2) ?>
+                    <b>Discount :</b> <?= number_format($totalDiscount, 2) ?>
                 </td>
             </tr>
             <tr>
@@ -229,9 +233,17 @@
             </tr>
             <tr>
                 <td style="width: 30%; text-align: left;">&nbsp;</td>
-                <td style="width: 110%; text-align: right; padding-right:10px; font-size: 18px;"><b>Receiving Amount
-                        :</b>
-                    <?= number_format($discountedTotal + $totalTax, 2) ?>
+                <?php
+                $totalAmount = 0;
+                foreach ($services as $service) {
+                    $discountAmount = ($service['fee'] * $service['discount']) / 100;
+                    $totalAmount += (float) $service['quantity'] * ((float) $service['fee'] - $discountAmount);
+                }
+                ?>
+
+                <td style="width: 110%; text-align: right; padding-right:10px; font-size: 18px;">
+                    <b>Receiving Amount :</b>
+                    <?= number_format($totalAmount + $totalTax, 2) ?>
                 </td>
             </tr>
         </table>
