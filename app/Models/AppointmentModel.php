@@ -15,18 +15,36 @@ class AppointmentModel extends Model
         return $this->insert($data);
     }
 
+    // public function getAllAppointmentsByBusinessID($businessID)
+    // {
+    //     return $this->db->table('appointment')
+    //         ->join('client', 'client.idClient = appointment.clientID')
+    //         ->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID')
+    //         ->join('fee_type', 'fee_type.f_id = appointment.appointmentType')
+    //         ->select('appointment.*, client.client as clientName, doctorprofile.FirstName as doctorFirstName, doctorprofile.LastName as doctorLastName, fee_type.FeeType as appointmentTypeName')
+    //         ->where('appointment.businessID', $businessID)
+    //         ->orderBy('appointment.appointmentDate', 'DESC')
+    //         ->get()
+    //         ->getResultArray();
+    // }
+
     public function getAllAppointmentsByBusinessID($businessID)
     {
         return $this->db->table('appointment')
             ->join('client', 'client.idClient = appointment.clientID')
             ->join('doctorprofile', 'doctorprofile.DoctorID = appointment.doctorID')
             ->join('fee_type', 'fee_type.f_id = appointment.appointmentType')
-            ->select('appointment.*, client.client as clientName, doctorprofile.FirstName as doctorFirstName, doctorprofile.LastName as doctorLastName, fee_type.FeeType as appointmentTypeName')
+            ->select('appointment.*, 
+                  client.client as clientName, 
+                  doctorprofile.FirstName as doctorFirstName, 
+                  doctorprofile.LastName as doctorLastName, 
+                  fee_type.FeeType as appointmentTypeName')
             ->where('appointment.businessID', $businessID)
             ->orderBy('appointment.appointmentDate', 'DESC')
             ->get()
             ->getResultArray();
     }
+
 
 
     public function getLastAppointmentNo($businessID)
@@ -560,6 +578,17 @@ class AppointmentModel extends Model
               labtest.hospitalCharges as labhospital, labtest.labInvoice as labInvoice, labtest.CreatedAT as labdate')
             ->get()
             ->getResultArray();
+    }
+
+    public function findName($AppointmentTypeID)
+    {
+        $query = $this->db->table('fee_type')
+            ->select('FeeType')
+            ->where('f_id', $AppointmentTypeID)
+            ->get()
+            ->getRowArray();
+
+        return $query['FeeType'] ?? null;
     }
 
 

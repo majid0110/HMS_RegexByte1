@@ -263,6 +263,9 @@
                           <td>
                             <a href="<?= base_url('viewAppointmentDetails/' . $appointment['appointmentID']); ?>"
                               class="btn btn-info btn-sm">View Details</a>
+
+                            <a href="<?= base_url('Appointmentinvoice/' . $appointment['appointmentID']); ?>"
+                              class="btn btn-info btn-sm">Inoice</a>
                             <a href="<?= base_url('deleteAppointment/' . $appointment['appointmentID']); ?>"
                               onclick="return confirm('Are you sure you want to delete this Appointment?');"
                               class="btn btn-danger btn-sm">Delete</a>

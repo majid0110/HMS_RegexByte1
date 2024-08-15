@@ -89,7 +89,8 @@ $routes->get('viewAppointmentDetails/(:num)', 'AppointmentController::viewAppoin
 $routes->get('/edit_fee/(:num)', 'DoctorController::editDoctorFee/$1');
 $routes->get('/edit_fee/(:num)', 'DoctorController::editDoctorFee/$1');
 $routes->post('/updateDoctorFee/(:num)', 'DoctorController::updateDoctorFee/$1');
-
+$routes->get('Appointmentinvoice/(:num)', 'AppointmentController::generateInvoice/$1');
+$routes->get('OPDAppointmentinvoice/(:num)', 'AppointmentController::OPDAppointmentinvoice/$1');
 
 // ---------------------------------------------------------------------------General OPD
 $routes->get('/GenearalOPD', 'AppointmentController::GenearalOpd_form');

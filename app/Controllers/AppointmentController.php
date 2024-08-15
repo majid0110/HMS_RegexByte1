@@ -36,6 +36,7 @@ class AppointmentController extends Controller
         $session = \Config\Services::session();
         $businessID = session()->get('businessID');
         $Model = new AppointmentModel();
+
         $data['Appointments'] = $Model->getAllAppointmentsByBusinessID($businessID);
         return view('appointments_table.php', $data);
     }
@@ -91,6 +92,17 @@ class AppointmentController extends Controller
 
 
     public function viewAppointmentDetails($appointmentID)
+    {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
+        $model = new AppointmentModel();
+        $data['AppointmentDetails'] = $model->viewAppointmentDetails($appointmentID);
+        return view('appointment_details', $data);
+    }
+
+    public function GenerateAppointmentInvoice($appointmentID)
     {
         $session = session();
         if (!$session->get('ID')) {
@@ -159,7 +171,7 @@ class AppointmentController extends Controller
 
         $session = \Config\Services::session();
         $businessID = session()->get('businessID');
-        // $charges = $session->get('hospitalcharges');
+        $charges = $session->get('hospitalcharges');
 
         $lastAppointmentNo = $appointmentModel->getLastAppointmentNo($businessID);
         $appointmentNo = intval($lastAppointmentNo) + 1;
@@ -217,7 +229,148 @@ class AppointmentController extends Controller
         ]);
     }
 
+    // public function saveAppointment()
+    // {
+    //     $appointmentModel = new AppointmentModel();
+    //     $doctorModel = new DoctorModel();
+    //     $businessModel = new LoginModel("business");
 
+    //     $clientID = $this->request->getPost('clientId');
+    //     $doctorID = $this->request->getPost('doctor_id');
+    //     $appointmentDate = $this->request->getPost('appointmentDate');
+    //     $appointmentTime = $this->request->getPost('appointmentTime');
+    //     $appointmentType = $this->request->getPost('app_type_id');
+    //     $selectedFeeTypeID = $this->request->getPost('fee_type_id');
+    //     $doctorFee = $this->request->getPost('appointmentFee');
+    //     $appointmentTypeName = $this->request->getPost('appointmentTypeName');
+    //     $clientName = $this->request->getPost('clientName');
+    //     $doctorName = $this->request->getPost('doctorName');
+    //     $charges = $this->request->getPost('hospitalFee');
+
+    //     $session = \Config\Services::session();
+    //     $businessID = session()->get('businessID');
+    //     // $charges = $session->get('hospitalcharges');
+
+    //     $lastAppointmentNo = $appointmentModel->getLastAppointmentNo($businessID);
+    //     $appointmentNo = intval($lastAppointmentNo) + 1;
+
+    //     $data = [
+    //         'clientID' => $clientID,
+    //         'doctorID' => $doctorID,
+    //         'appointmentDate' => $appointmentDate,
+    //         'appointmentTime' => $appointmentTime,
+    //         'appointmentType' => $appointmentType,
+    //         'appointmentFee' => $doctorFee,
+    //         'hospitalCharges' => $charges,
+    //         'appointmentNo' => $appointmentNo,
+    //         'businessID' => $businessID,
+    //     ];
+
+    //     $appointmentModel->saveAppointment($data);
+
+    //     $appointmentID = $appointmentModel->getInsertID();
+    //     $clientID = $this->request->getPost('clientId');
+    //     $clientModel = new ClientModel();
+    //     $Age = $clientModel->getclientAge($businessID, $clientID);
+    //     $Gender = $clientModel->getclientGender($businessID, $clientID);
+    //     $clientUnique = $clientModel->getclientUnique($businessID, $clientID);
+    //     $Model = new AppointmentModel();
+    //     $InvoiceNumber = $Model->getinvoiceNumber($businessID, $appointmentID);
+    //     $specializationName = $Model->getDoctorSpecialization($doctorID);
+    //     $operatorName = session()->get('fName');
+
+    //     $total = $doctorFee + $charges;
+
+    //     $mpdf = new Mpdf();
+    //     $pdfContent = view('pdf_template', [
+    //         'appointmentData' => $data,
+    //         'appointmentTypeName' => $appointmentTypeName,
+    //         'clientName' => $clientName,
+    //         'doctorName' => $doctorName,
+    //         'Age' => $Age,
+    //         'Gender' => $Gender,
+    //         'clientUnique' => $clientUnique,
+    //         'InvoiceNumber' => $InvoiceNumber,
+    //         'specializationName' => $specializationName,
+    //         'operatorName' => $operatorName,
+    //         'hospitalfee' => $charges,
+    //         'total' => $total,
+    //     ]);
+
+    //     $mpdf->WriteHTML($pdfContent);
+    //     $pdfBinary = $mpdf->Output('', 'S');
+    //     return $this->response->setJSON([
+    //         'status' => 'success',
+    //         'message' => 'Data inserted successfully',
+    //         'pdfContent' => base64_encode($pdfBinary),
+    //     ]);
+    // }
+
+
+    public function generateInvoice($appointmentID)
+    {
+        $appointmentModel = new AppointmentModel();
+        $clientModel = new ClientModel();
+        $doctorModel = new DoctorModel();
+
+        $appointmentData = $appointmentModel->find($appointmentID);
+        if (!$appointmentData) {
+            return redirect()->to('/appointments')->with('error', 'Appointment not found');
+        }
+
+        $appointmentTypeID = $appointmentData['appointmentType'];
+        $appointmentName = $appointmentModel->findName($appointmentTypeID);
+
+        $businessID = $appointmentData['businessID'];
+        $clientID = $appointmentData['clientID'];
+        $doctorID = $appointmentData['doctorID'];
+
+        $clientData = $clientModel->find($clientID);
+        $Age = $clientModel->getclientAge($businessID, $clientID);
+        $Gender = $clientModel->getclientGender($businessID, $clientID);
+        $clientName = $clientModel->getclientName($businessID, $clientID);
+        $clientUnique = $clientModel->getclientUnique($businessID, $clientID);
+
+        $doctorData = $doctorModel->getDoctorInfo($doctorID);
+        $doctorName = $doctorData['FirstName'] . ' ' . $doctorData['LastName'];
+        $specializationName = $doctorData['Specialization'];
+
+        $total = $appointmentData['appointmentFee'] + $appointmentData['hospitalCharges'];
+
+        $InvoiceNumber = $appointmentModel->getinvoiceNumber($businessID, $appointmentID);
+
+        $operatorName = session()->get('fName');
+
+        $data = [
+            'appointmentData' => $appointmentData,
+            'appointmentTypeName' => $appointmentName,
+            'clientName' => $clientName,
+            'doctorName' => $doctorName,
+            'Age' => $Age,
+            'Gender' => $Gender,
+            'clientUnique' => $clientUnique,
+            'InvoiceNumber' => $InvoiceNumber,
+            'specializationName' => $specializationName,
+            'operatorName' => $operatorName,
+            'hospitalfee' => $appointmentData['hospitalCharges'],
+            'total' => $total,
+        ];
+
+
+        $mpdf = new Mpdf();
+        $pdfContent = view('pdf_template', $data);
+        $mpdf->WriteHTML($pdfContent);
+
+        $pdfOutput = $mpdf->Output('', 'S');
+
+        $response = service('response');
+        $response->setContentType('application/pdf');
+        $response->setHeader('Content-Disposition', 'inline; filename="Invoice_' . $InvoiceNumber . '.pdf"');
+        $response->setHeader('Cache-Control', 'private, max-age=0, must-revalidate');
+        $response->setBody($pdfOutput);
+
+        return $response;
+    }
     public function saveOpdAppointment()
     {
         $appointmentModel = new AppointmentModel();
@@ -302,6 +455,71 @@ class AppointmentController extends Controller
         ]);
     }
 
+    public function OPDAppointmentinvoice($appointmentID)
+    {
+        $appointmentModel = new AppointmentModel();
+        $clientModel = new ClientModel();
+        $doctorModel = new DoctorModel();
+        $OPD = new OpdModel();
+
+        $appointmentData = $OPD->find($appointmentID);
+        if (!$appointmentData) {
+            return redirect()->to('/appointments')->with('error', 'Appointment not found');
+        }
+
+        $appointmentTypeID = $appointmentData['appointmentType'];
+        $appointmentName = $OPD->findName($appointmentTypeID);
+
+        $businessID = $appointmentData['businessID'];
+        $clientID = $appointmentData['clientID'];
+        $doctorID = $appointmentData['doctorID'];
+
+        $clientData = $clientModel->find($clientID);
+        $Age = $clientModel->getclientAge($businessID, $clientID);
+        $Gender = $clientModel->getclientGender($businessID, $clientID);
+        $clientName = $clientModel->getclientName($businessID, $clientID);
+        $clientUnique = $clientModel->getclientUnique($businessID, $clientID);
+
+        $doctorData = $doctorModel->getDoctorInfo($doctorID);
+        $doctorName = $doctorData['FirstName'] . ' ' . $doctorData['LastName'];
+        $specializationName = $doctorData['Specialization'];
+
+        $total = $appointmentData['appointmentFee'] + $appointmentData['hospitalCharges'];
+
+        $InvoiceNumber = $OPD->getinvoiceNumber($businessID, $appointmentID);
+
+        $operatorName = session()->get('fName');
+
+        $data = [
+            'appointmentData' => $appointmentData,
+            'appointmentTypeName' => $appointmentName,
+            'clientName' => $clientName,
+            'doctorName' => $doctorName,
+            'Age' => $Age,
+            'Gender' => $Gender,
+            'clientUnique' => $clientUnique,
+            'InvoiceNumber' => $InvoiceNumber,
+            'specializationName' => $specializationName,
+            'operatorName' => $operatorName,
+            'hospitalfee' => $appointmentData['hospitalCharges'],
+            'total' => $total,
+        ];
+
+
+        $mpdf = new Mpdf();
+        $pdfContent = view('pdf_template', $data);
+        $mpdf->WriteHTML($pdfContent);
+
+        $pdfOutput = $mpdf->Output('', 'S');
+
+        $response = service('response');
+        $response->setContentType('application/pdf');
+        $response->setHeader('Content-Disposition', 'inline; filename="Invoice_' . $InvoiceNumber . '.pdf"');
+        $response->setHeader('Cache-Control', 'private, max-age=0, must-revalidate');
+        $response->setBody($pdfOutput);
+
+        return $response;
+    }
     private function generatePdf($data)
     {
 

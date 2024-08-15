@@ -8,9 +8,17 @@ use CodeIgniter\Model;
 class DoctorModel extends Model
 {
 
-    protected $table = "doctorprofile";
-    protected $allowedFields = ['DoctorID', 'FirstName', 'LastName', 'Gender', 'DateOfBirth', 'ContactNumber', 'Email', 'Specialization', 'MedicalLicenseNumber', 'ClinicAddress', 'HospitalAffiliation', 'Education', 'ExperienceYears', 'Certification', 'ProfileImageURL', 'BusinessID'];
+    // protected $table = "doctorprofile";
+    // protected $allowedFields = ['DoctorID', 'FirstName', 'LastName', 'Gender', 'DateOfBirth', 'ContactNumber', 'Email', 'Specialization', 'MedicalLicenseNumber', 'ClinicAddress', 'HospitalAffiliation', 'Education', 'ExperienceYears', 'Certification', 'ProfileImageURL', 'BusinessID'];
 
+    protected $table = 'doctorprofile';
+    protected $primaryKey = 'DoctorID';
+    protected $allowedFields = ['FirstName', 'LastName', 'Gender', 'DateOfBirth', 'ContactNumber', 'Email', 'Specialization', 'MedicalLicenseNumber', 'ClinicAddress', 'HospitalAffiliation', 'ExperienceYears', 'Education', 'Certification', 'ProfileImageURL', 'BusinessID', 'RegistrationDate'];
+
+    public function getDoctorInfo($doctorID)
+    {
+        return $this->where('DoctorID', $doctorID)->first();
+    }
     public function saveDoctorProfile($data)
     {
         $this->db->table('doctorprofile')->insert($data);

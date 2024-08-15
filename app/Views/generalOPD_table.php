@@ -83,6 +83,9 @@
                                                     <td>
                                                         <!-- <a href="<?= base_url('viewAppointmentDetails/' . $opd['appointmentOPD']); ?>"
                                                             class="btn btn-info btn-sm">View Details</a> -->
+
+                                                        <a href="<?= base_url('OPDAppointmentinvoice/' . $opd['appointmentOPD']); ?>"
+                                                            class="btn btn-info btn-sm">Inoice</a>
                                                         <a href="<?= base_url('deleteGeneralOPD/' . $opd['appointmentOPD']); ?>"
                                                             onclick="return confirm('Are you sure you want to delete this Appointment?');"
                                                             class="btn btn-danger btn-sm">Delete</a>
