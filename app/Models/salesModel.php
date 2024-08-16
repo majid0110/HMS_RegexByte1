@@ -67,6 +67,16 @@ class salesModel extends Model
             ->getResultArray();
     }
 
+    // public function getServices()
+    // {
+    //     return $this->db->table('artmenu')
+    //         ->select('artmenu.*, taxtype.value as tax_value, taxtype.tax_id as idTVSH')
+    //         ->join('taxtype', 'artmenu.idTVSH = taxtype.tax_id', 'left')
+    //         ->where('artmenu.status', 'Active')
+    //         ->get()
+    //         ->getResultArray();
+    // }
+
     public function getCategories()
     {
         return $this->db->table('catart')

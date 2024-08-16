@@ -213,4 +213,27 @@ class OpdModel extends Model
     {
         return $this->where('appointmentOPD', $appointmentOPD)->delete();
     }
+
+    public function findName($AppointmentTypeID)
+    {
+        $query = $this->db->table('fee_type')
+            ->select('FeeType')
+            ->where('f_id', $AppointmentTypeID)
+            ->get()
+            ->getRowArray();
+
+        return $query['FeeType'] ?? null;
+    }
+
+    public function getinvoiceNumber($businessID, $appointmentOPD)
+    {
+        return $this->db->table($this->table)
+            ->where('businessID', $businessID)
+            ->where('appointmentOPD', $appointmentOPD)
+            ->select('appointmentNo')
+            ->get()
+            ->getRowArray()['appointmentNo'] ?? null;
+    }
+
+
 }

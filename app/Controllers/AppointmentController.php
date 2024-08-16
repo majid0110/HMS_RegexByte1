@@ -131,11 +131,11 @@ class AppointmentController extends Controller
         if (!$session->get('ID')) {
             return redirect()->to(base_url("/session_expired"));
         }
-        $model = new AppointmentModel();
+        $model = new OpdModel();
         $model->deleteAppointment($appointmentOPD);
         session()->setFlashdata('success', 'Appointment deleted...!!');
 
-        return redirect()->to(base_url("/generalOPD_table"));
+        return redirect()->to(base_url("/GeneralOPD_table"));
     }
 
     public function fetchDoctorFee()
@@ -484,7 +484,7 @@ class AppointmentController extends Controller
         $doctorName = $doctorData['FirstName'] . ' ' . $doctorData['LastName'];
         $specializationName = $doctorData['Specialization'];
 
-        $total = $appointmentData['appointmentFee'] + $appointmentData['hospitalCharges'];
+        $total = $appointmentData['appointmentFee'];
 
         $InvoiceNumber = $OPD->getinvoiceNumber($businessID, $appointmentID);
 
@@ -501,7 +501,7 @@ class AppointmentController extends Controller
             'InvoiceNumber' => $InvoiceNumber,
             'specializationName' => $specializationName,
             'operatorName' => $operatorName,
-            'hospitalfee' => $appointmentData['hospitalCharges'],
+            'hospitalfee' => $total,
             'total' => $total,
         ];
 

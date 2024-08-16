@@ -115,6 +115,55 @@
             border-top: 2px solid #eee;
             font-weight: bold;
         }
+        .toast {
+            position: fixed;
+            top: 10rem;
+            right: 20px;
+            background-color: orange;
+            color: #fff;
+            padding: 16px 24px;
+            border-radius: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: all 0.5s ease-in-out;
+            z-index: 999;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast.success {
+            background-color: #6495ED;
+        }
+
+        .toast.error {
+            background-color: #dc3545;
+        }
+
+        .toast::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px;
+            border-style: solid;
+            border-color: transparent transparent transparent transparent;
+        }
+
+        .toast.success::before {
+            border-top-color: #6495ED;
+        }
+
+        .toast.error::before {
+            border-top-color: #dc3545;
+        }
     </style>
 </head>
 
@@ -132,6 +181,10 @@
             <div class="main-panel" style="padding: 20px; background: #F4F5F7">
                 <div class="content-wrapper" style="background: #F4F5F7;">
 
+                <?php
+                    $successMessage = session()->getFlashdata('success');
+                    $errorMessage = session()->getFlashdata('error');
+                ?>
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="invoice-box"
                             style="max-width: 950px; margin: auto; border-radius: 30px; background: snow; width: 85rem; padding: 30px; border: 1px solid #eee; box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); font-size: 16px; line-height: 24px; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; color: #555;">
@@ -694,17 +747,6 @@ document.getElementById('addRowBtn').addEventListener('click', function() {
     </script>
 
 
-<!-- <script>
-        function loadCorrectInvoice(invOrdNum) {
-            $('#correctInvoiceContent').load('/HMS_RegexByte/CorrectInvoice?invOrdNum=' + invOrdNum);
-        }
-
-        $(document).on('click', '[data-target="#correctModal"]', function () {
-            var invOrdNum = '<?= $ServiceDetails[0]['invOrdNum']; ?>';
-            loadCorrectInvoice(invOrdNum);
-        });
-    </script> -->
-
     <!-- main-panel ends -->
     </div>
     <!-- page-body-wrapper ends -->
@@ -746,6 +788,35 @@ document.getElementById('addRowBtn').addEventListener('click', function() {
     <script src="<?= base_url('public/assets/js_s/file-upload.js') ?>"></script>
     <script src="<?= base_url('public/assets/js_s/typeahead.js') ?>"></script>
     <script src="<?= base_url('public/assets/js_s/select2.js') ?>"></script>
+
+    <script>
+        $(document).ready(function () {
+            function showToast(message, type) {
+                const toastContainer = document.createElement('div');
+                toastContainer.classList.add('toast', type);
+                toastContainer.textContent = message;
+                document.body.appendChild(toastContainer);
+
+                toastContainer.classList.add('show');
+
+                setTimeout(function () {
+                    toastContainer.classList.remove('show');
+                    setTimeout(function () {
+                        toastContainer.remove();
+                    }, 500);
+                }, 5000);
+            }
+
+            <?php if ($successMessage = session()->getFlashdata('success')): ?>
+                showToast('<?= $successMessage ?>', 'success');
+            <?php endif; ?>
+            <?php if ($errorMessage = session()->getFlashdata('error')): ?>
+                showToast('<?= $errorMessage ?>', 'error');
+            <?php endif; ?>
+
+        });
+
+    </script>
 
 </body>
 
