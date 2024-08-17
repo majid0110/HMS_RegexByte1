@@ -378,7 +378,8 @@
                                     <div class="item" style="align-content: center;"
                                         data-service-id="<?= $service['idArtMenu']; ?>"
                                         data-service-price="<?= $service['Price']; ?>"
-                                        data-service-tax="<?= $service['idTVSH']; ?>"
+                                        data-service-tax-id="<?= $service['idTVSH']; ?>"
+                                        data-service-tax-value="<?= $service['tax_value']; ?>"
                                         data-has-expiry="<?= count($serviceExpiries) > 0 ? '1' : '0' ?>">
                                         <div style="font-weight: bolder;"><?= $service['Name']; ?></div>
                                         <div style="margin-bottom:auto; font-size: small;"><?= $service['Price']; ?> pkr
@@ -897,34 +898,36 @@
             function addServiceRow(serviceId, serviceName, servicePrice, serviceTax, expiryHtml) {
                 var expiryColumn = isExpiry == 1 ? `<td>${expiryHtml}</td>` : '';
                 var rowHtml = `
-                <tr data-service-id="${serviceId}">
-                    <td>${serviceName}</td>
-                    <td contenteditable="true" class="editable-price">${servicePrice}</td>
-                    <td>
-                        <div class="quantity-input" style="display: flex;flex-direction: row;justify-content: space-evenly;">
-                        <span class="quantity-decrement btn btn-danger btn-sm" style="font-size: 17px;border-radius: 50%;">-</span>
-                        <input type="text" class="editable-quantity form-control quantity-box" style="width: 40px; padding: 2%;" value="1">
-                        <span class="quantity-increment btn btn-success btn-sm" style="border-radius: 50%; ">+</span>
-                        </div>
-                    </td>
-                    <td><input type="number" class="editable-discount" value="0" min="0" max="100"></td>
-                    <td class="tax-rate">${serviceTax}</td>
-                    ${expiryColumn}
-                    <td><button class="delete-button">Delete</button></td>
-                </tr>`;
+    <tr data-service-id="${serviceId}">
+        <td>${serviceName}</td>
+        <td contenteditable="true" class="editable-price">${servicePrice}</td>
+        <td>
+            <div class="quantity-input" style="display: flex;flex-direction: row;justify-content: space-evenly;">
+            <span class="quantity-decrement btn btn-danger btn-sm" style="font-size: 17px;border-radius: 50%;">-</span>
+            <input type="text" class="editable-quantity form-control quantity-box" style="width: 40px; padding: 2%;" value="1">
+            <span class="quantity-increment btn btn-success btn-sm" style="border-radius: 50%; ">+</span>
+            </div>
+        </td>
+        <td><input type="number" class="editable-discount" value="0" min="0" max="100"></td>
+        <td class="tax-rate" data-tax-id="${serviceTax.idTVSH}" data-tax-value="${serviceTax.value}">${serviceTax.value}%</td>
+        ${expiryColumn}
+        <td><button class="delete-button">Delete</button></td>
+    </tr>`;
 
                 $('#serviceTableBody').append(rowHtml);
                 calculateTotals();
             }
 
             $(document).off('click', '.item').on('click', '.item', function () {
-
                 $(this).toggleClass('selected-item');
 
                 var serviceId = $(this).data('service-id');
                 var serviceName = $(this).find('div:first').text();
                 var servicePrice = $(this).data('service-price');
-                var serviceTax = $(this).data('service-tax');
+                var serviceTax = {
+                    idTVSH: $(this).data('service-tax-id'),
+                    value: $(this).data('service-tax-value')
+                };
                 var hasExpiry = $(this).data('has-expiry') === 1;
                 var expiryHtml = hasExpiry ? $(this).find('.expiry-dropdown').clone().show().prop('outerHTML') : '-';
 
@@ -1163,7 +1166,8 @@
                     var fee = parseFloat(serviceTypeRow.find('.editable-price').text());
                     var quantity = parseInt(serviceTypeRow.find('.editable-quantity').val());
                     var discount = parseFloat(serviceTypeRow.find('.editable-discount').val());
-                    var taxRate = parseFloat(serviceTypeRow.find('.tax-rate').text());
+                    var taxRate = parseFloat(serviceTypeRow.find('.tax-rate').data('tax-value'));
+                    var taxId = serviceTypeRow.find('.tax-rate').data('tax-id');
                     // var expiryDate = '1970-01-01';
                     // var expiryDate = serviceTypeRow.find('.expiry-date').val();
                     var expiryDate = serviceTypeRow.find('.expiry-dropdown').val() || serviceTypeRow.find('.expiry-date').val() || null;
@@ -1181,22 +1185,24 @@
                         discount: discount,
                         expiryDate: expiryDate,
                         taxRate: taxRate,
+                        taxId: taxId,
                         calculatedTax: calculatedTax
                     });
                 });
 
                 console.log('Services', services);
-                console.log('Client ID', clientId);
-                console.log('Client Name', clientName);
-                console.log('Curranct Name', currencyName);
-                console.log('Payment Method ID', paymentMethodId);
-                console.log('Payment Name', paymentName);
-                console.log('Payment Method Name', paymentMethodName);
-                console.log('Currancy', currency);
-                console.log('Exchange ', exchange);
-                console.log('Total Fee ', totalFee);
-                console.log('Toatal Tax', totalTax);
-                console.log('Toatal Discount', discountedTotal);
+                // console.log('Client ID', clientId);
+                // console.log('Client Name', clientName);
+                // console.log('Curranct Name', currencyName);
+                // console.log('Payment Method ID', paymentMethodId);
+                // console.log('Payment Name', paymentName);
+                // console.log('Payment Method Name', paymentMethodName);
+                // console.log('Currancy', currency);
+                // console.log('Exchange ', exchange);
+                // console.log('Total Fee ', totalFee);
+                // console.log('Total Fee ', totalFee);
+                // console.log('Toatal Tax', totalTax);
+                // console.log('Toatal Discount', discountedTotal);
 
 
                 $.ajax({

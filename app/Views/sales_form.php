@@ -540,7 +540,7 @@
                             <tbody>
                               <?php foreach ($services as $service): ?>
                                 <tr data-service-type-id="<?= $service['idArtMenu']; ?>"
-                                  data-idtvsh="<?= $service['idTVSH']; ?>">
+                                  data-tax-value="<?= $service['tax_value']; ?>">
                                   <td class="title" class="col-name"><?= $service['Name']; ?></td>
                                   <td class="fee" contenteditable="true"><?= $service['Price']; ?></td>
                                   <?php if ($isExpiry == 1): ?>
@@ -881,13 +881,13 @@
         var quantity = parseFloat($(this).find('.editable-quantity').val());
         var fee = parseFloat($(this).find('.editable-fee').text());
         var discount = parseFloat($(this).find('.editable-discount').text());
-        var idTVSH = parseFloat($(this).find('.tax-rate').text()) / 100;
+        var taxValue = parseFloat($(this).find('.tax-rate').text()) / 100;
+        // var taxValue = parseFloat($(this).find('.tax-rate').text());
 
         var rowTotal = quantity * fee;
         var rowDiscountAmount = rowTotal * (discount / 100);
         var rowDiscountedTotal = rowTotal - rowDiscountAmount;
-        var rowTaxAmount = rowDiscountedTotal * idTVSH;
-        // var rowTaxAmount = idTVSH;
+        var rowTaxAmount = rowDiscountedTotal * taxValue;
 
         discountAmount += rowDiscountAmount;
         taxAmount += rowTaxAmount;
@@ -895,7 +895,6 @@
 
         $(this).data('calculatedTax', rowTaxAmount);
       });
-
       var discountedTotal = totalFee - discountAmount;
       var finalTotal = Math.round(discountedTotal + taxAmount);
 
@@ -917,9 +916,8 @@
       });
     });
 
-    function addServiceRow(serviceType, serviceTypeId, serviceFee, expiryDate, idTVSH) {
+    function addServiceRow(serviceType, serviceTypeId, serviceFee, expiryDate, taxValue) {
       var exists = false;
-
       $('#serviceTableBody tr').each(function () {
         var existingServiceTypeId = $(this).find('td:first').data('service-type-id');
         if (existingServiceTypeId === serviceTypeId) {
@@ -934,7 +932,7 @@
           '<td contenteditable="true" class="editable-fee" style="text-align: center;">' + serviceFee + '</td>' +
           '<td><div class="quantity-input"><span class="quantity-decrement btn btn-danger btn-sm" style="font-size: 17px;margin-left: 30%; border-radius: 50%; margin-right: -8%;">-</span><input type="text" class="editable-quantity form-control quantity-box" style="width: 40px; padding: 0%;" value="1"><span class="quantity-increment btn btn-success btn-sm" style="margin-right: 30%;font-size: 17px;margin-left: -7%; border-radius: 50%; ">+</span></div></td>' +
           '<td contenteditable="true" class="editable-discount" style="text-align: center;">0</td>' +
-          '<td class="tax-rate">' + idTVSH + '</td>';
+          '<td class="tax-rate">' + taxValue + '</td>';
 
         <?php if ($isExpiry == 1): ?>
           newRow += '<td>' + (expiryDate ? '<input type="hidden" class="expiry-date" value="' + expiryDate + '">' + expiryDate.split(' ')[0] : 'Nil') + '</td>';
@@ -981,8 +979,8 @@
         var serviceType = serviceTypeRow.find('.title').text().trim();
         var serviceFee = serviceTypeRow.find('.fee').text().trim();
         var expiryDate = serviceTypeRow.find('.expiry-dropdown').val();
-        var idTVSH = serviceTypeRow.data('idtvsh');
-        addServiceRow(serviceType, serviceTypeId, serviceFee, expiryDate, idTVSH);
+        var taxValue = serviceTypeRow.data('tax-value');
+        addServiceRow(serviceType, serviceTypeId, serviceFee, expiryDate, taxValue);
         calculateTotalFee();
       });
 

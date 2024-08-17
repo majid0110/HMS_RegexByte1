@@ -214,6 +214,7 @@ $routes->post('SalesController/UpdateInvoice/(:num)', 'SalesController::UpdateIn
 $routes->post('SalesController/UpdateInvoice', 'SalesController::UpdateInvoice');
 
 $routes->post('/saveClientfromSales', 'SalesController::saveClientProfile');
+$routes->get('regenerateInvoice/(:num)', 'SalesController::generateInvoice/$1');
 
 //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Reports Routes

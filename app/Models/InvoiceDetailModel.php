@@ -35,6 +35,16 @@ class InvoiceDetailModel extends Model
             ->update();
     }
 
+    public function getServicesByInvoice($idReceipts)
+    {
+        $db = \Config\Database::connect();
+        return $db->table('invoicedetail')
+            ->select('invoicedetail.*, artmenu.Name as serviceName')
+            ->join('artmenu', 'invoicedetail.idArtMenu = artmenu.idArtMenu')
+            ->where('invoicedetail.idReceipts', $idReceipts)
+            ->get()
+            ->getResultArray();
+    }
     public function getIdItemByIdArtMenu($idArtMenu, $idBusiness)
     {
         $db = \Config\Database::connect();
@@ -46,4 +56,6 @@ class InvoiceDetailModel extends Model
             ->get()
             ->getRowArray();
     }
+
+
 }

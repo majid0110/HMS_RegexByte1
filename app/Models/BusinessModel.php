@@ -7,29 +7,34 @@ use CodeIgniter\Model;
 class BusinessModel extends Model
 {
     protected $table = 'business';
-    protected $primaryKey = 'ID'; 
+    protected $primaryKey = 'ID';
     protected $allowedFields = ['businessName', 'regName', 'businessType', 'address', 'phone', 'email', 'logo'];
 
     public function getBusinessCharges($businessID)
     {
         $query = $this->db->table('business')
-        ->select('charges') 
-        ->where('BusinessID', $businessID)
-        ->get()
-        ->getRowArray();
+            ->select('charges')
+            ->where('BusinessID', $businessID)
+            ->get()
+            ->getRowArray();
 
-        return $query['charges']; 
+        return $query['charges'];
     }
-//     public functiongetBusinessCharges($businessID)
+    //     public functiongetBusinessCharges($businessID)
 // {
 //     //$businessID = session()->get('businessID');
-    
-//     $query = $this->db->table('business')
+
+    //     $query = $this->db->table('business')
 //         ->select('charges') 
 //         ->where('BusinessID', $businessID)
 //         ->get()
 //         ->getRowArray();
 
-//   //  return $query['hospitalCharges'] ?? 0; 
+    //   //  return $query['hospitalCharges'] ?? 0; 
 // }
+
+    public function getBusinessType($id)
+    {
+        return $this->table('businesstype')->find($id);
+    }
 }

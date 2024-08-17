@@ -102,6 +102,16 @@ class ServicesModel extends Model
         return $builder->countAllResults();
     }
 
+    public function getServiceName($businessID, $idService)
+    {
+        return $this->db->table($this->table)
+            ->where('idBusiness', $businessID)
+            ->where('idArtMenu', $idService)
+            ->select('Name')
+            ->get()
+            ->getRowArray()['Name'] ?? null;
+    }
+
 
     public function getServicesCount()
     {
@@ -277,6 +287,7 @@ class ServicesModel extends Model
             return false;
         }
     }
+
 
 
 }

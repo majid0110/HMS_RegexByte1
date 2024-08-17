@@ -219,5 +219,39 @@ class InvoiceModel extends Model
             ->getResult();
     }
 
+    public function getInvoiceData($idReceipts)
+    {
+        return $this->find($idReceipts);
+    }
+
+    public function getPaymentDetails($idReceipts)
+    {
+        $db = \Config\Database::connect();
+        return $db->table('invoicepayment')
+            ->join('invoicepaymentdetails', 'invoicepayment.idPayment = invoicepaymentdetails.idPayment')
+            ->where('invoicepayment.idReceipt', $idReceipts)
+            ->get()
+            ->getRowArray();
+    }
+
+    public function getPaymentMethodName($idPayment)
+    {
+        return $this->db->table('paymentmethods')
+            ->where('idPaymentMethods', $idPayment)
+            ->select('Method')
+            ->get()
+            ->getRowArray()['Method'] ?? null;
+    }
+
+    public function getCurrencyName($idCurrency)
+    {
+        return $this->db->table('currency')
+            ->where('id', $idCurrency)
+            ->select('Currency')
+            ->get()
+            ->getRowArray()['Currency'] ?? null;
+    }
+
+
 
 }

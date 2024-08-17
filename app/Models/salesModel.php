@@ -46,36 +46,49 @@ class salesModel extends Model
             ->getResultArray();
     }
 
+    // public function getServices2($enableService)
+    // {
+    //     $builder = $this->db->table('artmenu')
+    //         ->select('idArtMenu, Name, Price, idCatArt, idTVSH')
+    //         ->where('status', 'Active');
+
+    //     if ($enableService != 1) {
+    //         $builder->where('isService', 0);
+    //     }
+
+    //     return $builder->get()->getResultArray();
+    // }
+
     public function getServices2($enableService)
     {
         $builder = $this->db->table('artmenu')
-            ->select('idArtMenu, Name, Price, idCatArt, idTVSH')
-            ->where('status', 'Active');
+            ->select('artmenu.*, taxtype.value as tax_value, taxtype.tax_id as idTVSH')
+            ->join('taxtype', 'artmenu.idTVSH = taxtype.tax_id', 'left')
+            ->where('artmenu.status', 'Active');
 
         if ($enableService != 1) {
-            $builder->where('isService', 0);
+            $builder->where('artmenu.isService', 0);
         }
-
         return $builder->get()->getResultArray();
     }
-    public function getServices()
-    {
-        return $this->db->table('artmenu')
-            ->select('idArtMenu, Name, Price, idCatArt, idTVSH')
-            ->where('status', 'Active')
-            ->get()
-            ->getResultArray();
-    }
-
     // public function getServices()
     // {
     //     return $this->db->table('artmenu')
-    //         ->select('artmenu.*, taxtype.value as tax_value, taxtype.tax_id as idTVSH')
-    //         ->join('taxtype', 'artmenu.idTVSH = taxtype.tax_id', 'left')
-    //         ->where('artmenu.status', 'Active')
+    //         ->select('idArtMenu, Name, Price, idCatArt, idTVSH')
+    //         ->where('status', 'Active')
     //         ->get()
     //         ->getResultArray();
     // }
+
+    public function getServices()
+    {
+        return $this->db->table('artmenu')
+            ->select('artmenu.*, taxtype.value as tax_value, taxtype.tax_id as idTVSH')
+            ->join('taxtype', 'artmenu.idTVSH = taxtype.tax_id', 'left')
+            ->where('artmenu.status', 'Active')
+            ->get()
+            ->getResultArray();
+    }
 
     public function getCategories()
     {

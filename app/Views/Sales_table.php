@@ -317,6 +317,8 @@
                                                         <?= $Sale['Date']; ?>
                                                     </td>
                                                     <td>
+                                                        <a href="<?= base_url('regenerateInvoice/' . $Sale['idReceipts']); ?>"
+                                                            class="btn btn-info btn-sm">Invoice</a>
                                                         <a href="<?= base_url('viewServiceDetails/' . $Sale['idReceipts']); ?>"
                                                             class="btn btn-info btn-sm">View Details</a>
                                                         <a href="<?= base_url('deleteSales/' . $Sale['idReceipts']); ?>"
