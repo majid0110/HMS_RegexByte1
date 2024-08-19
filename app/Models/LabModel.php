@@ -14,7 +14,13 @@ class LabModel extends Model
 
     public function saveLabService($data)
     {
-        return $this->insert($data);
+        $this->insert($data);
+        return $this->insertID();
+    }
+
+    public function saveReportAttributes($data)
+    {
+        return $this->db->table('lab_report_attributes')->insert($data);
     }
 
     public function getTestDetails()

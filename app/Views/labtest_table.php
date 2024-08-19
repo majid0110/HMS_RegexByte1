@@ -254,6 +254,11 @@
                           </td>
 
                           <td>
+
+
+                            <a href="<?= base_url('generateTestInvoice/' . $test['test_id']); ?>"
+                              class="btn btn-primary btn-sm"><i class="mdi mdi-ticket-confirmation"></i> </a>
+
                             <a href="<?= base_url('viewTestDetails/' . $test['test_id']); ?>"
                               class="btn btn-info btn-sm">View Details</a>
 

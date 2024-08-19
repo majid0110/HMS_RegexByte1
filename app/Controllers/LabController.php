@@ -106,7 +106,16 @@ class LabController extends Controller
         ];
 
         $model = new LabModel();
-        $model->saveLabService($data);
+        $insertID = $model->saveLabService($data);
+
+        $report_attributes = [
+            'labTestID' => $insertID,
+            'title' => $request->getPost('ls_name'),
+            'referenceValue' => 0,
+            'unit' => 2
+        ];
+
+        $model->saveReportAttributes($report_attributes);
 
         session()->setFlashdata('success', 'Service Added..!!');
 
@@ -365,5 +374,111 @@ class LabController extends Controller
     }
 
 
+    public function generateTestInvoice($test_id)
+    {
+        $labModel = new LabModel();
+        $testModel = new TestModel();
+        $testDetailsModel = new LabtestdetailsModel();
+        $clientModel = new ClientModel();
+
+        $test = $testModel->find($test_id);
+        if (!$test) {
+            return redirect()->to('/tests')->with('error', 'Test not found');
+        }
+
+        $detailsData = $testDetailsModel->where('labTestID', $test_id)->findAll();
+
+        $clientData = $clientModel->find($test['clientId']);
+
+        $totalDiscount = 0;
+        foreach ($detailsData as &$detail) {
+            $testType = $labModel->find($detail['testTypeID']);
+            $detail['testName'] = $testType ? $testType['title'] : 'Unknown Test';
+
+            $discount = ($detail['actual_fee'] - $detail['fee']);
+            $totalDiscount += $discount;
+            $detail['discount'] = ($discount / $detail['actual_fee']) * 100;
+        }
+
+        $data = [
+            'testTypeId' => $test['testTypeId'],
+            'fee' => $test['fee'],
+            'actual_fee' => $test['actual_fee'],
+            'userId' => $test['userId'],
+            'businessId' => $test['businessId'],
+            'hospitalCharges' => $test['hospitalCharges'],
+            'clientId' => $test['clientId'],
+            'appointmentId' => $test['appointmentId'],
+            'labInvoice' => $test['labInvoice'],
+            'clientName' => 'test',
+        ];
+
+        $Age = $clientModel->getclientAge($test['businessId'], $test['clientId']);
+        $Gender = $clientModel->getclientGender($test['businessId'], $test['clientId']);
+        $clientName1 = $clientModel->getclientName($test['businessId'], $test['clientId']);
+        $clientUnique = $clientModel->getclientUnique($test['businessId'], $test['clientId']);
+        $operatorName = session()->get('fName');
+        $InvoiceNumber = $testModel->getinvoiceNumber($test['businessId'], $test['clientId'], $test['appointmentId']);
+
+        if ($test['appointmentId'] !== 'Non') {
+            $appointmentModel = new AppointmentModel();
+            $appointment = $appointmentModel->find($test['appointmentId']);
+            if ($appointment) {
+                $appointmentType = $appointment['appointmentType'];
+                $doctorModel = new DoctorModel();
+                $doctor = $doctorModel->find($appointment['doctorID']);
+                $doctorName = $doctor ? $doctor['FirstName'] : '';
+            }
+        }
+
+        if (empty($test['appointmentId'])) {
+            $appointment = 'Non';
+            $appointmentType = 'Non';
+            $doctorName = 'Non';
+        } else {
+            $appointmentDetails = $appointmentModel->getAppointmentDetails($test['appointmentId']);
+
+            if ($appointmentDetails) {
+                $appointment = $test['appointmentId'];
+                $appointmentType = $appointmentDetails['FeeType'];
+                $doctorName = $appointmentDetails['FirstName'] . ' ' . $appointmentDetails['LastName'];
+            } else {
+                $appointment = $test['appointmentId'];
+                $appointmentType = 'Unknown';
+                $doctorName = 'Unknown';
+            }
+        }
+
+
+
+
+        $mpdf = new \Mpdf\Mpdf();
+        $pdfContent = view('pdf_labTest', [
+            'data' => $data,
+            'detailsData' => $detailsData,
+            'TotalDiscount' => $totalDiscount,
+            'Age' => $Age,
+            'clientName1' => $clientName1,
+            'appointment' => $test['appointmentId'],
+            'Gender' => $Gender,
+            'clientUnique' => $clientUnique,
+            'operatorName' => $operatorName,
+            'InvoiceNumber' => $InvoiceNumber,
+            'appointmentType' => $appointmentType,
+            'doctorName' => $doctorName,
+        ]);
+
+        $mpdf = new \Mpdf\Mpdf();
+        $pdfContent = view('pdf_labTest', [
+        ]);
+        $mpdf->WriteHTML($pdfContent);
+
+        $filename = "Test_Invoice_" . $test_id . ".pdf";
+
+        $this->response->setHeader('Content-Type', 'application/pdf');
+        $this->response->setHeader('Content-Disposition', 'inline; filename="' . $filename . '"');
+
+        return $this->response->setBody($mpdf->Output($filename, 'S'));
+    }
 
 }

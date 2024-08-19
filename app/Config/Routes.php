@@ -150,6 +150,7 @@ $routes->post('PdfController/getDynamicDataForPdf', 'PdfController::getDynamicDa
 $routes->get('PdfController/generatePdf', 'PdfController::generatePdf');
 
 $routes->get('/generate_testPdf', 'LabController::generatePdf');
+$routes->get('generateTestInvoice/(:num)', 'LabController::generateTestInvoice/$1');
 
 
 //-------------------------------------------------------------------------------------------------------------------------
