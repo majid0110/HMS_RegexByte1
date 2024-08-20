@@ -10,6 +10,7 @@ use App\Models\ClientModel;
 use App\Models\AppointmentModel;
 use App\Models\TestModel;
 use App\Models\LabtestdetailsModel;
+use App\Models\ServicesModel;
 use Mpdf\Mpdf;
 
 class LabController extends Controller
@@ -24,6 +25,8 @@ class LabController extends Controller
     }
     public function lab_test_form()
     {
+        // $servicesModel = new ServicesModel();
+        // $data['categories'] = $servicesModel->getCategories();
         return view('lab_test_form.php');
     }
 
@@ -88,14 +91,12 @@ class LabController extends Controller
     }
 
 
-
     public function saveLabService()
     {
         $request = \Config\Services::request();
         $session = \Config\Services::session();
         $businessID = $session->get('businessID');
         $UserID = $session->get('ID');
-
 
         $data = [
             'title' => $request->getPost('ls_name'),
@@ -108,20 +109,58 @@ class LabController extends Controller
         $model = new LabModel();
         $insertID = $model->saveLabService($data);
 
-        $report_attributes = [
-            'labTestID' => $insertID,
-            'title' => $request->getPost('ls_name'),
-            'referenceValue' => 0,
-            'unit' => 2
-        ];
+        // Save lab report attributes
+        $attributeTitles = $request->getPost('attribute_title');
+        $attributeReferenceValues = $request->getPost('attribute_reference_value');
+        $attributeUnits = $request->getPost('attribute_unit');
 
-        $model->saveReportAttributes($report_attributes);
+        for ($i = 0; $i < count($attributeTitles); $i++) {
+            $attributeData = [
+                'labTestID' => $insertID,
+                'title' => $attributeTitles[$i],
+                'referenceValue' => $attributeReferenceValues[$i],
+                'unit' => $attributeUnits[$i]
+            ];
+            $model->saveLabReportAttribute($attributeData);
+        }
 
         session()->setFlashdata('success', 'Service Added..!!');
-
         return redirect()->to(base_url("/labServices_form"));
-
     }
+
+    // public function saveLabService()
+    // {
+    //     $request = \Config\Services::request();
+    //     $session = \Config\Services::session();
+    //     $businessID = $session->get('businessID');
+    //     $UserID = $session->get('ID');
+
+
+    //     $data = [
+    //         'title' => $request->getPost('ls_name'),
+    //         'description' => $request->getPost('ls_description'),
+    //         'test_fee' => $request->getPost('ls_fee'),
+    //         'userID' => $UserID,
+    //         'businessID' => $businessID,
+    //     ];
+
+    //     $model = new LabModel();
+    //     $insertID = $model->saveLabService($data);
+
+    //     $report_attributes = [
+    //         'labTestID' => $insertID,
+    //         'title' => $request->getPost('ls_name'),
+    //         'referenceValue' => 0,
+    //         'unit' => 2
+    //     ];
+
+    //     $model->saveReportAttributes($report_attributes);
+
+    //     session()->setFlashdata('success', 'Service Added..!!');
+
+    //     return redirect()->to(base_url("/labServices_form"));
+
+    // }
 
     public function addTest()
     {

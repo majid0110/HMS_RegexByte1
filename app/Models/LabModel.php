@@ -55,5 +55,11 @@ class LabModel extends Model
 
     }
 
+    public function saveLabReportAttribute($data)
+    {
+        $this->db->table('lab_report_attributes')->insert($data);
+        return $this->db->insertID();
+    }
+
 
 }

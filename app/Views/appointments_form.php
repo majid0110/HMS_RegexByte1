@@ -589,7 +589,15 @@
         newWindow.document.write('<iframe width="100%" height="100%" src="' + URL.createObjectURL(blob) + '"></iframe>');
       }
 
+      function isDoctorSelected() {
+        return $('#doctor_id').val() !== "";
+      }
+
       function submitForm() {
+        if (!isDoctorSelected()) {
+          showToast('Please select a doctor', 'error');
+          return;
+        }
         var formData = new FormData($('#appointmentForm')[0]);
 
         $.ajax({

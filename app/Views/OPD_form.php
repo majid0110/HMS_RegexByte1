@@ -527,18 +527,42 @@
                 });
             }
 
+            // function populateDoctors(doctors) {
+            //     var doctorDropdown = $('#doctor_id');
+            //     doctorDropdown.empty();
+
+            //     doctorDropdown.append('<option value="">Select a doctor</option>');
+
+            //     doctors.forEach(function (doctor) {
+            //         doctorDropdown.append('<option value="' + doctor.DoctorID + '">' + doctor.FirstName + ' ' + doctor.LastName + '</option>');
+            //     });
+
+            //     doctorDropdown.trigger('change');
+            // }
+
             function populateDoctors(doctors) {
                 var doctorDropdown = $('#doctor_id');
                 doctorDropdown.empty();
 
-                doctorDropdown.append('<option value="">Select a doctor</option>');
+                if (doctors.length > 0) {
+                    doctors.forEach(function (doctor, index) {
+                        var option = $('<option></option>')
+                            .attr('value', doctor.DoctorID)
+                            .text(doctor.FirstName + ' ' + doctor.LastName);
 
-                doctors.forEach(function (doctor) {
-                    doctorDropdown.append('<option value="' + doctor.DoctorID + '">' + doctor.FirstName + ' ' + doctor.LastName + '</option>');
-                });
+                        if (index === 0) {
+                            option.attr('selected', 'selected');
+                        }
+
+                        doctorDropdown.append(option);
+                    });
+                } else {
+                    doctorDropdown.append('<option value="">No doctors available</option>');
+                }
 
                 doctorDropdown.trigger('change');
             }
+
 
             function updateDoctorNameInput() {
                 var selectedOption = $('#doctor_id option:selected');

@@ -16,13 +16,12 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Test-MY Name</label>
+                    <label class="col-sm-3 col-form-label">Test Name</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="ls_name" />
                     </div>
                 </div>
             </div>
-            <!-- Description input -->
             <div class="col-md-6">
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Description</label>
@@ -33,7 +32,6 @@
             </div>
         </div>
         <div class="row">
-            <!-- Fee input -->
             <div class="col-md-6">
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Fee</label>
@@ -43,6 +41,37 @@
                 </div>
             </div>
         </div>
+
+        <!-- New section for lab report attributes -->
+        <div id="attributesContainer">
+            <div class="attribute-row">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" class="form-control" name="attribute_title[]" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Reference Value</label>
+                            <input type="text" class="form-control" name="attribute_reference_value[]" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Unit</label>
+                            <input type="text" class="form-control" name="attribute_unit[]" />
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-danger remove-attribute">Remove</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" id="addMoreAttribute" class="btn btn-secondary">Add More</button>
+
         <div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
@@ -50,18 +79,21 @@
 
     <script>
         $(document).ready(function () {
-            // Close button functionality
             $('#closeSpecializationForm').click(function (e) {
                 e.preventDefault();
-                // Since there's no modal, just close the form
-                // You might want to add further functionality here if needed
-                // For now, just go back to the previous page or close the form
-                // Example: window.history.back();
-                // Or: $('#testFormContainer').hide(); // if the form is in a container
             });
 
-            // Initialize Select2 for any select elements with the .select2 class
             $('.select2').select2();
+            $('#addMoreAttribute').click(function () {
+                var newRow = $('.attribute-row:first').clone();
+                newRow.find('input').val('');
+                $('#attributesContainer').append(newRow);
+            });
+            $('#attributesContainer').on('click', '.remove-attribute', function () {
+                if ($('.attribute-row').length > 1) {
+                    $(this).closest('.attribute-row').remove();
+                }
+            });
         });
     </script>
 </body>
