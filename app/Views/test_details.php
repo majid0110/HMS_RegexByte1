@@ -249,7 +249,7 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <!-- <th>LabTestID</th> -->
+                      <th>ID</th>
                       <th>Test Type</th>
                       <th>Fee</th>
                       <th>Created AT</th>
@@ -258,12 +258,52 @@
                   <tbody>
                     <?php foreach ($testDetails as $detail): ?>
                       <tr>
+                        <td><?= $detail['testTypeID']; ?></td>
                         <td><?= $detail['testTypeName']; ?></td>
                         <td><?= $detail['fee']; ?></td>
                         <td><?= $detail['createdAT']; ?></td>
+                        <td>
+                          <!-- Add Report Button -->
+                          <button class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#reportModal-<?= $detail['testTypeID']; ?>">
+                            Add Report
+                          </button>
+                        </td>
                       </tr>
+
+                      <!-- Modal for the specific report -->
+                      <div class="modal fade" id="reportModal-<?= $detail['testTypeID']; ?>" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Add Report for <?= $detail['testTypeName']; ?></h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <form action=<?= base_url('submitReport/' . $detail['testTypeID']); ?> method="POST">
+                                <?php if (!empty($detail['labReportAttributes'])): ?>
+                                  <?php foreach ($detail['labReportAttributes'] as $attribute): ?>
+
+                                    <input type="hidden" name="testID" value="<?= $testid; ?>">
+                                    <div class="mb-3">
+                                      <label class="form-label">Attribute Name: <b><?= $attribute['title']; ?></label>
+                                      <input type="text" class="form-control" name="result_<?= $attribute['id']; ?>"
+                                        placeholder="Enter result for <?= $attribute['title']; ?>">
+                                    </div>
+                                  <?php endforeach; ?>
+                                <?php else: ?>
+                                  <p>No attributes found for this test.</p>
+                                <?php endif; ?>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     <?php endforeach; ?>
                   </tbody>
+
                 </table>
               </div>
             </div>

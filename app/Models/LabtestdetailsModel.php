@@ -171,4 +171,13 @@ class LabtestdetailsModel extends Model
         return $pagerLinks;
     }
 
+    public function getTestAttributes($testId)
+    {
+        return $this->db->table('lab_report_attributes')
+            ->where('labTestID', $testId)
+            ->select('*')
+            ->get()
+            ->getResultArray();
+    }
+
 }

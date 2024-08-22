@@ -10,6 +10,7 @@ use App\Models\ClientModel;
 use App\Models\AppointmentModel;
 use App\Models\TestModel;
 use App\Models\LabtestdetailsModel;
+use App\Models\LabReportAttributesModel;
 use App\Models\ServicesModel;
 use Mpdf\Mpdf;
 
@@ -48,8 +49,24 @@ class LabController extends Controller
     {
         $model = new LabtestdetailsModel();
         $data['testDetails'] = $model->getTestDetails($testId);
+        $data['testid'] = $testId;
+
+        $attributeModel = new LabReportAttributesModel();
+        foreach ($data['testDetails'] as &$detail) {
+            $detail['labReportAttributes'] = $attributeModel->getAttributesByTestId($detail['testTypeID']);
+        }
+
         return view('test_details', $data);
     }
+
+
+
+    // public function viewTestDetails($testId)
+    // {
+    //     $model = new LabtestdetailsModel();
+    //     $data['testDetails'] = $model->getTestDetails($testId);
+    //     return view('test_details', $data);
+    // }
 
     public function labtest_form()
     {
@@ -193,8 +210,8 @@ class LabController extends Controller
             return redirect()->to(base_url());
         }
 
-        // Fetch necessary data to populate dropdowns or other form elements
-        $data['testTypes'] = []; // Replace with the actual data for test types
+
+        $data['testTypes'] = [];
 
         return view('add_test_form', $data);
     }
@@ -519,5 +536,30 @@ class LabController extends Controller
 
         return $this->response->setBody($mpdf->Output($filename, 'S'));
     }
+
+    public function submitReport($testTypeID)
+    {
+        $request = \Config\Services::request();
+        $model = new LabReportAttributesModel();
+        $testID = $this->request->getPost('testID');
+
+        foreach ($request->getPost() as $key => $value) {
+            if (strpos($key, 'result_') === 0 && !empty($value)) {
+                $labAttributeId = str_replace('result_', '', $key);
+
+                $data = [
+                    'labAttribute_id' => $labAttributeId,
+                    'result' => $value
+                ];
+
+
+                $model->submitLabAttributeReport($data);
+            }
+        }
+        return redirect()->to(base_url('viewTestDetails/' . $testID));
+
+
+    }
+
 
 }
