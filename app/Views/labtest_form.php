@@ -138,187 +138,7 @@
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:../../partials/_settings-panel.html -->
-      <div class="theme-setting-wrapper">
-        <div id="settings-trigger"><i class="ti-settings"></i></div>
-        <div id="theme-settings" class="settings-panel">
-          <i class="settings-close ti-close"></i>
-          <p class="settings-heading">SIDEBAR SKINS</p>
-          <div class="sidebar-bg-options selected" id="sidebar-light-theme">
-            <div class="img-ss rounded-circle bg-light border me-3"></div>Light
-          </div>
-          <div class="sidebar-bg-options" id="sidebar-dark-theme">
-            <div class="img-ss rounded-circle bg-dark border me-3"></div>Dark
-          </div>
-          <p class="settings-heading mt-2">HEADER SKINS</p>
-          <div class="color-tiles mx-0 px-4">
-            <div class="tiles success"></div>
-            <div class="tiles warning"></div>
-            <div class="tiles danger"></div>
-            <div class="tiles info"></div>
-            <div class="tiles dark"></div>
-            <div class="tiles default"></div>
-          </div>
-        </div>
-      </div>
-      <div id="right-sidebar" class="settings-panel">
-        <i class="settings-close ti-close"></i>
-        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab"
-              aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab"
-              aria-controls="chats-section">CHATS</a>
-          </li>
-        </ul>
-        <div class="tab-content" id="setting-content">
-          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
-            aria-labelledby="todo-section">
-            <div class="add-items d-flex px-3 mb-0">
-              <form class="form w-100">
-                <div class="form-group d-flex">
-                  <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
-                  <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Add</button>
-                </div>
-              </form>
-            </div>
-            <div class="list-wrapper px-3">
-              <ul class="d-flex flex-column-reverse todo-list">
-                <li>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox">
-                      Team review meeting at 3.00 PM
-                    </label>
-                  </div>
-                  <i class="remove ti-close"></i>
-                </li>
-                <li>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox">
-                      Prepare for presentation
-                    </label>
-                  </div>
-                  <i class="remove ti-close"></i>
-                </li>
-                <li>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox">
-                      Resolve all the low priority tickets due today
-                    </label>
-                  </div>
-                  <i class="remove ti-close"></i>
-                </li>
-                <li class="completed">
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox" checked>
-                      Schedule meeting for next week
-                    </label>
-                  </div>
-                  <i class="remove ti-close"></i>
-                </li>
-                <li class="completed">
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox" checked>
-                      Project review
-                    </label>
-                  </div>
-                  <i class="remove ti-close"></i>
-                </li>
-              </ul>
-            </div>
-            <h4 class="px-3 text-muted mt-5 fw-light mb-0">Events</h4>
-            <div class="events pt-4 px-3">
-              <div class="wrapper d-flex mb-2">
-                <i class="ti-control-record text-primary me-2"></i>
-                <span>Feb 11 2018</span>
-              </div>
-              <p class="mb-0 font-weight-thin text-gray">Creating component page build a js</p>
-              <p class="text-gray mb-0">The total number of sessions</p>
-            </div>
-            <div class="events pt-4 px-3">
-              <div class="wrapper d-flex mb-2">
-                <i class="ti-control-record text-primary me-2"></i>
-                <span>Feb 7 2018</span>
-              </div>
-              <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
-              <p class="text-gray mb-0 ">Call Sarah Graves</p>
-            </div>
-          </div>
-          <!-- To do section tab ends -->
-          <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
-            <div class="d-flex align-items-center justify-content-between border-bottom">
-              <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
-              <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 fw-normal">See All</small>
-            </div>
-            <ul class="chat-list">
-              <li class="list active">
-                <div class="profile"><img src="../../images/faces/face1.jpg" alt="image"><span class="online"></span>
-                </div>
-                <div class="info">
-                  <p>Thomas Douglas</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">19 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="../../images/faces/face2.jpg" alt="image"><span class="offline"></span>
-                </div>
-                <div class="info">
-                  <div class="wrapper d-flex">
-                    <p>Catherine</p>
-                  </div>
-                  <p>Away</p>
-                </div>
-                <div class="badge badge-success badge-pill my-auto mx-2">4</div>
-                <small class="text-muted my-auto">23 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="../../images/faces/face3.jpg" alt="image"><span class="online"></span>
-                </div>
-                <div class="info">
-                  <p>Daniel Russell</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">14 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="../../images/faces/face4.jpg" alt="image"><span class="offline"></span>
-                </div>
-                <div class="info">
-                  <p>James Richardson</p>
-                  <p>Away</p>
-                </div>
-                <small class="text-muted my-auto">2 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="../../images/faces/face5.jpg" alt="image"><span class="online"></span>
-                </div>
-                <div class="info">
-                  <p>Madeline Kennedy</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">5 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="../../images/faces/face6.jpg" alt="image"><span class="online"></span>
-                </div>
-                <div class="info">
-                  <p>Sarah Graves</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">47 min</small>
-              </li>
-            </ul>
-          </div>
-          <!-- chat tab ends -->
-        </div>
-      </div>
+
       <!-- partial -->
       <!-- partial:../../partials/_sidebar.html -->
       <?php include 'include_common/sidebar.php'; ?>
@@ -348,29 +168,71 @@
                   </p>
                   <form class="pt-3" method="POST" action="<?php echo base_url() . "submitTests"; ?>"
                     enctype="multipart/form-data">
-                    <div class="form-groups">
-                      <label for="clientName">Client Name</label>
-                      <select style="margin-top: 0.2rem;" class="form-control" id="clientName" name="clientName">
-                        <?php foreach ($client_names as $client): ?>
-                          <option value="<?= $client['idClient']; ?>">
-                            <?= $client['clientUniqueId']; ?> - <?= $client['client']; ?>
-                          </option>
-                        <?php endforeach; ?>
-                      </select>
-                    </div>
-                    <div class="form-groups">
-                      <label for="appointment">Appointment</label>
-                      <select style="margin-top: 0.2rem;" class="form-control" id="appointment" name="appointment">
-                        <!-- Appointments will be loaded dynamically here -->
-                      </select>
-                      <div id="appointmentStatus"></div>
+                    <div class="form-group row" style="margin-bottom: 6px;">
+                      <div class="col">
+                        <label for="clientName">Client Name</label>
+                        <div class="input-group">
+                          <select class="form-control select2" name="clientName" id="clientName">
+                            <?php foreach ($client_names as $client): ?>
+                              <option value="<?= $client['idClient']; ?>">
+                                <?= $client['clientUniqueId']; ?> - <?= $client['client']; ?>
+                              </option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <label for="appointment">Appointment</label>
+                        <div class="input-group">
+                          <select style="margin-top: 0.2rem;" class="form-control" id="appointment" name="appointment">
+                            <!-- Appointments will be loaded dynamically here -->
+                          </select>
+                          <div id="appointmentStatus"></div>
+                        </div>
+                      </div>
                     </div>
 
-                    <div class="form-groups">
+                    <div class="form-group row" style="margin-bottom: 6px;">
+                      <div class="col">
+                        <label for="clientName">Doctor Name</label>
+                        <div class="input-group">
+                          <select class="form-control select2" name="doctorName" id="doctorName">
+                            <?php foreach ($doctor_names as $doctor): ?>
+                              <option value="<?= $doctor['DoctorID']; ?>">
+                                <?= $doctor['FirstName']; ?>   <?= $doctor['LastName']; ?>
+                              </option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <label for="appointment">Registration Date</label>
+                        <div class="input-group">
+                          <input class="typeahead form-control" type="date" name="registration" id="registrationDate">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row" style="margin-bottom: 6px;">
+                      <div class="col">
+                        <label for="appointment">Collected At</label>
+                        <div class="input-group">
+                          <input class="typeahead form-control" type="date" name="collected" id="collectedDate">
+                        </div>
+                      </div>
+                      <div class="col">
+                        <label for="search">Search:</label>
+                        <input type="text" style="margin-top: 0.2rem;" class="form-control" id="testTypeSearch"
+                          placeholder="Search..">
+                      </div>
+                    </div>
+
+
+                    <!-- <div class="form-groups">
                       <label for="testType">Search Test Type</label>
                       <input type="text" style="margin-top: 0.2rem;" class="form-control" id="testTypeSearch"
                         placeholder="Search..">
-                    </div>
+                    </div> -->
 
                     <div class="form-groups">
                       <div class="table-responsive">
@@ -452,7 +314,11 @@
 
           <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
           <script src="../../vendors/js/vendor.bundle.base.js"></script>
-
+          <script>
+            const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Karachi" }));
+            const formattedDate = now.toISOString().split('T')[0];
+            document.getElementById('collectedDate').value = formattedDate;
+          </script>
           <script>
             $(document).ready(function () {
 
@@ -484,6 +350,39 @@
                 $('#clientDetails').html('Client: ' + clientName + '<br>Appointment: ' + appointment);
               }
 
+              // function loadAppointments(clientId) {
+              //   $.ajax({
+              //     method: 'POST',
+              //     url: '<?= site_url('LabController/getAppointmentsForClient') ?>',
+              //     dataType: "json",
+              //     data: {
+              //       clientId: clientId,
+              //       _cache: new Date().getTime()
+              //     },
+              //     async: false,
+              //     success: function (response) {
+              //       console.log('Appointments Response:', response);
+
+              //       var appointmentDropdown = $('#appointment');
+              //       appointmentDropdown.empty();
+
+              //       if (response.success && response.appointments.length > 0) {
+              //         $.each(response.appointments, function (index, appointment) {
+              //           appointmentDropdown.append('<option value="' + appointment.appointmentID + '">' + appointment.appointmentID + '</option>');
+              //         });
+
+              //         updateClientDetails(clientId);
+              //       } else {
+              //         appointmentDropdown.append('<option value="">No appointments available</option>');
+              //         updateClientDetails(clientId);
+              //       }
+              //     },
+              //     error: function (error) {
+              //       console.error('Error loading appointments:', error);
+              //     }
+              //   });
+              // }
+
               function loadAppointments(clientId) {
                 $.ajax({
                   method: 'POST',
@@ -498,11 +397,17 @@
                     console.log('Appointments Response:', response);
 
                     var appointmentDropdown = $('#appointment');
+                    var doctorDropdown = $('#doctorName');
                     appointmentDropdown.empty();
 
                     if (response.success && response.appointments.length > 0) {
                       $.each(response.appointments, function (index, appointment) {
                         appointmentDropdown.append('<option value="' + appointment.appointmentID + '">' + appointment.appointmentID + '</option>');
+
+                        // Auto-select the doctor based on doctorID
+                        if (index === 0) { // Assuming the first appointment's doctorID should be selected
+                          doctorDropdown.val(appointment.doctorID).trigger('change');
+                        }
                       });
 
                       updateClientDetails(clientId);
@@ -516,6 +421,19 @@
                   }
                 });
               }
+
+
+
+              // function setDoctor(doctorId) {
+              //   $('#doctorName').val(doctorId).trigger('change');
+              // }
+
+              // $('#appointment').change(function () {
+              //   var selectedDoctorId = $(this).find(':selected').data('doctor-id');
+              //   if (selectedDoctorId) {
+              //     setDoctor(selectedDoctorId);
+              //   }
+              // });
 
               $('#testTypeSearch').on('input', function () {
                 var searchText = $(this).val().toLowerCase();
@@ -635,6 +553,15 @@
                 var totalFee = parseFloat($('#totalFee').text());
                 var totalDiscount = parseFloat($('#totalDiscount').text());
                 var discountedTotal = parseFloat($('#discountedTotal').text());
+                var doctorId = $('#doctorName').val();
+                var registrationDate = $('#registrationDate').val();
+                var collectedDate = $('#collectedDate').val();
+
+                console.log(doctorId);
+                console.log(registrationDate);
+                console.log(collectedDate);
+
+
 
                 if (!clientId || isNaN(totalFee) || isNaN(totalDiscount) || isNaN(discountedTotal)) {
                   alert('Invalid data for insertion.');
@@ -669,6 +596,9 @@
                     totalFee: totalFee,
                     totalDiscount: totalDiscount,
                     discountedTotal: discountedTotal,
+                    doctorId: doctorId,
+                    registrationDate: registrationDate,
+                    collectedDate: collectedDate,
                     tests: tests
                   },
                   success: function (response) {

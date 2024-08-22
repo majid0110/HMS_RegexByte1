@@ -75,6 +75,8 @@ class LabController extends Controller
 
         $labmodel = new LabModel();
         $data['test_types'] = $labmodel->getTestType();
+        $model = new DoctorModel();
+        $data['doctor_names'] = $model->getDoctorNames();
 
         $appointmentModel = new AppointmentModel();
         $data['appointments'] = $appointmentModel->getAppointments();
@@ -126,7 +128,6 @@ class LabController extends Controller
         $model = new LabModel();
         $insertID = $model->saveLabService($data);
 
-        // Save lab report attributes
         $attributeTitles = $request->getPost('attribute_title');
         $attributeReferenceValues = $request->getPost('attribute_reference_value');
         $attributeUnits = $request->getPost('attribute_unit');
@@ -145,39 +146,6 @@ class LabController extends Controller
         return redirect()->to(base_url("/labServices_form"));
     }
 
-    // public function saveLabService()
-    // {
-    //     $request = \Config\Services::request();
-    //     $session = \Config\Services::session();
-    //     $businessID = $session->get('businessID');
-    //     $UserID = $session->get('ID');
-
-
-    //     $data = [
-    //         'title' => $request->getPost('ls_name'),
-    //         'description' => $request->getPost('ls_description'),
-    //         'test_fee' => $request->getPost('ls_fee'),
-    //         'userID' => $UserID,
-    //         'businessID' => $businessID,
-    //     ];
-
-    //     $model = new LabModel();
-    //     $insertID = $model->saveLabService($data);
-
-    //     $report_attributes = [
-    //         'labTestID' => $insertID,
-    //         'title' => $request->getPost('ls_name'),
-    //         'referenceValue' => 0,
-    //         'unit' => 2
-    //     ];
-
-    //     $model->saveReportAttributes($report_attributes);
-
-    //     session()->setFlashdata('success', 'Service Added..!!');
-
-    //     return redirect()->to(base_url("/labServices_form"));
-
-    // }
 
     public function addTest()
     {
@@ -297,6 +265,9 @@ class LabController extends Controller
             $clientName = $this->request->getPost('clientName');
             $totalDiscount = $this->request->getPost('totalDiscount');
             $discountedTotal = $this->request->getPost('discountedTotal');
+            $doctorId = $this->request->getPost('doctorId');
+            $registrationDate = $this->request->getPost('registrationDate');
+            $collectedDate = $this->request->getPost('collectedDate');
 
             $session = \Config\Services::session();
             $businessID = $session->get('businessID');
@@ -327,6 +298,10 @@ class LabController extends Controller
                 'appointmentId' => $appointmentId,
                 'labInvoice' => $testNo,
                 'clientName' => $clientName,
+                'doctorID' => $doctorId,
+                'registered_at' => $registrationDate,
+                'collected_at' => $collectedDate,
+                'reported_at'
             ];
 
             $labModel = new TestModel();

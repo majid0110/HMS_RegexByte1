@@ -8,7 +8,7 @@ class TestModel extends Model
 {
     protected $table = 'labtest';
     protected $primaryKey = 'test_id';
-    protected $allowedFields = ['testTypeId', 'fee', 'actual_fee', 'userId', 'businessId', 'hospitalCharges', 'clientId', 'appointmentId', 'labInvoice', 'CreatedAT'];
+    protected $allowedFields = ['testTypeId', 'fee', 'actual_fee', 'userId', 'businessId', 'hospitalCharges', 'clientId', 'doctorID', 'registered_at', 'collected_at', 'reported_at', 'appointmentId', 'labInvoice', 'CreatedAT'];
 
 
 
