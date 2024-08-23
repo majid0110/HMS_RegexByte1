@@ -13,6 +13,8 @@ use App\Models\LabtestdetailsModel;
 use App\Models\LabReportAttributesModel;
 use App\Models\ServicesModel;
 use Mpdf\Mpdf;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
 
 class LabController extends Controller
 {
@@ -536,5 +538,60 @@ class LabController extends Controller
 
     }
 
+    // public function downloadLabReportPDF($testid)
+    // {
+
+
+    //     $qrContent = base_url('viewTestDetails/' . $testid);
+    //     $qrCode = new QrCode($qrContent);
+    //     $qrCode->setSize(150);
+
+    //     $writer = new PngWriter();
+    //     $result = $writer->write($qrCode);
+
+    //     $qrDataUri = $result->getDataUri();
+    //     $data['qrDataUri'] = $qrDataUri;
+
+    //     $html = view('labTest_pdf', $data);
+
+    //     $mpdf = new \Mpdf\Mpdf([
+    //         'margin_left' => 14,
+    //         'margin_right' => 11,
+    //         'margin_top' => 11,
+    //         'margin_bottom' => 8,
+    //     ]);
+
+    //     $mpdf->WriteHTML($html);
+    //     $mpdf->Output('Report_' . $testid . '.pdf', \Mpdf\Output\Destination::DOWNLOAD);
+    // }
+
+    public function downloadLabReportPDF($test_id)
+    {
+        $labTestModel = new LabModel();
+
+        $labTestData = $labTestModel->getLabTestDetails($test_id);
+
+        $qrContent = base_url('viewTestDetails/' . $test_id);
+        $qrCode = new QrCode($qrContent);
+        $qrCode->setSize(150);
+
+        $writer = new PngWriter();
+        $result = $writer->write($qrCode);
+
+        $qrDataUri = $result->getDataUri();
+        $labTestData['qrDataUri'] = $qrDataUri;
+
+        $html = view('labTest_pdf', $labTestData);
+
+        $mpdf = new Mpdf([
+            'margin_left' => 14,
+            'margin_right' => 11,
+            'margin_top' => 11,
+            'margin_bottom' => 8,
+        ]);
+
+        $mpdf->WriteHTML($html);
+        return $mpdf->Output('Report_' . $test_id . '.pdf', 'D');
+    }
 
 }

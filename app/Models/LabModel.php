@@ -61,5 +61,37 @@ class LabModel extends Model
         return $this->db->insertID();
     }
 
+    public function getLabTestDetails($test_id)
+    {
+        $labTestData = $this->db->table('labtest')
+            ->select('labtest.*,users.fName as user, client.client as patient, doctorprofile.FirstName as doctor')
+            ->join('users', 'users.ID = labtest.userId')
+            ->join('client', 'client.idClient = labtest.clientId')
+            ->join('doctorprofile', 'doctorprofile.DoctorID = labtest.doctorID', 'left')
+            ->where('test_id', $test_id)
+            ->get()
+            ->getRowArray();
+
+        $labTestDetailsData = $this->db->table('labtestdetails')
+            ->select('labtestdetails.*,test_type.title as TestName')
+            ->join('test_type', 'test_type.testTypeId = labtestdetails.testTypeID')
+            ->where('labTestID', $test_id)
+            ->get()
+            ->getResultArray();
+
+        $labReportData = $this->db->table('lab_report')
+            ->select('lab_report.*, lab_report_attributes.title as attributeTitle')
+            ->join('lab_report_attributes', 'lab_report.labAttribute_id = lab_report_attributes.id')
+            // ->where('lab_report_attributes.labTestID', $test_id)
+            ->get()
+            ->getResultArray();
+
+
+        return [
+            'labTest' => $labTestData,
+            'labTestDetails' => $labTestDetailsData,
+            'labReport' => $labReportData,
+        ];
+    }
 
 }

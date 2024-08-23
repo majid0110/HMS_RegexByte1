@@ -404,8 +404,8 @@
                       $.each(response.appointments, function (index, appointment) {
                         appointmentDropdown.append('<option value="' + appointment.appointmentID + '">' + appointment.appointmentID + '</option>');
 
-                        // Auto-select the doctor based on doctorID
-                        if (index === 0) { // Assuming the first appointment's doctorID should be selected
+
+                        if (index === 0) {
                           doctorDropdown.val(appointment.doctorID).trigger('change');
                         }
                       });

@@ -154,7 +154,7 @@ $routes->get('PdfController/generatePdf', 'PdfController::generatePdf');
 
 $routes->get('/generate_testPdf', 'LabController::generatePdf');
 $routes->get('generateTestInvoice/(:num)', 'LabController::generateTestInvoice/$1');
-
+$routes->get('LabController/downloadLabReportPDF/(:num)', 'LabController::downloadLabReportPDF/$1');
 
 //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Services Routes
