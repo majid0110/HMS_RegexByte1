@@ -64,7 +64,7 @@ class LabModel extends Model
     public function getLabTestDetails($test_id)
     {
         $labTestData = $this->db->table('labtest')
-            ->select('labtest.*,users.fName as user, client.client as patient, doctorprofile.FirstName as doctor')
+            ->select('labtest.*,users.fName as user, client.client as patient, client.age as patientage, client.gender as patientsex,client.clientUniqueId as MR, doctorprofile.FirstName as doctor')
             ->join('users', 'users.ID = labtest.userId')
             ->join('client', 'client.idClient = labtest.clientId')
             ->join('doctorprofile', 'doctorprofile.DoctorID = labtest.doctorID', 'left')
@@ -80,7 +80,7 @@ class LabModel extends Model
             ->getResultArray();
 
         $labReportData = $this->db->table('lab_report')
-            ->select('lab_report.*, lab_report_attributes.title as attributeTitle')
+            ->select('lab_report.*, lab_report_attributes.title as attributeTitle, lab_report_attributes.unit as unit')
             ->join('lab_report_attributes', 'lab_report.labAttribute_id = lab_report_attributes.id')
             // ->where('lab_report_attributes.labTestID', $test_id)
             ->get()

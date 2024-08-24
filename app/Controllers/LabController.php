@@ -587,10 +587,11 @@ class LabController extends Controller
             'margin_left' => 14,
             'margin_right' => 11,
             'margin_top' => 11,
-            'margin_bottom' => 8,
+            'margin_bottom' => 1,
         ]);
 
         $mpdf->WriteHTML($html);
+        // return view('labTest_pdf', $labTestData);
         return $mpdf->Output('Report_' . $test_id . '.pdf', 'D');
     }
 

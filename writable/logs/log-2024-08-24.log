@@ -1,0 +1,206 @@
+INFO - 2024-08-24 05:05:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 05:19:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 05:19:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 05:20:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 05:20:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 05:20:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 05:20:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-24 05:20:44 --> Undefined variable $session
+in APPPATH\Views\labTest_pdf.php on line 113.
+ 1 APPPATH\Views\labTest_pdf.php(113): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $session', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\labTest_pdf.php', 113)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\labTest_pdf.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('labTest_pdf', [], true)
+ 5 APPPATH\Controllers\LabController.php(584): view('labTest_pdf', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->downloadLabReportPDF('207')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-08-24 05:21:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 05:21:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 05:32:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 05:34:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-24 05:34:40 --> Uninitialized string offset 0
+in FCPATH\vendor\mpdf\mpdf\src\Mpdf.php on line 16724.
+ 1 FCPATH\vendor\mpdf\mpdf\src\Mpdf.php(16724): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Uninitialized string offset 0', 'C:\\xampp\\htdocs\\HMS_RegexByte\\vendor\\mpdf\\mpdf\\src\\Mpdf.php', 16724)
+ 2 FCPATH\vendor\mpdf\mpdf\src\Mpdf.php(17048): Mpdf\Mpdf->_setBorderLine([...])
+ 3 FCPATH\vendor\mpdf\mpdf\src\Tag\BlockTag.php(1123): Mpdf\Mpdf->PaintDivBB('', 2)
+ 4 FCPATH\vendor\mpdf\mpdf\src\Tag.php(247): Mpdf\Tag\BlockTag->close([...], 35)
+ 5 FCPATH\vendor\mpdf\mpdf\src\Mpdf.php(13827): Mpdf\Tag->CloseTag('DIV', [...], 35)
+ 6 APPPATH\Controllers\LabController.php(593): Mpdf\Mpdf->WriteHTML(' <div class="container"> <header class="header"> <div class="logo"> <img src="http://localhost/HMS_RegexByte/uploads/download%20%281%29.png" alt="Company Logo"> </div> <div class="company-info"> <h1>Majid-123</h1> <p>Mardan</p> <p>Phone: 000000</p> </div> </header> <div class="report-title"> <h2>Laboratory Test Report</h2> </div> <div class="section"> <h3>Patient Information</h3> <table> <tr> <th>Patient Name</th> <td>Grace Lee</td> <th>Doctor</th> <td>Yuki</td> </tr> <tr> <th>Created By</th> <td>Majid</td> <th>Total Fee</th> <td>$500.00</td> </tr> </table> </div> <div class="section"> <h3>Test Timeline</h3> <table> <tr> <th>Registered At</th> <td>2024-08-02</td> </tr> <tr> <th>Collected At</th> <td>2024-08-23</td> </tr> <tr> <th>Reported At</th> <td>0000-00-00</td> </tr> </table> </div> <div class="section"> <h3>Test Details</h3> <table> <thead> <tr> <th>Test</th> <th>Fee</th> <th>Actual Fee</th> <th>Discount</th> <th>Created At</th> </tr></thead> <tbody> <tr> <td>Test A</td> <td>$100.00</td> <td>$100.00</td> <td>$0.00</td> <td>2024-08-23 15:16:56</td> </tr> <tr> <td>test B</td> <td>$200.00</td> <td>$200.00</td> <td>$0.00</td> <td>2024-08-23 15:16:56</td> </tr> </tbody> </table> </div> <div class="section"> <h3>Test Results</h3> <table> <thead> <tr> <th>Attribute</th> <th>Result</th> </tr></thead> <tbody> <tr> <td>Att A</td> <td>Positive</td> </tr> <tr> <td>Att 1A</td> <td>Postive</td> </tr> <tr> <td>Att 2A</td> <td>Negative</td> </tr> <tr> <td>att 1B</td> <td>Test B</td> </tr> <tr> <td>att 1B</td> <td>Test C</td> </tr> </tbody> </table> </div> <div class="qr-code"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKoAAACqCAIAAACyFEPVAAAACXBIWXMAAA7EAAAOxAGVKw4bAAADoElEQVR4nO3dwW7bMBAA0aro//+yeyiQw6JmRO0uyXjmXetEbgYECEqkrtfr9UtUv3d/Ae1kfjTzo5kfzfxo5kczP5r50cyPZn4086P9ufOh67q6v8c/4xsQ4WtkPpz51/GFgvFv7nPzVo6jH838aOZHMz/aralfUPiEyHgqNDUFC6Y+vGxGFiz7S77j6EczP5r50cyP9mTqF0xNOjLTt8wEbXzdzIUKv2TfX/IdRz+a+dHMj2Z+tIKpX5/Cm7ZTF5r61x+9S87Rj2Z+NPOjmR/t6Knf1Gyub6lu/OHMXentHP1o5kczP5r50Qqmfn2TncLltsKJYeFelPF1F3D0o5kfzfxo5kd7MvU7ZFNE3x7ewv2/Y7v+kl8c/WjmRzM/mvnRbk39dt3E7Hu475D/0XaOfjTzo5kfzfxoq8/16zvnbtlpLpkLnbb46OhHMz+a+dHMj1aw6pfZS7vsDOcphWtzfYfKlHD0o5kfzfxo5ke77kxz+tbIMvO1ZSuGyx79G1838Fw/ZZkfzfxo5kcreJtHZmaUmUYVHtASLDtPcErHJNrRj2Z+NPOjmR/t1qpf/Jm2La59Oze2P1X3318VeLiLljI/mvnRzI/2ZJtH4W3ZwifyMqt+y+Z6macm3eahYuZHMz+a+dGePOu3bItr39fIOORZvzFv+Op75kczP5r50Qre5jH1NF9Q+KBc4UOFhzzrV7ix+h1HP5r50cyPZn60J8/6xV+RuKW7az2x7/znZScGlnD0o5kfzfxo5kcrONJ52ebZKVOrjUHmpMKxvlXO8YXecfSjmR/N/GjmR/ucZ/369kicea5f4DYPTTM/mvnRzI9W/6xfkFl9O/O6Uwrv/3bMQB39aOZHMz+a+dEKpn5jfUtXfdPG8YV2HekceLiLssyPZn4086MVvMO3bwVt14bfQn1nILrDV1nmRzM/mvnRCrZ5FOo7CaZw8XHZCc+FP/uOox/N/GjmRzM/WsE7fDP61rkOeb1cULgI6A5fZZkfzfxo5kdr3+YRHPISuMIp5/jDyxZMn3H0o5kfzfxo5kdr3+axy7IDac58d/BNjn4086OZH838aB879Qv6dowse3yvYw3U0Y9mfjTzo5kfrWDqt+yMvMJ3wvU9zZd5o/H4VwWe66cs86OZH838aE+mfrueX8uc11K4oFa4zFfIVT9NMz+a+dHMj3brRW76VI5+NPOjmR/N/GjmRzM/mvnRzI9mfjTzo5kfzfxofwGtVTtsAom6nwAAAABJRU5ErkJggg==" alt="QR Code"> </div> <footer class="footer"> <p>Report generated on August 24, 2024 | Operator: Majid</p> <p>For more information, visit <a href="https://www.regexbyte.com" class="website-url">www.regexbyte.com</a> </p> </footer> </div> ')
+ 7 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->downloadLabReportPDF('207')
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-08-24 05:42:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 05:43:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-24 05:43:04 --> Uninitialized string offset 0
+in FCPATH\vendor\mpdf\mpdf\src\Mpdf.php on line 16724.
+ 1 FCPATH\vendor\mpdf\mpdf\src\Mpdf.php(16724): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Uninitialized string offset 0', 'C:\\xampp\\htdocs\\HMS_RegexByte\\vendor\\mpdf\\mpdf\\src\\Mpdf.php', 16724)
+ 2 FCPATH\vendor\mpdf\mpdf\src\Mpdf.php(17048): Mpdf\Mpdf->_setBorderLine([...])
+ 3 FCPATH\vendor\mpdf\mpdf\src\Tag\BlockTag.php(1123): Mpdf\Mpdf->PaintDivBB('', 2)
+ 4 FCPATH\vendor\mpdf\mpdf\src\Tag.php(247): Mpdf\Tag\BlockTag->close([...], 35)
+ 5 FCPATH\vendor\mpdf\mpdf\src\Mpdf.php(13827): Mpdf\Tag->CloseTag('DIV', [...], 35)
+ 6 APPPATH\Controllers\LabController.php(593): Mpdf\Mpdf->WriteHTML(' <div class="container"> <header class="header"> <div class="logo"> <img src="http://localhost/HMS_RegexByte/uploads/download%20%281%29.png" alt="Company Logo"> </div> <div class="company-info"> <h1>Majid-123</h1> <p>Mardan</p> <p>Phone: 000000</p> </div> </header> <div class="report-title"> <h2>Laboratory Test Report</h2> </div> <div class="section"> <h3>Patient Information</h3> <table> <tr> <th>Patient Name</th> <td>Grace Lee</td> <th>Doctor</th> <td>Yuki</td> </tr> <tr> <th>Created By</th> <td>Majid</td> <th>Total Fee</th> <td>$500.00</td> </tr> </table> </div> <div class="section"> <h3>Test Timeline</h3> <table> <tr> <th>Registered At</th> <td>2024-08-02</td> </tr> <tr> <th>Collected At</th> <td>2024-08-23</td> </tr> <tr> <th>Reported At</th> <td>0000-00-00</td> </tr> </table> </div> <div class="section"> <h3>Test Details</h3> <table> <thead> <tr> <th>Test</th> <th>Fee</th> <th>Actual Fee</th> <th>Discount</th> <th>Created At</th> </tr></thead> <tbody> <tr> <td>Test A</td> <td>$100.00</td> <td>$100.00</td> <td>$0.00</td> <td>2024-08-23 15:16:56</td> </tr> <tr> <td>test B</td> <td>$200.00</td> <td>$200.00</td> <td>$0.00</td> <td>2024-08-23 15:16:56</td> </tr> </tbody> </table> </div> <div class="section"> <h3>Test Results</h3> <table> <thead> <tr> <th>Attribute</th> <th>Result</th> </tr></thead> <tbody> <tr> <td>Att A</td> <td>Positive</td> </tr> <tr> <td>Att 1A</td> <td>Postive</td> </tr> <tr> <td>Att 2A</td> <td>Negative</td> </tr> <tr> <td>att 1B</td> <td>Test B</td> </tr> <tr> <td>att 1B</td> <td>Test C</td> </tr> </tbody> </table> </div> <div class="qr-code"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKoAAACqCAIAAACyFEPVAAAACXBIWXMAAA7EAAAOxAGVKw4bAAADoElEQVR4nO3dwW7bMBAA0aro//+yeyiQw6JmRO0uyXjmXetEbgYECEqkrtfr9UtUv3d/Ae1kfjTzo5kfzfxo5kczP5r50cyPZn4086P9ufOh67q6v8c/4xsQ4WtkPpz51/GFgvFv7nPzVo6jH838aOZHMz/aralfUPiEyHgqNDUFC6Y+vGxGFiz7S77j6EczP5r50cyP9mTqF0xNOjLTt8wEbXzdzIUKv2TfX/IdRz+a+dHMj2Z+tIKpX5/Cm7ZTF5r61x+9S87Rj2Z+NPOjmR/t6Knf1Gyub6lu/OHMXentHP1o5kczP5r50Qqmfn2TncLltsKJYeFelPF1F3D0o5kfzfxo5kd7MvU7ZFNE3x7ewv2/Y7v+kl8c/WjmRzM/mvnRbk39dt3E7Hu475D/0XaOfjTzo5kfzfxoq8/16zvnbtlpLpkLnbb46OhHMz+a+dHMj1aw6pfZS7vsDOcphWtzfYfKlHD0o5kfzfxo5ke77kxz+tbIMvO1ZSuGyx79G1838Fw/ZZkfzfxo5kcreJtHZmaUmUYVHtASLDtPcErHJNrRj2Z+NPOjmR/t1qpf/Jm2La59Oze2P1X3318VeLiLljI/mvnRzI/2ZJtH4W3ZwifyMqt+y+Z6macm3eahYuZHMz+a+dGePOu3bItr39fIOORZvzFv+Op75kczP5r50Qre5jH1NF9Q+KBc4UOFhzzrV7ix+h1HP5r50cyPZn60J8/6xV+RuKW7az2x7/znZScGlnD0o5kfzfxo5kcrONJ52ebZKVOrjUHmpMKxvlXO8YXecfSjmR/N/GjmR/ucZ/369kicea5f4DYPTTM/mvnRzI9W/6xfkFl9O/O6Uwrv/3bMQB39aOZHMz+a+dEKpn5jfUtXfdPG8YV2HekceLiLssyPZn4086MVvMO3bwVt14bfQn1nILrDV1nmRzM/mvnRCrZ5FOo7CaZw8XHZCc+FP/uOox/N/GjmRzM/WsE7fDP61rkOeb1cULgI6A5fZZkfzfxo5kdr3+YRHPISuMIp5/jDyxZMn3H0o5kfzfxo5kdr3+axy7IDac58d/BNjn4086OZH838aB879Qv6dowse3yvYw3U0Y9mfjTzo5kfrWDqt+yMvMJ3wvU9zZd5o/H4VwWe66cs86OZH838aE+mfrueX8uc11K4oFa4zFfIVT9NMz+a+dHMj3brRW76VI5+NPOjmR/N/GjmRzM/mvnRzI9mfjTzo5kfzfxofwGtVTtsAom6nwAAAABJRU5ErkJggg==" alt="QR Code"> </div> <footer class="footer"> <p>Report generated on August 24, 2024 | Operator: Majid</p> <p>For more information, visit <a href="https://www.regexbyte.com" class="website-url">www.regexbyte.com</a> </p> </footer> </div> ')
+ 7 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->downloadLabReportPDF('207')
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-08-24 05:44:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 05:45:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-24 05:45:38 --> Undefined variable $session
+in APPPATH\Views\labTest_pdf.php on line 154.
+ 1 APPPATH\Views\labTest_pdf.php(154): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $session', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\labTest_pdf.php', 154)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\labTest_pdf.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('labTest_pdf', [], true)
+ 5 APPPATH\Controllers\LabController.php(584): view('labTest_pdf', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->downloadLabReportPDF('207')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-08-24 05:47:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 05:47:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 05:55:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 05:57:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 07:13:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 07:14:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 07:37:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 07:43:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 07:43:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 07:51:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-24 07:51:26 --> Undefined variable $session
+in APPPATH\Views\labTest_pdf.php on line 74.
+ 1 APPPATH\Views\labTest_pdf.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $session', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\labTest_pdf.php', 74)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\labTest_pdf.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('labTest_pdf', [], true)
+ 5 APPPATH\Controllers\LabController.php(584): view('labTest_pdf', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->downloadLabReportPDF('207')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-08-24 07:53:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 07:53:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 08:58:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:00:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-24 09:00:02 --> Undefined variable $qrDataUri
+in APPPATH\Views\labTest_pdf.php on line 134.
+ 1 APPPATH\Views\labTest_pdf.php(134): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $qrDataUri', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\labTest_pdf.php', 134)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\labTest_pdf.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('labTest_pdf', [], true)
+ 5 APPPATH\Controllers\LabController.php(573): view('labTest_pdf', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->downloadLabReportPDF('207')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-08-24 09:01:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:02:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:02:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:04:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:04:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:04:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:04:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:05:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:05:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:06:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:07:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:07:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:07:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:07:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:11:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:11:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:11:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:11:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-24 09:11:21 --> Undefined variable $ServiceDetails
+in APPPATH\Views\labTest_pdf.php on line 125.
+ 1 APPPATH\Views\labTest_pdf.php(125): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $ServiceDetails', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\labTest_pdf.php', 125)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\labTest_pdf.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('labTest_pdf', [], true)
+ 5 APPPATH\Controllers\LabController.php(584): view('labTest_pdf', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->downloadLabReportPDF('207')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-08-24 09:12:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:15:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:15:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:22:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:32:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:34:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:35:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:36:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:37:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:42:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:44:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:45:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:46:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:48:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:50:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:51:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:54:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:57:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 09:58:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:00:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:01:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:02:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:02:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:08:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:09:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:12:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:13:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:13:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:16:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:19:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:20:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:20:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:25:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:27:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:28:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:31:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:31:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:33:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:35:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:36:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:39:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:40:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:47:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:49:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:50:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:52:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:53:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:54:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:56:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:57:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:58:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:59:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:59:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 10:59:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 11:00:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 11:01:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 11:02:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 11:03:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 11:03:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 11:05:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 11:05:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 11:06:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 11:07:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 11:07:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 11:15:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 11:17:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-08-24 11:17:19 --> Undefined array key "unit"
+in APPPATH\Views\labTest_pdf.php on line 226.
+ 1 APPPATH\Views\labTest_pdf.php(226): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "unit"', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\labTest_pdf.php', 226)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\labTest_pdf.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('labTest_pdf', [], true)
+ 5 APPPATH\Controllers\LabController.php(584): view('labTest_pdf', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LabController->downloadLabReportPDF('207')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LabController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-08-24 11:18:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 11:18:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-08-24 11:23:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
