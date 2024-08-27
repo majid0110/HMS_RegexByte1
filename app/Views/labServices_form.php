@@ -132,36 +132,39 @@
                             </div>
                           </div>
 
-                          <!-- New section for lab report attributes -->
-                          <div id="attributesContainer">
-                            <div class="attribute-row">
-                              <div class="row">
-                                <div class="col-md-4">
-                                  <div class="form-group">
-                                    <label>Title</label>
-                                    <input type="text" class="form-control" name="attribute_title[]" />
-                                  </div>
-                                </div>
-                                <div class="col-md-4">
-                                  <div class="form-group">
-                                    <label>Reference Value</label>
-                                    <input type="text" class="form-control" name="attribute_reference_value[]" />
-                                  </div>
-                                </div>
-                                <div class="col-md-3">
-                                  <div class="form-group">
-                                    <label>Unit</label>
-                                    <input type="text" class="form-control" name="attribute_unit[]" />
-                                  </div>
-                                </div>
-                                <div class="col-md-1">
-                                  <button type="button" class="btn btn-danger remove-attribute">Remove</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <button type="button" id="addMoreAttribute" class="btn btn-secondary">Add More</button>
 
+                          <div id="attributesContainer">
+                            <table class="table table-borderless">
+                              <tbody id="attributesTableBody">
+                                <tr class="attribute-row">
+                                  <td>
+                                    <div class="form-group">
+                                      <label>Title</label>
+                                      <input type="text" class="form-control" name="attribute_title[]" />
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group">
+                                      <label>Reference Value</label>
+                                      <input type="text" class="form-control" name="attribute_reference_value[]" />
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="form-group">
+                                      <label>Unit</label>
+                                      <input type="text" class="form-control" name="attribute_unit[]" />
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <button type="button" class="btn btn-danger remove-attribute">Remove</button>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="form-group">
+                            <button type="button" id="addMoreAttribute" class="btn btn-primary">Add More</button>
+                          </div>
                           <div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                           </div>
@@ -195,6 +198,23 @@
   <!-- inject:js -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="./public/assets/vendors_s/select2/select2.min.js"></script>
+
+  <!-- <script>
+    $(document).ready(function () {
+      $('#addMoreAttribute').click(function () {
+        var newRow = $('.attribute-row:first').clone();
+        newRow.find('input').val(''); // Clear input fields in the cloned row
+        $('#attributesTableBody').append(newRow); // Append the new row to the table body
+      });
+
+      $('#attributesContainer').on('click', '.remove-attribute', function () {
+        if ($('.attribute-row').length > 1) {
+          $(this).closest('.attribute-row').remove();
+        }
+      });
+    });
+
+  </script> -->
   <script>
     $(document).ready(function () {
       $('#openSpecializationFormDialog').click(function () {
@@ -209,9 +229,10 @@
       $('.select2').select2();
       $('#addMoreAttribute').click(function () {
         var newRow = $('.attribute-row:first').clone();
-        newRow.find('input').val('');
-        $('#attributesContainer').append(newRow);
+        newRow.find('input').val(''); // Clear input fields in the cloned row
+        $('#attributesTableBody').append(newRow); // Append the new row to the table body
       });
+
       $('#attributesContainer').on('click', '.remove-attribute', function () {
         if ($('.attribute-row').length > 1) {
           $(this).closest('.attribute-row').remove();

@@ -95,6 +95,8 @@ $routes->get('OPDAppointmentinvoice/(:num)', 'AppointmentController::OPDAppointm
 // ---------------------------------------------------------------------------General OPD
 $routes->get('/GenearalOPD', 'AppointmentController::GenearalOpd_form');
 $routes->get('/GeneralOPD_table', 'AppointmentController::GeneralOPD_table');
+$routes->Post('/GeneralOPD_table', 'AppointmentController::GeneralOPD_table');
+
 $routes->get('/deleteGeneralOPD/(:num)', 'AppointmentController::deleteGeneralOPD/$1');
 
 

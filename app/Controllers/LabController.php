@@ -91,24 +91,69 @@ class LabController extends Controller
         $model = new LabModel();
         $data['edit_Test'] = $model->find($testTypeId);
 
+        $data['attributes'] = $model->getAttributes($testTypeId);
         return view('edit_test', $data);
     }
+
+
+    // public function editTestForm($testTypeId)
+    // {
+    //     $model = new LabModel();
+    //     $data['edit_Test'] = $model->find($testTypeId);
+
+    //     return view('edit_test', $data);
+    // }
+
+    // public function updateTest($testTypeId)
+    // {
+    //     $model = new LabModel();
+
+    //     if ($this->request->getMethod() === 'post') {
+    //         $data = [
+    //             'title' => $this->request->getPost('ls_name'),
+    //             'description' => $this->request->getPost('ls_description'),
+    //             'test_fee' => $this->request->getPost('ls_fee'),
+    //         ];
+
+    //         $model->updateTest($testTypeId, $data);
+
+    //         return redirect()->to(base_url('/labServices_form'));
+    //     }
+    // }
 
     public function updateTest($testTypeId)
     {
         $model = new LabModel();
+        $data = [
+            'title' => $this->request->getPost('ls_name'),
+            'description' => $this->request->getPost('ls_description'),
+            'test_fee' => $this->request->getPost('ls_fee'),
+        ];
+        $model->update($testTypeId, $data);
 
-        if ($this->request->getMethod() === 'post') {
-            $data = [
-                'title' => $this->request->getPost('ls_name'),
-                'description' => $this->request->getPost('ls_description'),
-                'test_fee' => $this->request->getPost('ls_fee'),
-            ];
+        $attributeTitles = $this->request->getPost('attribute_title');
+        $attributeReferenceValues = $this->request->getPost('attribute_reference_value');
+        $attributeUnits = $this->request->getPost('attribute_unit');
 
-            $model->updateTest($testTypeId, $data);
+        $model->db->table('lab_report_attributes')->where('labTestID', $testTypeId)->delete();
 
-            return redirect()->to(base_url('/labServices_form'));
+        $attributeData = [];
+        for ($i = 0; $i < count($attributeTitles); $i++) {
+            if (!empty($attributeTitles[$i])) {
+                $attributeData[] = [
+                    'labTestID' => $testTypeId,
+                    'title' => $attributeTitles[$i],
+                    'referenceValue' => $attributeReferenceValues[$i],
+                    'unit' => $attributeUnits[$i],
+                ];
+            }
         }
+
+        if (!empty($attributeData)) {
+            $model->db->table('lab_report_attributes')->insertBatch($attributeData);
+        }
+
+        return redirect()->to(base_url('/labServices_form'));
     }
 
 

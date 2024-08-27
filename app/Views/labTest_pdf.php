@@ -131,8 +131,7 @@ $session = session();
                 </td>
                 <td style="width: 55%; text-align: left;">
                     <div class="invoice-details" style="display: inline-block; text-align: left;">
-                        <?= date("Y"); ?> <br>
-                        </p>
+
                         <p
                             style="font-weight: bold; color:#0d206d; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
 
@@ -140,8 +139,9 @@ $session = session();
                             if ($session->has('businessName') && $session->has('phoneNumber')) {
 
                                 echo '' . $session->get('businessName') . '<br>';
-                                echo '' . $session->get('phoneNumber') . '<br>';
-                                echo '' . $session->get('business_address') . '<br>';
+                                echo 'Phone : ' . $session->get('phoneNumber') . '<br>';
+                                echo 'Address : ' . $session->get('business_address') . '<br>';
+                                echo 'Email : ' . $session->get('business_email') . '<br>';
                             }
                             ?>
                         </p>
@@ -196,9 +196,9 @@ $session = session();
         <thead>
             <tr>
                 <th>Test</th>
-                <th>Fee</th>
+                <!-- <th>Fee</th>
                 <th>Actual Fee</th>
-                <th>Discount</th>
+                <th>Discount</th> -->
                 <th>Created At</th>
             </tr>
         </thead>
@@ -206,9 +206,9 @@ $session = session();
             <?php foreach ($labTestDetails as $detail): ?>
                 <tr>
                     <td><?= $detail['TestName']; ?></td>
-                    <td><?= $detail['fee']; ?></td>
+                    <!-- <td><?= $detail['fee']; ?></td>
                     <td><?= $detail['actual_fee']; ?></td>
-                    <td><?= $detail['discount']; ?></td>
+                    <td><?= $detail['discount']; ?></td> -->
                     <td><?= $detail['createdAT']; ?></td>
                 </tr>
             <?php endforeach; ?>
@@ -221,6 +221,7 @@ $session = session();
             <tr>
                 <th>Attribute</th>
                 <th>Result</th>
+                <th>Reference Value</th>
                 <th>Unit</th>
             </tr>
         </thead>
@@ -229,6 +230,7 @@ $session = session();
                 <tr>
                     <td><?= $report['attributeTitle']; ?></td>
                     <td><?= $report['result']; ?></td>
+                    <td><?= $report['reference']; ?></td>
                     <td><?= $report['unit']; ?></td>
                 </tr>
             <?php endforeach; ?>

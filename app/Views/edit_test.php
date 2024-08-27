@@ -27,30 +27,7 @@
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:../../partials/_settings-panel.html -->
-            <div class="theme-setting-wrapper">
-                <div id="settings-trigger"><i class="ti-settings"></i></div>
-                <div id="theme-settings" class="settings-panel">
-                    <i class="settings-close ti-close"></i>
-                    <p class="settings-heading">SIDEBAR SKINS</p>
-                    <div class="sidebar-bg-options selected" id="sidebar-light-theme">
-                        <div class="img-ss rounded-circle bg-light border me-3"></div>Light
-                    </div>
-                    <div class="sidebar-bg-options" id="sidebar-dark-theme">
-                        <div class="img-ss rounded-circle bg-dark border me-3"></div>Dark
-                    </div>
-                    <p class="settings-heading mt-2">HEADER SKINS</p>
-                    <div class="color-tiles mx-0 px-4">
-                        <div class="tiles success"></div>
-                        <div class="tiles warning"></div>
-                        <div class="tiles danger"></div>
-                        <div class="tiles info"></div>
-                        <div class="tiles dark"></div>
-                        <div class="tiles default"></div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- partial -->
             <!-- partial:../../partials/_sidebar.html -->
             <?php include 'include_common/sidebar.php'; ?>
             <!-- partial -->
@@ -64,6 +41,7 @@
                                     <!-- Form for editing test details -->
                                     <form class="pt-3" method="POST"
                                         action="<?= base_url('updateTest/' . $edit_Test['testTypeId']); ?>">
+                                        <!-- Existing form fields -->
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Test Name</label>
                                             <div class="col-sm-9">
@@ -85,12 +63,56 @@
                                                     value="<?= $edit_Test['test_fee']; ?>" />
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <button type="submit" class="btn btn-primary">Update</button>
-                                            </div>
+
+                                        <!-- Attributes section -->
+                                        <div id="attributesContainer">
+                                            <table class="table table-borderless">
+                                                <tbody id="attributesTableBody">
+                                                    <?php foreach ($attributes as $attribute): ?>
+                                                        <tr class="attribute-row">
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <label>Title</label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="attribute_title[]"
+                                                                        value="<?= $attribute['title']; ?>" />
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <label>Reference Value</label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="attribute_reference_value[]"
+                                                                        value="<?= $attribute['referenceValue']; ?>" />
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <label>Unit</label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="attribute_unit[]"
+                                                                        value="<?= $attribute['unit']; ?>" />
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <button type="button"
+                                                                    class="btn btn-danger remove-attribute">Remove</button>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="button" id="addMoreAttribute" class="btn btn-primary">Add
+                                                More</button>
+                                        </div>
+                                        <div>
+                                            <button type="submit" class="btn btn-primary">Update</button>
                                         </div>
                                     </form>
+
+
                                 </div>
                             </div>
                         </div>
@@ -109,6 +131,21 @@
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="../public/assets/vendors_s/js/vendor.bundle.base.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#addMoreAttribute').click(function () {
+                var newRow = $('.attribute-row:first').clone();
+                newRow.find('input').val(''); // Clear input fields in the cloned row
+                $('#attributesTableBody').append(newRow); // Append the new row to the table body
+            });
+
+            $('#attributesContainer').on('click', '.remove-attribute', function () {
+                if ($('.attribute-row').length > 1) {
+                    $(this).closest('.attribute-row').remove();
+                }
+            });
+        });
+    </script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="../public/assets/vendors_s/typeahead.js/typeahead.bundle.min.js"></script>

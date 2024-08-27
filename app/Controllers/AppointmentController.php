@@ -52,17 +52,65 @@ class AppointmentController extends Controller
         return view('appointments_form.php', $data);
     }
 
+    // public function GeneralOPD_table()
+    // {
+    //     $session = session();
+    //     if (!$session->get('ID')) {
+    //         return redirect()->to(base_url("/session_expired"));
+    //     }
+    //     $session = \Config\Services::session();
+    //     $businessID = session()->get('businessID');
+    //     $Model = new OpdModel();
+    //     $data['OPD'] = $Model->getAllOPDAppointmentsByBusinessID($businessID);
+    //     return view('generalOPD_table.php', $data);
+    // }
+
     public function GeneralOPD_table()
     {
-        $session = session();
-        if (!$session->get('ID')) {
-            return redirect()->to(base_url("/session_expired"));
-        }
-        $session = \Config\Services::session();
-        $businessID = session()->get('businessID');
+
         $Model = new OpdModel();
-        $data['OPD'] = $Model->getAllOPDAppointmentsByBusinessID($businessID);
-        return view('generalOPD_table.php', $data);
+        $clientModel = new ClientModel();
+        $data['client_names'] = $clientModel->getClientNames();
+        $model = new DoctorModel();
+        $data['doctor_names'] = $model->getDoctorNames();
+        $model = new AppointmentModel();
+
+        $search = $this->request->getPost('search');
+        $doctor = $this->request->getPost('doctor');
+        $client = $this->request->getPost('client');
+        $fromDate = $this->request->getPost('fromDate');
+        $toDate = $this->request->getPost('toDate');
+        $reportType = $this->request->getPost('reportType');
+
+        $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+        $perPage = 20;
+
+        $data['pager'] = $Model->getPager1($search, $doctor, $client, $fromDate, $toDate, $perPage, $currentPage);
+
+        $data['Campdata'] = $Model->getCampDetails($search, $doctor, $client, $fromDate, $toDate, $reportType, $perPage, ($currentPage - 1) * $perPage);
+
+        $data['totalHospitalCharges'] = $Model->getTotalCampcharges($doctor, $client, $fromDate, $toDate, $reportType);
+        $data['totalFeeByClient'] = $Model->getTotalFeeByClient($client, $fromDate, $toDate);
+        $data['totalFeeByDateRange'] = $Model->getTotalFeeByDateRange($fromDate, $toDate);
+
+        if ($this->request->isAJAX()) {
+            try {
+                $tableContent = view('Opd_Partial_Table', $data);
+                return $this->response->setJSON([
+                    'success' => true,
+                    'tableContent' => $tableContent,
+                    // 'totalFeeByDoctor' => $data['totalFeeByDoctor'],
+                    // 'totalFeeByClient' => $data['totalFeeByClient'],
+                    'totalHospitalCharges' => $data['totalHospitalCharges'],
+                    'totalFeeByDateRange' => $data['totalFeeByDateRange'],
+                    'pager' => $data['pager']
+                ]);
+            } catch (\Exception $e) {
+                return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+            }
+        } else {
+            return view('generalOPD_table.php', $data);
+        }
     }
 
 
@@ -89,6 +137,8 @@ class AppointmentController extends Controller
 
         return view('OPD_form.php', $data);
     }
+
+
 
 
     public function viewAppointmentDetails($appointmentID)

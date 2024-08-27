@@ -80,11 +80,19 @@ class LabModel extends Model
             ->getResultArray();
 
         $labReportData = $this->db->table('lab_report')
-            ->select('lab_report.*, lab_report_attributes.title as attributeTitle, lab_report_attributes.unit as unit')
+            ->select('lab_report.*, lab_report_attributes.title as attributeTitle,lab_report_attributes.referenceValue reference, lab_report_attributes.unit as unit')
             ->join('lab_report_attributes', 'lab_report.labAttribute_id = lab_report_attributes.id')
-            // ->where('lab_report_attributes.labTestID', $test_id)
+            ->join('labtestdetails', 'labtestdetails.testTypeID = lab_report_attributes.labTestID')
+            ->where('labtestdetails.labTestID', $test_id)
             ->get()
             ->getResultArray();
+
+        // $labReportData = $this->db->table('lab_report')
+        //     ->select('lab_report.*, lab_report_attributes.title as attributeTitle, lab_report_attributes.unit as unit')
+        //     ->join('lab_report_attributes', 'lab_report.labAttribute_id = lab_report_attributes.id')
+        //     // ->where('lab_report_attributes.labTestID', $test_id)
+        //     ->get()
+        //     ->getResultArray();
 
 
         return [
@@ -94,4 +102,13 @@ class LabModel extends Model
         ];
     }
 
+    public function getAttributes($testTypeId)
+    {
+        $query = $this->db->table('lab_report_attributes')
+            ->select('title, referenceValue, unit')
+            ->where('labTestID', $testTypeId)
+            ->get();
+
+        return $query->getResultArray();
+    }
 }

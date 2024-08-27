@@ -22,7 +22,7 @@
   <link rel="shortcut icon" href="../public/assets/images_s/regexbyte.png" />
 </head>
 
-<body>
+<body style="font-family: 'Manrope';">
   <div class="container-scroller">
     <!-- partial:./public/assets/partials/_navbar.html -->
 
@@ -67,6 +67,31 @@
                 class="btn btn-primary text-white me-0"><i class="icon-File"></i>
                 Download PDF</a>
               <hr>
+              <div class="card-body"
+                style="display: flex; justify-content: space-between; align-items: flex-start; font-family: 'Manrope';">
+
+                <!-- Client Information on the left -->
+                <div class="client-details" style="flex: 1; margin-right: 20px;">
+
+                  <p style="font-size: 20px; font-weight: 900;"><strong><?= $testDetails[0]['clientName']; ?></strong>
+                  </p>
+                  <p><strong>Gender:</strong> <?= $testDetails[0]['clientGender']; ?></p>
+                  <p><strong>Contact:</strong> <?= $testDetails[0]['clientContact']; ?></p>
+                  <p><strong>Email:</strong> <?= $testDetails[0]['clientEmail']; ?></p>
+                  <p><strong>Address:</strong> <?= $testDetails[0]['clientAddress']; ?></p>
+                </div>
+
+                <!-- Doctor Information on the right -->
+                <?php if (!empty($testDetails[0]['doctorFirstName'])): ?>
+                  <div class="doctor-details" style="flex: 1; margin-left: 20px; text-align: right;">
+
+                    <p style="font-size: 20px; font-weight: 900;"><strong> Dr. <?= $testDetails[0]['doctorFirstName'] . ' ' . $testDetails[0]['doctorLastName']; ?></strong></p>
+                    <p><strong>Specialization:</strong> <?= $testDetails[0]['specialization']; ?></p>
+                    <p><strong>Contact:</strong> <?= $testDetails[0]['doctorContact']; ?></p>
+                    <p><strong>Email:</strong> <?= $testDetails[0]['doctorEmail']; ?></p>
+                  </div>
+                <?php endif; ?>
+              </div>
               <h4 class="card-title">Test Details Table</h4>
               <div class="table-responsive">
                 <table class="table table-striped">

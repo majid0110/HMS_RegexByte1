@@ -235,5 +235,55 @@ class OpdModel extends Model
             ->getRowArray()['appointmentNo'] ?? null;
     }
 
+    public function getPager1($search = null, $doctor = null, $client = null, $fromDate = null, $toDate = null, $perPage = 20, $currentPage = 1)
+    {
+        $builder = $this->db->table('generalopd');
+        $builder->select('COUNT(*) as total');
+        $builder->join('doctorprofile', 'doctorprofile.DoctorID = generalopd.doctorID');
+        $builder->join('client', 'client.idClient = generalopd.clientID');
+        $builder->join('fee_type', 'fee_type.f_id = generalopd.appointmentType');
+
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->like('client.client', $search)
+                ->orLike('doctorprofile.FirstName', $search)
+                ->orLike('doctorprofile.LastName', $search)
+                ->orLike('generalopd.appointmentDate', $search)
+                ->orLike('generalopd.appointmentTime', $search)
+                ->orLike('fee_type.FeeType', $search)
+                ->orLike('(generalopd.appointmentFee + generalopd.hospitalCharges)', $search)
+                ->groupEnd();
+        }
+
+        if (!empty($doctor)) {
+            $builder->groupStart()
+                ->like('CONCAT(doctorprofile.FirstName, " ", doctorprofile.LastName)', $doctor)
+                ->groupEnd();
+        }
+
+        if (!empty($client)) {
+            $builder->like('client.client', $client);
+        }
+
+        if (!empty($fromDate) && !empty($toDate)) {
+            $builder->where('generalopd.appointmentDate >=', $fromDate)
+                ->where('generalopd.appointmentDate <=', $toDate);
+        }
+
+        $totalQuery = $builder->get();
+        $totalResult = $totalQuery->getRowArray();
+        $total = isset($totalResult['total']) ? (int) $totalResult['total'] : 0;
+
+        $pager = service('pager');
+        $pagerConfig = [
+            'perPage' => $perPage,
+            'total' => $total,
+            'uri' => uri_string(),
+        ];
+
+        $pagerLinks = $pager->makeLinks($currentPage, $perPage, $total, 'default_full');
+        return $pagerLinks;
+    }
+
 
 }

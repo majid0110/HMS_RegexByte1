@@ -16,24 +16,45 @@ class LabtestdetailsModel extends Model
     //     return $this->insert($responseData);
     // }
 
-    public function getTestDetails($testId)
-    {
-        return $this->db->table('labtestdetails')
-            ->join('test_type', 'test_type.testTypeId = labtestdetails.testTypeID')
-            ->where('labTestID', $testId)
-            ->select('labtestdetails.*, test_type.title as testTypeName')
-            ->get()
-            ->getResultArray();
-    }
-
-    // public function getlabdetails()
+    // public function getTestDetails($testId)
     // {
     //     return $this->db->table('labtestdetails')
     //         ->join('test_type', 'test_type.testTypeId = labtestdetails.testTypeID')
+    //         ->where('labTestID', $testId)
     //         ->select('labtestdetails.*, test_type.title as testTypeName')
     //         ->get()
     //         ->getResultArray();
     // }
+
+    public function getTestDetails($testId)
+    {
+        return $this->db->table('labtestdetails')
+            ->join('test_type', 'test_type.testTypeId = labtestdetails.testTypeID')
+            ->join('labtest', 'labtest.test_id = labtestdetails.labTestID')
+            ->join('client', 'client.idClient = labtest.clientId')
+            ->join('doctorprofile', 'doctorprofile.DoctorID = labtest.doctorID', 'left')
+            ->join('specialization', 'doctorprofile.Specialization = specialization.s_id', 'left')
+            ->where('labtestdetails.labTestID', $testId)
+            ->select('
+            labtestdetails.*,
+            test_type.title as testTypeName, 
+            client.client as clientName, 
+            client.gender as clientGender, 
+            client.contact as clientContact, 
+            client.email as clientEmail, 
+            client.address as clientAddress, 
+            doctorprofile.FirstName as doctorFirstName, 
+            doctorprofile.LastName as doctorLastName, 
+            doctorprofile.Specialization as doctorSpecialization, 
+            doctorprofile.ContactNumber as doctorContact, 
+            doctorprofile.Email as doctorEmail,
+            specialization.specialization_N as specialization
+        ')
+            ->get()
+            ->getResultArray();
+    }
+
+
 
     public function getTestTypes()
     {
