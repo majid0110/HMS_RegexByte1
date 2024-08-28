@@ -133,10 +133,44 @@
     <script src="../public/assets/vendors_s/js/vendor.bundle.base.js"></script>
     <script>
         $(document).ready(function () {
+            function createNewRow() {
+                return `
+            <tr class="attribute-row">
+                <td>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" class="form-control" name="attribute_title[]" value="" />
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <label>Reference Value</label>
+                        <input type="text" class="form-control" name="attribute_reference_value[]" value="" />
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <input type="text" class="form-control" name="attribute_unit[]" value="" />
+                    </div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger remove-attribute">Remove</button>
+                </td>
+            </tr>`;
+            }
+
             $('#addMoreAttribute').click(function () {
-                var newRow = $('.attribute-row:first').clone();
-                newRow.find('input').val(''); // Clear input fields in the cloned row
-                $('#attributesTableBody').append(newRow); // Append the new row to the table body
+                let newRow;
+
+                if ($('.attribute-row').length > 0) {
+                    newRow = $('.attribute-row:first').clone();
+                    newRow.find('input').val('');
+                } else {
+                    newRow = createNewRow();
+                }
+
+                $('#attributesTableBody').append(newRow);
             });
 
             $('#attributesContainer').on('click', '.remove-attribute', function () {
@@ -145,6 +179,7 @@
                 }
             });
         });
+
     </script>
     <!-- endinject -->
     <!-- Plugin js for this page -->

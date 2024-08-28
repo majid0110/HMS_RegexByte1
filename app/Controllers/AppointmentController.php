@@ -27,19 +27,66 @@ class AppointmentController extends Controller
 
 
     //------------------------------------------------Main View 
+    // public function appointments_table()
+    // {
+    //     $session = session();
+    //     if (!$session->get('ID')) {
+    //         return redirect()->to(base_url("/session_expired"));
+    //     }
+    //     $session = \Config\Services::session();
+    //     $businessID = session()->get('businessID');
+    //     $Model = new AppointmentModel();
+
+    //     $data['Appointments'] = $Model->getAllAppointmentsByBusinessID($businessID);
+    //     return view('appointments_table.php', $data);
+    // }
+
     public function appointments_table()
     {
-        $session = session();
-        if (!$session->get('ID')) {
-            return redirect()->to(base_url("/session_expired"));
-        }
-        $session = \Config\Services::session();
-        $businessID = session()->get('businessID');
-        $Model = new AppointmentModel();
+        $clientModel = new ClientModel();
+        $data['client_names'] = $clientModel->getClientNames();
+        $model = new DoctorModel();
+        $data['doctor_names'] = $model->getDoctorNames();
+        $model = new AppointmentModel();
 
-        $data['Appointments'] = $Model->getAllAppointmentsByBusinessID($businessID);
-        return view('appointments_table.php', $data);
+        $search = $this->request->getPost('search');
+        $doctor = $this->request->getPost('doctor');
+        $client = $this->request->getPost('client');
+        $fromDate = $this->request->getPost('fromDate');
+        $toDate = $this->request->getPost('toDate');
+
+        $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+        $perPage = 20;
+
+        $data['pager'] = $model->getPager($search, $doctor, $client, $fromDate, $toDate, $perPage, $currentPage);
+        $data['Appointments'] = $model->getAppointments($search, $doctor, $client, $fromDate, $toDate, $perPage, ($currentPage - 1) * $perPage);
+
+        $data['totalHospitalCharges'] = $model->getTotalHospitalCharges($doctor, $client, $fromDate, $toDate);
+        $data['totalAppointmentFee'] = $model->getTotalAppointmentFee();
+        $data['totalFeeByDoctor'] = $model->getTotalFeeByDoctor($doctor, $client, $fromDate, $toDate);
+        $data['totalFeeByClient'] = $model->getTotalFeeByClient($client, $fromDate, $toDate);
+        $data['totalFeeByDateRange'] = $model->getTotalFeeByDateRange($fromDate, $toDate);
+
+        if ($this->request->isAJAX()) {
+            try {
+                $tableContent = view('appointment_partial_table', $data);
+                return $this->response->setJSON([
+                    'success' => true,
+                    'tableContent' => $tableContent,
+                    'totalFeeByDoctor' => $data['totalFeeByDoctor'],
+                    'totalFeeByClient' => $data['totalFeeByClient'],
+                    'totalHospitalCharges' => $data['totalHospitalCharges'],
+                    'totalFeeByDateRange' => $data['totalFeeByDateRange'],
+                    'pager' => $data['pager']
+                ]);
+            } catch (\Exception $e) {
+                return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+            }
+        } else {
+            return view('appointments_table', $data);
+        }
     }
+
 
     public function appointments_form()
     {
@@ -52,18 +99,7 @@ class AppointmentController extends Controller
         return view('appointments_form.php', $data);
     }
 
-    // public function GeneralOPD_table()
-    // {
-    //     $session = session();
-    //     if (!$session->get('ID')) {
-    //         return redirect()->to(base_url("/session_expired"));
-    //     }
-    //     $session = \Config\Services::session();
-    //     $businessID = session()->get('businessID');
-    //     $Model = new OpdModel();
-    //     $data['OPD'] = $Model->getAllOPDAppointmentsByBusinessID($businessID);
-    //     return view('generalOPD_table.php', $data);
-    // }
+
 
     public function GeneralOPD_table()
     {

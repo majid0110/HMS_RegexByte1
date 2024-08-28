@@ -38,6 +38,14 @@ class salesModel extends Model
             ->getResultArray();
     }
 
+    public function getInvoice()
+    {
+        return $this->db->table('invoices')
+            ->select('idReceipts')
+            ->get()
+            ->getResultArray();
+    }
+
     public function getCurrancy()
     {
         return $this->db->table('currency')
@@ -482,6 +490,51 @@ class salesModel extends Model
     }
 
 
+    // public function getSalesReport($search = null, $paymentInput = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
+    // {
+    //     $session = \Config\Services::session();
+    //     $businessID = $session->get('businessID');
+    //     $builder = $this->db->table('invoices');
+    //     $builder->join('client', 'client.idClient = invoices.idClient');
+    //     $builder->join('currency', 'currency.id = invoices.idCurrency');
+    //     $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
+    //     $builder->select('invoices.*, client.client as clientName, currency.Currency, paymentmethods.Method as PaymentMethod');
+    //     $builder->select('(SELECT SUM(Sum) FROM invoicedetail WHERE invoicedetail.idReceipts = invoices.idReceipts) as Fee');
+
+    //     $builder->where('invoices.idBusiness', $businessID);
+
+    //     // if (!empty($search)) {
+    //     //     $builder->groupStart()
+    //     //         ->like('invoices.invOrdNum', $search)
+    //     //         ->orLike('client.client', $search)
+    //     //         ->orLike('currency.Currency', $search)
+    //     //         ->orLike('paymentmethods.Method', $search)
+    //     //         ->groupEnd();
+    //     // }
+
+    //     if (!empty($search)) {
+    //         $builder->where('client.client', $search);
+    //     }
+
+
+    //     if (!empty($paymentInput)) {
+    //         $builder->where('invoices.paymentMethod', $paymentInput);
+    //     }
+
+    //     if (!empty($clientName)) {
+    //         $builder->like('client.client', $clientName);
+    //     }
+
+    //     if (!empty($fromDate) && !empty($toDate)) {
+    //         $builder->where('invoices.Date >=', $fromDate)
+    //             ->where('invoices.Date <=', $toDate);
+    //     }
+    //     $builder->orderBy('invoices.idReceipts', 'DESC');
+    //     $builder->limit($perPage, $offset);
+    //     $query = $builder->get();
+    //     return $query->getResultArray();
+    // }
+
     public function getSalesReport($search = null, $paymentInput = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
     {
         $session = \Config\Services::session();
@@ -495,22 +548,20 @@ class salesModel extends Model
 
         $builder->where('invoices.idBusiness', $businessID);
 
-        // if (!empty($search)) {
-        //     $builder->groupStart()
-        //         ->like('invoices.invOrdNum', $search)
-        //         ->orLike('client.client', $search)
-        //         ->orLike('currency.Currency', $search)
-        //         ->orLike('paymentmethods.Method', $search)
-        //         ->groupEnd();
-        // }
-
         if (!empty($search)) {
-            $builder->where('client.client', $search);
+            $builder->groupStart()
+                ->like('invoices.invOrdNum', $search)
+                ->orLike('client.client', $search)
+                ->orLike('currency.Currency', $search)
+                ->orLike('paymentmethods.idReceipts', $search)
+                ->orLike('invoices.idReceipts', $search)
+                ->groupEnd();
         }
 
 
+
         if (!empty($paymentInput)) {
-            $builder->where('invoices.paymentMethod', $paymentInput);
+            $builder->where('invoices.idReceipts', $paymentInput);
         }
 
         if (!empty($clientName)) {
@@ -521,6 +572,7 @@ class salesModel extends Model
             $builder->where('invoices.Date >=', $fromDate)
                 ->where('invoices.Date <=', $toDate);
         }
+
         $builder->orderBy('invoices.idReceipts', 'DESC');
         $builder->limit($perPage, $offset);
         $query = $builder->get();

@@ -69,6 +69,7 @@ $routes->post('/updateClient/(:num)', 'ClientController::updateClient/$1');
 $routes->get('/appointments_form', 'ClientController::appointments_form');
 // $routes->post('/saveAppointment', 'AppointmentController::saveAppointment');
 $routes->get('/appointments_table', 'AppointmentController::appointments_table');
+$routes->post('/appointments_table', 'AppointmentController::appointments_table');
 $routes->get('/deleteAppointment/(:num)', 'AppointmentController::deleteAppointment/$1');
 $routes->post('/saveClient', 'AppointmentController::saveClientProfile');
 $routes->post('AppointmentController/saveAppointment', 'AppointmentController::saveAppointment');
@@ -194,6 +195,7 @@ $routes->post('SalesController/submitServices', 'SalesController::submitServices
 $routes->post('submitServices', 'SalesController::submitServices');
 $routes->post('submitInvoice', 'SalesController::submitInvoice');
 $routes->get('/Sales_table', 'SalesController::Sales_table');
+$routes->post('/Sales_table', 'SalesController::Sales_table');
 $routes->get('/deleteSales/(:num)', 'SalesController::deleteSales/$1');
 $routes->get('viewServiceDetails/(:num)', 'SalesController::viewServiceDetails/$1');
 $routes->get('sales/deleteService/(:num)', 'SalesController::deleteService/$1');

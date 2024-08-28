@@ -130,15 +130,63 @@ class SalesController extends Controller
 
         return view('Sale_details', $data);
     }
+    // public function Sales_table()
+    // {
+    //     $session = session();
+    //     if (!$session->get('ID')) {
+    //         return redirect()->to(base_url("/session_expired"));
+    //     }
+    //     $Model = new salesModel();
+    //     $data['Sales'] = $Model->getSales();
+    //     return view('Sales_table.php', $data);
+    // }
+
     public function Sales_table()
     {
-        $session = session();
-        if (!$session->get('ID')) {
-            return redirect()->to(base_url("/session_expired"));
+        $clientModel = new ClientModel();
+        $data['client_names'] = $clientModel->getClientNames();
+
+        $sales = new SalesModel();
+        // $data['payments'] = $sales->getpayment();
+        $data['Invoice'] = $sales->getInvoice();
+
+        $Model = new ServicesModel();
+        $Model = new SalesModel();
+        // $search = $this->request->getPost('searchValue');
+        $search = trim($this->request->getPost('search'));
+
+        $paymentInput = $this->request->getPost('paymentInput');
+        $clientName = $this->request->getPost('clientName');
+        $fromDate = $this->request->getPost('fromDate');
+        $toDate = $this->request->getPost('toDate');
+
+
+        $data['totalServiceFee'] = $Model->gettotalServiceFee($search, $clientName, $paymentInput, $fromDate, $toDate);
+        $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+        $perPage = 20;
+        $offset = ($currentPage - 1) * $perPage;
+        $data['Sales'] = $Model->getSalesReport($search, $paymentInput, $clientName, $fromDate, $toDate, $perPage, $offset);
+        $totalSales = count($Model->getSalesReport($search, $paymentInput, $clientName, $fromDate, $toDate));
+        $pager = service('pager');
+        $pagerLinks = $pager->makeLinks($currentPage, $perPage, $totalSales);
+        $data['pager'] = $pagerLinks;
+
+        if ($this->request->isAJAX()) {
+            try {
+                $tableContent = view('Sale_Partial_table', $data);
+                return $this->response->setJSON([
+                    'success' => true,
+                    'tableContent' => $tableContent,
+                    'pager' => $pagerLinks,
+                    'totalServiceFee' => $data['totalServiceFee']
+                ]);
+            } catch (\Exception $e) {
+                log_message('error', 'Error in services_report method: ' . $e->getMessage());
+                return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+            }
+        } else {
+            return view('Sales_table', $data);
         }
-        $Model = new salesModel();
-        $data['Sales'] = $Model->getSales();
-        return view('Sales_table.php', $data);
     }
 
 

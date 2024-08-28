@@ -571,7 +571,8 @@ class LabController extends Controller
 
                 $data = [
                     'labAttribute_id' => $labAttributeId,
-                    'result' => $value
+                    'result' => $value,
+                    'labTestID' => $testID,
                 ];
 
 
@@ -636,7 +637,6 @@ class LabController extends Controller
         ]);
 
         $mpdf->WriteHTML($html);
-        // return view('labTest_pdf', $labTestData);
         return $mpdf->Output('Report_' . $test_id . '.pdf', 'D');
     }
 
