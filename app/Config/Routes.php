@@ -132,6 +132,8 @@ $routes->post('LabController/getTestTypeId', 'LabController::getTestTypeId');
 $routes->post('LabController/getTestTypeId', 'LabController::getTestTypeId');
 $routes->post('LabController/getAppointmentTypeName/(:num)', 'LabController::getAppointmentTypeName/$1');
 $routes->get('/labtest_table', 'LabController::labtest_table');
+$routes->post('/labtest_table', 'LabController::labtest_table');
+
 $routes->get('viewTestDetails/(:num)', 'LabController::viewTestDetails/$1');
 $routes->get('labServices_form', 'LabController::labServices_form');
 $routes->get('editTestForm/(:num)', 'LabController::editTestForm/$1');

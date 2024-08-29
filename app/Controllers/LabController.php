@@ -40,13 +40,57 @@ class LabController extends Controller
         return view('edit_test', $data);
     }
 
+    // public function labtest_table()
+    // {
+    //     $Model = new TestModel();
+    //     $data['Tests'] = $Model->getTestsWithDetails();
+    //     return view('labtest_table.php', $data);
+    // }
+
     public function labtest_table()
     {
-        $Model = new TestModel();
-        $data['Tests'] = $Model->getTestsWithDetails();
-        return view('labtest_table.php', $data);
-    }
+        $testModel = new TestModel();
+        $data['totalHospitalFee'] = $testModel->getTotalHospitalFee();
 
+        $clientModel = new ClientModel();
+        $data['client_names'] = $clientModel->getClientNames();
+
+        $user = new AppointmentModel();
+        $data['user_names'] = $user->getuserprofile();
+
+        $search = $this->request->getPost('search');
+        $userName = $this->request->getPost('userName');
+        $clientName = $this->request->getPost('clientName');
+        $fromDate = $this->request->getPost('fromDate');
+        $toDate = $this->request->getPost('toDate');
+
+        $data['totalLabFee'] = $testModel->getTotalLabFee($clientName, $search, $userName, $fromDate, $toDate);
+
+        $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+        $perPage = 20;
+        $offset = ($currentPage - 1) * $perPage;
+
+        $data['Tests'] = $testModel->searchLabReports($search, $userName, $clientName, $fromDate, $toDate, $perPage, $offset);
+        $data['pager'] = $testModel->getPager($search, $userName, $clientName, $fromDate, $toDate, $perPage, $currentPage);
+
+        if ($this->request->isAJAX()) {
+            try {
+                $tableContent = view('Lab_Partial_Table', $data);
+                return $this->response->setJSON([
+                    'success' => true,
+                    'tableContent' => $tableContent,
+                    'pager' => $data['pager'],
+                    'totalLabFee' => $data['totalLabFee'],
+
+                ]);
+            } catch (\Exception $e) {
+                return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+            }
+        } else {
+            return view('labtest_table', $data);
+
+        }
+    }
     public function viewTestDetails($testId)
     {
         $model = new LabtestdetailsModel();
