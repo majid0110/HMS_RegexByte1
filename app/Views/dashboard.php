@@ -404,7 +404,7 @@
 
                           <?php if ($isHospital): ?>
                             <div class="d-none d-md-block">
-                              <h3 class="statistics-title">Total Revenue</h3>
+                              <h3 class="statistics-title">Total Revenue JJ</h3>
                               <p class="rate-percentage">
                                 <?php echo $totalRevenue; ?>
                               </p>
@@ -438,6 +438,8 @@
                     </div>
                   </div>
                   <div class="row">
+
+
                     <div class="col-lg-8 d-flex flex-column">
                       <div class="row flex-grow">
                         <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">
@@ -445,116 +447,119 @@
                             <div class="card-body">
                               <div class="d-sm-flex justify-content-between align-items-start">
                                 <div>
-                                  <h4 class="card-title card-title-dash">Revenue</h4>
-                                  <h5 class="card-subtitle card-subtitle-dash">Weekly Report</h5>
+                                  <h4 class="card-title card-title-dash">Sales Performance</h4>
+                                  <h5 class="card-subtitle card-subtitle-dash">Select Period</h5>
                                 </div>
-                                <div id="performance-line-legend"></div>
+                                <div class="dropdown">
+                                  <button class="btn btn-secondary dropdown-toggle" type="button" id="periodDropdown"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    This week
+                                  </button>
+                                  <div class="dropdown-menu" aria-labelledby="periodDropdown">
+                                    <a class="dropdown-item period-selector" href="#" data-period="week">This week</a>
+                                    <a class="dropdown-item period-selector" href="#" data-period="month">This month</a>
+                                    <a class="dropdown-item period-selector" href="#" data-period="year">This year</a>
+                                  </div>
+                                </div>
                               </div>
+                              <!-- <div class="chartjs-wrapper mt-5">
+                                <canvas id="salesLineChart" width="634" height="150"
+                                  style="display: block; width: 634px; height: 150px;"
+                                  class="chartjs-render-monitor"></canvas>
+                              </div> -->
+
                               <div class="chartjs-wrapper mt-5">
-                                <canvas id="performanceLine"></canvas>
+                                <canvas id="salesPerformanceChart"></canvas>
                               </div>
-                              <script>
-                                var appointmentsData = <?php echo json_encode($appointmentsData); ?>;
-                                var dates = appointmentsData.map(appointment => appointment.appointmentDate);
-                                var totalRevenue = appointmentsData.map(appointment => appointment.totalRevenue);
-                                var totalAppointments = appointmentsData.map(appointment => appointment.totalAppointments);
-                                console.log('dates:', dates);
-                                console.log('totalRevenue:', totalRevenue);
-                                console.log('totalAppointments:', totalAppointments);
-
-
-                                var ctx = document.getElementById('performanceLine').getContext('2d');
-
-                                var myChart = new Chart(ctx, {
-                                  type: 'line',
-                                  data: {
-                                    labels: dates,
-                                    datasets: [{
-                                      label: 'Total Revenue',
-                                      data: totalRevenue,
-                                      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                      borderColor: 'rgba(75, 192, 192, 1)',
-                                      borderWidth: 2,
-                                      pointRadius: 4,
-                                      pointBackgroundColor: 'rgba(75, 192, 192, 1)',
-                                      pointBorderColor: 'rgba(255, 255, 255, 1)',
-                                      pointBorderWidth: 2,
-                                      lineTension: 0.4,
-                                    },
-                                    {
-                                      label: 'Total Appointments',
-                                      data: totalAppointments,
-                                      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                      borderColor: 'rgba(255, 99, 132, 1)',
-                                      borderWidth: 2,
-                                      pointRadius: 4,
-                                      pointBackgroundColor: 'rgba(255, 99, 132, 1)',
-                                      pointBorderColor: 'rgba(255, 255, 255, 1)',
-                                      pointBorderWidth: 2,
-                                      lineTension: 0.4,
-                                    },
-                                    ],
-                                  },
-                                  options: {
-                                    maintainAspectRatio: false,
-                                    responsive: true,
-                                    scales: {
-                                      xAxes: [{
-                                        type: 'time',
-                                        time: {
-                                          unit: 'day',
-                                          displayFormats: {
-                                            day: 'MMM DD',
-                                          },
-                                        },
-                                        ticks: {
-                                          maxTicksLimit: 8,
-                                        },
-                                      }],
-                                      yAxes: [{
-                                        beginAtZero: true,
-                                        ticks: {
-                                          precision: 0,
-                                        },
-                                      }]
-                                    },
-                                    legend: {
-                                      display: true,
-                                      labels: {
-                                        fontColor: 'deepskyblue',
-                                      },
-                                    },
-                                    tooltips: {
-                                      mode: 'index',
-                                      intersect: false,
-                                      callbacks: {
-                                        label: function (tooltipItem, data) {
-                                          var label = data.datasets[tooltipItem.datasetIndex].label || '';
-                                          if (label) {
-                                            label += ': ';
-                                          }
-                                          label += tooltipItem.yLabel;
-                                          return label;
-                                        },
-                                        afterLabel: function (tooltipItem, data) {
-                                          var dataset = data.datasets[tooltipItem.datasetIndex];
-                                          var total = dataset.data.reduce(function (previousValue, currentValue) {
-                                            return previousValue + currentValue;
-                                          });
-                                          return 'Total: ' + total;
-                                        }
-                                      }
-                                    }
-                                  },
-                                });
-                              </script>
-
-
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
+
+                    <script>
+                      document.querySelectorAll('.period-selector').forEach(item => {
+                        item.addEventListener('click', event => {
+                          event.preventDefault();
+                          let period = event.target.getAttribute('data-period');
+                          document.getElementById('periodDropdown').innerText = `This ${period}`;
+                          updateChart(period);
+                        });
+                      });
+
+                      function updateChart(period) {
+                        $.ajax({
+                          url: "<?= base_url('/dashboard'); ?>",
+                          type: 'GET',
+                          data: { period: period },
+                          dataType: 'json',
+                          success: function (response) {
+                            if (response && response.salesData) {
+                              let salesData = response.salesData;
+
+                              salesPerformanceChart.data.labels = salesData.map(data => data.label);
+                              salesPerformanceChart.data.datasets[0].data = salesData.map(data => parseFloat(data.total));
+                              salesPerformanceChart.update();
+                            } else {
+                              console.error('Invalid response format:', response);
+                            }
+                          },
+                          error: function (xhr, status, error) {
+                            console.error('AJAX error:', status, error);
+                          }
+                        });
+                      }
+
+                      var ctx = document.getElementById('salesPerformanceChart').getContext('2d');
+                      var salesPerformanceChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                          labels: <?= json_encode(array_column($salesData, 'label')); ?>,
+                          datasets: [{
+                            label: 'Sales',
+                            data: <?= json_encode(array_column($salesData, 'total')); ?>,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 2,
+                            pointRadius: 4,
+                            pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                            pointBorderColor: 'rgba(255, 255, 255, 1)',
+                            pointBorderWidth: 2,
+                            lineTension: 0.4,
+                          }],
+                        },
+                        options: {
+                          maintainAspectRatio: false,
+                          responsive: true,
+                          scales: {
+                            xAxes: [{
+                              beginAtZero: true,
+                              ticks: {
+                                fontColor: '#333',
+                              }
+                            }],
+                            yAxes: [{
+                              beginAtZero: true,
+                              ticks: {
+                                precision: 0,
+                                fontColor: '#333',
+                              }
+                            }]
+                          },
+                          legend: {
+                            display: true,
+                            labels: {
+                              fontColor: '#333',
+                            }
+                          },
+                          tooltips: {
+                            mode: 'index',
+                            intersect: false,
+                          }
+                        }
+                      });
+                    </script>
+
 
                     <div class="col-lg-4 d-flex flex-column">
                       <div class="row flex-grow">
@@ -578,6 +583,7 @@
                             </div>
                           </div>
                         </div>
+                        <!-- --------------------------------------------------------------------------- -->
 
                         <!-- --------------------------------------------------------------------------- -->
 
@@ -824,6 +830,124 @@
                           </div>
                         </div>
                       </div>
+
+                      <?php if ($isHospital): ?>
+                        <div class="row flex-grow">
+                          <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">
+                            <div class="card card-rounded">
+                              <div class="card-body">
+                                <div class="d-sm-flex justify-content-between align-items-start">
+                                  <div>
+                                    <h4 class="card-title card-title-dash">Revenue</h4>
+                                    <h5 class="card-subtitle card-subtitle-dash">Weekly Report</h5>
+                                  </div>
+                                  <div id="performance-line-legend"></div>
+                                </div>
+                                <div class="chartjs-wrapper mt-5">
+                                  <canvas id="performanceLine"></canvas>
+                                </div>
+                                <script>
+                                  var appointmentsData = <?php echo json_encode($appointmentsData); ?>;
+                                  var dates = appointmentsData.map(appointment => appointment.appointmentDate);
+                                  var totalRevenue = appointmentsData.map(appointment => appointment.totalRevenue);
+                                  var totalAppointments = appointmentsData.map(appointment => appointment.totalAppointments);
+                                  console.log('dates:', dates);
+                                  console.log('totalRevenue:', totalRevenue);
+                                  console.log('totalAppointments:', totalAppointments);
+
+
+                                  var ctx = document.getElementById('performanceLine').getContext('2d');
+
+                                  var myChart = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                      labels: dates,
+                                      datasets: [{
+                                        label: 'Total Revenue',
+                                        data: totalRevenue,
+                                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                        borderColor: 'rgba(75, 192, 192, 1)',
+                                        borderWidth: 2,
+                                        pointRadius: 4,
+                                        pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                                        pointBorderColor: 'rgba(255, 255, 255, 1)',
+                                        pointBorderWidth: 2,
+                                        lineTension: 0.4,
+                                      },
+                                      {
+                                        label: 'Total Appointments MKD',
+                                        data: totalAppointments,
+                                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                        borderColor: 'rgba(255, 99, 132, 1)',
+                                        borderWidth: 2,
+                                        pointRadius: 4,
+                                        pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                                        pointBorderColor: 'rgba(255, 255, 255, 1)',
+                                        pointBorderWidth: 2,
+                                        lineTension: 0.4,
+                                      },
+                                      ],
+                                    },
+                                    options: {
+                                      maintainAspectRatio: false,
+                                      responsive: true,
+                                      scales: {
+                                        xAxes: [{
+                                          type: 'time',
+                                          time: {
+                                            unit: 'day',
+                                            displayFormats: {
+                                              day: 'MMM DD',
+                                            },
+                                          },
+                                          ticks: {
+                                            maxTicksLimit: 8,
+                                          },
+                                        }],
+                                        yAxes: [{
+                                          beginAtZero: true,
+                                          ticks: {
+                                            precision: 0,
+                                          },
+                                        }]
+                                      },
+                                      legend: {
+                                        display: true,
+                                        labels: {
+                                          fontColor: 'deepskyblue',
+                                        },
+                                      },
+                                      tooltips: {
+                                        mode: 'index',
+                                        intersect: false,
+                                        callbacks: {
+                                          label: function (tooltipItem, data) {
+                                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+                                            if (label) {
+                                              label += ': ';
+                                            }
+                                            label += tooltipItem.yLabel;
+                                            return label;
+                                          },
+                                          afterLabel: function (tooltipItem, data) {
+                                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                                            var total = dataset.data.reduce(function (previousValue, currentValue) {
+                                              return previousValue + currentValue;
+                                            });
+                                            return 'Total: ' + total;
+                                          }
+                                        }
+                                      }
+                                    },
+                                  });
+                                </script>
+
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      <?php endif; ?>
 
                       <div class="row flex-grow">
                         <div class="col-12 grid-margin stretch-card">

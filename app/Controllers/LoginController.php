@@ -13,6 +13,8 @@ use App\Models\itemsModel;
 use App\Models\ConfigModel;
 use App\Models\ItemsInventoryModel;
 use App\Models\ExpenseModel;
+use App\Models\InvoiceModel;
+use App\Models\OpdModel;
 
 
 class LoginController extends Controller
@@ -161,6 +163,8 @@ class LoginController extends Controller
         }
         $businessID = session()->get('businessID');
 
+
+
         $businessModel = new LoginModel('business');
         $business = $businessModel->find($businessID);
         $businessTypeID = $business['businessTypeID'];
@@ -211,6 +215,7 @@ class LoginController extends Controller
         // Combine the data
         $totalAppointmentsRevenue = $appointmentModel->getTotalAppointmentsRevenue($businessID);
         $data['totalAppointmentsRevenue'] = $totalAppointmentsRevenue;
+
         $totalChargesRevenue = $appointmentModel->getTotalChargesRevenue($businessID);
         $data['totalChargesRevenue'] = $totalChargesRevenue;
         $labModel = new LoginModel('labtest');
@@ -234,6 +239,34 @@ class LoginController extends Controller
         $TotalMonthlyExpenditure = $model->getMonthlyExpenditure();
         $data['TotalMonthlyExpenditure'] = $TotalMonthlyExpenditure;
 
+        // --------------------------------------------
+        $period = $this->request->getVar('period') ?? 'week';
+
+        $InvoiceModel = new InvoiceModel();
+        $data['period'] = $period;
+
+        switch ($period) {
+            case 'month':
+                $salesData = $InvoiceModel->getMonthlySalesData($businessID);
+                break;
+            case 'year':
+                $salesData = $InvoiceModel->getYearlySalesData($businessID);
+                break;
+            default:
+                $salesData = $InvoiceModel->getWeeklySalesData($businessID);
+                break;
+        }
+
+        $data['salesData'] = $salesData;
+
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON(['salesData' => $salesData]);
+        }
+        // ------------------------------------------------
+
+        $opdModel = new OpdModel();
+        $totalOPDRevenue = $opdModel->getTotalOPDRevenue($businessID);
+        $data['totalOPDRevenue'] = $totalOPDRevenue;
 
         $data['totalTests'] = $totalTests;
         $InvoiceModel = new LoginModel('invoices');
@@ -249,7 +282,7 @@ class LoginController extends Controller
         $labModel = new LoginModel('labtest');
         $totalTestRevenue = $labModel->getTotalTestRevenue($businessID);
         $data['totalTestRevenue'] = $totalTestRevenue;
-        $totalRevenue = $totalServiceRevenue + $totalAppointmentsRevenue + $totalTestRevenue;
+        $totalRevenue = $totalServiceRevenue + $totalAppointmentsRevenue + $totalTestRevenue + $totalOPDRevenue;
         $data['totalRevenue'] = $totalRevenue;
         $totalHospitalRevenue = $totalServiceRevenue + $totalLabChargesRevenue + $totalChargesRevenue;
         $data['totalHospitalRevenue'] = $totalHospitalRevenue;
@@ -301,6 +334,7 @@ class LoginController extends Controller
         $this->response->setHeader('Pragma', 'no-cache');
         return view('dashboard.php', $data);
     }
+
 
     public function save_role()
     {

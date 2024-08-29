@@ -252,6 +252,36 @@ class InvoiceModel extends Model
             ->getRowArray()['Currency'] ?? null;
     }
 
+    public function getWeeklySalesData($businessID)
+    {
+        return $this->select("DATE_FORMAT(Date, '%Y-%m-%d') as label, SUM(Value) as total")
+            ->where('idBusiness', $businessID)
+            ->where('WEEKDAY(Date) >=', 0)
+            ->where('WEEKDAY(Date) <=', 6)
+            ->where('YEARWEEK(Date, 1) = YEARWEEK(CURDATE(), 1)')
+            ->groupBy('label')
+            ->orderBy('Date')
+            ->findAll();
+    }
 
+    public function getMonthlySalesData($businessID)
+    {
+        return $this->select("DATE_FORMAT(Date, '%Y-%m-01') as label, SUM(Value) as total")
+            ->where('idBusiness', $businessID)
+            ->where('Date >=', date('Y-m-d', strtotime('-12 months')))
+            ->groupBy('label')
+            ->orderBy('Date')
+            ->findAll();
+    }
+
+    public function getYearlySalesData($businessID)
+    {
+        return $this->select("DATE_FORMAT(Date, '%Y-01-01') as label, SUM(Value) as total")
+            ->where('idBusiness', $businessID)
+            ->where('Date >=', date('Y-m-d', strtotime('-5 years')))
+            ->groupBy('label')
+            ->orderBy('Date')
+            ->findAll();
+    }
 
 }

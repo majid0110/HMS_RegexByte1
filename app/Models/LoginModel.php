@@ -364,5 +364,16 @@ class LoginModel extends Model
         return $query->getResultArray();
     }
 
+    public function getCurrentWeekSalesData($businessID)
+    {
+        return $this->select("DATE_FORMAT(Date, '%W') as day, SUM(Value) as total_sales")
+            ->where('idBusiness', $businessID)
+            ->where('WEEKOFYEAR(Date) = WEEKOFYEAR(CURDATE())')
+            ->groupBy('day')
+            ->orderBy('Date', 'ASC')
+            ->findAll();
+    }
+
+
 }
 

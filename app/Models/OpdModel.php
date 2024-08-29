@@ -17,6 +17,14 @@ class OpdModel extends Model
     }
 
 
+    public function getTotalOPDRevenue($businessID)
+    {
+        $query = $this->selectSum('appointmentFee', 'totalOPDRevenue')
+            ->where('businessID', $businessID)
+            ->get();
+
+        return $query->getRow()->totalOPDRevenue;
+    }
     public function getCampDetails($search = null, $doctor = null, $client = null, $fromDate = null, $toDate = null, $reportType = null, $perPage = 20, $offset = 0)
     {
         $builder = $this->db->table('generalopd');

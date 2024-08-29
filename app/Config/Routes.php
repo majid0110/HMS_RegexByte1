@@ -10,6 +10,7 @@ $routes->get('/login', 'LoginController::show');
 $routes->get('/session_expired', 'LoginController::session_expired');
 $routes->post("/loginSave", 'LoginController::loginSave');
 $routes->get('/dashboard', 'LoginController::dashboard');
+$routes->get('dashboard/get_sales_data/(:segment)', 'Dashboard::getSalesData/$1');
 $routes->get('/logout', 'LoginController::logout');
 $routes->get('/user_form', 'LoginController::user_form');
 $routes->get('/business_table', 'LoginController::business_table');
