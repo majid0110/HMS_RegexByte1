@@ -338,6 +338,7 @@ class ItemsInventoryModel extends Model
         $query = $this->db->table('invoices')
             ->selectSum('Value')
             ->where('idBusiness', $businessID)
+            ->where('isSummaryInvoice', 0)
             ->where('Date', $today)
             ->get();
 

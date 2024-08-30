@@ -293,5 +293,39 @@ class OpdModel extends Model
         return $pagerLinks;
     }
 
+    public function getMonthlyOPDFees($businessID)
+    {
+        $currentYear = date('Y');
 
+        $builder = $this->db->table($this->table);
+        $builder->select("
+            MONTH(appointmentDate) as month,
+            SUM(appointmentFee) as total
+        ");
+        $builder->where('businessID', $businessID);
+        $builder->where('YEAR(appointmentDate)', $currentYear);
+        $builder->where('status', 'completed');
+        $builder->where('isFreeCamp', 0);
+        $builder->groupBy('MONTH(appointmentDate)');
+        $builder->orderBy('MONTH(appointmentDate)', 'ASC');
+
+        $query = $builder->get();
+        $results = $query->getResultArray();
+
+        $monthlyData = array_fill(1, 12, ['month' => 0, 'total' => 0]);
+
+        foreach ($results as $row) {
+            $monthlyData[$row['month']] = $row;
+        }
+
+        foreach ($monthlyData as $month => &$data) {
+            if ($data['month'] === 0) {
+                $data['month'] = $month;
+            }
+        }
+
+        return array_values($monthlyData);
+    }
 }
+
+

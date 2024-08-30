@@ -15,6 +15,7 @@ use App\Models\ItemsInventoryModel;
 use App\Models\ExpenseModel;
 use App\Models\InvoiceModel;
 use App\Models\OpdModel;
+use App\Models\TestModel;
 
 
 class LoginController extends Controller
@@ -291,38 +292,82 @@ class LoginController extends Controller
         $monthlyHospitalCharges = $InvoiceModel->getMonthlyHospitalCharges($businessID);
         $LabModel = new LoginModel('labtest');
         $monthlyLabCharges = $LabModel->getMonthlyLabHospitalCharges($businessID);
+
+        // --------------------------------------------------------------------------
+
+        $opdModel = new OpdModel();
+        $monthlyOPDFees = $opdModel->getMonthlyOPDFees($businessID);
+
+        $invoiceModel = new InvoiceModel();
+        $monthlySalesFees = $invoiceModel->getMonthlySalesFees($businessID);
+
+        $labTestModel = new TestModel();
+        $monthlyLabFees = $labTestModel->getMonthlyLabFees($businessID);
+
+        $appointmentModel = new AppointmentModel();
+        $monthlyAppointmentFees = $appointmentModel->getMonthlyAppointmentFees($businessID);
+
         $combinedData = [];
-        foreach ($monthlyData as $appointment) {
-            $label = $appointment['label'];
-            $combinedData[$label] = [
-                'label' => $label,
-                'total' => $appointment['hospitalCharges'],
+        foreach (range(1, 12) as $month) {
+            $combinedData[$month] = [
+                'label' => date('F', mktime(0, 0, 0, $month, 1)),
+                'appointment' => 0,
+                'lab' => 0,
+                'sales' => 0,
+                'opd' => 0
             ];
         }
-        foreach ($monthlyHospitalCharges as $hospitalCharge) {
-            $label = $hospitalCharge['label'];
-            if (isset($combinedData[$label])) {
-                $combinedData[$label]['total'] += $hospitalCharge['hospitalCharges'];
-            } else {
-                $combinedData[$label] = [
-                    'label' => $label,
-                    'total' => $hospitalCharge['hospitalCharges'],
-                ];
-            }
+
+        foreach ($monthlyAppointmentFees as $item) {
+            $combinedData[$item['month']]['appointment'] = $item['total'];
         }
-        foreach ($monthlyLabCharges as $labCharge) {
-            $label = $labCharge['label'];
-            if (isset($combinedData[$label])) {
-                $combinedData[$label]['total'] += $labCharge['totalCharges'];
-            } else {
-                $combinedData[$label] = [
-                    'label' => $label,
-                    'total' => $labCharge['totalCharges'],
-                ];
-            }
+        foreach ($monthlyLabFees as $item) {
+            $combinedData[$item['month']]['lab'] = $item['total'];
         }
-        ksort($combinedData);
+        foreach ($monthlySalesFees as $item) {
+            $combinedData[$item['month']]['sales'] = $item['total'];
+        }
+        foreach ($monthlyOPDFees as $item) {
+            $combinedData[$item['month']]['opd'] = $item['total'];
+        }
+
         $data['combinedData'] = array_values($combinedData);
+
+        // -------------------------------------------------------------------------------------
+
+
+        // $combinedData = [];
+        // foreach ($monthlyData as $appointment) {
+        //     $label = $appointment['label'];
+        //     $combinedData[$label] = [
+        //         'label' => $label,
+        //         'total' => $appointment['hospitalCharges'],
+        //     ];
+        // }
+        // foreach ($monthlyHospitalCharges as $hospitalCharge) {
+        //     $label = $hospitalCharge['label'];
+        //     if (isset($combinedData[$label])) {
+        //         $combinedData[$label]['total'] += $hospitalCharge['hospitalCharges'];
+        //     } else {
+        //         $combinedData[$label] = [
+        //             'label' => $label,
+        //             'total' => $hospitalCharge['hospitalCharges'],
+        //         ];
+        //     }
+        // }
+        // foreach ($monthlyLabCharges as $labCharge) {
+        //     $label = $labCharge['label'];
+        //     if (isset($combinedData[$label])) {
+        //         $combinedData[$label]['total'] += $labCharge['totalCharges'];
+        //     } else {
+        //         $combinedData[$label] = [
+        //             'label' => $label,
+        //             'total' => $labCharge['totalCharges'],
+        //         ];
+        //     }
+        // }
+        // ksort($combinedData);
+        // $data['combinedData'] = array_values($combinedData);
         // $Labtestdetails= new LabtestdetailsModel();
         // $totalTests = $Labtestdetails->getTotalTests($businessID);
         // $data['totalTests'] = $totalTests;

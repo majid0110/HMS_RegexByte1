@@ -284,4 +284,38 @@ class InvoiceModel extends Model
             ->findAll();
     }
 
+    public function getMonthlySalesFees($businessID)
+    {
+        $currentYear = date('Y');
+
+        $builder = $this->db->table($this->table);
+        $builder->select("
+            MONTH(Date) as month,
+            SUM(Value) as total
+        ");
+        $builder->where('idBusiness', $businessID);
+        $builder->where('YEAR(Date)', $currentYear);
+        $builder->where('Status', 'closed');
+        $builder->where('isSummaryInvoice', 0);
+        $builder->groupBy('MONTH(Date)');
+        $builder->orderBy('MONTH(Date)', 'ASC');
+
+        $query = $builder->get();
+        $results = $query->getResultArray();
+
+        $monthlyData = array_fill(1, 12, ['month' => 0, 'total' => 0]);
+
+        foreach ($results as $row) {
+            $monthlyData[$row['month']] = $row;
+        }
+
+        foreach ($monthlyData as $month => &$data) {
+            if ($data['month'] === 0) {
+                $data['month'] = $month;
+            }
+        }
+
+        return array_values($monthlyData);
+    }
+
 }

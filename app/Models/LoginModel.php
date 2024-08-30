@@ -246,6 +246,7 @@ class LoginModel extends Model
         $query = $this->db->table('invoices')
             ->selectSum('Value', 'totalRevenue')
             ->where('idBusiness', $businessID)
+            ->where('isSummaryInvoice', 0)
             ->get();
 
         $result = $query->getRow();
@@ -257,6 +258,7 @@ class LoginModel extends Model
         $query = $this->db->table('invoices')
             ->selectSum('Value', 'totalRevenue')
             ->where('MONTH(Date)', date('m'))
+            ->where('isSummaryInvoice', 0)
             ->where('YEAR(Date)', date('Y'))
             ->where('idBusiness', $businessID)
             ->get();

@@ -315,7 +315,37 @@ class TestModel extends Model
     }
 
 
+    public function getMonthlyLabFees($businessID)
+    {
+        $currentYear = date('Y');
 
+        $builder = $this->db->table($this->table);
+        $builder->select("
+            MONTH(CreatedAT) as month,
+            SUM(fee) as total
+        ");
+        $builder->where('businessId', $businessID);
+        $builder->where('YEAR(CreatedAT)', $currentYear);
+        $builder->groupBy('MONTH(CreatedAT)');
+        $builder->orderBy('MONTH(CreatedAT)', 'ASC');
+
+        $query = $builder->get();
+        $results = $query->getResultArray();
+
+        $monthlyData = array_fill(1, 12, ['month' => 0, 'total' => 0]);
+
+        foreach ($results as $row) {
+            $monthlyData[$row['month']] = $row;
+        }
+
+        foreach ($monthlyData as $month => &$data) {
+            if ($data['month'] === 0) {
+                $data['month'] = $month;
+            }
+        }
+
+        return array_values($monthlyData);
+    }
 
 
 }

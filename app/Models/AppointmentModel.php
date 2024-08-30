@@ -591,6 +591,36 @@ class AppointmentModel extends Model
         return $query['FeeType'] ?? null;
     }
 
+    public function getMonthlyAppointmentFees($businessID)
+    {
+        $currentYear = date('Y');
 
+        $builder = $this->db->table($this->table);
+        $builder->select("
+            MONTH(appointmentDate) as month,
+            SUM(appointmentFee + hospitalCharges) as total
+        ");
+        $builder->where('businessID', $businessID);
+        $builder->where('YEAR(appointmentDate)', $currentYear);
+        $builder->groupBy('MONTH(appointmentDate)');
+        $builder->orderBy('MONTH(appointmentDate)', 'ASC');
+
+        $query = $builder->get();
+        $results = $query->getResultArray();
+
+        $monthlyData = array_fill(1, 12, ['month' => 0, 'total' => 0]);
+
+        foreach ($results as $row) {
+            $monthlyData[$row['month']] = $row;
+        }
+
+        foreach ($monthlyData as $month => &$data) {
+            if ($data['month'] === 0) {
+                $data['month'] = $month;
+            }
+        }
+
+        return array_values($monthlyData);
+    }
 
 }

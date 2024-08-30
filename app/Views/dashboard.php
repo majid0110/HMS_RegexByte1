@@ -727,7 +727,7 @@
                               <div class="d-sm-flex align-items-center mt-1 justify-content-between">
                                 <div class="d-sm-flex align-items-center mt-4 justify-content-between">
                                   <h2 class="me-2 fw-bold">PKR:
-                                    <?php echo $totalHospitalRevenue; ?>
+                                    <?php echo $totalRevenue; ?>
                                   </h2>
 
 
@@ -746,18 +746,41 @@
                                   type: 'bar',
                                   data: {
                                     labels: <?= json_encode(array_column($combinedData, 'label')); ?>,
-                                    datasets: [{
-                                      label: 'Monthly Revenue',
-                                      data: <?= json_encode(array_column($combinedData, 'total')); ?>,
-                                      backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                                      borderColor: 'rgba(75, 192, 192, 1)',
-                                      borderWidth: 2,
-                                      barPercentage: 0.7,
-                                    }]
+                                    datasets: [
+                                      {
+                                        label: 'Appointment Fee',
+                                        data: <?= json_encode(array_column($combinedData, 'appointment')); ?>,
+                                        backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                                        borderColor: 'rgba(75, 192, 192, 1)',
+                                        borderWidth: 2,
+                                      },
+                                      {
+                                        label: 'Lab Fee',
+                                        data: <?= json_encode(array_column($combinedData, 'lab')); ?>,
+                                        backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                                        borderColor: 'rgba(255, 99, 132, 1)',
+                                        borderWidth: 2,
+                                      },
+                                      {
+                                        label: 'Sales Fee',
+                                        data: <?= json_encode(array_column($combinedData, 'sales')); ?>,
+                                        backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                                        borderColor: 'rgba(54, 162, 235, 1)',
+                                        borderWidth: 2,
+                                      },
+                                      {
+                                        label: 'OPD Fee',
+                                        data: <?= json_encode(array_column($combinedData, 'opd')); ?>,
+                                        backgroundColor: 'rgba(255, 206, 86, 0.7)',
+                                        borderColor: 'rgba(255, 206, 86, 1)',
+                                        borderWidth: 2,
+                                      }
+                                    ]
                                   },
                                   options: {
                                     scales: {
                                       x: {
+                                        stacked: true,
                                         beginAtZero: true,
                                         title: {
                                           display: true,
@@ -766,15 +789,10 @@
                                         },
                                         grid: {
                                           color: 'rgba(0, 0, 0, 0.1)'
-                                        },
-                                        ticks: {
-                                          callback: function (value, index, values) {
-                                            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-                                            return months[value];
-                                          }
                                         }
                                       },
                                       y: {
+                                        stacked: true,
                                         beginAtZero: true,
                                         title: {
                                           display: true,
@@ -799,7 +817,7 @@
                                       },
                                       title: {
                                         display: true,
-                                        text: 'Total Monthly Revenue',
+                                        text: 'Monthly Revenue Breakdown',
                                         color: '#444',
                                         font: {
                                           size: 16,
