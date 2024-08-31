@@ -48,15 +48,16 @@
                                         </div>
 
                                         <div>
-                                            <input type="checkbox" id="istable" name="isTable" value="1"
+                                            <input type="checkbox" id="isTable" name="isTable" value="1"
                                                 <?= $configData['isTable'] == 1 ? 'checked' : ''; ?>>
-                                            <label for="isExpiry" style="margin-left: 1rem;">IsTable</label>
+                                            <label for="isTable" style="margin-left: 1rem;">IsTable</label>
                                         </div>
 
                                         <div>
-                                            <input type="checkbox" id="istable" name="enableService" value="1"
+                                            <input type="checkbox" id="enableService" name="enableService" value="1"
                                                 <?= $configData['enableService'] == 1 ? 'checked' : ''; ?>>
-                                            <label for="isExpiry" style="margin-left: 1rem;">Enable Services</label>
+                                            <label for="enableService" style="margin-left: 1rem;">Enable
+                                                Services</label>
                                         </div>
 
                                         <div style="margin-top: 2rem;">

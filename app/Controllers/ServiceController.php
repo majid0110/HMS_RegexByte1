@@ -430,7 +430,7 @@ class ServiceController extends Controller
             'idBusiness' => $businessID,
             'idPoint_of_sale' => 1,
             'Cost' => $this->request->getPost('cost'),
-            'idTVSH' => 0,
+            'idTVSH' => $this->request->getPost('tax'),
             'noTvshType' => 0,
         ];
         if ($img && $img->isValid() && !$img->hasMoved()) {
@@ -474,75 +474,6 @@ class ServiceController extends Controller
         return redirect()->to(base_url("/Services_table"));
     }
 
-    // public function transferItemsToServices()
-    // {
-    //     $db = \Config\Database::connect();
-    //     $servicesModel = new ServicesModel();
-
-    //     $activeItems = $servicesModel->getActiveItems();
-
-    //     $existingItems = $servicesModel->getServices();
-
-    //     $existingRatios = $servicesModel->getRatio();
-
-    //     $db->transBegin();
-
-    //     $dataToInsertArtmenu = [];
-    //     $dataToInsertRatio = [];
-
-    //     foreach ($activeItems as $item) {
-    //         if (!$this->isItemExistsInArtmenu($item, $existingItems) && !$this->isItemExistsInRatio($item, $existingRatios)) {
-    //             $dataToInsertArtmenu[] = [
-    //                 'Barcode' => $item['barcode'],
-    //                 'Code' => $item['Code'],
-    //                 'Name' => $item['Name'],
-    //                 'Image' => 'defaults/download.png',
-    //                 'Cost' => $item['Cost'],
-    //                 'Promotional_Price' => 0,
-    //                 'idCatArt' => $item['idCategories'],
-    //                 'Notes' => $item['Notes'],
-    //                 'idUnit' => $item['Unit'],
-    //                 'Product_mix' => $item['Minimum'],
-    //                 'status' => $item['status'],
-    //                 'Characteristic1' => $item['characteristic1'],
-    //                 'Characteristic2' => $item['characteristic2'],
-    //                 'isService' => 0,
-    //                 'idBusiness' => $item['idBusiness'],
-    //                 'idPoint_of_sale' => 1,
-    //                 'Price' => 0,
-    //                 'idTVSH' => 0,
-    //                 'noTvshType' => 0,
-    //             ];
-
-    //             $dataToInsertRatio[] = [
-    //                 'idItem' => $item['idItem'],
-    //                 'ratio' => 1,
-    //                 'idBusiness' => $item['idBusiness'],
-    //             ];
-    //         }
-    //     }
-
-    //     if (!empty($dataToInsertArtmenu)) {
-    //         $insertedIds = $servicesModel->insertBatch($dataToInsertArtmenu, true);
-    //         foreach ($dataToInsertRatio as $key => $ratioData) {
-    //             $dataToInsertRatio[$key]['idArtMenu'] = $insertedIds[$key];
-    //         }
-
-    //         $servicesModel->insertBatchRatio($dataToInsertRatio, true);
-
-    //         session()->setFlashdata('success', 'Data Transfered..!!');
-    //     } else {
-    //         session()->setFlashdata('error', 'No data to transfer.');
-
-    //     }
-
-    //     $db->transCommit();
-
-    //     return redirect()->to(base_url('Services_table'));
-    // }
-
-
-
     public function transferItemsToServices()
     {
         $db = \Config\Database::connect();
@@ -551,8 +482,7 @@ class ServiceController extends Controller
         $activeItems = $servicesModel->getActiveItems();
         $existingItems = $servicesModel->getServices();
 
-        $dataToInsertArtmenu = [];
-        $insertionIds = [];
+        $dataInserted = false;
 
         foreach ($activeItems as $item) {
             $Code = $item['Code'];
@@ -578,29 +508,32 @@ class ServiceController extends Controller
                     'isService' => 0,
                     'idBusiness' => $item['idBusiness'],
                     'idPoint_of_sale' => 1,
-                    'Price' => 0,
+                    'Price' => $item['Cost'],
                     'idTVSH' => 0,
                     'noTvshType' => 0,
                 ];
 
                 $insertedId = $servicesModel->insertArtMenu($dataToInsertArtmenu);
-                $insertionIds[] = $insertedId;
 
-                $ratioData = [
-                    'idArtMenu' => $insertedId,
-                    'idItem' => $item['idItem'],
-                    'ratio' => 1,
-                    'idBusiness' => $item['idBusiness'],
-                ];
-                $servicesModel->insertRatio($ratioData);
-                session()->setFlashdata('success', 'Data Transferred..!!');
+                if ($insertedId) {
+                    $dataInserted = true;
+
+                    $ratioData = [
+                        'idArtMenu' => $insertedId,
+                        'idItem' => $item['idItem'],
+                        'ratio' => 1,
+                        'idBusiness' => $item['idBusiness'],
+                    ];
+                    $servicesModel->insertRatio($ratioData);
+                }
             }
-            session()->setFlashdata('error', 'No data to transfer.');
-
-
         }
 
-        // $db->transCommit();
+        if ($dataInserted) {
+            session()->setFlashdata('success', 'Data Transferred Successfully!');
+        } else {
+            session()->setFlashdata('error', 'No new data to transfer.');
+        }
 
         return redirect()->to(base_url('Services_table'));
     }

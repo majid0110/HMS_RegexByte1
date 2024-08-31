@@ -404,7 +404,7 @@
 
                           <?php if ($isHospital): ?>
                             <div class="d-none d-md-block">
-                              <h3 class="statistics-title">Total Revenue JJ</h3>
+                              <h3 class="statistics-title">Total Revenue</h3>
                               <p class="rate-percentage">
                                 <?php echo $totalRevenue; ?>
                               </p>
@@ -893,7 +893,7 @@
                                         lineTension: 0.4,
                                       },
                                       {
-                                        label: 'Total Appointments MKD',
+                                        label: 'Total Appointments',
                                         data: totalAppointments,
                                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                         borderColor: 'rgba(255, 99, 132, 1)',

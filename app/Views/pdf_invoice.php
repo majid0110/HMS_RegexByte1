@@ -170,20 +170,20 @@
             if (!empty($services)) {
                 foreach ($services as $service) {
                     echo '<tr>';
-                    echo '<td style="margin-left: 20px;">' . $service['serviceName'] . '</td>';
-                    echo '<td style="text-align: right; padding-left:25px;">' . number_format($service['fee'], 2) . '</td>';
-                    echo '<td style="text-align: right;padding-left:4px;">' . $service['quantity'] . '</td>';
+                    echo '<td style="margin-left: 20px;">' . htmlspecialchars($service['serviceName']) . '</td>';
+                    echo '<td style="text-align: right; padding-left:25px;">' . number_format(floatval($service['fee']), 2) . '</td>';
+                    echo '<td style="text-align: right;padding-left:4px;">' . intval($service['quantity']) . '</td>';
 
-                    $discountAmount = ($service['fee'] * $service['discount']) / 100;
-                    // echo '<td style="text-align: right;padding-left:4%;">' . number_format($discountAmount, 2) . '</td>';
-                    echo '<td style="text-align: right;padding-left:4%;">' . number_format($service['calculatedTax'], 2) . '</td>';
+                    $discountAmount = (floatval($service['fee']) * floatval($service['discount'])) / 100;
+                    echo '<td style="text-align: right;padding-left:4%;">' . number_format(floatval($service['calculatedTax']), 2) . '</td>';
 
-                    echo '<td style="text-align: right; padding-left:4%; padding-right: 10px;">' . number_format((float) $service['fee'] * (float) $service['quantity'] - $discountAmount, 2) . '</td>';
+                    $total = (floatval($service['fee']) * intval($service['quantity'])) - $discountAmount;
+                    echo '<td style="text-align: right; padding-left:4%; padding-right: 10px;">' . number_format($total, 2) . '</td>';
                     echo '</tr>';
                 }
             } else {
                 echo '<tr>';
-                echo '<td colspan="2">No service details available.</td>';
+                echo '<td colspan="5">No service details available.</td>';
                 echo '</tr>';
             }
             ?>
@@ -195,7 +195,7 @@
         <?php
         $totalTax = 0;
         foreach ($services as $service) {
-            $totalTax += $service['calculatedTax'];
+            $totalTax += floatval($service['calculatedTax']);
         }
         ?>
 
@@ -206,7 +206,7 @@
                     <?php
                     $totalAmount = 0;
                     foreach ($services as $service) {
-                        $totalAmount += (float) $service['quantity'] * (float) $service['fee'];
+                        $totalAmount += floatval($service['quantity']) * floatval($service['fee']);
                     }
                     echo number_format($totalAmount, 2);
                     ?>
@@ -217,8 +217,8 @@
                 <?php
                 $totalDiscount = 0;
                 foreach ($services as $service) {
-                    $discountValue = ($service['fee'] * $service['discount']) / 100;
-                    $totalDiscount += $discountValue * $service['quantity'];
+                    $discountValue = (floatval($service['fee']) * floatval($service['discount'])) / 100;
+                    $totalDiscount += $discountValue * floatval($service['quantity']);
                 }
                 ?>
                 <td style="width: 100%; text-align: right; padding-right:10px; font-size: 18px;">
@@ -236,11 +236,10 @@
                 <?php
                 $totalAmount = 0;
                 foreach ($services as $service) {
-                    $discountAmount = ($service['fee'] * $service['discount']) / 100;
-                    $totalAmount += (float) $service['quantity'] * ((float) $service['fee'] - $discountAmount);
+                    $discountAmount = (floatval($service['fee']) * floatval($service['discount'])) / 100;
+                    $totalAmount += floatval($service['quantity']) * (floatval($service['fee']) - $discountAmount);
                 }
                 ?>
-
                 <td style="width: 110%; text-align: right; padding-right:10px; font-size: 18px;">
                     <b>Receiving Amount :</b>
                     <?= number_format($totalAmount + $totalTax, 2) ?>

@@ -441,9 +441,18 @@ class AppointmentModel extends Model
     }
 
 
+    // public function getTotalAppointmentsRevenue($businessID)
+    // {
+    //     $query = $this->selectSum('appointmentFee', 'totalAppointmentsRevenue')
+    //         ->where('businessID', $businessID)
+    //         ->get();
+
+    //     return $query->getRow()->totalAppointmentsRevenue;
+    // }
+
     public function getTotalAppointmentsRevenue($businessID)
     {
-        $query = $this->selectSum('appointmentFee', 'totalAppointmentsRevenue')
+        $query = $this->select('SUM(appointmentFee + hospitalCharges) AS totalAppointmentsRevenue')
             ->where('businessID', $businessID)
             ->get();
 

@@ -547,6 +547,7 @@ class salesModel extends Model
         $builder->select('(SELECT SUM(Sum) FROM invoicedetail WHERE invoicedetail.idReceipts = invoices.idReceipts) as Fee');
 
         $builder->where('invoices.idBusiness', $businessID);
+        $builder->where('invoices.isSummaryInvoice', 0);
 
         if (!empty($search)) {
             $builder->groupStart()

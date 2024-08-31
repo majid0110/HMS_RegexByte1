@@ -623,6 +623,7 @@
                 <div style="margin-left: 368px; font-weight: 900; font-size: 150px">
                   <p>Total Fee: <span id="totalFee">0</span></p>
                   <p>Discount: <span id="discountAmount">0</span></p>
+                  <p>Total without Tax: <span id="totalWithoutTax">0</span></p>
                   <p>Tax: <span id="taxAmount">0</span></p>
                   <p>Discounted Total: <span id="discountedTotal">0</span></p>
                 </div>
@@ -872,37 +873,80 @@
       dropdownAutoWidth: true,
     });
 
+    // function calculateTotalFee() {
+    //   var totalFee = 0;
+    //   var discountAmount = 0;
+    //   var taxAmount = 0;
+
+    //   $('#serviceTableBody tr').each(function () {
+    //     var quantity = parseFloat($(this).find('.editable-quantity').val());
+    //     var fee = parseFloat($(this).find('.editable-fee').text());
+    //     var discount = parseFloat($(this).find('.editable-discount').text());
+    //     // var taxValue = parseFloat($(this).find('.tax-rate').text()) / 100;
+    //     var taxValue = parseFloat($(this).find('.tax-rate').text()) || 0;
+    //     taxValue = (taxValue / 100) + 1;
+    //     // var taxValue = parseFloat($(this).find('.tax-rate').text());
+
+    //     var rowTotal = quantity * fee;
+    //     var rowDiscountAmount = rowTotal * (discount / 100);
+    //     var rowDiscountedTotal = rowTotal - rowDiscountAmount;
+    //     var rowTaxAmount = rowDiscountedTotal * taxValue;
+
+    //     discountAmount += rowDiscountAmount;
+    //     taxAmount += rowTaxAmount;
+    //     totalFee += rowTotal;
+
+    //     $(this).data('calculatedTax', rowTaxAmount);
+    //   });
+    //   var discountedTotal = totalFee - discountAmount;
+    //   var finalTotal = Math.round(discountedTotal + taxAmount);
+
+    //   $('#totalFee').text(totalFee.toFixed(2));
+    //   $('#discountAmount').text(discountAmount.toFixed(2));
+    //   $('#taxAmount').text(taxAmount.toFixed(2));
+    //   $('#discountedTotal').text(finalTotal.toFixed(2));
+    // }
+
     function calculateTotalFee() {
       var totalFee = 0;
       var discountAmount = 0;
       var taxAmount = 0;
+      var totalWithoutTax = 0; // Initialize total without tax
 
       $('#serviceTableBody tr').each(function () {
         var quantity = parseFloat($(this).find('.editable-quantity').val());
         var fee = parseFloat($(this).find('.editable-fee').text());
         var discount = parseFloat($(this).find('.editable-discount').text());
-        var taxValue = parseFloat($(this).find('.tax-rate').text()) / 100;
-        // var taxValue = parseFloat($(this).find('.tax-rate').text());
+        var taxValue = parseFloat($(this).find('.tax-rate').text()) || 0;
 
         var rowTotal = quantity * fee;
         var rowDiscountAmount = rowTotal * (discount / 100);
         var rowDiscountedTotal = rowTotal - rowDiscountAmount;
-        var rowTaxAmount = rowDiscountedTotal * taxValue;
+
+        var rowWithoutVat = rowDiscountedTotal / (1 + (taxValue / 100));
+        var rowTaxAmount = rowDiscountedTotal - rowWithoutVat;
 
         discountAmount += rowDiscountAmount;
         taxAmount += rowTaxAmount;
         totalFee += rowTotal;
+        totalWithoutTax += rowWithoutVat;
 
         $(this).data('calculatedTax', rowTaxAmount);
       });
+
       var discountedTotal = totalFee - discountAmount;
       var finalTotal = Math.round(discountedTotal + taxAmount);
 
+      // Update the text content for all required fields
       $('#totalFee').text(totalFee.toFixed(2));
       $('#discountAmount').text(discountAmount.toFixed(2));
       $('#taxAmount').text(taxAmount.toFixed(2));
+      $('#totalWithoutTax').text(totalWithoutTax.toFixed(2)); // Set total without tax
       $('#discountedTotal').text(finalTotal.toFixed(2));
     }
+
+
+
 
     $('#search').on('input', function () {
       var searchText = $(this).val().toLowerCase();
@@ -927,6 +971,7 @@
       });
 
       if (!exists) {
+        taxValue = parseFloat(taxValue) || 0;
         var newRow = '<tr>' +
           '<td data-service-type-id="' + serviceTypeId + '">' + serviceType + '</td>' +
           '<td contenteditable="true" class="editable-fee" style="text-align: center;">' + serviceFee + '</td>' +
