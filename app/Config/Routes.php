@@ -257,6 +257,9 @@ $routes->post('services_report', 'ReportsController::services_report');
 $routes->get('/generateExcelServiceReport', 'ReportsController::generateExcelServiceReport');
 $routes->post('generateExcelServiceReport', 'ReportsController::generateExcelServiceReport');
 
+$routes->get('/expenses_report', 'ReportsController::expenses_report');
+$routes->post('expenses_report', 'ReportsController::expenses_report');
+
 //-------------------------------------------------------------------------------------------------------------------------
 //                                                 items Routes
 //-------------------------------------------------------------------------------------------------------------------------
@@ -321,6 +324,7 @@ $routes->get('deleteExpenseCat/(:num)', 'ExpenseController::deleteExpenseCat/$1'
 $routes->post('/updateExpenseCategory', 'ExpenseController::updateExpenseCategory');
 $routes->get('/expenses_form1', 'ExpenseController::expenses_form1');
 $routes->post('export_expenses', 'ExpenseController::exportExpenses');
+
 
 //----------------------------------------------------------------------------------------------------------------
 //                                              Configuration Routes

@@ -11,6 +11,7 @@ use App\Models\TestModel;
 use App\Models\LoginModel;
 use App\Models\salesModel;
 use App\Models\ServicesModel;
+use App\Models\ExpenseModel;
 use App\Models\OpdModel;
 use CodeIgniter\CLI\Console;
 use App\Models\ClientModel;
@@ -932,6 +933,39 @@ class ReportsController extends Controller
 
 
 
+    public function expenses_report()
+    {
+        $expenseModel = new ExpenseModel();
+        $clientModel = new ClientModel();
+
+        $filters = [
+            'clientName' => $this->request->getGet('clientName'),
+            'userName' => $this->request->getGet('userName'),
+            'projectId' => $this->request->getGet('projectId'),
+            'fromDate' => $this->request->getGet('fromDate'),
+            'toDate' => $this->request->getGet('toDate'),
+            'search' => $this->request->getGet('search')
+        ];
+
+        $expenses = $expenseModel->getExpenses($filters);
+
+        $totalAmount = 0;
+        foreach ($expenses as $expense) {
+            $totalAmount += $expense['amount'];
+        }
+
+        $data['expenses'] = $expenses;
+        $data['totalAmount'] = $totalAmount;
+        $data['client_names'] = $clientModel->getClientNames();
+        $data['users'] = $expenseModel->getUsers();
+        $data['projects'] = $expenseModel->getExpenseProject();
+
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON($data['expenses']);
+        }
+
+        return view('expenses_report.php', $data);
+    }
 
 
 
