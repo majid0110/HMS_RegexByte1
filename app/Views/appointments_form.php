@@ -301,6 +301,7 @@
                               <?php foreach ($client_names as $client): ?>
                                 <option value="<?= $client['idClient']; ?>">
                                   <?= $client['clientUniqueId']; ?> - <?= $client['client']; ?>
+                                  <?= $client['contact']; ?>
                                 </option>
                               <?php endforeach; ?>
                             </select>

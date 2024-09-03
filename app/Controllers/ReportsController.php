@@ -278,6 +278,8 @@ class ReportsController extends Controller
 
         $sales = new SalesModel();
         $data['payments'] = $sales->getpayment();
+        $data['Invoice'] = $sales->getInvoiceNO();
+
 
         $Model = new ServicesModel();
         $Model = new SalesModel();
@@ -286,14 +288,15 @@ class ReportsController extends Controller
         $clientName = $this->request->getPost('clientName');
         $fromDate = $this->request->getPost('fromDate');
         $toDate = $this->request->getPost('toDate');
+        $invoice = $this->request->getPost('invoice');
 
 
-        $data['totalServiceFee'] = $Model->gettotalServiceFee($search, $clientName, $paymentInput, $fromDate, $toDate);
+        $data['totalServiceFee'] = $Model->gettotalServiceFee($search, $invoice, $clientName, $paymentInput, $fromDate, $toDate);
         $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
         $perPage = 20;
         $offset = ($currentPage - 1) * $perPage;
-        $data['Sales'] = $Model->getSalesReport($search, $paymentInput, $clientName, $fromDate, $toDate, $perPage, $offset);
-        $totalSales = count($Model->getSalesReport($search, $paymentInput, $clientName, $fromDate, $toDate));
+        $data['Sales'] = $Model->getSalesReport($search, $invoice, $paymentInput, $clientName, $fromDate, $toDate, $perPage, $offset);
+        $totalSales = count($Model->getSalesReport($search, $invoice, $paymentInput, $clientName, $fromDate, $toDate));
         $pager = service('pager');
         $pagerLinks = $pager->makeLinks($currentPage, $perPage, $totalSales);
         $data['pager'] = $pagerLinks;

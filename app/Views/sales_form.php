@@ -907,42 +907,43 @@
     //   $('#discountedTotal').text(finalTotal.toFixed(2));
     // }
 
+
     function calculateTotalFee() {
       var totalFee = 0;
       var discountAmount = 0;
       var taxAmount = 0;
-      var totalWithoutTax = 0; // Initialize total without tax
+      var totalWithoutTax = 0;
 
       $('#serviceTableBody tr').each(function () {
         var quantity = parseFloat($(this).find('.editable-quantity').val());
         var fee = parseFloat($(this).find('.editable-fee').text());
         var discount = parseFloat($(this).find('.editable-discount').text());
-        var taxValue = parseFloat($(this).find('.tax-rate').text()) || 0;
+        var taxRate = parseFloat($(this).find('.tax-rate').text()) || 0;
 
-        var rowTotal = quantity * fee;
-        var rowDiscountAmount = rowTotal * (discount / 100);
-        var rowDiscountedTotal = rowTotal - rowDiscountAmount;
+        var netFee = fee / (1 + (taxRate / 100));
 
-        var rowWithoutVat = rowDiscountedTotal / (1 + (taxValue / 100));
-        var rowTaxAmount = rowDiscountedTotal - rowWithoutVat;
-
+        var rowDiscountAmount = (quantity * fee) * (discount / 100);
         discountAmount += rowDiscountAmount;
+
+        var rowTaxAmount = (quantity * fee) * (taxRate / 100);
         taxAmount += rowTaxAmount;
-        totalFee += rowTotal;
-        totalWithoutTax += rowWithoutVat;
+
+        totalFee += quantity * fee;
+
+        totalWithoutTax += quantity * netFee;
 
         $(this).data('calculatedTax', rowTaxAmount);
       });
 
-      var discountedTotal = totalFee - discountAmount;
-      var finalTotal = Math.round(discountedTotal + taxAmount);
+      totalWithoutTax = Math.round(totalWithoutTax);
 
-      // Update the text content for all required fields
+      var finalTotal = Math.round(totalFee - discountAmount);
+
       $('#totalFee').text(totalFee.toFixed(2));
       $('#discountAmount').text(discountAmount.toFixed(2));
       $('#taxAmount').text(taxAmount.toFixed(2));
-      $('#totalWithoutTax').text(totalWithoutTax.toFixed(2)); // Set total without tax
       $('#discountedTotal').text(finalTotal.toFixed(2));
+      $('#totalWithoutTax').text(totalWithoutTax.toFixed(2));
     }
 
 

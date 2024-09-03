@@ -102,7 +102,6 @@ class DoctorController extends Controller
         $clientModel = new ClientModel();
         $data['client_names'] = $clientModel->getClientNames();
 
-
         return view('appointments_form.php', $data);
     }
 

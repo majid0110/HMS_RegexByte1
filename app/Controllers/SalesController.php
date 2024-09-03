@@ -436,6 +436,7 @@ class SalesController extends Controller
                 'Age' => $Age,
                 'clientUnique' => $clientUnique,
                 'Gender' => $Gender,
+                'totaltax' => $totalTax,
                 'InvoiceNumber' => $InvoiceNumber,
                 'operatorName' => $operatorName,
                 'discountedTotal' => $discountedTotal,

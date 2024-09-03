@@ -242,7 +242,7 @@
                 ?>
                 <td style="width: 110%; text-align: right; padding-right:10px; font-size: 18px;">
                     <b>Receiving Amount :</b>
-                    <?= number_format($totalAmount + $totalTax, 2) ?>
+                    <?= number_format($totalAmount, 2) ?>
                 </td>
             </tr>
         </table>

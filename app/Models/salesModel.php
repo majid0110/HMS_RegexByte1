@@ -46,6 +46,14 @@ class salesModel extends Model
             ->getResultArray();
     }
 
+    public function getInvoiceNO()
+    {
+        return $this->db->table('invoices')
+            ->select('idReceipts,invOrdNum')
+            ->get()
+            ->getResultArray();
+    }
+
     public function getCurrancy()
     {
         return $this->db->table('currency')
@@ -425,7 +433,7 @@ class salesModel extends Model
     //     return $pagerLinks;
     // }
 
-    public function gettotalServiceFee($search, $clientName, $paymentInput, $fromDate, $toDate)
+    public function gettotalServiceFee($search, $invoice, $clientName, $paymentInput, $fromDate, $toDate)
     {
         $session = \Config\Services::session();
         $businessID = $session->get('businessID');
@@ -451,6 +459,11 @@ class salesModel extends Model
         if (!empty($paymentInput)) {
             $builder->where('invoices.paymentMethod', $paymentInput);
         }
+
+        if (!empty($invoice)) {
+            $builder->where('invoices.idReceipts', $invoice);
+        }
+
 
         if (!empty($fromDate) && !empty($toDate)) {
             $builder->where('invoices.Date >=', $fromDate)
@@ -535,7 +548,7 @@ class salesModel extends Model
     //     return $query->getResultArray();
     // }
 
-    public function getSalesReport($search = null, $paymentInput = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
+    public function getSalesReport($search = null, $invoice = null, $paymentInput = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
     {
         $session = \Config\Services::session();
         $businessID = $session->get('businessID');
@@ -559,10 +572,12 @@ class salesModel extends Model
                 ->groupEnd();
         }
 
-
+        if (!empty($invoice)) {
+            $builder->where('invoices.idReceipts', $invoice);
+        }
 
         if (!empty($paymentInput)) {
-            $builder->where('invoices.idReceipts', $paymentInput);
+            $builder->where('paymentmethods.idPaymentMethods', $paymentInput);
         }
 
         if (!empty($clientName)) {

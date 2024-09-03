@@ -813,6 +813,42 @@
         var isExpiry = <?php echo json_encode($isExpiry); ?>;
         var isTable = <?php echo json_encode($isTable); ?>;
 
+        // function calculateTotals() {
+        //     var totalFee = 0;
+        //     var totalDiscount = 0;
+        //     var totalTax = 0;
+        //     var totalWithoutTax = 0;
+
+        //     $('#serviceTableBody tr').each(function () {
+        //         var price = parseFloat($(this).find('.editable-price').text()) || 0;
+        //         var quantity = parseInt($(this).find('.editable-quantity').val()) || 0;
+        //         var discount = parseFloat($(this).find('.editable-discount').val()) || 0;
+        //         var taxRate = parseFloat($(this).find('.tax-rate').text()) || 0;
+        //         var expiryDate = $(this).find('.expiry-date').val();
+
+        //         var rowTotal = price * quantity;
+        //         var rowDiscount = rowTotal * (discount / 100);
+        //         var rowTaxableAmount = rowTotal - rowDiscount;
+
+        //         var rowWithoutVat = rowTaxableAmount / (1 + (taxRate / 100));
+        //         var rowTax = rowTaxableAmount - rowWithoutVat;
+
+        //         totalFee += rowTotal;
+        //         totalDiscount += rowDiscount;
+        //         totalTax += rowTax;
+        //         totalWithoutTax += rowWithoutVat;
+        //     });
+
+        //     var discountedTotal = totalFee - totalDiscount + totalTax;
+
+        //     $('#totalFee').text(totalFee.toFixed(2));
+        //     $('#discountAmount').text(totalDiscount.toFixed(2));
+        //     $('#taxAmount').text(totalTax.toFixed(2));
+        //     $('#totalWithoutTax').text(totalWithoutTax.toFixed(2));
+        //     $('#discountedTotal').text(discountedTotal.toFixed(2));
+        // }
+
+
         function calculateTotals() {
             var totalFee = 0;
             var totalDiscount = 0;
@@ -824,22 +860,25 @@
                 var quantity = parseInt($(this).find('.editable-quantity').val()) || 0;
                 var discount = parseFloat($(this).find('.editable-discount').val()) || 0;
                 var taxRate = parseFloat($(this).find('.tax-rate').text()) || 0;
-                var expiryDate = $(this).find('.expiry-date').val();
+
+                var netPrice = price / (1 + (taxRate / 100));
 
                 var rowTotal = price * quantity;
-                var rowDiscount = rowTotal * (discount / 100);
-                var rowTaxableAmount = rowTotal - rowDiscount;
 
-                var rowWithoutVat = rowTaxableAmount / (1 + (taxRate / 100));
-                var rowTax = rowTaxableAmount - rowWithoutVat;
+                var rowDiscount = rowTotal * (discount / 100);
+                totalDiscount += rowDiscount;
+
+                var rowTax = rowTotal * (taxRate / 100);
+                totalTax += rowTax;
 
                 totalFee += rowTotal;
-                totalDiscount += rowDiscount;
-                totalTax += rowTax;
-                totalWithoutTax += rowWithoutVat;
+
+                totalWithoutTax += quantity * netPrice;
             });
 
-            var discountedTotal = totalFee - totalDiscount + totalTax;
+            totalWithoutTax = Math.round(totalWithoutTax);
+
+            var discountedTotal = Math.round(totalFee - totalDiscount);
 
             $('#totalFee').text(totalFee.toFixed(2));
             $('#discountAmount').text(totalDiscount.toFixed(2));
@@ -848,44 +887,6 @@
             $('#discountedTotal').text(discountedTotal.toFixed(2));
         }
 
-
-
-        function calculateTotalFee() {
-            var totalFee = 0;
-            var discountAmount = 0;
-            var taxAmount = 0;
-            var totalWithoutTax = 0;
-
-            $('#serviceTableBody tr').each(function () {
-                var quantity = parseFloat($(this).find('.editable-quantity').val());
-                var fee = parseFloat($(this).find('.editable-fee').text());
-                var discount = parseFloat($(this).find('.editable-discount').text());
-                var taxValue = parseFloat($(this).find('.tax-rate').text()) || 0;
-
-                var rowTotal = quantity * fee;
-                var rowDiscountAmount = rowTotal * (discount / 100);
-                var rowDiscountedTotal = rowTotal - rowDiscountAmount;
-
-                var rowWithoutVat = rowDiscountedTotal / (1 + (taxValue / 100));
-                var rowTaxAmount = rowDiscountedTotal - rowWithoutVat;
-
-                discountAmount += rowDiscountAmount;
-                taxAmount += rowTaxAmount;
-                totalFee += rowTotal;
-                totalWithoutTax += rowWithoutVat;
-
-                $(this).data('calculatedTax', rowTaxAmount);
-            });
-
-            var discountedTotal = totalFee - discountAmount;
-            var finalTotal = Math.round(discountedTotal + taxAmount);
-
-            $('#totalFee').text(totalFee.toFixed(2));
-            $('#discountAmount').text(discountAmount.toFixed(2));
-            $('#taxAmount').text(taxAmount.toFixed(2));
-            $('#totalWithoutTax').text(totalWithoutTax.toFixed(2));
-            $('#discountedTotal').text(finalTotal.toFixed(2));
-        }
 
         function toggleFullScreen() {
             if (!document.fullscreenElement &&
@@ -1210,19 +1211,18 @@
                     var serviceTypeRow = $(this);
                     var serviceTypeId = serviceTypeRow.data('service-id');
                     var serviceName = serviceTypeRow.find('td:eq(0)').text();
-                    var fee = parseFloat(serviceTypeRow.find('.editable-price').text());
-                    var quantity = parseInt(serviceTypeRow.find('.editable-quantity').val());
-                    var discount = parseFloat(serviceTypeRow.find('.editable-discount').val());
-                    var taxRate = parseFloat(serviceTypeRow.find('.tax-rate').data('tax-value'));
+                    var fee = parseFloat(serviceTypeRow.find('.editable-price').text()) || 0;
+                    var quantity = parseInt(serviceTypeRow.find('.editable-quantity').val()) || 0;
+                    var discount = parseFloat(serviceTypeRow.find('.editable-discount').val()) || 0;
+                    var taxRate = parseFloat(serviceTypeRow.find('.tax-rate').data('tax-value')) || 0;
                     var taxId = serviceTypeRow.find('.tax-rate').data('tax-id');
-                    // var expiryDate = '1970-01-01';
-                    // var expiryDate = serviceTypeRow.find('.expiry-date').val();
                     var expiryDate = serviceTypeRow.find('.expiry-dropdown').val() || serviceTypeRow.find('.expiry-date').val() || null;
 
                     var rowTotal = fee * quantity;
                     var rowDiscount = rowTotal * (discount / 100);
                     var rowTaxableAmount = rowTotal - rowDiscount;
-                    var calculatedTax = rowTaxableAmount * (taxRate / 100);
+
+                    var calculatedTax = rowTotal * (taxRate / 100);
 
                     services.push({
                         serviceTypeId: serviceTypeId,
@@ -1238,16 +1238,16 @@
                 });
 
                 console.log('Services', services);
-                // console.log('Client ID', clientId);
-                // console.log('Client Name', clientName);
-                // console.log('Curranct Name', currencyName);
-                // console.log('Payment Method ID', paymentMethodId);
-                // console.log('Payment Name', paymentName);
-                // console.log('Payment Method Name', paymentMethodName);
-                // console.log('Currancy', currency);
-                // console.log('Exchange ', exchange);
-                // console.log('Total Fee ', totalFee);
-                // console.log('Total Fee ', totalFee);
+                // // console.log('Client ID', clientId);
+                // // console.log('Client Name', clientName);
+                // // console.log('Curranct Name', currencyName);
+                // // console.log('Payment Method ID', paymentMethodId);
+                // // console.log('Payment Name', paymentName);
+                // // console.log('Payment Method Name', paymentMethodName);
+                // // console.log('Currancy', currency);
+                // // console.log('Exchange ', exchange);
+                // // console.log('Total Fee ', totalFee);
+                // // console.log('Total Fee ', totalFee);
                 // console.log('Toatal Tax', totalTax);
                 // console.log('Toatal Discount', discountedTotal);
 
@@ -1311,121 +1311,6 @@
                 return $('input[name="select_table"]:checked').length > 0;
             }
 
-            // function OrderData() {
-            //     $('#loading-overlay').show();
-
-            //     if (isTable && !isTableSelected()) {
-            //         alert('Please select a table before submitting the order.');
-            //         $('#loading-overlay').hide();
-            //         return;
-            //     }
-            //     var selectedTableId = isTable ? getSelectedTableId() : null;
-
-            //     var clientId = $('select[name="clientName"]').val();
-            //     var clientName = $('select[name="clientName"] option:selected').text();
-            //     var paymentMethodOption = $('select[name="Payment"] option:selected');
-            //     var paymentMethodId = paymentMethodOption.data('payment-id');
-            //     var paymentName = paymentMethodOption.text();
-            //     var paymentMethodName = paymentMethodOption.text();
-            //     var currency = $('select[name="Currency"]').val();
-            //     var currencyName = $('select[name="Currency"] option:selected').text();
-            //     var exchange = $('#exchangeInput').val();
-            //     var totalFee = parseFloat($('#totalFee').text());
-            //     var totalTax = parseFloat($('#taxAmount').text());
-            //     var discountedTotal = parseFloat($('#discountedTotal').text());
-
-            //     console.log('Table ID', selectedTableId);
-
-            //     if (!clientId || isNaN(totalFee)) {
-            //         alert('Invalid data for insertion.');
-            //         return;
-            //     }
-
-            //     var services = [];
-            //     $('#serviceTableBody tr').each(function () {
-            //         var serviceTypeRow = $(this);
-            //         var serviceTypeId = serviceTypeRow.data('service-id');
-            //         var serviceName = serviceTypeRow.find('td:eq(0)').text();
-            //         var fee = parseFloat(serviceTypeRow.find('.editable-price').text());
-            //         var quantity = parseInt(serviceTypeRow.find('.editable-quantity').val());
-            //         var discount = parseFloat(serviceTypeRow.find('.editable-discount').val());
-            //         var taxRate = parseFloat(serviceTypeRow.find('.tax-rate').text());
-            //         // var expiryDate = '1970-01-01';
-            //         // var expiryDate = serviceTypeRow.find('.expiry-date').val();
-            //         var expiryDate = serviceTypeRow.find('.expiry-dropdown').val() || serviceTypeRow.find('.expiry-date').val() || null;
-
-            //         var rowTotal = fee * quantity;
-            //         var rowDiscount = rowTotal * (discount / 100);
-            //         var rowTaxableAmount = rowTotal - rowDiscount;
-            //         var calculatedTax = rowTaxableAmount * (taxRate / 100);
-
-            //         services.push({
-            //             serviceTypeId: serviceTypeId,
-            //             serviceName: serviceName,
-            //             fee: fee,
-            //             quantity: quantity,
-            //             discount: discount,
-            //             expiryDate: expiryDate,
-            //             taxRate: taxRate,
-            //             calculatedTax: calculatedTax
-            //         });
-            //     });
-
-            //     $.ajax({
-            //         method: 'POST',
-            //         url: '<?= site_url('SalesController/submitServices') ?>',
-            //         dataType: "json",
-            //         data: {
-            //             clientId: clientId,
-            //             clientName: clientName,
-            //             currencyName: currencyName,
-            //             paymentMethodId: paymentMethodId,
-            //             paymentName: paymentName,
-            //             paymentMethodName: paymentMethodName,
-            //             currency: currency,
-            //             exchange: exchange,
-            //             totalFee: totalFee,
-            //             totalTax: totalTax,
-            //             selectedTableId: selectedTableId,
-            //             discountedTotal: discountedTotal,
-            //             services: services
-            //         },
-            //         success: function (response) {
-            //             console.log('Data inserted successfully:', response);
-            //             if (response.pdfContent) {
-            //                 var decodedPdfContent = atob(response.pdfContent);
-            //                 var blob = new Blob([new Uint8Array(decodedPdfContent.split('').map(function (c) {
-            //                     return c.charCodeAt(0);
-            //                 }))], {
-            //                     type: 'application/pdf'
-            //                 });
-            //                 var link = document.createElement('a');
-            //                 var url = window.URL.createObjectURL(blob);
-            //                 link.href = url;
-            //                 link.target = '_blank';
-            //                 link.click();
-
-            //                 setTimeout(function () {
-            //                     window.URL.revokeObjectURL(url);
-            //                 }, 100);
-            //             }
-            //             $('#serviceTableBody').empty();
-            //             $('#totalFee').text('0');
-            //             $('#discountAmount').text('0');
-            //             $('#taxAmount').text('0');
-            //             $('#discountedTotal').text('0');
-            //             calculateTotals();
-
-            //             $('#loading-overlay').hide();
-            //             location.reload();
-            //         },
-            //         error: function (error) {
-            //             console.error('Error inserting data:', error);
-            //             $('#loading-overlay').hide();
-            //         }
-            //     });
-            // }
-
             function OrderData() {
                 $('#loading-overlay').show();
 
@@ -1472,7 +1357,8 @@
                     var rowTotal = fee * quantity;
                     var rowDiscount = rowTotal * (discount / 100);
                     var rowTaxableAmount = rowTotal - rowDiscount;
-                    var calculatedTax = rowTaxableAmount * (taxRate / 100);
+
+                    var calculatedTax = rowTotal * (taxRate / 100);
 
                     services.push({
                         serviceTypeId: serviceTypeId,
@@ -1582,7 +1468,8 @@
                     var rowTotal = fee * quantity;
                     var rowDiscount = rowTotal * (discount / 100);
                     var rowTaxableAmount = rowTotal - rowDiscount;
-                    var calculatedTax = rowTaxableAmount * (taxRate / 100);
+
+                    var calculatedTax = rowTotal * (taxRate / 100);
 
                     services.push({
                         serviceTypeId: serviceTypeId,

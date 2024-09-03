@@ -461,7 +461,7 @@ class AppointmentModel extends Model
 
     public function getMonthlyAppointmentsRevenue($businessID)
     {
-        $query = $this->selectSum('appointmentFee', 'totalAppointmentsRevenue')
+        $query = $this->select('SUM(appointmentFee + hospitalCharges) AS totalAppointmentsRevenue')
             ->where('MONTH(appointmentDate)', date('m'))
             ->where('YEAR(appointmentDate)', date('Y'))
             ->where('businessID', $businessID)

@@ -276,8 +276,10 @@ class LoginController extends Controller
 
         $MonthlyServiceRevenue = $InvoiceModel->getMonthlyServiceRevenue($businessID);
         $MonthlyppointmentsRevenue = $appointmentModel->getMonthlyAppointmentsRevenue($businessID);
+        $MonthlyOPDRevenue = $opdModel->getMonthlyOPDRevenue($businessID);
+
         $MonthlyTestRevenue = $InvoiceModel->getMonthlyTestRevenue($businessID);
-        $MonthlyRevenue = $MonthlyServiceRevenue + $MonthlyppointmentsRevenue + $MonthlyTestRevenue;
+        $MonthlyRevenue = $MonthlyServiceRevenue + $MonthlyppointmentsRevenue + $MonthlyTestRevenue + $MonthlyOPDRevenue;
         $data['MonthlyRevenue'] = $MonthlyRevenue;
 
         $labModel = new LoginModel('labtest');
@@ -333,44 +335,7 @@ class LoginController extends Controller
 
         $data['combinedData'] = array_values($combinedData);
 
-        // -------------------------------------------------------------------------------------
 
-
-        // $combinedData = [];
-        // foreach ($monthlyData as $appointment) {
-        //     $label = $appointment['label'];
-        //     $combinedData[$label] = [
-        //         'label' => $label,
-        //         'total' => $appointment['hospitalCharges'],
-        //     ];
-        // }
-        // foreach ($monthlyHospitalCharges as $hospitalCharge) {
-        //     $label = $hospitalCharge['label'];
-        //     if (isset($combinedData[$label])) {
-        //         $combinedData[$label]['total'] += $hospitalCharge['hospitalCharges'];
-        //     } else {
-        //         $combinedData[$label] = [
-        //             'label' => $label,
-        //             'total' => $hospitalCharge['hospitalCharges'],
-        //         ];
-        //     }
-        // }
-        // foreach ($monthlyLabCharges as $labCharge) {
-        //     $label = $labCharge['label'];
-        //     if (isset($combinedData[$label])) {
-        //         $combinedData[$label]['total'] += $labCharge['totalCharges'];
-        //     } else {
-        //         $combinedData[$label] = [
-        //             'label' => $label,
-        //             'total' => $labCharge['totalCharges'],
-        //         ];
-        //     }
-        // }
-        // ksort($combinedData);
-        // $data['combinedData'] = array_values($combinedData);
-        // $Labtestdetails= new LabtestdetailsModel();
-        // $totalTests = $Labtestdetails->getTotalTests($businessID);
-        // $data['totalTests'] = $totalTests;
         $session = session();
         if (!$session->get('ID')) {
             return redirect()->to(base_url("/login"));

@@ -326,6 +326,17 @@ class OpdModel extends Model
 
         return array_values($monthlyData);
     }
+
+    public function getMonthlyOPDRevenue($businessID)
+    {
+        $query = $this->selectSum('appointmentFee', 'totalOPDRevenue')
+            ->where('MONTH(appointmentDate)', date('m'))
+            ->where('YEAR(appointmentDate)', date('Y'))
+            ->where('businessID', $businessID)
+            ->get();
+
+        return $query->getRow()->totalOPDRevenue;
+    }
 }
 
 

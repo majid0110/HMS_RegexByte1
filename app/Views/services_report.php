@@ -292,6 +292,20 @@
                                                     Export
                                                 </button>
                                                 <div class="col-md-3">
+                                                    <label>By Invoice</label>
+                                                    <div id="the-basics">
+                                                        <select class="form-control" name="invoice" id='invoiceInput'>
+                                                            <option value="">All Invoices</option>
+                                                            <?php foreach ($Invoice as $invoice): ?>
+                                                                <option value="<?= $invoice['idReceipts']; ?>"
+                                                                    data-invoice-id="<?= $invoice['idReceipts']; ?>">
+                                                                    <?= $invoice['invOrdNum']; ?>
+                                                                </option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
 
                                                     <label>Search</label>
                                                     <input class="form-control" type="text" name="search"
@@ -434,10 +448,11 @@
             <!-- inject:js -->
             <script>
                 $(document).ready(function () {
-                    $('#searchInput, #paymentInput, #clientInput, #fromDateInput, #toDateInput').on('input change', function () {
+                    $('#searchInput, #invoiceInput, #paymentInput, #clientInput, #fromDateInput, #toDateInput').on('input change', function () {
                         var searchValue = $('#searchInput').val();
                         var paymentInput = $('#paymentInput').val();
                         var clientValue = $('#clientInput').val();
+                        var invoice = $('#invoiceInput').val();
                         var fromDateValue = $('#fromDateInput').val();
                         var toDateValue = $('#toDateInput').val();
 
@@ -446,6 +461,7 @@
                         console.log('Client Value:', clientValue);
                         console.log('From Date Value:', fromDateValue);
                         console.log('To Date Value:', toDateValue);
+                        console.log('invoice:', invoice);
 
                         $.ajax({
                             type: 'POST',
@@ -455,7 +471,8 @@
                                 paymentInput: paymentInput,
                                 clientName: clientValue,
                                 fromDate: fromDateValue,
-                                toDate: toDateValue
+                                toDate: toDateValue,
+                                invoice: invoice
                             },
                             dataType: 'json',
                             success: function (response) {
