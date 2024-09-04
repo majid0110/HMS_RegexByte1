@@ -49,6 +49,4 @@ class InvoiceDetailsModel extends Model
         }
     }
 
-
-
 }

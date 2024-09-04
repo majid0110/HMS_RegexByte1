@@ -177,7 +177,7 @@
                                                     <option value="">All Client</option>
                                                     <?php foreach ($client_names as $client): ?>
                                                         <option value="<?= $client['client']; ?>">
-                                                            <?= $client['client']; ?>
+                                                            <?= $client['client']; ?> (<?= $client['contact']; ?>)
                                                         </option>
                                                     <?php endforeach; ?>
                                                 </select>

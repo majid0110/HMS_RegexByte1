@@ -478,7 +478,43 @@ class salesModel extends Model
 
     //--------------------------------------------------
 
+    public function gettotalServiceTableFee($search, $clientName, $paymentInput, $fromDate, $toDate)
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+        $builder = $this->db->table('invoices');
+        $builder->selectSum('Value', 'totalServiceFee');
+        $builder->join('client', 'client.idClient = invoices.idClient');
+        $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
+        $builder->where('invoices.idBusiness', $businessID);
 
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->like('invoices.invOrdNum', $search)
+                ->orLike('client.client', $search)
+                ->orLike('currency.Currency', $search)
+                ->orLike('paymentmethods.Method', $search)
+                ->groupEnd();
+        }
+
+        if (!empty($clientName)) {
+            $builder->like('client.client', $clientName);
+        }
+
+        if (!empty($paymentInput)) {
+            $builder->where('invoices.paymentMethod', $paymentInput);
+        }
+
+        if (!empty($fromDate) && !empty($toDate)) {
+            $builder->where('invoices.Date >=', $fromDate)
+                ->where('invoices.Date <=', $toDate);
+        }
+
+
+        $query = $builder->get();
+        $result = $query->getRowArray();
+        return $result['totalServiceFee'] ?? 0;
+    }
     public function getServicesByCategory($categoryId)
     {
         $builder = $this->db->table('artmenu');
@@ -639,7 +675,7 @@ class salesModel extends Model
     }
 
 
-    public function getSalesDetailsReport($search = null, $payment = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
+    public function getSalesDetailsReport($search = null, $item = null, $payment = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
     {
         $businessId = session()->get('businessID');
         $builder = $this->db->table('invoicedetail');
@@ -658,7 +694,12 @@ class salesModel extends Model
                 ->like('client.state', $search)
                 ->like('paymentmethods.idPaymentMethods', $search)
                 ->like('client.clientUniqueId', $search)
+                ->like('invoicedetail.idArtMenu', $search)
                 ->groupEnd();
+        }
+
+        if (!empty($item)) {
+            $builder->where('invoicedetail.idArtMenu', $item);
         }
 
         if (!empty($payment)) {
@@ -727,7 +768,7 @@ class salesModel extends Model
     }
 
 
-    public function getTotalServiceDetailFee($search = null, $payment = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
+    public function getTotalServiceDetailFee($search = null, $item = null, $payment = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
     {
         $businessId = session()->get('businessID');
         $builder = $this->db->table('invoicedetail');
@@ -746,7 +787,12 @@ class salesModel extends Model
                 ->like('client.state', $search)
                 ->like('paymentmethods.idPaymentMethods', $search)
                 ->like('client.clientUniqueId', $search)
+                ->like('invoicedetail.idArtMenu', $search)
                 ->groupEnd();
+        }
+
+        if (!empty($item)) {
+            $builder->where('invoicedetail.idArtMenu', $item);
         }
 
         if (!empty($payment)) {

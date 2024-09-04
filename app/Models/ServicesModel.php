@@ -54,6 +54,13 @@ class ServicesModel extends Model
             ->getResultArray();
     }
 
+    public function getItemsName()
+    {
+        return $this->db->table('artmenu')
+            ->select('idArtMenu,Name')
+            ->get()
+            ->getResultArray();
+    }
 
     // public function getServices()
     // {

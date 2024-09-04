@@ -37,7 +37,7 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <form action="<?= base_url('generateExcelAppointments'); ?>" method="post">
+                                <form action="<?= base_url('generateExcelExpensesReport'); ?>" method="post">
                                     <div class="form-group row">
                                         <div>
                                             <div
@@ -67,7 +67,7 @@
                                                     <option value="">All Clients</option>
                                                     <?php foreach ($client_names as $client): ?>
                                                         <option value="<?= $client['client']; ?>">
-                                                            <?= $client['client']; ?>
+                                                            <?= $client['client']; ?> (<?= $client['contact']; ?>)
                                                         </option>
                                                     <?php endforeach; ?>
                                                 </select>
@@ -225,10 +225,6 @@
                                 '<td>' + (expense.project_id || '') + '</td>' +
                                 '<td>' + expense.amount + '</td>' +
                                 '<td>' + expense.expense_date + '</td>' +
-                                '<td>' +
-                                '<a href="<?= base_url('editExpense/') ?>' + expense.id + '" class="btn btn-info btn-sm">Edit</a> ' +
-                                '<a href="<?= base_url('deleteExpense/') ?>' + expense.id + '" onclick="return confirm(\'Are you sure you want to delete this Record?\');" class="btn btn-danger btn-sm">Delete</a>' +
-                                '</td>' +
                                 '</tr>';
                             tableBody.append(row);
                         });

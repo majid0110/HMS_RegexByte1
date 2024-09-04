@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
     <style>
         #summaryInvoiceTable {
             width: 100%;
@@ -34,6 +37,10 @@
 
         #summaryInvoiceTable tfoot {
             font-weight: bold;
+        }
+
+        .select2-dropdown.select2-dropdown--below {
+            width: 190px !important;
         }
 
         .body {
@@ -69,6 +76,8 @@
 
         .table-item.selected .selection-indicator {
             display: block !important;
+            color: black !important;
+            background: #747c7af7 !important;
         }
 
         .table-list {
@@ -477,6 +486,7 @@
                                 <?php foreach ($client_names as $client): ?>
                                     <option value="<?= $client['idClient']; ?>">
                                         <?= $client['clientUniqueId']; ?> - <?= $client['client']; ?>
+                                        (<?= $client['contact']; ?>)
                                     </option>
                                 <?php endforeach; ?>
                             </select>
@@ -810,6 +820,15 @@
     </div>
 
     <script>
+        $(document).ready(function () {
+            $('#clientId').select2({
+                placeholder: "Search..",
+                allowClear: true
+            });
+        });
+    </script>
+
+    <script>
         var isExpiry = <?php echo json_encode($isExpiry); ?>;
         var isTable = <?php echo json_encode($isTable); ?>;
 
@@ -854,6 +873,7 @@
             var totalDiscount = 0;
             var totalTax = 0;
             var totalWithoutTax = 0;
+            var discountedTotal = 0;
 
             $('#serviceTableBody tr').each(function () {
                 var price = parseFloat($(this).find('.editable-price').text()) || 0;
@@ -861,24 +881,23 @@
                 var discount = parseFloat($(this).find('.editable-discount').val()) || 0;
                 var taxRate = parseFloat($(this).find('.tax-rate').text()) || 0;
 
-                var netPrice = price / (1 + (taxRate / 100));
-
                 var rowTotal = price * quantity;
+                var rowDiscountAmount = rowTotal * (discount / 100);
+                var rowDiscountedTotal = rowTotal - rowDiscountAmount;
 
-                var rowDiscount = rowTotal * (discount / 100);
-                totalDiscount += rowDiscount;
-
-                var rowTax = rowTotal * (taxRate / 100);
-                totalTax += rowTax;
+                var rowTaxAmount = rowDiscountedTotal * (taxRate / 100);
 
                 totalFee += rowTotal;
+                totalDiscount += rowDiscountAmount;
+                totalTax += rowTaxAmount;
+                totalWithoutTax += rowDiscountedTotal - rowTaxAmount;
+                discountedTotal += rowDiscountedTotal;
 
-                totalWithoutTax += quantity * netPrice;
+                $(this).data('calculatedTax', rowTaxAmount);
             });
 
             totalWithoutTax = Math.round(totalWithoutTax);
-
-            var discountedTotal = Math.round(totalFee - totalDiscount);
+            discountedTotal = Math.round(discountedTotal);
 
             $('#totalFee').text(totalFee.toFixed(2));
             $('#discountAmount').text(totalDiscount.toFixed(2));
@@ -886,7 +905,6 @@
             $('#totalWithoutTax').text(totalWithoutTax.toFixed(2));
             $('#discountedTotal').text(discountedTotal.toFixed(2));
         }
-
 
         function toggleFullScreen() {
             if (!document.fullscreenElement &&
@@ -1222,7 +1240,7 @@
                     var rowDiscount = rowTotal * (discount / 100);
                     var rowTaxableAmount = rowTotal - rowDiscount;
 
-                    var calculatedTax = rowTotal * (taxRate / 100);
+                    var calculatedTax = rowDiscount * (taxRate / 100);
 
                     services.push({
                         serviceTypeId: serviceTypeId,

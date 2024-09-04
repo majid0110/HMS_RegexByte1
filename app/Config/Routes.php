@@ -260,6 +260,8 @@ $routes->post('generateExcelServiceReport', 'ReportsController::generateExcelSer
 $routes->get('/expenses_report', 'ReportsController::expenses_report');
 $routes->post('expenses_report', 'ReportsController::expenses_report');
 
+$routes->get('/generateExcelExpensesReport', 'ReportsController::generateExcelExpensesReport');
+$routes->post('generateExcelExpensesReport', 'ReportsController::generateExcelExpensesReport');
 //-------------------------------------------------------------------------------------------------------------------------
 //                                                 items Routes
 //-------------------------------------------------------------------------------------------------------------------------

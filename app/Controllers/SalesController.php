@@ -161,7 +161,7 @@ class SalesController extends Controller
         $toDate = $this->request->getPost('toDate');
 
 
-        $data['totalServiceFee'] = $Model->gettotalServiceFee($search, $clientName, $paymentInput, $fromDate, $toDate);
+        $data['totalServiceFee'] = $Model->gettotalServiceTableFee($search, $clientName, $paymentInput, $fromDate, $toDate);
         $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
         $perPage = 20;
         $offset = ($currentPage - 1) * $perPage;
