@@ -11,6 +11,7 @@ use App\Models\itemsModel;
 use App\Models\TestModel;
 use App\Models\LabtestdetailsModel;
 use App\Models\ServicesModel;
+use App\Models\TaxModel;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class ServiceController extends Controller
@@ -591,6 +592,7 @@ class ServiceController extends Controller
                     $serviceName = $row[1];
                     $serviceCode = $row[2];
 
+
                     $existingService = $Model->getServiceByCodeAndName($serviceCode, $serviceName, $businessID);
 
                     if ($existingService) {
@@ -598,6 +600,10 @@ class ServiceController extends Controller
 
                         $unitName = $row[5];
                         $unit = $itemsModel->getUnitByName($unitName, $businessID);
+
+                        $tvshValue = $row[7];
+                        $taxModel = new TaxModel();
+                        $taxID = $this->getTaxIdByValue($taxModel, $tvshValue, $businessID);
 
                         if ($unit) {
                             $idUnit = $unit['idUnit'];
@@ -616,7 +622,7 @@ class ServiceController extends Controller
                             'Name' => $serviceName,
                             'Notes' => $row[3],
                             'idCatArt' => $existingService['idCatArt'],
-                            'idTVSH' => $row[7],
+                            'idTVSH' => $taxID,
                             'Cost' => $row[6],
                             'idUnit' => $idUnit,
                             'Price' => $row[8],
@@ -634,6 +640,10 @@ class ServiceController extends Controller
                         $Model->updateService($insertedServiceId, $formDataWarehouse);
                         session()->setFlashdata('success', 'Data updated successfully!');
                     } else {
+
+                        $tvshValue = $row[7];
+                        $taxModel = new TaxModel();
+                        $taxID = $this->getTaxIdByValue($taxModel, $tvshValue, $businessID);
                         $categoryName = $row[4];
                         $category = $itemsModel->getCategoryByName($categoryName, $businessID);
 
@@ -669,7 +679,7 @@ class ServiceController extends Controller
                             'Name' => $serviceName,
                             'Notes' => $row[3],
                             'idCatArt' => $idCatArt,
-                            'idTVSH' => $row[7],
+                            'idTVSH' => $taxID,
                             'Cost' => $row[6],
                             'idUnit' => $idUnit,
                             'Price' => $row[8],
@@ -703,6 +713,22 @@ class ServiceController extends Controller
             return $this->response->setJSON(['success' => false, 'error' => 'Error uploading the Excel file.']);
         }
     }
+    private function getTaxIdByValue($taxModel, $tvshValue, $businessID)
+    {
+        $existingTax = $taxModel->getTaxByValueAndBusiness($tvshValue, $businessID);
 
+        if ($existingTax) {
+            return $existingTax['tax_id'];
+        } else {
+            $newTax = [
+                'value' => $tvshValue,
+                'start_date' => date('Y-m-d'),
+                'status' => 'Active',
+                'idBusiness' => $businessID,
+            ];
+
+            return $taxModel->insertTax($newTax);
+        }
+    }
 
 }

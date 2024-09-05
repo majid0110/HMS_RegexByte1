@@ -143,7 +143,7 @@
                                                                     <option value="<?= $client['idClient']; ?>">
                                                                         <?= $client['clientUniqueId']; ?> -
                                                                         <?= $client['client']; ?>
-                                                                        (<?= $client['contact']; ?>)
+                                                                        <?= $client['contact']; ?>
                                                                     </option>
                                                                 <?php endforeach; ?>
                                                             </select>

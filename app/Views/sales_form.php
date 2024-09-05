@@ -279,7 +279,7 @@
                           <select class="form-control select2" name="clientName" id="clientId">
                             <?php foreach ($client_names as $client): ?>
                               <option value="<?= $client['idClient']; ?>">
-                                <?= $client['clientUniqueId']; ?> - <?= $client['client']; ?> (<?= $client['contact']; ?>)
+                                <?= $client['client']; ?>   <?= $client['contact']; ?>
                               </option>
                             <?php endforeach; ?>
                           </select>

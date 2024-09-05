@@ -5,7 +5,7 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 
 
-use App\Models\InvoiceDetailModel;
+use App\Models\TaxModel;
 use App\Models\ItemsInventoryModel;
 use App\Models\InvoiceModel;
 use App\Models\ServicesModel;
@@ -903,6 +903,10 @@ class itemsController extends Controller
         $itemName = $row[2];
         $itemCode = $row[1];
         $cost = $row[8];
+        $tvshValue = $row[5];
+
+        $taxModel = new TaxModel();
+        $taxID = $this->getTaxIdByValue($taxModel, $tvshValue, $businessID);
 
         $existingItem = $itemsModel->getItemByCodeAndName($itemCode, $itemName, $businessID);
 
@@ -929,7 +933,7 @@ class itemsController extends Controller
                 'Name' => $itemName,
                 'Notes' => $row[4],
                 'idCategories' => $existingItem['idCategories'],
-                'idTAX' => $row[5],
+                'idTAX' => $taxID,
                 'idWarehouse' => $row[6],
                 'Unit' => $idUnit,
                 'Cost' => $row[8],
@@ -980,7 +984,7 @@ class itemsController extends Controller
                 'Name' => $itemName,
                 'Notes' => $row[4],
                 'idCategories' => $idCatArt,
-                'idTAX' => $row[5],
+                'idTAX' => $taxID,
                 'idWarehouse' => $row[6],
                 'Unit' => $idUnit,
                 'Cost' => $row[8],
@@ -1017,6 +1021,9 @@ class itemsController extends Controller
     {
         $serviceName = $row[2];
         $serviceCode = $row[1];
+        $tvshValue = $row[5];
+        $taxModel = new TaxModel();
+        $taxID = $this->getTaxIdByValue($taxModel, $tvshValue, $businessID);
 
         $existingService = $servicesModel->getServiceByCodeAndName($serviceCode, $serviceName, $businessID);
 
@@ -1028,7 +1035,7 @@ class itemsController extends Controller
                 'Name' => $serviceName,
                 'Notes' => $row[4],
                 'idCatArt' => $existingService['idCatArt'],
-                'idTVSH' => $row[5],
+                'idTVSH' => $taxID,
                 'Cost' => $row[8],
                 'idUnit' => $idUnit,
                 'Price' => $row[10],
@@ -1065,7 +1072,7 @@ class itemsController extends Controller
                 'Name' => $serviceName,
                 'Notes' => $row[4],
                 'idCatArt' => $idCatArt,
-                'idTVSH' => $row[5],
+                'idTVSH' => $taxID,
                 'Cost' => $row[8],
                 'idUnit' => $idUnit,
                 'Price' => $row[10],
@@ -1093,6 +1100,23 @@ class itemsController extends Controller
         }
     }
 
+    private function getTaxIdByValue($taxModel, $tvshValue, $businessID)
+    {
+        $existingTax = $taxModel->getTaxByValueAndBusiness($tvshValue, $businessID);
+
+        if ($existingTax) {
+            return $existingTax['tax_id'];
+        } else {
+            $newTax = [
+                'value' => $tvshValue,
+                'start_date' => date('Y-m-d'),
+                'status' => 'Active',
+                'idBusiness' => $businessID,
+            ];
+
+            return $taxModel->insertTax($newTax);
+        }
+    }
     public function downloadTemplate()
     {
         return $this->response->download(ROOTPATH . 'uploads/defaults/Items_Template.xlsx', null);
