@@ -342,6 +342,8 @@
                           <label class="col-sm-3 col-form-label" name="ftype">Appointment Type</label>
                           <div class="col-sm-9">
                             <select class="form-control" name="app_type_id" id="app_type_id">
+                              <option value="" disabled selected> Select Appointment Type
+                              </option>
                               <?php foreach ($fee_types as $fee_type): ?>
                                 <option value="<?= $fee_type->f_id; ?>"
                                   data-appointment-type="<?= $fee_type->FeeType; ?>">
@@ -594,11 +596,16 @@
         return $('#doctor_id').val() !== "";
       }
 
+      function isAppointmentTypeSelected() {
+        return $('#app_type_id').val() !== "";
+      }
+
       function submitForm() {
-        if (!isDoctorSelected()) {
-          showToast('Please select a doctor', 'error');
+        if (!isDoctorSelected() || !isAppointmentTypeSelected()) {
+          showToast('Please select both doctor and appointment type', 'error');
           return;
         }
+
         var formData = new FormData($('#appointmentForm')[0]);
 
         $.ajax({

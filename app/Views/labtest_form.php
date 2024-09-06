@@ -175,7 +175,7 @@
                           <select class="form-control select2" name="clientName" id="clientName">
                             <?php foreach ($client_names as $client): ?>
                               <option value="<?= $client['idClient']; ?>">
-                                <?= $client['clientUniqueId']; ?> - <?= $client['client']; ?>   <?= $client['contact']; ?>
+                                <?= $client['client']; ?>   <?= $client['contact']; ?>
                               </option>
                             <?php endforeach; ?>
                           </select>
@@ -318,6 +318,7 @@
             const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Karachi" }));
             const formattedDate = now.toISOString().split('T')[0];
             document.getElementById('collectedDate').value = formattedDate;
+            document.getElementById('registrationDate').value = formattedDate;
           </script>
           <script>
             $(document).ready(function () {

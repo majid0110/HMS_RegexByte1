@@ -101,40 +101,43 @@
 
         <table>
             <tr>
-                <td style=" width: 50%; white-space: nowrap;">Patient:<b>
+                <td style=" font: 16px !important; width: 50%; white-space: nowrap;">Patient:<b>
                         <?= $clientName1; ?>
                         <!-- <?= $data['clientName'] ?> -->
                     </b></td>
-                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Gender:<b>
+                <td style=" font: 16px !important; width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">
+                    Gender:<b>
                         <?= $Gender; ?>
                     </b></td>
             </tr>
             <tr>
-                <td style=" width: 50%; white-space: nowrap;">Age:<b>
+                <td style="font: 16px !important; width: 50%; white-space: nowrap;">Age:<b>
                         <?= $Age; ?>
                     </b></td>
-                <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Operator:<b>
+                <td style=" font: 16px !important; width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">
+                    Operator:<b>
                         <?= $operatorName; ?>
                     </b></td>
             </tr>
 
             <?php if ($appointment !== 'Non'): ?>
                 <tr>
-                    <td style=" width: 50%; white-space: nowrap;">AppointmentID:<b>
+                    <td style="font: 16px !important; width: 50%; white-space: nowrap;">AppointmentID:<b>
                             <?= $appointment; ?>
                         </b></td>
-                    <td style=" width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">Doctor:<b>
+                    <td style="font: 16px !important; width: 50%; white-space: nowrap;text-align: right;padding-left:13%;">
+                        Doctor:<b>
                             <?= $doctorName; ?>
                         </b></td>
                 </tr>
                 <tr>
-                    <td style=" width: 50%; white-space: nowrap;">AppointmentType:<b>
+                    <td style="font: 16px !important; width: 50%; white-space: nowrap;">Type:<b>
                             <?= $appointmentType; ?>
                         </b></td>
                 </tr>
             <?php else: ?>
                 <tr>
-                    <td style=" width: 100%; white-space: nowrap;">AppointmentID:<b>
+                    <td style="font: 16px; width: 100%; white-space: nowrap;">AppointmentID:<b>
                             <?= $appointment; ?>
                         </b></td>
                 </tr>
@@ -182,21 +185,23 @@
         <hr>
         <table style="width: 100%;">
             <tr>
-                <td style="width: 50%; text-align: left;">&nbsp;</td>
-                <td style="width: 100%; text-align: right; padding-right:6px;"><b>Total :</b>
+                <td style="font: 16px !important; width: 50%; text-align: left;">&nbsp;</td>
+                <td style="font: 16px !important; width: 100%; text-align: right; padding-right:6px;"><b>Total :</b>
                     <?= $data['actual_fee']; ?>.00
                 </td>
             </tr>
             <tr>
-                <td style="width: 50%; text-align: left;">&nbsp;</td>
-                <td style="width: 100%; text-align: right; padding-right:6px;"><b>Total Discount :</b>
+                <td style="font: 16px !important; width: 50%; text-align: left;">&nbsp;</td>
+                <td style="font: 16px !important; width: 100%; text-align: right; padding-right:6px;"><b>Total Discount
+                        :</b>
                     <?= $TotalDiscount; ?>.00
                 </td>
             </tr>
             <tr>
                 <td style="width: 50%; text-align: left;">&nbsp;</td>
 
-                <td style="width: 100%; text-align: right; padding-right:6px;"><b>Discounted Total :</b>
+                <td style="font: 16px !important; width: 100%; text-align: right; padding-right:6px;"><b>Discounted
+                        Total :</b>
                     <?= $data['fee']; ?>.00
                 </td>
             </tr>

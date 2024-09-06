@@ -439,7 +439,7 @@
                     </table>
                   </div>
                 </div>
-                <div style="margin-left: 368px; font-weight: 900; font-size: 150px">
+                <div style="margin-left: 320px; font-weight: 900; font-size: 150px">
                   <p>Total Fee: <span id="totalFee">0</span></p>
                   <p>Discount: <span id="discountAmount">0</span></p>
                   <p>Total without Tax: <span id="totalWithoutTax">0</span></p>
