@@ -524,19 +524,37 @@ class salesModel extends Model
         return $builder->get()->getResultArray();
     }
 
+    // public function getServicesByCategory2($categoryId, $enableService)
+    // {
+
+    //     $builder = $this->db->table('artmenu');
+    //     if ($categoryId !== null) {
+    //         $builder->where('idCatArt', $categoryId);
+    //     }
+    //     if ($enableService != 1) {
+    //         $builder->where('isService', 0);
+    //     }
+    //     return $builder->get()->getResultArray();
+
+    // }
+
     public function getServicesByCategory2($categoryId, $enableService)
     {
-
         $builder = $this->db->table('artmenu');
+        $builder->select('artmenu.*, taxtype.value as tax_value');
+        $builder->join('taxtype', 'taxtype.tax_id = artmenu.idTVSH', 'left');
+
         if ($categoryId !== null) {
             $builder->where('idCatArt', $categoryId);
         }
+
         if ($enableService != 1) {
             $builder->where('isService', 0);
         }
-        return $builder->get()->getResultArray();
 
+        return $builder->get()->getResultArray();
     }
+
 
 
     // public function getSalesReport($search = null, $paymentInput = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)

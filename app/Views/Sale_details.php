@@ -191,7 +191,7 @@
                             <table cellpadding="0" cellspacing="0">
                                 <tr class="top">
                                     <td colspan="3">
-                                  
+<!--                                   
 
                                         <table>
                                             <tr>
@@ -217,7 +217,7 @@
                                                     ?>
                                                 </td>
                                                 <td></td>
-                                        </table>
+                                        </table> -->
 
                                         <span style=" font-family: fantasy;font-size: larger; color: <?= $ServiceDetails[0]['Notes'] === 'Cancelled' ? 'red' : 'green'; ?>"> <?= $ServiceDetails[0]['Notes']; ?></span>
 

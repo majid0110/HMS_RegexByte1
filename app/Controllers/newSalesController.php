@@ -42,6 +42,11 @@ class newSalesController extends Controller
 
     public function New_SalesFrom()
     {
+        $session = session();
+        if (!$session->get('ID')) {
+            return redirect()->to(base_url("/session_expired"));
+        }
+
         $data['baseURL'] = base_url();
 
         $clientModel = new ClientModel();
@@ -87,6 +92,7 @@ class newSalesController extends Controller
 
         // $data['services'] = $sales->getServices2($enableService);
         $data['services'] = $model->getServicesByCategory2($categoryId, $enableService);
+
         echo view('New_service_table_partial.php', $data);
     }
 

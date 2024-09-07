@@ -848,7 +848,8 @@
 
             $('#serviceTableBody tr').each(function () {
                 var price = parseFloat($(this).find('.editable-price').text()) || 0;
-                var quantity = parseInt($(this).find('.editable-quantity').val()) || 0;
+                // var quantity = parseInt($(this).find('.editable-quantity').val()) || 0;
+                var quantity = parseFloat($(this).find('.editable-quantity').val()) || 0;
                 var discount = parseFloat($(this).find('.editable-discount').val()) || 0;
                 var taxRate = parseFloat($(this).find('.tax-rate').text()) || 0;
 
@@ -856,7 +857,6 @@
                 var rowDiscountAmount = rowTotal * (discount / 100);
                 var rowDiscountedTotal = rowTotal - rowDiscountAmount;
 
-                // Calculate tax amount (which is already included in the price)
                 var rowTaxAmount = rowDiscountedTotal * (taxRate / (100 + taxRate));
                 var rowWithoutTax = rowDiscountedTotal - rowTaxAmount;
 

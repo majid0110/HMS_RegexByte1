@@ -38,13 +38,18 @@
         <div class="item-list">
             <?php foreach ($services as $service): ?>
                 <div class="item" data-service-id="<?= $service['idArtMenu']; ?>"
-                    data-service-price="<?= $service['Price']; ?>" data-service-tax="<?= $service['idTVSH']; ?>">
+                    data-service-price="<?= $service['Price']; ?>" data-service-tax-id="<?= $service['idTVSH']; ?>"
+                    data-service-tax-value="<?= $service['tax_value']; ?>">
+                    <!-- Updated this line -->
                     <div style="font-weight: bolder;"><?= $service['Name']; ?></div>
                     <div style="margin-bottom:auto; font-size: small;"><?= $service['Price']; ?> pkr</div>
                 </div>
             <?php endforeach; ?>
         </div>
     </div>
+
+
+
 </body>
 
 </html>

@@ -39,30 +39,7 @@
           <div class="col-lg-12 grid-margin stretch-card">
             <div class="invoice-box"
               style="max-width: 950px; margin: auto; border-radius: 30px; background: snow; width: 85rem; padding: 30px; border: 1px solid #eee; box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); font-size: 16px; line-height: 24px; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; color: #555;">
-              <div class="card-body" style="display: flex; justify-content: space-between; align-items: center;">
-                <div class="logo" style="flex: 1;">
-                  <!-- Insert your profile image here -->
-                  <?php
-                  $session = session();
-                  if ($session->has('businessProfileImage')) {
-                    echo '<img class="img-xs rounded-circle larger-profile-img" style="width: 90px; height: 90px;" src="' . $session->get('businessProfileImage') . '" alt="Profile image">';
-                  }
-                  ?>
-                  <!-- Style your image here -->
-                  <style="width: 100%; max-width: 300px" />
-                </div>
 
-                <div class="company-details" style="flex: 2; text-align: right;">
-                  <?php
-                  $session = session();
-                  if ($session->has('businessName') && $session->has('phoneNumber')) {
-                    echo '<strong>' . $session->get('businessName') . '</strong><br>';
-                    echo '<strong>' . $session->get('phoneNumber') . '</strong><br>';
-                    echo '<strong>' . $session->get('business_address') . '</strong><br>';
-                  }
-                  ?>
-                </div>
-              </div>
               <a href="<?= base_url('LabController/downloadLabReportPDF/' . $testid); ?>"
                 class="btn btn-primary text-white me-0"><i class="icon-File"></i>
                 Download PDF</a>
@@ -85,7 +62,8 @@
                 <?php if (!empty($testDetails[0]['doctorFirstName'])): ?>
                   <div class="doctor-details" style="flex: 1; margin-left: 20px; text-align: right;">
 
-                    <p style="font-size: 20px; font-weight: 900;"><strong> Dr. <?= $testDetails[0]['doctorFirstName'] . ' ' . $testDetails[0]['doctorLastName']; ?></strong></p>
+                    <p style="font-size: 20px; font-weight: 900;"><strong> Dr.
+                        <?= $testDetails[0]['doctorFirstName'] . ' ' . $testDetails[0]['doctorLastName']; ?></strong></p>
                     <p><strong>Specialization:</strong> <?= $testDetails[0]['specialization']; ?></p>
                     <p><strong>Contact:</strong> <?= $testDetails[0]['doctorContact']; ?></p>
                     <p><strong>Email:</strong> <?= $testDetails[0]['doctorEmail']; ?></p>
@@ -100,7 +78,10 @@
                       <th>ID</th>
                       <th>Test Type</th>
                       <th>Fee</th>
+                      <th>discount</th>
+                      <th>Total</th>
                       <th>Created AT</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -109,9 +90,10 @@
                         <td><?= $detail['testTypeID']; ?></td>
                         <td><?= $detail['testTypeName']; ?></td>
                         <td><?= $detail['fee']; ?></td>
+                        <td><?= $detail['discount']; ?></td>
+                        <td><?= number_format($detail['fee'] - $detail['discount'], 2); ?></td>
                         <td><?= $detail['createdAT']; ?></td>
                         <td>
-                          <!-- Add Report Button -->
                           <button class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#reportModal-<?= $detail['testTypeID']; ?>">
                             Add Report
@@ -125,7 +107,9 @@
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Add Report for <?= $detail['testTypeName']; ?></h5>
+                              <h5 class="modal-title" id="exampleModalLabel">Add Report for
+                                <?= $detail['testTypeName']; ?>
+                              </h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">

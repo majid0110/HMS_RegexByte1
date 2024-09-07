@@ -169,12 +169,12 @@ $session = session();
             <td style="width: 2px; background-color: #ccc; padding: 0; margin: 0; border: none; height: 100%;"></td>
 
             <td style="width: 33.33%; vertical-align: top;">
-
                 <p>Operator Name: <?= $session->get('fName'); ?></p>
-                <!-- <p>Fee:</strong> <?= $labTest['fee'] + $labTest['hospitalCharges']; ?></p> -->
-                <p>Reffered By: <strong>Dr. <?= $labTest['doctor']; ?></strong> </p>
-            </td>
 
+                <?php if (!empty($labTest['doctor'])): ?>
+                    <p>Referred By: <strong><?= $labTest['doctor']; ?></strong></p>
+                <?php endif; ?>
+            </td>
             <td style="width: 2px; background-color: #ccc; padding: 0; margin: 0; border: none; height: 100%;"></td>
             <td style="width: 33.33%; vertical-align: top;">
                 <p><strong>Registered At:</strong> <?= $labTest['registered_at']; ?></p>
@@ -259,7 +259,7 @@ $session = session();
 
 
     <div class="footer"
-        style="position: fixed; bottom: 0; left: -8%; width: 100%; background-color: #1424b7; margin-right: -15%; text-align: center; border-top: 1px solid #ddd;">
+        style="position: fixed; bottom: 0; left: -8%; width: 100%;  margin-right: -15%; text-align: center; border-top: 1px solid #ddd;">
         <p>Generated on <?= date('Y-m-d'); ?> | www.regexbyte.com</p>
     </div>
 

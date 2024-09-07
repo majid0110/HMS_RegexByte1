@@ -344,6 +344,8 @@ $routes->post('createTables', 'ConfigureController::createTables');
 //----------------------------------------------------------------------------------------------------------------
 $routes->get('/New_SalesFrom', 'newSalesController::New_SalesFrom');
 $routes->post('newSalesController/filterServices', 'newSalesController::filterServices');
+$routes->get('newSalesController/filterServices', 'newSalesController::filterServices');
+
 
 $routes->get('/getSummaryInvoices', 'newSalesController::getSummaryInvoices');
 $routes->post('newSalesController/getSummaryInvoices', 'newSalesController::getSummaryInvoices');
