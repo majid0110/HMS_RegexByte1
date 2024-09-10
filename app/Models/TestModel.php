@@ -176,28 +176,12 @@ class TestModel extends Model
         return $result['hospitalCharges'];
     }
 
-    // public function getTotalLabFee()
-    // {
-    //     $businessId = session()->get('businessID');
-    //     $builder = $this->db->table('labtest');
-    //     $builder->selectSum('fee');
-    //     $builder->where('businessId', $businessId);
-    //     $result = $builder->get()->getRowArray();
-    //     return $result['fee'];
-    // }
-
-    public function getTotalLabFee($clientName, $search, $userName, $fromDate, $toDate)
+    public function getTotalLabFee($clientName, $search, $userName, $fromDate, $toDate, $perPage, $offset)
     {
-        // $businessId = session()->get('businessID');
         $builder = $this->db->table('labtest');
-        $builder->selectSum('fee');
         $builder->join('client', 'client.idClient = labtest.clientId');
         $builder->join('users', 'users.ID = labtest.userId');
-        // $builder->where('businessId', $businessId);
-
-        if (!empty($clientName)) {
-            $builder->like('client.client', $clientName);
-        }
+        $builder->select('labtest.fee');
 
         if (!empty($search)) {
             $builder->groupStart()
@@ -208,7 +192,11 @@ class TestModel extends Model
         }
 
         if (!empty($userName)) {
-            $builder->like('users.fName', $userName);
+            $builder->where('users.fName', $userName);
+        }
+
+        if (!empty($clientName)) {
+            $builder->where('client.client', $clientName);
         }
 
         if (!empty($fromDate) && !empty($toDate)) {
@@ -216,22 +204,45 @@ class TestModel extends Model
                 ->where('labtest.CreatedAT <=', $toDate);
         }
 
+        $builder->limit($perPage, $offset);
+
         $query = $builder->get();
-        $result = $query->getRowArray();
-        return $result['fee'] ?? 0;
+        $results = $query->getResultArray();
+
+        $totalFee = 0;
+        foreach ($results as $row) {
+            $totalFee += $row['fee'];
+        }
+
+        return $totalFee;
     }
 
 
-    // public function getTotalLabFee($userName = null, $fromDate = null, $toDate = null)
+
+
+    // public function getTotalLabFee($clientName, $search, $userName, $fromDate, $toDate)
     // {
-    //     $businessId = session()->get('businessID');
+    //     // $businessId = session()->get('businessID');
     //     $builder = $this->db->table('labtest');
     //     $builder->selectSum('fee');
-    //     $builder->where('businessId', $businessId);
+    //     $builder->join('client', 'client.idClient = labtest.clientId');
+    //     $builder->join('users', 'users.ID = labtest.userId');
+    //     // $builder->where('businessId', $businessId);
+
+    //     if (!empty($clientName)) {
+    //         $builder->like('client.client', $clientName);
+    //     }
+
+    //     if (!empty($search)) {
+    //         $builder->groupStart()
+    //             ->like('client.client', $search)
+    //             ->orLike('users.fName', $search)
+    //             ->orLike('labtest.CreatedAT', $search)
+    //             ->groupEnd();
+    //     }
 
     //     if (!empty($userName)) {
-    //         $builder->join('users', 'users.ID = labtest.userId');
-    //         $builder->where('users.ID', $userName);
+    //         $builder->like('users.fName', $userName);
     //     }
 
     //     if (!empty($fromDate) && !empty($toDate)) {
@@ -239,9 +250,13 @@ class TestModel extends Model
     //             ->where('labtest.CreatedAT <=', $toDate);
     //     }
 
-    //     $result = $builder->get()->getRowArray();
-    //     return $result['fee'];
+    //     $query = $builder->get();
+    //     $result = $query->getRowArray();
+    //     return $result['fee'] ?? 0;
     // }
+
+
+
     //-------------------------------------------------------Pagination
     public function searchLabReports($search = null, $userName = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
     {

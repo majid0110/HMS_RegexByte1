@@ -1,4 +1,4 @@
-<?php include 'include_common/head.php'; ?>
+<?php include 'include_common/head1.php'; ?>
 <?php include 'include_common/navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +10,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Star Admin2 </title>
+    <title>Appointment-Report </title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="./public/assets/vendors/feather/feather.css">
     <link rel="stylesheet" href="./public/assets/vendors/mdi/css/materialdesignicons.min.css">
@@ -24,7 +24,7 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="./public/assets/css/vertical-layout-light/style.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="./public/assets/images/favicon.png" />
+    <link rel="shortcut icon" href="./public/assets/images_s/regexbyte.png" />
     <style>
         #service-table tfoot {
             font-weight: bold;
@@ -79,8 +79,8 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .text-bg-success {
-            background-color: #73ad31;
+        .text-bg-cancelled {
+            background-color: red;
             color: white;
             padding: 0.2rem 0.4rem;
             border-radius: 0.2rem;
@@ -89,21 +89,6 @@
         .text-bg-editted {
             background-color: yellow;
             color: black;
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.2rem;
-        }
-
-        .text-bg-cancelled {
-            background-color: red;
-            color: white;
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.2rem;
-        }
-
-
-        .text-bg-danger {
-            background-color: red;
-            color: white;
             padding: 0.2rem 0.4rem;
             border-radius: 0.2rem;
         }
@@ -127,7 +112,17 @@
                         <div class="card">
                             <div class="card-body">
                                 <form action="#" method="post">
+                                    <div class="form-group row">
+                                        <div>
+                                            <div
+                                                style="width:100%; display: flex; align-items: center; justify-content: flex-end; gap:10px">
 
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
                                     <div class="form-group row">
                                         <div class="col-md-3">
                                             <label>By Client</label>
@@ -142,21 +137,23 @@
                                                 </select>
                                             </div>
                                         </div>
+
                                         <div class="col-md-3">
                                             <label>By Invoice</label>
                                             <div id="the-basics">
-                                                <select class="form-control" name="PaymentMethod" id='paymentInput'>
+                                                <select class="form-control" name="invoice" id='invoiceInput'>
                                                     <option value="">All Invoices</option>
                                                     <?php foreach ($Invoice as $invoice): ?>
                                                         <option value="<?= $invoice['idReceipts']; ?>"
-                                                            data-payment-id="<?= $invoice['idReceipts']; ?>">
-                                                            <?= $invoice['idReceipts']; ?>
+                                                            data-invoice-id="<?= $invoice['idReceipts']; ?>">
+                                                            <?= $invoice['invOrdNum']; ?>
                                                         </option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
+
                                             <label>Search</label>
                                             <input class="form-control" type="text" name="search" id="searchInput"
                                                 placeholder="Search">
@@ -165,7 +162,7 @@
                                     </div>
                                 </form>
                                 <hr>
-                                <h4 class="card-title">Service Table</h4>
+                                <h4 class="card-title">Service Report</h4>
                                 <div class="col-12 grid-margin">
                                     <div class="table-responsive">
                                         <table id="service-table" class="table table-striped">
@@ -235,9 +232,12 @@
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
+
                                         </table>
                                     </div>
                                 </div>
+
+
                             </div>
                             <div class="pagination-container">
                                 <div class="pagination">
@@ -262,10 +262,11 @@
             <!-- inject:js -->
             <script>
                 $(document).ready(function () {
-                    $('#searchInput, #paymentInput, #clientInput, #fromDateInput, #toDateInput').on('input change', function () {
+                    $('#searchInput, #invoiceInput, #paymentInput, #clientInput, #fromDateInput, #toDateInput').on('input change', function () {
                         var searchValue = $('#searchInput').val();
                         var paymentInput = $('#paymentInput').val();
                         var clientValue = $('#clientInput').val();
+                        var invoice = $('#invoiceInput').val();
                         var fromDateValue = $('#fromDateInput').val();
                         var toDateValue = $('#toDateInput').val();
 
@@ -274,16 +275,18 @@
                         console.log('Client Value:', clientValue);
                         console.log('From Date Value:', fromDateValue);
                         console.log('To Date Value:', toDateValue);
+                        console.log('invoice:', invoice);
 
                         $.ajax({
                             type: 'POST',
                             url: '<?= base_url('Sales_table'); ?>',
                             data: {
-                                searchValue: searchValue,
+                                search: searchValue,
                                 paymentInput: paymentInput,
                                 clientName: clientValue,
                                 fromDate: fromDateValue,
-                                toDate: toDateValue
+                                toDate: toDateValue,
+                                invoice: invoice
                             },
                             dataType: 'json',
                             success: function (response) {

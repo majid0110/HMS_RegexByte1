@@ -448,11 +448,12 @@ class ReportsController extends Controller
         $fromDate = $this->request->getPost('fromDate');
         $toDate = $this->request->getPost('toDate');
 
-        $data['totalLabFee'] = $testModel->getTotalLabFee($clientName, $search, $userName, $fromDate, $toDate);
 
         $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
         $perPage = 20;
         $offset = ($currentPage - 1) * $perPage;
+
+        $data['totalLabFee'] = $testModel->getTotalLabFee($clientName, $search, $userName, $fromDate, $toDate, $perPage, $offset);
 
         $data['Tests'] = $testModel->searchLabReports($search, $userName, $clientName, $fromDate, $toDate, $perPage, $offset);
         $data['pager'] = $testModel->getPager($search, $userName, $clientName, $fromDate, $toDate, $perPage, $currentPage);
