@@ -430,6 +430,55 @@ class ReportsController extends Controller
         exit;
     }
 
+    // -------------------------------------------- Summary Invoice
+    public function SummaryInvoice_Report()
+    {
+        $clientModel = new ClientModel();
+        $data['client_names'] = $clientModel->getClientNames();
+
+        $sales = new SalesModel();
+        $data['payments'] = $sales->getpayment();
+        $data['tables'] = $sales->getTableName();
+
+
+        $Model = new ServicesModel();
+        $Model = new SalesModel();
+        $search = $this->request->getPost('search');
+        $paymentInput = $this->request->getPost('paymentInput');
+        $clientName = $this->request->getPost('clientName');
+        $fromDate = $this->request->getPost('fromDate');
+        $toDate = $this->request->getPost('toDate');
+        $invoice = $this->request->getPost('invoice');
+
+
+        $data['totalServiceFee'] = $Model->gettotalSummaryFee($search, $invoice, $clientName, $paymentInput, $fromDate, $toDate);
+        $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+        $perPage = 20;
+        $offset = ($currentPage - 1) * $perPage;
+        $data['Sales'] = $Model->getSummaryReport($search, $invoice, $paymentInput, $clientName, $fromDate, $toDate, $perPage, $offset);
+        $totalSales = count($Model->getSalesReport($search, $invoice, $paymentInput, $clientName, $fromDate, $toDate));
+        $pager = service('pager');
+        $pagerLinks = $pager->makeLinks($currentPage, $perPage, $totalSales);
+        $data['pager'] = $pagerLinks;
+
+        if ($this->request->isAJAX()) {
+            try {
+                $tableContent = view('ReportSummary', $data);
+                return $this->response->setJSON([
+                    'success' => true,
+                    'tableContent' => $tableContent,
+                    'pager' => $pagerLinks,
+                    'totalServiceFee' => $data['totalServiceFee']
+                ]);
+            } catch (\Exception $e) {
+                log_message('error', 'Error in services_report method: ' . $e->getMessage());
+                return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+            }
+        } else {
+            return view('SummaryInvoiceReport', $data);
+        }
+    }
+
     //-------------------------------------- Lab Reports + Excel
     public function lab_report()
     {

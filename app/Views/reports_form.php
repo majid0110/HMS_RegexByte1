@@ -339,6 +339,18 @@
                             </div>
                         </div>
 
+                        <div class="col-md-3 grid-margin stretch-card">
+                            <div class="card" onclick="window.location.href='<?= base_url('summary_report'); ?>';">
+                                <div class="card-body"
+                                    style="display: flex; flex-direction: column; align-items: center;">
+                                    <h4 class="card-title" style="text-align:center">Summary Report</h4>
+                                    <div class="media">
+                                        <i class="icon-lg mdi mdi-sale" style="height:45px; width:45px;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                     </div>
                     <!-- content-wrapper ends -->

@@ -18,7 +18,7 @@ class LoginModel extends Model
         if ($tableName === "users") {
             $this->table = "users";
             $this->primaryKey = 'ID';
-            $this->allowedFields = ['ID', 'fName', 'lName', 'email', 'address', 'phone', 'password', 'businessID', 'profile', 'CNIC', 'CNIC_img'];
+            $this->allowedFields = ['ID', 'fName', 'lName', 'email', 'address', 'phone', 'password', 'businessID', 'profile', 'CNIC', 'CNIC_img', 'reset_token'];
         } elseif ($tableName === "business") {
             $this->table = "business";
             $this->primaryKey = 'ID';

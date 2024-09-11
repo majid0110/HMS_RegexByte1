@@ -257,6 +257,9 @@ $routes->post('services_report', 'ReportsController::services_report');
 $routes->get('/generateExcelServiceReport', 'ReportsController::generateExcelServiceReport');
 $routes->post('generateExcelServiceReport', 'ReportsController::generateExcelServiceReport');
 
+$routes->get('/summary_report', 'ReportsController::SummaryInvoice_Report');
+$routes->post('/summary_report', 'ReportsController::SummaryInvoice_Report');
+
 $routes->get('/expenses_report', 'ReportsController::expenses_report');
 $routes->post('expenses_report', 'ReportsController::expenses_report');
 
@@ -352,3 +355,9 @@ $routes->post('newSalesController/getSummaryInvoices', 'newSalesController::getS
 
 $routes->get('newSalesController/submitSummary', 'newSalesController::submitSummary');
 $routes->post('newSalesController/submitSummary', 'newSalesController::submitSummary');
+
+// ---------------------------------------------------------------------------------------------
+$routes->get('forgot-password', 'ForgotPasswordController::forgot_password');
+$routes->post('forgot-password/send', 'ForgotPasswordController::sendResetLink');
+$routes->get('forgot-password/reset/(:any)', 'ForgotPasswordController::resetPassword/$1');
+$routes->post('forgot-password/reset', 'ForgotPasswordController::updatePassword');

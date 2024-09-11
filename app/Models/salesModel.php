@@ -46,10 +46,10 @@ class salesModel extends Model
             ->getResultArray();
     }
 
-    public function getInvoiceNO()
+    public function getTableName()
     {
-        return $this->db->table('invoices')
-            ->select('idReceipts,invOrdNum')
+        return $this->db->table('tables')
+            ->select('idTables, name')
             ->get()
             ->getResultArray();
     }
@@ -476,6 +476,50 @@ class salesModel extends Model
         return $result['totalServiceFee'] ?? 0;
     }
 
+    public function gettotalSummaryFee($search, $invoice, $clientName, $paymentInput, $fromDate, $toDate)
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+        $builder = $this->db->table('invoices');
+        $builder->selectSum('Value', 'totalServiceFee');
+        $builder->join('client', 'client.idClient = invoices.idClient');
+        $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
+        $builder->where('invoices.idBusiness', $businessID);
+        $builder->where('invoices.isSummaryInvoice', 1);
+
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->like('invoices.invOrdNum', $search)
+                ->orLike('client.client', $search)
+                ->orLike('currency.Currency', $search)
+                ->orLike('paymentmethods.Method', $search)
+                ->groupEnd();
+        }
+
+        if (!empty($clientName)) {
+            $builder->like('client.client', $clientName);
+        }
+
+        if (!empty($paymentInput)) {
+            $builder->where('invoices.paymentMethod', $paymentInput);
+        }
+
+        if (!empty($invoice)) {
+            $builder->where('invoices.idTable', $invoice);
+        }
+
+
+        if (!empty($fromDate) && !empty($toDate)) {
+            $builder->where('invoices.Date >=', $fromDate)
+                ->where('invoices.Date <=', $toDate);
+        }
+
+
+        $query = $builder->get();
+        $result = $query->getRowArray();
+        return $result['totalServiceFee'] ?? 0;
+    }
+
     //--------------------------------------------------
 
     public function gettotalServiceTableFee($search, $clientName, $paymentInput, $fromDate, $toDate)
@@ -556,51 +600,6 @@ class salesModel extends Model
     }
 
 
-
-    // public function getSalesReport($search = null, $paymentInput = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
-    // {
-    //     $session = \Config\Services::session();
-    //     $businessID = $session->get('businessID');
-    //     $builder = $this->db->table('invoices');
-    //     $builder->join('client', 'client.idClient = invoices.idClient');
-    //     $builder->join('currency', 'currency.id = invoices.idCurrency');
-    //     $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
-    //     $builder->select('invoices.*, client.client as clientName, currency.Currency, paymentmethods.Method as PaymentMethod');
-    //     $builder->select('(SELECT SUM(Sum) FROM invoicedetail WHERE invoicedetail.idReceipts = invoices.idReceipts) as Fee');
-
-    //     $builder->where('invoices.idBusiness', $businessID);
-
-    //     // if (!empty($search)) {
-    //     //     $builder->groupStart()
-    //     //         ->like('invoices.invOrdNum', $search)
-    //     //         ->orLike('client.client', $search)
-    //     //         ->orLike('currency.Currency', $search)
-    //     //         ->orLike('paymentmethods.Method', $search)
-    //     //         ->groupEnd();
-    //     // }
-
-    //     if (!empty($search)) {
-    //         $builder->where('client.client', $search);
-    //     }
-
-
-    //     if (!empty($paymentInput)) {
-    //         $builder->where('invoices.paymentMethod', $paymentInput);
-    //     }
-
-    //     if (!empty($clientName)) {
-    //         $builder->like('client.client', $clientName);
-    //     }
-
-    //     if (!empty($fromDate) && !empty($toDate)) {
-    //         $builder->where('invoices.Date >=', $fromDate)
-    //             ->where('invoices.Date <=', $toDate);
-    //     }
-    //     $builder->orderBy('invoices.idReceipts', 'DESC');
-    //     $builder->limit($perPage, $offset);
-    //     $query = $builder->get();
-    //     return $query->getResultArray();
-    // }
 
     public function getSalesReport($search = null, $invoice = null, $paymentInput = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
     {
@@ -692,6 +691,53 @@ class salesModel extends Model
         return $pagerLinks;
     }
 
+    public function getSummaryReport($search = null, $invoice = null, $paymentInput = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+        $builder = $this->db->table('invoices');
+        $builder->join('client', 'client.idClient = invoices.idClient');
+        $builder->join('currency', 'currency.id = invoices.idCurrency');
+        $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
+        $builder->join('tables', 'tables.idTables = invoices.idTable');
+        $builder->select('invoices.*, client.client as clientName, tables.name as table, currency.Currency, paymentmethods.Method as PaymentMethod');
+        $builder->select('(SELECT SUM(Sum) FROM invoicedetail WHERE invoicedetail.idReceipts = invoices.idReceipts) as Fee');
+
+        $builder->where('invoices.idBusiness', $businessID);
+        $builder->where('invoices.isSummaryInvoice', 1);
+
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->like('invoices.invOrdNum', $search)
+                ->orLike('client.client', $search)
+                ->orLike('currency.Currency', $search)
+                ->orLike('paymentmethods.idReceipts', $search)
+                ->orLike('invoices.idReceipts', $search)
+                ->groupEnd();
+        }
+
+        if (!empty($invoice)) {
+            $builder->where('invoices.idTable', $invoice);
+        }
+
+        if (!empty($paymentInput)) {
+            $builder->where('paymentmethods.idPaymentMethods', $paymentInput);
+        }
+
+        if (!empty($clientName)) {
+            $builder->like('client.client', $clientName);
+        }
+
+        if (!empty($fromDate) && !empty($toDate)) {
+            $builder->where('invoices.Date >=', $fromDate)
+                ->where('invoices.Date <=', $toDate);
+        }
+
+        $builder->orderBy('invoices.idReceipts', 'DESC');
+        $builder->limit($perPage, $offset);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
 
     public function getSalesDetailsReport($search = null, $item = null, $payment = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
     {
