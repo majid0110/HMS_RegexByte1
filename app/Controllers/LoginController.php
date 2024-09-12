@@ -670,34 +670,66 @@ class LoginController extends Controller
     }
 
 
-    public function update_user($id)
+    // public function update_user($id)
+    // {
+    //     $request = \Config\Services::request();
+    //     $model = new LoginModel('users');
+
+    //     $UserID = $id;
+    //     $userData = [
+    //         'fName' => $request->getPost('first_name'),
+    //         'lName' => $request->getPost('last_name'),
+    //         'email' => $request->getPost('user_email'),
+    //         'address' => $request->getPost('user_address'),
+    //         'phone' => $request->getPost('user_phone'),
+    //         'roleID' => $request->getPost('roleID'),
+    //         'CNIC' => $request->getPost('cnic_number'),
+
+    //     ];
+    //     //   print_r ($businessData);
+    //     //   die();
+
+
+    //     $model->updateUserData($UserID, $userData);
+
+    //     session()->setFlashdata('success', 'User updated successfully');
+
+    //     return redirect()->to(base_url('/users_table'));
+    // }
+
+    public function update_user($user_id)
     {
         $request = \Config\Services::request();
-        $model = new LoginModel('users');
+        $userModel = new LoginModel('users');
 
-        $UserID = $id;
+        $userData = $userModel->find($user_id);
+
+        $profileImage = $request->getFile('profile_image');
+        if ($profileImage && $profileImage->isValid()) {
+            $profileImageName = $profileImage->getName();
+            $profileImage->move(FCPATH . 'uploads', $profileImageName);
+        } else {
+            $profileImageName = $userData['CNIC_img'];
+        }
+
+        $password = $request->getPost('user_password');
+        $confirmPassword = $request->getPost('confirm_password');
+        if ($password !== $confirmPassword) {
+            session()->setFlashdata('error', 'Password and Confirm Password not matching.');
+            return redirect()->to(base_url("/edit_user/" . $user_id));
+        }
+
+        $hashedPassword = $password ? password_hash($password, PASSWORD_DEFAULT) : $userData['password'];
+
         $userData = [
-            'fName' => $request->getPost('first_name'),
-            'lName' => $request->getPost('last_name'),
-            'email' => $request->getPost('user_email'),
-            'address' => $request->getPost('user_address'),
-            'phone' => $request->getPost('user_phone'),
-            'roleID' => $request->getPost('roleID'),
-            'CNIC' => $request->getPost('cnic_number'),
-
+            'password' => $hashedPassword,
+            'CNIC_img' => $profileImageName,
         ];
-        //   print_r ($businessData);
-        //   die();
 
-
-        $model->updateUserData($UserID, $userData);
-
-        session()->setFlashdata('success', 'User updated successfully');
-
-        return redirect()->to(base_url('/users_table'));
+        $userModel->update($user_id, $userData);
+        session()->setFlashdata('success', 'User updated successfully.');
+        return redirect()->to(base_url("/edit_user/" . $user_id));
     }
-
-
 
 
 }

@@ -20,7 +20,7 @@ $modulePermissions = $session->get('module_permissions');
             <?php
             $moduleID = $module['id'];
 
-            $isSalesModule = $module['module_name'] === 'Pharmacy';
+            $isSalesModule = $module['module_name'] === 'Sales';
 
             $canView = $isSalesModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
             ?>
@@ -41,7 +41,7 @@ $modulePermissions = $session->get('module_permissions');
             <?php
             $moduleID = $module['id'];
 
-            $isSalesModule = $module['module_name'] === 'Sales';
+            $isSalesModule = $module['module_name'] === 'Services';
 
             $canView = $isSalesModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
             ?>
@@ -121,44 +121,6 @@ $modulePermissions = $session->get('module_permissions');
                             <?= $module['module_name'] ?>
                         </span>
                     </a>
-                </li>
-            <?php endif; ?>
-        <?php endforeach; ?>
-
-        <?php foreach ($modules as $module): ?>
-            <?php
-            $moduleID = $module['id'];
-
-            $isServicesModule = $module['module_name'] === 'Services';
-
-            $canView = $isServicesModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
-            ?>
-
-            <?php if ($canView): ?>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-<?= $moduleID ?>" aria-expanded="false"
-                        aria-controls="ui-basic-<?= $moduleID ?>">
-                        <i class="menu-icon mdi mdi-bike"></i>
-                        <span class="menu-title">
-                            <?= $module['module_name'] ?>
-                        </span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="ui-basic-<?= $moduleID ?>">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= base_url('Services_form'); ?>">Add Service</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= base_url('Services_table'); ?>">View Services</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= base_url('Sales_table'); ?>">View Sales</a>
-                            </li>
-                            <!-- Add more sub-menu items as needed -->
-                        </ul>
-                    </div>
                 </li>
             <?php endif; ?>
         <?php endforeach; ?>

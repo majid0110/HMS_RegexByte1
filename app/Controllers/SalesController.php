@@ -148,7 +148,7 @@ class SalesController extends Controller
 
         $sales = new SalesModel();
         $data['payments'] = $sales->getpayment();
-        $data['Invoice'] = $sales->getInvoiceNO();
+        $data['Invoice'] = $sales->getInvoice();
 
 
         $Model = new ServicesModel();

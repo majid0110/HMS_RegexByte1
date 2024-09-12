@@ -101,6 +101,9 @@ $routes->Post('/GeneralOPD_table', 'AppointmentController::GeneralOPD_table');
 
 $routes->get('/deleteGeneralOPD/(:num)', 'AppointmentController::deleteGeneralOPD/$1');
 
+$routes->Post('/OpdClinet', 'AppointmentController::saveClientProfileFromOPD');
+
+
 
 
 //----------------------------------------------------------------------------------Doctor

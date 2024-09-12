@@ -41,7 +41,7 @@ class salesModel extends Model
     public function getInvoice()
     {
         return $this->db->table('invoices')
-            ->select('idReceipts')
+            ->select('idReceipts, invOrdNum')
             ->get()
             ->getResultArray();
     }
@@ -442,6 +442,8 @@ class salesModel extends Model
         $builder->join('client', 'client.idClient = invoices.idClient');
         $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
         $builder->where('invoices.idBusiness', $businessID);
+        $builder->where('invoices.isSummaryInvoice', 0);
+
 
         if (!empty($search)) {
             $builder->groupStart()

@@ -635,11 +635,14 @@ class AppointmentController extends Controller
             $model->resetMainClients();
         }
 
+        $clientUniqueId = $this->generateUniqueClientId($businessID);
         $data = [
             'client' => $request->getPost('cName'),
             'contact' => $request->getPost('cphone'),
             'email' => $request->getPost('cemail'),
             'CNIC' => $request->getPost('CNIC'),
+            'age' => $request->getPost('age'),
+            'gender' => $request->getPost('gender'),
             'status' => $request->getPost('cstatus'),
             'Def' => $request->getPost('cdef'),
             'idBusiness' => $businessID,
@@ -651,6 +654,7 @@ class AppointmentController extends Controller
             'city' => $request->getPost('city'),
             'state' => $request->getPost('state'),
             'code' => $request->getPost('code'),
+            'clientUniqueId' => $clientUniqueId,
         ];
 
         $model->saveClient($data);
@@ -660,6 +664,69 @@ class AppointmentController extends Controller
         return redirect()->to(base_url("/appointments_form"));
     }
 
+    public function saveClientProfileFromOPD()
+    {
+        $request = \Config\Services::request();
+        $session = \Config\Services::session();
+
+        $model = new ClientModel();
+        $businessID = $session->get('businessID');
+        $mainClient = $request->getPost('mclient') ? 1 : 0;
+
+        if ($mainClient == 1) {
+            $model->resetMainClients();
+        }
+
+        $clientUniqueId = $this->generateUniqueClientId($businessID);
+        $data = [
+            'client' => $request->getPost('cName'),
+            'contact' => $request->getPost('cphone'),
+            'email' => $request->getPost('cemail'),
+            'CNIC' => $request->getPost('CNIC'),
+            'age' => $request->getPost('age'),
+            'gender' => $request->getPost('gender'),
+            'status' => $request->getPost('cstatus'),
+            'Def' => $request->getPost('cdef'),
+            'idBusiness' => $businessID,
+            'identification_type' => $request->getPost('idType'),
+            'limitExpense' => $request->getPost('expense'),
+            'discount' => $request->getPost('discount'),
+            'mainClient' => $mainClient,
+            'address' => $request->getPost('address'),
+            'city' => $request->getPost('city'),
+            'state' => $request->getPost('state'),
+            'code' => $request->getPost('code'),
+            'clientUniqueId' => $clientUniqueId,
+        ];
+
+        $model->saveClient($data);
+
+        session()->setFlashdata('success', 'Client Added..!!');
+
+        return redirect()->to(base_url("/GenearalOPD"));
+    }
+
+
+    private function generateUniqueClientId($businessID)
+    {
+        $model = new ClientModel();
+        $lastClientId = (int) $this->getLastClientId($businessID);
+        $nextClientId = sprintf('%04d', $lastClientId + 1);
+
+        return $nextClientId;
+    }
+
+    private function getLastClientId($businessID)
+    {
+        $model = new ClientModel();
+
+        $lastClient = $model
+            ->where('idBusiness', $businessID)
+            ->orderBy('clientUniqueId', 'DESC')
+            ->first();
+
+        return $lastClient ? (int) $lastClient['clientUniqueId'] : 0;
+    }
 
 
 }

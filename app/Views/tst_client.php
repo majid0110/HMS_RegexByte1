@@ -72,6 +72,27 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" name="gender">Gender</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" name="gender" required />
+                        <option>Male</option>
+                        <option>Female</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" name="age">Client Age</label>
+                    <div class="col-sm-9">
+                        <input type="number" class="form-control" name="age" />
+                    </div>
+                </div>
+            </div>
         </div>
         <p class="card-description">
             Other Details
