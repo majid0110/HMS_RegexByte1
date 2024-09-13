@@ -364,3 +364,9 @@ $routes->get('forgot-password', 'ForgotPasswordController::forgot_password');
 $routes->post('forgot-password/send', 'ForgotPasswordController::sendResetLink');
 $routes->get('forgot-password/reset/(:any)', 'ForgotPasswordController::resetPassword/$1');
 $routes->post('forgot-password/reset', 'ForgotPasswordController::updatePassword');
+
+//----------------------------------------------------------------------------------------------------------------
+//                                             Supplier Routes
+//----------------------------------------------------------------------------------------------------------------
+$routes->get('/supplierTable', 'SupplierController::supplierTable');
+$routes->post('/SaveSupplier', 'SupplierController::SaveSupplier');
