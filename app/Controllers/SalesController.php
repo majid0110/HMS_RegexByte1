@@ -19,6 +19,8 @@ use App\Models\LoginModel;
 use App\Models\ServicesModel;
 use App\Models\ConfigModel;
 use App\Models\BusinessModel;
+use App\Models\InventoryModel;
+use App\Models\itemsModel;
 use Mpdf\Mpdf;
 
 class SalesController extends Controller
@@ -800,10 +802,96 @@ class SalesController extends Controller
     }
 
 
+    // public function cancelInvoice($idReceipts)
+    // {
+    //     $model = new InvoiceModel();
+    //     $salesModel = new salesModel();
+    //     $session = \Config\Services::session();
+    //     $currentUserId = $session->get('ID');
+
+    //     $references = $salesModel->getReferenceInvoices($idReceipts);
+    //     foreach ($references as $reference) {
+    //         $referencedInvoice = $model->getInvoiceById($reference->idReceipt ?? $reference['idReceipt']);
+    //         if ($referencedInvoice) {
+    //             $notes = is_object($referencedInvoice) ? $referencedInvoice->Notes : $referencedInvoice['Notes'];
+    //             if ($notes == 'Cancelled') {
+    //                 session()->setFlashdata('error', 'This invoice has already been cancelled...!!');
+    //                 return redirect()->to(base_url('/viewServiceDetails/' . $idReceipts));
+    //             }
+    //         }
+    //     }
+
+    //     $invoice = $model->getInvoiceById($idReceipts);
+    //     $invoiceDetails = $model->getInvoiceDetailsByReceiptId($idReceipts);
+    //     $invoicePayments = $model->getInvoicePaymentsByReceiptId($idReceipts);
+
+    //     if ($invoice) {
+    //         $invoiceArray = (array) $invoice;
+
+    //         $newInvoiceData = $invoiceArray;
+    //         unset($newInvoiceData['idReceipts']);
+
+    //         $newInvoiceData['Value'] = -$invoiceArray['Value'];
+    //         $newInvoiceData['Notes'] = 'Cancelled';
+    //         $newInvoiceData['timeStamp'] = date('Y-m-d H:i:s');
+    //         $newInvoiceData['invOrdNum'] = $this->getNextInvOrdNum();
+    //         $newInvoiceData['idUser'] = $currentUserId;
+
+    //         $newInvoiceId = $model->insertInvoice1($newInvoiceData);
+
+    //         if ($newInvoiceId) {
+    //             $referenceData = [
+    //                 'idReceipt' => $newInvoiceId,
+    //                 'receiptReference' => $idReceipts
+    //             ];
+
+    //             $model->insertInvoiceReference($referenceData);
+
+    //             foreach ($invoiceDetails as $detail) {
+    //                 $detailArray = (array) $detail;
+    //                 unset($detailArray['idInvoiceDetail']);
+
+    //                 $detailArray['idReceipts'] = $newInvoiceId;
+    //                 $detailArray['Quantity'] = -$detailArray['Quantity'];
+    //                 $detailArray['Sum'] = $detailArray['Quantity'] * $detailArray['Price'];
+
+    //                 $model->insertInvoiceDetail($detailArray);
+    //             }
+
+    //             foreach ($invoicePayments as $payment) {
+    //                 $paymentArray = (array) $payment;
+
+    //                 $paymentDetails = $model->getPaymentDetailsById($paymentArray['idPayment']);
+    //                 foreach ($paymentDetails as $paymentDetail) {
+    //                     $paymentDetailArray = (array) $paymentDetail;
+    //                     unset($paymentDetailArray['idPayment']);
+
+    //                     $paymentDetailArray['value'] = -$paymentDetailArray['value'];
+    //                     $paymentDetailArray['timestamp'] = date('Y-m-d H:i:s');
+
+    //                     $newPaymentId = $model->insertPaymentDetail($paymentDetailArray);
+
+    //                     $model->insertInvoicePayment([
+    //                         'idReceipt' => $newInvoiceId,
+    //                         'idPayment' => $newPaymentId
+    //                     ]);
+    //                 }
+    //             }
+
+    //             session()->setFlashdata('success', 'Invoice cancelled...!!');
+    //             return redirect()->to(base_url('/viewServiceDetails/' . $newInvoiceId));
+    //         }
+    //     }
+
+    //     return redirect()->back()->with('error', 'Failed to cancel the invoice.');
+    // }
+
     public function cancelInvoice($idReceipts)
     {
         $model = new InvoiceModel();
         $salesModel = new salesModel();
+        $inventoryModel = new InventoryModel();
+        $itemsWarehouseModel = new itemsModel();
         $session = \Config\Services::session();
         $currentUserId = $session->get('ID');
 
@@ -854,6 +942,17 @@ class SalesController extends Controller
                     $detailArray['Sum'] = $detailArray['Quantity'] * $detailArray['Price'];
 
                     $model->insertInvoiceDetail($detailArray);
+
+                    $item = $itemsWarehouseModel->getItemByName($detailArray['name']);
+                    if ($item) {
+                        $idItem = $item['idItem'];
+
+                        $inventory = $inventoryModel->getInventoryByItem($idItem);
+                        if ($inventory) {
+                            $newInventory = $inventory['inventory'] + abs($detailArray['Quantity']);
+                            $inventoryModel->updateInventory($idItem, $newInventory);
+                        }
+                    }
                 }
 
                 foreach ($invoicePayments as $payment) {

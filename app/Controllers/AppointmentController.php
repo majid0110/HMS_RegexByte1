@@ -606,6 +606,11 @@ class AppointmentController extends Controller
 
         return $response;
     }
+
+    public function test()
+    {
+
+    }
     private function generatePdf($data)
     {
 

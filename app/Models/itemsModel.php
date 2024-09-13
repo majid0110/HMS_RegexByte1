@@ -50,6 +50,10 @@ class itemsModel extends Model
         return $result;
     }
 
+    public function getItemByName($name)
+    {
+        return $this->where('Name', $name)->first();
+    }
     public function countItemsByBusinessID($businessID)
     {
         return $this->db->table('itemswarehouse')->where('idBusiness', $businessID)->countAllResults();
