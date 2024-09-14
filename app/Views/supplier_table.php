@@ -89,13 +89,12 @@
                                                     </td>
                                                     <td>
 
-                                                        <a href="<?= base_url('#/' . $supplier['idSupplier']); ?>"
+                                                        <a href="<?= base_url('edit_supplier/' . $supplier['idSupplier']); ?>"
                                                             class="btn btn-info btn-sm">Edit</a>
 
-                                                        <a href="<?= base_url('#/' . $supplier['idSupplier']); ?>"
-                                                            onclick="if (this.classList.contains('disabled')) { return false; } return confirm('Are you sure you want to delete this Record?');"
-                                                            class="btn btn-danger btn-sm disabled" tabindex="-1"
-                                                            aria-disabled="true">Delete</a>
+                                                        <a href="<?= base_url('delete_Supplier/' . $supplier['idSupplier']); ?>"
+                                                            onclick="return confirm('Are you sure you want to delete this client?');"
+                                                            class="btn btn-danger btn-sm">Delete</a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -136,8 +135,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Supplier</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="supplier"
-                                            value="<?= isset($supplier['supplier']) ? $supplier['supplier'] : ''; ?>" />
+                                        <input type="text" class="form-control" name="supplier" />
                                     </div>
                                 </div>
                             </div>
@@ -146,8 +144,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Contact</label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control" name="contact"
-                                            value="<?= isset($supplier['contact']) ? $supplier['contact'] : ''; ?>" />
+                                        <input type="number" class="form-control" name="contact" />
                                     </div>
                                 </div>
                             </div>
@@ -158,8 +155,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">CNIC</label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control" name="cnic"
-                                            value="<?= isset($supplier['cnic']) ? $supplier['cnic'] : ''; ?>" />
+                                        <input type="number" class="form-control" name="cnic" />
                                     </div>
                                 </div>
                             </div>
@@ -182,8 +178,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Address</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="address"
-                                            value="<?= isset($supplier['address']) ? $supplier['address'] : ''; ?>" />
+                                        <input type="text" class="form-control" name="address" />
                                     </div>
                                 </div>
                             </div>
@@ -191,8 +186,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">City</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="city"
-                                            value="<?= isset($supplier['city']) ? $supplier['city'] : ''; ?>" />
+                                        <input type="text" class="form-control" name="city" />
                                     </div>
                                 </div>
                             </div>
@@ -204,8 +198,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Notes</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="notes"
-                                            value="<?= isset($supplier['notes']) ? $supplier['notes'] : ''; ?>" />
+                                        <input type="text" class="form-control" name="notes" />
                                     </div>
                                 </div>
                             </div>

@@ -1,0 +1,115 @@
+INFO - 2024-09-14 06:24:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-14 06:24:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-14 06:24:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-14 06:28:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-14 06:54:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-14 06:56:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-14 07:14:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-14 07:15:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-14 07:51:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-14 07:51:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-14 07:51:32 --> Undefined array key "ID"
+in APPPATH\Views\edit_supplier.php on line 43.
+ 1 APPPATH\Views\edit_supplier.php(43): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "ID"', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\edit_supplier.php', 43)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\edit_supplier.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('edit_supplier.php', [], true)
+ 5 APPPATH\Controllers\SupplierController.php(30): view('edit_supplier.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\SupplierController->edit_supplier('1')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SupplierController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-14 07:52:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-14 07:56:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-14 07:56:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-14 07:56:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-14 08:10:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-09-14 08:10:39 --> [DEPRECATED] Creation of dynamic property App\Controllers\SupplierController::$db is deprecated in APPPATH\Controllers\SupplierController.php on line 11.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\SupplierController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-14 08:11:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-09-14 08:11:00 --> [DEPRECATED] Creation of dynamic property App\Controllers\SupplierController::$db is deprecated in APPPATH\Controllers\SupplierController.php on line 11.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\SupplierController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-14 08:18:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-09-14 08:18:53 --> [DEPRECATED] Creation of dynamic property App\Controllers\SupplierController::$db is deprecated in APPPATH\Controllers\SupplierController.php on line 11.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\SupplierController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-14 08:19:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-09-14 08:19:16 --> [DEPRECATED] Creation of dynamic property App\Controllers\SupplierController::$db is deprecated in APPPATH\Controllers\SupplierController.php on line 11.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\SupplierController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-14 09:45:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-09-14 09:45:28 --> [DEPRECATED] Creation of dynamic property App\Controllers\SupplierController::$db is deprecated in APPPATH\Controllers\SupplierController.php on line 11.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\SupplierController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-14 09:45:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-09-14 09:45:35 --> [DEPRECATED] Creation of dynamic property App\Controllers\SupplierController::$db is deprecated in APPPATH\Controllers\SupplierController.php on line 11.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\SupplierController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-14 09:45:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-09-14 09:45:37 --> [DEPRECATED] Creation of dynamic property App\Controllers\SupplierController::$db is deprecated in APPPATH\Controllers\SupplierController.php on line 11.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\SupplierController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-14 09:46:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-09-14 09:46:10 --> [DEPRECATED] Creation of dynamic property App\Controllers\SupplierController::$db is deprecated in APPPATH\Controllers\SupplierController.php on line 11.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\SupplierController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-14 09:46:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-09-14 09:46:11 --> [DEPRECATED] Creation of dynamic property App\Controllers\SupplierController::$db is deprecated in APPPATH\Controllers\SupplierController.php on line 11.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\SupplierController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-14 09:46:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-09-14 09:46:36 --> [DEPRECATED] Creation of dynamic property App\Controllers\SupplierController::$db is deprecated in APPPATH\Controllers\SupplierController.php on line 11.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\SupplierController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-14 09:47:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-09-14 09:47:14 --> [DEPRECATED] Creation of dynamic property App\Controllers\SupplierController::$db is deprecated in APPPATH\Controllers\SupplierController.php on line 11.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\SupplierController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-14 09:47:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-09-14 09:47:15 --> [DEPRECATED] Creation of dynamic property App\Controllers\SupplierController::$db is deprecated in APPPATH\Controllers\SupplierController.php on line 11.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\SupplierController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-14 09:49:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-09-14 09:49:34 --> [DEPRECATED] Creation of dynamic property App\Controllers\SupplierController::$db is deprecated in APPPATH\Controllers\SupplierController.php on line 11.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\SupplierController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-14 09:49:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-09-14 09:49:58 --> [DEPRECATED] Creation of dynamic property App\Controllers\SupplierController::$db is deprecated in APPPATH\Controllers\SupplierController.php on line 11.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\SupplierController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-14 09:49:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-09-14 09:49:59 --> [DEPRECATED] Creation of dynamic property App\Controllers\SupplierController::$db is deprecated in APPPATH\Controllers\SupplierController.php on line 11.
+ 1 SYSTEMPATH\CodeIgniter.php(914): App\Controllers\SupplierController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(493): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()

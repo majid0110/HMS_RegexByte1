@@ -27,4 +27,14 @@ class SupplierModel extends Model
             ->select('*');
         return $builder->get()->getResultArray();
     }
+
+    public function get_Supplier($idSupplier)
+    {
+        return $this->find($idSupplier);
+    }
+
+    public function deleteSupplier($id)
+    {
+        return $this->where('idSupplier', $id)->delete();
+    }
 }

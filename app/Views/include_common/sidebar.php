@@ -28,7 +28,7 @@ $modulePermissions = $session->get('module_permissions');
             <?php if ($canView): ?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('New_SalesFrom'); ?>">
-                        <i class="menu-icon mdi mdi-pharmacy"></i>
+                        <i class="menu-icon mdi mdi-store"></i>
                         <span class="menu-title">
                             <?= $module['module_name'] ?>
                         </span>
@@ -49,7 +49,7 @@ $modulePermissions = $session->get('module_permissions');
             <?php if ($canView): ?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('sales_form'); ?>">
-                        <i class="menu-icon mdi mdi-cash-multiple"></i>
+                        <i class="menu-icon mdi mdi-food-variant"></i>
                         <span class="menu-title">
                             <?= $module['module_name'] ?>
                         </span>

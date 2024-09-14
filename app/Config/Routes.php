@@ -370,3 +370,8 @@ $routes->post('forgot-password/reset', 'ForgotPasswordController::updatePassword
 //----------------------------------------------------------------------------------------------------------------
 $routes->get('/supplierTable', 'SupplierController::supplierTable');
 $routes->post('/SaveSupplier', 'SupplierController::SaveSupplier');
+
+$routes->get('/edit_supplier/(:num)', 'SupplierController::edit_supplier/$1');
+$routes->post('/update_Supplier/(:num)', 'SupplierController::update_Supplier/$1');
+$routes->get('delete_Supplier/(:num)', 'SupplierController::delete_Supplier/$1');
+
