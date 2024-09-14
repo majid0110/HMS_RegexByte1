@@ -952,7 +952,7 @@
         <td>
     <div class="quantity-input" style="display: flex;flex-direction: row;justify-content: space-evenly;">
         <span class="quantity-decrement btn btn-danger btn-sm" style="font-size: 17px;border-radius: 50%;">-</span>
-        <input type="number" step="0.01" min="0.01" class="editable-quantity form-control quantity-box" style="width: 60px; padding: 2%;" value="1.00">
+      <input type="number" step="0.01" min="0.01" class="editable-quantity form-control quantity-box" style="width: 60px; padding: 2%;" value="1.00">
         <span class="quantity-increment btn btn-success btn-sm" style="border-radius: 50%; ">+</span>
     </div>
 </td>
