@@ -34,6 +34,8 @@ $routes->post('/updateRole/(:num)', 'LoginController::updateRole/$1');
 $routes->get('/users_table', 'LoginController::users_table');
 $routes->get('/edit_user/(:num)', 'LoginController::edit_user/$1');
 $routes->post('/update_user/(:num)', 'LoginController::update_user/$1');
+$routes->get('/deleteUser/(:num)', 'LoginController::deleteUser/$1');
+
 
 $routes->get('/doctors_form', 'DoctorController::doctors_form');
 $routes->get('/doctors_table', 'DoctorController::doctors_table');
@@ -375,3 +377,11 @@ $routes->get('/edit_supplier/(:num)', 'SupplierController::edit_supplier/$1');
 $routes->post('/update_Supplier/(:num)', 'SupplierController::update_Supplier/$1');
 $routes->get('delete_Supplier/(:num)', 'SupplierController::delete_Supplier/$1');
 
+//----------------------------------------------------------------------------------------------------------------
+//                                             Supplier Routes
+//----------------------------------------------------------------------------------------------------------------
+$routes->get('/Purchase', 'PurchaseController::Purchase_form');
+
+$routes->post('PurchaseController/filteritems', 'PurchaseController::filteritems');
+$routes->get('PurchaseController/filteritems', 'PurchaseController::filteritems');
+$routes->post('submitPurchaseInvoice', 'PurchaseController::submitPurchaseInvoice');

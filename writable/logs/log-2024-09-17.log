@@ -1,0 +1,636 @@
+INFO - 2024-09-17 05:23:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:24:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:24:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:40:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:40:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:40:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:41:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:41:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:41:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:41:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:41:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:41:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:41:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:41:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:41:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:41:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:42:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:42:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:42:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:42:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:42:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:42:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:42:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:43:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:43:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:43:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:43:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:43:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:44:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:44:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:44:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:45:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:45:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:51:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:55:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:55:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:55:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:56:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:57:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:57:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:57:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:58:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:59:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 05:59:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-17 05:59:21 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`dashboard`.`warehouse`, CONSTRAINT `fk_usr` FOREIGN KEY (`idUser`) REFERENCES `users` (`ID`)) in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('DELETE FROM `us...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `us...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `us...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2790): CodeIgniter\Database\BaseConnection->query('DELETE FROM `us...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\UserModel.php(15): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\LoginController.php(741): App\Models\UserModel->deleteUser('19')
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\LoginController->deleteUser('19')
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-17 05:59:21 --> Cannot delete or update a parent row: a foreign key constraint fails (`dashboard`.`warehouse`, CONSTRAINT `fk_usr` FOREIGN KEY (`idUser`) REFERENCES `users` (`ID`))
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2790): CodeIgniter\Database\BaseConnection->query('DELETE FROM `users`
+WHERE `ID` = :ID:', [...], false)
+ 2 APPPATH\Models\UserModel.php(15): CodeIgniter\Database\BaseBuilder->delete()
+ 3 APPPATH\Controllers\LoginController.php(741): App\Models\UserModel->deleteUser('19')
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LoginController->deleteUser('19')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 06:07:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:07:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-17 06:07:53 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`dashboard`.`warehouse`, CONSTRAINT `fk_usr` FOREIGN KEY (`idUser`) REFERENCES `users` (`ID`)) in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('DELETE FROM `us...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `us...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `us...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2790): CodeIgniter\Database\BaseConnection->query('DELETE FROM `us...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\UserModel.php(16): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\LoginController.php(740): App\Models\UserModel->deleteUser('19')
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\LoginController->deleteUser('19')
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-17 06:07:53 --> Cannot delete or update a parent row: a foreign key constraint fails (`dashboard`.`warehouse`, CONSTRAINT `fk_usr` FOREIGN KEY (`idUser`) REFERENCES `users` (`ID`))
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2790): CodeIgniter\Database\BaseConnection->query('DELETE FROM `users`
+WHERE `ID` = :ID:', [...], false)
+ 2 APPPATH\Models\UserModel.php(16): CodeIgniter\Database\BaseBuilder->delete()
+ 3 APPPATH\Controllers\LoginController.php(740): App\Models\UserModel->deleteUser('19')
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LoginController->deleteUser('19')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 06:10:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:10:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-17 06:10:15 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`dashboard`.`warehouse`, CONSTRAINT `fk_usr` FOREIGN KEY (`idUser`) REFERENCES `users` (`ID`)) in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('DELETE FROM `us...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `us...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `us...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2790): CodeIgniter\Database\BaseConnection->query('DELETE FROM `us...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\UserModel.php(18): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\LoginController.php(740): App\Models\UserModel->deleteUser('19')
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\LoginController->deleteUser('19')
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-17 06:10:15 --> Cannot delete or update a parent row: a foreign key constraint fails (`dashboard`.`warehouse`, CONSTRAINT `fk_usr` FOREIGN KEY (`idUser`) REFERENCES `users` (`ID`))
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2790): CodeIgniter\Database\BaseConnection->query('DELETE FROM `users`
+WHERE `ID` = :ID:', [...], false)
+ 2 APPPATH\Models\UserModel.php(18): CodeIgniter\Database\BaseBuilder->delete()
+ 3 APPPATH\Controllers\LoginController.php(740): App\Models\UserModel->deleteUser('19')
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LoginController->deleteUser('19')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 06:13:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:13:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-17 06:13:32 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`dashboard`.`warehouse`, CONSTRAINT `fk_usr` FOREIGN KEY (`idUser`) REFERENCES `users` (`ID`)) in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('DELETE FROM `us...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `us...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `us...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2790): CodeIgniter\Database\BaseConnection->query('DELETE FROM `us...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\UserModel.php(18): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\LoginController.php(742): App\Models\UserModel->deleteUser('19')
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\LoginController->deleteUser('19')
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-17 06:13:32 --> Cannot delete or update a parent row: a foreign key constraint fails (`dashboard`.`warehouse`, CONSTRAINT `fk_usr` FOREIGN KEY (`idUser`) REFERENCES `users` (`ID`))
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2790): CodeIgniter\Database\BaseConnection->query('DELETE FROM `users`
+WHERE `ID` = :ID:', [...], false)
+ 2 APPPATH\Models\UserModel.php(18): CodeIgniter\Database\BaseBuilder->delete()
+ 3 APPPATH\Controllers\LoginController.php(742): App\Models\UserModel->deleteUser('19')
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LoginController->deleteUser('19')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 06:16:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:16:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:16:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:16:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:16:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:16:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:19:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:30:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 06:30:48 --> Call to undefined method App\Models\PurchaseModel::getpayment
+in SYSTEMPATH\Model.php on line 873.
+ 1 APPPATH\Controllers\PurchaseController.php(65): CodeIgniter\Model->__call('getpayment', [])
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->Purchase_form()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 06:32:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-17 06:32:15 --> mysqli_sql_exception: Unknown table 'dashboard.idItem' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `idItem`...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `idItem`...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `idItem`...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `idItem`...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\PurchaseModel.php(40): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\PurchaseController.php(78): App\Models\PurchaseModel->getitems()
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\PurchaseController->Purchase_form()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-17 06:32:15 --> Unknown table 'dashboard.idItem'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `idItem`.*, `taxtype`.`value` as `tax_value`, `taxtype`.`tax_id` as `idTVSH`
+FROM `itemswarehouse`
+LEFT JOIN `taxtype` ON `itemswarehouse`.`idTAX` = `taxtype`.`tax_id`
+WHERE `itemswarehouse`.`status` = :itemswarehouse.status:', [...], false)
+ 2 APPPATH\Models\PurchaseModel.php(40): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\PurchaseController.php(78): App\Models\PurchaseModel->getitems()
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->Purchase_form()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 06:32:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:42:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 06:42:01 --> Undefined variable $PurchaseModel
+in APPPATH\Views\Purchase_form.php on line 392.
+ 1 APPPATH\Views\Purchase_form.php(392): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $PurchaseModel', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\Purchase_form.php', 392)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\Purchase_form.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('purchase_form.php', [], true)
+ 5 APPPATH\Controllers\PurchaseController.php(90): view('purchase_form.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->Purchase_form()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 06:43:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:43:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:43:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:44:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:44:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:44:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:44:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:46:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:46:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:46:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:46:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:46:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:46:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:46:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:46:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:47:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:47:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 06:47:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:04:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:05:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 07:05:04 --> Call to undefined method App\Models\salesModel::getItemsByCategory
+in SYSTEMPATH\Model.php on line 873.
+ 1 APPPATH\Controllers\PurchaseController.php(106): CodeIgniter\Model->__call('getItemsByCategory', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->filteritems()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 07:05:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 07:05:11 --> Call to undefined method App\Models\salesModel::getItemsByCategory
+in SYSTEMPATH\Model.php on line 873.
+ 1 APPPATH\Controllers\PurchaseController.php(106): CodeIgniter\Model->__call('getItemsByCategory', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->filteritems()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 07:05:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 07:05:14 --> Call to undefined method App\Models\salesModel::getItemsByCategory
+in SYSTEMPATH\Model.php on line 873.
+ 1 APPPATH\Controllers\PurchaseController.php(106): CodeIgniter\Model->__call('getItemsByCategory', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->filteritems()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 07:05:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 07:05:15 --> Call to undefined method App\Models\salesModel::getItemsByCategory
+in SYSTEMPATH\Model.php on line 873.
+ 1 APPPATH\Controllers\PurchaseController.php(106): CodeIgniter\Model->__call('getItemsByCategory', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->filteritems()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 07:06:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:06:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 07:06:47 --> Undefined array key "idArtMenu"
+in APPPATH\Views\New_service_table_partial.php on line 40.
+ 1 APPPATH\Views\New_service_table_partial.php(40): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "idArtMenu"', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_service_table_partial.php', 40)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_service_table_partial.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('New_service_table_partial.php', [], true)
+ 5 APPPATH\Controllers\PurchaseController.php(108): view('New_service_table_partial.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->filteritems()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 07:12:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:12:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 07:12:34 --> Invalid file: "New_item_table_partial.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('New_item_table_partial.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('New_item_table_partial.php', [], true)
+ 3 APPPATH\Controllers\PurchaseController.php(108): view('New_item_table_partial.php', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->filteritems()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 07:14:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:14:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 07:14:31 --> Undefined variable $service
+in APPPATH\Views\New_item_table_partial.php on line 41.
+ 1 APPPATH\Views\New_item_table_partial.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $service', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_item_table_partial.php', 41)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_item_table_partial.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('New_item_table_partial.php', [], true)
+ 5 APPPATH\Controllers\PurchaseController.php(108): view('New_item_table_partial.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->filteritems()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 07:15:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:15:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:15:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 07:15:42 --> Undefined variable $service
+in APPPATH\Views\New_item_table_partial.php on line 41.
+ 1 APPPATH\Views\New_item_table_partial.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $service', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_item_table_partial.php', 41)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_item_table_partial.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('New_item_table_partial.php', [], true)
+ 5 APPPATH\Controllers\PurchaseController.php(108): view('New_item_table_partial.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->filteritems()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 07:15:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 07:15:50 --> Undefined variable $service
+in APPPATH\Views\New_item_table_partial.php on line 41.
+ 1 APPPATH\Views\New_item_table_partial.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $service', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_item_table_partial.php', 41)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_item_table_partial.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('New_item_table_partial.php', [], true)
+ 5 APPPATH\Controllers\PurchaseController.php(108): view('New_item_table_partial.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->filteritems()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 07:15:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:16:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 07:16:09 --> Undefined variable $service
+in APPPATH\Views\New_item_table_partial.php on line 41.
+ 1 APPPATH\Views\New_item_table_partial.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $service', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_item_table_partial.php', 41)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_item_table_partial.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('New_item_table_partial.php', [], true)
+ 5 APPPATH\Controllers\PurchaseController.php(108): view('New_item_table_partial.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->filteritems()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 07:16:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 07:16:11 --> Undefined variable $service
+in APPPATH\Views\New_item_table_partial.php on line 41.
+ 1 APPPATH\Views\New_item_table_partial.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $service', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_item_table_partial.php', 41)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_item_table_partial.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('New_item_table_partial.php', [], true)
+ 5 APPPATH\Controllers\PurchaseController.php(108): view('New_item_table_partial.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->filteritems()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 07:16:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:16:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:18:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:18:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 07:18:35 --> Undefined variable $service
+in APPPATH\Views\New_item_table_partial.php on line 41.
+ 1 APPPATH\Views\New_item_table_partial.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $service', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_item_table_partial.php', 41)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_item_table_partial.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('New_item_table_partial.php', [], true)
+ 5 APPPATH\Controllers\PurchaseController.php(108): view('New_item_table_partial.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->filteritems()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 07:21:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:21:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 07:21:45 --> Undefined variable $service
+in APPPATH\Views\New_item_table_partial.php on line 41.
+ 1 APPPATH\Views\New_item_table_partial.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $service', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_item_table_partial.php', 41)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_item_table_partial.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('New_item_table_partial.php', [], true)
+ 5 APPPATH\Controllers\PurchaseController.php(108): view('New_item_table_partial.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->filteritems()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 07:22:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:22:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 07:22:45 --> Undefined variable $service
+in APPPATH\Views\New_item_table_partial.php on line 41.
+ 1 APPPATH\Views\New_item_table_partial.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $service', 'C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_item_table_partial.php', 41)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\HMS_RegexByte\\app\\Views\\New_item_table_partial.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('New_item_table_partial.php', [], true)
+ 5 APPPATH\Controllers\PurchaseController.php(108): view('New_item_table_partial.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->filteritems()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 07:23:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:23:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:23:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:23:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:23:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:24:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:30:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:50:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:50:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:50:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 07:52:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 09:28:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 09:43:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 09:44:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 09:45:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 09:49:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 09:53:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 09:54:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 10:00:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 10:00:29 --> Call to undefined method CodeIgniter\Database\MySQLi\Builder::findAll()
+in APPPATH\Models\PurchaseModel.php on line 95.
+ 1 APPPATH\Controllers\PurchaseController.php(79): App\Models\PurchaseModel->getSupplierNames()
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->Purchase_form()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 10:01:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 10:02:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 10:04:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 10:04:51 --> Cannot use object of type stdClass as array
+in APPPATH\Views\Purchase_form.php on line 493.
+ 1 SYSTEMPATH\View\View.php(228): include()
+ 2 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('purchase_form.php', [], true)
+ 4 APPPATH\Controllers\PurchaseController.php(91): view('purchase_form.php', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->Purchase_form()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 10:05:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 10:05:51 --> Cannot use object of type stdClass as array
+in APPPATH\Views\Purchase_form.php on line 493.
+ 1 SYSTEMPATH\View\View.php(228): include()
+ 2 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('purchase_form.php', [], true)
+ 4 APPPATH\Controllers\PurchaseController.php(91): view('purchase_form.php', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->Purchase_form()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 10:08:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 10:19:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-17 10:19:13 --> mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`dashboard`.`invoices`, CONSTRAINT `client_id` FOREIGN KEY (`idClient`) REFERENCES `client` (`idClient`)) in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `in...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `in...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `in...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `in...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\system\Model.php(319): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\HMS_RegexByte\system\BaseModel.php(788): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\Model.php(715): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\HMS_RegexByte\app\Models\InvoiceModel.php(49): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\SalesController.php(636): App\Models\InvoiceModel->insertInvoice(Array)
+#9 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\SalesController->submitInvoice()
+#10 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SalesController))
+#11 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#13 {main}
+ERROR - 2024-09-17 10:19:13 --> mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`dashboard`.`invoicedetail`, CONSTRAINT `id_rec` FOREIGN KEY (`idReceipts`) REFERENCES `invoices` (`idReceipts`)) in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `in...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `in...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `in...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `in...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\system\Model.php(319): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\HMS_RegexByte\system\BaseModel.php(788): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\Model.php(715): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\SalesController.php(666): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\SalesController->submitInvoice()
+#9 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SalesController))
+#10 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#12 {main}
+ERROR - 2024-09-17 10:19:13 --> mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`dashboard`.`invoicedetail`, CONSTRAINT `id_rec` FOREIGN KEY (`idReceipts`) REFERENCES `invoices` (`idReceipts`)) in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `in...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `in...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `in...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `in...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\system\Model.php(319): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\HMS_RegexByte\system\BaseModel.php(788): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\Model.php(715): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\SalesController.php(666): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\SalesController->submitInvoice()
+#9 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SalesController))
+#10 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#12 {main}
+INFO - 2024-09-17 10:19:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 10:22:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 10:22:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 10:23:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 10:23:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 10:23:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 10:33:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 10:33:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-17 10:33:55 --> mysqli_sql_exception: Unknown column 'serial_number' in 'field list' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `pu...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pu...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pu...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pu...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\PurchaseModel.php(102): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\PurchaseController.php(194): App\Models\PurchaseModel->insertPurchaseInvoice(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\PurchaseController->submitPurchaseInvoice()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+INFO - 2024-09-17 10:34:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-17 10:34:52 --> mysqli_sql_exception: Unknown column 'serial_number' in 'field list' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `pu...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pu...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pu...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pu...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\PurchaseModel.php(102): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\PurchaseController.php(194): App\Models\PurchaseModel->insertPurchaseInvoice(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\PurchaseController->submitPurchaseInvoice()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+INFO - 2024-09-17 10:35:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 10:35:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-17 10:35:24 --> mysqli_sql_exception: Unknown column 'serial_number' in 'field list' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `pu...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pu...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pu...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pu...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\PurchaseModel.php(102): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\PurchaseController.php(194): App\Models\PurchaseModel->insertPurchaseInvoice(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\PurchaseController->submitPurchaseInvoice()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+INFO - 2024-09-17 10:39:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 10:40:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-17 10:40:17 --> mysqli_sql_exception: Unknown column 'serial_number' in 'field list' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `pu...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pu...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pu...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pu...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\PurchaseModel.php(102): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\PurchaseController.php(194): App\Models\PurchaseModel->insertPurchaseInvoice(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\PurchaseController->submitPurchaseInvoice()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+INFO - 2024-09-17 10:40:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 10:41:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-17 10:41:53 --> mysqli_sql_exception: Unknown column 'serial_number' in 'field list' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `pu...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pu...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pu...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pu...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\PurchaseModel.php(102): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\PurchaseController.php(194): App\Models\PurchaseModel->insertPurchaseInvoice(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\PurchaseController->submitPurchaseInvoice()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-17 10:41:54 --> Unknown column 'serial_number' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `purchase_invoices` (`idSupplier`, `Value`, `actual_Value`, `idUser`, `Status`, `serial_number`, `idBusiness`, `idCancellation`, `invOrdNum`, `idWarehouse`, `FIC`, `ValueTVSH`, `idCurrency`, `rate`, `paymentMethod`, `closeShift`, `isSummaryInvoice`, `isImport`, `idPoint_of_sale`, `transporterId`, `invoiceType`, `isReverseCharge`, `Contract`, `invoice_period_start_date`, `invoice_period_end_date`, `filename`, `dokumenti`, `lloji_fatures_id`, `InvoiceNotes`) VALUES (:idSupplier:, :Value:, :actual_Value:, :idUser:, :Status:, :serial_number:, :idBusiness:, :idCancellation:, :invOrdNum:, :idWarehouse:, :FIC:, :ValueTVSH:, :idCurrency:, :rate:, :paymentMethod:, :closeShift:, :isSummaryInvoice:, :isImport:, :idPoint_of_sale:, :transporterId:, :invoiceType:, :isReverseCharge:, :Contract:, :invoice_period_start_date:, :invoice_period_end_date:, :filename:, :dokumenti:, :lloji_fatures_id:, :InvoiceNotes:)', [...], false)
+ 2 APPPATH\Models\PurchaseModel.php(102): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\PurchaseController.php(194): App\Models\PurchaseModel->insertPurchaseInvoice([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->submitPurchaseInvoice()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 10:42:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 10:42:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 10:42:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-17 10:42:42 --> mysqli_sql_exception: Unknown column 'serial_number' in 'field list' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `pu...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pu...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pu...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pu...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\PurchaseModel.php(102): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\PurchaseController.php(194): App\Models\PurchaseModel->insertPurchaseInvoice(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\PurchaseController->submitPurchaseInvoice()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-17 10:42:42 --> Unknown column 'serial_number' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `purchase_invoices` (`idSupplier`, `Value`, `actual_Value`, `idUser`, `Status`, `serial_number`, `idBusiness`, `idCancellation`, `invOrdNum`, `idWarehouse`, `FIC`, `ValueTVSH`, `idCurrency`, `rate`, `paymentMethod`, `closeShift`, `isSummaryInvoice`, `isImport`, `idPoint_of_sale`, `transporterId`, `invoiceType`, `isReverseCharge`, `Contract`, `invoice_period_start_date`, `invoice_period_end_date`, `filename`, `dokumenti`, `lloji_fatures_id`, `InvoiceNotes`) VALUES (:idSupplier:, :Value:, :actual_Value:, :idUser:, :Status:, :serial_number:, :idBusiness:, :idCancellation:, :invOrdNum:, :idWarehouse:, :FIC:, :ValueTVSH:, :idCurrency:, :rate:, :paymentMethod:, :closeShift:, :isSummaryInvoice:, :isImport:, :idPoint_of_sale:, :transporterId:, :invoiceType:, :isReverseCharge:, :Contract:, :invoice_period_start_date:, :invoice_period_end_date:, :filename:, :dokumenti:, :lloji_fatures_id:, :InvoiceNotes:)', [...], false)
+ 2 APPPATH\Models\PurchaseModel.php(102): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\PurchaseController.php(194): App\Models\PurchaseModel->insertPurchaseInvoice([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->submitPurchaseInvoice()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 10:47:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 10:47:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-17 10:47:28 --> mysqli_sql_exception: Unknown column 'serial_number' in 'field list' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `pu...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pu...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pu...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pu...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\PurchaseModel.php(102): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\PurchaseController.php(194): App\Models\PurchaseModel->insertPurchaseInvoice(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\PurchaseController->submitPurchaseInvoice()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-17 10:47:28 --> Unknown column 'serial_number' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `purchase_invoices` (`idSupplier`, `Value`, `actual_Value`, `idUser`, `Status`, `serial_number`, `idBusiness`, `idCancellation`, `invOrdNum`, `idWarehouse`, `FIC`, `ValueTVSH`, `idCurrency`, `rate`, `paymentMethod`, `closeShift`, `isSummaryInvoice`, `isImport`, `idPoint_of_sale`, `transporterId`, `invoiceType`, `isReverseCharge`, `Contract`, `invoice_period_start_date`, `invoice_period_end_date`, `filename`, `dokumenti`, `lloji_fatures_id`, `InvoiceNotes`) VALUES (:idSupplier:, :Value:, :actual_Value:, :idUser:, :Status:, :serial_number:, :idBusiness:, :idCancellation:, :invOrdNum:, :idWarehouse:, :FIC:, :ValueTVSH:, :idCurrency:, :rate:, :paymentMethod:, :closeShift:, :isSummaryInvoice:, :isImport:, :idPoint_of_sale:, :transporterId:, :invoiceType:, :isReverseCharge:, :Contract:, :invoice_period_start_date:, :invoice_period_end_date:, :filename:, :dokumenti:, :lloji_fatures_id:, :InvoiceNotes:)', [...], false)
+ 2 APPPATH\Models\PurchaseModel.php(102): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\PurchaseController.php(194): App\Models\PurchaseModel->insertPurchaseInvoice([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->submitPurchaseInvoice()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 10:47:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-17 10:47:44 --> mysqli_sql_exception: Unknown column 'serial_number' in 'field list' in C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\HMS_RegexByte\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `pu...', 0)
+#1 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pu...')
+#2 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pu...')
+#3 C:\xampp\htdocs\HMS_RegexByte\system\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pu...', Array, false)
+#4 C:\xampp\htdocs\HMS_RegexByte\app\Models\PurchaseModel.php(102): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\HMS_RegexByte\app\Controllers\PurchaseController.php(194): App\Models\PurchaseModel->insertPurchaseInvoice(Array)
+#6 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(942): App\Controllers\PurchaseController->submitPurchaseInvoice()
+#7 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+#8 C:\xampp\htdocs\HMS_RegexByte\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\HMS_RegexByte\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-17 10:47:44 --> Unknown column 'serial_number' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2308): CodeIgniter\Database\BaseConnection->query('INSERT INTO `purchase_invoices` (`idSupplier`, `Value`, `actual_Value`, `idUser`, `Status`, `serial_number`, `idBusiness`, `idCancellation`, `invOrdNum`, `idWarehouse`, `FIC`, `ValueTVSH`, `idCurrency`, `rate`, `paymentMethod`, `closeShift`, `isSummaryInvoice`, `isImport`, `idPoint_of_sale`, `transporterId`, `invoiceType`, `isReverseCharge`, `Contract`, `invoice_period_start_date`, `invoice_period_end_date`, `filename`, `dokumenti`, `lloji_fatures_id`, `InvoiceNotes`) VALUES (:idSupplier:, :Value:, :actual_Value:, :idUser:, :Status:, :serial_number:, :idBusiness:, :idCancellation:, :invOrdNum:, :idWarehouse:, :FIC:, :ValueTVSH:, :idCurrency:, :rate:, :paymentMethod:, :closeShift:, :isSummaryInvoice:, :isImport:, :idPoint_of_sale:, :transporterId:, :invoiceType:, :isReverseCharge:, :Contract:, :invoice_period_start_date:, :invoice_period_end_date:, :filename:, :dokumenti:, :lloji_fatures_id:, :InvoiceNotes:)', [...], false)
+ 2 APPPATH\Models\PurchaseModel.php(102): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\PurchaseController.php(194): App\Models\PurchaseModel->insertPurchaseInvoice([...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\PurchaseController->submitPurchaseInvoice()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PurchaseController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-09-17 10:47:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

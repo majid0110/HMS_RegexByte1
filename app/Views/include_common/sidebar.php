@@ -58,6 +58,27 @@ $modulePermissions = $session->get('module_permissions');
             <?php endif; ?>
         <?php endforeach; ?>
 
+        <?php foreach ($modules as $module): ?>
+            <?php
+            $moduleID = $module['id'];
+
+            $isSalesModule = $module['module_name'] === 'Purchases';
+
+            $canView = $isSalesModule && isset($modulePermissions[$moduleID]['can_view']) && $modulePermissions[$moduleID]['can_view'];
+            ?>
+
+            <?php if ($canView): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url('Purchase'); ?>">
+                        <i class="menu-icon mdi mdi-cart"></i>
+                        <span class="menu-title">
+                            <?= $module['module_name'] ?>
+                        </span>
+                    </a>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
         <!-- For Appointments module -->
         <?php foreach ($modules as $module): ?>
             <?php

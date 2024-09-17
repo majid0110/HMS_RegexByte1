@@ -16,6 +16,8 @@ use App\Models\ExpenseModel;
 use App\Models\InvoiceModel;
 use App\Models\OpdModel;
 use App\Models\TestModel;
+use App\Models\UserModel;
+
 
 
 class LoginController extends Controller
@@ -730,6 +732,30 @@ class LoginController extends Controller
         session()->setFlashdata('success', 'User updated successfully.');
         return redirect()->to(base_url("/edit_user/" . $user_id));
     }
+
+    public function deleteUser($id)
+    {
+        try {
+            $Model = new UserModel();
+
+            $delete = $Model->deleteUser($id);
+
+            if ($delete) {
+                session()->setFlashdata('success', 'User deleted successfully!');
+            } else {
+                session()->setFlashdata('error', 'Clear all records for this user before deletion.');
+            }
+
+            return redirect()->to(base_url("/users_table"));
+
+        } catch (\Exception $e) {
+            log_message('error', 'Database Error: ' . $e->getMessage());
+            session()->setFlashdata('error', 'Clear all records for this user before deletion.');
+
+            return redirect()->to(base_url("/users_table"));
+        }
+    }
+
 
 
 }

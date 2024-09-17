@@ -284,7 +284,10 @@
                                                         <a href="<?php echo base_url() . 'edit_user/' . $user['ID']; ?>"
                                                             class="btn btn-info btn-sm">Edit</a>
 
-                                                        <a href=" " class="btn btn-danger btn-sm">Delete</a>
+                                                        <a href="<?= base_url('deleteUser/' . $user['ID']); ?>"
+                                                            onclick="return confirm('Make Sure you have deleted all records for this user before deleting it..!');"
+                                                            class="btn btn-danger btn-sm">Delete</a>
+
                                                 </tr>
                                             <?php endforeach; ?>
 
