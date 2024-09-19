@@ -102,4 +102,39 @@ class PurchaseModel extends Model
         return $this->db->table('purchase_invoices')->insert($data);
     }
 
+    public function subtractFromInventory($itemId, $quantity, $businessID, $expiryDate)
+    {
+        $idItems = $itemId;
+        $ratio = 1;
+
+        foreach ($idItems as $idItem) {
+            $inventorySubtract = $quantity * $ratio;
+
+            log_message('debug', 'Updating inventory for item: ' . $idItem . ' with quantity: ' . $inventorySubtract);
+            $this->db->table('itemsinventory')
+                ->where('idItem', $idItem)
+                ->set('inventory', 'inventory - ' . $inventorySubtract, FALSE)
+                ->update();
+
+            if ($this->isExpiryEnabled($businessID)) {
+
+                $query = $this->db->table('itemsinventory')
+                    ->select('idInventory')
+                    ->where('idItem', $idItem)
+                    ->get();
+
+                if ($query->getNumRows() > 0) {
+                    $idInventory = $query->getRow()->idInventory;
+
+
+                    $this->db->table('itemsexpiry')
+                        ->where('idInventory', $idInventory)
+                        ->where('expiryDate', $expiryDate)
+                        ->set('inventory', 'inventory - ' . $inventorySubtract, FALSE)
+                        ->update();
+                }
+            }
+        }
+    }
+
 }

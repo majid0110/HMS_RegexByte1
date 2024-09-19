@@ -385,3 +385,4 @@ $routes->get('/Purchase', 'PurchaseController::Purchase_form');
 $routes->post('PurchaseController/filteritems', 'PurchaseController::filteritems');
 $routes->get('PurchaseController/filteritems', 'PurchaseController::filteritems');
 $routes->post('submitPurchaseInvoice', 'PurchaseController::submitPurchaseInvoice');
+$routes->post('submitPurchaseServices', 'PurchaseController::submitPurchaseServices');

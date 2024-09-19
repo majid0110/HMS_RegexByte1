@@ -37,4 +37,35 @@ class SupplierModel extends Model
     {
         return $this->where('idSupplier', $id)->delete();
     }
+
+    public function getSupplierAge($businessID, $id)
+    {
+        return $this->db->table($this->table)
+            ->where('idBusiness', $businessID)
+            ->where('idSupplier', $id)
+            ->select('age')
+            ->get()
+            ->getRowArray()['age'] ?? null;
+    }
+
+    public function getsupplierGender($businessID, $clientID)
+    {
+        return $this->db->table($this->table)
+            ->where('idBusiness', $businessID)
+            ->where('idClient', $clientID)
+            ->select('gender')
+            ->get()
+            ->getRowArray()['gender'] ?? null;
+    }
+
+    public function getsupplierContact($businessID, $id)
+    {
+        return $this->db->table($this->table)
+            ->where('idBusiness', $businessID)
+            ->where('idSupplier', $id)
+            ->select('contact')
+            ->get()
+            ->getRowArray()['contact'] ?? null;
+    }
+
 }
