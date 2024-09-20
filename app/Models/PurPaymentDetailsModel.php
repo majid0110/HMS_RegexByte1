@@ -21,7 +21,7 @@ class PurPaymentDetailsModel extends Model
 
     public function insertPurInvoicePayment($InvoicePayment)
     {
-        $this->db->table('invoicepayment')
+        $this->db->table('purchaseinvoicepayment')
             ->insert($InvoicePayment);
     }
 

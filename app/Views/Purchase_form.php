@@ -945,123 +945,6 @@
                 });
             });
 
-            function insertData() {
-                $('#loading-overlay').show();
-
-                var clientId = $('select[name="clientName"]').val();
-                var clientName = $('select[name="clientName"] option:selected').text();
-                var paymentMethodOption = $('select[name="Payment"] option:selected');
-                var paymentMethodId = paymentMethodOption.data('payment-id');
-                var paymentName = paymentMethodOption.text();
-                var paymentMethodName = paymentMethodOption.text();
-                var currency = $('select[name="Currency"]').val();
-                var currencyName = $('select[name="Currency"] option:selected').text();
-                var exchange = $('#exchangeInput').val();
-
-                var totals = calculateTotals();
-                var totalFee = totals.totalFee;
-                var totalTax = totals.totalTax;
-                var discountedTotal = totals.discountedTotal;
-                var totalWithoutTax = totals.totalWithoutTax;
-
-                var selectedTableId = null;
-
-                if (!clientId || isNaN(totalFee)) {
-                    alert('Invalid data for insertion.');
-                    return;
-                }
-
-                var services = [];
-                $('#serviceTableBody tr').each(function () {
-                    var serviceTypeRow = $(this);
-                    var serviceTypeId = serviceTypeRow.data('service-id');
-                    var serviceName = serviceTypeRow.find('td:eq(0)').text();
-                    var fee = parseFloat(serviceTypeRow.find('.editable-price').text()) || 0;
-                    var quantity = parseInt(serviceTypeRow.find('.editable-quantity').val()) || 0;
-                    var discount = parseFloat(serviceTypeRow.find('.editable-discount').val()) || 0;
-                    var taxRate = parseFloat(serviceTypeRow.find('.tax-rate').data('tax-value')) || 0;
-                    var taxId = serviceTypeRow.find('.tax-rate').data('tax-id');
-                    var expiryDate = serviceTypeRow.find('.expiry-dropdown').val() || serviceTypeRow.find('.expiry-date').val() || null;
-
-                    var rowTotal = serviceTypeRow.data('rowTotal');
-                    var rowDiscountAmount = serviceTypeRow.data('rowDiscountAmount');
-                    var rowDiscountedTotal = serviceTypeRow.data('rowDiscountedTotal');
-                    var calculatedTax = serviceTypeRow.data('calculatedTax');
-                    var rowWithoutTax = serviceTypeRow.data('rowWithoutTax');
-
-                    services.push({
-                        serviceTypeId: serviceTypeId,
-                        serviceName: serviceName,
-                        fee: fee,
-                        quantity: quantity,
-                        discount: discount,
-                        expiryDate: expiryDate,
-                        taxRate: taxRate,
-                        taxId: taxId,
-                        calculatedTax: calculatedTax,
-                        rowTotal: rowTotal,
-                        rowDiscountAmount: rowDiscountAmount,
-                        rowDiscountedTotal: rowDiscountedTotal,
-                        rowWithoutTax: rowWithoutTax
-                    });
-                });
-                console.log('Services', services);
-
-                $.ajax({
-                    method: 'POST',
-                    url: '<?= site_url('SalesController/submitServices') ?>',
-                    dataType: "json",
-                    data: {
-                        clientId: clientId,
-                        clientName: clientName,
-                        currencyName: currencyName,
-                        paymentMethodId: paymentMethodId,
-                        paymentName: paymentName,
-                        paymentMethodName: paymentMethodName,
-                        currency: currency,
-                        exchange: exchange,
-                        totalFee: totalFee,
-                        totalTax: totalTax,
-                        services: services,
-                        selectedTableId: selectedTableId,
-                        discountedTotal: discountedTotal
-                    },
-                    success: function (response) {
-                        console.log('Data inserted successfully:', response);
-                        if (response.pdfContent) {
-                            var decodedPdfContent = atob(response.pdfContent);
-                            var blob = new Blob([new Uint8Array(decodedPdfContent.split('').map(function (c) {
-                                return c.charCodeAt(0);
-                            }))], {
-                                type: 'application/pdf'
-                            });
-                            var link = document.createElement('a');
-                            var url = window.URL.createObjectURL(blob);
-                            link.href = url;
-                            link.target = '_blank';
-                            link.click();
-
-                            setTimeout(function () {
-                                window.URL.revokeObjectURL(url);
-                            }, 100);
-                        }
-                        $('#serviceTableBody').empty();
-                        $('#totalFee').text('0');
-                        $('#discountAmount').text('0');
-                        $('#taxAmount').text('0');
-                        $('#discountedTotal').text('0');
-                        calculateTotals();
-
-                        $('#loading-overlay').hide();
-                        location.reload();
-                    },
-                    error: function (error) {
-                        console.error('Error inserting data:', error);
-                        $('#loading-overlay').hide();
-                    }
-                });
-            }
-
             function isTableSelected() {
                 return $('input[name="select_table"]:checked').length > 0;
             }
@@ -1126,7 +1009,20 @@
                         rowWithoutTax: rowWithoutTax
                     });
                 });
-                console.log('Services', services);
+                console.log('SupplierID', clientId);
+                console.log('supplier Name', clientName);
+                console.log('currancy', currencyName);
+                console.log('payment ID', paymentMethodId);
+                console.log('Payment Name', paymentName);
+                console.log('payment Method Name', paymentMethodName);
+                console.log('currancy', currency);
+                console.log('Excahge', exchange);
+                console.log('Total Fee', totalFee);
+                console.log('Total Tax', totalTax);
+                console.log('Discounted Total', discountedTotal);
+                console.log('total fee without', totalWithoutTax);
+                console.log('selected table', selectedTableId);
+                console.log('service', services);
 
                 $.ajax({
                     method: 'POST',
@@ -1174,7 +1070,7 @@
                         calculateTotals();
 
                         $('#loading-overlay').hide();
-                        location.reload();
+                        // location.reload();
                     },
                     error: function (error) {
                         console.error('Error inserting data:', error);

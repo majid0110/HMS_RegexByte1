@@ -360,14 +360,13 @@ class PurchaseController extends Controller
                 $serviceData = [
                     'idReceipts' => $idPayment,
                     'Nr' => 0,
-                    'idArtMenu' => $service['serviceTypeId'],
+                    'idItem' => $service['serviceTypeId'],
                     'Quantity' => $quantity,
                     'Price' => $discountedPrice,
                     'actual_Price' => $fee,
                     'Sum' => $sum,
                     'idBusiness' => $businessID,
-                    'IdTax' => $service['taxRate'],
-                    // 'IdTax' => 1,
+                    'IdTax' => 1,
                     'ValueTax' => $service['calculatedTax'],
                     'idMag' => 1,
                     'name' => $service['serviceName'],
@@ -376,9 +375,9 @@ class PurchaseController extends Controller
                 ];
                 $PurchaseDetailModel->insert($serviceData);
 
-                $ItemId = $service['serviceTypeId'];
+                $idItem = $service['serviceTypeId'];
                 $Model = new PurchaseModel();
-                $model->subtractFromInventory($ItemId, $quantity, $businessID, $expiryDate);
+                $Model->subtractFromInventory([$idItem], $quantity, $businessID, $expiryDate);
             }
 
             $paymentDetailsModel = new PurPaymentDetailsModel();
@@ -400,11 +399,6 @@ class PurchaseController extends Controller
 
             ];
             $paymentDetailsModel->insertPurInvoicePayment($InvoicePayment);
-            // $paymentDetailsModel->insertInvoicePayment([
-            //     'idReceipt' => $idPayment,
-            //     'idPayment' => $idReceipt,
-            // ]);
-
 
             $db->transCommit();
 
@@ -451,6 +445,7 @@ class PurchaseController extends Controller
                 'message' => 'Data inserted successfully',
                 'pdfContent' => base64_encode($pdfBinary),
             ]);
+
         } catch (\Exception $e) {
             $db->transRollback();
             log_message('error', 'Error retrieving data: ' . $e->getMessage());
