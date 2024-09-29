@@ -1,4 +1,4 @@
-<?php include 'include_common/head.php'; ?>
+<?php include 'include_common/head1.php'; ?>
 <?php include 'include_common/navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,78 +7,99 @@
 
 <head>
 
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Star Admin2 </title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="./public/assets/vendors/feather/feather.css">
+    <link rel="stylesheet" href="./public/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="./public/assets/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="./public/assets/vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="./public/assets/vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="./public/assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="./public/assets/css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="./public/assets/images/favicon.png" />
 
-    <style>
-        #lab-table tfoot {
-            font-weight: bold;
-            background-color: #f2f2f2;
-        }
+    <head>
 
-        #lab-table tfoot .table-totals td {
 
-            border-top: 2px solid #000;
-
-        }
-
-        .table-container {
-            max-height: 400px;
-            /* Adjust as needed */
-            overflow-y: auto;
-        }
-
-        @keyframes shine {
-            0% {
-                left: -50%;
+        <style>
+            #lab-table tfoot {
+                font-weight: bold;
+                background-color: #f2f2f2;
             }
 
-            100% {
-                left: 150%;
+            #lab-table tfoot .table-totals td {
+
+                border-top: 2px solid #000;
+
             }
-        }
 
-        .pagination {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+            .table-container {
+                max-height: 400px;
+                /* Adjust as needed */
+                overflow-y: auto;
+            }
 
-        .pagination li {
-            margin: 0 5px;
-        }
+            @keyframes shine {
+                0% {
+                    left: -50%;
+                }
 
-        .pagination a {
-            display: block;
-            padding: 8px 16px;
-            text-decoration: none;
-            color: #333;
-            background-color: #f5f5f5;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
-        }
+                100% {
+                    left: 150%;
+                }
+            }
 
-        .pagination a.active {
-            background-color: #4CAF50;
-            color: white;
-            border-color: #4CAF50;
-        }
+            .pagination {
+                display: flex;
+                justify-content: center;
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
 
-        .pagination a:hover:not(.active) {
-            background-color: #ddd;
-        }
+            .pagination li {
+                margin: 0 5px;
+            }
 
-        /* Additional Styling */
-        .pagination a {
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+            .pagination a {
+                display: block;
+                padding: 8px 16px;
+                text-decoration: none;
+                color: #333;
+                background-color: #f5f5f5;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                transition: background-color 0.3s, color 0.3s;
+            }
 
-        .pagination a.active {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-    </style>
-</head>
+            .pagination a.active {
+                background-color: #4CAF50;
+                color: white;
+                border-color: #4CAF50;
+            }
+
+            .pagination a:hover:not(.active) {
+                background-color: #ddd;
+            }
+
+            /* Additional Styling */
+            .pagination a {
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .pagination a.active {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+        </style>
+    </head>
 
 <body>
     <div class="container-scroller">

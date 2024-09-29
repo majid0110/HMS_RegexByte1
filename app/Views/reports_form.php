@@ -367,9 +367,10 @@
                             <div class="card" onclick="window.location.href='<?= base_url('Purchase_details'); ?>';">
                                 <div class="card-body"
                                     style="display: flex; flex-direction: column; align-items: center;">
-                                    <h4 class="card-title" style="text-align:center">Purchase Detail Report</h4>
+                                    <h4 class="card-title" style="text-align:center">Purchase Detail</h4>
                                     <div class="media">
-                                        <i class="icon-lg mdi mdi-sale" style="height:45px; width:45px;"></i>
+                                        <i class="icon-lg mdi mdi-file-document-box"
+                                            style="height:45px; width:45px;"></i>
                                     </div>
                                 </div>
                             </div>
