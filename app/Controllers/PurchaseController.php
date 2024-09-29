@@ -157,7 +157,8 @@ class PurchaseController extends Controller
                 throw new \Exception('Services data is null.');
             }
 
-            $lastInvoiceNumber = $invoice->select('invOrdNum')->orderBy('invOrdNum', 'DESC')->limit(1)->first();
+            $purchaseModel = new purchaseInvoiceModel();
+            $lastInvoiceNumber = $purchaseModel->select('invOrdNum')->orderBy('invOrdNum', 'DESC')->limit(1)->first();
             $newInvoiceNumber = $lastInvoiceNumber ? $lastInvoiceNumber['invOrdNum'] + 1 : 1;
             $invoiceData = [
                 'idSupplier' => $Supplierid,
@@ -168,7 +169,7 @@ class PurchaseController extends Controller
                 'idBusiness' => $businessID,
                 'idCancellation' => 0,
                 'invOrdNum' => $newInvoiceNumber,
-                'idWarehouse' => 0,
+                'idWarehouse' => 1,
                 'FIC' => 0,
                 'ValueTVSH' => $totalTax,
                 'idCurrency' => $currency,
@@ -325,7 +326,7 @@ class PurchaseController extends Controller
                 'idBusiness' => $businessID,
                 'idCancellation' => 0,
                 'invOrdNum' => $newInvoiceNumber,
-                'idWarehouse' => 0,
+                'idWarehouse' => 1,
                 'FIC' => 0,
                 'ValueTVSH' => $totalTax,
                 'idCurrency' => $currency,

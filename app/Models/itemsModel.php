@@ -387,4 +387,12 @@ class itemsModel extends Model
         return isset($result['isExpiry']) ? (int) $result['isExpiry'] : 0;
     }
 
+    public function getItemsName()
+    {
+        return $this->db->table('itemswarehouse')
+            ->select('idItem,Name')
+            ->get()
+            ->getResultArray();
+    }
+
 }

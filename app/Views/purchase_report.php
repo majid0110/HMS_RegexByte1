@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Star Admin2 </title>
     <!-- plugins:css -->
-    <!-- <link rel="stylesheet" href="./public/assets/vendors/feather/feather.css">
+    <link rel="stylesheet" href="./public/assets/vendors/feather/feather.css">
     <link rel="stylesheet" href="./public/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="./public/assets/vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" href="./public/assets/vendors/typicons/typicons.css">
@@ -24,17 +24,34 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="./public/assets/css/vertical-layout-light/style.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="./public/assets/images/favicon.png" /> -->
+    <link rel="shortcut icon" href="./public/assets/images/favicon.png" />
+
     <style>
-        #service-table tfoot {
+        #lab-table tfoot {
             font-weight: bold;
             background-color: #f2f2f2;
         }
 
-        #service-table tfoot .table-totals td {
+        #lab-table tfoot .table-totals td {
 
             border-top: 2px solid #000;
 
+        }
+
+        .table-container {
+            max-height: 400px;
+            /* Adjust as needed */
+            overflow-y: auto;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -50%;
+            }
+
+            100% {
+                left: 150%;
+            }
         }
 
         .pagination {
@@ -97,7 +114,7 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <form action="<?= base_url('generateExcelServiceReport'); ?>" method="post">
+                                <form action="<?= base_url('generateExcelPurchaseReport'); ?>" method="post">
                                     <div class="form-group row">
                                         <div>
                                             <div
@@ -115,7 +132,7 @@
                                                             <?php foreach ($Invoice as $invoice): ?>
                                                                 <option value="<?= $invoice['idReceipts']; ?>"
                                                                     data-invoice-id="<?= $invoice['idReceipts']; ?>">
-                                                                    <?= $invoice['invOrdNum']; ?>
+                                                                    <?= $invoice['idReceipts']; ?>
                                                                 </option>
                                                             <?php endforeach; ?>
                                                         </select>
@@ -134,13 +151,13 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-3">
-                                            <label>By Client</label>
+                                            <label>By Supplier</label>
                                             <div id="the-basics">
                                                 <select class="form-control" name="clientName" id='clientInput'>
-                                                    <option value="">All Clients</option>
-                                                    <?php foreach ($client_names as $client): ?>
-                                                        <option value="<?= $client['client']; ?>">
-                                                            <?= $client['client']; ?> (<?= $client['contact']; ?>)
+                                                    <option value="">All</option>
+                                                    <?php foreach ($Suppliers as $supplier): ?>
+                                                        <option value="<?= $supplier['supplier']; ?>">
+                                                            <?= $supplier['supplier']; ?>     <?= $supplier['contact']; ?>
                                                         </option>
                                                     <?php endforeach; ?>
                                                 </select>
@@ -173,14 +190,15 @@
                                     </div>
                                 </form>
                                 <hr>
-                                <h4 class="card-title">Service Report</h4>
+                                <h4 class="card-title">purchase Report</h4>
                                 <div class="col-12 grid-margin">
-                                    <div class="table-responsive">
-                                        <table id="service-table" class="table table-striped">
+                                    <!-- <div class="table-container"> -->
+                                    <div class="table-responsive" id='tableData'>
+                                        <table id="lab-table" class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Invoice NO #</th>
-                                                    <th>Client Name</th>
+                                                    <th>Invoice #</th>
+                                                    <th>Supplier</th>
                                                     <th>Currancy</th>
                                                     <th>Payment Method</th>
                                                     <th>Status</th>
@@ -190,32 +208,32 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
-                                                <?php foreach ($Sales as $Sale): ?>
+                                                <?php foreach ($Purchases as $purchase): ?>
                                                     <tr>
                                                         <td>
-                                                            <?= $Sale['invOrdNum']; ?>
+                                                            <?= $purchase['idReceipts']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $Sale['clientName']; ?>
+                                                            <?= $purchase['SupplierName']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $Sale['Currency']; ?>
+                                                            <?= $purchase['Currency']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $Sale['PaymentMethod']; ?>
+                                                            <?= $purchase['PaymentMethod']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $Sale['Status']; ?>
+                                                            <?= $purchase['Status']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $Sale['Date']; ?>
+                                                            <?= $purchase['Date']; ?>
                                                         </td>
                                                         <td>
-                                                            <?= $Sale['Value']; ?>
+                                                            <?= $purchase['Value']; ?>
                                                         </td>
+
                                                         <td>
-                                                            <a href="<?= base_url('viewServiceDetails/' . $Sale['idReceipts']); ?>"
+                                                            <a href="<?= base_url('viewTestDetails/' . $purchase['idReceipts']); ?>"
                                                                 class="btn btn-info btn-sm">View Details</a>
                                                         </td>
                                                     </tr>
@@ -230,15 +248,16 @@
                                                     <td></td>
                                                     <td>Total:</td>
                                                     <td>
-                                                        <?= $totalServiceFee ?>
+                                                        <?= $totalPurchaseFee ?>
                                                     </td>
                                                     <td></td>
                                                 </tr>
+
                                             </tfoot>
                                         </table>
                                     </div>
+                                    <!-- </div> -->
                                 </div>
-
 
                             </div>
                             <div class="pagination-container">
@@ -266,37 +285,37 @@
                 $(document).ready(function () {
                     $('#searchInput, #invoiceInput, #paymentInput, #clientInput, #fromDateInput, #toDateInput').on('input change', function () {
                         var searchValue = $('#searchInput').val();
-                        var paymentInput = $('#paymentInput').val();
+                        var paymentValue = $('#paymentInput').val();
+                        var invoiceValue = $('#invoiceInput').val();
                         var clientValue = $('#clientInput').val();
-                        var invoice = $('#invoiceInput').val();
                         var fromDateValue = $('#fromDateInput').val();
                         var toDateValue = $('#toDateInput').val();
 
                         console.log('Search Value:', searchValue);
-                        console.log('payment Input:', paymentInput);
+                        console.log('paymentValue Value:', paymentValue);
                         console.log('Client Value:', clientValue);
                         console.log('From Date Value:', fromDateValue);
                         console.log('To Date Value:', toDateValue);
-                        console.log('invoice:', invoice);
+                        console.log('invoiceValue:', invoiceValue);
 
                         $.ajax({
                             type: 'POST',
-                            url: '<?= base_url('services_report'); ?>',
+                            url: '<?= base_url('purchase_report'); ?>',
                             data: {
                                 search: searchValue,
-                                paymentInput: paymentInput,
-                                clientName: clientValue,
+                                payment: paymentValue,
+                                clientValue: clientValue,
                                 fromDate: fromDateValue,
-                                toDate: toDateValue,
-                                invoice: invoice
+                                invoiceValue: invoiceValue,
+                                toDate: toDateValue
                             },
                             dataType: 'json',
                             success: function (response) {
                                 if (response.success) {
                                     var cleanedTableContent = response.tableContent.trim();
-                                    $('.table-responsive').html(cleanedTableContent);
-                                    $('#totalServiceFee').text(response.totalServiceFee);
-
+                                    $('#tableData').html(cleanedTableContent);
+                                    $('#total-lab-fee').text(response.totalLabFee);
+                                    console.log(response.totalLabFee);
                                 } else {
                                     console.error('Error:', response.error);
                                 }
@@ -308,6 +327,10 @@
                     });
                 });
             </script>
+
+
+
+
             <script src="./public/assets/js/off-canvas.js"></script>
             <script src="./public/assets/js/hoverable-collapse.js"></script>
             <script src="./public/assets/js/template.js"></script>

@@ -1,4 +1,4 @@
-<?php include 'include_common/head1.php'; ?>
+<?php include 'include_common/head.php'; ?>
 <?php include 'include_common/navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,34 +7,33 @@
 
 <head>
 
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Star Admin2 </title>
-    <!-- plugins:css -->
-    <!-- <link rel="stylesheet" href="./public/assets/vendors/feather/feather.css">
-    <link rel="stylesheet" href="./public/assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="./public/assets/vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="./public/assets/vendors/typicons/typicons.css">
-    <link rel="stylesheet" href="./public/assets/vendors/simple-line-icons/css/simple-line-icons.css">
-    <link rel="stylesheet" href="./public/assets/vendors/css/vendor.bundle.base.css">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <link rel="stylesheet" href="./public/assets/css/vertical-layout-light/style.css">
-    <!-- endinject -->
-    <link rel="shortcut icon" href="./public/assets/images/favicon.png" /> -->
+
     <style>
-        #service-table tfoot {
+        #lab-table tfoot {
             font-weight: bold;
             background-color: #f2f2f2;
         }
 
-        #service-table tfoot .table-totals td {
+        #lab-table tfoot .table-totals td {
 
             border-top: 2px solid #000;
 
+        }
+
+        .table-container {
+            max-height: 400px;
+            /* Adjust as needed */
+            overflow-y: auto;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -50%;
+            }
+
+            100% {
+                left: 150%;
+            }
         }
 
         .pagination {
@@ -88,6 +87,7 @@
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:./public/assets/partials/_settings-panel.html -->
+
             <!-- partial -->
             <!-- partial:./public/assets/partials/_sidebar.html -->
             <?php include 'include_common/sidebar.php'; ?>
@@ -97,7 +97,8 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <form action="<?= base_url('generateExcelServiceReport'); ?>" method="post">
+
+                                <form action="<?= base_url('generateExcelPurchaseDetailsReport'); ?>" method="post">
                                     <div class="form-group row">
                                         <div>
                                             <div
@@ -108,14 +109,14 @@
                                                     Export
                                                 </button>
                                                 <div class="col-md-3">
-                                                    <label>By Invoice</label>
+                                                    <label>By Item</label>
                                                     <div id="the-basics">
-                                                        <select class="form-control" name="invoice" id='invoiceInput'>
-                                                            <option value="">All Invoices</option>
-                                                            <?php foreach ($Invoice as $invoice): ?>
-                                                                <option value="<?= $invoice['idReceipts']; ?>"
-                                                                    data-invoice-id="<?= $invoice['idReceipts']; ?>">
-                                                                    <?= $invoice['invOrdNum']; ?>
+                                                        <select class="form-control" name="invoice" id='itemInput'>
+                                                            <option value="">All Items</option>
+                                                            <?php foreach ($Items as $item): ?>
+                                                                <option value="<?= $item['idItem']; ?>"
+                                                                    data-invoice-id="<?= $item['idItem']; ?>">
+                                                                    <?= $item['Name']; ?>
                                                                 </option>
                                                             <?php endforeach; ?>
                                                         </select>
@@ -134,29 +135,30 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-3">
-                                            <label>By Client</label>
+                                            <label>By Supplier</label>
                                             <div id="the-basics">
                                                 <select class="form-control" name="clientName" id='clientInput'>
-                                                    <option value="">All Clients</option>
-                                                    <?php foreach ($client_names as $client): ?>
-                                                        <option value="<?= $client['client']; ?>">
-                                                            <?= $client['client']; ?> (<?= $client['contact']; ?>)
+                                                    <option value="">All</option>
+                                                    <?php foreach ($Suppliers as $supplier): ?>
+                                                        <option value="<?= $supplier['supplier']; ?>">
+                                                            <?= $supplier['supplier']; ?>     <?= $supplier['contact']; ?>
                                                         </option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <label>By Payment Methods</label>
+                                            <label>By Payment Method</label>
                                             <div id="the-basics">
-                                                <select class="form-control" name="PaymentMethod" id='paymentInput'>
-                                                    <option value="">All Payment Methods</option>
+                                                <select class="form-control" name="payment" id='userInput'>
+                                                    <option value="">All Payment</option>
                                                     <?php foreach ($payments as $payment): ?>
                                                         <option value="<?= $payment['idPaymentMethods']; ?>"
                                                             data-payment-id="<?= $payment['idPaymentMethods']; ?>">
                                                             <?= $payment['Method']; ?>
                                                         </option>
                                                     <?php endforeach; ?>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -173,51 +175,61 @@
                                     </div>
                                 </form>
                                 <hr>
-                                <h4 class="card-title">Service Report</h4>
+                                <h4 class="card-title">Purchase Details Report</h4>
                                 <div class="col-12 grid-margin">
+                                    <!-- <div class="table-container"> -->
                                     <div class="table-responsive">
                                         <table id="service-table" class="table table-striped">
+
                                             <thead>
                                                 <tr>
-                                                    <th>Invoice NO #</th>
-                                                    <th>Client Name</th>
-                                                    <th>Currancy</th>
-                                                    <th>Payment Method</th>
-                                                    <th>Status</th>
-                                                    <th>Date</th>
-                                                    <th>FEE</th>
-                                                    <th>Actions</th>
+                                                    <th>Invoice</th>
+                                                    <th>Item</th>
+                                                    <th>Price</th>
+                                                    <th>Quantity</th>
+                                                    <th>Sum</th>
+                                                    <th>discount</th>
+                                                    <th>Client</th>
+                                                    <th>State</th>
+                                                    <th>Method</th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
 
                                                 <?php foreach ($Sales as $Sale): ?>
                                                     <tr>
+
                                                         <td>
-                                                            <?= $Sale['invOrdNum']; ?>
+                                                            <?= $Sale['idReceipts']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['name']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['Price']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['Quantity']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['Sum']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $Sale['Discount']; ?>
                                                         </td>
                                                         <td>
                                                             <?= $Sale['clientName']; ?>
                                                         </td>
+
                                                         <td>
-                                                            <?= $Sale['Currency']; ?>
+                                                            <?= $Sale['country']; ?>
                                                         </td>
+
                                                         <td>
                                                             <?= $Sale['PaymentMethod']; ?>
                                                         </td>
-                                                        <td>
-                                                            <?= $Sale['Status']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $Sale['Date']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $Sale['Value']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <a href="<?= base_url('viewServiceDetails/' . $Sale['idReceipts']); ?>"
-                                                                class="btn btn-info btn-sm">View Details</a>
-                                                        </td>
+
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
@@ -226,20 +238,21 @@
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
-                                                    <td></td>
-                                                    <td></td>
                                                     <td>Total:</td>
                                                     <td>
-                                                        <?= $totalServiceFee ?>
+                                                        <?= $ServiceDetailFee ?>
                                                     </td>
                                                     <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+
                                                 </tr>
                                             </tfoot>
                                         </table>
                                     </div>
+                                    <!-- </div> -->
                                 </div>
-
-
                             </div>
                             <div class="pagination-container">
                                 <div class="pagination">
@@ -264,39 +277,39 @@
             <!-- inject:js -->
             <script>
                 $(document).ready(function () {
-                    $('#searchInput, #invoiceInput, #paymentInput, #clientInput, #fromDateInput, #toDateInput').on('input change', function () {
+                    $('#searchInput, #userInput, #itemInput, #clientInput, #fromDateInput, #toDateInput').on('input change', function () {
                         var searchValue = $('#searchInput').val();
-                        var paymentInput = $('#paymentInput').val();
+                        var payment = $('#userInput').val();
+                        var item = $('#itemInput').val();
                         var clientValue = $('#clientInput').val();
-                        var invoice = $('#invoiceInput').val();
                         var fromDateValue = $('#fromDateInput').val();
                         var toDateValue = $('#toDateInput').val();
 
                         console.log('Search Value:', searchValue);
-                        console.log('payment Input:', paymentInput);
-                        console.log('Client Value:', clientValue);
+                        console.log('Test Value:', payment);
+                        console.log('Supplier:', clientValue);
                         console.log('From Date Value:', fromDateValue);
                         console.log('To Date Value:', toDateValue);
-                        console.log('invoice:', invoice);
+                        console.log('item ID:', item);
 
                         $.ajax({
                             type: 'POST',
-                            url: '<?= base_url('services_report'); ?>',
+                            url: '<?= base_url('Purchase_details'); ?>',
                             data: {
                                 search: searchValue,
-                                paymentInput: paymentInput,
+                                payment: payment,
                                 clientName: clientValue,
                                 fromDate: fromDateValue,
                                 toDate: toDateValue,
-                                invoice: invoice
+                                item: item
                             },
                             dataType: 'json',
                             success: function (response) {
                                 if (response.success) {
                                     var cleanedTableContent = response.tableContent.trim();
                                     $('.table-responsive').html(cleanedTableContent);
-                                    $('#totalServiceFee').text(response.totalServiceFee);
-
+                                    $('#total-Service-fee').text(response.ServiceDetailFee);
+                                    console.log(response.pager);
                                 } else {
                                     console.error('Error:', response.error);
                                 }
@@ -308,6 +321,10 @@
                     });
                 });
             </script>
+
+
+
+
             <script src="./public/assets/js/off-canvas.js"></script>
             <script src="./public/assets/js/hoverable-collapse.js"></script>
             <script src="./public/assets/js/template.js"></script>

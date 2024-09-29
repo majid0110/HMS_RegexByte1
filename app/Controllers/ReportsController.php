@@ -14,6 +14,8 @@ use App\Models\salesModel;
 use App\Models\ServicesModel;
 use App\Models\ExpenseModel;
 use App\Models\OpdModel;
+use App\Models\purchaseInvoiceModel;
+use App\Models\SupplierModel;
 use CodeIgniter\CLI\Console;
 use App\Models\ClientModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -1162,5 +1164,340 @@ class ReportsController extends Controller
         $writer->save('php://output');
         exit;
     }
+
+    //-------------------------------------------- Purchase report
+    public function purchase_report()
+    {
+        $Model = new purchaseInvoiceModel();
+        $data['totalHospitalFee'] = 100;
+
+        $SupplierModel = new SupplierModel();
+        $data['Suppliers'] = $SupplierModel->getSupplierNames();
+
+        $sales = new SalesModel();
+        $data['payments'] = $sales->getpayment();
+
+        $data['Invoice'] = $Model->getInvoice();
+
+        $search = $this->request->getPost('search');
+        $invoice = $this->request->getPost('invoiceValue');
+        $paymentValue = $this->request->getPost('payment');
+        $SupplierName = $this->request->getPost('clientValue');
+        $fromDate = $this->request->getPost('fromDate');
+        $toDate = $this->request->getPost('toDate');
+
+
+        $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+        $perPage = 20;
+        $offset = ($currentPage - 1) * $perPage;
+
+        $data['totalPurchaseFee'] = $Model->getPurchaseFee($SupplierName, $search, $paymentValue, $invoice, $fromDate, $toDate, $perPage, $offset);
+
+        $data['Purchases'] = $Model->getPurchaseReport($search, $SupplierName, $paymentValue, $invoice, $fromDate, $toDate, $perPage, $offset);
+        $data['pager'] = $Model->getPager($search, $paymentValue, $invoice, $SupplierName, $fromDate, $toDate, $perPage, $currentPage);
+
+        if ($this->request->isAJAX()) {
+            try {
+                $tableContent = view('PurchasePartialReport', $data);
+                return $this->response->setJSON([
+                    'success' => true,
+                    'tableContent' => $tableContent,
+                    'pager' => $data['pager'],
+                    'totalPurchaseFee' => $data['totalPurchaseFee'],
+
+                ]);
+            } catch (\Exception $e) {
+                return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+            }
+        } else {
+            return view('purchase_report', $data);
+
+        }
+    }
+
+    public function generateExcelPurchaseReport()
+    {
+        $headerStyle = [
+            'font' => ['bold' => true],
+        ];
+        $headerFill = [
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'FFFF00'],
+            ],
+        ];
+
+        $borderStyle = [
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['rgb' => '000000'],
+                ],
+            ],
+        ];
+
+        $Model = new purchaseInvoiceModel();
+
+        $search = $this->request->getPost('search') ?? '';
+        $invoice = $this->request->getPost('invoice') ?? '';
+        $paymentValue = $this->request->getPost('PaymentMethod') ?? '';
+        $SupplierName = $this->request->getPost('clientName') ?? '';
+        $fromDate = $this->request->getPost('fromDate') ?? '';
+        $toDate = $this->request->getPost('toDate') ?? '';
+
+        $purchases = $Model->getPurchaseReport($search, $SupplierName, $paymentValue, $invoice, $fromDate, $toDate);
+
+        if (empty($purchases)) {
+            return redirect()->back()->with('error', 'No data available to generate report.');
+        }
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $session = \Config\Services::session();
+        $businessName = session()->get('businessName');
+        $sheet->setCellValue('A1', $businessName);
+        $sheet->mergeCells('A1:G1');
+        $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('A1')->applyFromArray($headerStyle);
+
+        $sheet->setCellValue('A2', 'Generated Date: ' . date('Y-m-d H:i:s'));
+        $sheet->mergeCells('A2:G2');
+        $sheet->getStyle('A2')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('A2')->applyFromArray($headerStyle);
+
+        $filterRow = 3;
+
+        if (!empty($search)) {
+            $sheet->setCellValue('A' . $filterRow, 'Filter by Search: ' . $search);
+            $filterRow++;
+        }
+        if (!empty($SupplierName)) {
+            $sheet->setCellValue('A' . $filterRow, 'Filter by Supplier: ' . $SupplierName);
+            $filterRow++;
+        }
+        if (!empty($paymentValue)) {
+            $sheet->setCellValue('A' . $filterRow, 'Filter by Payment Method: ' . $paymentValue);
+            $filterRow++;
+        }
+        if (!empty($fromDate) && !empty($toDate)) {
+            $sheet->setCellValue('A' . $filterRow, 'Filter by Date Range: ' . $fromDate . ' to ' . $toDate);
+            $filterRow++;
+        }
+
+        $headers = ['Receipt ID', 'Supplier Name', 'Currency', 'Payment Method', 'Status', 'Date', 'Value'];
+        foreach ($headers as $col => $header) {
+            $cell = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($col + 1) . ($filterRow);
+            $sheet->setCellValue($cell, $header);
+            $sheet->getStyle($cell)->applyFromArray($headerStyle);
+            $sheet->getStyle($cell)->applyFromArray($headerFill);
+            $sheet->getStyle($cell)->applyFromArray($borderStyle);
+        }
+
+        $row = $filterRow + 1;
+        foreach ($purchases as $purchase) {
+            $sheet->setCellValue('A' . $row, $purchase['idReceipts']);
+            $sheet->setCellValue('B' . $row, $purchase['SupplierName']);
+            $sheet->setCellValue('C' . $row, $purchase['Currency']);
+            $sheet->setCellValue('D' . $row, $purchase['PaymentMethod']);
+            $sheet->setCellValue('E' . $row, $purchase['Status']);
+            $sheet->setCellValue('F' . $row, $purchase['Date']);
+            $sheet->setCellValue('G' . $row, $purchase['Value']);
+            $row++;
+        }
+
+        foreach (range('A', 'G') as $col) {
+            $sheet->getColumnDimension($col)->setAutoSize(true);
+        }
+
+        $lastRow = $row;
+        $sheet->setCellValue('F' . $lastRow, 'Total Value:');
+        $sheet->setCellValue('G' . $lastRow, '=SUM(G' . ($filterRow + 1) . ':G' . ($lastRow - 1) . ')');
+        $sheet->getStyle('F' . $lastRow)->applyFromArray($headerStyle);
+        $sheet->getStyle('F' . $lastRow)->applyFromArray($borderStyle);
+        $sheet->getStyle('G' . $lastRow)->applyFromArray($headerStyle);
+        $sheet->getStyle('G' . $lastRow)->applyFromArray($borderStyle);
+
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'purchase_report.xlsx';
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=' . $filename);
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+        exit;
+    }
+
+
+
+    //---------------------------
+    public function Purchase_details()
+    {
+
+        $SupplierModel = new SupplierModel();
+        $data['Suppliers'] = $SupplierModel->getSupplierNames();
+        $test = $SupplierModel->getSupplierNames();
+
+        $sales = new SalesModel();
+        $data['payments'] = $sales->getpayment();
+
+        $ITModel = new itemsModel();
+        $data['Items'] = $ITModel->getItemsName();
+
+        $search = $this->request->getPost('search');
+        $item = $this->request->getPost('item');
+        $payment = $this->request->getPost('payment');
+        $clientName = $this->request->getPost('clientName'); // clientName --> Supplier Name
+        $fromDate = $this->request->getPost('fromDate');
+        $toDate = $this->request->getPost('toDate');
+
+        $Model = new SalesModel();
+        $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+        $perPage = 20;
+        $offset = ($currentPage - 1) * $perPage;
+
+        $PIModel = new purchaseInvoiceModel();
+        $data['ServiceDetailFee'] = $PIModel->getTotalPurchaseDetailFee($search, $item, $clientName, $payment, $fromDate, $toDate);
+        $data['Sales'] = $PIModel->getPurchaseDetailsReport($search, $item, $payment, $clientName, $fromDate, $toDate, $perPage, $offset);
+        $data['pager'] = $PIModel->getdetailPager($search, $payment, $clientName, $fromDate, $toDate, $perPage, $currentPage);
+
+        if ($this->request->isAJAX()) {
+            try {
+                $tableContent = view('PurchasePartialDeteailReport', $data);
+                return $this->response->setJSON([
+                    'success' => true,
+                    'tableContent' => $tableContent,
+                    'pager' => $data['pager'],
+                    'ServiceDetailFee' => $data['ServiceDetailFee'],
+
+                ]);
+            } catch (\Exception $e) {
+                return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+            }
+        } else {
+            return view('purchase_details_report.php', $data);
+
+        }
+
+
+    }
+
+
+    public function generateExcelPurchaseDetailsReport()
+    {
+        $headerStyle = [
+            'font' => ['bold' => true],
+        ];
+        $headerFill = [
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'FFFF00'],
+            ],
+        ];
+
+        $borderStyle = [
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['rgb' => '000000'],
+                ],
+            ],
+        ];
+
+        $PIModel = new purchaseInvoiceModel();
+        $search = $this->request->getPost('search');
+        $item = $this->request->getPost('item');
+        $payment = $this->request->getPost('payment');
+        $clientName = $this->request->getPost('clientName');
+        $fromDate = $this->request->getPost('fromDate');
+        $toDate = $this->request->getPost('toDate');
+
+        $purchases = $PIModel->getPurchaseDetailsReport($search, $item, $payment, $clientName, $fromDate, $toDate);
+
+        if (empty($purchases)) {
+            return redirect()->back()->with('error', 'No data available to generate report.');
+        }
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $businessName = session()->get('businessName');
+        $sheet->setCellValue('A1', $businessName);
+        $sheet->mergeCells('A1:I1');
+        $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('A1')->applyFromArray($headerStyle);
+
+        $sheet->setCellValue('A2', 'Generated Date: ' . date('Y-m-d H:i:s'));
+        $sheet->mergeCells('A2:I2');
+        $sheet->getStyle('A2')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('A2')->applyFromArray($headerStyle);
+
+        $filterRow = 3;
+        if (!empty($search)) {
+            $sheet->setCellValue('A' . $filterRow, 'Filter by Search: ' . $search);
+            $filterRow++;
+        }
+        if (!empty($clientName)) {
+            $sheet->setCellValue('A' . $filterRow, 'Filter by Supplier: ' . $clientName);
+            $filterRow++;
+        }
+        if (!empty($item)) {
+            $sheet->setCellValue('A' . $filterRow, 'Filter by Item: ' . $item);
+            $filterRow++;
+        }
+        if (!empty($payment)) {
+            $sheet->setCellValue('A' . $filterRow, 'Filter by Payment Method: ' . $payment);
+            $filterRow++;
+        }
+        if (!empty($fromDate) && !empty($toDate)) {
+            $sheet->setCellValue('A' . $filterRow, 'Filter by Date Range: ' . $fromDate . ' to ' . $toDate);
+            $filterRow++;
+        }
+
+        $headers = ['Receipt ID', 'Name', 'Price', 'Quantity', 'Sum', 'Discount', 'Supplier Name', 'Country', 'Payment Method'];
+        foreach ($headers as $col => $header) {
+            $cell = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($col + 1) . ($filterRow);
+            $sheet->setCellValue($cell, $header);
+            $sheet->getStyle($cell)->applyFromArray($headerStyle);
+            $sheet->getStyle($cell)->applyFromArray($headerFill);
+            $sheet->getStyle($cell)->applyFromArray($borderStyle);
+        }
+
+        $row = $filterRow + 1;
+        foreach ($purchases as $purchase) {
+            $sheet->setCellValue('A' . $row, $purchase['idReceipts']);
+            $sheet->setCellValue('B' . $row, $purchase['name']);
+            $sheet->setCellValue('C' . $row, $purchase['Price']);
+            $sheet->setCellValue('D' . $row, $purchase['Quantity']);
+            $sheet->setCellValue('E' . $row, $purchase['Sum']);
+            $sheet->setCellValue('F' . $row, $purchase['Discount']);
+            $sheet->setCellValue('G' . $row, $purchase['clientName']);
+            $sheet->setCellValue('H' . $row, $purchase['country']);
+            $sheet->setCellValue('I' . $row, $purchase['PaymentMethod']);
+            $row++;
+        }
+
+        foreach (range('A', 'I') as $col) {
+            $sheet->getColumnDimension($col)->setAutoSize(true);
+        }
+
+        $lastRow = $row;
+        $sheet->setCellValue('D' . $lastRow, 'Total:');
+        $sheet->setCellValue('E' . $lastRow, '=SUM(E4:E' . ($lastRow - 1) . ')');
+        $sheet->setCellValue('F' . $lastRow, '=SUM(F4:F' . ($lastRow - 1) . ')');
+        $sheet->getStyle('D' . $lastRow)->applyFromArray($headerStyle);
+        $sheet->getStyle('E' . $lastRow)->applyFromArray($headerStyle);
+        $sheet->getStyle('F' . $lastRow)->applyFromArray($borderStyle);
+
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'purchase_details_report.xlsx';
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=' . $filename);
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+        exit;
+    }
+
 
 }

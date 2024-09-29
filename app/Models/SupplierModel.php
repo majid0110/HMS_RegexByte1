@@ -68,4 +68,10 @@ class SupplierModel extends Model
             ->getRowArray()['contact'] ?? null;
     }
 
+    public function getSupplierNames()
+    {
+        $businessId = session()->get('businessID');
+        return $this->select('idSupplier, supplier, contact')->where('status', 'Active')->where('idBusiness', $businessId)->findAll();
+    }
+
 }

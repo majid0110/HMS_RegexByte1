@@ -232,6 +232,9 @@ $routes->post('SalesController/UpdateInvoice', 'SalesController::UpdateInvoice')
 $routes->post('/saveClientfromSales', 'SalesController::saveClientProfile');
 $routes->get('regenerateInvoice/(:num)', 'SalesController::generateInvoice/$1');
 
+$routes->get('/Purchase_details', 'ReportsController::Purchase_details');
+$routes->post('/Purchase_details', 'ReportsController::Purchase_details');
+
 //-------------------------------------------------------------------------------------------------------------------------
 //                                                 Reports Routes
 //-------------------------------------------------------------------------------------------------------------------------
@@ -270,6 +273,15 @@ $routes->post('expenses_report', 'ReportsController::expenses_report');
 
 $routes->get('/generateExcelExpensesReport', 'ReportsController::generateExcelExpensesReport');
 $routes->post('generateExcelExpensesReport', 'ReportsController::generateExcelExpensesReport');
+
+$routes->get('/purchase_report', 'ReportsController::purchase_report');
+$routes->post('purchase_report', 'ReportsController::purchase_report');
+
+$routes->get('/generateExcelPurchaseReport', 'ReportsController::generateExcelPurchaseReport');
+$routes->post('generateExcelPurchaseReport', 'ReportsController::generateExcelPurchaseReport');
+
+$routes->get('/generateExcelPurchaseDetailsReport', 'ReportsController::generateExcelPurchaseDetailsReport');
+$routes->post('generateExcelPurchaseDetailsReport', 'ReportsController::generateExcelPurchaseDetailsReport');
 //-------------------------------------------------------------------------------------------------------------------------
 //                                                 items Routes
 //-------------------------------------------------------------------------------------------------------------------------
