@@ -42,6 +42,15 @@ class purchaseInvoiceModel extends Model
         return $this->insert($data);
     }
 
+    public function getLastInvoiceNumber()
+    {
+        $result = $this->select('invOrdNum')
+            ->orderBy('idReceipts', 'DESC')
+            ->first();
+
+        return $result ? $result['invOrdNum'] : 0;
+    }
+
     public function getPurchaseInvoiceNumber($businessID, $idPayment)
     {
         return $this->db->table($this->table)

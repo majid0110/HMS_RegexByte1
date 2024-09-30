@@ -82,6 +82,7 @@ class PurchaseController extends Controller
         $purchase = new PurchaseModel();
         $data['suppliers'] = $purchase->getSupplierNames();
         $data['items'] = $purchase->getitems();
+        $data['Warehouses'] = $purchase->getWareHouse();
         // print_r($test);
         // die();
         $data['categories'] = $sales->getCategories();
@@ -130,6 +131,7 @@ class PurchaseController extends Controller
             $paymentMethodID = $this->request->getPost('paymentMethodId');
             $totalFee = $this->request->getPost('totalFee');
             $services = $this->request->getPost('services');
+            $warehouseId = $this->request->getPost('warehouseId');
 
             $totalTax = $this->request->getPost('totalTax');
             $discountedTotal = $this->request->getPost('discountedTotal');
@@ -158,8 +160,9 @@ class PurchaseController extends Controller
             }
 
             $purchaseModel = new purchaseInvoiceModel();
-            $lastInvoiceNumber = $purchaseModel->select('invOrdNum')->orderBy('invOrdNum', 'DESC')->limit(1)->first();
-            $newInvoiceNumber = $lastInvoiceNumber ? $lastInvoiceNumber['invOrdNum'] + 1 : 1;
+            $lastInvoiceNumber = $purchaseModel->getLastInvoiceNumber();
+            // $purchaseModel->select('invOrdNum')->orderBy('invOrdNum', 'DESC')->limit(1)->first();
+            $newInvoiceNumber = $lastInvoiceNumber + 1;
             $invoiceData = [
                 'idSupplier' => $Supplierid,
                 'Value' => $discountedTotal,
@@ -169,7 +172,7 @@ class PurchaseController extends Controller
                 'idBusiness' => $businessID,
                 'idCancellation' => 0,
                 'invOrdNum' => $newInvoiceNumber,
-                'idWarehouse' => 1,
+                'idWarehouse' => $warehouseId,
                 'FIC' => 0,
                 'ValueTVSH' => $totalTax,
                 'idCurrency' => $currency,
@@ -294,6 +297,7 @@ class PurchaseController extends Controller
 
             $totalTax = $this->request->getPost('totalTax');
             $discountedTotal = $this->request->getPost('discountedTotal');
+            $warehouseId = $this->request->getPost('warehouseId');
 
             $session = \Config\Services::session();
             $businessID = $session->get('businessID');
@@ -315,8 +319,9 @@ class PurchaseController extends Controller
                 throw new \Exception('Services data is null.');
             }
 
-            $lastInvoiceNumber = $invoice->select('invOrdNum')->orderBy('invOrdNum', 'DESC')->limit(1)->first();
-            $newInvoiceNumber = $lastInvoiceNumber ? $lastInvoiceNumber['invOrdNum'] + 1 : 1;
+            $purchaseModel = new purchaseInvoiceModel();
+            $lastInvoiceNumber = $purchaseModel->getLastInvoiceNumber();
+            $newInvoiceNumber = $lastInvoiceNumber + 1;
             $invoiceData = [
                 'idSupplier' => $Supplierid,
                 'Value' => $discountedTotal,
@@ -326,7 +331,7 @@ class PurchaseController extends Controller
                 'idBusiness' => $businessID,
                 'idCancellation' => 0,
                 'invOrdNum' => $newInvoiceNumber,
-                'idWarehouse' => 1,
+                'idWarehouse' => $warehouseId,
                 'FIC' => 0,
                 'ValueTVSH' => $totalTax,
                 'idCurrency' => $currency,

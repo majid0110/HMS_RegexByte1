@@ -188,4 +188,12 @@ class PurchaseModel extends Model
         return false;
     }
 
+    public function getWareHouse()
+    {
+        return $this->db->table('warehouse')
+            ->select('idWarehouse, name')
+            ->get()
+            ->getResultArray();
+    }
+
 }

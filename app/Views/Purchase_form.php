@@ -498,13 +498,26 @@
                         </div>
                     </div>
                     <div class="col">
-                        <label for="paymentMethod">Payment Method</label>
+                        <label for="paymentMethod">Payment</label>
                         <div id="the-basics">
                             <select class="typeahead form-control" name="Payment" id="paymentMethod">
                                 <?php foreach ($payments as $payment): ?>
                                     <option value="<?= $payment['idPaymentMethods']; ?>"
                                         data-payment-id="<?= $payment['idPaymentMethods']; ?>">
                                         <?= $payment['Method']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="warehouse">WareHouse</label>
+                        <div id="the-basics">
+                            <select class="typeahead form-control" name="warehouse" id="warehouse">
+                                <?php foreach ($Warehouses as $Warehouse): ?>
+                                    <option value="<?= $Warehouse['idWarehouse']; ?>"
+                                        data-warehouse-id="<?= $Warehouse['idWarehouse']; ?>">
+                                        <?= $Warehouse['name']; ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
@@ -961,6 +974,8 @@
                 var currency = $('select[name="Currency"]').val();
                 var currencyName = $('select[name="Currency"] option:selected').text();
                 var exchange = $('#exchangeInput').val();
+                var WareHouseOption = $('select[name="warehouse"] option:selected');
+                var warehouseId = WareHouseOption.data('warehouse-id');
 
                 var totals = calculateTotals();
                 var totalFee = totals.totalFee;
@@ -1009,20 +1024,22 @@
                         rowWithoutTax: rowWithoutTax
                     });
                 });
-                console.log('SupplierID', clientId);
-                console.log('supplier Name', clientName);
-                console.log('currancy', currencyName);
-                console.log('payment ID', paymentMethodId);
-                console.log('Payment Name', paymentName);
-                console.log('payment Method Name', paymentMethodName);
-                console.log('currancy', currency);
-                console.log('Excahge', exchange);
-                console.log('Total Fee', totalFee);
-                console.log('Total Tax', totalTax);
-                console.log('Discounted Total', discountedTotal);
-                console.log('total fee without', totalWithoutTax);
-                console.log('selected table', selectedTableId);
-                console.log('service', services);
+                // console.log('WareHouse ID', warehouseId);
+
+                // console.log('SupplierID', clientId);
+                // console.log('supplier Name', clientName);
+                // console.log('currancy', currencyName);
+                // console.log('payment ID', paymentMethodId);
+                // console.log('Payment Name', paymentName);
+                // console.log('payment Method Name', paymentMethodName);
+                // console.log('currancy', currency);
+                // console.log('Excahge', exchange);
+                // console.log('Total Fee', totalFee);
+                // console.log('Total Tax', totalTax);
+                // console.log('Discounted Total', discountedTotal);
+                // console.log('total fee without', totalWithoutTax);
+                // console.log('selected table', selectedTableId);
+                // console.log('service', services);
 
                 $.ajax({
                     method: 'POST',
@@ -1041,7 +1058,8 @@
                         totalTax: totalTax,
                         services: services,
                         selectedTableId: selectedTableId,
-                        discountedTotal: discountedTotal
+                        discountedTotal: discountedTotal,
+                        warehouseId: warehouseId
                     },
                     success: function (response) {
                         console.log('Data inserted successfully:', response);
@@ -1070,7 +1088,7 @@
                         calculateTotals();
 
                         $('#loading-overlay').hide();
-                        // location.reload();
+                        location.reload();
                     },
                     error: function (error) {
                         console.error('Error inserting data:', error);
@@ -1092,6 +1110,8 @@
                 var currency = $('select[name="Currency"]').val();
                 var currencyName = $('select[name="Currency"] option:selected').text();
                 var exchange = $('#exchangeInput').val();
+                var WareHouseOption = $('select[name="warehouse"] option:selected');
+                var warehouseId = WareHouseOption.data('warehouse-id');
 
                 var totals = calculateTotals();
                 var totalFee = totals.totalFee;
@@ -1140,20 +1160,20 @@
                     });
                 });
 
-                console.log('SupplierID', clientId);
-                console.log('supplier Name', clientName);
-                console.log('currancy', currencyName);
-                console.log('payment ID', paymentMethodId);
-                console.log('Payment Name', paymentName);
-                console.log('payment Method Name', paymentMethodName);
-                console.log('currancy', currency);
-                console.log('Excahge', exchange);
-                console.log('Total Fee', totalFee);
-                console.log('Total Tax', totalTax);
-                console.log('Discounted Total', discountedTotal);
-                console.log('total fee without', totalWithoutTax);
-                console.log('selected table', selectedTableId);
-                console.log('service', services);
+                // console.log('SupplierID', clientId);
+                // console.log('supplier Name', clientName);
+                // console.log('currancy', currencyName);
+                // console.log('payment ID', paymentMethodId);
+                // console.log('Payment Name', paymentName);
+                // console.log('payment Method Name', paymentMethodName);
+                // console.log('currancy', currency);
+                // console.log('Excahge', exchange);
+                // console.log('Total Fee', totalFee);
+                // console.log('Total Tax', totalTax);
+                // console.log('Discounted Total', discountedTotal);
+                // console.log('total fee without', totalWithoutTax);
+                // console.log('selected table', selectedTableId);
+                // console.log('service', services);
 
                 $.ajax({
                     method: 'POST',
@@ -1173,6 +1193,7 @@
                         discountedTotal: discountedTotal,
                         totalWithoutTax: totalWithoutTax,
                         selectedTableId: selectedTableId,
+                        warehouseId: warehouseId,
                         services: services
                     },
                     success: function (response) {
