@@ -115,40 +115,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <form action="<?= base_url('generateExcelPurchaseReport'); ?>" method="post">
-                                    <div class="form-group row">
-                                        <div>
-                                            <div
-                                                style="width:100%; display: flex; align-items: center; justify-content: flex-end; gap:10px">
-                                                <button type="submit"
-                                                    style="align-self: flex-end;color: white;background-color: #172D88;border-color: #172D88;height: 33px;font-size: 12px;font-weight: 500;box-sizing: border-box;border: 1px solid #CADDFF;padding: 8px 15px;border-radius: 6px;align-items: center;">
-                                                    <i class="ti-download"> </i>
-                                                    Export
-                                                </button>
-                                                <div class="col-md-3">
-                                                    <label>By Invoice</label>
-                                                    <div id="the-basics">
-                                                        <select class="form-control" name="invoice" id='invoiceInput'>
-                                                            <option value="">All Invoices</option>
-                                                            <?php foreach ($Invoice as $invoice): ?>
-                                                                <option value="<?= $invoice['idReceipts']; ?>"
-                                                                    data-invoice-id="<?= $invoice['idReceipts']; ?>">
-                                                                    <?= $invoice['idReceipts']; ?>
-                                                                </option>
-                                                            <?php endforeach; ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
 
-                                                    <label>Search</label>
-                                                    <input class="form-control" type="text" name="search"
-                                                        id="searchInput" placeholder="Search">
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                    </div>
                                     <div class="form-group row">
                                         <div class="col-md-3">
                                             <label>By Supplier</label>
@@ -177,20 +144,31 @@
                                                 </select>
                                             </div>
                                         </div>
+
                                         <div class="col-md-3">
-                                            <label>From</label>
-                                            <input class="form-control" type="date" placeholder="From"
-                                                id="fromDateInput" name="fromDate">
+                                            <label>By Invoice</label>
+                                            <div id="the-basics">
+                                                <select class="form-control" name="invoice" id='invoiceInput'>
+                                                    <option value="">All Invoices</option>
+                                                    <?php foreach ($Invoice as $invoice): ?>
+                                                        <option value="<?= $invoice['idReceipts']; ?>"
+                                                            data-invoice-id="<?= $invoice['idReceipts']; ?>">
+                                                            <?= $invoice['idReceipts']; ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <label>To</label>
-                                            <input class="form-control" type="date" placeholder="To" id="toDateInput"
-                                                name="toDate">
+
+                                            <label>Search</label>
+                                            <input class="form-control" type="text" name="search" id="searchInput"
+                                                placeholder="Search">
                                         </div>
                                     </div>
                                 </form>
                                 <hr>
-                                <h4 class="card-title">purchase Report</h4>
+                                <h4 class="card-title">purchase Table</h4>
                                 <div class="col-12 grid-margin">
                                     <!-- <div class="table-container"> -->
                                     <div class="table-responsive" id='tableData'>
@@ -204,6 +182,7 @@
                                                     <th>Status</th>
                                                     <th>Date</th>
                                                     <th>FEE</th>
+                                                    <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -230,23 +209,17 @@
                                                         <td>
                                                             <?= $purchase['Value']; ?>
                                                         </td>
+
+                                                        <td>
+
+                                                            <a href="<?= base_url('viewPurchaseDetails/' . $purchase['idReceipts']); ?>"
+                                                                class="btn btn-info btn-sm">View Details</a>
+                                                        </td>
+
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
-                                            <tfoot>
-                                                <tr class="table-totals">
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>Total:</td>
-                                                    <td>
-                                                        <?= $totalPurchaseFee ?>
-                                                    </td>
-                                                </tr>
 
-                                            </tfoot>
                                         </table>
                                     </div>
                                     <!-- </div> -->
@@ -293,7 +266,7 @@
 
                         $.ajax({
                             type: 'POST',
-                            url: '<?= base_url('purchase_report'); ?>',
+                            url: '<?= base_url('Purchase_table'); ?>',
                             data: {
                                 search: searchValue,
                                 payment: paymentValue,

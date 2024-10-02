@@ -24,7 +24,7 @@
                     <th>Status</th>
                     <th>Date</th>
                     <th>FEE</th>
-                    <!-- <th>Actions</th> -->
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,28 +52,16 @@
                             <?= $purchase['Value']; ?>
                         </td>
 
-                        <!-- <td>
-                            <a href="<?= base_url('viewTestDetails/' . $purchase['idReceipts']); ?>"
+                        <td>
+
+                            <a href="<?= base_url('viewPurchaseDetails/' . $purchase['idReceipts']); ?>"
                                 class="btn btn-info btn-sm">View Details</a>
-                        </td> -->
+                        </td>
+
                     </tr>
                 <?php endforeach; ?>
             </tbody>
-            <tfoot>
-                <tr class="table-totals">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Total:</td>
-                    <td>
-                        <?= $totalPurchaseFee ?>
-                    </td>
-                    <!-- <td></td> -->
-                </tr>
 
-            </tfoot>
         </table>
     </div>
 </div>

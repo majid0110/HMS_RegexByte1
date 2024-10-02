@@ -25,4 +25,42 @@ class PurPaymentDetailsModel extends Model
             ->insert($InvoicePayment);
     }
 
+    public function insertInvoicePayment($InvoicePayment)
+    {
+        $this->db->table('purchaseinvoicepayment')
+            ->insert($InvoicePayment);
+    }
+
+    public function getPurchaseInvoiceById($idReceipts)
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+
+        $invoice = $this->db->table('purchase_invoices')
+            ->where('idReceipts', $idReceipts)
+            ->where('idBusiness', $businessID)
+            ->get()
+            ->getRow();
+
+        if ($invoice) {
+            $payments = $this->db->table('purchaseinvoicepaymentdetails')
+                ->selectSum('purchaseinvoicepaymentdetails.value', 'totalPaid')
+                ->join('purchaseinvoicepayment', 'purchaseinvoicepayment.idPayment = purchaseinvoicepaymentdetails.idPayment')
+                ->where('purchaseinvoicepayment.idReceipt', $invoice->idReceipts)
+                ->get()
+                ->getRow();
+
+            $invoice->totalPaid = $payments->totalPaid ?? 0;
+        }
+
+        return $invoice;
+    }
+
+    public function updatePurchaseInvoiceStatus($idReceipts, $status)
+    {
+        $this->db->table('purchase_invoices')
+            ->where('idReceipts', $idReceipts)
+            ->update(['status' => $status]);
+    }
+
 }

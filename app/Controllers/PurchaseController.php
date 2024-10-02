@@ -24,6 +24,7 @@ use App\Models\itemsModel;
 use App\Models\purchaseInvoiceModel;
 use App\Models\PurchaseDetailsInvoice;
 use App\Models\SupplierModel;
+use App\Models\InventoryModel;
 use App\Models\PurPaymentDetailsModel;
 use Mpdf\Mpdf;
 
@@ -383,7 +384,8 @@ class PurchaseController extends Controller
 
                 $idItem = $service['serviceTypeId'];
                 $Model = new PurchaseModel();
-                $Model->subtractFromInventory([$idItem], $quantity, $businessID, $expiryDate);
+                $Model->addToInventory([$idItem], $quantity, $businessID, $warehouseId, $expiryDate);
+                // $Model->subtractFromInventory([$idItem], $quantity, $businessID, $expiryDate);
             }
 
             $paymentDetailsModel = new PurPaymentDetailsModel();
@@ -457,6 +459,543 @@ class PurchaseController extends Controller
             log_message('error', 'Error retrieving data: ' . $e->getMessage());
             return $this->response->setJSON(['error' => 'Error retrieving data.', 'message' => $e->getMessage()]);
         }
+    }
+
+    public function Purchase_table()
+    {
+        $Model = new purchaseInvoiceModel();
+        $data['totalHospitalFee'] = 100;
+
+        $SupplierModel = new SupplierModel();
+        $data['Suppliers'] = $SupplierModel->getSupplierNames();
+
+        $sales = new SalesModel();
+        $data['payments'] = $sales->getpayment();
+
+        $data['Invoice'] = $Model->getInvoice();
+
+        $search = $this->request->getPost('search');
+        $invoice = $this->request->getPost('invoiceValue');
+        $paymentValue = $this->request->getPost('payment');
+        $SupplierName = $this->request->getPost('clientValue');
+        $fromDate = $this->request->getPost('fromDate');
+        $toDate = $this->request->getPost('toDate');
+
+
+        $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+        $perPage = 20;
+        $offset = ($currentPage - 1) * $perPage;
+
+        $data['totalPurchaseFee'] = $Model->getPurchaseFee($SupplierName, $search, $paymentValue, $invoice, $fromDate, $toDate, $perPage, $offset);
+
+        $data['Purchases'] = $Model->getPurchaseReport($search, $SupplierName, $paymentValue, $invoice, $fromDate, $toDate, $perPage, $offset);
+        $data['pager'] = $Model->getPager($search, $paymentValue, $invoice, $SupplierName, $fromDate, $toDate, $perPage, $currentPage);
+
+        if ($this->request->isAJAX()) {
+            try {
+                $tableContent = view('PurchasePartialTable', $data);
+                return $this->response->setJSON([
+                    'success' => true,
+                    'tableContent' => $tableContent,
+                    'pager' => $data['pager'],
+                    'totalPurchaseFee' => $data['totalPurchaseFee'],
+
+                ]);
+            } catch (\Exception $e) {
+                return $this->response->setJSON(['success' => false, 'error' => $e->getMessage()]);
+            }
+        } else {
+            return view('Purchase_table', $data);
+
+        }
+    }
+
+    public function viewPurchaseDetails($idReceipts)
+    {
+        $model = new salesModel();
+        // $clientModel = new ClientModel();
+        $supplierModel = new SupplierModel();
+
+        $data['payments'] = $model->getpayment();
+        $data['currencies'] = $model->getCurrancy();
+
+        $PModel = new PurchaseModel();
+        $data['ServiceDetails'] = $PModel->getPurchaseDetails($idReceipts);
+        // $data['ServiceDetails'] = $model->getSalesDetails($idReceipts);
+        $data['PaymentDetails'] = $PModel->getPurchasePaymentDetails($idReceipts);
+        // $data['PaymentDetails'] = $model->getPaymentDetails($idReceipts);
+        $data['clients'] = $supplierModel->findAll();
+        // $data['clients'] = $clientModel->findAll();
+
+        $data['services'] = $PModel->getPurchaseItems();
+        // $data['services'] = $model->getServices();
+
+        $invoice = $PModel->getPurchaseInvoiceByOrdNum($idReceipts);
+
+        // $invoice = $model->getInvoiceByOrdNum($idReceipts);
+
+        if ($invoice) {
+            $data['valueToPay'] = $invoice->remainingValue;
+            $data['client'] = $invoice->idSupplier;
+            $data['idReceipts'] = $invoice->idReceipts;
+        } else {
+            $data['valueToPay'] = null;
+            $data['idReceipts'] = null;
+        }
+
+        $data['referenceInvoices'] = $model->getReferenceInvoices($idReceipts);
+
+        return view('Purchase_details', $data);
+    }
+
+    public function PurchasePayment()
+    {
+        $session = \Config\Services::session();
+        $UserID = $session->get('ID');
+
+        $exchange = $this->request->getPost('exchange');
+        $value = $this->request->getPost('Value');
+        $currencyName = $this->request->getPost('Currency');
+        $paymentMethod = $this->request->getPost('Payment');
+        $client = $this->request->getPost('client');
+        $idReceipts = $this->request->getPost('idReceipts');
+        // $paymentMethodID = $this->request->getPost('paymentMethodId');
+
+        $paymentDetailsModel = new PurPaymentDetailsModel();
+
+        $paymentDetailsData = [
+            'value' => $value,
+            'idUser' => $UserID,
+            'idAnullim' => 0,
+            'method' => $currencyName,
+            'idPaymentMethod' => $paymentMethod,
+            'exchange' => $exchange,
+            'nr_serial' => 0,
+        ];
+        $paymentDetailsModel->insert($paymentDetailsData);
+        $idPayment = $paymentDetailsModel->getInsertID();
+
+        $InvoicePayment = [
+            'idReceipt' => $idReceipts,
+            'idPayment' => $idPayment,
+
+        ];
+        $paymentDetailsModel->insertInvoicePayment($InvoicePayment);
+
+        $invoiceModel = new InvoiceModel();
+        $invoice = $paymentDetailsModel->getPurchaseInvoiceById($idReceipts);
+
+        // $invoice = $invoiceModel->getInvoiceById($idReceipts);
+
+        if ($invoice) {
+            $totalPaid = $invoice->totalPaid + $value;
+            if ($totalPaid >= $invoice->Value) {
+                $paymentDetailsModel->updatePurchaseInvoiceStatus($idReceipts, 'closed');
+                echo ('status changed');
+            }
+        }
+
+        return redirect()->to(base_url("/Purchase_table"));
+        // return redirect()->back();
+
+    }
+
+    public function cancelPurchaseInvoice($idReceipts)
+    {
+        $model = new InvoiceModel();
+        $salesModel = new salesModel();
+        $inventoryModel = new InventoryModel();
+        $itemsWarehouseModel = new itemsModel();
+
+        $PModel = new PurchaseModel();
+        $session = \Config\Services::session();
+        $currentUserId = $session->get('ID');
+
+        $references = $PModel->getPurchaseReferenceInvoices($idReceipts);
+        foreach ($references as $reference) {
+            $referencedInvoice = $PModel->getPurchaseInvoiceById($reference->idReceipt ?? $reference['idReceipt']);
+            if ($referencedInvoice) {
+                $notes = is_object($referencedInvoice) ? $referencedInvoice->Notes : $referencedInvoice['Notes'];
+                if ($notes == 'Cancelled') {
+                    session()->setFlashdata('error', 'This invoice has already been cancelled...!!');
+                    return redirect()->to(base_url('/viewServiceDetails/' . $idReceipts));
+                }
+            }
+        }
+
+        $invoice = $PModel->getPurchaseInvoiceById($idReceipts);
+        $invoiceDetails = $PModel->getPurchaseInvoiceDetailsByReceiptId($idReceipts);
+        $invoicePayments = $PModel->getPurchaseInvoicePaymentsByReceiptId($idReceipts);
+
+        if ($invoice) {
+            $invoiceArray = (array) $invoice;
+
+            $newInvoiceData = $invoiceArray;
+            unset($newInvoiceData['idReceipts']);
+
+            $newInvoiceData['Value'] = -$invoiceArray['Value'];
+            $newInvoiceData['Notes'] = 'Cancelled';
+            $newInvoiceData['timeStamp'] = date('Y-m-d H:i:s');
+            $newInvoiceData['invOrdNum'] = $this->getNextInvOrdNum();
+            $newInvoiceData['idUser'] = $currentUserId;
+
+            $PImodel = new purchaseInvoiceModel();
+            $newInvoiceId = $PImodel->insertPurchaseInvoice1($newInvoiceData);
+
+            if ($newInvoiceId) {
+                $referenceData = [
+                    'idReceipt' => $newInvoiceId,
+                    'receiptReference' => $idReceipts
+                ];
+
+                $PImodel->insertPurchaseInvoiceReference($referenceData);
+
+                foreach ($invoiceDetails as $detail) {
+                    $detailArray = (array) $detail;
+                    unset($detailArray['idInvoiceDetail']);
+
+                    $detailArray['idReceipts'] = $newInvoiceId;
+                    $detailArray['Quantity'] = -$detailArray['Quantity'];
+                    $detailArray['Sum'] = $detailArray['Quantity'] * $detailArray['Price'];
+
+                    $PImodel->insertPurchaseInvoiceDetail($detailArray);
+
+                    $item = $itemsWarehouseModel->getItemByName($detailArray['name']);
+                    if ($item) {
+                        $idItem = $item['idItem'];
+
+                        $inventory = $inventoryModel->getInventoryByItem($idItem);
+                        if ($inventory) {
+                            $newInventory = $inventory['inventory'] - abs($detailArray['Quantity']);
+                            $inventoryModel->updateInventory($idItem, $newInventory);
+                        }
+                    }
+                }
+
+                foreach ($invoicePayments as $payment) {
+                    $paymentArray = (array) $payment;
+
+                    $paymentDetails = $PImodel->getPurchasePaymentDetailsById($paymentArray['idPayment']);
+                    foreach ($paymentDetails as $paymentDetail) {
+                        $paymentDetailArray = (array) $paymentDetail;
+                        unset($paymentDetailArray['idPayment']);
+
+                        $paymentDetailArray['value'] = -$paymentDetailArray['value'];
+                        $paymentDetailArray['timestamp'] = date('Y-m-d H:i:s');
+
+                        $newPaymentId = $PImodel->insertPurchasePaymentDetail($paymentDetailArray);
+
+                        $PImodel->insertPurchaseInvoicePayment([
+                            'idReceipt' => $newInvoiceId,
+                            'idPayment' => $newPaymentId
+                        ]);
+                    }
+                }
+
+                session()->setFlashdata('success', 'Invoice cancelled...!!');
+                return redirect()->to(base_url('/viewPurchaseDetails/' . $newInvoiceId));
+            }
+        }
+
+        return redirect()->back()->with('error', 'Failed to cancel the invoice.');
+    }
+
+    private function getNextInvOrdNum()
+    {
+        $model = new PurchaseModel();
+        $latestInvoice = $model->getLatestPurchaseInvoice();
+
+        if ($latestInvoice) {
+            return $latestInvoice['invOrdNum'] + 1;
+        }
+
+        return 1;
+    }
+
+    // public function UpdatePurchaseInvoice()
+    // {
+    //     $request = service('request');
+    //     $session = \Config\Services::session();
+    //     $currentUserId = $session->get('ID');
+
+    //     // $invoiceId = $request->getPost('invoiceId');
+    //     $invoiceId = 52;
+    //     $idSupplier = $request->getPost('client');
+    //     $clientEmail = $request->getPost('email');
+    //     $clientContact = $request->getPost('contact');
+    //     $currencyId = $request->getPost('currency');
+    //     $invoiceDate = $request->getPost('invoiceDate');
+    //     $paymentMethodId = $request->getPost('paymentMethod');
+    //     $notes = $request->getPost('notes');
+    //     $serviceDetails = $request->getPost('ServiceDetails');
+    //     $totalValue = $request->getPost('totalValue');
+
+    //     $model = new InvoiceModel();
+
+    //     $PModel = new PurchaseModel();
+
+    //     $originalInvoice = $PModel->getInvoiceById($invoiceId);
+    //     $originalInvoiceDetails = $PModel->getPurchaseInvoiceDetailsByReceiptId($invoiceId);
+    //     $originalInvoicePayments = $PModel->getPurchaseInvoicePaymentsByReceiptId($invoiceId);
+
+    //     if ($originalInvoice) {
+    //         $cancelStatus = $this->cancelPurchaseInvoice($invoiceId);
+    //         if (!$cancelStatus) {
+    //             return redirect()->back()->with('error', 'Invoice cancellation failed.');
+    //         }
+
+    //         $newInvoiceData = (array) $originalInvoice;
+    //         unset($newInvoiceData['idReceipts']);
+
+    //         $newInvoiceData['idSupplier'] = $idSupplier;
+    //         $newInvoiceData['idCurrency'] = $currencyId;
+    //         $newInvoiceData['Date'] = $invoiceDate;
+    //         $newInvoiceData['Value'] = $totalValue;
+    //         $newInvoiceData['paymentMethod'] = $paymentMethodId;
+    //         $newInvoiceData['Notes'] = 'Corrective';
+    //         $newInvoiceData['InvoiceNotes'] = $notes;
+    //         $newInvoiceData['idUser'] = $currentUserId;
+    //         $newInvoiceData['timeStamp'] = date('Y-m-d H:i:s');
+    //         $newInvoiceData['invOrdNum'] = $this->getNextInvOrdNum();
+
+
+    //         $PIModel = new purchaseInvoiceModel();
+    //         $newInvoiceId = $PIModel->insertPurchaseInvoice($newInvoiceData);
+
+    //         if ($newInvoiceId) {
+    //             $referenceData = [
+    //                 'idReceipt' => $newInvoiceId,
+    //                 'receiptReference' => $invoiceId
+    //             ];
+    //             $PIModel->insertPurchaseInvoiceReference($referenceData);
+
+    //             foreach ($serviceDetails as $index => $detail) {
+    //                 $newDetail = [];
+    //                 $isNewRow = true;
+
+    //                 foreach ($originalInvoiceDetails as $originalDetail) {
+    //                     if ($originalDetail->idItem == $detail['idItem']) {
+    //                         $newDetail = (array) $originalDetail;
+    //                         $isNewRow = false;
+    //                         break;
+    //                     }
+    //                 }
+
+    //                 if ($isNewRow) {
+    //                     $newDetail = [
+    //                         'idReceipts' => $newInvoiceId,
+    //                         'Nr' => $index + 1,
+    //                         'idItem' => $detail['ServiceTypeName'],
+    //                         'idBusiness' => $originalInvoice->idBusiness,
+    //                         'IdTax' => 0,
+    //                         'ValueTax' => 0,
+    //                         'idMag' => 0,
+    //                         'name' => $this->getItemNameById($detail['ServiceTypeName']),
+    //                         'idSummaryInvoice' => 0,
+    //                         'Discount' => 0,
+    //                     ];
+
+
+    //                 } else {
+    //                     unset($newDetail['idInvoiceDetail']);
+    //                     $newDetail['idReceipts'] = $newInvoiceId;
+    //                 }
+
+    //                 $newDetail['Quantity'] = $detail['Quantity'];
+    //                 $newDetail['Price'] = $detail['Price'];
+    //                 $newDetail['Sum'] = $detail['Quantity'] * $detail['Price'];
+
+    //                 $PIModel->insertPurchaseInvoiceDetail($newDetail);
+    //             }
+
+    //             foreach ($originalInvoicePayments as $payment) {
+    //                 $paymentArray = (array) $payment;
+    //                 unset($paymentArray['idInvPay']);
+
+    //                 $paymentDetails = $PIModel->getPurchasePaymentDetailsById($paymentArray['idPayment']);
+    //                 foreach ($paymentDetails as $paymentDetail) {
+    //                     $paymentDetailArray = (array) $paymentDetail;
+    //                     unset($paymentDetailArray['idPayment']);
+
+    //                     $paymentDetailArray['value'] = $totalValue;
+    //                     $paymentDetailArray['timestamp'] = date('Y-m-d H:i:s');
+    //                     $paymentDetailArray['idUser'] = $currentUserId;
+    //                     $paymentDetailArray['idPaymentMethod'] = $paymentMethodId;
+    //                     $newPaymentId = $PIModel->insertPurchasePaymentDetail($paymentDetailArray);
+
+    //                     $PIModel->insertPurchaseInvoicePayment([
+    //                         'idReceipt' => $newInvoiceId,
+    //                         'idPayment' => $newPaymentId
+    //                     ]);
+    //                 }
+    //             }
+
+    //             return redirect()->to(base_url('/Purchase_table'));
+
+    //             // return redirect()->to(base_url('/viewPurchaseDetails/' . $newInvoiceId));
+    //         }
+    //     }
+
+    //     return redirect()->back()->with('error', 'Failed to update the invoice.');
+    // }
+
+    private function getItemNameById($serviceId)
+    {
+        $model = new itemsModel();
+        $service = $model->find($serviceId);
+        return $service ? $service['Name'] : 'Unknown Item';
+    }
+
+    public function UpdatePurchaseInvoice()
+    {
+        $request = service('request');
+        $session = \Config\Services::session();
+        $currentUserId = $session->get('ID');
+
+        $invoiceId = $request->getPost('invoiceId');
+        $idSupplier = $request->getPost('client');
+        $clientEmail = $request->getPost('email');
+        $clientContact = $request->getPost('contact');
+        $currencyId = $request->getPost('currency');
+        $invoiceDate = $request->getPost('invoiceDate');
+        $paymentMethodId = $request->getPost('paymentMethod');
+        $notes = $request->getPost('notes');
+        $serviceDetails = $request->getPost('ServiceDetails');
+        $totalValue = $request->getPost('totalValue');
+
+        $model = new InvoiceModel();
+        $PModel = new PurchaseModel();
+
+        // Retrieve original invoice
+        $originalInvoice = $PModel->getPurchaseInvoiceById($invoiceId);
+        if (!$originalInvoice) {
+            return redirect()->back()->with('error', 'Original invoice not found.');
+        }
+
+        $originalInvoiceDetails = $PModel->getPurchaseInvoiceDetailsByReceiptId($invoiceId);
+        if (!$originalInvoiceDetails) {
+            return redirect()->back()->with('error', 'Original invoice details not found.');
+        }
+
+        $originalInvoicePayments = $PModel->getPurchaseInvoicePaymentsByReceiptId($invoiceId);
+        if (!$originalInvoicePayments) {
+            return redirect()->back()->with('error', 'Original invoice payments not found.');
+        }
+
+        // Attempt to cancel the original invoice
+        $cancelStatus = $this->cancelPurchaseInvoice($invoiceId);
+        if (!$cancelStatus) {
+            return redirect()->back()->with('error', 'Invoice cancellation failed.');
+        }
+
+        // Prepare new invoice data
+        $newInvoiceData = (array) $originalInvoice;
+        unset($newInvoiceData['idReceipts']);
+
+        $newInvoiceData['idSupplier'] = $idSupplier;
+        $newInvoiceData['idCurrency'] = $currencyId;
+        $newInvoiceData['Date'] = $invoiceDate;
+        $newInvoiceData['Value'] = $totalValue;
+        $newInvoiceData['paymentMethod'] = $paymentMethodId;
+        $newInvoiceData['Notes'] = 'Corrective';
+        $newInvoiceData['InvoiceNotes'] = $notes;
+        $newInvoiceData['idUser'] = $currentUserId;
+        $newInvoiceData['timeStamp'] = date('Y-m-d H:i:s');
+        $newInvoiceData['invOrdNum'] = $this->getNextInvOrdNum();
+
+        // Insert new invoice
+        $PIModel = new purchaseInvoiceModel();
+        $newInvoiceId = $PIModel->insertPurchaseInvoice($newInvoiceData);
+
+        if (!$newInvoiceId) {
+            return redirect()->back()->with('error', 'Failed to insert the new invoice.');
+        }
+
+        // Insert reference for the new invoice
+        $referenceData = [
+            'idReceipt' => $newInvoiceId,
+            'receiptReference' => $invoiceId
+        ];
+        $insertRefStatus = $PIModel->insertPurchaseInvoiceReference($referenceData);
+
+        if (!$insertRefStatus) {
+            return redirect()->back()->with('error', 'Failed to insert invoice reference.');
+        }
+
+        // Insert service details
+        foreach ($serviceDetails as $index => $detail) {
+            $newDetail = [];
+            $isNewRow = true;
+
+            foreach ($originalInvoiceDetails as $originalDetail) {
+                if ($originalDetail->idItem == $detail['idItem']) {
+                    $newDetail = (array) $originalDetail;
+                    $isNewRow = false;
+                    break;
+                }
+            }
+
+            if ($isNewRow) {
+                $newDetail = [
+                    'idReceipts' => $newInvoiceId,
+                    'Nr' => $index + 1,
+                    'idItem' => $detail['ServiceTypeName'],
+                    'idBusiness' => $originalInvoice->idBusiness,
+                    'IdTax' => 0,
+                    'ValueTax' => 0,
+                    'idMag' => 0,
+                    'name' => $this->getItemNameById($detail['ServiceTypeName']),
+                    // 'idSummaryInvoice' => 0,
+                    'Discount' => 0,
+                ];
+            } else {
+                unset($newDetail['idInvoiceDetail']);
+                $newDetail['idReceipts'] = $newInvoiceId;
+            }
+
+            $newDetail['Quantity'] = $detail['Quantity'];
+            $newDetail['Price'] = $detail['Price'];
+            $newDetail['Sum'] = $detail['Quantity'] * $detail['Price'];
+
+            $insertDetailStatus = $PIModel->insertPurchaseInvoiceDetail($newDetail);
+
+            if (!$insertDetailStatus) {
+                return redirect()->back()->with('error', 'Failed to insert service details for item ' . $detail['ServiceTypeName']);
+            }
+        }
+
+        // Insert payment details
+        foreach ($originalInvoicePayments as $payment) {
+            $paymentArray = (array) $payment;
+            unset($paymentArray['idInvPay']);
+
+            $paymentDetails = $PIModel->getPurchasePaymentDetailsById($paymentArray['idPayment']);
+            foreach ($paymentDetails as $paymentDetail) {
+                $paymentDetailArray = (array) $paymentDetail;
+                unset($paymentDetailArray['idPayment']);
+
+                $paymentDetailArray['value'] = $totalValue;
+                $paymentDetailArray['timestamp'] = date('Y-m-d H:i:s');
+                $paymentDetailArray['idUser'] = $currentUserId;
+                $paymentDetailArray['idPaymentMethod'] = $paymentMethodId;
+                $newPaymentId = $PIModel->insertPurchasePaymentDetail($paymentDetailArray);
+
+                if (!$newPaymentId) {
+                    return redirect()->back()->with('error', 'Failed to insert payment detail.');
+                }
+
+                $insertPaymentStatus = $PIModel->insertPurchaseInvoicePayment([
+                    'idReceipt' => $newInvoiceId,
+                    'idPayment' => $newPaymentId
+                ]);
+
+                if (!$insertPaymentStatus) {
+                    return redirect()->back()->with('error', 'Failed to insert invoice payment for payment ' . $paymentArray['idPayment']);
+                }
+            }
+        }
+
+        return redirect()->to(base_url('/viewPurchaseDetails/' . $newInvoiceId))->with('success', 'Invoice updated successfully.');
     }
 
 }

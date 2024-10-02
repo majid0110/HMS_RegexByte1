@@ -175,6 +175,46 @@ class PurchaseModel extends Model
         }
     }
 
+    public function addToInventory($idItems, $quantity, $businessID, $warehouseId, $expiryDate)
+    {
+        if (!is_array($idItems)) {
+            $idItems = [$idItems]; // Convert single ID to array
+        }
+
+        $ratio = 1; // Assuming ratio is 1 as in the original logic
+
+        foreach ($idItems as $idItem) {
+            $inventoryAdd = $quantity * $ratio;
+
+            log_message('debug', 'Updating inventory for item: ' . $idItem . ' in warehouse: ' . $warehouseId . ' with quantity: ' . $inventoryAdd);
+
+            // Add the quantity where idWarehouse matches
+            $this->db->table('itemsinventory')
+                ->where('idItem', $idItem)
+                ->where('idWarehouse', $warehouseId) // Add warehouse matching
+                ->set('inventory', 'inventory + ' . $inventoryAdd, FALSE)
+                ->update();
+
+            if ($this->isExpiryEnabled($businessID)) {
+                $query = $this->db->table('itemsinventory')
+                    ->select('idInventory')
+                    ->where('idItem', $idItem)
+                    ->where('idWarehouse', $warehouseId) // Ensure warehouse matches
+                    ->get();
+
+                if ($query->getNumRows() > 0) {
+                    $idInventory = $query->getRow()->idInventory;
+
+                    $this->db->table('itemsexpiry')
+                        ->where('idInventory', $idInventory)
+                        ->where('expiryDate', $expiryDate)
+                        ->set('inventory', 'inventory + ' . $inventoryAdd, FALSE) // Add to expiry inventory
+                        ->update();
+                }
+            }
+        }
+    }
+
     public function isExpiryEnabled($businessID)
     {
         $query = $this->db->table('config')
@@ -195,5 +235,155 @@ class PurchaseModel extends Model
             ->get()
             ->getResultArray();
     }
+
+    public function getPurchaseDetails($idReceipts)
+    {
+        return $this->db->table('purchaseinvoicedetail')
+            ->join('itemswarehouse', 'itemswarehouse.idItem = purchaseinvoicedetail.idItem')
+            ->join('purchase_invoices', 'purchase_invoices.idReceipts = purchaseinvoicedetail.idReceipts')
+            ->join('supplier', 'supplier.idSupplier = purchase_invoices.idSupplier')
+            ->join('paymentmethods', 'paymentmethods.idPaymentMethods = purchase_invoices.paymentMethod', 'left') // Join with paymentmethods table
+            ->join('currency', 'currency.id = purchase_invoices.idCurrency', 'left')
+            ->where('purchaseinvoicedetail.idReceipts', $idReceipts)
+            ->select('purchaseinvoicedetail.*, itemswarehouse.Unit as Unit,itemswarehouse.Name as ServiceTypeName,itemswarehouse.Code as Code,purchase_invoices.Notes, purchase_invoices.invOrdNum, purchase_invoices.Status, purchase_invoices.Value, purchase_invoices.invoice_period_end_date as due, purchase_invoices.Date as InvoiceDate, purchase_invoices.Time as InvoiceTime, supplier.*, paymentmethods.Method as PaymentMethod, currency.Currency as Currency')
+            ->get()
+            ->getResultArray();
+    }
+
+    public function getPurchasePaymentDetails($idReceipts)
+    {
+        return $this->db->table('purchaseinvoicepayment')
+            ->join('purchaseinvoicepaymentdetails', 'purchaseinvoicepaymentdetails.idPayment = purchaseinvoicepayment.idPayment')
+            ->join('paymentmethods', 'paymentmethods.idPaymentMethods = purchaseinvoicepaymentdetails.method', 'left')
+            ->join('currency', 'currency.id = purchaseinvoicepaymentdetails.idPaymentMethod', 'left')
+            ->where('purchaseinvoicepayment.idReceipt', $idReceipts)
+            ->select('purchaseinvoicepaymentdetails.*, paymentmethods.Method as PaymentMethodName, currency.Currency as Currency')
+            ->get()
+            ->getResultArray();
+    }
+
+    public function getPurchaseItems()
+    {
+        return $this->db->table('itemswarehouse')
+            ->select('itemswarehouse.*, taxtype.value as tax_value, taxtype.tax_id as idTVSH')
+            ->join('taxtype', 'itemswarehouse.idTAX = taxtype.tax_id', 'left')
+            ->where('itemswarehouse.status', 'Active')
+            ->get()
+            ->getResultArray();
+    }
+
+    public function getPurchaseInvoiceByOrdNum($idReceipts)
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+        $invoice = $this->db->table('purchase_invoices')
+            ->where('idReceipts', $idReceipts)
+            ->where('idBusiness', $businessID)
+            ->get()
+            ->getRow();
+
+        if ($invoice) {
+            $payments = $this->db->table('purchaseinvoicepaymentdetails')
+                ->selectSum('purchaseinvoicepaymentdetails.value', 'totalPaid')
+                ->join('purchaseinvoicepayment', 'purchaseinvoicepayment.idPayment = purchaseinvoicepaymentdetails.idPayment')
+                ->where('purchaseinvoicepayment.idReceipt', $invoice->idReceipts)
+                ->get()
+                ->getRow();
+
+            $totalPaid = $payments->totalPaid ?? 0;
+            $invoice->remainingValue = $invoice->Value - $totalPaid;
+        }
+
+        return $invoice;
+    }
+
+    public function getPurchaseReferenceInvoices($idReceipts)
+    {
+        return $this->db->table('purchaseinvoicerefrences')
+            ->select('referenceID, idReceipt, receiptReference')
+            ->where('idReceipt', $idReceipts)
+            ->orWhere('receiptReference', $idReceipts)
+            ->get()
+            ->getResultArray();
+    }
+
+    public function getPurchaseInvoiceById($idReceipts)
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+        $invoice = $this->db->table('purchase_invoices')
+            ->where('idReceipts', $idReceipts)
+            ->where('idBusiness', $businessID)
+            ->get()
+            ->getRow();
+
+        if ($invoice) {
+            $payments = $this->db->table('purchaseinvoicepaymentdetails')
+                ->selectSum('purchaseinvoicepaymentdetails.value', 'totalPaid')
+                ->join('purchaseinvoicepayment', 'purchaseinvoicepayment.idPayment = purchaseinvoicepaymentdetails.idPayment')
+                ->where('purchaseinvoicepayment.idReceipt', $invoice->idReceipts)
+                ->get()
+                ->getRow();
+
+            $invoice->totalPaid = $payments->totalPaid ?? 0;
+        }
+
+        return $invoice;
+    }
+
+    public function getPurchaseInvoiceDetailsByReceiptId($idReceipts)
+    {
+        return $this->db->table('purchaseinvoicedetail')
+            ->where('idReceipts', $idReceipts)
+            ->get()
+            ->getResult();
+    }
+
+    public function getPurchaseInvoicePaymentsByReceiptId($idReceipts)
+    {
+        return $this->db->table('purchaseinvoicepayment')
+            ->where('idReceipt', $idReceipts)
+            ->get()
+            ->getResult();
+    }
+
+    public function getLatestPurchaseInvoice()
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+        return $this->db->table('purchase_invoices')
+            ->orderBy('invOrdNum', 'DESC')
+            ->where('idBusiness', $businessID)
+            ->limit(1)
+            ->get()
+            ->getRowArray();
+    }
+
+    public function getInvoiceById($idReceipts)
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+
+        $invoice = $this->db->table('invoices')
+            ->where('idReceipts', $idReceipts)
+            ->where('idBusiness', $businessID)
+            ->get()
+            ->getRow();
+
+        if ($invoice) {
+            $payments = $this->db->table('invoicepaymentdetails')
+                ->selectSum('invoicepaymentdetails.value', 'totalPaid')
+                ->join('invoicepayment', 'invoicepayment.idPayment = invoicepaymentdetails.idPayment')
+                ->where('invoicepayment.idReceipt', $invoice->idReceipts)
+                ->get()
+                ->getRow();
+
+            $invoice->totalPaid = $payments->totalPaid ?? 0;
+        }
+
+        return $invoice;
+    }
+
+
 
 }

@@ -398,3 +398,13 @@ $routes->post('PurchaseController/filteritems', 'PurchaseController::filteritems
 $routes->get('PurchaseController/filteritems', 'PurchaseController::filteritems');
 $routes->post('submitPurchaseInvoice', 'PurchaseController::submitPurchaseInvoice');
 $routes->post('submitPurchaseServices', 'PurchaseController::submitPurchaseServices');
+
+$routes->get('/Purchase_table', 'PurchaseController::Purchase_table');
+$routes->post('/Purchase_table', 'PurchaseController::Purchase_table');
+
+$routes->get('viewPurchaseDetails/(:num)', 'PurchaseController::viewPurchaseDetails/$1');
+$routes->post('/PurchasePayment', 'PurchaseController::PurchasePayment');
+
+$routes->get('PurchaseController/cancelPurchaseInvoice/(:num)', 'PurchaseController::cancelPurchaseInvoice/$1');
+$routes->post('PurchaseController/UpdatePurchaseInvoice/(:num)', 'PurchaseController::UpdatePurchaseInvoice/$1');
+$routes->post('PurchaseController/UpdatePurchaseInvoice', 'PurchaseController::UpdatePurchaseInvoice');

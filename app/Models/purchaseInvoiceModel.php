@@ -335,5 +335,49 @@ class purchaseInvoiceModel extends Model
 
         return $pagerLinks;
     }
+    public function insertPurchaseInvoice1($data)
+    {
+        $this->insert($data);
+        return $this->insertID();
+    }
+
+    public function insertPurchaseInvoiceDetail($data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('purchaseinvoicedetail');
+        return $builder->insert($data);
+    }
+
+    public function insertPurchaseInvoiceReference($data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('purchaseinvoicerefrences');
+        return $builder->insert($data);
+    }
+
+    public function getPurchasePaymentDetailsById($idPayment)
+    {
+        return $this->db->table('purchaseinvoicepaymentdetails')
+            ->where('idPayment', $idPayment)
+            ->get()
+            ->getResult();
+    }
+
+    public function insertPurchasePaymentDetail($data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('purchaseinvoicepaymentdetails');
+        $builder->insert($data);
+        return $this->insertID();
+    }
+
+    public function insertPurchaseInvoicePayment($data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('purchaseinvoicepayment');
+        return $builder->insert($data);
+    }
+
+
 
 }
