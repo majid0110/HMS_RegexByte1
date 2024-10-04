@@ -248,7 +248,7 @@
                                         <!-- <a href="<?= base_url('SalesController/downloadPDF/' . $ServiceDetails[0]['idReceipts']); ?>"
                                             class="btn btn-primary">Download PDF</a> -->
 
-                                        <a href="<?= base_url('SalesController/downloadPDF/' . $ServiceDetails[0]['idReceipts']); ?>"
+                                        <a href="<?= base_url('PurchaseController/downloadPDF/' . $ServiceDetails[0]['idReceipts']); ?>"
                                             class="btn btn-primary text-white me-0"><i class="icon-File"></i>
                                             Download PDF</a>
 
@@ -653,7 +653,7 @@
                 cell1.innerHTML = `<input type="hidden" name="ServiceDetails[${rowCount}][idItem]" value="">
                            <select class="form-control" id="serviceType_${rowCount}" name="ServiceDetails[${rowCount}][ServiceTypeName]" required>
                                <?php foreach ($services as $service): ?>
-                                                                       <option value="<?= $service['idItem']; ?>"><?= $service['Name']; ?></option>
+                                                                           <option value="<?= $service['idItem']; ?>"><?= $service['Name']; ?></option>
                                <?php endforeach; ?>
                            </select>`;
                 cell2.innerHTML = `<input type="number" class="form-control" id="quantity_${rowCount}" name="ServiceDetails[${rowCount}][Quantity]" required>`;

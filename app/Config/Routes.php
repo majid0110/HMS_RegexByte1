@@ -408,3 +408,4 @@ $routes->post('/PurchasePayment', 'PurchaseController::PurchasePayment');
 $routes->get('PurchaseController/cancelPurchaseInvoice/(:num)', 'PurchaseController::cancelPurchaseInvoice/$1');
 $routes->post('PurchaseController/UpdatePurchaseInvoice/(:num)', 'PurchaseController::UpdatePurchaseInvoice/$1');
 $routes->post('PurchaseController/UpdatePurchaseInvoice', 'PurchaseController::UpdatePurchaseInvoice');
+$routes->get('PurchaseController/downloadPDF/(:num)', 'PurchaseController::downloadPDF/$1');

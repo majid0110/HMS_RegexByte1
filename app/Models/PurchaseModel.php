@@ -384,6 +384,20 @@ class PurchaseModel extends Model
         return $invoice;
     }
 
+    public function getPurchaseDetails1($idReceipts)
+    {
+        return $this->db->table('purchaseinvoicedetail')
+            ->join('itemswarehouse', 'itemswarehouse.idItem = purchaseinvoicedetail.idItem')
+            ->join('purchase_invoices', 'purchase_invoices.idReceipts = purchaseinvoicedetail.idReceipts')
+            ->join('supplier', 'supplier.idSupplier = purchase_invoices.idSupplier')
+            ->join('units', 'units.idUnit = itemswarehouse.Unit')
+            ->join('paymentmethods', 'paymentmethods.idPaymentMethods = purchase_invoices.paymentMethod', 'left')
+            ->join('currency', 'currency.id = purchase_invoices.idCurrency', 'left')
+            ->where('purchaseinvoicedetail.idReceipts', $idReceipts)
+            ->select('purchaseinvoicedetail.*, units.name as Unit,itemswarehouse.Name as ServiceTypeName, itemswarehouse.Code as Code, purchase_invoices.Notes, purchase_invoices.invOrdNum, purchase_invoices.Status, purchase_invoices.Value, purchase_invoices.invoice_period_end_date as due, purchase_invoices.timeStamp as InvoiceDate, purchase_invoices.Time as InvoiceTime,purchase_invoices.ValueTVSH as TVSH, supplier.*, paymentmethods.Method as PaymentMethod, currency.Currency as Currency, purchaseinvoicedetail.Discount') // Added invoicedetail.Discount
+            ->get()
+            ->getResultArray();
+    }
 
 
 }

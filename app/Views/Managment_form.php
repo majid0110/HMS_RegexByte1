@@ -232,8 +232,7 @@
                                     style="display: flex; flex-direction: column; align-items: center;">
                                     <h4 class="card-title" style="text-align:center">Purchase Table</h4>
                                     <div class="media">
-                                        <i class="icon-lg mdi mdi-view-dashboard-outline"
-                                            style="height:45px; width:45px;"></i>
+                                        <i class="icon-lg mdi mdi-cart" style="height:45px; width:45px;"></i>
                                     </div>
                                 </div>
 

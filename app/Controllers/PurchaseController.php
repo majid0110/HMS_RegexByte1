@@ -150,7 +150,7 @@ class PurchaseController extends Controller
                 foreach ($services as $service) {
                     if (isset($service['fee']) && isset($service['quantity'])) {
                         $fee = (float) $service['fee'];
-                        $quantity = (int) $service['quantity'];
+                        $quantity = (float) $service['quantity'];
                         $totalFee += $fee * $quantity;
                     } else {
                         throw new \Exception('Service fee or quantity is not set.');
@@ -198,7 +198,7 @@ class PurchaseController extends Controller
 
             foreach ($services as $service) {
                 $discount = $service['discount'];
-                $quantity = (int) $service['quantity'];
+                $quantity = (float) $service['quantity'];
                 $fee = (float) $service['fee'];
 
                 $discountedPrice = $fee - ($fee * ($discount / 100));
@@ -310,7 +310,7 @@ class PurchaseController extends Controller
                 foreach ($services as $service) {
                     if (isset($service['fee']) && isset($service['quantity'])) {
                         $fee = (float) $service['fee'];
-                        $quantity = (int) $service['quantity'];
+                        $quantity = (float) $service['quantity'];
                         $totalFee += $fee * $quantity;
                     } else {
                         throw new \Exception('Service fee or quantity is not set.');
@@ -357,7 +357,7 @@ class PurchaseController extends Controller
 
             foreach ($services as $service) {
                 $discount = $service['discount'];
-                $quantity = (int) $service['quantity'];
+                $quantity = (float) $service['quantity'];
                 $fee = (float) $service['fee'];
 
                 $discountedPrice = $fee - ($fee * ($discount / 100));
@@ -996,6 +996,37 @@ class PurchaseController extends Controller
         }
 
         return redirect()->to(base_url('/viewPurchaseDetails/' . $newInvoiceId))->with('success', 'Invoice updated successfully.');
+    }
+
+    public function downloadPDF($idReceipts)
+    {
+        // $model = new salesModel();
+        // $data['ServiceDetails'] = $model->getSalesDetails1($idReceipts);
+
+        $PModel = new PurchaseModel();
+        $data['ServiceDetails'] = $PModel->getPurchaseDetails1($idReceipts);
+
+        $qrContent = base_url('viewPurchaseDetails/' . $idReceipts);
+        $qrCode = new QrCode($qrContent);
+        $qrCode->setSize(150);
+
+        $writer = new PngWriter();
+        $result = $writer->write($qrCode);
+
+        $qrDataUri = $result->getDataUri();
+        $data['qrDataUri'] = $qrDataUri;
+
+        $html = view('purchase_pdf', $data);
+
+        $mpdf = new \Mpdf\Mpdf([
+            'margin_left' => 14,
+            'margin_right' => 11,
+            'margin_top' => 11,
+            'margin_bottom' => 8,
+        ]);
+
+        $mpdf->WriteHTML($html);
+        $mpdf->Output('invoice_' . $idReceipts . '.pdf', \Mpdf\Output\Destination::DOWNLOAD);
     }
 
 }

@@ -748,10 +748,26 @@
             });
 
 
+            // $('#serviceTableBody').on('click', '.quantity-increment', function () {
+            //     var input = $(this).siblings('.editable-quantity');
+            //     var currentValue = parseFloat(input.val()) || 0;
+            //     input.val((currentValue + 1).toFixed(2));
+            //     calculateTotals();
+            // });
+
+            // $('#serviceTableBody').on('click', '.quantity-decrement', function () {
+            //     var input = $(this).siblings('.editable-quantity');
+            //     var currentValue = parseFloat(input.val()) || 0;
+            //     if (currentValue > 0.01) {
+            //         input.val((Math.max(currentValue - 1, 0.01)).toFixed(2));
+            //         calculateTotals();
+            //     }
+            // });
+
             $('#serviceTableBody').on('click', '.quantity-increment', function () {
                 var input = $(this).siblings('.editable-quantity');
                 var currentValue = parseFloat(input.val()) || 0;
-                input.val((currentValue + 1).toFixed(2));
+                input.val((currentValue + 0.01).toFixed(2));
                 calculateTotals();
             });
 
@@ -759,7 +775,7 @@
                 var input = $(this).siblings('.editable-quantity');
                 var currentValue = parseFloat(input.val()) || 0;
                 if (currentValue > 0.01) {
-                    input.val((Math.max(currentValue - 1, 0.01)).toFixed(2));
+                    input.val((Math.max(currentValue - 0.01, 0.01)).toFixed(2));
                     calculateTotals();
                 }
             });
@@ -996,7 +1012,8 @@
                     var serviceTypeId = serviceTypeRow.data('service-id');
                     var serviceName = serviceTypeRow.find('td:eq(0)').text();
                     var fee = parseFloat(serviceTypeRow.find('.editable-price').text()) || 0;
-                    var quantity = parseInt(serviceTypeRow.find('.editable-quantity').val()) || 0;
+                    // var quantity = parseInt(serviceTypeRow.find('.editable-quantity').val()) || 0;
+                    var quantity = parseFloat(serviceTypeRow.find('.editable-quantity').val()) || 0;
                     var discount = parseFloat(serviceTypeRow.find('.editable-discount').val()) || 0;
                     var taxRate = parseFloat(serviceTypeRow.find('.tax-rate').data('tax-value')) || 0;
                     var taxId = serviceTypeRow.find('.tax-rate').data('tax-id');
@@ -1132,7 +1149,8 @@
                     var serviceTypeId = serviceTypeRow.data('service-id');
                     var serviceName = serviceTypeRow.find('td:eq(0)').text();
                     var fee = parseFloat(serviceTypeRow.find('.editable-price').text()) || 0;
-                    var quantity = parseInt(serviceTypeRow.find('.editable-quantity').val()) || 0;
+                    // var quantity = parseInt(serviceTypeRow.find('.editable-quantity').val()) || 0;
+                    var quantity = parseFloat(serviceTypeRow.find('.editable-quantity').val()) || 0;
                     var discount = parseFloat(serviceTypeRow.find('.editable-discount').val()) || 0;
                     var taxRate = parseFloat(serviceTypeRow.find('.tax-rate').data('tax-value')) || 0;
                     var taxId = serviceTypeRow.find('.tax-rate').data('tax-id');

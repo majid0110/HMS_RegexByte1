@@ -259,12 +259,57 @@ class salesModel extends Model
 
 
 
-    public function gettotalServiceFee($search, $invoice, $clientName, $paymentInput, $fromDate, $toDate)
+    // public function gettotalServiceFee($search, $invoice, $clientName, $paymentInput, $fromDate, $toDate)
+    // {
+    //     $session = \Config\Services::session();
+    //     $businessID = $session->get('businessID');
+    //     $builder = $this->db->table('invoices');
+    //     $builder->selectSum('Value', 'totalServiceFee');
+    //     $builder->join('client', 'client.idClient = invoices.idClient');
+    //     $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
+    //     $builder->where('invoices.idBusiness', $businessID);
+    //     $builder->where('invoices.isSummaryInvoice', 0);
+
+
+    //     if (!empty($search)) {
+    //         $builder->groupStart()
+    //             ->like('invoices.invOrdNum', $search)
+    //             ->orLike('client.client', $search)
+    //             ->orLike('currency.Currency', $search)
+    //             ->orLike('paymentmethods.Method', $search)
+    //             ->groupEnd();
+    //     }
+
+    //     if (!empty($clientName)) {
+    //         $builder->like('client.client', $clientName);
+    //     }
+
+    //     if (!empty($paymentInput)) {
+    //         $builder->where('invoices.paymentMethod', $paymentInput);
+    //     }
+
+    //     if (!empty($invoice)) {
+    //         $builder->where('invoices.idReceipts', $invoice);
+    //     }
+
+
+    //     if (!empty($fromDate) && !empty($toDate)) {
+    //         $builder->where('invoices.Date >=', $fromDate)
+    //             ->where('invoices.Date <=', $toDate);
+    //     }
+
+
+    //     $query = $builder->get();
+    //     $result = $query->getRowArray();
+    //     return $result['totalServiceFee'] ?? 0;
+    // }
+
+    public function gettotalServiceFee($search, $invoice, $clientName, $paymentInput, $fromDate, $toDate, $perPage, $offset)
     {
         $session = \Config\Services::session();
         $businessID = $session->get('businessID');
         $builder = $this->db->table('invoices');
-        $builder->selectSum('Value', 'totalServiceFee');
+        $builder->select('invoices.Value');
         $builder->join('client', 'client.idClient = invoices.idClient');
         $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
         $builder->where('invoices.idBusiness', $businessID);
@@ -298,10 +343,19 @@ class salesModel extends Model
                 ->where('invoices.Date <=', $toDate);
         }
 
+        $builder->orderBy('invoices.idReceipts', 'DESC');
+        $builder->limit($perPage, $offset);
+
 
         $query = $builder->get();
-        $result = $query->getRowArray();
-        return $result['totalServiceFee'] ?? 0;
+        $results = $query->getResultArray();
+
+        $totalFee = 0;
+        foreach ($results as $row) {
+            $totalFee += $row['Value'];
+        }
+
+        return $totalFee;
     }
 
     public function gettotalSummaryFee($search, $invoice, $clientName, $paymentInput, $fromDate, $toDate)
@@ -428,7 +482,6 @@ class salesModel extends Model
     }
 
 
-
     public function getSalesReport($search = null, $invoice = null, $paymentInput = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
     {
         $session = \Config\Services::session();
@@ -438,10 +491,9 @@ class salesModel extends Model
         $builder->join('currency', 'currency.id = invoices.idCurrency');
         $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
         $builder->select('invoices.*, client.client as clientName, currency.Currency, paymentmethods.Method as PaymentMethod');
-        $builder->select('(SELECT SUM(Sum) FROM invoicedetail WHERE invoicedetail.idReceipts = invoices.idReceipts) as Fee');
-
         $builder->where('invoices.idBusiness', $businessID);
         $builder->where('invoices.isSummaryInvoice', 0);
+
 
         if (!empty($search)) {
             $builder->groupStart()
@@ -472,9 +524,152 @@ class salesModel extends Model
 
         $builder->orderBy('invoices.idReceipts', 'DESC');
         $builder->limit($perPage, $offset);
+
         $query = $builder->get();
         return $query->getResultArray();
     }
+
+    public function getPager1($search = null, $invoice = null, $paymentInput = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $currentPage = 1)
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+        $builder = $this->db->table('invoices');
+        $builder->select('COUNT(*) as total');
+        $builder->join('client', 'client.idClient = invoices.idClient');
+        $builder->join('currency', 'currency.id = invoices.idCurrency');
+        $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
+        $builder->where('invoices.idBusiness', $businessID);
+        $builder->where('invoices.isSummaryInvoice', 0);
+
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->like('invoices.invOrdNum', $search)
+                ->orLike('client.client', $search)
+                ->orLike('currency.Currency', $search)
+                ->orLike('paymentmethods.idReceipts', $search)
+                ->orLike('invoices.idReceipts', $search)
+                ->groupEnd();
+        }
+
+        if (!empty($invoice)) {
+            $builder->where('invoices.idReceipts', $invoice);
+        }
+
+        if (!empty($paymentInput)) {
+            $builder->where('paymentmethods.idPaymentMethods', $paymentInput);
+        }
+
+        if (!empty($clientName)) {
+            $builder->like('client.client', $clientName);
+        }
+
+        if (!empty($fromDate) && !empty($toDate)) {
+            $builder->where('invoices.Date >=', $fromDate)
+                ->where('invoices.Date <=', $toDate);
+        }
+
+        $totalQuery = $builder->get();
+        $totalResult = $totalQuery->getRowArray();
+        $total = isset($totalResult['total']) ? (int) $totalResult['total'] : 0;
+
+        $pager = service('pager');
+        $pagerLinks = $pager->makeLinks($currentPage, $perPage, $total, 'default_full');
+
+        return $pagerLinks;
+    }
+
+    public function abc($search = null, $invoice = null, $paymentInput = null, $clientName = null, $fromDate = null, $toDate = null)
+    {
+        $session = \Config\Services::session();
+        $businessID = $session->get('businessID');
+        $builder = $this->db->table('invoices');
+        $builder->join('client', 'client.idClient = invoices.idClient');
+        $builder->join('currency', 'currency.id = invoices.idCurrency');
+        $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
+        $builder->select('invoices.*, client.client as clientName, currency.Currency, paymentmethods.Method as PaymentMethod');
+        $builder->where('invoices.idBusiness', $businessID);
+        $builder->where('invoices.isSummaryInvoice', 0);
+
+
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->like('invoices.invOrdNum', $search)
+                ->orLike('client.client', $search)
+                ->orLike('currency.Currency', $search)
+                ->orLike('paymentmethods.idReceipts', $search)
+                ->orLike('invoices.idReceipts', $search)
+                ->groupEnd();
+        }
+
+        if (!empty($invoice)) {
+            $builder->where('invoices.idReceipts', $invoice);
+        }
+
+        if (!empty($paymentInput)) {
+            $builder->where('paymentmethods.idPaymentMethods', $paymentInput);
+        }
+
+        if (!empty($clientName)) {
+            $builder->like('client.client', $clientName);
+        }
+
+        if (!empty($fromDate) && !empty($toDate)) {
+            $builder->where('invoices.Date >=', $fromDate)
+                ->where('invoices.Date <=', $toDate);
+        }
+
+        $builder->orderBy('invoices.idReceipts', 'DESC');
+
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    // public function getSalesReport($search = null, $invoice = null, $paymentInput = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $offset = 0)
+    // {
+    //     $session = \Config\Services::session();
+    //     $businessID = $session->get('businessID');
+    //     $builder = $this->db->table('invoices');
+    //     $builder->join('client', 'client.idClient = invoices.idClient');
+    //     $builder->join('currency', 'currency.id = invoices.idCurrency');
+    //     $builder->join('paymentmethods', 'paymentmethods.idPaymentMethods = invoices.paymentMethod');
+    //     $builder->select('invoices.*, client.client as clientName, currency.Currency, paymentmethods.Method as PaymentMethod');
+
+
+    //     $builder->where('invoices.idBusiness', $businessID);
+    //     $builder->where('invoices.isSummaryInvoice', 0);
+
+    //     if (!empty($search)) {
+    //         $builder->groupStart()
+    //             ->like('invoices.invOrdNum', $search)
+    //             ->orLike('client.client', $search)
+    //             ->orLike('currency.Currency', $search)
+    //             ->orLike('paymentmethods.idReceipts', $search)
+    //             ->orLike('invoices.idReceipts', $search)
+    //             ->groupEnd();
+    //     }
+
+    //     if (!empty($invoice)) {
+    //         $builder->where('invoices.idReceipts', $invoice);
+    //     }
+
+    //     if (!empty($paymentInput)) {
+    //         $builder->where('paymentmethods.idPaymentMethods', $paymentInput);
+    //     }
+
+    //     if (!empty($clientName)) {
+    //         $builder->like('client.client', $clientName);
+    //     }
+
+    //     if (!empty($fromDate) && !empty($toDate)) {
+    //         $builder->where('invoices.Date >=', $fromDate)
+    //             ->where('invoices.Date <=', $toDate);
+    //     }
+
+    //     $builder->orderBy('invoices.idReceipts', 'DESC');
+    //     $builder->limit($perPage, $offset);
+    //     $query = $builder->get();
+    //     return $query->getResultArray();
+    // }
 
     public function getPager($search = null, $paymentInput = null, $clientName = null, $fromDate = null, $toDate = null, $perPage = 20, $currentPage = 1)
     {

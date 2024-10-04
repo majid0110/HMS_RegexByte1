@@ -38,6 +38,20 @@
 
         }
 
+        .text-bg-cancelled {
+            background-color: red;
+            color: white;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+        }
+
+        .text-bg-editted {
+            background-color: yellow;
+            color: black;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+        }
+
         .table-container {
             max-height: 400px;
             /* Adjust as needed */
@@ -182,6 +196,7 @@
                                                     <th>Status</th>
                                                     <th>Date</th>
                                                     <th>FEE</th>
+                                                    <th>Notes</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -208,6 +223,20 @@
                                                         </td>
                                                         <td>
                                                             <?= $purchase['Value']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <span class="<?php
+                                                            if ($purchase['Notes'] == 'Cancelled') {
+                                                                echo 'text-bg-cancelled';
+                                                            } elseif ($purchase['Notes'] == 'Corrective') {
+                                                                echo 'text-bg-editted';
+                                                            } else {
+
+                                                                echo 'text-bg-default';
+                                                            }
+                                                            ?>">
+                                                                <?= $purchase['Notes']; ?>
+                                                            </span>
                                                         </td>
 
                                                         <td>

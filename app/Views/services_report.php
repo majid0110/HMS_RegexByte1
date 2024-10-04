@@ -86,7 +86,7 @@
         <!-- partial:./public/assets/partials/_navbar.html -->
 
         <!-- partial -->
-        <div class="container-fluid page-body-wrapper">
+        <div class="container-fluid page-body-wrapper" style="margin-top: -23px;">
             <!-- partial:./public/assets/partials/_settings-panel.html -->
             <!-- partial -->
             <!-- partial:./public/assets/partials/_sidebar.html -->

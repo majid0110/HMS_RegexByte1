@@ -172,7 +172,7 @@
                     echo '<tr>';
                     echo '<td style="margin-left: 20px;">' . htmlspecialchars($service['serviceName']) . '</td>';
                     echo '<td style="text-align: right; padding-left:25px;">' . number_format(floatval($service['fee']), 2) . '</td>';
-                    echo '<td style="text-align: right;padding-left:4px;">' . intval($service['quantity']) . '</td>';
+                    echo '<td style="text-align: right;padding-left:4px;">' . floatval($service['quantity']) . '</td>';
 
                     $discountAmount = (floatval($service['fee']) * floatval($service['discount'])) / 100;
                     echo '<td style="text-align: right;padding-left:4%;">' . number_format(floatval($service['calculatedTax']), 2) . '</td>';

@@ -990,23 +990,29 @@
 
             // $('#serviceTableBody').on('click', '.quantity-increment', function () {
             //     var input = $(this).siblings('.editable-quantity');
-            //     var value = parseInt(input.val(), 10);
-            //     input.val(value + 1);
+            //     var currentValue = parseFloat(input.val()) || 0;
+            //     input.val((currentValue + 1).toFixed(2));
             //     calculateTotals();
             // });
-
             $('#serviceTableBody').on('click', '.quantity-increment', function () {
                 var input = $(this).siblings('.editable-quantity');
                 var currentValue = parseFloat(input.val()) || 0;
-                input.val((currentValue + 1).toFixed(2));
+                input.val((currentValue + 0.01).toFixed(2));
                 calculateTotals();
             });
 
+            // $('#serviceTableBody').on('click', '.quantity-increment', function () {
+            //     var input = $(this).siblings('.editable-quantity');
+            //     var currentValue = parseFloat(input.val()) || 0;
+            //     input.val((currentValue + 1).toFixed(2));
+            //     calculateTotals();
+            // });
+
             // $('#serviceTableBody').on('click', '.quantity-decrement', function () {
             //     var input = $(this).siblings('.editable-quantity');
-            //     var value = parseInt(input.val(), 10);
-            //     if (value > 1) {
-            //         input.val(value - 1);
+            //     var currentValue = parseFloat(input.val()) || 0;
+            //     if (currentValue > 0.01) {
+            //         input.val((Math.max(currentValue - 1, 0.01)).toFixed(2));
             //         calculateTotals();
             //     }
             // });
@@ -1014,21 +1020,34 @@
             $('#serviceTableBody').on('click', '.quantity-decrement', function () {
                 var input = $(this).siblings('.editable-quantity');
                 var currentValue = parseFloat(input.val()) || 0;
-                if (currentValue > 1) {
-                    input.val((currentValue - 1).toFixed(2));
+                if (currentValue > 0.01) {
+                    input.val((Math.max(currentValue - 0.01, 0.01)).toFixed(2));
                     calculateTotals();
                 }
             });
 
-            // $('#serviceTableBody').on('input', '.editable-quantity', function () {
-            //     var value = parseInt($(this).val(), 10);
-            //     if (isNaN(value) || value < 1) {
-            //         $(this).val(1);
+            // $('#serviceTableBody').on('click', '.quantity-decrement', function () {
+            //     var input = $(this).siblings('.editable-quantity');
+            //     var currentValue = parseFloat(input.val()) || 0;
+            //     if (currentValue > 1) {
+            //         input.val((currentValue - 1).toFixed(2));
+            //         calculateTotals();
             //     }
-            //     calculateTotals();
             // });
 
             $('#serviceTableBody').on('input', '.editable-quantity', function () {
+                var inputValue = $(this).val();
+
+                if (!/^[\d.]*$/.test(inputValue)) {
+                    $(this).val(inputValue.replace(/[^\d.]/g, ''));
+                }
+
+                if ((inputValue.match(/\./g) || []).length > 1) {
+                    $(this).val(inputValue.replace(/\.+$/, ''));
+                }
+            });
+
+            $('#serviceTableBody').on('blur', '.editable-quantity', function () {
                 var value = parseFloat($(this).val());
                 if (isNaN(value) || value < 0.01) {
                     $(this).val('0.01');
@@ -1037,6 +1056,16 @@
                 }
                 calculateTotals();
             });
+
+            // $('#serviceTableBody').on('input', '.editable-quantity', function () {
+            //     var value = parseFloat($(this).val());
+            //     if (isNaN(value) || value < 0.01) {
+            //         $(this).val('0.01');
+            //     } else {
+            //         $(this).val(value.toFixed(2));
+            //     }
+            //     calculateTotals();
+            // });
 
             $('#serviceTableBody').on('click', '.delete-button', function () {
                 $(this).closest('tr').remove();
@@ -1240,7 +1269,9 @@
                     var serviceTypeId = serviceTypeRow.data('service-id');
                     var serviceName = serviceTypeRow.find('td:eq(0)').text();
                     var fee = parseFloat(serviceTypeRow.find('.editable-price').text()) || 0;
-                    var quantity = parseInt(serviceTypeRow.find('.editable-quantity').val()) || 0;
+                    // var quantity = parseInt(serviceTypeRow.find('.editable-quantity').val()) || 0;
+                    var quantity = parseFloat(serviceTypeRow.find('.editable-quantity').val()) || 0;
+                    var discount = parseFloat(serviceTypeRow.find('.editable-discount').val()) || 0;
                     var discount = parseFloat(serviceTypeRow.find('.editable-discount').val()) || 0;
                     var taxRate = parseFloat(serviceTypeRow.find('.tax-rate').data('tax-value')) || 0;
                     var taxId = serviceTypeRow.find('.tax-rate').data('tax-id');
@@ -1368,7 +1399,8 @@
                     var serviceTypeId = serviceTypeRow.data('service-id');
                     var serviceName = serviceTypeRow.find('td:eq(0)').text();
                     var fee = parseFloat(serviceTypeRow.find('.editable-price').text()) || 0;
-                    var quantity = parseInt(serviceTypeRow.find('.editable-quantity').val()) || 0;
+                    // var quantity = parseInt(serviceTypeRow.find('.editable-quantity').val()) || 0;
+                    var quantity = parseFloat(serviceTypeRow.find('.editable-quantity').val()) || 0;
                     var discount = parseFloat(serviceTypeRow.find('.editable-discount').val()) || 0;
                     var taxRate = parseFloat(serviceTypeRow.find('.tax-rate').data('tax-value')) || 0;
                     var taxId = serviceTypeRow.find('.tax-rate').data('tax-id');
@@ -1485,7 +1517,8 @@
                     var serviceTypeId = serviceTypeRow.data('service-id');
                     var serviceName = serviceTypeRow.find('td:eq(0)').text();
                     var fee = parseFloat(serviceTypeRow.find('.editable-price').text()) || 0;
-                    var quantity = parseInt(serviceTypeRow.find('.editable-quantity').val()) || 0;
+                    // var quantity = parseInt(serviceTypeRow.find('.editable-quantity').val()) || 0;
+                    var quantity = parseFloat(serviceTypeRow.find('.editable-quantity').val()) || 0;
                     var discount = parseFloat(serviceTypeRow.find('.editable-discount').val()) || 0;
                     var taxRate = parseFloat(serviceTypeRow.find('.tax-rate').data('tax-value')) || 0;
                     var taxId = serviceTypeRow.find('.tax-rate').data('tax-id');

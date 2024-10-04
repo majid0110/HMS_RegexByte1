@@ -276,17 +276,32 @@ class ReportsController extends Controller
     //------------------------------------ Service Report + Excel
     public function services_report()
     {
+        // $clientModel = new ClientModel();
+        // $data['client_names'] = $clientModel->getClientNames();
+
+        // $sales = new SalesModel();
+        // $data['payments'] = $sales->getpayment();
+        // // $data['Invoice'] = $sales->getInvoiceNO();
+        // $data['Invoice'] = $sales->getInvoice();
+
+
+
+        // $Model = new ServicesModel();
+        // $Model = new SalesModel();
+        // $search = $this->request->getPost('search');
+        // $paymentInput = $this->request->getPost('paymentInput');
+        // $clientName = $this->request->getPost('clientName');
+        // $fromDate = $this->request->getPost('fromDate');
+        // $toDate = $this->request->getPost('toDate');
+        // $invoice = $this->request->getPost('invoice');
         $clientModel = new ClientModel();
         $data['client_names'] = $clientModel->getClientNames();
 
         $sales = new SalesModel();
         $data['payments'] = $sales->getpayment();
-        // $data['Invoice'] = $sales->getInvoiceNO();
         $data['Invoice'] = $sales->getInvoice();
 
 
-
-        $Model = new ServicesModel();
         $Model = new SalesModel();
         $search = $this->request->getPost('search');
         $paymentInput = $this->request->getPost('paymentInput');
@@ -296,15 +311,15 @@ class ReportsController extends Controller
         $invoice = $this->request->getPost('invoice');
 
 
-        $data['totalServiceFee'] = $Model->gettotalServiceFee($search, $invoice, $clientName, $paymentInput, $fromDate, $toDate);
         $currentPage = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
         $perPage = 20;
         $offset = ($currentPage - 1) * $perPage;
+
+        $data['totalServiceFee'] = $sales->gettotalServiceFee($search, $invoice, $clientName, $paymentInput, $fromDate, $toDate, $perPage, $offset);
+
         $data['Sales'] = $Model->getSalesReport($search, $invoice, $paymentInput, $clientName, $fromDate, $toDate, $perPage, $offset);
-        $totalSales = count($Model->getSalesReport($search, $invoice, $paymentInput, $clientName, $fromDate, $toDate));
-        $pager = service('pager');
-        $pagerLinks = $pager->makeLinks($currentPage, $perPage, $totalSales);
-        $data['pager'] = $pagerLinks;
+        $data['pager'] = $Model->getPager1($search, $paymentInput, $invoice, $clientName, $fromDate, $toDate, $perPage, $currentPage);
+
 
         if ($this->request->isAJAX()) {
             try {
@@ -312,7 +327,7 @@ class ReportsController extends Controller
                 return $this->response->setJSON([
                     'success' => true,
                     'tableContent' => $tableContent,
-                    'pager' => $pagerLinks,
+                    'pager' => $data['pager'],
                     'totalServiceFee' => $data['totalServiceFee']
                 ]);
             } catch (\Exception $e) {
@@ -352,6 +367,8 @@ class ReportsController extends Controller
         $fromDate = $this->request->getPost('fromDate');
         $toDate = $this->request->getPost('toDate');
         $services = $Model->getSalesReport($search, $paymentInput, $clientName, $fromDate, $toDate);
+
+        // $services = $Model->abc($search, $paymentInput, $clientName, $fromDate, $toDate);
 
         if (empty($services)) {
             return redirect()->back()->with('error', 'No data available to generate report.');
@@ -409,7 +426,7 @@ class ReportsController extends Controller
             $sheet->setCellValue('D' . $row, $service['PaymentMethod']);
             $sheet->setCellValue('E' . $row, $service['Status']);
             $sheet->setCellValue('F' . $row, $service['Date']);
-            $sheet->setCellValue('G' . $row, $service['Fee']);
+            $sheet->setCellValue('G' . $row, $service['Value']);
             $row++;
         }
 
